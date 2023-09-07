@@ -21,7 +21,7 @@ title: Workflows/Functions
 Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework facilitates this process through a YAML-based Domain Specific Language (DSL) for defining workflows and tasks that encapsulate the business logic. These defined workflows can either be linked to events as their handlers or invoked from within other workflows, allowing for versatile and seamless automation.
 
 ## A Sample Workflow Example 
-### Example-1
+#### Example 1:
 ```yaml
 id: hello_world_function
 summary: Call an API and return the task message
@@ -31,7 +31,7 @@ tasks:
       fn: com.gs.return #It's a inbuilt function that returns args.
       args: "Hello World!"
 ```
-### Example-2
+#### Example 2:
 ```yaml
   summary: Summing x + y
   description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
@@ -116,7 +116,7 @@ retry:
   max_interval: PT10s
 ```
 
-## on_error
+## Error handling
  the on_error section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
 
 ```yaml
