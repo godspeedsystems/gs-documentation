@@ -97,8 +97,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "5.2. Prisma as data source",
-          id: "data_sources/prisma_as_data_source"
+          label: "5.2. Data source plugins",
+          id: "data_sources/datasource_plugins"
         },
         {
           type: "doc",
