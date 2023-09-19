@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+title: Introduction
+---
+
+# Introduction
+
+In general, the communication could be one of the following
+
+ ### <Highlight color="#F0F8FF">External to API gateway</Highlight>
+External services will communicate with API gateway synchronously and will follow the request - response cycle.
+ ### <Highlight color="#F0F8FF">Microservices communication</Highlight>
+ Communication between microservices could either be synchronous or asynchronous. All synchronous communication will happen , either through HTTP or gRPC, via the service mesh (using proxy sidecar). Asynchronous communication will follow event driven architecture (EDA) through messages/events. The event format will follow the CloudEvents specification (a standard open format.
+ ### <Highlight color="#F0F8FF">Triggered workflows</Highlight>
+ A workflow is a serverless function which could be triggered by an event or a schedule, being listened to by ArgoEvents. Examples include AI/ML computation, CI/CD workflows, ETLs.
+
+
+<!-- export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '0px',
+      color: 'black',
+      fontSize:'22px',
+      padding: '5px',
+      cursor: 'pointer',
+    }}
+   >
+    {children}
+  </span>
+);
+ -->

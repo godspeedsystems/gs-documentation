@@ -6,13 +6,12 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  
   title: 'Godspeed Docs',
   tagline: 'Documentaion for Godspeed framework',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'http://localhost:3000',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -40,6 +39,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: 'v2.0.0.alpha',
+            },
+            
+          },          
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -63,42 +69,36 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/Gs-logo.png',
+      image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Godspeed',
         logo: {
           alt: 'Godspeed Logo',
-          src: 'img/Gs-logo.png',
-          // style:{width:100,height:60}
+          src: 'img/logo.svg',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Introduction',
+            label: 'Documentation',
           },
           {
-            label: 'Getting Started',
-            to: '/docs/getting_started',
-            position: 'left',
-          },
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            type: 'docsVersionDropdown',
             position: 'right',
-          },
+            dropdownActiveClassDisabled: true,
+          },          
         ],
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Godspeed',
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/introduction',
+                label: 'Documentation',
+                to: '/docs/intro',
               },
             ],
           },
@@ -106,30 +106,30 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Code SandBox',
-                href: 'https://github.com/godspeedsystems/godspeed-codesandbox',
+                label: 'Forum',
+                href: 'https://forum.godspeed.systems',
               },
               {
                 label: 'Discord',
-                href: 'https://discord.com/channels/983323669809999882/983323759714897940',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/GodspeedSystem',
+                href: 'https://discord.gg/MKjv3KdD7X',
               },
             ],
           },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/godspeedsystems',
-              },
-            ],
-          },
+          // {
+          //   title: 'More',
+          //   items: [
+          //     {
+          //       label: 'Blog',
+          //       to: '/blog',
+          //     },
+          //     {
+          //       label: 'GitHub',
+          //       href: 'https://github.com/facebook/docusaurus',
+          //     },
+          //   ],
+          // },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} by Godspeed Systems.`,
+        // copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

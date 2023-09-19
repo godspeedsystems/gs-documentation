@@ -1,0 +1,117 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "doc",
+      "label": "Table of Contents",
+      "id": "table-of-contents"
+    },
+    {
+      "type": "doc",
+      "label": "1. Preface",
+      "id": "preface"
+    },
+    {
+      "type": "doc",
+      "label": "2. Introduction",
+      "id": "microservices/intro"
+    },
+    {
+      "type": "category",
+      "label": "3. Setup",
+      "items": [
+        "microservices/setup/getting-started",
+        "microservices/setup/scaffolding",
+        {
+          "type": "category",
+          "label": "3.3 Configuration",
+          "items": [
+            "microservices/setup/configuration/intro",
+            "microservices/setup/configuration/env-vars",
+            "microservices/setup/configuration/static-vars",
+            "microservices/setup/configuration/custom-swagger-spec-docs"
+          ]
+        },
+        "microservices/setup/tests",
+        "microservices/setup/auto-watch"
+      ]
+    },
+    {
+      "type": "doc",
+      "label": "4. CLI",
+      "id": "microservices/introduction-cli"
+    },
+    {
+      "type": "doc",
+      "label": "5. Swagger Specs",
+      "id": "microservices/swagger-specs"
+    },
+    {
+      "type": "doc",
+      "label": "6. Events",
+      "id": "microservices/events"
+    },
+    {
+      "type": "doc",
+      "label": "7. Workflows",
+      "id": "microservices/workflows"
+    },
+    {
+      "type": "category",
+      "label": "8. Datasources",
+      "items": [
+        "microservices/datasources/intro",
+        "microservices/datasources/before-and-after-hooks",
+        "microservices/datasources/api",
+        "microservices/datasources/datastore",
+        "microservices/datasources/kafka",
+        {
+          "type": "category",
+          "label": "8.6 Elasticgraph",
+          "items": [
+            "microservices/datasources/elasticgraph/elasticgraph",
+            "microservices/datasources/elasticgraph/feature-set-of-elasticgraph"
+          ]
+        },
+        "microservices/datasources/extensible-datasources",
+        "microservices/datasources/aws",
+        "microservices/datasources/redis",
+        "microservices/datasources/rabbitmq"
+      ]
+    },
+    {
+      "type": "doc",
+      "label": "9. Caching",
+      "id": "microservices/caching"
+    },
+    {
+      "type": "doc",
+      "label": "10. Mappings",
+      "id": "microservices/mappings"
+    },
+    {
+      "type": "doc",
+      "label": "11. Plugins",
+      "id": "microservices/plugins"
+    },
+    {
+      "type": "doc",
+      "label": "12. Authentication & Authorization",
+      "id": "microservices/authen-author"
+    },
+    {
+      "type": "doc",
+      "label": "13. Telemetry",
+      "id": "telemetry/intro"
+    },
+    {
+      "type": "doc",
+      "label": "14. Custom Middleware",
+      "id": "microservices/custom-middleware"
+    },
+    {
+      "type": "doc",
+      "label": "15. Roadmap",
+      "id": "roadmap"
+    }
+  ]
+}

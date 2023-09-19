@@ -1,0 +1,127 @@
+---
+sidebar_position: 6
+title: Project structure
+---
+
+## Introduction
+
+There are two kinds of projects :
+
+- Microservice
+- Serverless
+
+Any project can
+
+- Have its own code (./src)
+- Include other libraries/modules (package.json)
+- Add middleware to functions (imported or in /src)
+- Export functions (own or imported) via HTTP, message bus or socket
+
+> A CLI is planned to create the scaffolding structure. For now template git repository will be made available.
+
+### Project Scaffolding Structure
+
+- Configuration of any kind can be written in a single yaml/toml/json file, or can be broken down into nested folders. Any single file when getting too big, can be broken down into folders. [Read more here](./config-loading)
+- Middleware: Functions authored in /src or imported from other modules, when loaded at service start time, can be wrapped as GSInstruction, with zero or more pre and post hooks including validations and auth, [based on middleware settings](#common-middleware) of the project and overriden settings per function
+
+```
+./                                              // Project root directory
+  src/                                          // It includes your authored functions which you wish to expose via the microservice interfaces as API. The FQN of any exported from any function, is the folder path to that function relative to /src
+  test/                                         // Test cases for the project
+  ui/                                           // Any UI related code including static files
+      static //html, images, css
+      src //React, react-native, Ionic,
+  config/                                       // All the configuration for this project, including that of imported modules and also own exported functions.
+    src/                                        // Any config required by the code in src folder
+    imported_modules
+      auth/                                     // Auth related config
+      telemetry/                                // Telemetry related config
+      data/                                     // Data related config, including model, databases used, batch settings, internationalization/localization etc.
+    middleware/                                 // Inserting pre and post function hooks to functions ;
+      common/                                   // Applicable to all functions, be it imported functions or functions defined in src
+      function_overrides/                       // Middleware related config
+    exported_functions/                         // Configuration for function/modules to be exported over REST, message bus or socket (whether from /src or imported modules)
+    test/                                       // Any config required by the tests
+    microservice/                               // When exposed as microservice this is required. It contains any microservice level settings. For example, the microservice name, domain name, open API channels (like message bus, REST).
+      domainName: 'lending'
+      microserviceName: 'credit_card'
+      enabled_channels: ['REST', 'messageBus', 'socket']  //By default all exported functions will be exported via all enabled channels
+    serverless/                                 // When exposed as serverless function this is required. It contains any FAAS level settings.
+      domainName: 'lending'
+      FAASName: 'some_ETL'
+      trigger: 'messageBus' | 'gitOps' ...      //For full list of supported triggers, see the ArgoEvents for supported sources
+  package.json                                  // All package info including the imported modules and dependencies
+  ReadMe.md
+```
+
+> TODO: Add details for microservice/serverless config for different environments like dev/staging/production.
+
+### Defining API schema and exporting
+
+In Godspeed land, the API schema is collection of defined and exported functions with middleware hooks like param validation & authorization. [Refer the core runtime](../writing-business-logic/functions) for the same.
+In Godspeed land, you need to write only the business logic & configurations, and not write any code for setting up the server, defining routes, listening to different sync/async channels, sending responses etc.
+This way the business logic of a function is decoupled from the way this function is exported and consumed, saving development and testing work, and also saving code repetition.
+All you need to export a function is to define its config in /config/exported_functions.
+
+```
+./config
+  exported_functions/
+    com
+      abc
+        functionA                               // The Fullly qualified name (FQN) of the exported function to external consumer will be `${domainName}.${microserviceName}.com.abc.functionA`
+                                                // On event interfaces, the microservie or serverless will be registered to listen on the FQN of this function. For REST, the FQN will itself become the URL for that endpoint.
+          enabled_channels:                     // If channels are not specified for this function, it is exportd via all the channels exposed by this service. In case of HTTP, default export will be POST.
+            REST:
+              methodType: 'GET' | 'POST'...     // The params of GET request and payload of POST request become the arguments of the underlying function, to be called with its middleware
+            messageBus: true | false            // Default value: true. By default every function is exported on all the exported channels of this microservice (see microservice config detailed in above section)
+            socket: true | false                // If a channel is not set at the microservice config level, yet a function can be exported on that channel by this local override
+```
+
+### Common middleware
+
+Like discussed already, any function exported an be given middleware hooks to be run before and after the function execution. These are useful for param validation, authorization and any other use cases as need be.
+The developer gets default middleware functions defined in `/config/middleware/common`. He can further tweak the middleware for any function used in the project. Local changes will override the global settings.
+These settings will be same in case of FAAS or microservice project.
+
+```
+./config
+    middleware/
+      common/                                                       // all functions will have common middleware defined here
+        preAuths
+          com.mg.gs.telemetry.createSpan
+          dot.separated.fqn.fn2
+        auths //GSAssert
+          f.q.n2.cachedAclsBasedAuth
+          f.q.n2.ownershipBasedAuth
+        validations //GSAssert
+          f.q.n3.applyValidationA
+          f.q.n4.applyValidationB
+        onError
+        finally
+          com.mg.gs.telemetry.closeSpan
+          com.mg.gs.telemetry.EFKLog
+          com.mg.gs.telemetry.trace
+          com.mg.gs.telemetry.sendLatencyMetric
+
+      function_overrides                                             //function specific overrides values here
+        com
+          godspeed
+            lending
+              createLoanAccount
+                middleware
+                  preAuths
+                    push // | prepend | set                          //One can add middleware before or after the common middleware. Or replace (set) the common middleware with override.
+                      - f.q.n.fn1
+                      - dot.separated.fqn.afterAll
+                    prepend
+                      - f.q.n.beforeAll
+                  auths //GSAssert
+                    set // | prepend | set
+                      - f.q.n2.cachedAclsBasedAuth
+                      - f.q.n2.ownershipBasedAuth
+                  validations
+                    prepend
+                      - f.q.n3.applyValidationA
+                      - f.q.n4.applyValidationB
+                  finally
+```
