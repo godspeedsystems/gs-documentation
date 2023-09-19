@@ -4,32 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Standardized implementations or integrations across frameworks',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        "Standardized implementations or integrations across frameworks" means that in software development, there is a focus on adopting consistent and well-documented approaches to incorporate different software components into a project, and these practices are applied consistently across various software frameworks. This approach can lead to more efficient development, easier maintenance, and better compatibility between different parts of a software system.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Complete stack solution',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        A "complete stack solution" in software development is a pre-configured package of tools and technologies that covers the entire application development process. It includes front-end and back-end frameworks, database management, middleware, deployment guidance, security measures, monitoring tools, scalability strategies, documentation, and development environment recommendations. This integrated approach streamlines development, making it easier to create fully functional applications while adhering to best practices. The specific components can vary depending on project requirements and goals.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Schema driven development',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Schema-driven development is an approach where a formal schema or specification defines an application's structure, data models, UI, and behavior. It streamlines development by enabling code and UI generation based on the schema, ensuring consistency and flexibility. It's useful for data-intensive apps, and tools like GraphQL and JSON Schema facilitate its implementation, making it easier to adapt to evolving requirements.
       </>
     ),
   },
