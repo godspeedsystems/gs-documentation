@@ -40,19 +40,15 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "3.2. Express as HTTP event source",
-          id: "event_sources/express_as_http_event_source"
+          label: "3.2.  Event source plugins",
+          id: "event_sources/event_source_plugins"
         },
         {
           type: "doc",
           label: "3.3. Custome Event Source",
           id: "event_sources/custome_event_source"
         },
-        {
-          type: "doc",
-          label: "3.4. DSL(Domain Specific Language)",
-          id: "event_sources/DSL"
-        },
+      
       ],
     },
     {
@@ -147,11 +143,6 @@ const sidebars = {
           type: "doc",
           label: "8.1. Overview",
           id: "config/overview"
-        },
-        {
-          type: "doc",
-          label: "8.2. Configuration",
-          id: "config/configuration"
         },
       ],
     },
