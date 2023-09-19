@@ -40,15 +40,9 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "3.2.  Event source plugins",
-          id: "event_sources/event_source_plugins"
-        },
-        {
-          type: "doc",
           label: "3.3. Custome Event Source",
           id: "event_sources/custome_event_source"
         },
-      
       ],
     },
     {
@@ -67,17 +61,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "4.3. Recipies/Examples for common use cases",
-          id: "workflows/recipies_or_examples"
-        },
-        {
-          type: "doc",
-          label: "4.4. Scripting in workflows",
-          id: "workflows/scripting_in_workflows"
-        },
-        {
-          type: "doc",
-          label: "4.5. Retry",
+          label: "4.3. Retry",
           id: "workflows/retry"
         },
       ],
@@ -148,23 +132,34 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "9. Telemetry",
+      label: "9. caching",
       items: [
         {
           type: "doc",
           label: "9.1. Overview",
+          id: "caching/overview"
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "10. Telemetry",
+      items: [
+        {
+          type: "doc",
+          label: "10.1. Overview",
           id: "telemetry/overview"
         },
       ],
     },
     {
       type: "doc",
-      label: "10. Language Tools",
+      label: "11. Language Tools",
       id: "language_tools"
     },
     {
       type: "doc",
-      label: "11. CLI",
+      label: "12. CLI",
       id: "CLI"
     }
   ]
