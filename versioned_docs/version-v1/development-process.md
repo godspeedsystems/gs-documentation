@@ -13,13 +13,13 @@ title: Development Process
 #### Development practices
 
 - Sprint planning
-- Properly formatted issue/task creation [read more](/docs/faq#q5-what-is-our-development-process-and-quality-metrics)
+<!-- - Properly formatted issue/task creation [read more](/docs/faq#q5-what-is-our-development-process-and-quality-metrics) -->
 - Documentation
 - Coding standards
 - Test Coverage
 - Git ops
 
-[read more](/docs/springboot-integration/intro#sdk-features-)
+<!-- [read more](/docs/springboot-integration/intro#sdk-features-) -->
 
 #### Diversity & cutting edge
 

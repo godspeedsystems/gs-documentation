@@ -95,12 +95,12 @@ const config = {
         links: [
           {
             title: 'Godspeed',
-            items: [
-              {
-                label: 'Documentation',
-                to: '/docs/intro',
-              },
-            ],
+            // items: [
+            //   {
+            //     label: 'Documentation',
+            //     to: '/docs/intro',
+            //   },
+            // ],
           },
           {
             title: 'Community',
