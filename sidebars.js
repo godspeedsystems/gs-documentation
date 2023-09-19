@@ -101,11 +101,6 @@ const sidebars = {
           label: "6.2. Configuration",
           id: "authentication/configuration"
         },
-        {
-          type: "doc",
-          label: "6.3. Error handler",
-          id: "authentication/error_handler"
-        },
       ],
     },
     {
