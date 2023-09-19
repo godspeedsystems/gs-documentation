@@ -107,7 +107,7 @@ godspeed create **hello-world** # hello-world is the name of the app
 1. Create a project using Godspeed CLI with below command:
 
 ```bash
-godspeed create blog-app # blog-app is the name of the app
+godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name of the app
 ```
 
 2. Navigate to you project folder
@@ -121,17 +121,23 @@ cd blog-app
 ```bash
 code .
 ```
-4. Open terminal in vscode and enter the below ccommand
+
+4. Now to setup your database please follow the steps provided in README.md file of your blog-app project.
+
+**If you want to know more about mongo cluster visit [Mongo-cluster](https://www.mongodb.com/docs/guides/atlas/cluster/)**
+
+
+5. Open terminal in vscode and enter the below ccommand
 
 ```bash
 godspeed prisma prepare
 ```
 **This command will generate the prisma client and will sync the database with prisma schema**
 
-5. Now to generate the CRUD APIs enter the below command
+. Now to generate the CRUD APIs enter the below command
 
 ```bash
-npm run gen-crud-api
+godspeed gen-crud-api
 ```
 **This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma**
 
