@@ -40,18 +40,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "3.2. Express as HTTP event source",
-          id: "event_sources/express_as_http_event_source"
-        },
-        {
-          type: "doc",
           label: "3.3. Custome Event Source",
           id: "event_sources/custome_event_source"
-        },
-        {
-          type: "doc",
-          label: "3.4. DSL(Domain Specific Language)",
-          id: "event_sources/DSL"
         },
       ],
     },
@@ -71,17 +61,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "4.3. Recipies/Examples for common use cases",
-          id: "workflows/recipies_or_examples"
-        },
-        {
-          type: "doc",
-          label: "4.4. Scripting in workflows",
-          id: "workflows/scripting_in_workflows"
-        },
-        {
-          type: "doc",
-          label: "4.5. Retry",
+          label: "4.3. Retry",
           id: "workflows/retry"
         },
       ],
@@ -148,32 +128,38 @@ const sidebars = {
           label: "8.1. Overview",
           id: "config/overview"
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "9. caching",
+      items: [
         {
           type: "doc",
-          label: "8.2. Configuration",
-          id: "config/configuration"
+          label: "9.1. Overview",
+          id: "caching/overview"
         },
       ],
     },
     {
       type: "category",
-      label: "9. Telemetry",
+      label: "10. Telemetry",
       items: [
         {
           type: "doc",
-          label: "9.1. Overview",
+          label: "10.1. Overview",
           id: "telemetry/overview"
         },
       ],
     },
     {
       type: "doc",
-      label: "10. Language Tools",
+      label: "11. Language Tools",
       id: "language_tools"
     },
     {
       type: "doc",
-      label: "11. CLI",
+      label: "12. CLI",
       id: "CLI"
     }
   ]

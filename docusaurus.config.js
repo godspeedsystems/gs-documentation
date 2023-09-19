@@ -6,6 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  
   title: 'Godspeed Docs',
   tagline: 'Documentaion for Godspeed framework',
   favicon: 'img/favicon.ico',
@@ -62,21 +63,26 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/Gs-logo.png',
       navbar: {
         title: 'Godspeed',
         logo: {
           alt: 'Godspeed Logo',
-          src: 'img/logo.svg',
+          src: 'img/Gs-logo.png',
+          // style:{width:100,height:60}
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Introduction',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            label: 'Getting Started',
+            to: '/docs/getting_started',
+            position: 'left',
+          },
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -91,8 +97,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Introduction',
+                to: '/docs/introduction',
               },
             ],
           },
@@ -100,16 +106,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Code SandBox',
+                href: 'https://github.com/godspeedsystems/godspeed-codesandbox',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.com/channels/983323669809999882/983323759714897940',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/GodspeedSystem',
               },
             ],
           },
@@ -117,17 +123,13 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/godspeedsystems',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} by Godspeed Systems.`,
       },
       prism: {
         theme: lightCodeTheme,
