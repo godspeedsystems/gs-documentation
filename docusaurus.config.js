@@ -74,7 +74,7 @@ const config = {
         title: 'Godspeed',
         logo: {
           alt: 'Godspeed Logo',
-          src: 'img/logo.svg',
+          src: 'img/Gs-logo.png',
         },
         items: [
           {
