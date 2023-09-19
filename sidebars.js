@@ -36,22 +36,12 @@ const sidebars = {
         {
           type: "doc",
           label: "3.1. Overview",
-          id: "event_sources/overview"
-        },
-        {
-          type: "doc",
-          label: "3.2. Express as HTTP event source",
-          id: "event_sources/express_as_http_event_source"
+          id: "event_sources/overview",
         },
         {
           type: "doc",
           label: "3.3. Custome Event Source",
-          id: "event_sources/custome_event_source"
-        },
-        {
-          type: "doc",
-          label: "3.4. DSL(Domain Specific Language)",
-          id: "event_sources/DSL"
+          id: "event_sources/custome_event_source",
         },
       ],
     },
@@ -62,27 +52,27 @@ const sidebars = {
         {
           type: "doc",
           label: "4.1. Overview",
-          id: "workflows/overview"
+          id: "workflows/overview",
         },
         {
           type: "doc",
           label: "4.2. Inbuilt workflows",
-          id: "workflows/inbuilt_workflows"
+          id: "workflows/inbuilt_workflows",
         },
         {
           type: "doc",
           label: "4.3. Recipies/Examples for common use cases",
-          id: "workflows/recipies_or_examples"
+          id: "workflows/recipies_or_examples",
         },
         {
           type: "doc",
           label: "4.4. Scripting in workflows",
-          id: "workflows/scripting_in_workflows"
+          id: "workflows/scripting_in_workflows",
         },
         {
           type: "doc",
           label: "4.5. Retry",
-          id: "workflows/retry"
+          id: "workflows/retry",
         },
       ],
     },
@@ -93,17 +83,17 @@ const sidebars = {
         {
           type: "doc",
           label: "5.1. Overview",
-          id: "data_sources/overview"
+          id: "data_sources/overview",
         },
         {
           type: "doc",
           label: "5.2. Data source plugins",
-          id: "data_sources/datasource_plugins"
+          id: "data_sources/datasource_plugins",
         },
         {
           type: "doc",
           label: "5.3. Custome data source",
-          id: "data_sources/custome_data_source"
+          id: "data_sources/custome_data_source",
         },
       ],
     },
@@ -114,17 +104,17 @@ const sidebars = {
         {
           type: "doc",
           label: "6.1. Overview",
-          id: "authentication/overview"
+          id: "authentication/overview",
         },
         {
           type: "doc",
           label: "6.2. Configuration",
-          id: "authentication/configuration"
+          id: "authentication/configuration",
         },
         {
           type: "doc",
           label: "6.3. Error handler",
-          id: "authentication/error_handler"
+          id: "authentication/error_handler",
         },
       ],
     },
@@ -135,7 +125,7 @@ const sidebars = {
         {
           type: "doc",
           label: "7.1. Overview",
-          id: "authorization/overview"
+          id: "authorization/overview",
         },
       ],
     },
@@ -146,12 +136,7 @@ const sidebars = {
         {
           type: "doc",
           label: "8.1. Overview",
-          id: "config/overview"
-        },
-        {
-          type: "doc",
-          label: "8.2. Configuration",
-          id: "config/configuration"
+          id: "config/overview",
         },
       ],
     },
@@ -162,21 +147,21 @@ const sidebars = {
         {
           type: "doc",
           label: "9.1. Overview",
-          id: "telemetry/overview"
+          id: "telemetry/overview",
         },
       ],
     },
     {
       type: "doc",
       label: "10. Language Tools",
-      id: "language_tools"
+      id: "language_tools",
     },
     {
       type: "doc",
       label: "11. CLI",
-      id: "CLI"
-    }
-  ]
+      id: "CLI",
+    },
+  ],
 };
 
 module.exports = sidebars;
