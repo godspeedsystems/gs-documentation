@@ -4,7 +4,7 @@ Godspeed framework has a pluggable aproach to define data sources. The framework
 
 ## List of plugins
 
-1. Prisma-as-datasource
+### 1. Prisma-as-datasource [npm](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
 Prisma-as-datasource plugin provide functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma ORM.
 
@@ -38,6 +38,9 @@ export default PrismaDataSource;
 4. Run `godspeed dev` or `npm run dev` to restart the server.
 
 
+### 2. axios-as-datasource [npm](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
+
+"axios-as-datasource," This powerful plugin supercharges your applications by seamlessly connecting to 3rd party APIs. With its ease of use and versatility, it's your secret weapon for accessing external data sources effortlessly.
 
 
 
