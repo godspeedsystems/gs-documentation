@@ -36,13 +36,20 @@ const sidebars = {
         {
           type: "doc",
           label: "3.1. Overview",
+
           id: "event_sources/overview",
         },
         {
           type: "doc",
-          label: "3.3. Custome Event Source",
-          id: "event_sources/custome_event_source",
+          label: "3.2.  Event source plugins",
+          id: "event_sources/event_source_plugins"
         },
+        {
+          type: "doc",
+          label: "3.3. Custome Event Source",
+
+          id: "event_sources/custome_event_source",
+        }
       ],
     },
     {
