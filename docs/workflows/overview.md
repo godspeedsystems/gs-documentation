@@ -117,7 +117,7 @@ retry:
 ```
 
 ## Error handling
- the on_error section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
+ the `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
 
 ```yaml
 summary: Hello world
@@ -137,3 +137,5 @@ tasks:
     fn: com.gs.return
     args: 'Hello World!' 
 ```
+## Built-in Function
+The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include "com.gs.series" and "com.gs.parallel," enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides "com.gs.switch," "com.gs.if," "com.gs.elif," and "com.gs.else" functions to make decisions based on specific criteria. Developers can iterate through tasks with "com.gs.each_sequential" and "com.gs.each_parallel" for controlled repetition. To capture and communicate data between tasks, "com.gs.return" comes in handy, while "com.gs.log" aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework. Refer [inbuilt functions](/docs/workflows/inbuilt_workflows)
