@@ -62,7 +62,7 @@ Incorporate established standards into system design, such as utilizing CloudEve
 ## Guiding principles of design
 
 ### Four fundamental abstractions
-The three fundamental abstractions in the Godspeed are events (sync/async), workflows (business logic) , datasources (datastores) and eventsources (APIs).
+The four fundamental abstractions in the Godspeed are events (sync/async), workflows (business logic) , datasources (datastores) and eventsources (APIs).
 
 ### Unified Observability For APM and BPM
 
