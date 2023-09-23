@@ -15,6 +15,8 @@ title: Event Sources
     - shares the client with the corresponding data source
     - eg., kafka, rabbitMQ
 
+**Here kafka works as datasource and datasource to have look at the configuration,event and workflow checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)**
+
 ## How to use a event source in godspeed project?
 
   You can use Godspee CLI to browse and install plugins published and maintained by godspeed.
