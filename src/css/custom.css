@@ -5,6 +5,8 @@
  */
 
 /* You can override the default Infima variables here. */
+
+
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -16,6 +18,37 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
+h1 {
+  color: rgb(7,11,19);
+  font-size: 56px;
+  font-family: sans-serif;
+  font-weight: bold;
+
+  
+}
+h2{
+  font-family: sans-serif;
+  color: rgb(7,11,19);
+  font-size: 36px;
+  font-weight: bold;
+  
+}
+ h3{
+  font-family: sans-serif;
+  color: rgb(7,11,19);
+  font-size: 28px;
+  font-weight: bold;
+
+
+}
+
+ p{
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  color: rgb(7,11,19);
+  font-size: 18px;
+  font-weight: 500;
+}
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
@@ -26,5 +59,45 @@
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); */
+  background-color: rgb(7,11,19);
+
+
 }
+
+[data-theme='dark'] h1 {
+  color: #ffffff;
+  font-size: 56px;
+  font-family: sans-serif;
+}
+[data-theme='dark'] h2{
+  font-family: sans-serif;
+  color: #ffffff;
+  font-size: 36px;
+  
+}
+[data-theme='dark'] h3{
+  font-family: sans-serif;
+  color: #ffffff;
+
+}
+[data-theme='dark'] h3{
+  font-family: sans-serif;
+  color: #ffffff;
+  font-size: 28px;
+
+}
+
+[data-theme='dark'] p{
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  /* color: #94A3B8; */
+  color: #ffffff;
+  font-size: 18px;
+}
+
+
+
+
+
+
