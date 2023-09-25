@@ -56,10 +56,16 @@ Every Workflow has the following attributes.
 - **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
 ### Tasks and Attributes within a task
 The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
+
 - **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
+
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
-- **fn** - This specifies the handler that will be executed for this task. It can be one of the framework functions, control functions (such as parallel, sequential, switch), custom developer-written functions, or another workflow.
+
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/workflows/inbuilt_workflows) or [developer defined function](/docs/workflows/custom_workflows).
+
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
+#### developer defined functions
+Developers have the flexibility to create custom JavaScript functions that can be utilized across various YAML workflows by exporting these functions. [refer](/docs/workflows/custom_workflows)
 #### Inputs
  These are typically used to represent the input data or parameters required for a task. In the below workflow, we see references to `inputs.body.name`, which suggests that the task expects a value named "name" as input. This input data can come from external sources.
 #### Outputs

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:docs/getting_started.md
 # Getting Started Guide
 
 The initial guide is tailored for Node.js programming, and we have plans to provide a similar guide for Java in the near future.
@@ -54,6 +55,11 @@ The initial guide is tailored for Node.js programming, and we have plans to prov
 ```
 
 3. Creating a godspeed project.
+=======
+# Steps for creating a new project.
+## Creating a godspeed project.
+Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+>>>>>>> e782c6a09df0f3f33568299e3913147dbe4a3e3f:docs/getting_started/create_new_proj.md
 
 ```bash
 godspeed create **hello-world** # hello-world is the name of the app
@@ -94,6 +100,7 @@ godspeed create **hello-world** # hello-world is the name of the app
 5. It will start your app on localhost on default port number 3000, if you can modify the port number as per your requirement. You can try out your hello-world API is live.
 
 
+<<<<<<< HEAD:docs/getting_started.md
 **Building blocks of framework:**
 
 1. **Events:** Events of async and sync kind, Define endpoint, input, and response.
@@ -108,7 +115,10 @@ godspeed create **hello-world** # hello-world is the name of the app
 **YAML-based DSL (Domain-Specific Language) is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.**
 
 
+=======
+>>>>>>> e782c6a09df0f3f33568299e3913147dbe4a3e3f:docs/getting_started/create_new_proj.md
 ## Run the sample project with Godspeed.
+Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 
@@ -158,6 +168,3 @@ godspeed dev
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
 Happy building with Godspeed!
-
-
-
