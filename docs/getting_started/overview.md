@@ -89,7 +89,7 @@ godspeed create **hello-world** # hello-world is the name of the app
 > godspeed dev
 ```
 
-5. It will start your app on localhost on port 3000. You can try out your hello-world API is live.
+5. It will start your app on localhost on default port number 3000, if you can modify the port number as per your requirement. You can try out your hello-world API is live.
 
 
 **Building blocks of framework:**
@@ -127,27 +127,29 @@ code .
 **If you want to know more about mongo cluster visit [Mongo-cluster](https://www.mongodb.com/docs/guides/atlas/cluster/)**
 
 
-5. Open terminal in vscode and enter the below ccommand
+5. Open terminal in vscode and enter the below command
 
 ```bash
 godspeed prisma prepare
 ```
 **This command will generate the prisma client and will sync the database with prisma schema**
 
-. Now to generate the CRUD APIs enter the below command
+6. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
+
+7. Now to generate the CRUD API'S enter the below command
 
 ```bash
 godspeed gen-crud-api
 ```
 **This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma**
 
-6. Run `godspeed dev` to start the development server.
+8. Run `godspeed dev` to start the development server.
 
 ```bash
 godspeed dev
 ```
 
-**Voila!** Your API backend is up and running. You can use Postman to test your APIs.
+**Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
 Happy building with Godspeed!
 

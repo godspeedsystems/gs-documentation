@@ -1,6 +1,6 @@
 # Data source Plugins
 
-Godspeed framework has a pluggable aproach to define data sources. The framework provides an interface to write different data source. Here are few data source plugins which are managed by the core framework team.
+Godspeed framework has a pluggable approach to define data sources. The framework provides an interface to write different data sources. Here are few data source plugins which are managed by the core framework team.
 
 ## List of plugins
 

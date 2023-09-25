@@ -3,9 +3,9 @@ title: Event Sources
 ---
 # Overview
 
-  Event Sources in godspeeed framework allows you to define entry or trigger points of application. Like `express` type event source will allow you to expose your application through REST API or a `cron` type event source to schedule a recurring call to a workflow.
+  Event Sources in godspeed framework allows you to define entry or trigger points of application. Like `express` type, event source will allow you to expose your application through REST API or a `cron` type event source to schedule a recurring call to a workflow.
 
-## Types of Event Source
+## Types of Event Sources
   1. Event Source
     - it can act only as event source
     - has its own client initilization
@@ -17,9 +17,9 @@ title: Event Sources
 
 **Here kafka works as datasource and datasource to have look at the configuration,event and workflow checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)**
 
-## How to use a event source in godspeed project?
+## How to use an event source in godspeed project?
 
-  You can use Godspee CLI to browse and install plugins published and maintained by godspeed.
+  You can use Godspeed CLI to browse and install plugins which are published and maintained by godspeed.
 
   ```bash
    > godspeed plugin add

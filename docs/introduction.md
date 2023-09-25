@@ -1,14 +1,14 @@
 # Godspeed - A framework for microservices
 
-**This document is meant for stakeholders, technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.**
+This document is meant for stakeholders, technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.
 
 ## Introduction
 
-"Godspeed is on a mission to empower teams with the tools to effortlessly create, maintain, and monitor microservices-based backends, delivering unparalleled velocity, scalability, quality, and performance. Our goal is to liberate development and QA teams from the burdensome, repetitive tasks associated with building modern distributed backends, encompassing domain-driven design, multi-tenancy, microservices, and serverless functions. We envision developers being able to swiftly craft microservices in a matter of days, not months.
+Godspeed is on a mission to empower teams with the tools to effortlessly create, maintain, and monitor microservices-based backends, delivering unparalleled velocity, scalability, quality, and performance. Our goal is to liberate development and QA teams from the burdensome, repetitive tasks associated with building modern distributed backends, encompassing domain-driven design, multi-tenancy, microservices, and serverless functions. We envision developers being able to swiftly craft microservices in a matter of days, not months.
 
 To achieve this, we're committed to providing teams with everything they need to create and operate contemporary microservices, guided by configuration-driven, plug-and-play, and inherently extensible principles, all while remaining cloud-agnostic. We firmly reject any form of vendor lock-in, whether it be with Godspeed or any chosen cloud provider. Our approach empowers developers with the freedom to select and control the tools, databases, and cloud services they prefer, all while adhering to industry standards and unified interfaces.
 
-This framework has been meticulously developed by Mindgrep over several years, meticulously refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs."
+This framework has been meticulously developed by Mindgrep over several years, meticulously refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
 
 ---
 
