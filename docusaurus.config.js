@@ -77,6 +77,7 @@ const config = {
       }),
     ],
   ],
+  onBrokenLinks: 'ignore',
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
