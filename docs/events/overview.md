@@ -8,6 +8,39 @@ A microservice can be configured to consume events from variety of event sources
 
 The response of the event is flexible for the developer to change as per the requirement.
 
+## Structure of an event
+```yaml
+http.put./mongo/user/{id}:
+  summary: Update a user
+  description: Update user from database
+  fn: com.biz.mongo.user.update
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/mongo/BusinessProfile'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+```
+- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`).
+- The `summary` and `description` fields provide insights into the event's purpose and can be viewed in Swagger specifications of that API.
+- The `fn` keyword specifies which function should be executed when the event occurs.
+- Use `params` to include `path` or `query` parameters.  The `name` keyword identifies the parameter's name, `in` specifies its type (path or query), and `schema` defines the expected input value.
+- Events can receive JSON request body objects via the `body`, and you can define a specific schema to extract user information.
+- The `responses` section outlines the expected response objects that should be included in the response body.
+
+
+
+
 ##  Event types
 
 **Currently supported**
@@ -87,6 +120,7 @@ If response schema validation fails, then status code 500 is returned.
 
 For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
 
+
  The inputs (event) object has following properties:
 
     - query: `<%inputs.query.var_name%>` # present in case of http events
@@ -132,42 +166,64 @@ tasks:
       data: <% inputs.body %>
   ```
 
+  ### Kafka event
+
+The `group_id` functions as a unique identifier for all consumers within a group, ensuring that only one consumer processes a message at a time. This becomes particularly valuable in microservices architecture scenarios where a single service operates across multiple Kubernetes (K8s) pods, with each pod belonging to the same consumer group. This setup guarantees that the message is reliably consumed by any one of the pods.
+
+Within the Kafka event structure, the content of the message is captured and made accessible as `inputs.body`, facilitating its integration into the handler workflow for processing.
+
+
+[To know about Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)
+
+#### Example spec for Kafka event
+
+``` yaml
+ # event for consume data from Topic
+Kafka.publish-producer1.kafka_proj: // event key
+  id: kafka__consumer
+  fn: kafka_consume
+  body:
+    description: The body of the query
+    content:
+      application/json: 
+        schema:
+          type: string
+ ```
+
+#### Example workflow consuming an kafka event
+  ```yaml
+   # function for consume data
+id: kafka-conumer
+summary: consumer
+tasks:
+    - id: set_consume
+      fn: com.gs.return
+      args: <% inputs %>
+  ```
+
 #### Example workflow (on_validation_error handler) handling json schema validation error
   ```yaml
-  summary: For each sample
-  description: Here we transform the response of for loop
+  summary: Handle json scehma validation error
+  id: error_handler
   tasks:
-    - id: each_parallel_step1
-      description: for each
-      fn: com.gs.each_parallel
-      value: [1, 2, 3, 4]
-      tasks:
-        - id: each_task1
-          fn: com.gs.if
-          condition: <js% (inputs.query.number) != null %>
-          tasks:
-            - id: hhfhf
-              fn: com.gs.transform
-              args: <%task_value + parseInt(inputs.query.number)%>
-        - id: else 
-          fn: com.gs.else
-          tasks: 
-            - id: fssds
-              fn: com.gs.transform
-              args: |
-                  <coffee%{
-                    success: false,
-                    code: 400,
-                    data: "error at task level"
-                  }%>
-      on_error: # on_error at loop level
-        continue: true
-        response: 
-          success: false
-          code: 400
-          data: <%"error at loop level"%>
-    - id: each_parallel_step2
-      description: return the response
-      fn: com.gs.transform
-      args: <% outputs.each_parallel_step1 %>
+    - id: erorr_step1
+      fn: datasource.kafka.publish
+      args:
+        data: # publish the event and validation error to kafka on a topic
+          value:
+            event: <% inputs.event %>
+            validation_error: <% inputs.validation_error %>
   ```
+
+
+### Working with different eventsources
+
+To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance, HTTP events accept inputs such as body, headers, path parameters, and query parameters. On the other hand, Kafka events only accept inputs in the form of body.
+
+Checkout a http event [example-http-event](#example-spec-for-http-event)
+
+Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
+
+**When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.**
+
+
