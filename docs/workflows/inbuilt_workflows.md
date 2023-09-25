@@ -1,5 +1,6 @@
 # Built-in functions
 
+
 ### The framework comes equipped with the following built-in functions.
 
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
@@ -31,7 +32,7 @@ This function enables you to convert data from one format to another using Coffe
 
 The above event will trigger the below function 
 
-#### Example function for transform
+#### Example function for transform ( transform.yaml )
 
 
 ```yaml
@@ -77,7 +78,7 @@ The parallel function is employed when we intend to include sub-tasks within the
 
 The above event will trigger the below function
 
-#### Example function for parallel 
+#### Example function for parallel ( com-gs-parallel.yaml )
 
 ```yaml
   summary: The Parallel function runs all its child task in parallel and we can select the specific childs output
@@ -132,7 +133,7 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
 
 The above event will trigger the below function 
 
-#### Example function for switch
+#### Example function for switch ( com-gs-switch.yaml )
 
 
 ```yaml
@@ -194,7 +195,7 @@ The `args` parameter consists of a list of values within the `value` field, each
 
 ```
 
-#### Example function using each_sequential
+#### Example function using each_sequential ( com-gs-each_sequencial.yaml )
 
 ```yaml
   summary: For each sample
@@ -266,7 +267,7 @@ The `args` parameter comprises a list of values in the `value` field, each paire
 ```
 
 
-#### Example function using each_parallel
+#### Example function using each_parallel ( com-gs-each_parallel.yaml )
 
 ```yaml
   summary: For each sample
@@ -343,7 +344,7 @@ When the return statement is invoked, it causes the current function to exit and
   fn: com-gs-return
 ```
 
-#### Example function for return 
+#### Example function for return ( com-gs-return.yaml )
 
 ```yaml
 summary: returning the data
@@ -402,7 +403,7 @@ During the workflow execution, it records intermediate inputs and outputs in the
                 type: string
 ```
 
-#### Example function using log
+#### Example function using log ( com-gs-log.yaml )
 
 ```yaml
 summary: Summing x + y
@@ -456,7 +457,7 @@ http.get./greet:
 
 ```
 
-#### Example function for if-elif-else
+#### Example function for if-elif-else ( com-gs-if.yaml )
 
 ```yaml
 summary: The subtasks will be triggered if the condition returns true

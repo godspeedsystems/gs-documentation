@@ -18,6 +18,7 @@ title: Workflows/Functions
   [EXAMPLE] -->
 
 ## Introduction
+
 Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework facilitates this process through a YAML-based Domain Specific Language (DSL) for defining workflows and tasks that encapsulate the business logic. These defined workflows can either be linked to events as their handlers or invoked from within other workflows, allowing for a versatile and seamless automation.
 
 ## A Sample Workflow Example 

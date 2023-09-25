@@ -1,5 +1,7 @@
 # Getting Started Guide
 
+The initial guide is tailored for Node.js programming, and we have plans to provide a similar guide for Java in the near future.
+
 ### Pre-requisite:
 
 1. Node 18 and npm
@@ -100,6 +102,10 @@ godspeed create **hello-world** # hello-world is the name of the app
 4. **DataSources:** Pluggable data source to store and retrieve data like **Mongo, Redis, API**
 5. **Config:** Application-level configuration
 6. **ENV:** environment files
+7. **DSL:** As the default, events and workflows are composed using YAML-based DSL, which serves as the primary language for defining them. However, when necessary, workflows can also be scripted in JavaScript files..
+
+
+**YAML-based DSL (Domain-Specific Language) is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.**
 
 
 ## Run the sample project with Godspeed.
