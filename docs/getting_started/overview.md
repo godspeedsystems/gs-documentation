@@ -1,4 +1,5 @@
-# Getting Started Guide
+# Getting Started with Godspeed Node JS framework
+
 The initial guide is tailored for Node.js programming, and we have plans to provide a similar guide for Java in the near future.
 
 In this section, you will learn how to install the Godspeed framework using the command line interface (CLI) and how to either create a new project with the framework or integrate Godspeed into an existing project.
