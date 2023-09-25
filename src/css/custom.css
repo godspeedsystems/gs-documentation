@@ -21,20 +21,20 @@
 h1 {
   color: rgb(7,11,19);
   font-size: 56px;
-  font-family: sans-serif;
+  font-family: monospace;
   font-weight: bold;
 
   
 }
 h2{
-  font-family: sans-serif;
+  font-family: monospace;
   color: rgb(7,11,19);
   font-size: 36px;
   font-weight: bold;
   
 }
  h3{
-  font-family: sans-serif;
+  font-family: monospace;
   color: rgb(7,11,19);
   font-size: 28px;
   font-weight: bold;
@@ -43,11 +43,12 @@ h2{
 }
 
  p{
-  font-family: sans-serif;
-  letter-spacing: 1px;
+  font-family: monospace;
+  letter-spacing: 0.2px;
   color: rgb(7,11,19);
   font-size: 18px;
   font-weight: 500;
+
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
