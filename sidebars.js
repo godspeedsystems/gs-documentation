@@ -25,9 +25,25 @@ const sidebars = {
       id: "introduction",
     },
     {
-      type: "doc",
+      type: "category",
       label: "2. Getting started",
-      id: "getting_started",
+      items: [
+        {
+          type: "doc",
+          label: "2.1. Overview",
+          id: "getting_started/overview"
+        },
+        {
+          type: "doc",
+          label: "2.2. Creating new project",
+          id: "getting_started/create_new_proj"
+        },
+        {
+          type: "doc",
+          label: "2.3. Godspeed on Existing project",
+          id: "getting_started/gs_on_existing_proj"
+        }
+      ]
     },
     {
       type: "category",
@@ -64,6 +80,11 @@ const sidebars = {
           type: "doc",
           label: "5.1. Overview",
           id: "workflows/overview"
+        },
+        {
+          type: "doc",
+          label: "5.2. Custom workflows",
+          id: "workflows/custom_workflows"
         },
         {
           type: "doc",
