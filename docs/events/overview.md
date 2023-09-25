@@ -1,12 +1,15 @@
 # Events
-A microservice can be configured to consume events from variety of event sources, like HTTP, etc. The event schema, for each event source, closely follows the OpenAPI specification. It includes
+## Introduction
+In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+
+The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event source and other information for the source (for ex. group_id in case of Kafka events)
 - The event handler workflow
 - Validation (input and output)
 - Examples of input and output
 
-The response of the event is flexible for the developer to change as per the requirement.
+Event handlers within microservices are responsible for processing these events, executing predefined workflows, and ensuring that both input and output data adhere to specified validation rules. These events empower developers with flexibility, allowing them to tailor responses to meet specific requirements.
 
 ## Structure of an event
 ```yaml
