@@ -11,7 +11,7 @@ url: redis[s]://[[username][:password]@][host][:port][/db-number]
 ```
 
 ### Configuration
-Define default caching datasource in [static configuration](./config)
+Define default caching datasource in [static configuration](/docs/config/overview)
 
 ```yaml
 log_level: debug

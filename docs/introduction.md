@@ -34,10 +34,6 @@ Module owners can initiate the deployment of microservices within a week of onbo
 
 The framework can read the environmental variables from a secure source like K8s Vault. For data in transit and data at rest, we use encryption mechanisms. Also, the framework supports JWT Authentication. Further, all hits to other APIs are secured via security schemas specified in their Open API Specification (OAS 3). Fine grained authorization at API and datasources level is in the roadmap. 
 
-### Seamless and rapid migrations.
-
-Transforming existing data models into Godspeed is made effortless through database introspection. CRUD APIs are automatically generated from these data models. The migration of existing APIs, to align them with Godspeed compliant events, is in the planning stages. Consequently, developers only need to focus on migrating the business logic.
-
 ---
 
 ## Features

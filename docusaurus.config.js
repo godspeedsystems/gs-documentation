@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Godspeed Docs',
-  tagline: 'Documentaion for Godspeed framework',
+  tagline: 'Documentation for Godspeed framework',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
