@@ -31,6 +31,8 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  onBrokenLinks: 'ignore',
+
 
   // plugins: [
   //   async function myPlugin(context, options) {
@@ -77,7 +79,6 @@ const config = {
       }),
     ],
   ],
-  onBrokenLinks: 'ignore',
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
