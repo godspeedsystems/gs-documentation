@@ -5,7 +5,7 @@ Authentication refers to the process of verifying the identity of a user or serv
 ### Generating a token
 Lets generating a JWT token manually from the [jwt.io](https://jwt.io/#debugger-io). 
 
-In the Debugger's Decoded section, the **HEADER** of a token typically comprises two parts: the token type (JWT) and the signing algorithm (e.g., HMAC SHA256 or RSA) in use. This JSON is then encoded using Base64Url, forming the initial segment of the JWT. Next, the **PAYLOAD** represents the token's second part, housing various claims. Claims are statements about an entity, often the user, and additional data. The **VERIFY SIGNATURE** component is employed to ensure the message remains unaltered during transmission. In the case of tokens signed with a private key, it can also verify the authenticity of the JWT sender.
+In the Debugger's Decoded section, the **HEADER** of a token typically comprises two parts: the token type (JWT) and the signing algorithm (e.g., HMAC SHA256 or RSA) in use. This JSON is then encoded using Base64Url, forming the initial segment of the JWT. Next, the **PAYLOAD** represents the token's second part, housing various claims. Claims are statements about an entity, often the user, and additional data. The **VERIFY SIGNATURE** component is employed to ensure that the message remains unaltered during transmission. In the case of tokens signed with a private key, it can also verify the authenticity of the JWT sender.
 
 ![JWT](https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-09-19%2014-11-34.png?updatedAt=1695113314578)
 

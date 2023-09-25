@@ -51,8 +51,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "4.2. Custome Event Source",
-          id: "event_sources/custome_event_source"
+          label: "4.2. Custom Event Source",
+          id: "event_sources/custom_event_source"
         },
       ],
     },
@@ -94,7 +94,7 @@ const sidebars = {
         {
           type: "doc",
           label: "6.3. Custome data source",
-          id: "data_sources/custome_data_source"
+          id: "data_sources/custom_data_source"
         },
       ],
     },
@@ -105,7 +105,7 @@ const sidebars = {
         {
           type: "doc",
           label: "7.1. Overview",
-          id: "authentication/overview"
+          id: "authentication/Overview"
         },
         {
           type: "doc",
@@ -138,7 +138,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "10. caching",
+      label: "10. Caching",
       items: [
         {
           type: "doc",
@@ -148,15 +148,9 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "11. Telemetry",
-      items: [
-        {
-          type: "doc",
-          label: "11.1. Overview",
-          id: "telemetry/overview"
-        },
-      ],
+      type: "doc",
+      label: "11. CLI",
+      id: "CLI"
     },
     {
       type: "doc",
@@ -164,10 +158,16 @@ const sidebars = {
       id: "language_tools"
     },
     {
-      type: "doc",
-      label: "13. CLI",
-      id: "CLI"
-    }
+      type: "category",
+      label: "13. Telemetry",
+      items: [
+        {
+          type: "doc",
+          label: "13.1. Overview",
+          id: "telemetry/overview"
+        },
+      ],
+    }, 
   ]
 };
 

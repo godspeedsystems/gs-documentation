@@ -2,6 +2,8 @@
 
 ### The framework comes equipped with the following built-in functions.
 
+The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework. Refer [inbuilt functions](/docs/workflows/inbuilt_workflows)
+
 
 ## com.gs.transform
 
@@ -51,9 +53,6 @@ Executes the child tasks in parallel.
 :::
 
 The parallel function is employed when we intend to include sub-tasks within the main tasks.
-
-Syntax is same as [com.gs.series](#comgsseries)
-
 
 
 #### Example event for parallel inbuilt function
@@ -217,7 +216,7 @@ The `args` parameter consists of a list of values within the `value` field, each
 
 # Using on_error
 
-You have the option to include an `on_error` handler at both the task level and within the `each_sequential` loop level.
+You have an option to include an `on_error` handler at both the task level and within the `each_sequential` loop level.
 
 Here's an example to illustrate:
 - If a task encounters a failure for any `task_value`, the program will follow the `on_error` defined at the task level. If `continue` is set to false, it will terminate the loop; otherwise, it will proceed to the next tasks.
@@ -427,7 +426,7 @@ tasks:
 
 
 
-## com.gs.if, com.gs.elif, com.gs.else
+## com.gs.if
 :::tip control flow function
 The classic if-else flow execution
 :::
