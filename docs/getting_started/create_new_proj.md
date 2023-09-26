@@ -27,10 +27,6 @@ godspeed create **hello-world** # hello-world is the name of the app
        Use `godspeed --help` command for available commands. Happy building microservices with Godspeed!. 
 
 ```
-
-  **For detailed documentation visit <https://docs.godspeed.systems>**
-
-
      
 4. Running the dev server. Navigate to the project root directory and run.
 

@@ -30,7 +30,7 @@ In this section, you will learn how to install the Godspeed framework using the 
    npm install -g @godspeedsystems/godspeed
 ```
 
-** Try running in the below command line to see available godspeed commands.** Refer [this](/docs/CLI.md) for more information.
+** Try running in the below command line to see available Godspeed commands.** Refer [this](/docs/CLI.md) for more information.
 
 ```bash
    godspeed --help

@@ -10,7 +10,7 @@ To achieve this, we're committed to providing teams with everything they need to
 
 This framework has been meticulously developed by Godspeed team over several years, refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
 
-we started with a low code [eslatic gragh] ORM and to resolve the issues of modern distributed even driven system we evaluated more robust temperate usecases covering for microservices spectrum
+we started with a low code eslatic gragh ORM and to resolve the issues of modern distributed even driven system we evaluated more robust temperate usecases covering for microservices spectrum
 
 ---
 
@@ -50,7 +50,7 @@ Developers are relieved from the need to intervene at levels such as schema, eve
 
 ### Simplified for extension and personalization.
 
-Pluggable event-source and data-source interfaces and recipe enable seamless integration of new components or usecases. For instance, substituting datastores, APM/BPM tools, analytics engines, cache systems, email providers, file storage solutions, CRMs.
+Pluggable event-source and data-source interfaces and recipe enable seamless integration of new components or usecases. For instance, substituting datastores, APM/BPM tools, analytics engines, cache systems, email providers, file storage solutions, API calls.
 
 ### Standards driven
 

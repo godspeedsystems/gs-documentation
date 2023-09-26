@@ -61,8 +61,8 @@ The parallel function is employed when we intend to include sub-tasks within the
 ```yaml
   http.get./test/parallel:
   summary: parallel
-  description: parallel
-  fn: com-gs-parallel
+  description: executing tasks parallelly
+  fn: parallel
   body:
     content:
       application/json:
@@ -78,7 +78,7 @@ The parallel function is employed when we intend to include sub-tasks within the
 
 The above event will trigger the below function
 
-#### Example function for parallel ( com-gs-parallel.yaml )
+#### Example function for parallel ( parallel.yaml )
 
 ```yaml
   summary: The Parallel function runs all its child task in parallel and we can select the specific childs output
@@ -118,7 +118,7 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
   http.post./test/switch:
   summary: switch
   description: switch
-  fn: com-gs-switch
+  fn: switch
   body:
     content:
       application/json:
@@ -133,7 +133,7 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
 
 The above event will trigger the below function 
 
-#### Example function for switch ( com-gs-switch.yaml )
+#### Example function for switch ( switch.yaml )
 
 
 ```yaml
@@ -174,13 +174,13 @@ The classic for-each flow execution
 The `args` parameter consists of a list of values within the `value` field, each paired with its associated task. For every value in the `value` list, tasks are executed one after the other in sequence. The resulting output, `each_sequential`, is an array containing the status of the last task executed in each iteration.
 
 
-#### Example event using each_sequencial
+#### Example event using each_sequential
 
 ```yaml
-  http.get./test/each_sequencial:
-  summary: each_sequencial
-  description: each_sequencial
-  fn: com-gs-each_sequencial
+  http.get./test/each_sequential:
+  summary: each_sequential
+  description: each_sequential
+  fn: each_sequential
   body:
     content:
       application/json:
@@ -195,7 +195,7 @@ The `args` parameter consists of a list of values within the `value` field, each
 
 ```
 
-#### Example function using each_sequential ( com-gs-each_sequencial.yaml )
+#### Example function using each_sequential ( each_sequential.yaml )
 
 ```yaml
   summary: For each sample
@@ -263,11 +263,11 @@ The `args` parameter comprises a list of values in the `value` field, each paire
 
 ```yaml
   http.get./test/each_parallel:
-  fn: com-gs-each_parallel
+  fn: each_parallel
 ```
 
 
-#### Example function using each_parallel ( com-gs-each_parallel.yaml )
+#### Example function using each_parallel ( each_parallel.yaml )
 
 ```yaml
   summary: For each sample
@@ -287,7 +287,7 @@ The `args` parameter comprises a list of values in the `value` field, each paire
       args: <% outputs.each_parallel_step1 %>
 ```
 
-# Using on_error
+## Using on_error
 
 You have the flexibility to include an `on_error` handler at both the task level and within the `each_parallel` loop level.
 
@@ -301,14 +301,13 @@ The `on_error` handler at the loop level is triggered exclusively when all tasks
 
 #### Error handling in each_sequential functions
 
-
 ```yaml
   summary: For each sample
   description: Here we transform the response of for loop
   tasks:
-    - id: each_parallel_step1
+    - id: each_sequential_step1
       description: for each
-      fn: com.gs.each_parallel
+      fn: com.gs.each_sequential
       value: [1, 2, 3, 4]
       tasks:
         - id: each_task1
@@ -316,17 +315,14 @@ The `on_error` handler at the loop level is triggered exclusively when all tasks
           args: <% 'each_task1 ' + task_value %>
           on_error: # on_error at task level
             continue: false
-            response: <%"error occured at task level"%>
-        - id: each_task2
-          fn: com.gs.transform
-          args: <% 'each_task2 ' + task_value %>
+            response: <%Coffee/JS expression%> | String
       on_error: # on_error at loop level
         continue: true
-        response: <%"error occured at loop level"%>
-    - id: each_parallel_step2
+        response: <%Coffee/JS expression%> | String
+    - id: each_sequential_step2
       description: return the response
       fn: com.gs.transform
-      args: <% outputs.each_parallel_step1 %>
+      args: <% outputs.each_sequential_step1 %>
 ```
 
 ## com.gs.return
@@ -341,10 +337,10 @@ When the return statement is invoked, it causes the current function to exit and
 
 ```yaml
   http.post./return-fn/:city:
-  fn: com-gs-return
+  fn: return
 ```
 
-#### Example function for return ( com-gs-return.yaml )
+#### Example function for return ( return.yaml )
 
 ```yaml
 summary: returning the data
@@ -376,7 +372,7 @@ During the workflow execution, it records intermediate inputs and outputs in the
   http.post./test/log:
   summary: series
   description: series
-  fn: com-gs-log
+  fn: log
   body:
     content:
       application/json:
@@ -403,7 +399,7 @@ During the workflow execution, it records intermediate inputs and outputs in the
                 type: string
 ```
 
-#### Example function using log ( com-gs-log.yaml )
+#### Example function using log ( log.yaml )
 
 ```yaml
 summary: Summing x + y
@@ -439,7 +435,7 @@ The function takes two parameters: `condition` and `tasks`. The `condition` para
 
 ```yaml
 http.get./greet:
-  fn: com-gs-if
+  fn: if
   params:
   - name: greet
     in: query 
@@ -457,7 +453,7 @@ http.get./greet:
 
 ```
 
-#### Example function for if-elif-else ( com-gs-if.yaml )
+#### Example function for if-elif-else ( if.yaml )
 
 ```yaml
 summary: The subtasks will be triggered if the condition returns true
