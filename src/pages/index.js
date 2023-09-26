@@ -17,8 +17,18 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="docs/getting_started">
-            Godspeed Tutorial - 5min ⏱️
+            to="https://www.youtube.com/watch?v=f1jlvaM7Sbo">
+            Godspeed Tutorial - 10mins ⏱️
+          </Link>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/getting_started/overview">
+            Godspeed getting started - 5mins ⏱️
+          </Link>
+          <Link
+            className="button button--secondary button--lg"
+            to="https://www.youtube.com/@godspeed.systems">
+            Godspeed Youtube channel
           </Link>
         </div>
       </div>
