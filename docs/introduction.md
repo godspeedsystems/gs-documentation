@@ -82,9 +82,9 @@ The three main pillars of Godspeed framework: eventsources, datasources, and wor
 
 3. [**Workflows:**](/docs/workflows/overview.md) Handler of events. Your business logic goes here.
 
-4. [**Config:**](#building-blocks-of-framework) Application-level configuration.
+4. [**Config:**](#building-blocks-of-framework) The configuration variables as well as their values are defined in yaml files under `config/` directory. These variables can be replaced as per the business use cases.
 
-5. [**ENV:**](#building-blocks-of-framework) environment files.
+5. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files.
 
 
 ### DSL (Domain Specific Language)
