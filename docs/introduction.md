@@ -75,8 +75,8 @@ The four main dimensions of Godspeed framework: events, workflows, datasources a
 2. [**Workflows:**](/docs/workflows/overview.md) Handler of events. Your business logic goes here.
 3. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **express, Kafka, salesforce**
 4. [**DataSources:**](/docs/data_sources/overview.md) Pluggable data source to store and retrieve data like **Mongo, Redis, API**
-5. [**Config:**](#building-blocks-of-framework) Application-level configuration.
-6. [**ENV:**](#building-blocks-of-framework) environment files.
+5. [**Config:**](/docs/config/overview.md) The configuration variables as well as their values are defined in yaml files under `config/` directory. These variables can be replaced as per the business use cases. The default directory structure is given as below:.
+6. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files.
 7. [**DSL**](#building-blocks-of-framework): As the default, events and workflows are composed using YAML-based DSL, which serves as the primary language for defining them. However, when necessary, workflows can also be scripted in JavaScript files.
 
 YAML-based **DSL (Domain-Specific Language)** is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.
