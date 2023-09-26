@@ -26,32 +26,53 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "2. Getting started",
-      id: "getting_started",
+      label: "2. Introduction to framework",
+      id: "framework_intro",
     },
     {
       type: "category",
-      label: "3. Events",
+      label: "3. Getting started",
       items: [
         {
           type: "doc",
           label: "3.1. Overview",
-          id: "events/overview"
+          id: "getting_started/overview"
         },
-      ],
+        {
+          type: "doc",
+          label: "3.2. Creating new project",
+          id: "getting_started/create_new_proj"
+        },
+        {
+          type: "doc",
+          label: "3.3. Godspeed on Existing project",
+          id: "getting_started/gs_on_existing_proj"
+        }
+      ]
     },
     {
       type: "category",
       label: "4. Event Sources",
       items: [
         {
+          type: "category",
+          label: "4.1. Events",
+          items: [
+            {
+              type: "doc",
+              label: "4.1.1. Overview",
+              id: "events/overview"
+            },
+          ],
+        },
+        {
           type: "doc",
-          label: "4.1. Overview",
+          label: "4.2. Overview",
           id: "event_sources/overview"
         },
         {
           type: "doc",
-          label: "4.2. Custom Event Source",
+          label: "4.3. Custom Event Source",
           id: "event_sources/custom_event_source"
         },
       ],
@@ -67,12 +88,17 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "5.2. Inbuilt workflows",
+          label: "5.2. Custom workflows",
+          id: "workflows/custom_workflows"
+        },
+        {
+          type: "doc",
+          label: "5.3. Inbuilt workflows",
           id: "workflows/inbuilt_workflows"
         },
         {
           type: "doc",
-          label: "5.3. Retry",
+          label: "5.4. Retry",
           id: "workflows/retry"
         },
       ],

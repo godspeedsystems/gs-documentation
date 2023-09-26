@@ -1,57 +1,6 @@
-# Getting Started Guide
-
-### Pre-requisite:
-
-1. Node 18 and npm
-2. Git
-3. VS Code or any code editor
-
-### Steps:
-
-1. Installing Godspeed CLI
-    
-    Godspeed CLI is the command center of a Godspeed project. It allows you to create, manage, deploy, and monitor your Godspeed project.
-    
-2. Godspeed CLI is shipped via [npm](https://www.npmjs.com/). You can go ahead and install it using the below command.
-
-
-```bash
-   npm install -g @godspeedsystems/godspeed
-```
-
-** Try running in the below command line to see available godspeed commands.**
-
-```bash
-   godspeed --help
-```
-   
-```bash
-    > **godspeed --help**
-    
-    ~~~~~~ Godspeed CLI ~~~~~~
-    
-    Usage: Godspeed CLI [options] [command]
-    
-    CLI tool for godspeed framework.
-    
-    Options:
-      -V, --version         output the version number
-      -h, --help            display help for command
-    
-    Commands:
-      create <projectName>  create a new godspeed project.
-      dev                   run godspeed development server.
-      clean                 clean the previous build.
-      build                 build the godspeed project.
-      devops-plugin         manage(add, remove, update) godspeed plugins for devops.
-      plugin                manage(add, remove, update) eventsource and datasource plugins for godspeed.
-      help [command]        display help for command
-    
-    For detailed documentation visit <https://docs.godspeed.systems>
-    
-```
-
-3. Creating a godspeed project.
+# Steps for creating a new project.
+## Creating a godspeed project.
+Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
 ```bash
 godspeed create **hello-world** # hello-world is the name of the app
@@ -92,17 +41,8 @@ godspeed create **hello-world** # hello-world is the name of the app
 5. It will start your app on localhost on default port number 3000, if you can modify the port number as per your requirement. You can try out your hello-world API is live.
 
 
-**Building blocks of framework:**
-
-1. **Events:** Events of async and sync kind, Define endpoint, input, and response.
-2. **Workflows:** Handler of events. Your business logic goes here.
-3. **EventSources:** Pluggable event sources of different kinds like, **express, Kafka, salesforce**
-4. **DataSources:** Pluggable data source to store and retrieve data like **Mongo, Redis, API**
-5. **Config:** Application-level configuration
-6. **ENV:** environment files
-
-
 ## Run the sample project with Godspeed.
+Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 
@@ -152,6 +92,3 @@ godspeed dev
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
 Happy building with Godspeed!
-
-
-

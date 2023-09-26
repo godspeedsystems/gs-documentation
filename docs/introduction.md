@@ -55,11 +55,6 @@ Incorporate established standards into system design, such as utilizing CloudEve
 
 ---
 
-## Guiding principles of design
-
-### Four fundamental abstractions
-The four fundamental abstractions in the Godspeed are events (sync/async), workflows (business logic) , datasources (datastores) and eventsources (APIs).
-
 ### Unified Observability For APM and BPM
 
 We will follow [OpenTelemetry](https://opentelemetry.io/) (OTEL) SDKs to collect and observe telemetry data, including application performance monitoring. This will be integrable with a plethora of open source or commercial tools of choice that integrate with the standard OTEL protocol.
@@ -73,6 +68,18 @@ The four main dimensions of Godspeed framework: events, workflows, datasources a
 ![framework-architecture](/img/framework-architecture.png)
 
 ---
+
+### Building blocks of framework:
+
+1. [**Events:**](/docs/events/overview.md) Events of async and sync kind, Define endpoint, input, and response.
+2. [**Workflows:**](/docs/workflows/overview.md) Handler of events. Your business logic goes here.
+3. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **express, Kafka, salesforce**
+4. [**DataSources:**](/docs/data_sources/overview.md) Pluggable data source to store and retrieve data like **Mongo, Redis, API**
+5. [**Config:**](#building-blocks-of-framework) Application-level configuration.
+6. [**ENV:**](#building-blocks-of-framework) environment files.
+7. [**DSL**](#building-blocks-of-framework): As the default, events and workflows are composed using YAML-based DSL, which serves as the primary language for defining them. However, when necessary, workflows can also be scripted in JavaScript files.
+
+YAML-based **DSL (Domain-Specific Language)** is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.
 
 ## Situations and application scenarios
 
