@@ -170,7 +170,7 @@ tasks:
   ```
 
   ### Kafka event
-> A kafka event is specified as `{topic_name}.{datasourceName}.{group_id}` in [the kafka event specification](#example-spec-for-kafka-event).
+> A kafka event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the kafka event specification](#example-spec-for-kafka-event).
 
 The `group_id` functions as a unique identifier for all consumers within a group, ensuring that only one consumer processes a message at a time. This becomes particularly valuable in microservices architecture scenarios where a single service operates across multiple Kubernetes (K8s) pods, with each pod belonging to the same consumer group. This setup guarantees that the message is reliably consumed by any one of the pods.
 
