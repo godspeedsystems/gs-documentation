@@ -21,7 +21,7 @@ const config = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'Godspeed', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -31,21 +31,7 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  onBrokenLinks: 'ignore',
 
-
-  // plugins: [
-  //   async function myPlugin(context, options) {
-  //     return {
-  //       name: "docusaurus-tailwindcss",
-  //       configurePostCss(postcssOptions) {
-  //         postcssOptions.plugins.push(require("tailwindcss"));
-  //         postcssOptions.plugins.push(require("autoprefixer"));
-  //         return postcssOptions;
-  //       },
-  //     };
-  //   },
-  // ],
 
   presets: [
     [
@@ -109,7 +95,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Godspeed',
+            // title: 'Godspeed',
             // items: [
             //   {
             //     label: 'Documentation',
@@ -118,18 +104,49 @@ const config = {
             // ],
           },
           {
-            title: 'Community',
             items: [
               {
                 label: 'Forum',
                 href: 'https://forum.godspeed.systems',
               },
+
+            ],
+          },
+
+
+          {
+            items: [
               {
                 label: 'Discord',
-                href: 'https://discord.gg/MKjv3KdD7X',
+                href: 'https://discord.com/invite/MKjv3KdD7X',
               },
             ],
           },
+          {
+            items: [
+              {
+                label: 'Github',
+                href: 'https://github.com/facebook/docusaurus',
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/GodspeedSystem',
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                label: 'LinkedIn',
+                href: 'https://www.linkedin.com/company/godspeed-systems/',
+              },
+            ],
+          },
+
           // {
           //   title: 'More',
           //   items: [
