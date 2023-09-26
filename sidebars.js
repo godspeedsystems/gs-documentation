@@ -75,6 +75,11 @@ const sidebars = {
           label: "4.3. Custom Event Source",
           id: "event_sources/custom_event_source"
         },
+        {
+          type: "doc",
+          label: "4.4. Event Sources Plugins",
+          id: "event_sources/event_source_plugins"
+        },
       ],
     },
     {
@@ -96,11 +101,11 @@ const sidebars = {
           label: "5.3. Inbuilt workflows",
           id: "workflows/inbuilt_workflows"
         },
-        {
-          type: "doc",
-          label: "5.4. Retry",
-          id: "workflows/retry"
-        },
+        // {
+        //   type: "doc",
+        //   label: "5.4. Retry",
+        //   id: "workflows/retry"
+        // },
       ],
     },
     {
@@ -124,72 +129,72 @@ const sidebars = {
         },
       ],
     },
+    // {
+    //   type: "category",
+    //   label: "7. Authentication",
+    //   items: [
+    //     {
+    //       type: "doc",
+    //       label: "7.1. Overview",
+    //       id: "authentication/Overview"
+    //     },
+    //     {
+    //       type: "doc",
+    //       label: "7.2. Configuration",
+    //       id: "authentication/configuration"
+    //     },
+    //   ],
+    // },
     {
       type: "category",
-      label: "7. Authentication",
+      label: "7. Authorization",
       items: [
         {
           type: "doc",
           label: "7.1. Overview",
-          id: "authentication/Overview"
-        },
-        {
-          type: "doc",
-          label: "7.2. Configuration",
-          id: "authentication/configuration"
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "8. Authorization",
-      items: [
-        {
-          type: "doc",
-          label: "8.1. Overview",
           id: "authorization/overview"
         },
       ],
     },
     {
       type: "category",
-      label: "9. Config",
+      label: "8. Config",
       items: [
         {
           type: "doc",
-          label: "9.1. Overview",
+          label: "8.1. Overview",
           id: "config/overview"
         },
       ],
     },
     {
       type: "category",
-      label: "10. Caching",
+      label: "9. Caching",
       items: [
         {
           type: "doc",
-          label: "10.1. Overview",
+          label: "9.1. Overview",
           id: "caching/overview"
         },
       ],
     },
     {
       type: "doc",
-      label: "11. CLI",
+      label: "10. CLI",
       id: "CLI"
     },
     {
       type: "doc",
-      label: "12. Language Tools",
+      label: "11. Language Tools",
       id: "language_tools"
     },
     {
       type: "category",
-      label: "13. Telemetry",
+      label: "12. Telemetry",
       items: [
         {
           type: "doc",
-          label: "13.1. Overview",
+          label: "12.1. Overview",
           id: "telemetry/overview"
         },
       ],

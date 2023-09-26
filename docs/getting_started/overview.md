@@ -2,7 +2,7 @@
 
 In this section, you will learn how to install the Godspeed framework using the command line interface (CLI) and how to either create a new project with the framework or integrate Godspeed into an existing project in NodeJS.
 
-:::tip **We are coming with Godspeed Framework in Java as well. Where Developer's will be able to write events and workflow in same way as NodeJS, while for scripting tasks [`groovy`](https://groovy-lang.org/) can be used.**
+:::tip **We are coming with Godspeed Framework in Java as well. Where Developer's will be able to write events and workflows in same way as NodeJS, while for scripting tasks [`groovy`](https://groovy-lang.org/) can be used.**
 :::
 
 

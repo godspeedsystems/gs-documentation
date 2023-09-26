@@ -104,23 +104,24 @@ When an operation fails, instead of giving up immediately, the retry mechanism a
 Retry strategies can vary and may include parameters such as the maximum number of retry attempts, the type of retry algorithm (e.g., constant, exponential, or random intervals between retries), and the conditions under which retries should be triggered.
 
 ```yaml
-retry:
-  max_attempts: 5
-  type: constant
-  interval: PT15m
-```
-```yaml
-retry:
-  max_attempts: 5
-  type: exponential
-  interval: PT15s
-```
-```yaml
-retry:
-  max_attempts: 5
-  type: random
-  min_interval: PT5s
-  max_interval: PT10s
+summary: upload file
+  id: upload_file
+  tasks:
+    - id: step1 # the response of this will be accessible within the parent step key, under the step1 sub key
+      description: upload documents
+      fn: datasource.mongo.document.post
+      args:
+        params:
+        file_key: files
+        files: <% inputs.files %>
+
+      retry:
+        max_attempts: 5
+        type: constant/exponential/random
+        interval: PT15m/PT15s
+        #can select either 'internal' or use min and max interval.
+        min_interval: PT5s
+        max_interval: PT10s
 ```
 
 ## Error handling

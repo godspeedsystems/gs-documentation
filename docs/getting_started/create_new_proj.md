@@ -28,9 +28,6 @@ godspeed create **hello-world** # hello-world is the name of the app
 
 ```
 
-  **For detailed documentation visit <https://docs.godspeed.systems>**
-
-
      
 4. Running the dev server. Navigate to the project root directory and run.
 
@@ -75,6 +72,11 @@ godspeed prisma prepare
 **This command will generate the prisma client and will sync the database with prisma schema**
 
 6. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
+
+```yaml
+type: express
+port: 3000
+```
 
 7. Now to generate the CRUD API'S enter the below command
 
