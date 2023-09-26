@@ -25,14 +25,16 @@ http.get./greet:
 ```yaml
 summary: greet the user
 description: this function greets the user by accepting the user name
-fn: greetings
-args:
-    name: <%inputs.query.name%>
+tasks:
+  - id: greet_task
+    fn: greetings
+    args:
+      name: <%inputs.query.name%>
 ```
 
 #### src/functions/greetings.js
 ```js
-module.export = function greet(name){
+module.exports = function greet(name){
     return `Hello ${name}!`;
 }
 ```

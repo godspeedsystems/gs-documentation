@@ -37,8 +37,15 @@ godspeed create **hello-world** # hello-world is the name of the app
 ```bash
 > godspeed dev
 ```
+<img src="https://ik.imagekit.io/pavanKillada/image.png_ex=6514249e&is=6512d31e&hm=c7228638c9cb7932b705b9c010c42ddaa8b77ce9a74bfe93e60c3aff9993cba2&=&width=817&height=460?updatedAt=1695732924855"/>
 
 5. It will start your app on localhost on default port number 3000, if you can modify the port number as per your requirement. You can try out your hello-world API is live.
+
+**src/eventsources/http.yaml**
+```yaml
+type: express
+port: 3000
+```
 
 
 ## Run the sample project with Godspeed.

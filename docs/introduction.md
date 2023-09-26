@@ -10,7 +10,7 @@ To achieve this, we're committed to providing teams with everything they need to
 
 This framework has been meticulously developed by Godspeed team over several years, refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
 
-we started with a low code eslatic gragh ORM and to resolve the issues of modern distributed even driven system we evaluated more robust temperate usecases covering for microservices spectrum
+we started with a low code [eslatic gragh] ORM and to resolve the issues of modern distributed even driven system we evaluated more robust temperate usecases covering for microservices spectrum
 
 ---
 
