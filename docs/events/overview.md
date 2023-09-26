@@ -81,7 +81,7 @@ http.get./greet:
 - The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
 - The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
 - It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
-- Furthermore, you have the option to specify responses, including status codes and response body types, among other things.
+- Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
 If request schema validation fails, then status code 400 is returned.
 
@@ -197,7 +197,7 @@ Kafka.publish-producer1.kafka_proj: // event key
 #### Example workflow consuming an kafka event
   ```yaml
    # function for consume data
-id: kafka-conumer
+id: kafka-consumer
 summary: consumer
 tasks:
     - id: set_consume
@@ -210,7 +210,7 @@ tasks:
   summary: Handle json scehma validation error
   id: error_handler
   tasks:
-    - id: erorr_step1
+    - id: error_step1
       fn: datasource.kafka.publish
       args:
         data: # publish the event and validation error to kafka on a topic

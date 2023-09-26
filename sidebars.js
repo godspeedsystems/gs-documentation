@@ -119,7 +119,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "6.3. Custome data source",
+          label: "6.3. Custom data source",
           id: "data_sources/custom_data_source"
         },
       ],

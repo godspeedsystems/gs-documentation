@@ -7,15 +7,15 @@ title: Event Sources
 
 ## Types of Event Sources
   1. Event Source
-    - it can act only as event source
+    - it can act only as an event source
     - has its own client initilization
     - eg,. express
-  2. DataSource As Event Source
+  2. DataSource As an Event Source
     - it can act as event source as well as data source
     - shares the client with the corresponding data source
     - eg., kafka, rabbitMQ
 
-**Here kafka works as datasource and datasource to have look at the configuration,event and workflow checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)**
+**Here kafka works as [datasource](/docs/data_sources/overview.md) and an eventsource. To have look at the configuration,events and workflows, Checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)**
 
 ## How to use an event source in godspeed project?
 
