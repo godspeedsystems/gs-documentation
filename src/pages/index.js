@@ -17,21 +17,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button"
-            to="https://www.youtube.com/watch?v=f1jlvaM7Sbo">
-            <button className={styles.doc_button1}>Godspeed Tutorial - 10mins 📽️</button>
-          </Link>
-          <Link
-            className="button"
             to="/docs/getting_started/overview">
             <button className={styles.doc_button2}>Godspeed getting started - 5mins 📝</button>
-          </Link>
-          <Link
-            className="button"
-            to="https://www.youtube.com/@godspeed.systems">
-            <button className={styles.doc_button3}>
-              Godspeed Youtube channel 
-              <img width={27} src='https://ik.imagekit.io/pavanKillada/youtube-svgrepo-com.svg?updatedAt=1695728641380' alt='youtube icon'/>
-            </button>
           </Link>
         </div>
       </div>

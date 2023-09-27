@@ -8,9 +8,7 @@ Godspeed is on a mission to empower teams with the tools to effortlessly create,
 
 To achieve this, we're committed to providing teams with everything they need to create and operate contemporary microservices, guided by declared over-code approach, plug-and-play, and inherently extensible principles, all while remaining cloud-agnostic. We firmly reject any form of vendor lock-in, whether it be with Godspeed or any chosen cloud provider. Our approach empowers developers with the freedom to select and control the tools, databases, and cloud services they prefer, all while adhering to industry standards and unified interfaces.
 
-This framework has been meticulously developed by Godspeed team over several years, refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
-
-we started with a low code eslatic gragh ORM and to resolve the issues of modern distributed even driven system we evaluated more robust temperate usecases covering for microservices spectrum
+This framework has been meticulously developed by Godspeed team over several years,refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
 
 ---
 
@@ -91,6 +89,8 @@ The three main pillars of Godspeed framework: eventsources, datasources, and wor
  As the default, events and workflows are composed using YAML-based DSL, which serves as the primary language for defining them. However, when necessary, workflows can also be scripted in JavaScript files.
 
 YAML-based **DSL** is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.
+
+To provide flexibility for developers, it's important to allow them to write workflows in languages other than just JavaScript and TypeScript, ensuring that their choices aren't limited.
 
 ## Situations and application scenarios
 

@@ -79,6 +79,11 @@ godspeed prisma prepare
 
 6. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
 
+```yaml
+type: express
+port: 3000
+```
+
 7. Now to generate the CRUD API'S enter the below command
 
 ```bash
