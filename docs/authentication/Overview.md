@@ -1,5 +1,8 @@
 
-## Authentication
+## Authentication 
+:::note
+Implementing into the framework soon...
+:::
 Authentication refers to the process of verifying the identity of a user or service in a secure manner. Specifically, it mentions [JWT (JSON Web Token)](https://jwt.io/introduction) authentication, which is a widely used method for authentication in web applications and microservices.
 
 ### Generating a token

@@ -10,7 +10,7 @@ Prisma-as-datasource plugin provide functionality to access most popular databas
 
 How to use **prisma-as-datastore** plugin?
 
-Simplest way to use this plugin in your godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
+Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
 
 ```sh
 godspeed add plugin prisma-as-datastore

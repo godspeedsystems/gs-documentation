@@ -190,7 +190,7 @@ $ godspeed gen-crud-api
 
 ## 4.plugin
 
-Godspeed Plugins are the way to extend the core godspeed framework. Currently we support adding Event Source and Data Source as plugin.
+Godspeed Plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as plugin.
 
 ```bash
 $ godspeed help plugin
@@ -257,7 +257,7 @@ $ godspeed plugin update
 
 ## 5.devops-plugin
 
-Godspeed devops-plugins are the way to extend the core godspeed framework. Currently we support adding Event Source and Data Source as devops-plugin.
+Godspeed devops-plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as devops-plugin.
 
 ```bash
 $ godspeed help devops-plugin
@@ -296,7 +296,7 @@ $ godspeed plugin add
 
 ### devops-plugin remove
 
-The `godspeed devosp-plugin remove` command allows the user to select a devops plugin from the list of installed plugins and remove them from the operating system.
+The `godspeed devops-plugin remove` command allows the user to select a devops plugin from the list of installed plugins and remove them from the operating system.
 
 ```bash
 $ godspeed plugin remove
@@ -324,7 +324,7 @@ $ godspeed plugin update
 
 ## 6.dev
 
-You can run your godspeed project using `godspeed dev` command.
+You can run your Godspeed project using `godspeed dev` command.
 
 ```bash
  godspeed dev
