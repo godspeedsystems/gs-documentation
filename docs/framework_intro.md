@@ -24,6 +24,13 @@ The developer will utilize the framework's CLI to initiate a new microservice pr
 - When using axios plugin for APIs we can specify either OpenAPI schema or provide the corresponding URL.
 
 
+### design principles
+
+- **Standardization:** "Godspeed offers standardization features that allow you to seamlessly integrate a wide range of event sources without the need to modify the entire event structure. The only change required is the initial line of the event, and the framework will handle the rest, ensuring a unified event structure across all sources."
+
+
+
+
 ### Salient Features
 
 :::tip Note
