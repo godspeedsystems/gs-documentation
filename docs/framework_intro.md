@@ -18,8 +18,10 @@ Every microservice in the Godspeed framework has three fundamental abstractions,
 
 ## Developer's work 
 The developer will utilize the framework's CLI to initiate a new microservice project and begin development. They will set up the necessary events, data sources, workflows, and configurations such as mappings, environment variables, and telemetry settings. When configuring data sources:
+
 - For databases, they can either define the database schema or auto-generate it from the existing database using the CLI.
-- For APIs, they should specify the OpenAPI schema or provide the corresponding URL.
+
+- When using axios plugin for APIs we can specify either OpenAPI schema or provide the corresponding URL.
 
 
 ### Salient Features

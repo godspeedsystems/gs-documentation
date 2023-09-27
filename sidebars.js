@@ -26,7 +26,7 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "2. Introduction to framework",
+      label: "2. About the framework",
       id: "framework_intro",
     },
     {
@@ -77,9 +77,9 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "4.4. Event Sources Plugins",
+          label: "4.4. Event Source Plugins",
           id: "event_sources/event_source_plugins"
-        },
+        }
       ],
     },
     {
@@ -124,7 +124,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "6.3. Custome data source",
+          label: "6.3. Custom data source",
           id: "data_sources/custom_data_source"
         },
       ],

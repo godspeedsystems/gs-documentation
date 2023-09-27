@@ -8,7 +8,7 @@
   id: upload_file
   tasks:
     - id: step1 # the response of this will be accessible within the parent step key, under the step1 sub key
-      description: upload docfileuments
+      description: upload documents
       fn: com.gs.http
       args:
         datasource: httpbin
@@ -21,7 +21,6 @@
 
       retry:
         max_attempts: 5
-        
         type: constant
         interval: PT15M
 ```

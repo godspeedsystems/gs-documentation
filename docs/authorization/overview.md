@@ -1,4 +1,7 @@
 # Authorization
+:::note
+Implementing into the framework soon...
+:::
 The framework provides authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
 
 
@@ -207,7 +210,7 @@ tasks:
   - id: find_user
     description: find users
     authz:
-      fn: com.jfs.auth
+      fn: com.jfs.authz
       args: <% inputs %>
     fn: datasource.mongo.user.findMany
     args:

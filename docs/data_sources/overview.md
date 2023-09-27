@@ -28,4 +28,4 @@ In this example:
 
 To enable this seamless interaction with data sources, the Godspeed Framework allows you to configure data sources within your project. For instance, the example mentions the use of the "prisma-as-datastore" plugin to define the "mongo" data source. This configuration step ensures that the framework can establish connections and communicate effectively with the specified data source.
 
-In the above example there is a `mongo` datasource is defined in the project using [prisma-as-datastore](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore) plugin.
+In the above example there is a `mongo` datasource defined in the project using [prisma-as-datastore](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore) plugin.

@@ -64,13 +64,13 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 - **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/workflows/inbuilt_workflows) or [developer defined function](/docs/workflows/custom_workflows).
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
+
 #### developer defined functions
 Developers have the flexibility to create custom JavaScript functions that can be utilized across various YAML workflows by exporting these functions. [refer](/docs/workflows/custom_workflows)
 #### Inputs
  These are typically used to represent the input data or parameters required for a task. In the below workflow, we see references to `inputs.body.name`, which suggests that the task expects a value named "name" as input. This input data can come from external sources.
 #### Outputs
 These represent the results or data produced by a task. In the below workflow, we have references like `outputs.transform_fn_step1.data`, indicating that the "data" produced by the task named "transform_fn_step1" is accessible as an output. This data can be used as input for subsequent tasks or for other purposes within the workflow.
-
 
 ```yaml
 summary: Invoke an API and convert the custom function provided in the arguments into the YAML functions format.
