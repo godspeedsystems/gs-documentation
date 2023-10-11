@@ -1,39 +1,57 @@
-# Godspeed - A framework for microservices
+# Godspeed - Our Philosophy
 
-This document is meant for stakeholders, technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.
+This document is meant for technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.
 
 ## Introduction
+> Our mission at Godspeed is to bring greater standardization, best practices and ease of engineering to the tech teams of the world. We wish to achieve this as a collaboration by and for the community.  We wish to develop a meta-framework along with tools, integrations, learning content, licensing and marketplace, based on a value system which fosters develop-rights, equity, fairness and wellbeing for all. 
 
-Godspeed is on a mission to empower teams with the tools to effortlessly create, maintain, and monitor microservices-based backends, delivering unparalleled velocity, scalability, quality, and performance. Our goal is to liberate development and QA teams from the burdensome, repetitive tasks associated with building modern distributed backends, encompassing domain-driven design, multi-tenancy, and distributed event driven systems covering microservices and serverless functions. We envision developers being able to swiftly craft microservices in a matter of days, not months.
+We want to democratize tech for teams to effortlessly create, maintain, and monitor complex applications with reduced effort, agility, scalability, quality, performance, cost effectiveness and minimizatin of technical debt and talent hurdle. Our goal is to liberate teams from the burdensome, repetitive tasks, boilerplate, wiring, so that instead of focussing on the how, they retain a razor sharp focus on the what.
 
-To achieve this, we're committed to providing teams with everything they need to create and operate contemporary microservices, guided by declared over-code approach, plug-and-play, and inherently extensible principles, all while remaining cloud-agnostic. We firmly reject any form of vendor lock-in, whether it be with Godspeed or any chosen cloud provider. Our approach empowers developers with the freedom to select and control the tools, databases, and cloud services they prefer, all while adhering to industry standards and unified interfaces.
-
-This framework has been meticulously developed by Godspeed team over several years,refined through various projects by abstracting reusable components. It's a dynamic and continuously improved solution, adapting to meet evolving needs.
+To achieve this, we're committed to providing teams with the meta-framework, tools, integrations and learning that they need to develop and maintain products, guided by first principles and best practices like
+* Standardized implementation across languages, frameworks & tools
+* Decoupled architecture with plug and play integrations
+* Zero boilerplate with pre-built abstractions
+* Schema and standards driven development
+* Shift left
+* Cloud agnostic setup
+* No vendor lock-in
 
 ---
 
 ## Aims
 
-**The framework's objectives are designed to enhance business agility by empowering product and development teams to rapidly deliver exceptional solutions.**
+### Boosting tech team's efficiency
 
-### Developer-centric
+The meta-framework with developer guardrails and pre-built integrations provides a ready-made feature set, powerful SDKs, a YAML DSL for important abstractions, auto-generation features, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
-Godspeed offers a YAML-based DSL, a ready-made feature set, and simplified project setup, streamlining the lives of developers. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
-
-### Boosting developer efficiency.
-
-The framework includes essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in an 80% reduction in workload.
+The framework includes essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in significant reduction in workload.
 ![productivity](/img/productivity.png)
 
 
-### Compact, micro-sized teams and a shallower learning curve.
+### Shallower learning curve.
 
-Module owners can initiate the deployment of microservices within a week of onboarding. In most cases, only a select few within the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, either with internal support or assistance from our team.
+Developers can deliver simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, uskilling on the way as the projects proceed. In most cases, only a select few within the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
+
+### Easy brownfield adoption
+Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the CLI. 
 
 ### Security
 
-The framework can read the environmental variables from a secure source like K8s Vault. For data in transit and data at rest, we use encryption mechanisms. Also, the framework supports JWT Authentication. Further, all hits to other APIs are secured via security schemas specified in their Open API Specification (OAS 3). Fine grained authorization at API and datasources level is in the roadmap. 
-Log reduction involves strategies to manage and analyze database logs more efficiently. This includes filtering and aggregating logs, normalizing data formats, setting up alerts and anomaly detection, defining retention policies, using log analysis tools, and applying user behavior analytics. These practices help improve security monitoring, detect threats, and maintain compliance while dealing with large volumes of log data.
+The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained authorization. For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
+
+### Flexibility
+Developer should be able to implement anything they need, or replace existing eventsources or datasources with ease. They should also be able to migrate a project from one language or framework to another with least effort.
+
+### Scale, performance and monitoring
+For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud with ease, via service templates and the Godspeed command line.
+
+For performance, we believe the datasources (APIs and DBs) are the bottlenecks most of the time, and hence the framework allows an easy integration of a cache of choice, over the calls to the datasources. An easier way to setup Graphql like subscriptions and dual writes is planned.
+
+For monitoring, the framework microservices allows export of APM and BPM signals in OTEL format which is supported by all major observability backend solutions. We provide a pre-configured Grafana dashboard, with correlated logs and traces, and detailed APM out of the box. Using the devops plugin of Godspeed CLI, teams can install the full Grafana stack with Loki, Mimir, Tempo and Minio, on a Kubernetes cluster for scalable telemetry ingestion.
+
+### Maintainability
+The standardized guardrails with clearly defined developer's boundaries, ensure neat, simple & systematic implementations across projects and individual developers with diverse experiences. This avoids technical debt from creeping into the project over time. Further, the decoupled architecture and a neat and modular implementation allows agility in bringing rapid changes as per the ever evolving needs and scenarios.
+
 
 ---
 
@@ -42,13 +60,13 @@ Log reduction involves strategies to manage and analyze database logs more effic
 
 ## Tenets
 
-### Minimize redundancy.
+### Focus on the what and not how
 
-Developers are relieved from the need to intervene at levels such as schema, events, datasources, and business logic. The framework can create its Docker containers using the node service, eliminating the need for developers to duplicate any tasks across APIs or projects.
+Developers should not need to get sidetracked in wiring up their project. They do not need to work at levels lower than defining schemas, events, datasources, event sources and business logic. For ex. they should not be creating scaffolding, struggling with local setup, figuring out Kubernetes or Open Telemetry integration, setting up and figuring out CI/CD and monitoring tools etc.
 
-### Simplified for extension and personalization.
+### Simplified for usage and extension
 
-Pluggable event-source and data-source interfaces and recipe enable seamless integration of new components or usecases. For instance, substituting datastores, APM/BPM tools, analytics engines, cache systems, email providers, file storage solutions, API calls.
+Pluggable event-source and data-source interfaces and recipe enable seamless integration of new components or usecases. For instance, substituting datastores, APM/BPM tools, cache systems, email providers, file storage solutions, API intgrations etc.
 
 ### Standards driven
 
