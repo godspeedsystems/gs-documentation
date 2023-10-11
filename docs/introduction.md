@@ -22,7 +22,7 @@ To achieve this, we're committed to providing teams with the meta-framework, too
 
 ### Boosting tech team's efficiency
 
-The meta-framework with developer guardrails and pre-built integrations provides a ready-made feature set, powerful SDKs, a YAML DSL for important abstractions, auto-generation features, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
+The meta-framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
 The framework includes essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in significant reduction in workload.
 ![productivity](/img/productivity.png)
@@ -62,27 +62,24 @@ The standardized guardrails with clearly defined developer's boundaries, ensure 
 
 ### Focus on the what and not how
 
-Developers should not need to get sidetracked in wiring up their project. They do not need to work at levels lower than defining schemas, events, datasources, event sources and business logic. For ex. they should not be creating scaffolding, struggling with local setup, figuring out Kubernetes or Open Telemetry integration, setting up and figuring out CI/CD and monitoring tools etc.
+Thanks to Godspeed's out of box integrations, abstractions and command line assistance, developers can focus on implementing features rather than scaffolding, wiring up integrations, writing boilerplate code, doing repetitive tasks, setting up CI/CD, telemetry etc. 
 
-### Simplified for usage and extension
+### Follow first principles and best practices
+The framework helps teams learn and practice decoupled architecture, schema driven development, security etc. Easy CI/CD setup with command line assistance, helps adopting a shift left approach.
 
-Pluggable event-source and data-source interfaces and recipe enable seamless integration of new components or usecases. For instance, substituting datastores, APM/BPM tools, cache systems, email providers, file storage solutions, API intgrations etc.
+Best practices come with their own benefits. For example, decoupled event sources and datasources mean that replacing HTTP server, message bus, databases, cache systems, HTTP client etc. should require minimum to no changes in the project. Even switching between languages, like from Nodejs to Java, should require change in business logic only, leaving the abstracted event definitions, database models, API calls and business logic untouched.
 
 ### Standards driven
+All projects of an organization should follow standardized and systematic implementation for ensuring maintainability and easy adoption by new developers.
+Godspeed is called a meta-framework, or a framework of frameworks, because it unifies the way in which microservices are developed across the organization, even with varying languages and frameworks like Nodejs, BunJS, Java Springboot (coming soon), Golang/Python (coming in 2024) etc., via its standardized abstractions & scaffolding. 
 
-Incorporate established standards into system design, such as utilizing CloudEvents for event handling, adopting OpenTelemetry for observability, implementing Swagger specifications, configuring the database model using Prisma, and setting up the API also using Prisma.
-
----
-
-### Unified Observability For APM and BPM
-
-We follow [OpenTelemetry](https://opentelemetry.io/) (OTEL) SDKs to collect and observe telemetry data, including application performance monitoring. This will be integrable with a plethora of open source or commercial tools of choice that integrate with the standard OTEL protocol.
+Further the standardization includes established industry standards into system design, such as OpenTelemetry for observability, Swagger specifications for API and event schema, and Prisma for database model definition.
 
 ---
 
 ## Framework architecture
 
-The three main pillars of Godspeed framework: eventsources, datasources, and workflows.
+The three main pillars of Godspeed framework: eventsources, datasources, and functions or workflows.
 
 ![framework-architecture](/img/framework-architecture.png)
 
@@ -90,26 +87,20 @@ The three main pillars of Godspeed framework: eventsources, datasources, and wor
 
 ### Building blocks of framework:
 
-1. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **express, Kafka, salesforce**.
+1. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
 
-    1.1. [**Events:**](/docs/events/overview.md) Events of async and sync kind, Define endpoint, input, and response.
+    1.1. [**Events:**](/docs/events/overview.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
 
-2. [**DataSources:**](/docs/data_sources/overview.md) Pluggable data source to store and retrieve data like **Mongo, Redis, API**
+2. [**DataSources:**](/docs/data_sources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
 
-3. [**Workflows:**](/docs/workflows/overview.md) Handler of events. Your business logic goes here.
+3. [**Workflows or Functions:**](/docs/workflows/overview.md) The events invoke functions or workflows which contain the business logic.
 
-4. [**Config:**](#building-blocks-of-framework) The configuration variables as well as their values are defined in yaml files under `config/` directory. These variables can be replaced as per the business use cases.
+4. [**Config:**](#building-blocks-of-framework) The configuration variables as well as their values are defined in yaml files under `config/` directory. Some variables are specific to the framework and rest variables can be created as per the business use cases.
 
-5. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files.
+5. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files and made available in the rest of the project via GSContext object.
 
 
 ### DSL (Domain Specific Language)
- As the default, events and workflows are composed using YAML-based DSL, which serves as the primary language for defining them. However, when necessary, workflows can also be scripted in JavaScript files.
+ Events and workflows are composed with high level cross-framework, cross-language, cross-integration abstractions, using YAML-based DSL which allows inline scripting in JS, CoffeeScript or Groovy (coming soon with Java port). However, when necessary, workflows can also be scripted in pure JavaScript, Typescript or Java files.
 
-YAML-based **DSL** is a concise and human-readable way to define and configure data and processes. It simplifies complex structures using indentation and key-value pairs, making it an efficient choice for expressing data, workflows, and configurations.
 
-To provide flexibility for developers, it's important to allow them to write workflows in languages other than just JavaScript and TypeScript, ensuring that their choices aren't limited.
-
-## Situations and application scenarios
-
-The use cases span a diverse spectrum of microservices, encompassing various types such as CRUD microservices, wrapper services, search and suggestion services, backend for frontend services, orchestration services, domain gateway services, and others. This broad array of applications highlights the versatility and applicability of the framework across a wide range of scenarios and service types.
