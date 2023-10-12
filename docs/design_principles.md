@@ -62,6 +62,6 @@ The framework promites setting up of environment variables in a pre-defined YAML
 ### Log redaction
 The framework allows developer to specify the keys that may have sensitive information and should never get published in logs by mistake. There is a centralized check for such keys before a log is about to be printed. 
 
-### OTEL Telemetry
+### Telemetry autoinstrumentation using OTEL
 Godspeed allows a developer to add auto-instrumentation which publishes logs, trace and APM information in OTEL standard format, supported by all major observability backends. The APM export captures not just the RAM, CPU information per node/pod/service, but also the latency information of the incoming API calls, with broken down spans giving breakup of latency across the calls to datastores or external APIs. This helps to find out exact bottlenecks. Further the logs and trace/spans are correlated to find out exactly where the error happened in a request spanning multiple microservices with each calling multiple datasources and doing internal computation. 
 Developer can also add custom logging, span creation and BPM metrics at task level. For ex. new user registration, failed login attempt etc.
