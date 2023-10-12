@@ -26,8 +26,8 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "2. About the framework",
-      id: "framework_intro",
+      label: "2. Design Principles",
+      id: "design_principles",
     },
     {
       type: "category",

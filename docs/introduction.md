@@ -28,7 +28,7 @@ The framework includes essential functionalities of a 'modern microservice' by d
 ![productivity](/img/productivity.png)
 
 
-### Shallower learning curve.
+### Lower learning curve.
 
 Developers can deliver simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, uskilling on the way as the projects proceed. In most cases, only a select few within the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
 
@@ -55,9 +55,6 @@ The standardized guardrails with clearly defined developer's boundaries, ensure 
 
 ---
 
-## Features
-![features](/img/features.png)
-
 ## Tenets
 
 ### Focus on the what and not how
@@ -77,9 +74,15 @@ Further the standardization includes established industry standards into system 
 
 ---
 
+## Design Principles
+
+In order to serve the [Goals](#aims) and [Tenets](#tenets) of the framework, we have followed certain [design principles](/docs/framework_intro).
+
 ## Framework architecture
 
-The three main pillars of Godspeed framework: eventsources, datasources, and functions or workflows.
+The three main pillars of Godspeed framework: eventsources, datasources, and functions or workflows. 
+
+> Do read more about them in the [design principles](/docs/framework_intro#three-fundamental-abstractions) section.
 
 ![framework-architecture](/img/framework-architecture.png)
 
@@ -99,8 +102,5 @@ The three main pillars of Godspeed framework: eventsources, datasources, and fun
 
 5. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files and made available in the rest of the project via GSContext object.
 
-
-### DSL (Domain Specific Language)
- Events and workflows are composed with high level cross-framework, cross-language, cross-integration abstractions, using YAML-based DSL which allows inline scripting in JS, CoffeeScript or Groovy (coming soon with Java port). However, when necessary, workflows can also be scripted in pure JavaScript, Typescript or Java files.
-
-
+## Features
+![features](/img/features.png)
