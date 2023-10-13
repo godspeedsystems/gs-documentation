@@ -70,14 +70,32 @@ http.get./greet:
 - It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
-#### Response schema validation
+#### Response schema validation:
 Sample spec for response schema.
 ```yaml
-http.post./test/log:
-  summary: series
-  description: series
-  fn: com-gs-log
+"http.get./helloworld":
+  fn: helloworld
+  body:
+    type: object
+    properties:
+      name:
+        type: string
+  responses:
+    500:
+      application/json: 
+
   # give respective 'body' and 'responses' fields by considering the above event structure reference
+```
+
+Sample workflow for the above event. 
+
+```yaml
+id: helloworld
+tasks:
+  - id: first_task
+    fn: com.gs.return
+    args:
+      name: 'Hello World!'
 ```
 
 ### HTTP event
