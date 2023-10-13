@@ -17,20 +17,16 @@ In this section, you will learn how to install the Godspeed framework using the 
     <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/f1jlvaM7Sbo" frameborder="0" allowfullscreen></iframe>
 </div>
 
-### Steps:
+### Installation
 
-1. Installing Godspeed CLI
-    
-    Godspeed CLI is the command center of a Godspeed project. It allows you to create, manage, deploy, and monitor your Godspeed project.
-    
-2. Godspeed CLI is shipped via [npm](https://www.npmjs.com/). You can go ahead and install it using the below command.
+Godspeed CLI is the command center of a Godspeed project. It allows you to create & manage your Godspeed project. It is shipped via [npm](https://www.npmjs.com/package/%2540godspeedsystems/godspeed). You can go ahead and install it using the below command.
 
 
 ```bash
    npm install -g @godspeedsystems/godspeed
 ```
 
-** Try running in the below command line to see available Godspeed commands.** Refer [this](/docs/CLI.md) for more information.
+** Try running in the below command line to see available Godspeed commands.** Refer [the full CLI spec](/docs/CLI.md) for more information.
 
 ```bash
    godspeed --help

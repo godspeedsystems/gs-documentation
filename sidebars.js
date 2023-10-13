@@ -26,8 +26,8 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "2. About the framework",
-      id: "framework_intro",
+      label: "2. Design Principles",
+      id: "design_principles",
     },
     {
       type: "category",
@@ -40,14 +40,19 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "3.2. Creating new project",
-          id: "getting_started/create_new_proj"
+          label: "3.2. Creating HelloWorld project",
+          id: "getting_started/create_hello_world"
         },
         {
           type: "doc",
-          label: "3.3. Godspeed on Existing project",
-          id: "getting_started/gs_on_existing_proj"
-        }
+          label: "3.3. Creating sample Blog project",
+          id: "getting_started/create_blog_project"
+        },
+        // {
+        //   type: "doc",
+        //   label: "3.4. Godspeed on Existing project",
+        //   id: "getting_started/gs_on_existing_proj"
+        // }
       ]
     },
     {

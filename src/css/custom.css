@@ -21,20 +21,20 @@
 h1 {
   color: rgb(7,11,19);
   font-size: 56px;
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   font-weight: bold;
 
   
 }
 h2{
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   color: rgb(7,11,19);
   font-size: 36px;
   font-weight: bold;
   
 }
  h3{
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   color: rgb(7,11,19);
   font-size: 28px;
   font-weight: bold;
@@ -43,7 +43,8 @@ h2{
 }
 
  p{
-  font-family: monospace;
+      font-family: Helvetica, sans-serif;
+
   letter-spacing: 0.2px;
   color: rgb(7,11,19);
   font-size: 18px;
@@ -69,22 +70,22 @@ h2{
 [data-theme='dark'] h1 {
   color: #ffffff;
   font-size: 56px;
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
 }
 [data-theme='dark'] h2{
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   color: #ffffff;
   font-size: 36px;
   
 }
 [data-theme='dark'] h3{
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   color: #ffffff;
   font-size: 28px;
 }
 
 [data-theme='dark'] p{
-  font-family: monospace;
+  font-family: Helvetica, sans-serif;
   letter-spacing: 0.2px;
   /* color: #94A3B8; */
   color: #ffffff;

@@ -33,6 +33,7 @@
   font-family: sans-serif;
   font-size: 16px;
   border: 1px solid blue;
+  cursor: pointer;
 }
 .doc_button1{
   border: 1px solid orange;

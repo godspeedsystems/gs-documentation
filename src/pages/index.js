@@ -14,11 +14,11 @@ function HomepageHeader() {
       <div className={`${styles.customBanner} container`}>
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
+        <div>
           <Link
             className="button"
             to="/docs/getting_started/overview">
-            <button className={styles.doc_button2}>Godspeed getting started - 5mins 📝</button>
+            <button className={styles.doc_button2}>Godspeed getting started 📝</button>
           </Link>
         </div>
       </div>

@@ -2,7 +2,7 @@
 :::note
 Implementing into the framework soon...
 :::
-The framework provides authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
+The framework provides Authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
 
 
 ## Event spec
@@ -82,8 +82,8 @@ tasks:
           jwt_payload: <% inputs.user %>
 ```
 
-## Datasources authentication
-At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as needed.
+## Datasources Authentication
+At the API datasource level, you can implement Authentication measures. You can establish an Authentication workflow specific to the datasource, allowing it to make requests to an Authentication service in order to obtain tokens or perform Authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
 
 Here is the sample spec:
 **Datasource**
@@ -124,7 +124,7 @@ tasks:
           queryid: <% outputs.auth_step1.params.queryid %>
         statusCodes: <% outputs.auth_step1.status_code %>          
 ```
-The authentication workflow should return response in this format:
+The Authentication workflow should return response in this format:
 ```yaml
 headers: 
   header1: val1
@@ -133,7 +133,7 @@ params:
 statusCodes: [401, 403, ....]
 ```
 :::note
-The authentication workflow gets called when any request returns the specified `statusCodes`. 
+The Authentication workflow gets called when any request returns the specified `statusCodes`. 
 :::
 
 
@@ -190,7 +190,7 @@ tasks:
         } %>
 ```
 
-The authorization workflow should return response in this format to allow/deny:
+The Authorization workflow should return response in this format to allow/deny:
 ```yaml
 success: true/false
 data: true/false/JSON output
@@ -244,7 +244,7 @@ tasks:
         } %>
 ```
 
-When authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.   
+When Authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.   
 For example, in the above authz workflow, `data` is returned as:
 ```yaml
 data:

@@ -204,5 +204,5 @@ reconciled: #The type of entity
 
 ### API examples: Postman collection
 
-Download the collection with documentation [here](https://www.getpostman.com/collections/017987acfbcc18e88d7e)
+Download the collection with documentation [here](https://api.postman.com/collections/17317391-ae9724b5-10ac-428a-b0d2-e7d8127659c0?access_key=PMAT-01HCM2RCXZCR9H840HKZRBXBP7)
 There you will see core CRUD API (same in sync and async). Each CRUD api has its documentation in the collection itself.
