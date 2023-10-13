@@ -45,7 +45,7 @@ Developer should be able to implement anything they need, or replace existing [e
 ### Scale, performance and monitoring
 For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud with ease, via service templates and the Godspeed command line.
 
-For performance, we believe the datasources (APIs and DBs) are the bottlenecks most of the time, and hence the framework allows an easy integration of a cache of choice, over the calls to the datasources. An easier way to setup Graphql like subscriptions and dual writes is planned.
+For performance, we believe the datasources (APIs and DBs) are the bottlenecks most of the time, and hence the framework allows an easy integration of a cache of choice, over the calls to the [datasources](data_sources/overview.md). An easier way to setup Graphql like subscriptions and dual writes is planned.
 
 For monitoring, the framework microservices allows export of APM and BPM signals in OTEL format which is supported by all major observability backend solutions. We provide a pre-configured Grafana dashboard, with correlated logs and traces, and detailed APM out of the box. Using the devops plugin of Godspeed CLI, teams can install the full Grafana stack with Loki, Mimir, Tempo and Minio, on a Kubernetes cluster for scalable telemetry ingestion.
 
@@ -59,30 +59,30 @@ The standardized guardrails with clearly defined developer's boundaries, ensure 
 
 ### Focus on the what and not how
 
-Thanks to Godspeed's out of box integrations, abstractions and command line assistance, developers can focus on implementing features rather than scaffolding, wiring up integrations, writing boilerplate code, doing repetitive tasks, setting up CI/CD, telemetry etc. 
+Thanks to Godspeed's out of box integrations, abstractions and command line assistance, developers can focus on implementing features rather than scaffolding, wiring up integrations, writing boilerplate code, doing repetitive tasks, setting up CI/CD, [telemetry](telemetry/overview.md) etc. 
 
 ### Follow first principles and best practices
 The framework helps teams learn and practice decoupled architecture, schema driven development, security etc. Easy CI/CD setup with command line assistance, helps adopting a shift left approach.
 
-Best practices come with their own benefits. For example, decoupled event sources and datasources mean that replacing HTTP server, message bus, databases, cache systems, HTTP client etc. should require minimum to no changes in the project. Even switching between languages, like from Nodejs to Java, should require change in business logic only, leaving the abstracted event definitions, database models, API calls and business logic untouched.
+Best practices come with their own benefits. For example, decoupled [event sources](event_sources/overview.md) and [datasources](data_sources/overview.md) mean that replacing HTTP server, message bus, databases, cache systems, HTTP client etc. should require minimum to no changes in the project. Even switching between languages, like from Nodejs to Java, should require change in business logic only, leaving the abstracted event definitions, database models, API calls and business logic untouched.
 
 ### Standards driven
 All projects of an organization should follow standardized and systematic implementation for ensuring maintainability and easy adoption by new developers.
 Godspeed is called a meta-framework, or a framework of frameworks, because it unifies the way in which microservices are developed across the organization, even with varying languages and frameworks like Nodejs, BunJS, Java Springboot (coming soon), Golang/Python (coming in 2024) etc., via its standardized abstractions & scaffolding. 
 
-Further the standardization includes established industry standards into system design, such as OpenTelemetry for observability, Swagger specifications for API and event schema, and Prisma for database model definition.
+Further the standardization includes established industry standards into system design, such as [OpenTelemetry](telemetry/overview.md) for observability, Swagger specifications for API and event schema, and [Prisma](data_sources/datasource_plugins#1-prisma-as-datasource-npm) for database model definition.
 
 ---
 
 ## Design Principles
 
-In order to serve the [Goals](#aims) and [Tenets](#tenets) of the framework, we have followed certain [design principles](/docs/framework_intro).
+In order to serve the [Goals](#aims) and [Tenets](#tenets) of the framework, we have followed certain [design principles](design_principles.md).
 
 ## Framework architecture
 
-The three main pillars of Godspeed framework: eventsources, datasources, and functions or workflows. 
+The three main pillars of Godspeed framework: [eventsources](event_sources/overview.md), [datasources](data_sources/overview.md), and [functions or workflows](workflows/overview.md). 
 
-> Do read more about them in the [design principles](/docs/framework_intro#three-fundamental-abstractions) section.
+> Do read more about them in the [design principles](design_principles#design-principles-1) section.
 
 ![framework-architecture](/img/framework-architecture.png)
 
@@ -98,7 +98,7 @@ The three main pillars of Godspeed framework: eventsources, datasources, and fun
 
 3. [**Workflows or Functions:**](/docs/workflows/overview.md) The events invoke functions or workflows which contain the business logic.
 
-4. [**Config:**](#building-blocks-of-framework) The configuration variables as well as their values are defined in yaml files under `config/` directory. Some variables are specific to the framework and rest variables can be created as per the business use cases.
+4. [**Config:**](config/overview.md) The configuration variables as well as their values are defined in yaml files under `config/` directory. Some variables are specific to the framework and rest variables can be created as per the business use cases.
 
 5. [**ENV:**](#building-blocks-of-framework) Sensitive data, like database URLs, that require concealment are specified in .env files and made available in the rest of the project via GSContext object.
 
