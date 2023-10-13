@@ -5,7 +5,7 @@ This document is meant for technology leaders, architects, and developers. Its p
 ## Introduction
 > Our mission at Godspeed is to bring greater standardization, best practices and ease of engineering to the tech teams of the world. We wish to achieve this as a collaboration by and for the community.  We wish to develop a meta-framework along with tools, integrations, learning content, licensing and marketplace, based on a value system which fosters develop-rights, equity, fairness and wellbeing for all. 
 
-We want to democratize tech for teams to effortlessly create, maintain, and monitor complex applications with reduced effort, agility, scalability, quality, performance, cost effectiveness and minimizatin of technical debt and talent hurdle. Our goal is to liberate teams from the burdensome, repetitive tasks, boilerplate, wiring, so that instead of focussing on the how, they retain a razor sharp focus on the what.
+We want to democratize tech for teams to effortlessly create, maintain, and monitor complex applications with reduced effort, agility, scalability, quality, performance, cost effectiveness and minimization of technical debt and talent hurdle. Our goal is to liberate teams from the burdensome, repetitive tasks, boilerplate, wiring, so that instead of focussing on the how, they retain a razor sharp focus on the what.
 
 To achieve this, we're committed to providing teams with the meta-framework, tools, integrations and learning that they need to develop and maintain products, guided by first principles and best practices like
 * Standardized implementation across languages, frameworks & tools
@@ -22,7 +22,7 @@ To achieve this, we're committed to providing teams with the meta-framework, too
 
 ### Boosting tech team's efficiency
 
-The meta-framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
+The meta-framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based [telemetry](telemetry/overview.md) and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
 The framework includes essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in significant reduction in workload.
 ![productivity](/img/productivity.png)
@@ -30,17 +30,17 @@ The framework includes essential functionalities of a 'modern microservice' by d
 
 ### Lower learning curve.
 
-Developers can deliver simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, uskilling on the way as the projects proceed. In most cases, only a select few within the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
+Developers can deliver simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, upskilling on the way as the projects proceed. In most cases, only a few in the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
 
 ### Easy brownfield adoption
-Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the CLI. 
+Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](CLI.md). 
 
 ### Security
 
-The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained authorization. For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
+The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](authorization/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
 
 ### Flexibility
-Developer should be able to implement anything they need, or replace existing eventsources or datasources with ease. They should also be able to migrate a project from one language or framework to another with least effort.
+Developer should be able to implement anything they need, or replace existing [eventsources](event_sources/overview.md) or [datasources](data_sources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
 
 ### Scale, performance and monitoring
 For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud with ease, via service templates and the Godspeed command line.
