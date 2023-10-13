@@ -1,11 +1,38 @@
 
-# Run the sample project with Godspeed.
+# Run the sample blog project with Godspeed.
 Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 
 ```bash
 godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name of the app
+```
+Framework will give you below folder structure.
+```
+
+    .
+    ├── src
+        ├── datasources
+        │   ├── types
+        │   |    └── prisma.ts
+        |   |
+        │   └── mongo.prisma
+        │
+        ├── events
+        |   |
+        │   └── helloworld.yaml
+        |
+        ├── eventsources
+        │   ├── types
+        │   |    └── express.ts
+        |   |
+        │   └── http.yaml
+        |
+        └── functions
+            |
+            └── helloworld.yaml
+
+
 ```
 
 2. Navigate to you project folder
