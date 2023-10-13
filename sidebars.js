@@ -48,11 +48,11 @@ const sidebars = {
           label: "3.3. Creating sample Blog project",
           id: "getting_started/create_blog_project"
         },
-        {
-          type: "doc",
-          label: "3.4. Godspeed on Existing project",
-          id: "getting_started/gs_on_existing_proj"
-        }
+        // {
+        //   type: "doc",
+        //   label: "3.4. Godspeed on Existing project",
+        //   id: "getting_started/gs_on_existing_proj"
+        // }
       ]
     },
     {
