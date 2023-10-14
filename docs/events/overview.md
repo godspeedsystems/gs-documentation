@@ -89,6 +89,7 @@ Sample spec for response schema.
 
 Sample workflow for the above event. 
 
+
 ```yaml
 id: helloworld
 tasks:
@@ -163,7 +164,7 @@ summary: consumer
 tasks:
     - id: set_consume
       fn: com.gs.return
-      args: <% inputs %>
+      args: <% inputs.body %>
   ```
 
 #### Example workflow (on_validation_error handler) handling json schema validation error

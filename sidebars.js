@@ -204,6 +204,11 @@ const sidebars = {
         },
       ],
     }, 
+    {
+      type: "doc",
+      label: "13. Documentation Principles",
+      id: "documentation_principles",
+    },
   ]
 };
 
