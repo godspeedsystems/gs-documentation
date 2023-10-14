@@ -3,7 +3,7 @@ title: Event Sources
 ---
 # Overview
 
-  Event sources in Godspeed framework captures event and allows you to define entry or trigger points of application. Like `express` type, event source will allow you to expose your application through REST API or a `cron` type event source to schedule a recurring call to a workflow.
+  Event sources in Godspeed framework captures event and allows you to define entry or trigger points of application. Like `express` type, event source will allow you to expose your application through REST API or a `cron` type event source to schedule a recurring call to a workflow. To know the design principles of the Event source, refer [this](design_priciples#three-fundamental-abstractions).
 
 ## Types of Event Sources
   1. Event Source

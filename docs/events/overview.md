@@ -1,6 +1,6 @@
 # Events
 ## Introduction
-In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details. Refer [this](design_principles#three-fundamental-abstractions) to know more about Event and Event source.
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
