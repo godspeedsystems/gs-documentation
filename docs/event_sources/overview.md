@@ -15,7 +15,7 @@ title: Event Sources
     - shares the client with the corresponding data source
     - eg., kafka, rabbitMQ
 
-**Here kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, Checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka/README.md)**
+**Here kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, Checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
 
 ## How to use an event source in Godspeed project?
 
@@ -33,4 +33,4 @@ title: Event Sources
     @godspeedsystems/plugins-kafka
   ```
 
-
+To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](event_sources/event_source_plugins.md).
