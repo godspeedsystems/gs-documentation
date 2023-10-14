@@ -41,12 +41,12 @@ const sidebars = {
         {
           type: "doc",
           label: "3.2. Creating HelloWorld project",
-          id: "getting_started/create_hello_world"
+          id: "getting_started/create hello-world project"
         },
         {
           type: "doc",
           label: "3.3. Creating sample Blog project",
-          id: "getting_started/create_blog_project"
+          id: "getting_started/Create sample blog project"
         },
         // {
         //   type: "doc",

@@ -20,42 +20,45 @@ yarn global add @godspeedsystems/godspeed
 
 Once Godspeed CLI is installed, the `godspeed` command can be called from command line. When called without arguments, it displays its help and command usage.
 
+```
+$  godspeed
+```
+
 ```bash
- $ godspeed
 
-        ~~~~~~ Godspeed CLI ~~~~~~
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-        Usage: Godspeed CLI [options] [command]
 
-        CLI tool for godspeed framework.
+Usage: Godspeed CLI [options] [command]
 
-        Options:
-        -V, --version                   output the version number
-        -h, --help                      display help for command
+CLI tool for godspeed framework.
 
-        Commands:
-        create [options] <projectName>  create a new godspeed project.
+Options:
+  -V, --version                   output the version number
+  -h, --help                      display help for command
 
-        dev                             run godspeed development server.
+Commands:
+  create [options] <projectName>  create a new godspeed project.
+  dev                             run godspeed development server.
+  clean                           clean the previous build.
+  gen-crud-api                    scans your prisma datasources and generate
+                                  CRUD APIs events and workflows
+  build                           build the godspeed project.
+  devops-plugin                   manage(add, remove, update) godspeed plugins
+                                  for devops.
+  plugin                          manage(add, remove, update) eventsource and
+                                  datasource plugins for godspeed.
+  prisma                          proxy to prisma commands with some add-on
+                                  commands to handle prisma datasources.
+  help [command]                  display help for command
 
-        clean                           clean the previous build.
 
-        gen-crud-api                    scans your prisma datasources and generate
-                                        CRUD APIs events and workflows
+For detailed documentation visit https://godspeed.systems
 
-        build                           build the godspeed project.
 
-        devops-plugin                   manage(add, remove, update) godspeed plugins
-                                        for devops.
-
-        plugin                          manage(add, remove, update) eventsource and
-                                        datasource plugins for godspeed.
-
-        prisma                          proxy to prisma commands with some add-on
-                                        commands to handle prisma datasources.
-
-        help [command]                  display help for command
-           
 ```
 
 ## Supported Commands & Arguments
@@ -76,45 +79,63 @@ Once Godspeed CLI is installed, the `godspeed` command can be called from comman
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
 
 ```bash
- $ godspeed create my-service
+$  godspeed create my-service
+```
 
-     ~~~~~~ Godspeed CLI ~~~~~~
+```bash
 
-      …  waiting   Cloning project template.
-        success   Cloning template successful.
-       …  waiting   Generating project with default examples.
-       …  waiting   Generating project files.
-         success   Successfully generated godspeed project files.
-       …  waiting   Installing project dependencies.
-         success   Successfully installed project dependencies.
-         success  
 
-       Successfully created the project my-service.
-       Use `godspeed --help` command for available commands. Happy building microservices with Godspeed!.
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+…  waiting   Cloning project template.
+✔  success   Cloning template successful.
+…  waiting   Generating project with default examples.
+…  waiting   Generating project files.
+✔  success   Successfully generated godspeed project files.
+
+
+dependencies installed successfully!
+
+Successfully created the project my-service.
+Use `godspeed help` command for available commands. 
+
+Happy building microservices with Godspeed! 🚀🎉
+
 
 ```
 
 ### Options for create command
 
 ```bash
-$ godspeed help create
+$  godspeed help create
+```
+```
 
-    ~~~~~~ Godspeed CLI ~~~~~~
-
-    Usage: Godspeed CLI create [options] <projectName>
-
-    create a new godspeed project.
-
-    Arguments:
-    projectName                            name of the project.
-
-    Options:
-    --from-template <projectTemplateName>  create a project from a template.
-    --from-example <exampleName>           create a project from examples.
-    -h, --help                             display help for command
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
 
-    For detailed documentation visit https://godspeed.systems
+Usage: Godspeed CLI create [options] <projectName>
+
+create a new godspeed project.
+
+Arguments:
+  projectName                            name of the project.
+
+Options:
+  --from-template <projectTemplateName>  create a project from a template.
+  --from-example <exampleName>           create a project from examples.
+  -h, --help                             display help for command
+
+
+For detailed documentation visit https://godspeed.systems
+
 
 ```
 
@@ -130,62 +151,80 @@ $ godspeed help create
 The `prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
 
 ```bash
-    $ godspeed prisma [options]
+$  godspeed prisma [options]
 ```
 
 ### prisma prepare
 
-The `godspeed prisma generate command` generates your prisma client for database and sync the database with the schema.
+The `godspeed prisma prepare` generates your prisma client for database and sync the database with the schema.
 
-````bash
+```bash
+
 $ godspeed prisma prepare
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
 
-    Environment variables loaded from .env
-    Prisma schema loaded from src/datasources/mongo.prisma
+```
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-    ✔ Generated Prisma Client (v5.3.1) to ./node_modules/@prisma/client in 54ms
 
-    Start using Prisma Client in Node.js (See: https://pris.ly/d/client)
-    ```
-    import { PrismaClient } from '@prisma/client'
-    const prisma = new PrismaClient()
-    ```
-    or start using Prisma Client at the edge (See: https://pris.ly/d/accelerate)
-    ```
-    import { PrismaClient } from '@prisma/client/edge'
-    const prisma = new PrismaClient()
-    ```
+Environment variables loaded from .env
+Prisma schema loaded from src/datasources/mongo.prisma
+Environment variables loaded from .env
+Prisma schema loaded from src/datasources/mongo.prisma
+Datasource "db": MongoDB database "test" at "cluster0.syzyst8.mongodb.net"
 
-    See other ways of importing Prisma Client: http://pris.ly/d/importing-client
+✔ Generated Prisma Client (v5.4.2) to ./node_modules/@prisma/client in 114ms
 
-    Environment variables loaded from .env
-    Prisma schema loaded from src/datasources/mongo.prisma
-    Datasource "db": MongoDB database "test" at "cluster0.ni9izd6.mongodb.net"
+Start using Prisma Client in Node.js (See: https://pris.ly/d/client)
 
-    The database is already in sync with the Prisma schema.
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
-    ✔ Generated Prisma Client (v5.3.1) to ./node_modules/@prisma/client in 62ms
-````
+or start using Prisma Client at the edge (See: https://pris.ly/d/accelerate)
+
+import { PrismaClient } from '@prisma/client/edge'
+const prisma = new PrismaClient()
+
+
+See other ways of importing Prisma Client: http://pris.ly/d/importing-client
+
+
+The database is already in sync with the Prisma schema.
+
+✔ Generated Prisma Client (v5.4.2) to ./node_modules/@prisma/client in 115ms
+
+
+```
 
 ## 3.gen-crud-api
 
 The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma[name of your prisma schema].
 
 ```bash
-$ godspeed gen-crud-api
+$  godspeed gen-crud-api
+```
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
+
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
 
-    > cli@1.0.0 gen-crud-api
-    > npx @godspeedsystems/api-generator
 
-    Select datasource / schema to generate CRUD APIs
-    (x) mongo.prisma
-    ( ) For all
-    ( ) Cancel
+> blog-app@1.0.0 gen-crud-api
+> npx @godspeedsystems/api-generator
+
+Select datasource / schema to generate CRUD APIs
+(x) mongo.prisma
+( ) For all
+( ) Cancel
+
 ```
 
 ## 4.plugin
@@ -193,22 +232,34 @@ $ godspeed gen-crud-api
 Godspeed Plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as plugin.
 
 ```bash
-$ godspeed help plugin
+$  godspeed help plugin
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
+```
 
-    Usage: Godspeed CLI plugin [options] [command]
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-    manage(add, remove, update) eventsource and datasource plugins for godspeed.
 
-    Options:
-    -h, --help      display help for command
+Usage: Godspeed CLI plugin [options] [command]
 
-    Commands:
-    add             Add an eventsource/datasource plugin.
-    remove          Remove an eventsource/datasource plugin.
-    update          Update an eventsource/datasource plugin.
-    help [command]  display help for command
+manage(add, remove, update) eventsource and datasource plugins for godspeed.
+
+Options:
+  -h, --help           display help for command
+
+Commands:
+  add [pluginName]     Add an eventsource/datasource plugin.
+  remove [pluginName]  Remove an eventsource/datasource plugin.
+  update               Update an eventsource/datasource plugin.
+  help [command]       display help for command
+
+
+For detailed documentation visit https://godspeed.systems
+
+
 ```
 
 ### plugin add
@@ -216,15 +267,29 @@ $ godspeed help plugin
 The `godspeed plugin add` command allows the user to select a plugin from the list of available plugins and add them to the project.
 
 ```bash
-$ godspeed plugin add
+$  godspeed plugin add
+```
+  ```bash
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-    ? Please select godspeed plugin to install. (Use arrow keys)
 
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
-    @godspeedsystems/plugins-axios-as-datasource
+? Please select a godspeed plugin to install. (Use arrow keys)
+    @godspeedsystems/plugins-prisma-as-datastore 
+    @godspeedsystems/plugins-express-as-http 
+❯ @godspeedsystems/plugins-cron-as-eventsource 
+    @godspeedsystems/plugins-axios-as-datasource 
+    @godspeedsystems/plugins-aws-as-datasource 
+    @godspeedsystems/plugins-excel-as-datasource 
+    @godspeedsystems/plugins-mailer-as-datasource 
+    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+    @godspeedsystems/plugins-redis-as-datasource 
+(Move up and down to reveal more choices)
+
+
 ```
 
 ### plugin remove
@@ -232,13 +297,22 @@ $ godspeed plugin add
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.
 
 ```bash
-$ godspeed plugin remove
+$  godspeed plugin remove
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
+```
 
-    ? Please select a eventsource/datasource plugin to remove.
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+? Please select an eventsource/datasource plugin to remove: (Use arrow keys)
+
+❯ @godspeedsystems/plugins-express-as-http 
+  @godspeedsystems/plugins-prisma-as-datastore 
+
 ```
 
 ### plugin update
@@ -246,13 +320,21 @@ $ godspeed plugin remove
 The `godspeed plugin update` command allows the user to select a plugin from the list of available plugins and update them.
 
 ```bash
-$ godspeed plugin update
+$  godspeed plugin update
+```
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
 
-    ? Please select a eventsource/datasource plugin to update. (Use arrow keys)
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+? Please select a eventsource/datasource plugin to update. (Use arrow keys)
+❯ @godspeedsystems/plugins-express-as-http 
+  @godspeedsystems/plugins-prisma-as-datastore 
+
 ```
 
 ## 5.devops-plugin
@@ -260,22 +342,33 @@ $ godspeed plugin update
 Godspeed devops-plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as devops-plugin.
 
 ```bash
-$ godspeed help devops-plugin
+$  godspeed help devops-plugin
+```
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-    Usage: Godspeed CLI devops-plugin [options] [command]
 
-    manage(add, remove, update) godspeed plugins for devops.
+Usage: Godspeed CLI devops-plugin [options] [command]
 
-    Options:
-    -h, --help      display help for command
+manage(add, remove, update) godspeed plugins for devops.
 
-    Commands:
-    add             Add a godspeed devops plugin.
-    remove          Remove a godspeed devops plugin.
-    update          Update a godspeed devops plugin.
-    help [command]  display help for command
+Options:
+  -h, --help           display help for command
+
+Commands:
+  add [pluginName]     Add a godspeed devops plugin.
+  remove [pluginName]  Remove a godspeed devops plugin.
+  update               Update a godspeed devops plugin.
+  help [command]       display help for command
+
+
+For detailed documentation visit https://godspeed.systems
+
+
 ```
 
 ### devops-plugin add
@@ -283,15 +376,28 @@ $ godspeed help devops-plugin
 The `godspeed devops-plugin add` command allows the user to select a devops plugin from the list of available plugins and add them to the operating system.
 
 ```bash
-$ godspeed plugin add
+$ godspeed devops-plugin add
+```
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+```
 
-    ? Please select devops plugin to install. (Use arrow keys)
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
-    @godspeedsystems/plugins-axios-as-datasource
+
+? Please select devops plugin to install. (Use arrow keys)
+    @godspeedsystems/plugins-prisma-as-datastore 
+    @godspeedsystems/plugins-express-as-http 
+❯ @godspeedsystems/plugins-cron-as-eventsource 
+    @godspeedsystems/plugins-axios-as-datasource 
+    @godspeedsystems/plugins-aws-as-datasource 
+    @godspeedsystems/plugins-excel-as-datasource 
+    @godspeedsystems/plugins-mailer-as-datasource 
+    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+    @godspeedsystems/plugins-redis-as-datasource 
+(Move up and down to reveal more choices)
 ```
 
 ### devops-plugin remove
@@ -301,11 +407,17 @@ The `godspeed devops-plugin remove` command allows the user to select a devops p
 ```bash
 $ godspeed plugin remove
 
-    ~~~~~~ Godspeed CLI ~~~~~~
 
-    ? Please select a devops plugin to remove.
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+? Please select a devops plugin to remove. (Use arrow keys)
+❯ @godspeedsystems/plugins-prisma-as-datastore 
+
+    
 ```
 
 ### devops-plugin update
@@ -315,11 +427,14 @@ The `godspeed devops-plugin update` command allows the user to select a devops p
 ```bash
 $ godspeed plugin update
 
-    ~~~~~~ Godspeed CLI ~~~~~~
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
 
-    ? Please select a devops plugin to update. (Use arrow keys)
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
+
+? Please select devops plugin to update. (Use arrow keys)
+❯ @godspeedsystems/plugins-prisma-as-datastore 
 ```
 
 ## 6.dev

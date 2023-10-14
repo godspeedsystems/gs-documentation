@@ -1,0 +1,79 @@
+### Steps for creating a sample hello-world project.
+
+1. Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+
+```bash
+  godspeed create hello-world # hello-world is the name of the app
+```
+
+** Below is the sample for creating a project** 
+    
+```bash
+
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+…  waiting   Cloning project template.
+✔  success   Cloning template successful.
+…  waiting   Generating project with default examples.
+…  waiting   Generating project files.
+✔  success   Successfully generated godspeed project files.
+
+
+dependencies installed successfully!
+
+Successfully created the project hello-world.
+Use `godspeed help` command for available commands. 
+
+Happy building microservices with Godspeed! 🚀🎉
+
+
+```
+Framework will give you below folder structure.
+```
+
+    .
+    ├── src
+        ├── datasources
+        │   ├── types
+        │   |    └── axios.ts
+        |   |
+        │   └── api.yaml
+        │
+        ├── events
+        |   |
+        │   └── helloworld.yaml
+        |
+        ├── eventsources
+        │   ├── types
+        │   |    └── express.ts
+        |   |
+        │   └── http.yaml
+        |
+        └── functions
+            |
+            └── helloworld.yaml
+
+
+```
+
+2. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
+
+```yaml
+type: express
+port: 3000
+```
+3.  Run `godspeed dev` to start the development server.
+
+```bash
+godspeed dev
+```
+<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
+
+**Voila!** Your API backend is up and running. You can use Postman to test your API's.
+
+Happy building with Godspeed!
+
