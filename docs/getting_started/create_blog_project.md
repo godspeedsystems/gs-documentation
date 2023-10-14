@@ -1,39 +1,11 @@
 
-### Steps for creating a sample blog project.
-
-Let's create a project which includes a Prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
+# Run the sample project with Godspeed.
+Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 
 ```bash
 godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name of the app
-```
-Framework will give you below folder structure.
-```
-
-    .
-    ├── src
-        ├── datasources
-        │   ├── types
-        │   |    └── prisma.ts
-        |   |
-        │   └── mongo.prisma
-        │
-        ├── events
-        |   |
-        │   └── helloworld.yaml
-        |
-        ├── eventsources
-        │   ├── types
-        │   |    └── express.ts
-        |   |
-        │   └── http.yaml
-        |
-        └── functions
-            |
-            └── helloworld.yaml
-
-
 ```
 
 2. Navigate to you project folder
@@ -50,14 +22,8 @@ code .
 
 4. Now to setup your database please follow the steps provided in README.md file of your blog-app project.
 
+**If you want to know more about mongo cluster visit [Mongo-cluster](https://www.mongodb.com/docs/guides/atlas/cluster/)**
 
-#### Prisma supports wide range of databases
-* [MySQL](https://dev.mysql.com/doc/)
-* [PostgreSQL](https://www.postgresql.org/docs/)
-* [SQLite](https://www.sqlite.org/docs.html)
-* [CockroachDB](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart)
-* [MariaDB](https://mariadb.org/documentation/)
-* [MongoDB](https://www.mongodb.com/docs/guides/atlas/cluster/)
 
 5. Open terminal in vscode and enter the below command
 
@@ -85,7 +51,7 @@ godspeed gen-crud-api
 ```bash
 godspeed dev
 ```
-<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
+<img src="https://ik.imagekit.io/pavanKillada/image.png_ex=6514249e&is=6512d31e&hm=c7228638c9cb7932b705b9c010c42ddaa8b77ce9a74bfe93e60c3aff9993cba2&=&width=817&height=460?updatedAt=1695732924855"/>
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
