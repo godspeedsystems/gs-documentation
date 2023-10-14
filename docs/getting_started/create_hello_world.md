@@ -1,14 +1,16 @@
-### Steps for creating a sample hello-world project.
+# Steps for creating a new project.
+## Creating a godspeed project.
 
-1. Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
+1. Create a project using Godspeed CLI with below command:  
 ```bash
-  godspeed create hello-world # hello-world is the name of the app
+godspeed create hello-world # hello-world is the name of the app
 ```
 
-** Below is the sample for creating a project** 
-    
+Below is the sample for creating a project
 ```bash
+> godspeed create hello-world # hello-world is the name of the app
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║

@@ -62,7 +62,18 @@ Sample spec for request schema.
 ```yaml
 http.get./greet:
   fn: function-greet
- # mention respective 'params' and 'responses' fields.
+  params:
+    - name: greet_message
+      in: query
+      required: true
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name: 
+              type: string
 ```
 
 - The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
@@ -70,14 +81,40 @@ http.get./greet:
 - It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
-#### Response schema validation
+#### Response schema validation:
 Sample spec for response schema.
 ```yaml
-http.post./test/log:
-  summary: series
-  description: series
-  fn: log_function
-  # give respective 'body' and 'responses' fields by considering the above event structure reference
+"http.get./helloworld":
+  fn: helloworld
+  body:
+    type: object
+    properties:
+      name:
+        type: string
+  responses:
+    500:
+      content:
+        application/json: 
+          schema:
+            type: string
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
+
+```
+
+Sample workflow for the above event. 
+
+
+```yaml
+id: helloworld
+tasks:
+  - id: first_task
+    fn: com.gs.return
+    args:
+      name: 'Hello World!'
 ```
 
 ### HTTP event
@@ -145,7 +182,7 @@ summary: consumer
 tasks:
     - id: set_consume
       fn: com.gs.return
-      args: <% inputs %>
+      args: <% inputs.body %>
   ```
 
 #### Example workflow (on_validation_error handler) handling json schema validation error
