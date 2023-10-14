@@ -22,8 +22,14 @@ code .
 
 4. Now to setup your database please follow the steps provided in README.md file of your blog-app project.
 
-**If you want to know more about mongo cluster visit [Mongo-cluster](https://www.mongodb.com/docs/guides/atlas/cluster/)**
 
+#### Prisma supports wide range of databases
+* [MySQL](https://dev.mysql.com/doc/)
+* [PostgreSQL](https://www.postgresql.org/docs/)
+* [SQLite](https://www.sqlite.org/docs.html)
+* [CockroachDB](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart)
+* [MariaDB](https://mariadb.org/documentation/)
+* [MongoDB](https://www.mongodb.com/docs/guides/atlas/cluster/)
 
 5. Open terminal in vscode and enter the below command
 

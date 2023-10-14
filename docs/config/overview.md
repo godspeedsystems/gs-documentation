@@ -1,6 +1,6 @@
 # Introduction
 
-## config Structure
+## Config Structure
 
 The configuration variables, along with their respective values, are specified within YAML files located in the `config/` directory. These variables are easily customizable to align with specific business use cases. The default directory structure is outlined as follows
 
