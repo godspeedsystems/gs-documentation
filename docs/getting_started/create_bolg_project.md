@@ -1,7 +1,7 @@
 
 ### Steps for creating a sample blog project.
 
-Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
+Let's create a project which includes a Prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 

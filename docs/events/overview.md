@@ -1,13 +1,11 @@
 # Events
 ## Introduction
-In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details. Refer [this](design_principles#three-fundamental-abstractions) to know more about Event and Event source.
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
-- The event source and other information for the source (for ex. group_id in case of Kafka events)
 - The event handler workflow
-- Validation (input and output)
-- Examples of input and output
+- Input and output schema 
 
 Event handlers within microservices are responsible for processing these events, executing predefined workflows, and ensuring that both input and output data adhere to specified validation rules. These events empower developers with flexibility, allowing them to tailor responses to meet specific requirements.
 
@@ -29,16 +27,18 @@ http.put./mongo/user/{id}:
         schema:
           $ref: '#/definitions/mongo/BusinessProfile'
   responses:
-    content:
-      application/json:
-        schema:
-          type: object
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
 ```
 - The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`).
 - The `summary` and `description` fields provide insights into the event's purpose and can be viewed in Swagger specifications of that API.
-- The `fn` keyword specifies which function should be executed when the event occurs.
+- The `fn` keyword specifies which function should be executed when the event occurs, this is the event handler workflow.
 - Use `params` to include `path` or `query` parameters.  The `name` keyword identifies the parameter's name, `in` specifies its type (path or query), and `schema` defines the expected input value.
 - Events can receive JSON request body objects via the `body`, and you can define a specific schema to extract user information.
+  - In the request body `$ref: '#/definitions/mongo/BusinessProfile'` refers to the request schema in the definitions which are auto generated on genrating CRUD ApIs based on the prisma schema used in the project.
 - The `responses` section outlines the expected response objects that should be included in the response body.
 
 
@@ -76,7 +76,7 @@ Sample spec for response schema.
 http.post./test/log:
   summary: series
   description: series
-  fn: com-gs-log
+  fn: log_function
   # give respective 'body' and 'responses' fields by considering the above event structure reference
 ```
 
