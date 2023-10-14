@@ -41,7 +41,6 @@ export default EventSource;
 ### 2. [cron-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
 cron-as-eventsource is a plugin which running in the background that will execute events at a specified time, or in a regular intervals.
-express-as-http is a plugin that simplifies building APIs by providing essential features for handling HTTP routes, requests, and responses. It's known for its simplicity and speed, making it a popular choice for building server-side applications in Node.js.
 
 How to use **cron-as-eventsource** plugin?
 
