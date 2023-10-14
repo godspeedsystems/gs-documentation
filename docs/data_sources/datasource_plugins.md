@@ -16,27 +16,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin prisma-as-datastore
 ```
 
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-prisma-as-datastore
-```
-
-2. Create a {databaseName}.prisma file in your projects, `src/datasources` folder, which is the Prisma schema file for the database.
-
-3. Create a `prisma.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-prisma-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
-
 
 ### 2. [axios-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
 
@@ -49,28 +28,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 ```sh
 godspeed add plugin axios-as-datasource
 ```
-
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-axios-as-datasource
-```
-
-2. Create a `api.yaml` file in your projects, `src/datasources` folder, which is the config file for the configuration.
-
-3. Create a `axios.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
-
 
 
 ### 3. [aws-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
@@ -85,27 +42,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin aws-as-datasource
 ```
 
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-aws-as-datasource
-```
-
-2. Create a `aws.yaml` file in your projects, `src/datasources` folder, which is the config file for the configuration.
-
-3. Create a `aws.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-aws-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
-
 
 ### 4. [excel-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-excel-as-datasource)
 
@@ -118,27 +54,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 ```sh
 godspeed add plugin excel-as-datasource
 ```
-
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-excel-as-datasource
-```
-
-2. Create a `excel.yaml` file in your projects, `src/datasources` folder, which is the config file for the configuration.
-
-3. Create a `excel.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-excel-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
 
 
 ### 5. [mailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
@@ -153,27 +68,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin mailer-as-datasource
 ```
 
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-mailer-as-datasource
-```
-
-2. Create a `mailer.yaml` file in your projects, `src/datasources` folder, which is the config file for the configuration.
-
-3. Create a `mailer.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-mailer-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
-
 
 ### 6. [redis-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-redis-as-datasource)
 
@@ -186,27 +80,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 ```sh
 godspeed add plugin redis-as-datasource
 ```
-
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-redis-as-datasource
-```
-
-2. Create a `redis.yaml` file in your projects, `src/datasources` folder, which is the config file for the configuration.
-
-3. Create a `redis.ts` file in your `src/datasources/types` folder and paste below content.
-
-```js
-import { DataSource } from '@godspeedsystems/plugins-redis-as-datasource';
-export default DataSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
 
 
 
