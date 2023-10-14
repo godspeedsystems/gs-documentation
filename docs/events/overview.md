@@ -76,7 +76,7 @@ Sample spec for response schema.
 http.post./test/log:
   summary: series
   description: series
-  fn: com-gs-log
+  fn: log_function
   # give respective 'body' and 'responses' fields by considering the above event structure reference
 ```
 
