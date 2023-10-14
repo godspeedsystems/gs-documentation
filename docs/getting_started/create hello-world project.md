@@ -1,12 +1,12 @@
-# Steps for creating a new project.
-## Creating a godspeed project.
-Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+### Steps for creating a sample hello-world project.
+
+1. Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
 ```bash
   godspeed create hello-world # hello-world is the name of the app
 ```
 
-** below is the sample for creating a project** 
+** Below is the sample for creating a project** 
     
 ```bash
 
@@ -32,7 +32,7 @@ Happy building microservices with Godspeed! 🚀🎉
 
 
 ```
-     
+Framework will give you below folder structure.
 ```
 
     .
@@ -60,18 +60,20 @@ Happy building microservices with Godspeed! 🚀🎉
 
 ```
 
+2. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
 
-4. Running the dev server. Navigate to the project root directory and run.
-
-```bash
-  godspeed dev
-```
-
-5. It will start your app on localhost on default port number 3000, if you can modify the port number as per your requirement. You can try out your hello-world API is live.
-
-**src/eventsources/http.yaml**
 ```yaml
 type: express
 port: 3000
 ```
+3.  Run `godspeed dev` to start the development server.
+
+```bash
+godspeed dev
+```
+<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
+
+**Voila!** Your API backend is up and running. You can use Postman to test your API's.
+
+Happy building with Godspeed!
 

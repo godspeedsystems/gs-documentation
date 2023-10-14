@@ -1,5 +1,6 @@
 
-# Run the sample blog project with Godspeed.
+### Steps for creating a sample blog project.
+
 Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
@@ -78,7 +79,7 @@ godspeed gen-crud-api
 ```bash
 godspeed dev
 ```
-<img src="https://ik.imagekit.io/pavanKillada/image.png_ex=6514249e&is=6512d31e&hm=c7228638c9cb7932b705b9c010c42ddaa8b77ce9a74bfe93e60c3aff9993cba2&=&width=817&height=460?updatedAt=1695732924855"/>
+<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
