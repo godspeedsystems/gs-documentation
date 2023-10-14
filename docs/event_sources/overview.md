@@ -20,17 +20,30 @@ title: Event Sources
 ## How to use an event source in Godspeed project?
 
   You can use Godspeed CLI to browse and install plugins which are published and maintained by Godspeed.
+```bash
+    godspeed plugin add
+```
 
   ```bash
-   > godspeed plugin add
 
-   ~~~~~~ Godspeed CLI ~~~~~~
-  ? Please select godspeed plugin to install. (Use arrow keys)
-  ❯ @godspeedsystems/plugins-express-as-http
-    @godspeedsystems/plugins-prisma-as-datastore
-    @godspeedsystems/plugins-axios-as-datasource
-    @godspeedsystems/plugins-cron
-    @godspeedsystems/plugins-kafka
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+? Please select a godspeed plugin to install. (Use arrow keys)
+    @godspeedsystems/plugins-prisma-as-datastore 
+    @godspeedsystems/plugins-express-as-http 
+❯ @godspeedsystems/plugins-cron-as-eventsource 
+    @godspeedsystems/plugins-axios-as-datasource 
+    @godspeedsystems/plugins-aws-as-datasource 
+    @godspeedsystems/plugins-excel-as-datasource 
+    @godspeedsystems/plugins-mailer-as-datasource 
+    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+    @godspeedsystems/plugins-redis-as-datasource 
+(Move up and down to reveal more choices)
+
   ```
 
 

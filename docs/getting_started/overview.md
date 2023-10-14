@@ -33,28 +33,39 @@ Godspeed CLI is the command center of a Godspeed project. It allows you to creat
 ```
    
 ```bash
-    > **godspeed --help**
     
-    ~~~~~~ Godspeed CLI ~~~~~~
-    
-    Usage: Godspeed CLI [options] [command]
-    
-    CLI tool for godspeed framework.
-    
-    Options:
-      -V, --version         output the version number
-      -h, --help            display help for command
-    
-    Commands:
-      create <projectName>  create a new godspeed project.
-      dev                   run godspeed development server.
-      clean                 clean the previous build.
-      build                 build the godspeed project.
-      devops-plugin         manage(add, remove, update) godspeed plugins for devops.
-      plugin                manage(add, remove, update) eventsource and datasource plugins for godspeed.
-      help [command]        display help for command
-    
-    For detailed documentation visit <https://docs.godspeed.systems>
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+Usage: Godspeed CLI [options] [command]
+
+CLI tool for godspeed framework.
+
+Options:
+  -V, --version                   output the version number
+  -h, --help                      display help for command
+
+Commands:
+  create [options] <projectName>  create a new godspeed project.
+  dev                             run godspeed development server.
+  clean                           clean the previous build.
+  gen-crud-api                    scans your prisma datasources and generate
+                                  CRUD APIs events and workflows
+  build                           build the godspeed project.
+  devops-plugin                   manage(add, remove, update) godspeed plugins
+                                  for devops.
+  plugin                          manage(add, remove, update) eventsource and
+                                  datasource plugins for godspeed.
+  prisma                          proxy to prisma commands with some add-on
+                                  commands to handle prisma datasources.
+  help [command]                  display help for command
+
+
+For detailed documentation visit https://godspeed.systems
+
     
 ```
 
