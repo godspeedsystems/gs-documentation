@@ -6,7 +6,7 @@ In this section, you will learn how to install the Godspeed framework using the 
 :::
 
 
-### Pre-requisite:
+### Pre-requisites:
 
 1. Node 18 and npm
 2. Git
@@ -26,7 +26,7 @@ Godspeed CLI is the command center of a Godspeed project. It allows you to creat
    npm install -g @godspeedsystems/godspeed
 ```
 
-** Try running in the below command line to see available Godspeed commands.** Refer [the full CLI spec](/docs/CLI.md) for more information.
+Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/CLI.md) for more information.
 
 ```bash
    godspeed --help
