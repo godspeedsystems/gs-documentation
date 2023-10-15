@@ -1,11 +1,44 @@
+# Create a blog project
+### Steps for creating a sample blog project.
 
-# Run the sample project with Godspeed.
-Let's create a project which includes a prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
+Let's create a project which includes a Prisma schema(`mongo.prisma`) for creating a blog app using mongodb.
 
 1. Create a project using Godspeed CLI with below command:
 
 ```bash
 godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name of the app
+```
+
+In this sample project, we have utilized a MongoDB database, but you have the flexibility to choose any other database that Prisma supports and that meets your requirements [MySQL](https://dev.mysql.com/doc/), [PostgreSQL](https://www.postgresql.org/docs/) etc
+
+
+
+Framework will give you below folder structure.
+```
+
+    .
+    ├── src
+        ├── datasources
+        │   ├── types
+        │   |    └── prisma.ts
+        |   |
+        │   └── mongo.prisma
+        │
+        ├── events
+        |   |
+        │   └── helloworld.yaml
+        |
+        ├── eventsources
+        │   ├── types
+        │   |    └── express.ts
+        |   |
+        │   └── http.yaml
+        |
+        └── functions
+            |
+            └── helloworld.yaml
+
+
 ```
 
 2. Navigate to you project folder
@@ -22,8 +55,17 @@ code .
 
 4. Now to setup your database please follow the steps provided in README.md file of your blog-app project.
 
-**If you want to know more about mongo cluster visit [Mongo-cluster](https://www.mongodb.com/docs/guides/atlas/cluster/)**
 
+#### Prisma supports wide range of databases
+* [MySQL](https://dev.mysql.com/doc/)
+* [PostgreSQL](https://www.postgresql.org/docs/)
+* [SQLite](https://www.sqlite.org/docs.html)
+* [CockroachDB](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart)
+* [MariaDB](https://mariadb.org/documentation/)
+* [MongoDB](https://www.mongodb.com/docs/guides/atlas/cluster/)
+
+
+Prisma provides a unified and versatile database experience, enabling you to connect to diverse databases through a single schema definition. This ensures a consistent schema for interacting with various databases and generates a unified API, streamlining development for flexibility and ease. Whether you opt for MySQL, PostgreSQL, SQLite, or other supported databases, Prisma's unified approach simplifies both database management and application development.
 
 5. Open terminal in vscode and enter the below command
 
