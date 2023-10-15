@@ -46,12 +46,55 @@ godspeed gen-crud-api
 ```
 **This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma**
 
+Command generates the below respective folders and files in the Events and Functions.
+
+```bash
+
+    .
+    ├── src
+        ├── datasources
+        |
+        ├── events
+        |   ├── post.yaml
+        │   └── user.yaml
+        |
+        ├── eventsources
+        |
+        └── functions/com/biz/mongo
+            ├── post
+            |   ├── create.yaml
+            |   ├── delete.yaml
+            |   ├── one.yaml
+            |   ├── search.yaml
+            |   └── update.yaml
+            |
+            └── user
+                ├── create.yaml
+                ├── delete.yaml
+                ├── one.yaml
+                ├── search.yaml
+                └── update.yaml
+
+```
+
 8. Run `godspeed dev` to start the development server.
 
 ```bash
 godspeed dev
 ```
-<img src="https://ik.imagekit.io/pavanKillada/image.png_ex=6514249e&is=6512d31e&hm=c7228638c9cb7932b705b9c010c42ddaa8b77ce9a74bfe93e60c3aff9993cba2&=&width=817&height=460?updatedAt=1695732924855"/>
+9. Go to [http://localhost:3000/api-docs](http://localhost:3000/api-docs) to see the API endpoints in the swagger.
+:::note
+Currently, the feature for generating Swagger specifications, which we had in [version 1](https://docs.godspeed.systems/docs/v1/microservices/swagger-specs), is coming soon in version 2.
+:::
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-24-45.png?updatedAt=1697316915416" alt="swagger spec default" />
+
+10. Create a user in the Mongodb by giving the proper request body to the post API in the swagger and execute it.
+
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-27-06.png?updatedAt=1697317104366" alt="swagger mongo user" />
+
+11. An appropriate response will be returned on successful execution.
+
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-27-20.png?updatedAt=1697317104433" alt="swagger response" />
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
