@@ -10,7 +10,6 @@ godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name o
 ```
 Framework will give you below folder structure.
 ```
-
     .
     ├── src
         ├── datasources
@@ -32,8 +31,6 @@ Framework will give you below folder structure.
         └── functions
             |
             └── helloworld.yaml
-
-
 ```
 
 2. Navigate to you project folder
@@ -83,16 +80,23 @@ godspeed gen-crud-api
 Command generates the below respective folders and files in the Events and Functions.
 
 ```bash
-
     .
     ├── src
         ├── datasources
+        │   ├── types
+        │   |    └── prisma.ts
+        |   |
+        │   └── mongo.prisma
         |
         ├── events
         |   ├── post.yaml
         │   └── user.yaml
         |
         ├── eventsources
+        │   ├── types
+        │   |    └── express.ts
+        |   |
+        │   └── http.yaml
         |
         └── functions/com/biz/mongo
             ├── post
@@ -108,7 +112,6 @@ Command generates the below respective folders and files in the Events and Funct
                 ├── one.yaml
                 ├── search.yaml
                 └── update.yaml
-
 ```
 
 8. Run `godspeed dev` to start the development server.
