@@ -16,7 +16,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin prisma-as-datastore
 ```
 
-
 ### 2. [axios-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
 
 Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 🌐✨
@@ -28,7 +27,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 ```sh
 godspeed add plugin axios-as-datasource
 ```
-
 
 ### 3. [aws-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
 
@@ -42,7 +40,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin aws-as-datasource
 ```
 
-
 ### 4. [excel-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-excel-as-datasource)
 
 Excel as a datasource: Turn your spreadsheets into actionable insights. Seamlessly integrate Excel into your applications to harness data, charts, and calculations. Transform static numbers into dynamic, real-time intelligence. Ready to Excel? 📊
@@ -55,17 +52,16 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin excel-as-datasource
 ```
 
+### 5. [Nodemailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
 
-### 5. [mailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
+Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
 
-Mailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
-
-How to use **mailer-as-datasource** plugin?
+How to use **nodemailer-as-datasource** plugin?
 
 Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
 
 ```sh
-godspeed add plugin nodemailer-as-datasource
+godspeed add plugin mailer-as-datasource
 ```
 godspeed add plugin mailer-as-datasource
 ```
@@ -82,7 +78,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 ```sh
 godspeed add plugin redis-as-datasource
 ```
-
 
 
 
