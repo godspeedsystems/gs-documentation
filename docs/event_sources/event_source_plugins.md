@@ -16,27 +16,6 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin express-as-http
 ```
 
-OR
-
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-express-as-http
-```
-
-2. Create a `http.yaml` file in your projects, `src/eventsources` folder, which is the config file for the configuration.
-
-3. Create a `express.ts` file in your `src/eventsources/types` folder and paste below content.
-
-```js
-import { EventSource } from '@godspeedsystems/plugins-express-as-http';
-export default EventSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.
-
 
 ### 2. [cron-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
@@ -50,23 +29,4 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin cron-as-eventsource
 ```
 
-OR
 
-You can also manually add this plugin in your godspeed project. By following below steps.
-
-1. Install the plugin npm module.
-
-```sh
-npm install @godspeedsystems/plugins-cron-as-eventsource
-```
-
-2. Create a `cron.yaml` file in your projects, `src/eventsources` folder, which is the config file for the configuration.
-
-3. Create a `cron.ts` file in your `src/eventsources/types` folder and paste below content.
-
-```js
-import { EventSource } from '@godspeedsystems/plugins-cron-as-eventsource';
-export default EventSource;
-```
-
-4. Run `godspeed dev` or `npm run dev` to restart the server.

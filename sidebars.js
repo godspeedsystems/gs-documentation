@@ -77,14 +77,14 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "4.3. Custom Event Source",
-          id: "event_sources/custom_event_source"
+          label: "4.3. Event Source Plugins",
+          id: "event_sources/event_source_plugins"
         },
         {
           type: "doc",
-          label: "4.4. Event Source Plugins",
-          id: "event_sources/event_source_plugins"
-        }
+          label: "4.4. Create Your Event Source",
+          id: "event_sources/create_your_event_source"
+        },
       ],
     },
     {
@@ -129,8 +129,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "6.3. Custom data source",
-          id: "data_sources/custom_data_source"
+          label: "6.3. Create Your data source",
+          id: "data_sources/create_your_data_source"
         },
       ],
     },

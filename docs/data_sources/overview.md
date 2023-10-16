@@ -22,7 +22,7 @@ In this example:
 `datasource.mongo.User.findOne` is the data source function, which can be described as below:
 
   - `datasource`: fixed namespace for all data sources
-  - `mongo`: name of data source
+  - `mongo`: name of data source,this can be any data base that you select can checkout [database list](/docs/getting_started/create_blog_project#prisma-supports-wide-range-of-databases)
   - `User`: entity name
   - `findOne`: method to be invoked in entity name
 
