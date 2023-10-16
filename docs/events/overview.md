@@ -1,17 +1,19 @@
 # Events
 ## Introduction
-In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details. Refer [this](design_principles#three-fundamental-abstractions) to know more about Event and Event source.
+In the realm of microservices architecture, [events](design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+
+We closely follow the openAPI specification this is part of all the events that follows standard structure which is one of the core design
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event handler workflow
-- Input and output schema 
+- Input and output schema with the validation error handling
+- [Authorization](authorization/overview.md) checks
 
-Event handlers within microservices are responsible for processing these events, executing predefined workflows, and ensuring that both input and output data adhere to specified validation rules. These events empower developers with flexibility, allowing them to tailor responses to meet specific requirements.
 
 ## Structure of an event
 ```yaml
-http.put./mongo/user/{id}:
+http.put./mongo/user/{id}: #This comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`).
   summary: Update a user
   description: Update user from database
   fn: com.biz.mongo.user.update

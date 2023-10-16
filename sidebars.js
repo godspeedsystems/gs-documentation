@@ -40,12 +40,12 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "3.2. Sample project",
+          label: "3.2. Hello world project",
           id: "getting_started/create_hello_world"
         },
         {
           type: "doc",
-          label: "3.3. Blog project",
+          label: "3.3. Sample blog project",
           id: "getting_started/create_blog_project"
         },
         // {
@@ -106,11 +106,11 @@ const sidebars = {
           label: "5.3. Inbuilt workflows",
           id: "workflows/inbuilt_workflows"
         },
-        // {
-        //   type: "doc",
-        //   label: "5.4. Retry",
-        //   id: "workflows/retry"
-        // },
+        {
+          type: "doc",
+          label: "5.4. Caching",
+          id: "caching/overview"
+        },
       ],
     },
     {
@@ -134,22 +134,6 @@ const sidebars = {
         },
       ],
     },
-    // {
-    //   type: "category",
-    //   label: "7. Authentication",
-    //   items: [
-    //     {
-    //       type: "doc",
-    //       label: "7.1. Overview",
-    //       id: "authentication/Overview"
-    //     },
-    //     {
-    //       type: "doc",
-    //       label: "7.2. Configuration",
-    //       id: "authentication/configuration"
-    //     },
-    //   ],
-    // },
     {
       type: "category",
       label: "7. Authorization",
@@ -173,33 +157,22 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "9. Caching",
-      items: [
-        {
-          type: "doc",
-          label: "9.1. Overview",
-          id: "caching/overview"
-        },
-      ],
-    },
-    {
       type: "doc",
-      label: "10. CLI",
+      label: "9. CLI",
       id: "CLI"
     },
     {
       type: "doc",
-      label: "11. Language Tools",
+      label: "10. Language Tools",
       id: "language_tools"
     },
     {
       type: "category",
-      label: "12. Telemetry",
+      label: "11. Telemetry",
       items: [
         {
           type: "doc",
-          label: "12.1. Overview",
+          label: "11.1. Overview",
           id: "telemetry/overview"
         },
       ],
