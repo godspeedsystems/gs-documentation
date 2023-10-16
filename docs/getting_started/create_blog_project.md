@@ -133,13 +133,23 @@ Currently, the feature for generating Swagger specifications, which we have in [
 :::
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-24-45.png?updatedAt=1697316915416" alt="swagger spec default" />
 
-10. Create a user in the Mongodb by giving the proper request body to the post API in the swagger and execute it.
+<!-- 
+    <img src="../../static/img/swagger_default.png" alt="swagger spec default" />
+ -->
 
+10. Create a user in the Mongodb by giving the proper request body to the post API in the swagger and execute it.
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-27-06.png?updatedAt=1697317104366" alt="swagger mongo user" />
 
-11. An appropriate response will be returned on successful execution.
+<!-- 
+    <img src="../../static/img/swagger_request.png" alt="swagger spec default" />
+ -->
 
+11. An appropriate response will be returned on successful execution.
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-27-20.png?updatedAt=1697317104433" alt="swagger response" />
+
+<!-- 
+    <img src="../../static/img/swagger_response.png" alt="swagger spec default" />
+ -->
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 

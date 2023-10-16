@@ -2,7 +2,7 @@
 ## Introduction
 In the realm of microservices architecture, [events](design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
 
-We closely follow the openAPI specification this is part of all the events that follows standard structure which is one of the core design
+**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event

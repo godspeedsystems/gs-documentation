@@ -73,7 +73,7 @@ port: 3000
 ```bash
 godspeed dev
 ```
-<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
+<img src="../../static/img/helloworld.webp"/>
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 

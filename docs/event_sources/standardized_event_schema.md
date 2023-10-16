@@ -1,48 +1,41 @@
 # Events
 ## Introduction
-In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details. Refer [this](design_principles#three-fundamental-abstractions) to know more about Event and Event source.
+In the realm of microservices architecture, [events](design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+
+**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event handler workflow
-- Input and output schema 
+- Input and output schema with the validation error handling
+- [Authorization](authorization/overview.md) checks
 
-Event handlers within microservices are responsible for processing these events, executing predefined workflows, and ensuring that both input and output data adhere to specified validation rules. These events empower developers with flexibility, allowing them to tailor responses to meet specific requirements.
 
 ## Structure of an event
 ```yaml
-http.put./mongo/user/{id}: 
-  summary: Update a user
-  description: Update user from database
-  fn: com.biz.mongo.user.update
-  params:
+http.put./mongo/user/{id}: #This is the only thing changes across all the events 
+  summary: Update a user # as per swagger spec
+  description: Update user from database # as per swagger spec
+  fn: com.biz.mongo.user.update # function to be invoked
+  params:       # params as per swagger spec
     - name: id
       in: path
       required: true
       schema:
         type: string
-  body:
+  body:       # request body as per swagger spec
     content:
       application/json:
         schema:
-          $ref: '#/definitions/mongo/BusinessProfile'
-  responses:
+          $ref: '#/definitions/mongo/BusinessProfile'  # you can use the ref defined in the definitions section
+  responses:   # responses as per swagger spec
     200:
       content:
         application/json:
           schema:
             type: object
 ```
-- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`).
-- The `summary` and `description` fields provide insights into the event's purpose and can be viewed in Swagger specifications of that API.
-- The `fn` keyword specifies which function should be executed when the event occurs, this is the event handler workflow.
-- Use `params` to include `path` or `query` parameters.  The `name` keyword identifies the parameter's name, `in` specifies its type (path or query), and `schema` defines the expected input value.
-- Events can receive JSON request body objects via the `body`, and you can define a specific schema to extract user information.
-  - In the request body `$ref: '#/definitions/mongo/BusinessProfile'` refers to the request schema in the definitions which are auto generated on genrating CRUD ApIs based on the prisma schema used in the project.
-- The `responses` section outlines the expected response objects that should be included in the response body.
-
-
-
+- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the event source plugin, and it is the only line that changes across all events.
 
 ##  Event types
 
