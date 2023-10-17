@@ -31,12 +31,9 @@ Successfully created the project hello-world.
 Use `godspeed help` command for available commands. 
 
 Happy building microservices with Godspeed! 🚀🎉
-
-
 ```
 Framework will give you below folder structure.
 ```
-
     .
     ├── src
         ├── datasources
@@ -58,8 +55,6 @@ Framework will give you below folder structure.
         └── functions
             |
             └── helloworld.yaml
-
-
 ```
 
 2. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
@@ -78,4 +73,3 @@ godspeed dev
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 
 Happy building with Godspeed!
-

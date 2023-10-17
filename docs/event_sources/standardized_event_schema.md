@@ -4,6 +4,8 @@ In the realm of microservices architecture, [events](design_principles#three-fun
 
 **We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
+<!-- **When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.** -->
+
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event handler workflow
@@ -14,21 +16,21 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 ## Structure of an event
 ```yaml
 http.put./mongo/user/{id}: #This is the only thing changes across all the events 
-  summary: Update a user # as per swagger spec
-  description: Update user from database # as per swagger spec
+  summary: Update a user # as per Swagger spec
+  description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
-  params:       # params as per swagger spec
+  params:       # params as per Swagger spec
     - name: id
       in: path
       required: true
       schema:
         type: string
-  body: #as per swagger spec
+  body: #as per Swagger spec
     content:
       application/json:
         schema:
           $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
-  responses: #as per swagger spec
+  responses: #as per Swagger spec
     200:
       content:
         application/json:
@@ -59,7 +61,7 @@ The framework provides request and response schema validation out of the box.
 Sample spec for request schema.
 ```yaml
 http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
-  fn: function-greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  fn: function_greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
   params: #It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
     - name: greet_message
       in: query
@@ -162,15 +164,15 @@ Within the Kafka event structure, the content of the message is captured and mad
 ``` yaml
  # event for consume data from Topic
 Kafka.publish-producer1.kafka_proj: // event key
-  id: kafka__consumer
+  id: kafka_consumer
   fn: kafka_consume
   body: #same body structure for all the events
  ```
 
-#### Example workflow consuming an kafka event
+#### Example workflow consuming an Kafka event
   ```yaml
    # function for consume data
-id: kafka-consumer
+id: kafka_consumer
 summary: consumer
 tasks:
     - id: set_consume
@@ -178,7 +180,7 @@ tasks:
       args: <% inputs.body %>
   ```
 
-#### Example workflow (on_validation_error handler) handling json schema validation error
+#### On validation error handler
   ```yaml
   summary: Handle json scehma validation error
   id: error_handler
@@ -191,7 +193,21 @@ tasks:
             event: <% inputs.event %>
             validation_error: <% inputs.validation_error %>
   ```
+### Cron event
+Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repo to know more about it.
 
+```yaml
+# event for Shedule a task for every minute.
+
+cron.* * * * *.Asia/Kolkata: //event key
+  fn: every_minute
+
+```
+- `cron.*`: This is the cron syntax for the field representing minutes. The asterisk (*) in this position means "every minute," so the event is scheduled to run every minute.
+
+- `* * * * *`: These asterisks represent the other cron fields, which specify the schedule for hours, days of the month, months, and days of the week, respectively. 
+
+- `Asia/Kolkata`: This is a timezone specification. It indicates that the event is scheduled to run in the Asia/Kolkata timezone. Kolkata is a city in India, and this timezone corresponds to the Indian Standard Time (IST).
 
 ### Working with different eventsources
 
@@ -201,6 +217,6 @@ Checkout a http event [example-http-event](#example-spec-for-http-event)
 
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
 
-**When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.**
+
 
 
