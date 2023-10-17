@@ -21,6 +21,12 @@ title: Workflows/Functions
 
 Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework facilitates this process through a YAML-based Domain Specific Language (DSL) for defining workflows and tasks that encapsulate the business logic. These defined workflows can either be linked to events as their handlers or invoked from within other workflows, allowing for a versatile and seamless automation.
 
+## Structure of a Workflow
+Every Workflow has the following attributes.
+- **id** - This is recommended for better logging visibility.
+- **summary** - This provides a descriptive title for a workflow, enhancing code readability.
+- **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
+
 ## A Sample Workflow Example 
 #### Example 1:
 ```yaml
@@ -49,11 +55,7 @@ tasks:
       fn: com.gs.transform #Inbuilt function that converts the code written in <%%>.
       args: <% outputs.sum_step1 %> #we access the first task output and return it.
 ```
-## Structure of a Workflow
-Every Workflow has the following attributes.
-- **id** - This is recommended for better logging visibility.
-- **summary** - This provides a descriptive title for a workflow, enhancing code readability.
-- **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
+
 ### Tasks and Attributes within a task
 The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
 
@@ -65,10 +67,84 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 
+### Types of workflows or functions
+* Native language workflows
+* Yaml-DSL workflows
+
+### Native Language Workflows
+The user has the ability to write JavaScript files and can invoke them from events when implementing intricate functionalities.
+
+```js
+export class GSContext { //span executions
+  inputs: GSCloudEvent; //The very original event for which this workflow context was created
+
+  outputs:{[key: string]: GSStatus; }; //DAG result. This context has a trace history and responses of all instructions in the DAG are stored in this object
+
+  log_events: GSLogEvent[] = [];
+
+  config: PlainObject; //app config
+
+  datasources: PlainObject; //app config
+
+  mappings: any;
+
+  plugins: PlainObject;
+
+  exitWithStatus?: GSStatus;
+
+  constructor(config: PlainObject, datasources: PlainObject, event: GSCloudEvent, mappings: any, plugins: PlainObject) {//_function?: GSFunction
+    this.inputs = event;
+    this.config = config;
+    this.outputs = {};
+    this.datasources = datasources;
+    this.mappings = mappings;
+    this.plugins = plugins;
+
+    childLogger.debug('inputs for context %o', event.data);
+  }
+
+  public cloneWithNewData(data: PlainObject): GSContext {
+    return new GSContext(
+        this.config,
+        this.datasources,
+        this.inputs?.cloneWithNewData(data),
+        this.mappings,
+        this.plugins
+    );
+  }
+
+  public addLogEvent(event: GSLogEvent): void {
+    this.log_events?.push(event);
+    //also push to the logging backend
+  }
+}
+
+```
+
+### Yaml-DSL Workflows
+YAML DSL serves as the default language for creating general workflows.
+
+* Decoupled Architechture
+Yaml workflows allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+
+* Zero Boiler Plate
+Yaml follows zero-bolier-plate approch reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
+
+```yaml
+id: helloworld
+tasks:
+  - id: fist_task
+    fn: com.gs.return
+    args:
+      name: 'Hello World!'
+```
+
 #### developer defined functions
 Developers have the flexibility to create custom JavaScript functions that can be utilized across various YAML workflows by exporting these functions. [refer](/docs/workflows/custom_workflows)
+
 #### Inputs
  These are typically used to represent the input data or parameters required for a task. In the below workflow, we see references to `inputs.body.name`, which suggests that the task expects a value named "name" as input. This input data can come from external sources.
+
 #### Outputs
 These represent the results or data produced by a task. In the below workflow, we have references like `outputs.transform_fn_step1.data`, indicating that the "data" produced by the task named "transform_fn_step1" is accessible as an output. This data can be used as input for subsequent tasks or for other purposes within the workflow.
 
@@ -98,6 +174,8 @@ The output of every task and function can be expected in the following format wi
 - **code**: standard HTTP response codes[1xx, 2xx, 3xx, 4xx, 5xx] Default value is 200
 - **message**: any string explaining the response. Optional
 - **data**: the actual data returned from the task/function. Optional
+
+
 ### Retry
 When an operation fails, instead of giving up immediately, the retry mechanism allows the system to make multiple subsequent attempts to execute the same operation, with the hope that the issue causing the failure is temporary and will be resolved in subsequent tries.
 

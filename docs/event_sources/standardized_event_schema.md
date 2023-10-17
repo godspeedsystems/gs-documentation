@@ -4,6 +4,8 @@ In the realm of microservices architecture, [events](design_principles#three-fun
 
 **We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
+<!-- **When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.** -->
+
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event handler workflow
@@ -14,21 +16,21 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 ## Structure of an event
 ```yaml
 http.put./mongo/user/{id}: #This is the only thing changes across all the events 
-  summary: Update a user # as per swagger spec
-  description: Update user from database # as per swagger spec
+  summary: Update a user # as per Swagger spec
+  description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
-  params:       # params as per swagger spec
+  params:       # params as per Swagger spec
     - name: id
       in: path
       required: true
       schema:
         type: string
-  body: #as per swagger spec
+  body: #as per Swagger spec
     content:
       application/json:
         schema:
           $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
-  responses: #as per swagger spec
+  responses: #as per Swagger spec
     200:
       content:
         application/json:
@@ -201,6 +203,6 @@ Checkout a http event [example-http-event](#example-spec-for-http-event)
 
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
 
-**When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.**
+
 
 
