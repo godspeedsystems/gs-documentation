@@ -131,7 +131,7 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
           type: object
 ```
 
-The above event will trigger the below function 
+The above event will trigger the below function. 
 
 #### Example function for switch ( switch.yaml )
 

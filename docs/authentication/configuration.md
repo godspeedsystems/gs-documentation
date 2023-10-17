@@ -8,7 +8,7 @@ jwt:
 ```
 The provided snippet contains payload information and a secret key. Once the above snippet is added to the `Config/Environment`, authentication for all the events will be *true* by default. 
 
-Options which can be passed for jwt config are:
+Options which can be passed for JWT config are:
 
 ![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
 When configuring the JWT settings, if you do not provide either the s`ecretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an [error](https://www.passportjs.org/packages/passport-jwt/).
@@ -72,8 +72,8 @@ http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate:
                 additionalProperties: false
                 required: [application_id]
 ```
-## Datasources authentication
-At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as needed.
+## Datasources Authentication
+At the API datasource level, you can implement Authentication measures. You can establish an Authentication workflow specific to the datasource, allowing it to make requests to an Authentication service in order to obtain tokens or perform Authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as needed.
 
 Here is the sample spec:
 **Datasource**
@@ -82,7 +82,7 @@ type: api
 base_url: <% config.api.base_url %>
 authn: com.jfs.api_auth
 ```
-Here, `com.jfs.api_auth` is the authentication workflow which gets called for the authentication of any request to this datasource.
+Here, `com.jfs.api_auth` is the Authentication workflow which gets called for the Authentication of any request to this datasource.
 
 #### Sample workflow using the above datasource
 ```yaml
@@ -94,7 +94,7 @@ tasks:
       args:
         data: <% inputs.body %>
 ```
-#### Sample authentication workflow com.jfs.api_auth
+#### Sample Authentication workflow com.jfs.api_auth
 ```yaml
 summary: Auth workflow
 tasks:
@@ -114,7 +114,7 @@ tasks:
           queryid: <% outputs.auth_step1.params.queryid %>
         statusCodes: <% outputs.auth_step1.status_code %>          
 ```
-The authentication workflow should return response in this format:
+The Authentication workflow should return response in this format:
 ```yaml
 headers: 
   header1: val1
@@ -123,5 +123,5 @@ params:
 statusCodes: [401, 403, ....]
 ```
 :::note
-The authentication workflow gets called when any request returns the specified `statusCodes`. 
+The Authentication workflow gets called when any request returns the specified `statusCodes`. 
 :::

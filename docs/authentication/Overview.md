@@ -1,9 +1,8 @@
-
 ## Authentication 
 :::note
 Implementing into the framework soon...
 :::
-Authentication refers to the process of verifying the identity of a user or service in a secure manner. Specifically, it mentions [JWT (JSON Web Token)](https://jwt.io/introduction) authentication, which is a widely used method for authentication in web applications and microservices.
+Authentication refers to the process of verifying the identity of a user or service in a secure manner. Specifically, it mentions [JWT (JSON Web Token)](https://jwt.io/introduction) Authentication, which is a widely used method for Authentication in web applications and microservices.
 
 ### Generating a token
 Lets generating a JWT token manually from the [jwt.io](https://jwt.io/#debugger-io). 
@@ -12,7 +11,7 @@ In the Debugger's Decoded section, the **HEADER** of a token typically comprises
 
 ![JWT](https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-09-19%2014-11-34.png?updatedAt=1695113314578)
 
-The framework utilizes JWT authentication to ensure secure communication between microservices. To achieve this, the user agent must include the JWT token in the Authorization header using the Bearer schema, following a specific format. This authentication process helps protect the integrity and confidentiality of data exchanged between microservices within the system.
+The framework utilizes JWT Authentication to ensure secure communication between microservices. To achieve this, the user agent must include the JWT token in the Authorization header using the Bearer schema, following a specific format. This Authentication process helps protect the integrity and confidentiality of data exchanged between microservices within the system.
 ```bash
 Authorization: Bearer <token>
 ```

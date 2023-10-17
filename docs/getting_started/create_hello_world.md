@@ -1,14 +1,16 @@
-### Steps for creating a sample hello-world project.
+# Steps for creating a new project.
+## Creating a godspeed project.
 
-1. Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+Let's create a project that includes a simple 'hello world' example for both [events](/docs/events/overview.md) and [functions](/docs/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
+1. Create a project using Godspeed CLI with below command:  
 ```bash
-  godspeed create hello-world # hello-world is the name of the app
+godspeed create hello-world # hello-world is the name of the app
 ```
 
-** Below is the sample for creating a project** 
-    
+Below is the sample for creating a project
 ```bash
+> godspeed create hello-world # hello-world is the name of the app
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
@@ -71,7 +73,7 @@ port: 3000
 ```bash
 godspeed dev
 ```
-<img src="https://ik.imagekit.io/h7ozyeimg/Screenshot%20from%202023-10-14%2018-17-22.png?updatedAt=1697287888204"/>
+<img src="../../static/img/helloworld.webp"/>
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 

@@ -2,7 +2,7 @@
 ## Introduction
 In the realm of microservices architecture, [events](design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
 
-**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.**
+**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
 The event schema, for each event source, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
@@ -13,11 +13,11 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 
 ## Structure of an event
 ```yaml
-http.put./mongo/user/{id}: #this is the only line which changes across all event sources/ event types/ event protocols
-  summary: Update a user #as per swagger spec
-  description: Update user from database #as per swagger spec
-  fn: com.biz.mongo.user.update #the function which is to be executed
-  params: #as per swagger spec
+http.put./mongo/user/{id}: #This is the only thing changes across all the events 
+  summary: Update a user # as per swagger spec
+  description: Update user from database # as per swagger spec
+  fn: com.biz.mongo.user.update # function to be invoked
+  params:       # params as per swagger spec
     - name: id
       in: path
       required: true
@@ -27,7 +27,7 @@ http.put./mongo/user/{id}: #this is the only line which changes across all event
     content:
       application/json:
         schema:
-          $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section
+          $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
   responses: #as per swagger spec
     200:
       content:
@@ -35,18 +35,19 @@ http.put./mongo/user/{id}: #this is the only line which changes across all event
           schema:
             type: object
 ```
+- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the event source plugin, and it is the only line that changes across all events.
 
 ##  Event types
 
 - An event type refers to a categorization or classification of events based on common characteristics or attributes. 
-- Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation.
+- Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation
 - Developer can create any event source by following a standard process.
 
 **For Example**
-- http.{method_type} from express.
-  For example, post or get
+- http.{method_type} from express For example, post or get
 - cron
-- message bus event from kafka or rabbitmq
+- message bus event from kafka or rabbit mq
+
 ## Event schema & examples for supported sources
 
 > All event declarations are stored in the src/events folder, in YAML files.
@@ -57,9 +58,9 @@ The framework provides request and response schema validation out of the box.
 #### Request schema validation
 Sample spec for request schema.
 ```yaml
-http.get./greet:
-  fn: function-greet
-  params:
+http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
+  fn: function-greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  params: #It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
     - name: greet_message
       in: query
       required: true
@@ -72,10 +73,6 @@ http.get./greet:
             name: 
               type: string
 ```
-
-- The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
-- The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
-- It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
 #### Response schema validation:
@@ -103,7 +100,6 @@ Sample spec for response schema.
 ```
 
 Sample workflow for the above event. 
-
 
 ```yaml
 id: helloworld
@@ -206,3 +202,5 @@ Checkout a http event [example-http-event](#example-spec-for-http-event)
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
 
 **When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.**
+
+
