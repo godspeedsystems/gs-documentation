@@ -11,44 +11,39 @@ Event handlers within microservices are responsible for processing these events,
 
 ## Structure of an event
 ```yaml
-http.put./mongo/user/{id}: 
-  summary: Update a user
-  description: Update user from database
-  fn: com.biz.mongo.user.update
-  params:
+http.put./mongo/user/{id}: #this is the only line which changes across event sources/event types/event protocols
+  summary: Update a user #as per swagger spec
+  description: Update user from database #as per swagger spec
+  fn: com.biz.mongo.user.update #function which is to be executed
+  params: #as per swagger spec
     - name: id
       in: path
       required: true
       schema:
         type: string
-  body:
+  body: #as per swagger spec
     content:
       application/json:
         schema:
-          $ref: '#/definitions/mongo/BusinessProfile'
-  responses:
+          $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
+  responses: #as per swagger spec
     200:
       content:
         application/json:
           schema:
             type: object
 ```
-- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`).
-- The `summary` and `description` fields provide insights into the event's purpose and can be viewed in Swagger specifications of that API.
-- The `fn` keyword specifies which function should be executed when the event occurs, this is the event handler workflow.
-- Use `params` to include `path` or `query` parameters.  The `name` keyword identifies the parameter's name, `in` specifies its type (path or query), and `schema` defines the expected input value.
-- Events can receive JSON request body objects via the `body`, and you can define a specific schema to extract user information.
-  - In the request body `$ref: '#/definitions/mongo/BusinessProfile'` refers to the request schema in the definitions which are auto generated on genrating CRUD ApIs based on the prisma schema used in the project.
-- The `responses` section outlines the expected response objects that should be included in the response body.
-
-
-
 
 ##  Event types
 
+- An event type refers to a categorization or classification of events based on common characteristics or attributes. 
+- Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation
+- Developer can create any event source by following a standard process.
+
 **For Example**
-- http.{method_type} For example, post or get
+- http.{method_type} from express For example, post or get
 - cron
+- message bus event from kafka or rabbit mq
 
 ## Event schema & examples for supported sources
 
@@ -60,9 +55,9 @@ The framework provides request and response schema validation out of the box.
 #### Request schema validation
 Sample spec for request schema.
 ```yaml
-http.get./greet:
-  fn: function-greet
-  params:
+http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
+  fn: function-greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  params: #It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
     - name: greet_message
       in: query
       required: true
@@ -75,10 +70,6 @@ http.get./greet:
             name: 
               type: string
 ```
-
-- The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
-- The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
-- It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
 #### Response schema validation:
@@ -106,7 +97,6 @@ Sample spec for response schema.
 ```
 
 Sample workflow for the above event. 
-
 
 ```yaml
 id: helloworld
