@@ -206,5 +206,3 @@ Checkout a http event [example-http-event](#example-spec-for-http-event)
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
 
 **When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.**
-
-

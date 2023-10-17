@@ -13,19 +13,11 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 
 ## Structure of an event
 ```yaml
-<<<<<<< HEAD
 http.put./mongo/user/{id}: #This is the only thing changes across all the events 
   summary: Update a user # as per swagger spec
   description: Update user from database # as per swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
   params:       # params as per swagger spec
-=======
-http.put./mongo/user/{id}: #this is the only line which changes across event sources/event types/event protocols
-  summary: Update a user #as per swagger spec
-  description: Update user from database #as per swagger spec
-  fn: com.biz.mongo.user.update #function which is to be executed
-  params: #as per swagger spec
->>>>>>> aa8798e5c5c012c2a4f3b5d0241f0710318ba9d5
     - name: id
       in: path
       required: true
