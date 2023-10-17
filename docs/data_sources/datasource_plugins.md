@@ -70,14 +70,6 @@ godspeed add plugin excel-as-datasource
 Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
 
 How to use **nodemailer-as-datasource** plugin?
-=======
-
-### 5. [mailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
-
-Mailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
-
-How to use **mailer-as-datasource** plugin?
->>>>>>> 2e427c79e3a5047e9d0a70f3ab453f48a84fc07b
 
 Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
 

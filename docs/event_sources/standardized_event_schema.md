@@ -13,22 +13,30 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 
 ## Structure of an event
 ```yaml
+<<<<<<< HEAD
 http.put./mongo/user/{id}: #This is the only thing changes across all the events 
   summary: Update a user # as per swagger spec
   description: Update user from database # as per swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
   params:       # params as per swagger spec
+=======
+http.put./mongo/user/{id}: #this is the only line which changes across event sources/event types/event protocols
+  summary: Update a user #as per swagger spec
+  description: Update user from database #as per swagger spec
+  fn: com.biz.mongo.user.update #function which is to be executed
+  params: #as per swagger spec
+>>>>>>> aa8798e5c5c012c2a4f3b5d0241f0710318ba9d5
     - name: id
       in: path
       required: true
       schema:
         type: string
-  body:       # request body as per swagger spec
+  body: #as per swagger spec
     content:
       application/json:
         schema:
-          $ref: '#/definitions/mongo/BusinessProfile'  # you can use the ref defined in the definitions section
-  responses:   # responses as per swagger spec
+          $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
+  responses: #as per swagger spec
     200:
       content:
         application/json:
@@ -39,9 +47,14 @@ http.put./mongo/user/{id}: #This is the only thing changes across all the events
 
 ##  Event types
 
+- An event type refers to a categorization or classification of events based on common characteristics or attributes. 
+- Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation
+- Developer can create any event source by following a standard process.
+
 **For Example**
-- http.{method_type} For example, post or get
+- http.{method_type} from express For example, post or get
 - cron
+- message bus event from kafka or rabbit mq
 
 ## Event schema & examples for supported sources
 
@@ -53,9 +66,9 @@ The framework provides request and response schema validation out of the box.
 #### Request schema validation
 Sample spec for request schema.
 ```yaml
-http.get./greet:
-  fn: function-greet
-  params:
+http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
+  fn: function-greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  params: #It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
     - name: greet_message
       in: query
       required: true
@@ -68,10 +81,6 @@ http.get./greet:
             name: 
               type: string
 ```
-
-- The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
-- The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
-- It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
 #### Response schema validation:
@@ -99,7 +108,6 @@ Sample spec for response schema.
 ```
 
 Sample workflow for the above event. 
-
 
 ```yaml
 id: helloworld

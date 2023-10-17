@@ -104,6 +104,11 @@ const sidebars = {
               label: "5.3. Inbuilt workflows",
               id: "workflows/inbuilt_workflows"
             },
+            {
+              type: "doc",
+              label: "5.4. Caching",
+              id: "caching/overview"
+            },
             // {
             //   type: "doc",
             //   label: "5.4. Retry",
@@ -171,33 +176,22 @@ const sidebars = {
           ],
         },
         {
-          type: "category",
-          label: "9. Caching",
-          items: [
-            {
-              type: "doc",
-              label: "9.1. Overview",
-              id: "caching/overview"
-            },
-          ],
-        },
-        {
           type: "doc",
-          label: "10. CLI",
+          label: "9. CLI",
           id: "CLI"
         },
         {
           type: "doc",
-          label: "11. Language Tools",
+          label: "10. VScode extention",
           id: "language_tools"
         },
         {
           type: "category",
-          label: "12. Telemetry",
+          label: "11. Telemetry",
           items: [
             {
               type: "doc",
-              label: "12.1. Overview",
+              label: "11.1. Overview",
               id: "telemetry/overview"
             },
           ],
