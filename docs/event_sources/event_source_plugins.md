@@ -19,7 +19,7 @@ godspeed add plugin express-as-http
 
 ### 2. [cron-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
-cron-as-eventsource is a plugin which running in the background that will execute events at a specified time, or in a regular intervals.
+Cron-as-eventsource is a background plugin that executes events at specified times or at regular intervals.
 
 How to use **cron-as-eventsource** plugin?
 
