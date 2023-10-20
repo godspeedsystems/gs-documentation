@@ -55,7 +55,7 @@ http.put./mongo/user/{id}: #This is the only thing changes across all the events
 
 > All event declarations are stored in the src/events folder, in YAML files.
 
-#### Request schema validation
+## Request schema validation
 Sample spec for request schema.
 ```yaml
 http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
@@ -75,7 +75,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 ```
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
-#### Response schema validation:
+## Response schema validation:
 Sample spec for response schema.
 ```yaml
 "http.get./helloworld":
