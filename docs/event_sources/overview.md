@@ -16,7 +16,7 @@ title: Event Sources
   2. DataSource As an Event Source
     - it can act as event source as well as data source
     - shares the client with the corresponding data source
-    - eg., kafka, rabbitMQ
+    - eg., kafka, RabbitMQ
 
 ## How to use an event source in Godspeed project?
 
