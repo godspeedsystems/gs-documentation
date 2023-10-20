@@ -101,7 +101,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 ```
 - When the request body schema type is an object, but the input type is anything other than an object, it throws the below error.
 
-<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2015-51-04.png?updatedAt=1697797912957" alt="request schema error" />
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2019-42-10.png?updatedAt=1697811194591" alt="request schema error" />
 
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
@@ -125,10 +125,10 @@ Sample spec for response schema.
       content:
         application/json:
           schema:
-            type: string
+            type: object
 
 ```
-- When the response schema type is specified as string, but the response returns an output type anything other than a string, it throws the below error.
+- When the response schema type is specified as object, but the response returns an output type anything other than an object, it throws the below error.
 
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2015-51-58.png?updatedAt=1697797912694" alt="response schema error" />
 
@@ -178,7 +178,7 @@ tasks:
 Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repository to know more about it.
 
 ```yaml
-# event for Shedule a task for every minute.
+# event for Scheduling a task for every minute.
 
 cron.* * * * *.Asia/Kolkata: //event key
   fn: every_minute
