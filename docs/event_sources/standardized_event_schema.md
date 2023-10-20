@@ -94,14 +94,14 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
     content:
       application/json:
         schema:
-          type: array
+          type: object
           properties:
             name: 
               type: string
 ```
-- When the request body schema type is an array, but the input type is anything other than an array, it throws the below error.
+- When the request body schema type is an object, but the input type is anything other than an object, it throws the below error.
 
-<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2015-51-04.png?updatedAt=1697797912957" alt="request schema error" />
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2019-42-10.png?updatedAt=1697811194591" alt="request schema error" />
 
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
