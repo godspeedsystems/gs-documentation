@@ -1,4 +1,4 @@
-# Godspeed Event Source Plugins:
+# Event Source Plugins
 
 Godspeed framework has a pluggable aproach to define event sources. The framework provides an interface to write different event sources. Here are few event source plugins which are managed by the core framework team.
 

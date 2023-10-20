@@ -46,7 +46,7 @@ http.put./mongo/user/{id}: #this is the only line which changes across all event
 - http.{method_type} from express.
   For example, post or get
 - cron
-- message bus event from kafka or rabbitmq
+- message bus event from Kafka or Rabbitmq
 ## Event schema & examples for supported sources
 
 > All event declarations are stored in the src/events folder, in YAML files.
@@ -54,7 +54,7 @@ http.put./mongo/user/{id}: #this is the only line which changes across all event
 ### JSON schema validation
 The framework provides request and response schema validation out of the box.
 
-#### Request schema validation
+## Request schema validation
 Sample spec for request schema.
 ```yaml
 http.get./greet:
@@ -78,7 +78,7 @@ http.get./greet:
 - It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
-#### Response schema validation:
+## Response schema validation:
 Sample spec for response schema.
 ```yaml
 "http.get./helloworld":

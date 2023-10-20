@@ -13,18 +13,26 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 - [Authorization](authorization/overview.md) checks
 - The framework provides request and response schema validation out of the box.
 
-
-## Structure of an event schema
+## Structure of an event
 ```yaml
-http.put./mongo/user/{id}: #This is the only thing changes across all the events 
+http.post./mongo/user/search/{id}: #This is the only thing changes across all the events 
   summary: Update a user # as per Swagger spec
   description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
+  headers:       # headers for an event will override the default headers if specified in src/datasources/api.yaml
+    user-role: user
+    token: YOUR_SECRET_KEY
+    Content-Type: application/json
   params:       # params as per Swagger spec
     - name: id
       in: path
       required: true
       schema:
+        type: string
+    - name: name
+      in: query
+      required: false
+      schema: 
         type: string
   body: #as per Swagger spec
     content:
@@ -37,25 +45,43 @@ http.put./mongo/user/{id}: #This is the only thing changes across all the events
         application/json:
           schema:
             type: object
+    500:
+      content:
+        application/json: 
+          schema:
+            type: string
 ```
 - The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the event source plugin, and it is the only line that changes across all events.
 
+For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
+
+The inputs (event) object has following properties:
+
+- **query can be accessed as**: `<%inputs.query.var_name%>` # present in case of http events
+
+- **params can be accessed as**: `<%inputs.params.path_param%>` # present in case of http events
+
+- **headers can be accessed as**: `<%inputs.headers.some_header_key%>` # present in case of http events
+
+- **body can be accessed as**: `<%inputs.body.key%>` # Present for all events except for http events which don't have a body. For ex. http.get
+
+- **files can be accessed as**: `<%input.files%>` # Any files uploaded via HTTP event. Not present in other kind of events
+
 ##  Event types
 
-- An event type refers to a categorization or classification of events based on common characteristics or attributes like. There are two types of events async and sync.
+- An event type refers to a categorization or classification of events based on common characteristics or attributes. 
 - Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation
 - Developer can create any event source by following a standard process.
 
 **For Example**
 - http.{method_type} from express For example, post or get
 - cron
-- message bus event from Kafka or RabbitMQ
+- message bus event from Kafka or Rabbit MQ
 
-## Examples for supported sources
+## Schema validation
+The framework offers validation for response and request schemas.
 
-> All event declarations are stored in the src/events folder, in YAML files.
-
-#### Request schema validation
+### Request schema validation
 Sample spec for request schema.
 ```yaml
 http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
@@ -73,9 +99,13 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
             name: 
               type: string
 ```
+- When the request body schema type is an object, but the input type is anything other than an object, it throws the below error.
+
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2019-42-10.png?updatedAt=1697811194591" alt="request schema error" />
+
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
-#### Response schema validation:
+### Response schema validation:
 Sample spec for response schema.
 ```yaml
 "http.get./helloworld":
@@ -98,56 +128,9 @@ Sample spec for response schema.
             type: object
 
 ```
+- When the response schema type is specified as object, but the response returns an output type anything other than an object, it throws the below error.
 
-Sample workflow for the above event. 
-
-```yaml
-id: helloworld
-tasks:
-  - id: first_task
-    fn: com.gs.return
-    args:
-      name: 'Hello World!'
-```
-
-### HTTP event
-
-For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
-
-
- The inputs (event) object has following properties:
-
-- **query can be accessed as**: `<%inputs.query.var_name%>` # present in case of http events
-
-- **params can be accessed as**: `<%inputs.params.path_param%>` # present in case of http events
-
-- **headers can be accessed as**: `<%inputs.headers.some_header_key%>` # present in case of http events
-
-- **body can be accessed as**: `<%inputs.body.key%>` # Present for all events except for http events which don't have a body. For ex. http.get
-
-- **files can be accessed as**: `<%input.files%>` # Any files uploaded via HTTP event. Not present in other kind of events
-
-#### Example spec for HTTP event
-
-``` yaml
- http.put./mongo/user/{id}:
-  summary: Update a User
-  description: Update User from database
-  fn: com.biz.mongo.user.update
-  # this event has respective 'path params', 'body' and 'responses' fields.
- ```
-
-#### Example workflow consuming an HTTP event
-  ```yaml
-summary: Update User
-tasks:
-  - id: mongo_user_update
-    fn: datasource.mongo.User.update
-    args:
-      where:
-        id: <% inputs.params.id %>
-      data: <% inputs.body %>
-  ```
+<img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2015-51-58.png?updatedAt=1697797912694" alt="response schema error" />
 
   ### Kafka event
 > A kafka event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the kafka event specification](#example-spec-for-kafka-event).
@@ -180,7 +163,7 @@ tasks:
 
 #### On validation error handler
   ```yaml
-  summary: Handle json schema validation error
+  summary: Handle json scehma validation error
   id: error_handler
   tasks:
     - id: error_step1
@@ -192,10 +175,10 @@ tasks:
             validation_error: <% inputs.validation_error %>
   ```
 ### Cron event
-Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repo to know more about it.
+Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repository to know more about it.
 
 ```yaml
-# event for scheduling a task for every minute.
+# event for Shedule a task for every minute.
 
 cron.* * * * *.Asia/Kolkata: //event key
   fn: every_minute
@@ -211,7 +194,7 @@ cron.* * * * *.Asia/Kolkata: //event key
 
 To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance, HTTP events accept inputs such as body, headers, path parameters, and query parameters. On the other hand, Kafka events only accept inputs in the form of body.
 
-Checkout a http event [example-http-event](#example-spec-for-http-event)
+Checkout a http event [example-http-event](#structure-of-an-event)
 
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
 

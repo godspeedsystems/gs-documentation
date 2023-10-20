@@ -138,6 +138,11 @@ Yaml workflows allow decoupled architecture. This promotes modularity, flexibili
 #### Zero Boiler Plate
 Yaml follows zero-bolier-plate approach reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
 
+<<<<<<< HEAD
+=======
+* Decoupled Architechture
+[Yaml workflows](../design_principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+>>>>>>> b674777aa16efe13ca3cde07ee40574aebb7831f
 
 
 ```yaml
