@@ -11,10 +11,10 @@ title: Event Sources
 ## Types of Event Sources
   1. Event Source
     - It can act only as an event source
-    - has its own client initilization
+    - has its own client initialization
     - Eg,. Express
   2. DataSource As an Event Source
-    - it can act as event source as well as data source
+    - It can act as event source as well as a data source
     - shares the client with the corresponding data source
     - eg., Kafka, RabbitMQ
 

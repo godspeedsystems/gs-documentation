@@ -178,7 +178,7 @@ tasks:
 Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repository to know more about it.
 
 ```yaml
-# event for Shedule a task for every minute.
+# event for Scheduling a task for every minute.
 
 cron.* * * * *.Asia/Kolkata: //event key
   fn: every_minute
