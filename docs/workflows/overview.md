@@ -125,7 +125,7 @@ export class GSContext { //span executions
 YAML DSL serves as the default language for creating general workflows.
 
 * Decoupled Architechture
-Yaml workflows allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+[Yaml workflows](../design_principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
 
 * Zero Boiler Plate
 Yaml follows zero-bolier-plate approch reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
