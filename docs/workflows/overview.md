@@ -139,7 +139,7 @@ tasks:
       name: 'Hello World!'
 ```
 
-#### developer defined functions
+#### Developer Defined Functions
 Developers have the flexibility to create custom JavaScript functions that can be utilized across various YAML workflows by exporting these functions. [refer](/docs/workflows/custom_workflows)
 
 #### Inputs

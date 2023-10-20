@@ -11,9 +11,10 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 - The event handler workflow
 - Input and output schema with the validation error handling
 - [Authorization](authorization/overview.md) checks
+- The framework provides request and response schema validation out of the box.
 
 
-## Structure of an event
+## Structure of an event schema
 ```yaml
 http.put./mongo/user/{id}: #This is the only thing changes across all the events 
   summary: Update a user # as per Swagger spec
@@ -41,21 +42,18 @@ http.put./mongo/user/{id}: #This is the only thing changes across all the events
 
 ##  Event types
 
-- An event type refers to a categorization or classification of events based on common characteristics or attributes. 
+- An event type refers to a categorization or classification of events based on common characteristics or attributes like. There are two types of events async and sync.
 - Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation
 - Developer can create any event source by following a standard process.
 
 **For Example**
 - http.{method_type} from express For example, post or get
 - cron
-- message bus event from kafka or rabbit mq
+- message bus event from Kafka or RabbitMQ
 
-## Event schema & examples for supported sources
+## Examples for supported sources
 
 > All event declarations are stored in the src/events folder, in YAML files.
-
-### JSON schema validation
-The framework provides request and response schema validation out of the box.
 
 #### Request schema validation
 Sample spec for request schema.
@@ -182,7 +180,7 @@ tasks:
 
 #### On validation error handler
   ```yaml
-  summary: Handle json scehma validation error
+  summary: Handle json schema validation error
   id: error_handler
   tasks:
     - id: error_step1
@@ -197,7 +195,7 @@ tasks:
 Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repo to know more about it.
 
 ```yaml
-# event for Shedule a task for every minute.
+# event for scheduling a task for every minute.
 
 cron.* * * * *.Asia/Kolkata: //event key
   fn: every_minute

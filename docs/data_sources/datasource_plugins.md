@@ -4,7 +4,7 @@ Godspeed framework has a pluggable approach to define data sources. The framewor
 
 ## List of plugins
 
-### 1. [Prisma-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+### 1. [prisma-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
 Prisma-as-datasource plugin provide functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma ORM.
 
@@ -52,7 +52,7 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin excel-as-datasource
 ```
 
-### 5. [Nodemailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
+### 5. [nodemailer-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
 
 Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
 
