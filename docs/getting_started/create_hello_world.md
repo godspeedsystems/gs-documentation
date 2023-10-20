@@ -68,7 +68,8 @@ port: 3000
 ```bash
 godspeed dev
 ```
-<img src="../../static/img/helloworld.webp"/>
+4. The server is up and running on port 3000 ([http://localhost:3000/helloworld](http://localhost:3000/helloworld))
+<img src="https://ik.imagekit.io/pavanKillada/helloworld.webp?updatedAt=1697782618204" alt="hello world output"/>
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
 

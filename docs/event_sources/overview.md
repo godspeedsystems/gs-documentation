@@ -12,11 +12,11 @@ title: Event Sources
   1. Event Source
     - It can act only as an event source
     - has its own client initilization
-    - Eg,. express
+    - Eg,. Express
   2. DataSource As an Event Source
     - it can act as event source as well as data source
     - shares the client with the corresponding data source
-    - eg., kafka, rabbitMQ
+    - eg., Kafka, RabbitMQ
 
 ## How to use an event source in Godspeed project?
 

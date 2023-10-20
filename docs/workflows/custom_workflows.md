@@ -42,8 +42,4 @@ module.exports = function greet(name){
 When making a request to the `http://localhost:3000/greet` API with the 'name' query parameter set to 'developer,' the expected response is as follows:
 ```bash
 Hello developer!
-```rma — Today at 12:01 PM
-@Kushal Chauhan please check your WhatsApp
-￼
-Kushal Chauhan — Today at 1:33 PM
-@Mohit Sharma please write messages here. I will read here also 
+```
