@@ -15,7 +15,7 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 
 ## Structure of an event
 ```yaml
-http.post./mongo/user/search/{id}: #This is the only thing changes across all the events 
+http.post./mongo/user/search/{id}: #This is the only thing that changes across all the events 
   summary: Update a user # as per Swagger spec
   description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
@@ -175,7 +175,7 @@ tasks:
             validation_error: <% inputs.validation_error %>
   ```
 ### Cron event
-Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repository to know more about it.
+Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab. Refer [Cron plugin](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) repository to know more about it.
 
 ```yaml
 # event for Scheduling a task for every minute.

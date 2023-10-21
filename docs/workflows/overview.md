@@ -57,8 +57,7 @@ tasks:
 ```
 
 ### Tasks and Attributes within a task
-The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
-
+The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute plays a vital role in structuring and specifying the precise actions or operations required within the workflow. This attribute is essential for defining the workflow's logic and behavior.
 - **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
 
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
@@ -124,7 +123,7 @@ export class GSContext { //span executions
 ### Yaml-DSL Workflows
 YAML DSL serves as the default language for creating general workflows. 
 
-#### Decoupled Implementation
+#### Decoupled Architecture
 Yaml workflows allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
 
 #### 1. Language-Agnostic Decoupling:

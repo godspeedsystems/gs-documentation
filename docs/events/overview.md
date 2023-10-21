@@ -37,8 +37,7 @@ http.put./mongo/user/{id}: #this is the only line which changes across all event
 ```
 
 ##  Event types
-
-- An event type refers to a categorization or classification of events based on common characteristics or attributes. 
+ 
 - Event types are essential in event-driven systems, such as software applications, data analysis, monitoring, and automation.
 - Developer can create any event source by following a standard process.
 
@@ -76,7 +75,7 @@ http.get./greet:
 - The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
 - The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
 - It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
-- Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
+- Furthermore, you have an option to specify responses, including status codes and response body types among other things.
 
 ## Response schema validation:
 Sample spec for response schema.
@@ -116,7 +115,7 @@ tasks:
 
 ### HTTP event
 
-For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
+For an HTTP event, the headers, query, params and body data are captured in a standard format and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
 
 
  The inputs (event) object has following properties:
