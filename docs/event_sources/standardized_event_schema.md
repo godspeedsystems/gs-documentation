@@ -197,7 +197,3 @@ To switch between events, you'll need to adjust the event schema based on the ex
 Checkout a http event [example-http-event](#structure-of-an-event)
 
 Checkout the kafka event [example-kafka-event](#example-spec-for-kafka-event)
-
-
-
-
