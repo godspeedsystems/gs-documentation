@@ -75,12 +75,17 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.3. Event Source Plugins",
+              label: "4.3. Examples",
+              id: "event_sources/examples"
+            },
+            {
+              type: "doc",
+              label: "4.4. Event Source Plugins",
               id: "event_sources/event_source_plugins"
             },
             {
               type: "doc",
-              label: "4.4. Create Your Event Source",
+              label: "4.5. Create Your Event Source",
               id: "event_sources/create_your_event_source"
             },
           ],
