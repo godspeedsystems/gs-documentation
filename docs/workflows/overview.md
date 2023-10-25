@@ -21,7 +21,7 @@ title: Workflows/Functions
 
 Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework facilitates this process through a YAML-based Domain Specific Language (DSL) for defining workflows and tasks that encapsulate the business logic. These defined workflows can either be linked to events as their handlers or invoked from within other workflows, allowing for a versatile and seamless automation.
 
-### Types of workflows or functions
+### Types of workflows
 Godspeed supports two types for functions
 * Native language workflows
 * Yaml-DSL workflows
@@ -30,6 +30,7 @@ Godspeed supports two types for functions
 :::tip **YAML is suitable for cases where you require straightforward business logic and database queries. In contrast, for more intricate business logic, it is advisable to use native programming languages like JavaScript, TypeScript, or Java.**
 :::
 
+**These two functions can invoke each other based on the flow of execution.**
 
 ### Native Language Workflows
 The user has the ability to write JavaScript files and can invoke them from events when implementing intricate functionalities.
