@@ -1,7 +1,8 @@
 # Built-in functions
 
+**The framework comes equipped with the following built-in functions.**
 
-### The framework comes equipped with the following built-in functions.
+## Godspeed Built-in functions
 
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
@@ -10,7 +11,11 @@ The Godspeed framework offers a robust set of built-in functions to empower deve
 
 This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.
 
+
 #### Example event for transform function
+
+<details>
+<summary>Example event for transform function</summary>
 
 ```yaml
   http.get./transform:
@@ -29,6 +34,9 @@ This function enables you to convert data from one format to another using Coffe
           schema:
             type: string
 ```
+</details>
+
+
 
 The above event will trigger the below function 
 
@@ -58,6 +66,9 @@ The parallel function is employed when we intend to include sub-tasks within the
 
 #### Example event for parallel inbuilt function
 
+<details>
+<summary>Example event for parallel inbuilt function</summary>
+
 ```yaml
   http.get./test/parallel:
   summary: parallel
@@ -75,6 +86,8 @@ The parallel function is employed when we intend to include sub-tasks within the
           schema:
             type: object
 ```
+</details>
+
 
 The above event will trigger the below function
 
@@ -114,6 +127,9 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
 
 #### Example event for switch inbuilt function
 
+<details>
+<summary>Example event for switch inbuilt function</summary>
+
 ```yaml
   http.post./test/switch:
   summary: switch
@@ -130,6 +146,9 @@ The `switch-flow` function accepts two arguments: `value` and `cases`. The `valu
         schema:
           type: object
 ```
+</details>
+
+
 
 The above event will trigger the below function. 
 
@@ -176,6 +195,9 @@ The `args` parameter consists of a list of values within the `value` field, each
 
 #### Example event using each_sequential
 
+<details>
+<summary>Example event using each_sequential</summary>
+
 ```yaml
   http.get./test/each_sequential:
   summary: each_sequential
@@ -194,6 +216,8 @@ The `args` parameter consists of a list of values within the `value` field, each
             type: number
 
 ```
+</details>
+
 
 #### Example function using each_sequential ( each_sequential.yaml )
 
@@ -215,17 +239,6 @@ The `args` parameter consists of a list of values within the `value` field, each
       args: <% outputs.each_sequential_step1.data %>
 ```
 
-# Using on_error
-
-You have an option to include an `on_error` handler at both the task level and within the `each_sequential` loop level.
-
-Here's an example to illustrate:
-- If a task encounters a failure for any `task_value`, the program will follow the `on_error` defined at the task level. If `continue` is set to false, it will terminate the loop; otherwise, it will proceed to the next tasks.
-- In the event that all tasks within the loop fail, the program will direct control to the `on_error` defined at the loop level.
-
-:::note
-The `on_error` handler at the loop level is exclusively triggered when all tasks within the loop have failed. If at least one task within the loop succeeds, this handler will not be executed.
-:::
 
 #### Error handling in each_sequential functions
 
@@ -261,10 +274,16 @@ The `args` parameter comprises a list of values in the `value` field, each paire
 
 #### Exmaple event using each_parallel
 
+<details>
+<summary>Exmaple event using each_parallel</summary>
+
 ```yaml
   http.get./test/each_parallel:
   fn: each_parallel
 ```
+
+</details>
+
 
 
 #### Example function using each_parallel ( each_parallel.yaml )
@@ -287,7 +306,7 @@ The `args` parameter comprises a list of values in the `value` field, each paire
       args: <% outputs.each_parallel_step1 %>
 ```
 
-## Using on_error
+#### Using on_error
 
 You have the flexibility to include an `on_error` handler at both the task level and within the `each_parallel` loop level.
 
@@ -335,10 +354,15 @@ When the return statement is invoked, it causes the current function to exit and
 
 #### Example event for return inbuilt function
 
+<details>
+<summary>Example event for return inbuilt function</summary>
+
 ```yaml
   http.post./return-fn/:city:
   fn: return
 ```
+</details>
+
 
 #### Example function for return ( return.yaml )
 
@@ -367,6 +391,9 @@ During the workflow execution, it records intermediate inputs and outputs in the
 
 
 #### Example event for log inbuilt function
+
+<details>
+<summary>Example event for log inbuilt function</summary>
 
 ```yaml
   http.post./test/log:
@@ -398,6 +425,8 @@ During the workflow execution, it records intermediate inputs and outputs in the
               lender_response_code:
                 type: string
 ```
+</details>
+
 
 #### Example function using log ( log.yaml )
 
@@ -433,6 +462,9 @@ The function takes two parameters: `condition` and `tasks`. The `condition` para
 
 #### Example event for if-elif-else inbuilt function
 
+<details>
+<summary>Example event for if-elif-else inbuilt function</summary>
+
 ```yaml
 http.get./greet:
   fn: if
@@ -452,6 +484,7 @@ http.get./greet:
             
 
 ```
+</details>
 
 #### Example function for if-elif-else ( if.yaml )
 
@@ -492,3 +525,14 @@ tasks:
 
 ```
 
+##### Using on_error
+
+You have an option to include an `on_error` handler at both the task level and within the `each_sequential` loop level.
+
+Here's an example to illustrate:
+- If a task encounters a failure for any `task_value`, the program will follow the `on_error` defined at the task level. If `continue` is set to false, it will terminate the loop; otherwise, it will proceed to the next tasks.
+- In the event that all tasks within the loop fail, the program will direct control to the `on_error` defined at the loop level.
+
+:::note
+The `on_error` handler at the loop level is exclusively triggered when all tasks within the loop have failed. If at least one task within the loop succeeds, this handler will not be executed.
+:::

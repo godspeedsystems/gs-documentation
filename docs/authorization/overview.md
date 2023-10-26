@@ -62,7 +62,7 @@ The provided snippet contains payload information and a secret key. Once the abo
 Options which can be passed for jwt config are:
 
 ![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
-When configuring the JWT settings, if you do not provide either the s`ecretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an [error](https://www.passportjs.org/packages/passport-jwt/).
+When configuring the JWT settings, if you do not provide either the s`ecretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an [error](https://www.passportjs.org/packages/passport-jjgodspeedwtjgodspeedwtgodspeedwt/).
 
 Additionally, if you specify an `issuer` or `audience` value in the configuration, and the token values differ from those specified in the configuration payload, the response will be 'Unauthorized.'
 

@@ -8,8 +8,9 @@ Let's create a project which includes a Prisma schema(`mongo.prisma`) for creati
 ```bash
 godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name of the app
 ```
+## Checkout other examples
 
-In this sample project, we have utilized a MongoDB database, but you have the flexibility to choose any other database that Prisma supports and that meets your requirements [MySQL](https://dev.mysql.com/doc/), [PostgreSQL](https://www.postgresql.org/docs/) etc
+In this sample project, we have utilized a MongoDB database, but you have the flexibility to choose any other database that Prisma supports and that meets your requirements [MySQL](https://github.com/godspeedsystems/godspeed-codesandbox/tree/gs-projects-examples/Project-Examples/sql), [PostgreSQL](https://github.com/godspeedsystems/godspeed-codesandbox/tree/gs-projects-examples/Project-Examples/postgres) etc
 
 
 

@@ -75,12 +75,17 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.3. Event Source Plugins",
+              label: "4.3. Examples",
+              id: "event_sources/examples"
+            },
+            {
+              type: "doc",
+              label: "4.4. Event Source Plugins",
               id: "event_sources/event_source_plugins"
             },
             {
               type: "doc",
-              label: "4.4. Create Your Event Source",
+              label: "4.5. Create Your Event Source",
               id: "event_sources/create_your_event_source"
             },
           ],
@@ -96,17 +101,27 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "5.2. Custom workflows",
-              id: "workflows/custom_workflows"
+              label: "5.2. Native language functions",
+              id: "workflows/native_language_functions"
             },
             {
               type: "doc",
-              label: "5.3. Inbuilt workflows",
+              label: "5.3. Yaml-DSL functions",
+              id: "workflows/yaml_dsl_functions"
+            },
+            // {
+            //   type: "doc",
+            //   label: "5.3. Custom workflows",
+            //   id: "workflows/custom_workflows"
+            // },
+            {
+              type: "doc",
+              label: "5.4. Inbuilt workflows",
               id: "workflows/inbuilt_workflows"
             },
             {
               type: "doc",
-              label: "5.4. Caching",
+              label: "5.5. Caching",
               id: "caching/overview"
             },
             // {
