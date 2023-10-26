@@ -1,6 +1,6 @@
 # Events
 ## Introduction
-In the realm of microservices architecture, [events](design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
+In the realm of microservices architecture, [events](../design_principles#three-fundamental-abstractions) serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
 
 **We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
@@ -16,7 +16,6 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 - The framework provides request and response schema validation out of the box.
 - To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance, HTTP events accept inputs such as body, headers, path parameters, and query parameters. On the other hand, Kafka events only accept inputs in the form of body.
 
-Checkout a http event [example-http-event](#structure-of-an-event)
 
 This event schema is supported by [http event source](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin)
 

@@ -114,14 +114,14 @@ const sidebars = {
             //   label: "5.3. Custom workflows",
             //   id: "workflows/custom_workflows"
             // },
-            // {
-            //   type: "doc",
-            //   label: "5.4. Inbuilt workflows",
-            //   id: "workflows/inbuilt_workflows"
-            // },
             {
               type: "doc",
-              label: "5.4. Caching",
+              label: "5.4. Inbuilt workflows",
+              id: "workflows/inbuilt_workflows"
+            },
+            {
+              type: "doc",
+              label: "5.5. Caching",
               id: "caching/overview"
             },
             // {

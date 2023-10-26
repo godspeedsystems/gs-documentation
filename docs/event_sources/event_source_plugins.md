@@ -29,4 +29,14 @@ Simplest way to use this plugin in your Godspeed project is through Godspeed CLI
 godspeed add plugin cron-as-eventsource
 ```
 
+### 3. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
+Kafka is an open-source event streaming platform that excels at real-time data ingestion, distribution, and processing. It's widely used for building data pipelines and streaming applications due to its scalability, durability, and real-time capabilities.
+
+How to use **kafka-as-datasource-as-eventsource** plugin?
+
+Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
+
+```sh
+godspeed add plugin kafka-as-datasource-as-eventsource
+```

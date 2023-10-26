@@ -27,7 +27,7 @@ Godspeed supports two types for functions
 * Yaml-DSL workflows
 
 
-:::tip **YAML is suitable for cases where you require straightforward business logic and database queries. In contrast, for more intricate business logic, it is advisable to use native programming languages like JavaScript, TypeScript, or Java.**
+:::tip **YAML is suitable for cases where you require straightforward business logic and datasource queries. In contrast, for more intricate business logic, it is advisable to use native programming languages like JavaScript, TypeScript, or Java.**
 :::
 
 **These two functions can invoke each other based on the flow of execution.**

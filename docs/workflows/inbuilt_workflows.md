@@ -1,7 +1,8 @@
 # Built-in functions
 
+**The framework comes equipped with the following built-in functions.**
 
-### The framework comes equipped with the following built-in functions.
+## Godspeed Built-in functions
 
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
@@ -305,7 +306,7 @@ The `args` parameter comprises a list of values in the `value` field, each paire
       args: <% outputs.each_parallel_step1 %>
 ```
 
-## Using on_error
+#### Using on_error
 
 You have the flexibility to include an `on_error` handler at both the task level and within the `each_parallel` loop level.
 
