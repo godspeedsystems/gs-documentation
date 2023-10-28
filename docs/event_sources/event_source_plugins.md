@@ -1,42 +1,52 @@
-# Event Source Plugins
+ # Event source plugins
 
-Godspeed framework has a pluggable aproach to define event sources. The framework provides an interface to write different event sources. Here are few event source plugins which are managed by the core framework team.
+Godspeed framework adopts a pluggable approach that empowers you to define event sources effortlessly. Our framework graciously provides an interface that caters to diverse event source needs. Here's a glimpse into the exceptional event source plugins meticulously crafted by our core framework team.
 
-## List of plugins
+To seamlessly integrate these plugins into your project, simply wield the command:
+
+```bash
+$  godspeed plugin add
+```
+  ```bash
+Output:
+
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+
+
+? Please select a godspeed plugin to install. (Use arrow keys)
+    @godspeedsystems/plugins-prisma-as-datastore 
+    @godspeedsystems/plugins-express-as-http 
+❯ @godspeedsystems/plugins-cron-as-eventsource 
+    @godspeedsystems/plugins-axios-as-datasource 
+    @godspeedsystems/plugins-aws-as-datasource 
+    @godspeedsystems/plugins-excel-as-datasource 
+    @godspeedsystems/plugins-mailer-as-datasource 
+    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+    @godspeedsystems/plugins-redis-as-datasource 
+(Move up and down to reveal more choices)
+```
+
+you can specify plugin name to add directly to your project
+
+```sh
+godspeed plugin add <plugin-name>
+```
+
+## List of Eventsource plugins
 
 ### 1. [express-as-http](https://www.npmjs.com/package/@godspeedsystems/plugins-express-as-http)
 
-express-as-http is a plugin that simplifies building APIs by providing essential features for handling HTTP routes, requests, and responses. It's known for its simplicity and speed, making it a popular choice for building server-side applications in Node.js.
-
-How to use **express-as-http** plugin?
-
-Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
-
-```sh
-godspeed add plugin express-as-http
-```
-
+Embark on a journey of API development made sublime. The express-as-http plugin, renowned for its simplicity and velocity, equips you with essential features to effortlessly handle HTTP routes, requests, and responses. Elevate your server-side applications in Node.js with this gem.
 
 ### 2. [cron-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
-Cron-as-eventsource is a background plugin that executes events at specified times or at regular intervals.
+cron-as-eventsource is a plugin which running in the background that will execute events at a specified time, or in a regular intervals.
 
-How to use **cron-as-eventsource** plugin?
-
-Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
-
-```sh
-godspeed add plugin cron-as-eventsource
-```
 
 ### 3. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
-Kafka is an open-source event streaming platform that excels at real-time data ingestion, distribution, and processing. It's widely used for building data pipelines and streaming applications due to its scalability, durability, and real-time capabilities.
+Kafka is your dynamic data stream and event maestro! As a data source, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka. 
 
-How to use **kafka-as-datasource-as-eventsource** plugin?
-
-Simplest way to use this plugin in your Godspeed project is through Godspeed CLI. From your project root, You can run below command to use this.
-
-```sh
-godspeed add plugin kafka-as-datasource-as-eventsource
-```
