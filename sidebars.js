@@ -72,17 +72,22 @@ const sidebars = {
               type: "doc",
               label: "4.2. Standardized Event Schema",
               id: "event_sources/standardized_event_schema"
-            },
-            {
+            },{
               type: "doc",
-              label: "4.3. Event Source Plugins",
-              id: "event_sources/event_source_plugins"
-            },
-            {
-              type: "doc",
-              label: "4.4. Create Your Event Source",
+              label: "4.3. Create custom EventSource",
               id: "event_sources/create_your_event_source"
             },
+            {
+              type: "doc",
+              label: "4.4. Create EventSource Plugin",
+              id: "event_sources/create_eventsource_plugin"
+            },
+            {
+              type: "doc",
+              label: "4.5. EventSource Plugins",
+              id: "event_sources/event_source_plugins"
+            }
+            
           ],
         },
         {
@@ -127,13 +132,18 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.2. Data source plugins",
-              id: "data_sources/datasource_plugins"
+              label: "6.2. Create Custom DataSource",
+              id: "data_sources/create_your_data_source"
             },
             {
               type: "doc",
-              label: "6.3. Create Your data source",
-              id: "data_sources/create_your_data_source"
+              label: "6.3. Create DataSource Plugin",
+              id: "data_sources/create_Datasource_plugin"
+            },
+            {
+              type: "doc",
+              label: "6.4. DataSource plugins",
+              id: "data_sources/datasource_plugins"
             },
           ],
         },
