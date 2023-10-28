@@ -43,7 +43,7 @@ Embark on a journey of API development made sublime. The express-as-http plugin,
 
 ### 2. [cron-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
-Witness the magic of time orchestration! The cron-as-eventsource plugin operates stealthily in the background, executing events with precision at specified times or in rhythmic intervals. Seamlessly weave time-triggered actions into your projects and experience event handling like never before.
+cron-as-eventsource is a plugin which running in the background that will execute events at a specified time, or in a regular intervals.
 
 
 ### 3. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)

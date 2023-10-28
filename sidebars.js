@@ -72,22 +72,27 @@ const sidebars = {
               type: "doc",
               label: "4.2. Standardized Event Schema",
               id: "event_sources/standardized_event_schema"
-            },{
-              type: "doc",
-              label: "4.3. Create custom EventSource",
-              id: "event_sources/create_your_event_source"
             },
             {
               type: "doc",
-              label: "4.4. Create EventSource Plugin",
+              label: "4.3. Examples",
+              id: "event_sources/examples"
+            },{
+              type: "doc",
+              label: "4.4. Create custom EventSource",
+              id: "event_sources/create_your_event_source"
+            },
+
+            {
+              type: "doc",
+              label: "4.5. Create EventSource Plugin",
               id: "event_sources/create_eventsource_plugin"
             },
             {
               type: "doc",
-              label: "4.5. EventSource Plugins",
+              label: "4.6 EventSource plugins",
               id: "event_sources/event_source_plugins"
-            }
-            
+            },
           ],
         },
         {
@@ -101,17 +106,27 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "5.2. Custom workflows",
-              id: "workflows/custom_workflows"
+              label: "5.2. Native language functions",
+              id: "workflows/native_language_functions"
             },
             {
               type: "doc",
-              label: "5.3. Inbuilt workflows",
+              label: "5.3. Yaml-DSL functions",
+              id: "workflows/yaml_dsl_functions"
+            },
+            // {
+            //   type: "doc",
+            //   label: "5.3. Custom workflows",
+            //   id: "workflows/custom_workflows"
+            // },
+            {
+              type: "doc",
+              label: "5.4. Inbuilt workflows",
               id: "workflows/inbuilt_workflows"
             },
             {
               type: "doc",
-              label: "5.4. Caching",
+              label: "5.5. Caching",
               id: "caching/overview"
             },
             // {
@@ -123,7 +138,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "6. Data Sources",
+          label: "6. DataSources",
           items: [
             {
               type: "doc",

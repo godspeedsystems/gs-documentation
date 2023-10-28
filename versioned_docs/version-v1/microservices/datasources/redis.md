@@ -26,5 +26,15 @@ Sample configuration in `redis.yaml`
 type: redis
 url: redis[s]://[[username][:password]@][host][:port][/db-number]
 ```
-
 For full redis configuration, Refer [redis node client documentation](https://github.com/redis/node-redis/blob/master/docs/client-configuration.md).
+
+`redis-as-datasource` also support connecting to cluster mode. Here is a sample redis datasource for cluster mode.
+```
+type: redis
+cluster:
+    rootNodes:
+        - url: redis://10.0.0.1:30001
+        - url: redis://10.0.0.2:30002
+
+```
+For full redis configuration, Refer [redis cluster mode documentation](https://github.com/redis/node-redis/blob/master/docs/clustering.md).
