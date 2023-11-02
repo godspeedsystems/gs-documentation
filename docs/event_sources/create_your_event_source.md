@@ -4,11 +4,10 @@
 
 An event source is any entity or technology responsible for generating events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Event sources can include Message Brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
 
-### Steps to create Custom **Eventsource** for personal use:
+### Steps to create Custom **Eventsource** :
 
-1. Look for the `npm package` you wish to integrate with  Godspeed framework.
 
-2. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
+1. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
 
 ```
     .
@@ -32,11 +31,11 @@ An event source is any entity or technology responsible for generating events or
 
 ```
 
-3. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
+2. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
 
-4. Afterward, you can access the methods provided by `GSEventSource`. Initialize your client by calling the `initClient()` function.
+3. Afterward, you can access the methods provided by `GSEventSource`. Initialize your client by calling the `initClient()` function.
 
-5. Once your client is initialized, you can execute its subscription using the `subscribeToEvent` function.
+4. Once your client is initialized, you can execute its subscription using the `subscribeToEvent` function.
 
 <details>
   <summary>let's use cron as an example of eventsource :</summary>
@@ -158,11 +157,10 @@ Any kind of entity which provides read and write mechanism for data and acts as 
 
 
 
-### Steps to create Custom **Datasource As Eventsource** for personal use:
+### Steps to create Custom **Datasource As Eventsource** :
 
-1. Look for the `npm package` you wish to integrate with  Godspeed framework.
 
-2. Inside the `DataSources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
+1. To create Datasource follow [How to create Custom datasource](./../data_sources/create_your_data_source.md)
 
 ```
     .
@@ -188,146 +186,11 @@ Any kind of entity which provides read and write mechanism for data and acts as 
             └── helloworld.yaml
 ```
 
-3. In your TypeScript file, use an import statement to bring in `GSDataSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSDataSource`.
+2. To create eventsource, Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
 
-4. Afterward, you can access the methods provided by `GSDataSource`. Initialize your client by calling the `initClient()` function.
+3. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
 
-5. Once your client is initialized, you can execute its methods using the `execute` function.
-
-<details>
-  <summary>let's use kafka as an example of an datasource :</summary>
-
-#### Project structure
-
-```bash
-    .
-    ├── src
-        ├── datasources
-        │   ├── types
-        │   |    └── kafka.ts
-        |   |
-        │   └── kafka.yaml
-        │
-        ├── events
-        |   |
-        │   ├── kafka_publish_event.yaml
-        |   |
-        |   └── kafka_consumer_event.yaml
-
-        ├── eventsources
-        │   ├── types
-        │   |    └── kafka.ts
-        |   |
-        │   └── kafka.yaml
-        |
-        └── functions
-            |
-            ├── kafka-publish.yaml
-            |
-            └── kafka-consume.yaml
-```
-
-#### kafka config ( src/datasources/kafka.yaml )
-```yaml
-type: Kafka
-clientId: "kafka_proj"
-brokers: ["kafka:9092"]
-```
-
-#### initializing client and execution ( src/datasources/types/Kafka.ts ) :
-
-```javascript
-import { GSContext, GSDataSource, PlainObject } from "@godspeedsystems/core";
-import { Kafka } from "kafkajs";
-
-export default class DataSource extends GSDataSource {
-  protected async initClient(): Promise<PlainObject> {
-    const kafka = new Kafka({
-      clientId: this.config.clientId,
-      brokers: this.config.brokers,
-    });
-
-    return kafka;
-  }
-
-  async execute(ctx: GSContext, args: PlainObject): Promise<any> {
-    try {
-      const {
-        topic,
-        message,
-        meta: { fnNameInWorkflow },
-      } = args;
-      let method = fnNameInWorkflow.split(".")[2];
-      if (this.client) {
-        if (method === "producer") {
-          const producer = this.client.producer();
-          await producer.connect();
-          let result = await producer.send({
-            topic: topic,
-            messages: [{ value: message }],
-          });
-          return result;
-        } else {
-          return "Invalid method";
-        }
-      }
-    } catch (error) {
-      throw error;
-    }
-  }
-}
-
-```
-
-
-
-#### Example Event ( src/events/kafka_publish_event.yaml ) :
-```yaml
-'http.post./kafka-pub':
-  fn: kafka-publish
-  body:
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            message:
-              type: string
-          required: ['message']
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-
-```
-
-#### Function Example ( src/functions/kafka-publish.yaml ) :
-
-
-```yaml
-id: kafka-publish
-summary: kafka publish message
-tasks:
-    - id: publish
-      fn: datasource.kafka.producer
-      args:
-        topic: "publish-producer1"
-        message: <% inputs.body.message%>
-
-```
-</details>
-
-
-6. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
-
-7. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
-
-8. Your client is initialized already in Datasource so you can execute its subscription using the `subscribeToEvent` function.
+4. Your client is initialized already in Datasource so you can execute its subscription using the `subscribeToEvent` function.
 
 <details>
   <summary>let's use kafka as an example of an eventsource :</summary>
