@@ -4,13 +4,12 @@
 
 Any kind of entity which provides read and write mechanism for data is considered a datasource. For example, an API, a SQL or NoSQL datastore which includes RDBMS or mongodb,postgresql, key value stores, document stores etc. The settings for each datasource lies in src/datasources directory.
 
-### Steps to create Custom Datasource for personal use:
+### Steps to create Custom Datasource:
 
-1. Look for the `npm package` you wish to integrate with  Godspeed framework.
 
-2. Inside the `datasources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
+1. Inside the `datasources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
 
-3. In your TypeScript file, use an import statement to bring in `GSDataSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSDataSource`.
+2. In your TypeScript file, use an import statement to bring in `GSDataSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSDataSource`.
 
 ```
     .
@@ -31,12 +30,12 @@ Any kind of entity which provides read and write mechanism for data is considere
         └── functions
 ```
 
-4. Afterward, you can access the methods provided by `GSDataSource`. Initialize your client by calling the `initClient()` function.
+3. Afterward, you can access the methods provided by `GSDataSource`. Initialize your client by calling the `initClient()` function.
 
-5. Once your client is initialized, you can execute its methods using the `execute` function.
+4. Once your client is initialized, you can execute its methods using the `execute` function.
 
 <details>
-<summary> let's use axios as an example of datasource :</summary>
+  <summary>let's use kafka as an example of an datasource :</summary>
 
 #### Project structure
 
@@ -45,100 +44,120 @@ Any kind of entity which provides read and write mechanism for data is considere
     ├── src
         ├── datasources
         │   ├── types
-        │   |    └── axios.ts
+        │   |    └── kafka.ts
         |   |
-        │   └── api.yaml
+        │   └── kafka.yaml
         │
         ├── events
         |   |
-        |   └── axios_event.yaml
-        |
+        │   ├── kafka_publish_event.yaml
+        |   |
+        |   └── kafka_consumer_event.yaml
+
         ├── eventsources
-        │  
+        │   ├── types
+        │   |    └── kafka.ts
+        |   |
+        │   └── kafka.yaml
         |
         └── functions
             |
-            └── axios_workflow.yaml
+            ├── kafka-publish.yaml
+            |
+            └── kafka-consume.yaml
 ```
 
-#### axios config ( src/datasources/api.yaml )
+#### kafka config ( src/datasources/kafka.yaml )
 ```yaml
-type: axios
-base_url: http://localhost:5440
+type: Kafka
+clientId: "kafka_proj"
+brokers: ["kafka:9092"]
 ```
 
-#### Initializing client and execution ( src/datasources/types/axios.ts ) :
+#### initializing client and execution ( src/datasources/types/Kafka.ts ) :
 
-``` typeScript
-import { GSContext, GSDataSource, GSStatus, PlainObject } from "@godspeedsystems/core";
-import axios, { Axios, AxiosInstance, AxiosResponse } from 'axios'
+```javascript
+import { GSContext, GSDataSource, PlainObject } from "@godspeedsystems/core";
+import { Kafka } from "kafkajs";
 
 export default class DataSource extends GSDataSource {
   protected async initClient(): Promise<PlainObject> {
-    const { base_url, ...rest } = this.config;
+    const kafka = new Kafka({
+      clientId: this.config.clientId,
+      brokers: this.config.brokers,
+    });
 
-    const client = axios.create({ baseURL: base_url, ...rest });
-    return client;
-
+    return kafka;
   }
+
   async execute(ctx: GSContext, args: PlainObject): Promise<any> {
-    const { logger } = ctx;
-    const {
-      meta: { fnNameInWorkflow },
-      ...rest
-    } = args as { meta: { entityType: string, method: string, fnNameInWorkflow: string }, rest: PlainObject };
-
-    const [, , method, url] = fnNameInWorkflow.split('.');
-
     try {
-      const client = this.client as AxiosInstance;
-
-      const response = await client({
-        method: method.toLowerCase(),
-        url,
-        ...rest
-      });
-
-      return new GSStatus(true, response.status, response.statusText, response.data, response.headers);
-    } catch (error: any) {
-      const { request, response } = error;
-
-      // request initilized but failed
-      if (response) {
-        const { status, data: { message }, headers } = response as AxiosResponse;
-        return new GSStatus(false, status, message, undefined, headers)
+      const {
+        topic,
+        message,
+        meta: { fnNameInWorkflow },
+      } = args;
+      let method = fnNameInWorkflow.split(".")[2];
+      if (this.client) {
+        if (method === "producer") {
+          const producer = this.client.producer();
+          await producer.connect();
+          let result = await producer.send({
+            topic: topic,
+            messages: [{ value: message }],
+          });
+          return result;
+        } else {
+          return "Invalid method";
+        }
       }
-
-      // request sent but no response received
-      if (request) {
-        return new GSStatus(false, 503, 'Server timeout.', undefined, undefined);
-      }
-
-      return new GSStatus(false, 500, 'Oops! Something went wrong while setting up request.', undefined, undefined);
+    } catch (error) {
+      throw error;
     }
   }
 }
 
-
 ```
-#### Example Event ( src/events/axios_event.yaml ) :
+
+
+
+#### Example Event ( src/events/kafka_publish_event.yaml ) :
 ```yaml
-"http.post./hello":
-  fn:axios_workflow :
+'http.post./kafka-pub':
+  fn: kafka-publish
   body:
-    type: object
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+          required: ['message']
   responses:
     200:
-      application/json:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+
 ```
-#### Example workflow ( src/functions/axios_workflow.yaml ) :
+
+#### Function Example ( src/functions/kafka-publish.yaml ) :
+
+
 ```yaml
-id: helloworld
+id: kafka-publish
+summary: kafka publish message
 tasks:
-  - id: fist_task
-    fn: datasource.api.post./helloworld
-    args:
-      name: 'Hello World!'
+    - id: publish
+      fn: datasource.kafka.producer
+      args:
+        topic: "publish-producer1"
+        message: <% inputs.body.message%>
+
 ```
 </details>
-
