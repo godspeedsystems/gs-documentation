@@ -207,16 +207,21 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "10. VScode extention",
+          label: "10. Swagger Specs",
+          id: "Swagger_specs"
+        },
+        {
+          type: "doc",
+          label: "11. VScode extention",
           id: "language_tools"
         },
         {
           type: "category",
-          label: "11. Telemetry",
+          label: "12. Telemetry",
           items: [
             {
               type: "doc",
-              label: "11.1. Overview",
+              label: "12.1. Overview",
               id: "telemetry/overview"
             },
           ],
