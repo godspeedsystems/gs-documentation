@@ -2,6 +2,9 @@
 Godspeed provides caching of the tasks using redis as cache. You can cache the result of any task in the workflows. 
 Caching can take various forms, including in-memory caching and the upcoming addition of Elasticsearch for caching.
 
+:::tip **Coming soon in V2**
+:::
+
 ## Specifications
 ### Datasource spec for redis
 Define a datasource with type 'redis' in `src/datasources`. Here, redis datasource is defined in `src/datasources/redis.yaml`
