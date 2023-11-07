@@ -20,7 +20,7 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 This event schema is supported by [http event source](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin)
 
 ```yaml
-http.post./mongo/user/search/{id}: #This is the only thing changes across all the events 
+http.post./mongo/user/search/{id}: #This is the only thing that changes across all the events 
   summary: Update a user # as per Swagger spec
   description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
