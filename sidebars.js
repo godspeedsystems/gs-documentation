@@ -75,13 +75,23 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.3. Event Source Plugins",
-              id: "event_sources/event_source_plugins"
+              label: "4.3. Examples",
+              id: "event_sources/examples"
+            },{
+              type: "doc",
+              label: "4.4. Create custom EventSource",
+              id: "event_sources/create_your_event_source"
+            },
+
+            {
+              type: "doc",
+              label: "4.5. Create EventSource Plugin",
+              id: "event_sources/create_eventsource_plugin"
             },
             {
               type: "doc",
-              label: "4.4. Create Your Event Source",
-              id: "event_sources/create_your_event_source"
+              label: "4.6 EventSource plugins",
+              id: "event_sources/event_source_plugins"
             },
           ],
         },
@@ -96,17 +106,27 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "5.2. Custom workflows",
-              id: "workflows/custom_workflows"
+              label: "5.2. Native language functions",
+              id: "workflows/native_language_functions"
             },
             {
               type: "doc",
-              label: "5.3. Inbuilt workflows",
+              label: "5.3. Yaml-DSL functions",
+              id: "workflows/yaml_dsl_functions"
+            },
+            // {
+            //   type: "doc",
+            //   label: "5.3. Custom workflows",
+            //   id: "workflows/custom_workflows"
+            // },
+            {
+              type: "doc",
+              label: "5.4. Inbuilt workflows",
               id: "workflows/inbuilt_workflows"
             },
             {
               type: "doc",
-              label: "5.4. Caching",
+              label: "5.5. Caching",
               id: "caching/overview"
             },
             // {
@@ -118,7 +138,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "6. Data Sources",
+          label: "6. DataSources",
           items: [
             {
               type: "doc",
@@ -127,13 +147,18 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.2. Data source plugins",
-              id: "data_sources/datasource_plugins"
+              label: "6.2. Create Custom DataSource",
+              id: "data_sources/create_your_data_source"
             },
             {
               type: "doc",
-              label: "6.3. Create Your data source",
-              id: "data_sources/create_your_data_source"
+              label: "6.3. Create DataSource Plugin",
+              id: "data_sources/create_Datasource_plugin"
+            },
+            {
+              type: "doc",
+              label: "6.4. DataSource plugins",
+              id: "data_sources/datasource_plugins"
             },
           ],
         },
@@ -182,16 +207,21 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "10. VScode extention",
+          label: "10. Swagger Specs",
+          id: "Swagger_specs"
+        },
+        {
+          type: "doc",
+          label: "11. VScode extention",
           id: "language_tools"
         },
         {
           type: "category",
-          label: "11. Telemetry",
+          label: "12. Telemetry",
           items: [
             {
               type: "doc",
-              label: "11.1. Overview",
+              label: "12.1. Overview",
               id: "telemetry/overview"
             },
           ],
