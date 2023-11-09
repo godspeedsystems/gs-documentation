@@ -76,7 +76,7 @@ summary: Call an API and transform the
 tasks:
     - id: api_step1
       description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.anything.post
+      fn: datasource.api.post./anything
       args:
         data: <% inputs.body %>
           jwt_payload: <% inputs.user %>
