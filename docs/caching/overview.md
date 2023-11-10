@@ -47,28 +47,21 @@ tasks:
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.http
+    fn: datasource.api.post./anything
     args:
-        datasource: httpbin
         data:
           name: 'hello'
-        config:
-          url : /anything
-          method: post
   - id: cache_step2
     caching:
       key: cache_step2
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.http
+    fn: datasource.api.post./anything
     args:
-        datasource: httpbin
         data:
           name: 'cache'
-        config:
-          url : /anything
-          method: post
+ 
 ```
 
 - When the workflow is triggered for the first time, then the result of the two tasks are cached in DB with keys `cache_step1` and `cache_step2` for 60 seconds.
