@@ -18,28 +18,20 @@ tasks:
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.http
+    fn: com.gs.return
     args:
-        datasource: httpbin
         data:
           name: 'hello'
-        config:
-          url : /anything
-          method: post
   - id: cache_step2
     caching:
       key: cache_step2
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.http
+    fn: com.gs.return
     args:
-        datasource: httpbin
         data:
           name: 'cache'
-        config:
-          url : /anything
-          method: post
 ```
 
 #### Decoupled Architechture
