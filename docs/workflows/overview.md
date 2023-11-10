@@ -93,7 +93,6 @@ Every Workflow has the following attributes.
 - **summary** - This provides a descriptive title for a workflow, enhancing code readability.
 - **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
 
-<<<<<<< HEAD
 ## A Sample Workflow Example 
 #### Example 1:
 ```yaml
@@ -205,9 +204,6 @@ Yaml workflows allow decoupled architecture. This promotes modularity, flexibili
 Yaml follows zero-bolier-plate approach reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
 
 
-=======
-### Example for Yaml
->>>>>>> d5660f6f808eea7d47a5bbc000074b08ea0e63db
 
 ```yaml
 id: helloworld
