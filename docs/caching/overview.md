@@ -45,7 +45,7 @@ tasks:
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.return
+    fn: datasource.api.post./anything
     args:
         data:
           name: 'hello'
@@ -55,7 +55,7 @@ tasks:
       cache_on_failure : false
       expires: 60
       force: false
-    fn: com.gs.return
+    fn: datasource.api.post./anything
     args:
         data:
           name: 'cache'
