@@ -93,7 +93,121 @@ Every Workflow has the following attributes.
 - **summary** - This provides a descriptive title for a workflow, enhancing code readability.
 - **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
 
+<<<<<<< HEAD
+## A Sample Workflow Example 
+#### Example 1:
+```yaml
+id: hello_world_function
+summary: Call an API and return the task message
+tasks:
+    - id: return_fn_step1
+      description: add a message property
+      fn: com.gs.return #It's a inbuilt function that returns args.
+      args: "Hello World!"
+```
+#### Example 2:
+```yaml
+  summary: Summing x + y
+  description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
+  tasks:
+    - id: sum_step1
+      description: add two numbers
+      fn: com.jfs.sum #This is a developer defined function that takes two arguments, performs addition and returns the total.
+      args:
+        x: 1
+        y: 2
+    
+    - id: sum_step2
+      description: return the response
+      fn: com.gs.transform #Inbuilt function that converts the code written in <%%>.
+      args: <% outputs.sum_step1 %> #we access the first task output and return it.
+```
+
+### Tasks and Attributes within a task
+The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute plays a vital role in structuring and specifying the precise actions or operations required within the workflow. This attribute is essential for defining the workflow's logic and behavior.
+- **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
+
+- **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
+
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/workflows/inbuilt_workflows) or [developer defined function](/docs/workflows/custom_workflows).
+
+- **args** - Every handler function has its own argument structure, which is kept in the args key.
+
+### Types of workflows or functions
+* Native language workflows
+* Yaml-DSL workflows
+
+### Native Language Workflows
+The user has the ability to write JavaScript files and can invoke them from events when implementing intricate functionalities.
+
+```js
+export class GSContext { //span executions
+  inputs: GSCloudEvent; //The very original event for which this workflow context was created
+
+  outputs:{[key: string]: GSStatus; }; //DAG result. This context has a trace history and responses of all instructions in the DAG are stored in this object
+
+  log_events: GSLogEvent[] = [];
+
+  config: PlainObject; //app config
+
+  datasources: PlainObject; //app config
+
+  mappings: any;
+
+  plugins: PlainObject;
+
+  exitWithStatus?: GSStatus;
+
+  constructor(config: PlainObject, datasources: PlainObject, event: GSCloudEvent, mappings: any, plugins: PlainObject) {//_function?: GSFunction
+    this.inputs = event;
+    this.config = config;
+    this.outputs = {};
+    this.datasources = datasources;
+    this.mappings = mappings;
+    this.plugins = plugins;
+
+    childLogger.debug('inputs for context %o', event.data);
+  }
+
+  public cloneWithNewData(data: PlainObject): GSContext {
+    return new GSContext(
+        this.config,
+        this.datasources,
+        this.inputs?.cloneWithNewData(data),
+        this.mappings,
+        this.plugins
+    );
+  }
+
+  public addLogEvent(event: GSLogEvent): void {
+    this.log_events?.push(event);
+    //also push to the logging backend
+  }
+}
+
+```
+
+### Yaml-DSL Workflows
+YAML DSL serves as the default language for creating general workflows. 
+
+#### Decoupled Architecture
+Yaml workflows allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+
+#### 1. Language-Agnostic Decoupling:
+
+  When leveraging a Prisma API, it is possible to craft YAML configurations today and seamlessly incorporate them into a Java-based workflow at a later time. This decoupling empowers a seamless transition between various programming languages, provided they uphold compatibility with the identical YAML configuration format.
+
+#### 2. Client-Agnostic Decoupling:
+
+  If you develop your code in JavaScript, you are essentially using the native JavaScript client exposed by Prisma. Later, if you decide to switch from Prisma to TypeORM, you can keep the same YAML configuration. All you need to do is adapt the TypeORM client to conform to the YAML DSL of datasources. In this scenario, only the datasource implementation would change, while the rest of your code remains unchanged.
+
+#### Zero Boiler Plate
+Yaml follows zero-bolier-plate approach reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
+
+
+=======
 ### Example for Yaml
+>>>>>>> d5660f6f808eea7d47a5bbc000074b08ea0e63db
 
 ```yaml
 id: helloworld

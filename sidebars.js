@@ -202,21 +202,31 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "9. CLI",
+          label: "9. Mappings",
+          id: "mappings"
+        },
+        {
+          type: "doc",
+          label: "10. CLI",
           id: "CLI"
         },
         {
           type: "doc",
-          label: "10. VScode extention",
+          label: "11. Swagger Specs",
+          id: "Swagger_specs"
+        },
+        {
+          type: "doc",
+          label: "12. VScode extention",
           id: "language_tools"
         },
         {
           type: "category",
-          label: "11. Telemetry",
+          label: "13. Telemetry",
           items: [
             {
               type: "doc",
-              label: "11.1. Overview",
+              label: "13.1. Overview",
               id: "telemetry/overview"
             },
           ],

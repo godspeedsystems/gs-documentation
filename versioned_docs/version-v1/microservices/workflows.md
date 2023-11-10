@@ -469,36 +469,42 @@ By default every top level workflow executes its task in series. But when invoki
 Executes the child tasks in parallel.
 :::
 
-Syntax is same as [com.gs.series](#666-comgsseries)
+
 
 ```yaml
-  summary: Parallel Multiplexing create loan for hdfc api calls
-  tasks:
-    - id: parallel
-      fn: com.gs.parallel
-      tasks:
-        - id: 1st
-          fn: com.gs.return
-          args: |
-            'parallel task1'
+id: return4
+tasks:
+  - id: parallel
+    fn: com.gs.parallel
+    tasks:
+      - id: 1st
+        fn: com.gs.return
+        args: |
+          'parallel task1'
+      - id: 2nd
+        fn: com.gs.return
+        args: |
+          'parallel task2'
+  - id: output_task
+    fn: com.gs.return
+    args: <% outputs.parallel.data %>
+```
 
-        - id: 2nd
-          fn: com.gs.return
-          args: |
-            'parallel task2'
+**Output**
 
-        - id: 3rd
-          fn: com.gs.return
-          args: |
-            'parallel task3'
-
-    - id: step2
-      fn: com.gs.transform
-      args: |
-        <coffee% {
-        code: 200,
-        data: outputs['1st']
-        } %>
+```
+[
+  {
+    "code": 200,
+    "success": true,
+    "data": "parallel task1"
+  },
+  {
+    "code": 200,
+    "success": true,
+    "data": "parallel task2"
+  }
+]
 ```
 
 #### 7.6.8 com.gs.switch
@@ -644,20 +650,35 @@ on_error at loop level only gets executed when all the tasks are failed. If even
 
 #### 7.6.11 com.gs.return
 
-:::tip return statement
-The classic return statement
+:::tip Return Statement
+In typical scenarios, the "return" statement will terminate a workflow. However, when the "return" statement is used within a parallel function, it won't immediately exit the workflow. Instead, it will wait until all the child tasks within the parallel function have completed before exiting the workflow.
 :::
+
+[Checkout return functionality in com.gs.parallel](#767-comgsparallel)
+
 It returns from the current function to the function caller. The function stops executing when the return statement is called.
 
+
+
+**Example** 
+
 ```yaml
-  summary: Multiplexing create loan for hdfc api calls
-  id: helloworld
-  tasks:
-    - id: step1 # the response of this will be accessible within the parent step key, under the step1 sub key
-      description: create account in the bank
-      fn: com.gs.return
-      args: |
-        <coffee% 'Hello ' + inputs.query.name %>
+summary: Returning hello world
+tasks:
+  - id: return_hello_word
+    fn: com.gs.return
+    args: 'Hello'
+
+  - id: return_with_status
+    fn: com.gs.transform 
+    args: <% outputs.return_hello_word.data + inputs.query.word %>
+
+```
+
+**Output**
+
+```
+Hello
 ```
 
 #### 7.6.12 com.gs.log

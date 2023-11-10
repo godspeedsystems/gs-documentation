@@ -76,7 +76,7 @@ summary: Call an API and transform the
 tasks:
     - id: api_step1
       description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.anything.post
+      fn: datasource.api.post./anything
       args:
         data: <% inputs.body %>
           jwt_payload: <% inputs.user %>
@@ -100,7 +100,7 @@ summary: Call an API and transform the
 tasks:
     - id: api_step1 # the response of this will be accessible within the parent step key, under the step1 sub key
       description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.anything.post
+      fn: datasource.api.post./anything
       args:
         data: <% inputs.body %>
 ```
@@ -110,7 +110,7 @@ summary: Auth workflow
 tasks:
     - id: auth_step1
       description: Hit the authn request
-      fn: datasource.authapi.authenticate.post
+      fn: datasource.authapi.post./authenticate
       args:
         data: <% inputs.query.username %>
 
@@ -158,7 +158,7 @@ tasks:
       authz:
         fn: com.jfs.authz
         args: <% inputs %>
-      fn: datasource.api.anything.post
+      fn: datasource.api.post./anything
       args:
         data: <% inputs %>
 ```
@@ -169,7 +169,7 @@ summary: Authorization workflow
 tasks:
   - id: authz_step1
     description: return allow/deny based upon user
-    fn: datasource.authz.authorize.post
+    fn: datasource.authz.post./authorize
     args: 
       data: <% inputs.body.user %>
   - id: authz_step2
@@ -225,7 +225,7 @@ summary: Authorization workflow
 tasks:
   - id: authz_step1
     description: return allow/deny based upon user
-    fn: datasource.authz.authorize.post
+    fn: datasource.authz.post./authorize
     args: 
       data: <% inputs.body.user %>
       

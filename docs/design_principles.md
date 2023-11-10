@@ -5,7 +5,7 @@ In order to serve the [Goals](/docs/introduction#aims) and [Tenets](/docs/introd
 ## Design Principles
 
 ### Three fundamental abstractions
-Every microservice in the Godspeed framework has five fundamental abstractions which encompass the functionality of any microservice in general.
+Every microservice in the Godspeed framework has three fundamental abstractions which encompass the functionality of any microservice in general.
 
 - **[Event-sources](event_sources/overview.md):** In the Godspeed framework, Event Sources serve as a mechanism for defining the primary entry or initiation points of an application. Developers can use [pre-built](event_sources/event_source_plugins.md) event source types or create their [own plugins](event_sources/custom_event_source.md). For instance, you can opt for an ['Express'](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin) type of Event Source to expose your microservice through REST APIs, ['Kafka'](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource) message bus event source, a 'Salesforce' Event Source, or you may choose a ['cron'](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource#godspeed-plugin-cron-as-eventsource) type Event Source to schedule recurring calls to specific workflows. This level of configurability empowers developers to finely tune the behavior of their application according to their requirements.
 
