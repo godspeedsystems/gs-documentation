@@ -59,10 +59,10 @@ Let's assume you have setup SigNoz as the exporter then you will see something l
 
 ### Logging
 #### Log level
-The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](../microservices/setup/configuration/static-vars.md#defaultyaml)
+The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](../config/overview.md#static-variables)
 
 #### Log fields masking
-If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](../microservices/setup/configuration/static-vars.md#defaultyaml). Redaction path syntax is standard JSON object lookup.   
+If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](../config/overview.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
 redact: ['a.b.c', 'a.b.*', 'req.headers']
@@ -142,7 +142,7 @@ You can add any custom attribute in the OTEL logs whenever any event is triggere
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
-- `log_attributes` variable as [environment variable](../microservices/setup/configuration/env-vars.md) or [static variable](../microservices/setup/configuration/static-vars.md) which contains custom identifiers.
+- `log_attributes` variable as [environment variable](../config/overview.md#environment-variables) or [static variable](../config/overview.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml
@@ -327,7 +327,7 @@ tasks:
     - id: httpbin_step1 # the response of this will be accessible within the parent step key, under the step1 sub key
       name: http bin step
       description: Hit http bin with some dummy data. It will send back same as response
-      fn: com.gs.http         
+      fn: datasource.api.post./anything       
       metrics:
         - name: httpbin_calls_total
           help: 'httpbin_calls_total counter of httpbin requests labeled with: method, status_code'
@@ -344,12 +344,8 @@ tasks:
             status_code: <% outputs.httpbin_step1.code %>               
           timer: true          
       args:
-        datasource: httpbin
         params: <% inputs.query %>
         data: <% inputs.body %>
-        config:
-          url : /anything
-          method: post
 ```
 
 ### DSL spec for custom trace
@@ -370,19 +366,15 @@ tasks:
     - id: httpbin_step1 # the response of this will be accessible within the parent step key, under the step1 sub key
       name: http bin step
       description: Hit http bin with some dummy data. It will send back same as response
-      fn: com.gs.http
+      fn: datasource.api.post./anything
       trace:
         name: httpbin_trace
         attributes:
             request: <%inputs.body%>
             param: <%inputs.query%>
       args:
-        datasource: httpbin
         params: <% inputs.query %>
         data: <% inputs.body %>
-        config:
-          url : /anything
-          method: post
 ```
 
 ### DSL spec for custom logs
@@ -419,7 +411,7 @@ tasks:
     - id: httpbin_step1 # the response of this will be accessible within the parent step key, under the step1 sub key
       name: http bin step
       description: Hit http bin with some dummy data. It will send back same as response
-      fn: com.gs.http
+      fn: datasource.api.post./anything
       logs:
         before:
           level: error
@@ -439,12 +431,8 @@ tasks:
           attributes: 
             customer_name: <% outputs.httpbin_step1.data.json.customer_name %> 
       args:
-        datasource: httpbin
         params: <% inputs.query %>
         data: <% inputs.body %>
-        config:
-          url : /anything
-          method: post
 ```
 
 ** Sample Logs **  
