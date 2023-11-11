@@ -61,7 +61,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "4. Event Sources",
+          label: "4. Event sources",
           items: [
             {
               type: "doc",
@@ -70,7 +70,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.2. Standardized Event Schema",
+              label: "4.2. Standardized event schema",
               id: "event_sources/standardized_event_schema"
             },
             {
@@ -79,18 +79,18 @@ const sidebars = {
               id: "event_sources/examples"
             },{
               type: "doc",
-              label: "4.4. Create custom EventSource",
+              label: "4.4. Create custom event source",
               id: "event_sources/create_your_event_source"
             },
 
             {
               type: "doc",
-              label: "4.5. Create EventSource Plugin",
+              label: "4.5. Create event source plugin",
               id: "event_sources/create_eventsource_plugin"
             },
             {
               type: "doc",
-              label: "4.6 EventSource plugins",
+              label: "4.6 Event source plugins",
               id: "event_sources/event_source_plugins"
             },
           ],

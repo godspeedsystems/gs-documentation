@@ -64,7 +64,8 @@ Gender:
 {
     "id": 1,
     "title": "Hello World",
-    "completed": false
+    "completed": false,
+    "gender": "<%mappings.Gender.Male%>"
 }
 ```
 
