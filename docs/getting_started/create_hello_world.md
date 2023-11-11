@@ -81,6 +81,6 @@ godspeed dev
 
 ### Let's try Our Sample Project Repl:
 
-<iframe src="https://replit.com/@GodspeedSystems/sampleproject?embed=true" width="750" height="600" />
+<iframe src="https://replit.com/@GodspeedSystems/Godspeed-sample-project" width="750" height="600" />
 
 Happy building with Godspeed!
