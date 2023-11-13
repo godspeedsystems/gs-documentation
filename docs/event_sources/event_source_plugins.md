@@ -1,6 +1,6 @@
- # Event source plugins
+ # Eventsource plugins
 
-Godspeed framework adopts a pluggable approach that empowers you to define event sources effortlessly. Our framework graciously provides an interface that caters to diverse event source needs. Here's a glimpse into the exceptional event source plugins meticulously crafted by our core framework team.
+Godspeed framework adopts a pluggable approach that empowers you to define eventsources effortlessly. Our framework graciously provides an interface that caters to diverse eventsource needs. Here's a glimpse into the exceptional eventsource plugins meticulously crafted by our core framework team.
 
 To seamlessly integrate these plugins into your project, simply wield the command:
 
@@ -35,7 +35,7 @@ you can specify plugin name to add directly to your project
 godspeed plugin add <plugin-name>
 ```
 
-## List of Eventsource plugins
+## List of eventsource plugins
 
 ### 1. [express-as-http](https://www.npmjs.com/package/@godspeedsystems/plugins-express-as-http)
 
@@ -48,5 +48,5 @@ cron-as-eventsource is a plugin which running in the background that will execut
 
 ### 3. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
-Kafka is your dynamic data stream and event maestro! As a data source, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka. 
+Kafka is your dynamic data stream and event maestro! As a datasource, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka. 
 

@@ -32,6 +32,31 @@ const config = {
     locales: ['en'],
   },
 
+  plugins: [
+    // ... Your other plugins.
+    [
+      require.resolve("docusaurus-plugin-search-local"),
+      {
+        translations: {
+          "search_placeholder": "Search",
+          "see_all_results": "See all results",
+          "no_results": "No results.",
+          "search_results_for": "Search results for \"{{ keyword }}\"",
+          "search_the_documentation": "Search the documentation",
+          "count_documents_found": "{{ count }} document found",
+          "count_documents_found_plural": "{{ count }} documents found",
+          "no_documents_were_found": "No documents were found"
+        },
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        // language: ["en", "zh"],
+        // ```
+        // When applying `zh` in language, please install `nodejieba` in your project.
+      },
+    ],
+  ],
 
   presets: [
     [

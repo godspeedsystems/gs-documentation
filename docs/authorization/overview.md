@@ -2,7 +2,7 @@
 :::note
 Implementing into the framework soon...
 :::
-The framework provides Authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
+The framework provides authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
 
 
 ## Event spec
@@ -48,7 +48,7 @@ http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate:
                 required: [application_id]
 ```
 
-### Jwt Authorization
+### JWT authorization
 
 You can configure JWT settings within the `Configuration/Environment` variables. Here's an example of such a configuration:
 ```yaml
@@ -59,16 +59,16 @@ jwt:
 ```
 The provided snippet contains payload information and a secret key. Once the above snippet is added to the `Config/Environment`, authentication for all the events will be *true* by default. 
 
-Options which can be passed for jwt config are:
+Options which can be passed for JWT config are:
 
 ![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
-When configuring the JWT settings, if you do not provide either the s`ecretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an [error](https://www.passportjs.org/packages/passport-jjgodspeedwtjgodspeedwtgodspeedwt/).
+When configuring the JWT settings, if you do not provide either the `secretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an error.
 
 Additionally, if you specify an `issuer` or `audience` value in the configuration, and the token values differ from those specified in the configuration payload, the response will be 'Unauthorized.'
 
 To ensure proper functionality, it is necessary to export these environment variables within your environment.
 
-### Access JWT payload in Workflow DSL
+### Access JWT payload in workflow DSL
 You can access the complete JWT payload in `<% inputs.user %>` in workflow DSL as given below:
 
 ```yaml
@@ -82,8 +82,8 @@ tasks:
           jwt_payload: <% inputs.user %>
 ```
 
-## Datasources Authentication
-At the API datasource level, you can implement Authentication measures. You can establish an Authentication workflow specific to the datasource, allowing it to make requests to an Authentication service in order to obtain tokens or perform Authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
+## Datasources authentication
+At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
 
 Here is the sample spec:
 **Datasource**
@@ -124,7 +124,7 @@ tasks:
           queryid: <% outputs.auth_step1.params.queryid %>
         statusCodes: <% outputs.auth_step1.status_code %>          
 ```
-The Authentication workflow should return response in this format:
+The authentication workflow should return response in this format:
 ```yaml
 headers: 
   header1: val1
@@ -133,7 +133,7 @@ params:
 statusCodes: [401, 403, ....]
 ```
 :::note
-The Authentication workflow gets called when any request returns the specified `statusCodes`. 
+The authentication workflow gets called when any request returns the specified `statusCodes`. 
 :::
 
 
@@ -190,7 +190,7 @@ tasks:
         } %>
 ```
 
-The Authorization workflow should return response in this format to allow/deny:
+The authorization workflow should return response in this format to allow/deny:
 ```yaml
 success: true/false
 data: true/false/JSON output
@@ -244,7 +244,7 @@ tasks:
         } %>
 ```
 
-When Authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.   
+When authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.   
 For example, in the above authz workflow, `data` is returned as:
 ```yaml
 data:
