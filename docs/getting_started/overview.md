@@ -19,7 +19,7 @@ In this section, you will learn how to install the Godspeed framework using the 
 
 ### Installation
 
-Godspeed CLI is the command center of a Godspeed project. It allows you to create & manage your Godspeed project. It is shipped via [npm](https://www.npmjs.com/package/%2540godspeedsystems/godspeed). You can go ahead and install it using the below command.
+Godspeed CLI is the command center of a Godspeed project. It allows you to create & manage your Godspeed project. It is shipped via [npm](https://www.npmjs.com/package/@godspeedsystems/godspeed). You can go ahead and install it using the below command.
 
 
 ```bash

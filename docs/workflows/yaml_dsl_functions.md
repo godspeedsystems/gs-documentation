@@ -87,7 +87,7 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
 
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](./yaml_dsl_functions#built-in-functions)
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](workflows/inbuilt_workflows.md)
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 

@@ -50,18 +50,19 @@ http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate:
 
 ### JWT authorization
 
-You can configure JWT settings within the `Configuration/Environment` variables. Here's an example of such a configuration:
+You can configure JWT settings within the `eventsources/http.yaml`. Here's an example of such a configuration:
 ```yaml
 jwt:
   issuer: ISS_KEY #iss
   audience: AUD_KEY #aud
   secretOrKey: SECRET_KEY
 ```
-The provided snippet contains payload information and a secret key. Once the above snippet is added to the `Config/Environment`, authentication for all the events will be *true* by default. 
+The provided snippet contains payload information and a secret key. Once the above snippet is added to the `eventsources/http.yaml`, authentication for all the events will be *true* by default. 
 
 Options which can be passed for JWT config are:
 
 ![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
+
 When configuring the JWT settings, if you do not provide either the `secretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an error.
 
 Additionally, if you specify an `issuer` or `audience` value in the configuration, and the token values differ from those specified in the configuration payload, the response will be 'Unauthorized.'

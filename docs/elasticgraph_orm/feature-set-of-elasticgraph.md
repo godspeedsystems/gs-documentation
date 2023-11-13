@@ -607,6 +607,4 @@ You can find the API and docs in the CRUD folder of the Postman collection share
 
 This project started with the .collect() feature sometime in 2015, from there it has evolved to include the deep API, denormalization, esql and other features. And now it is expanding to become a very powerful full fledged Microservice Platform. We have catered to four clients so far, and also built our own admin panel using the same.
 
-Built with deep thought from the Himalayas. <3
-
-/|\
+Built with deep thought from the Himalayas.
