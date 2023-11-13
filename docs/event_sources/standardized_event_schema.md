@@ -4,9 +4,9 @@ In the realm of microservices architecture, [events](../design_principles#three-
 
 **We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](../design_principles#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
-<!-- **When switching between event sources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the event source name, method, and path. However, for Kafka events, the start line combines the data source name, topic name, and group ID.** -->
+<!-- **When switching between eventsources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the eventsource name, method, and path. However, for Kafka events, the start line combines the datasource name, topic name, and group ID.** -->
 
-The event schema, for each event source, closely follows the OpenAPI specification. It includes
+The event schema, for each eventsource, closely follows the OpenAPI specification. It includes
 - The name/topic/URL of the event
 - The event handler workflow
 - Input and output schema with the validation error handling
@@ -17,7 +17,7 @@ The event schema, for each event source, closely follows the OpenAPI specificati
 - To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance, HTTP events accept inputs such as body, headers, path parameters, and query parameters. On the other hand, Kafka events only accept inputs in the form of body.
 
 
-This event schema is supported by [http event source](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin)
+This event schema is supported by [HTTP eventsource](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin)
 
 ```yaml
 http.post./mongo/user/search/{id}: #This is the only thing that changes across all the events 
@@ -53,21 +53,21 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
           schema:
             type: string
 ```
-- The event's first line comprises three key elements: the type of event source (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the event source plugin, and it is the only line that changes across all events.
+- The event's first line comprises three key elements: the type of eventsource (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the eventsource plugin, and it is the only line that changes across all events.
 
 For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](#example-workflow-consuming-an-http-event).
 
 The inputs (event) object has following properties:
 
-- **query can be accessed as**: `<%inputs.query.var_name%>` # present in case of http events
+- **query can be accessed as**: `<%inputs.query.var_name%>`  Present in case of http events
 
-- **params can be accessed as**: `<%inputs.params.path_param%>` # present in case of http events
+- **params can be accessed as**: `<%inputs.params.path_param%>`  Present in case of http events
 
-- **headers can be accessed as**: `<%inputs.headers.some_header_key%>` # present in case of http events
+- **headers can be accessed as**: `<%inputs.headers.some_header_key%>`  Present in case of http events
 
-- **body can be accessed as**: `<%inputs.body.key%>` # Present for all events except for http events which don't have a body. For ex. http.get
+- **body can be accessed as**: `<%inputs.body.key%>`  Present for all events except for http events which don't have a body. For ex. http.get
 
-- **files can be accessed as**: `<%input.files%>` # Any files uploaded via HTTP event. Not present in other kind of events
+- **files can be accessed as**: `<%input.files%>`  Any files uploaded via HTTP event. Not present in other kind of events
 
 ##  Event types
 There are two primary types of events: synchronous (sync) and asynchronous (async) events, each suited for various protocols. 

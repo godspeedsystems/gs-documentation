@@ -1,10 +1,10 @@
-# Defining a Custom event Source.
+# Defining a custom eventsource.
 
-## Event Source :
+## Eventsource :
 
-An event source is any entity or technology responsible for generating events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Event sources can include Message Brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
+An eventsource is any entity or technology responsible for generating events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Eventsources can include Message brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
 
-### Steps to create Custom **Eventsource** :
+### Steps to create custom eventsource :
 
 
 1. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
@@ -151,16 +151,16 @@ tasks:
 </details>
 
 
-## Datasource As EventSource :
+## Datasource as eventsource :
 
 Any kind of entity which provides read and write mechanism for data and acts as an entity responsible for generating events or notifications when specific events or conditions occur. These events are consumed by event handlers.
 
 
 
-### Steps to create Custom **Datasource As Eventsource** :
+### Steps to create custom datasource as eventsource :
 
 
-1. To create Datasource follow [How to create Custom datasource](./../data_sources/create_your_data_source.md)
+1. To create datasource follow [How to create custom datasource](./../data_sources/create_your_data_source.md)
 
 ```
     .
@@ -190,7 +190,7 @@ Any kind of entity which provides read and write mechanism for data and acts as 
 
 3. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
 
-4. Your client is initialized already in Datasource so you can execute its subscription using the `subscribeToEvent` function.
+4. Your client is initialized already in datasource so you can execute its subscription using the `subscribeToEvent` function.
 
 <details>
   <summary>let's use kafka as an example of an eventsource :</summary>
@@ -226,7 +226,7 @@ Any kind of entity which provides read and write mechanism for data and acts as 
 ```
 
 
-#### kafka config ( src/eventsources/kafka.yaml )
+#### Kafka config ( src/eventsources/kafka.yaml )
 ```yaml
 type: kafka
 groupId: "kafka_proj"
@@ -311,7 +311,7 @@ export default class EventSource extends GSDataSourceAsEventSource {
 }
 ```
 
-#### Example Event for consume ( src/events/kafka_consumer_event.yaml ) :
+#### Example event for consume ( src/events/kafka_consumer_event.yaml ) :
 
 ```yaml
 kafka.publish-producer1.kafka_proj:
