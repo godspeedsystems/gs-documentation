@@ -1,8 +1,8 @@
 # Godspeed CLI
 
-CLI to create and manage [Godspeed](https://github.com/godspeedsystems/core) projects.
+CLI to create and manage Godspeed projects.
 
-# About
+## About
 
 Godspeed CLI is the primary way to interact with your Godspeed project from the command line. It provides a bunch of useful functionalities during the project development lifecycle.
 
@@ -61,7 +61,7 @@ For detailed documentation visit https://godspeed.systems
 
 ```
 
-## Supported Commands & Arguments
+## Supported commands & arguments
 
 | Command                            | Options                         | Description                                                                     |
 | ---------------------------------- | ------------------------------- | ------------------------------------------------------------------------------- |
@@ -74,7 +74,7 @@ For detailed documentation visit https://godspeed.systems
 | gen-crud-api                       |                                 | generate CRUD APIs based on prisma schema.                                      |
 | prisma                             | prepare                         | generates your prisma client for database and sync the database with the schema |
 
-## 1.create
+### create
 
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
 
@@ -108,7 +108,7 @@ Happy building microservices with Godspeed! 🚀🎉
 
 ```
 
-### Options for create command
+#### Options for `create` command
 
 ```bash
 $  godspeed help create
@@ -146,7 +146,7 @@ For detailed documentation visit https://godspeed.systems
 
 :::
 
-## 2.prisma
+### prisma
 
 The `prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
 
@@ -154,7 +154,7 @@ The `prisma` command is a proxy to prisma commands with some add-on commands to 
 $  godspeed prisma [options]
 ```
 
-### prisma prepare
+#### prisma prepare
 
 The `godspeed prisma prepare` generates your prisma client for database and sync the database with the schema.
 
@@ -200,7 +200,7 @@ The database is already in sync with the Prisma schema.
 
 ```
 
-## 3.gen-crud-api
+### gen-crud-api
 
 The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma[name of your prisma schema].
 
@@ -227,9 +227,9 @@ Select datasource / schema to generate CRUD APIs
 
 ```
 
-## 4.plugin
+### plugin
 
-Godspeed Plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as plugin.
+Godspeed plugins are the way to extend the core Godspeed framework. Currently we support adding eventsource and datasource as plugin.
 
 ```bash
 $  godspeed help plugin
@@ -262,14 +262,14 @@ For detailed documentation visit https://godspeed.systems
 
 ```
 
-### plugin add
+#### plugin add
 
 The `godspeed plugin add` command allows the user to select a plugin from the list of available plugins and add them to the project.
 
 ```bash
 $  godspeed plugin add
 ```
-  ```bash
+```bash
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
@@ -277,22 +277,23 @@ $  godspeed plugin add
        " "   ╚════════════════════════════════════╝
 
 
-? Please select a godspeed plugin to install. (Use arrow keys)
-    @godspeedsystems/plugins-prisma-as-datastore 
-    @godspeedsystems/plugins-express-as-http 
-❯ @godspeedsystems/plugins-cron-as-eventsource 
-    @godspeedsystems/plugins-axios-as-datasource 
-    @godspeedsystems/plugins-aws-as-datasource 
-    @godspeedsystems/plugins-excel-as-datasource 
-    @godspeedsystems/plugins-mailer-as-datasource 
-    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
-    @godspeedsystems/plugins-redis-as-datasource 
-(Move up and down to reveal more choices)
-
-
+? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
+┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│      │ Name                                   │ Description                                                                    │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ ❯◯   │ aws-as-datasource                      │ aws as datasource plugin for Godspeed Framework                                │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ excel-as-datasource                    │ excel as datasource plugin for Godspeed Framework                              │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ mailer-as-datasource                   │ mailer as datasource plugin for Godspeed Framework                             │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ kafka-as-datasource-as-eventsource     │ kafka as datasource-as-eventsource plugin for Godspeed Framework               │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ cron-as-eventsource                    │ Cron as eventsource plugin for Godspeed Framework                              │
+└──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### plugin remove
+#### plugin remove
 
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.
 
@@ -302,28 +303,34 @@ $  godspeed plugin remove
 ```
 ```
 
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
 
 
-? Please select an eventsource/datasource plugin to remove: (Use arrow keys)
-
-❯ @godspeedsystems/plugins-express-as-http 
-  @godspeedsystems/plugins-prisma-as-datastore 
-
+? Please select godspeed plugin to uninstall: (Press <space> to select, <Up and Down> to move rows)
+┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│      │ Name                                   │ Description                                                                    │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ ❯◯   │ express-as-http                        │ Godspeed event source plugin for express as http server                        │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ prisma-as-datastore                    │ Prisma as a datasource plugin for Godspeed Framework.                          │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ axios-as-datasource                    │ Axios as datasource plugin for Godspeed Framework                              │
+└──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### plugin update
+#### plugin update
 
 The `godspeed plugin update` command allows the user to select a plugin from the list of available plugins and update them.
 
 ```bash
 $  godspeed plugin update
 ```
+```bash
 
-```
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
@@ -331,15 +338,21 @@ $  godspeed plugin update
        " "   ╚════════════════════════════════════╝
 
 
-? Please select a eventsource/datasource plugin to update. (Use arrow keys)
-❯ @godspeedsystems/plugins-express-as-http 
-  @godspeedsystems/plugins-prisma-as-datastore 
-
+? Please select godspeed plugin to update: (Press <space> to select, <Up and Down> to move rows)
+┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│      │ Name                                   │ Description                                                                    │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ ❯◯   │ express-as-http                        │ Godspeed event source plugin for express as http server                        │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ prisma-as-datastore                    │ Prisma as a datasource plugin for Godspeed Framework.                          │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ axios-as-datasource                    │ Axios as datasource plugin for Godspeed Framework                              │
+└──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 5.devops-plugin
+### devops-plugin
 
-Godspeed devops-plugins are the way to extend the core Godspeed framework. Currently we support adding Event Source and Data Source as devops-plugin.
+Godspeed devops-plugins are the way to extend the core Godspeed framework. Currently we support adding eventsource and datasource as devops-plugin.
 
 ```bash
 $  godspeed help devops-plugin
@@ -371,7 +384,7 @@ For detailed documentation visit https://godspeed.systems
 
 ```
 
-### devops-plugin add
+#### devops-plugin add
 
 The `godspeed devops-plugin add` command allows the user to select a devops plugin from the list of available plugins and add them to the operating system.
 
@@ -400,12 +413,12 @@ $ godspeed devops-plugin add
 (Move up and down to reveal more choices)
 ```
 
-### devops-plugin remove
+#### devops-plugin remove
 
 The `godspeed devops-plugin remove` command allows the user to select a devops plugin from the list of installed plugins and remove them from the operating system.
 
 ```bash
-$ godspeed plugin remove
+$ godspeed devops-plugin remove
 
 
        ,_,   ╔════════════════════════════════════╗
@@ -420,12 +433,12 @@ $ godspeed plugin remove
     
 ```
 
-### devops-plugin update
+#### devops-plugin update
 
 The `godspeed devops-plugin update` command allows the user to select a devops plugin from the list of installed plugins and update them.
 
 ```bash
-$ godspeed plugin update
+$ godspeed devops-plugin update
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
@@ -437,7 +450,7 @@ $ godspeed plugin update
 ❯ @godspeedsystems/plugins-prisma-as-datastore 
 ```
 
-## 6.dev
+### dev
 
 You can run your Godspeed project using `godspeed dev` command.
 

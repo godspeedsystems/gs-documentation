@@ -1,24 +1,24 @@
 ---
-title: Event Sources
+title: Eventsources
 ---
 # Overview
 
-  Event sources in Godspeed framework captures event and allows you to define entry or trigger points of application. Like `express` type, event source will allow you to expose your application through REST API or a `cron` type event source to schedule a recurring call to a workflow. To know the design principles of the Event source, refer [this](/docs/design_principles#three-fundamental-abstractions).
+  Eventsources in Godspeed framework captures event and allows you to define entry or trigger points of application. Like `express` type, eventsource will allow you to expose your application through REST API or a `cron` type eventsource to schedule a recurring call to a workflow. To know the design principles of the eventsource, refer [this](/docs/design_principles#three-fundamental-abstractions).
 
-  **Here kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, Checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
+  **Here Kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
 
 
-## Types of Event Sources
-  1. Event Source
-    - It can act only as an event source
+## Types of eventsources
+  1. Eventsource
+    - It can act only as an eventsource
     - has its own client initialization
     - Eg,. Express
-  2. DataSource As an Event Source
-    - It can act as event source as well as a data source
-    - shares the client with the corresponding data source
+  2. DataSource as an eventsource
+    - It can act as eventsource as well as a datasource
+    - shares the client with the corresponding datasource
     - eg., Kafka, RabbitMQ
 
-## How to use an event source in Godspeed project?
+## How to use an eventsource in Godspeed project?
 
   You can use Godspeed CLI to browse and install plugins which are published and maintained by Godspeed.
 ```bash

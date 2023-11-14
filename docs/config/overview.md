@@ -1,6 +1,6 @@
 # Introduction
 
-## Config Structure
+## Config structure
 
 The configuration variables, along with their respective values, are specified within YAML files located in the `config/` directory. These variables are easily customizable to align with specific business use cases. The default directory structure is outlined as follows
 
@@ -10,8 +10,8 @@ The configuration variables, along with their respective values, are specified w
 │   ├── default.yaml
 ```
 
-### File Naming and Load Order
-The configuration files under `config/` directory can have specific naming conventions and load order. Please refer [File Name and Load Order](https://github.com/node-config/node-config/wiki/Configuration-Files#file-load-order) for more information.
+### File naming and Load order
+The configuration files under `config/` directory can have specific naming conventions and load order. Please refer [File name and Load order](https://github.com/node-config/node-config/wiki/Configuration-Files#file-load-order) for more information.
 
 
 ## Environment variables
@@ -26,7 +26,7 @@ The configuration files under `config/` directory can have specific naming conve
 │   ├── custom-environment-variables.yaml
 ```
 
-2. We can also add Database connection string and Urls in .env  file is under root folder `/.env`
+2. We can also add database connection string and Urls in .env  file is under root folder `/.env`
 
 ```
 ├── .env
@@ -66,7 +66,7 @@ $ export MY_DATASOURCE_BASE_URL=https://httpbin.org/
 After exporting the environment variable, you can access this variable in your project by using scripting `<% config.my_datasource.base_url %>`
 
 
-# Static variables
+## Static variables
 The static variables as well as their values are defined in yaml files under `config/` directory. These variables can be replaced as per the business use cases. The default directory structure is given as below:
 
 ```
