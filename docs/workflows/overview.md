@@ -204,11 +204,11 @@ tasks:
 #### Decoupled Architecture
 Yaml workflows allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
 
-- **Language-Agnostic Decoupling:**
+- #### Language-Agnostic Decoupling:
 
   When leveraging a Prisma API, it is possible to craft YAML configurations today and seamlessly incorporate them into a Java-based workflow at a later time. This decoupling empowers a seamless transition between various programming languages, provided they uphold compatibility with the identical YAML configuration format.
 
-- **Client-Agnostic Decoupling:**
+- #### Client-Agnostic Decoupling:
 
   If you develop your code in JavaScript, you are essentially using the native JavaScript client exposed by Prisma. Later, if you decide to switch from Prisma to TypeORM, you can keep the same YAML configuration. All you need to do is adapt the TypeORM client to conform to the YAML DSL of datasources. In this scenario, only the datasource implementation would change, while the rest of your code remains unchanged.
 
