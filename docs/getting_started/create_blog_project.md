@@ -129,9 +129,7 @@ Command generates the below respective folders and files in the Events and Funct
 godspeed dev
 ```
 9. Go to [http://localhost:3000/api-docs](http://localhost:3000/api-docs) to see the API endpoints in the swagger.
-:::note
-Currently, the feature for generating Swagger specifications, which we have in [version 1](https://docs.godspeed.systems/docs/v1/microservices/swagger-specs), is coming soon in version 2.
-:::
+
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-15%2002-24-45.png?updatedAt=1697316915416" alt="swagger spec default" />
 
 <!-- 

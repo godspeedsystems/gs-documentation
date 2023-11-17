@@ -7,7 +7,7 @@ A native language workflow enables us to incorporate additional features using J
 module.exports = async(ctx) => {
     // In the current version, import all the libs with require
     const { GSStatus } = require("@godspeedsystems/core");
-    const { inputs, childLogger } = ctx;
+    const { inputs, childLogger,outputs } = ctx;
     const maria_db_client = ctx.datasources['mariadb'].client;
     const redis_client = ctx.datasources['redis'].client;
     let response;
@@ -49,10 +49,42 @@ The above is a sample of how a js file is configured and used.For every function
 
 We use the varibles inside the ctx as follows
 
+### inputs
+
+Inputs are stored in the context (`ctx`), allowing universal access throughout the workflow.
+
+```yaml
+  - id: return_with_status
+    fn: com.gs.return 
+    args: <% inputs.query.word %>
+```
+
+
+### outputs
+
+In the context (`ctx`), the outputs of each task are stored along with their respective task IDs. This facilitates subsequent operations that rely on the outputs of previous tasks.
+
+```yaml
+  - id: task_level_2
+    fn: com.gs.return
+    args: <% outputs.task_level_1 %>
+```
+This is how we use the outputs of previous task in a workflow
+
+
+### Datasources
+
+we can also access the datasource clients from ctx as follows
+
 ```js
  const { inputs, childLogger } = ctx;
  const maria_db_client = ctx.datasources['mariadb'].client;
+
 ```
+
+### GSStatus
+
+The `GSStatus` is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
 
 We the set the values as below
 
