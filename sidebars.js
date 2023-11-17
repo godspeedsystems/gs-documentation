@@ -445,7 +445,7 @@ const sidebars = {
       items: [
         {
           type: "doc",
-          label: "14.1. React App",
+          label: "3.1. React App",
           id: "ai_modules/react_app"
         },
       
