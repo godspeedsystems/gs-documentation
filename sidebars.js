@@ -231,17 +231,7 @@ const sidebars = {
             },
           ],
         },
-        {
-          type: "category",
-          label: "14. AI Module",
-          items: [
-            {
-              type: "doc",
-              label: "14.1. React App",
-              id: "ai_modules/react_app"
-            },
-          ],
-        }
+       
         
       ]
       
@@ -448,10 +438,20 @@ const sidebars = {
           id: "elasticgraph_orm/feature-set-of-elasticgraph"
         },
       ]
-   }
+   },
+    {
+      type: "category",
+      label: "3. Web-UI Starter Kit",
+      items: [
+        {
+          type: "doc",
+          label: "14.1. React App",
+          id: "ai_modules/react_app"
+        },
+      
+      ]
+    }
   ]
 };
 
 module.exports = sidebars;
-
-
