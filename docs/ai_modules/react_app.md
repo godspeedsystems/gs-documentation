@@ -59,6 +59,8 @@ Currently we support [React](https://react.dev/).
   ```
 * It will ask you for the location and name of your OpenAPI file.
 * AI agent will read the OpenAPI spec and generate a react project with fetch hooks and tailwind configured.
+* Go to the new app folder and install the dependencies by `npm install`
+* Run `npm start` command to run the react project.
 * And Done.
 
 ### What you will end up with
