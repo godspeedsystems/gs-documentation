@@ -862,8 +862,14 @@ tasks:
         args: 'Hi!'
 ```
 
-### 7.7 Developer written functions
-Developer can write functions in JS/TS and [kept in src/functions folder](#63-location-and-fully-qualified-name-id-of-workflows-and-functions) at a path, which becomes its fully qualified name. Other languages support is planned. Once it is written, the function can be invoked from within any workflow or sub-workflow, with its fully qualified name and argument structure.
+
+### 7.7 Writing custom JS/TS workflows
+
+Godspeed allows developers to write js/ts workflows.
+
+#### 7.7.1 Executing a JS/TS Workflow within a YAML Workflow:
+
+Developer can write functions in JS/TS and [kept in src/functions folder](#63-location-and-fully-qualified-name-id-of-workflows-and-functions) at a path, which becomes its fully qualified name. Once it is written, the function can be invoked from within any workflow or sub-workflow, with its fully qualified name and argument structure.
 
 ![function_folder](/img/function_folder.jpeg)
 
@@ -877,6 +883,89 @@ Developer can write functions in JS/TS and [kept in src/functions folder](#63-lo
       args:
         arg1: 'hello world'
         arg2: 'hello again'
+```
+
+#### 7.7.2 Executing JS/TS workflow directly from event:
+
+Developer can write functions in JS/TS and call directly from any event. Check out below event and workflow example for better understanding.
+
+##### Event: (src/events/mongo/create.yaml)
+```yaml
+/mongo/category.http.post:
+  summary: Create a new Category
+  description: Create Category from database
+  fn: com.jfs.create # calling js workflow in src/functions/com/jfs folder.
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/mongo/Category'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+```
+##### JS Workflow: (src/functions/com/jfs/create.js)
+In this JavaScript/TypeScript workflow, a pivotal stage is the creation of arguments encompassing the datasource, data, and configuration. These arguments are then supplied to the executeDatasource function, accompanied by the context and function     name. The workflow manages inputs, constructs appropriate arguments, and executes the 'Category.create' datasource function through executeDatasource. Ultimately, the workflow yields a GSStatus object that signals either success or failure, providing relevant details about the response or encountered error. 
+
+Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.
+
+CTX includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
+To access outputs from workflows executed before the existing workflow, developer can destruct ctx object just like how inputs and datasources. for eg. const {outputs} = ctx; 
+same can be done to access mappings and plugins etc.
+
+```javascript
+const { GSStatus, executeDatasource } = require('#core/interfaces');
+
+module.exports = async (ctx, fn) => {
+  const { inputs, datasources } = ctx;
+  try {
+    inputs.body = inputs.data.body;
+
+    let args = {
+      datasource: 'mongo',
+      data: { data: inputs.body },
+      config: { method: 'Category.create' },
+    };
+
+    const responseData = await executeDatasource(
+      ctx,
+      fn['com.gs.datastore'],
+      args,
+    );
+    // return GSStatus response from a workflow
+    return new GSStatus(true, 200, undefined, responseData, undefined);
+
+  } catch (error) {
+    return new GSStatus(false, 500, undefined, error, undefined);
+  }
+};
+
+module.exports.id = 'main';
+```
+In JS/TS workflows, we can utilize `fn` to access YAML workflows. In the example below, there is a workflow named create.yaml located at the path src/functions/com.biz/mongo/category/create.yaml. When the API is called, this JavaScript workflow is triggered, obtaining the response from the create.yaml workflow and returning it.
+
+```javascript
+const { GSStatus, executeDatasource } = require('#core/interfaces');
+
+module.exports = async (ctx, fn) => {
+  const { inputs, datasources } = ctx;
+  try {
+    inputs.body = inputs.data.body;
+
+
+    const responseData =  await fn['com.biz.mongo.category.create'](ctx)
+    return new GSStatus(true, 200, undefined, responseData, undefined);
+
+
+  } catch (error) {
+    return new GSStatus(false, 500, undefined, error, undefined);
+  }
+};
+
+module.exports.id = 'main';
+
 ```
 
 ### 7.8 Headers defined at workflow level
