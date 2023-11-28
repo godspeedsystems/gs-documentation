@@ -58,7 +58,6 @@ with childLogger you have accessibility to framework logger.
 
 Every workflow response should be in GSStatus. it has the below properties.
 
-:::
 #### GSStatus Properties :
 
 ```bash
@@ -70,6 +69,8 @@ Every workflow response should be in GSStatus. it has the below properties.
         [key: string]: any;
     };
 ```
+:::
+
 
 
 ```js
