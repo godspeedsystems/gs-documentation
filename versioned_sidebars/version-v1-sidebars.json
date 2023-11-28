@@ -32,7 +32,8 @@
           ]
         },
         "microservices/setup/tests",
-        "microservices/setup/auto-watch"
+        "microservices/setup/auto-watch",
+        "microservices/setup/debugger-in-yaml"
       ]
     },
     {

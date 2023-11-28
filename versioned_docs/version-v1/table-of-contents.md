@@ -33,7 +33,8 @@ title: Table of Contents
     [3.3.3 Static variables](./microservices/setup/configuration/static-vars.md)      
 
 [3.4 Tests](./microservices/setup/tests.md)      
-[3.5 Auto watch and build](./microservices/setup/auto-watch.md)      
+[3.5 Auto watch and build](./microservices/setup/auto-watch.md)  
+[3.6 Debugger in yaml](./microservices/setup/debugger-in-yaml.md)     
 
 [4. **CLI**](./microservices/introduction-cli.md)      
     [4.1 Functionality](./microservices/introduction-cli.md/#41-functionality)      
