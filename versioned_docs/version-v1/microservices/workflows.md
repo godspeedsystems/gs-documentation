@@ -944,7 +944,7 @@ module.exports = async (ctx, fn) => {
 
 module.exports.id = 'main';
 ```
-In JS/TS workflows, we can utilize `fn` to access YAML workflows. In the example below, there is a workflow named create.yaml located at the path src/functions/com.biz/mongo/category/create.yaml. When the API is called, this JavaScript workflow is triggered, obtaining the response from the create.yaml workflow and returning it.
+In JS/TS workflows, we can utilize `fn` to access YAML workflows. In the example below, there is a workflow named create.yaml located at the path src/functions/com/biz/mongo/category/create.yaml. When the API is called, this JavaScript workflow is triggered, obtaining the response from the create.yaml workflow and returning it.
 
 ```javascript
 const { GSStatus, executeDatasource } = require('#core/interfaces');
