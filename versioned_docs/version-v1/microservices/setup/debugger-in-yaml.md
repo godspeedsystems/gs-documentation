@@ -26,4 +26,4 @@ The framework provides debugger feature in yaml workflows.
 
 9. Check out the provided video for a more in-depth understanding of the debugger feature and give it a try in your project.
  
-<iframe  width="560" height="315" src="https://imagekit.io/player/embed/h7ozyeimg/debugger.mp4?thumbnail=https%3A%2F%2Fik.imagekit.io%2Fh7ozyeimg%2Fdebugger.mp4%2Fik-thumbnail.jpg&updatedAt=1701160429669" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" />
+<iframe width="560" height="315" src="https://imagekit.io/player/embed/h7ozyeimg/debugger%20in%20yaml%20-%20Made%20with%20Clipchamp100.mp4?thumbnail=https%3A%2F%2Fik.imagekit.io%2Fh7ozyeimg%2Fdebugger%2520in%2520yaml%2520-%2520Made%2520with%2520Clipchamp100.mp4%2Fik-thumbnail.jpg&updatedAt=1701309290790" title="ImageKit video player" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"> </iframe>
