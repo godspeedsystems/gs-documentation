@@ -887,7 +887,7 @@ Developer can write functions in JS/TS and [kept in src/functions folder](#63-lo
 
 #### 7.7.2 Executing JS/TS workflow directly from event:
 
-Developer can write functions in JS/TS and call directly from any event. Check out below event and workflow example for better understanding.
+Developer can call JS/TS workflows directly from any event. Check out below event and workflow example for better understanding.
 
 ##### Event: (src/events/mongo/create.yaml)
 ```yaml
@@ -911,15 +911,66 @@ In this JavaScript/TypeScript workflow, a pivotal stage is the creation of argum
 
 Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.
 
+#### CTX: 
+:::note
+ (Every function/workflow has accessibility to ctx object which is passed as an orgument and further more you can access the properties by destructuring it.)
+:::
+
+##### what is CTX ?
+
 CTX includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
-To access outputs from workflows executed before the existing workflow, developer can destruct ctx object just like how inputs and datasources. for eg. const {outputs} = ctx; 
-same can be done to access mappings and plugins etc.
+
+##### Inputs:
+
+Inputs Provide you all the Information you passed to event like headers, params, query params etc.
+
+```javascript
+  const {inputs} = ctx;
+  inputs.body = inputs.data.body;
+```
+##### Outputs:
+
+To access outputs of tasks executed before the current task, developer can destruct ctx object just like how inputs and datasources.If we have more then one task, we can access first task outputs in second task with Outputs object. we should access first task output by useing it's id.
+
+```javascript
+  const {outputs} = ctx;
+  const firstTaskOutput = outputs[firstTaskId]
+```
+
+
+##### config:
+
+you can access any information of config with ctx.
+
+```javascript
+
+    const { config } = ctx;
+    const mongoConnectionString = config.MONGO_URL;
+
+```
+:::note
+
+Every workflow response should be in GSStatus. it has the below properties.
+
+#### GSStatus Properties :
+
+```bash
+    success: boolean;
+    code?: number;
+    message?: string;
+    data?: any;
+    headers?: {
+        [key: string]: any;
+    };
+```
+:::
+
 
 ```javascript
 const { GSStatus, executeDatasource } = require('#core/interfaces');
 
 module.exports = async (ctx, fn) => {
-  const { inputs, datasources } = ctx;
+  const { inputs } = ctx;
   try {
     inputs.body = inputs.data.body;
 
@@ -944,7 +995,7 @@ module.exports = async (ctx, fn) => {
 
 module.exports.id = 'main';
 ```
-In JS/TS workflows, we can utilize `fn` to access YAML workflows. In the example below, there is a workflow named create.yaml located at the path src/functions/com.biz/mongo/category/create.yaml. When the API is called, this JavaScript workflow is triggered, obtaining the response from the create.yaml workflow and returning it.
+In JS/TS workflows, we can utilize `fn` to access YAML workflows. In the example below, there is a workflow named create.yaml located at the path src/functions/com/biz/mongo/category/create.yaml. When the API is called, this JavaScript workflow is triggered, obtaining the response from the create.yaml workflow and returning it.
 
 ```javascript
 const { GSStatus, executeDatasource } = require('#core/interfaces');
