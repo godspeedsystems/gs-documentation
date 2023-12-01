@@ -47,16 +47,39 @@ module.exports = async(ctx) => {
 
 The above is a sample of how a js file is configured and used.For every function it comes up with a ctx called context which helps in maintained and passing the data with the functions and method
 
+### [GSContext(ctx)](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts)
+
+Ctx is the of the builtin class of godspeed where it stores certain variables called inputs,outputs,datasources,exitwithstatus etc,It helps in passing the args from one functions to another
+
 We use the varibles inside the ctx as follows
+
+:::info Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
+:::
+
+
 
 ### inputs
 
 Inputs are stored in the context (`ctx`), allowing universal access throughout the workflow.
 
+#### In Yaml file
+
 ```yaml
   - id: return_with_status
     fn: com.gs.return 
     args: <% inputs.query.word %>
+```
+
+#### In JS file
+
+```js
+ module.exports=(ctx)=>{
+
+    console.log(ctx.inputs.data.body.name)
+
+    return ctx.inputs.data.body.name
+
+}
 ```
 
 
@@ -84,7 +107,7 @@ we can also access the datasource clients from ctx as follows
 
 ### GSStatus
 
-The `GSStatus` is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
+The [`GSStatus`](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
 
 We the set the values as below
 
