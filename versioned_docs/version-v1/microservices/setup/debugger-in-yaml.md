@@ -10,7 +10,7 @@ The framework provides debugger feature in yaml workflows.
 
 1. Start by creating a new project and running `npm install` to install the necessary dependencies.
 
-2. Utilize the "godspeed" build command to build your project efficiently.
+2. Utilize the "godspeed build" command to build your project efficiently.
 
 3. Access the JavaScript debugger and open the YAML file. You can now set breakpoints within the YAML file by placing debugger points.
 
