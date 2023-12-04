@@ -57,13 +57,19 @@ jwt:
 
 prisma_secret: PRISMA_SECRET
 ```
+
 For example, `MY_DATASOURCE_BASE_URL` is defined as an environment variable. To specify its value, you need to export this variable in the environment.Enter as given below in the terminal:
 
 ```
 $ export MY_DATASOURCE_BASE_URL=https://httpbin.org/
 ```
 
-After exporting the environment variable, you can access this variable in your project by using scripting `<% config.my_datasource.base_url %>`
+After exporting the environment variable, you can access this variable in your project by using scripting 
+`<% config.my_datasource.base_url %>`
+
+:::info To reflect the updated values of the .env variables, you need to export them again after making changes. This ensures that the updated values are accessible and used in your application.
+:::
+
 
 
 ## Static variables
