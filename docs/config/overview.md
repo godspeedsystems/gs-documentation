@@ -57,7 +57,7 @@ jwt:
 
 prisma_secret: PRISMA_SECRET
 ```
-For example, `MY_DATASOURCE_BASE_URL` is defined as an environment variable. To specify its value, you need to export this variable in the environment as given below:
+For example, `MY_DATASOURCE_BASE_URL` is defined as an environment variable. To specify its value, you need to export this variable in the environment.Enter as given below in the terminal:
 
 ```
 $ export MY_DATASOURCE_BASE_URL=https://httpbin.org/
