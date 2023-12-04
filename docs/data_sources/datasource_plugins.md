@@ -7,8 +7,8 @@ To seamlessly integrate these plugins into your project, simply wield the comman
 ```bash
 $  godspeed plugin add
 ```
-  ```bash
-Output:
+```bash
+
 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
@@ -16,17 +16,21 @@ Output:
        " "   ╚════════════════════════════════════╝
 
 
-? Please select a godspeed plugin to install. (Use arrow keys)
-    @godspeedsystems/plugins-prisma-as-datastore 
-    @godspeedsystems/plugins-express-as-http 
-❯ @godspeedsystems/plugins-cron-as-eventsource 
-    @godspeedsystems/plugins-axios-as-datasource 
-    @godspeedsystems/plugins-aws-as-datasource 
-    @godspeedsystems/plugins-excel-as-datasource 
-    @godspeedsystems/plugins-mailer-as-datasource 
-    @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
-    @godspeedsystems/plugins-redis-as-datasource 
-(Move up and down to reveal more choices)
+? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
+┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│      │ Name                                   │ Description                                                                    │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ ❯◯   │ cron-as-eventsource                    │ Cron as eventsource plugin for Godspeed Framework                              │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ aws-as-datasource                      │ aws as datasource plugin for Godspeed Framework                                │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ excel-as-datasource                    │ excel as datasource plugin for Godspeed Framework                              │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ mailer-as-datasource                   │ mailer as datasource plugin for Godspeed Framework                             │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ kafka-as-datasource-as-eventsource     │ kafka as datasource-as-eventsource plugin for Godspeed Framework               │
+└──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+
 ```
 
 you can specify plugin name to add directly to your project
