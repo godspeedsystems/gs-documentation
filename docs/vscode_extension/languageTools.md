@@ -34,7 +34,7 @@ Godspeed Language Tool is the extnsion used to increase the productivity.
 
 ---
 #### Crate a Workflow 
-- You can also add body , params , response in the event customise it. 
+- You can add Godspeed Basic Workflow to get started the Workflow. 
 
 ![preview](/img/video-gif/godspeed_workflow.gif "Godspeed Workflow Sample")
 
