@@ -231,6 +231,18 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "14. AI Module",
+          items: [
+            {
+              type: "doc",
+              label: "14.1. React App",
+              id: "ai_modules/react_app"
+            },
+          ],
+        }
+        
       ]
       
       

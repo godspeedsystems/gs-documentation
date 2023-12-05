@@ -65,3 +65,57 @@ The framework allows developer to specify the keys that may have sensitive infor
 ### Telemetry autoinstrumentation using OTEL
 Godspeed allows a developer to add auto-instrumentation which publishes logs, trace and APM information in OTEL standard format, supported by all major observability backends. The APM export captures not just the RAM, CPU information per node/pod/service, but also the latency information of the incoming API calls, with broken down spans giving breakup of latency across the calls to datastores or external APIs. This helps to find out exact bottlenecks. Further the logs and trace/spans are correlated to find out exactly where the error happened in a request spanning multiple microservices with each calling multiple datasources and doing internal computation. 
 Developer can also add custom logging, span creation and BPM metrics at task level. For ex. new user registration, failed login attempt etc.
+
+### GuardRails 
+Guardrails in the context of software development refer to a set of predefined rules, best practices, and constraints that guide developers in creating code that is secure, efficient, and maintainable. 
+
+At Godspeed, our development philosophy revolves around four core guardrails, shaping a robust and innovative approach to software creation:
+
+**1.Schema driven development:**
+
+Embracing the power of structured data, Godspeed follows a schema-driven development approach. This guardrail ensures that the events, workflows within the software are defined by clear and well-documented schemas. 
+
+Dive deeper into the fascinating world of schema-driven development by watching the video below...
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/jtn8rvfs7lo" frameBorder="0" allowFullScreen></iframe>
+</div>
+
+
+**2.Configure over code:**
+
+At Godspeed, we believe in empowerment over complexity. That's why we champion configuration over endless coding. This guardrail encourages the use of high-level abstractions and configuration settings, giving developers the power to tailor the software's behavior without getting lost in the weeds of complex code changes.
+
+Ready to unravel the magic of configure over code? Take a closer look in the video below, where we break it down in simple terms!"
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/7y7-gx80Nsc" frameBorder="0" allowFullScreen></iframe>
+</div>
+
+
+
+
+
+**3.Security:**
+
+At Godspeed, security is non-negotiable. We've fortified our software with robust security standards and practices, including secure coding, strong authentication, and proactive vulnerability mitigation. 
+
+Watch the video below to see how we keep your digital fortress impregnable."
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/nVn86r3Sguo" frameBorder="0" allowFullScreen></iframe>
+</div>
+
+
+
+**4. Decoupled Architecture:**
+
+Godspeed's guardrail of decoupled architecture advocates for the separation of concerns within the software. By modularizing components and minimizing dependencies, this approach enhances scalability, maintainability, and collaboration among development teams. 
+
+Watch the below video for more understanding.
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tVWDbVPsLFQ" frameBorder="0" allowFullScreen></iframe>
+</div>
+
+
