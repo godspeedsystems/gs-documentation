@@ -61,13 +61,13 @@ The standardized guardrails with clearly defined developer's boundaries, ensure 
 
 ## Design Principles
 
-In order to serve the [Goals](#aims) and [Tenets](#tenets) of the framework, we have followed certain [design principles](design_principles.md).
+In order to serve the [Goals](#aims) and [Tenets](/docs/tenets_and_design_principles.md#tenets) of the framework, we have followed certain [design principles](/docs/tenets_and_design_principles.md#design-principles).
 
 ## Framework architecture
 
 The three main pillars of Godspeed framework: [eventsources](event_sources/overview.md), [datasources](data_sources/overview.md), and [functions or workflows](workflows/overview.md). 
 
-> Do read more about them in the [design principles](design_principles#design-principles-1) section.
+> Do read more about them in the [design principles](/docs/tenets_and_design_principles.md#design-principles) section.
 
 ![framework-architecture](/img/framework-architecture.png)
 

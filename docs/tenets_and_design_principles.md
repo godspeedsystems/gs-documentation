@@ -1,4 +1,6 @@
-# Tenets
+# Tenets and Design Principles
+
+## Tenets
 
 ### Focus on the what and not the how
 
