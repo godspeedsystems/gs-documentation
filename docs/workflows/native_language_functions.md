@@ -1,117 +1,127 @@
 # Native Language Functions
 
-Native language functions are primarily written in JavaScript or TypeScript. This allows users to create custom functions to extend and enhance workflow functionality.
+Native language functions are primarily written in JavaScript or TypeScript. This allows users to create custom functions.
 A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
 
-```js
-module.exports = async(ctx) => {
-    // In the current version, import all the libs with require
-    const { GSStatus } = require("@godspeedsystems/core");
-    const { inputs, childLogger,outputs } = ctx;
-    const maria_db_client = ctx.datasources['mariadb'].client;
-    const redis_client = ctx.datasources['redis'].client;
-    let response;
-    
-    try {
-    inputs.body = inputs.data.body
-    childLogger.info('inputs: %o', inputs.body);
 
-    // 1. check amount
-    if (inputs.body.amount <= 0) {
-        throw "Invalid Amount"
-    }
+Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.
 
-    // 2. get TSP List
-    const tsp = await maria_db_client.tabTSP_List.findMany({
-        where: {
-            tsp: {
-                equals: inputs.body.tsp
-            },
-            parent: {
-                equals: inputs.body.customer
-            }
-        }
-    })
-    if (tsp.length == 0) {
-        throw(`Customer doesn't exist ${inputs.body.customer}`);
-    }
-    // 3. get customer and check its status
-    const customer = await get_customer_status_kyc_type(maria_db_client, redis_client, inputs.body.customer);
-    childLogger.debug("Customer status %s" , customer.status)
-    if (customer.status != "Active") {
-        throw(`Customer is ${customer.status}`);
-    }
-    }}
+### CTX 
+:::note
+ (Every function/workflow has accessibility to ctx object which is passed as an orgument and further more you can access the properties by destructuring it.)
+:::
 
-```
+### what is CTX ?
 
-The above is a sample of how a js file is configured and used.For every function it comes up with a ctx called context which helps in maintained and passing the data with the functions and method
+CTX includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
 
-### [GSContext(ctx)](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts)
-
-Ctx is the of the builtin class of godspeed where it stores certain variables called inputs,outputs,datasources,exitwithstatus etc,It helps in passing the args from one functions to another
-
-We use the varibles inside the ctx as follows
-
-:::info Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
+:::tip Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
 :::
 
 
+### Inputs
 
-### inputs
+Inputs Provide you all the Information you passed to event like headers, params, query params etc.
 
-Inputs are stored in the context (`ctx`), allowing universal access throughout the workflow.
 
-#### In Yaml file
+```javascript
+  const {inputs} = ctx;
+  inputs.body = inputs.data.body;
+```
+### Outputs
 
-```yaml
-  - id: return_with_status
-    fn: com.gs.return 
-    args: <% inputs.query.word %>
+To access outputs of tasks executed before the current task, developer can destruct ctx object just like how inputs and datasources.If we have more then one task, we can access first task outputs in second task with Outputs object. we should access first task output by useing it's id.
+
+```javascript
+  const {outputs} = ctx;
+  const firstTaskOutput = outputs[firstTaskId]
 ```
 
-#### In JS file
+### datasources
+    
+With datasources we can access all Datasources, their clients and methods.
 
-```js
- module.exports=(ctx)=>{
+```javascript
 
-    console.log(ctx.inputs.data.body.name)
+const { datasources} = ctx;
+const responseData = await datasources.mongo.client.Restaurant.create({
+    data: inputs.body
+})
 
-    return ctx.inputs.data.body.name
-
-}
 ```
+### childLogger
 
+with childLogger you have accessibility to framework logger.
 
-### outputs
+```javascript
 
-In the context (`ctx`), the outputs of each task are stored along with their respective task IDs. This facilitates subsequent operations that rely on the outputs of previous tasks.
-
-```yaml
-  - id: task_level_2
-    fn: com.gs.return
-    args: <% outputs.task_level_1 %>
-```
-This is how we use the outputs of previous task in a workflow
-
-
-### Datasources
-
-we can also access the datasource clients from ctx as follows
-
-```js
- const { inputs, childLogger } = ctx;
- const maria_db_client = ctx.datasources['mariadb'].client;
+    const { childLogger} = ctx;
+    childLogger.info('inputs: %o', inputs.body);
 
 ```
 
 ### GSStatus
 
-The [`GSStatus`](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
+The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
 
-We the set the values as below
+:::note
+
+Every workflow response should be in GSStatus. it has the below properties.
+
+### GSStatus Properties
+
+```bash
+    success: boolean;
+    code?: number;
+    message?: string;
+    data?: any;
+    headers?: {
+        [key: string]: any;
+    };
+```
+:::
+
+We set the values as below
 
 ```js
 response = new GSStatus(true, 200, undefined, responseData, undefined);
 ctx.outputs[id] = response;
 ```
+
+
+```js
+module.exports = async(ctx)=>{
+
+  const {GSStatus} = require('@godspeedsystems/core');
+  const {inputs, childLogger, datasources} = ctx;
+  const prismaClient = datasources.mongo.client;
+
+  try {
+
+    inputs.body = inputs.data.body;
+    childLogger.info('inputs: %o', inputs.body);
+    
+    const responseData = await prismaClient.Restaurant.create({
+      data: inputs.body
+    })
+    ctx.outputs[id] = responseData;
+
+    return new GSStatus(true, 200, undefined, responseData, undefined);
+
+  } catch (error) {
+
+    return new GSStatus(false, 500, undefined, error, undefined);
+
+  }
+}
+
+module.exports.id = 'main';
+```
+
+The above is a sample of how a js file is configured and used.For every function it comes up with a ctx called context which helps in maintained and passing the data with the functions and method
+
+
+
+
+
+
