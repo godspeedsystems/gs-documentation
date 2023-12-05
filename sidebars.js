@@ -30,7 +30,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "2. Design Principles",
+          label: "2. Tenets and Design Principles",
           id: "design_principles",
         },
         {
