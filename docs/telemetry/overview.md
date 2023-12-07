@@ -34,10 +34,29 @@ Numerous open source and commercial softwares for Observability support OpenTele
 Collect, correlate and debug signals across logs (events), traces and metrics, based on the request id and the attributes defined for the organization. For example, app version, function, DB query, K8s pod, domain, microservice etc.
 
 ## Configuration
+### Enable observability
+When observability is enabled then the application starts omitting traces, logs and metrics.
+
+#### Set OTEL_ENABLED flag
+Environment variable to enable/disable observability in Godspeed. The default value is false. Either export the variable or set it in  the .env file.
+```
+export OTEL_ENABLED=<boolean value>
+```
+For example,
+```
+export OTEL_ENABLED=true
+```
+
+#### Install @godspeedsystems/tracing npm package
+Install @godspeedsystems/tracing npm package in your Godspeed application
+```
+npm install @godspeedsystems/tracing
+```
+
 ### OTEL exporter endpoint
 Specify the IP address of your OTEL collector as env variable. Refer [OTEL Exporter](https://opentelemetry.io/docs/reference/specification/protocol/exporter/#endpoint-urls-for-otlphttp) for more information.
 ```
-$ export OTEL_EXPORTER_OTLP_ENDPOINT=<IP of OTEL collector>:4317
+export OTEL_EXPORTER_OTLP_ENDPOINT=<IP of OTEL collector>:4317
 ```
 For example,
 ```
@@ -47,7 +66,7 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://172.17.0.1:4317
 ### OTEL service name
 Specify the service name by which you want to setup observability and set it as env variable. 
 ```
-$ export OTEL_SERVICE_NAME=sample_proj1
+export OTEL_SERVICE_NAME=sample_proj1
 ```
 
 Let's assume you have setup SigNoz as the exporter then you will see something like this: 
@@ -90,9 +109,8 @@ Sample masked logs:
 {"Body":"this.id: hello_world, output: {\"request_data\":{\"payload\":{\"data\":{\"body\":{\"mobileNumber\":\"*****\"}}}}}","Timestamp":"1684221387898000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"unknown_service:node","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"hello_world"}}
 ```
 
-
 #### Log format
-By default, the logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when you deploy your service 
+When observability is [enabled](overview.md/#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
 {"Body":"adding body schema for /upload_multiple_docs.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -105,40 +123,26 @@ By default, the logs are dumped in [OTEL Logging format](https://opentelemetry.i
 {"Body":"Validate Response JSON Schema Success","Timestamp":"1676531765811000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":""}}
 ```   
    
-** Dev Format **
-The `dev format` is basically a transformation of OTEL log format to increase readability for developers. To set the `dev format` logs, you need to set NODE_ENV value as `dev` inside your environment.
-```
-export NODE_ENV=dev
-```
-
-The format is as below:
-```
-datetime [SeverityText] TraceId SpanId {Attributes} Body
-```
+** pino pretty format **
+When observability is [disabled](overview.md/#enable-observability) i.e. OTEL_ENABLED env variable is set to false or NODE_ENV is set to 'dev' then the logs are dumpde in [pino pretty format](https://www.npmjs.com/package/pino-pretty).
   
 Sample Logs:
 ```
-16/02/23, 12:44:42 pm [INFO]   {} adding body schema for /upload_doc.http.post
-16/02/23, 12:44:42 pm [INFO]   {} adding body schema for /upload_multiple_docs.http.post
-16/02/23, 12:44:42 pm [INFO]   {} adding body schema for /upload_s3.http.post
-16/02/23, 12:44:42 pm [INFO]   {} registering http handler /another_workflow post
-16/02/23, 12:44:42 pm [INFO]   {} registering http handler /create/:entity_type post
-16/02/23, 12:44:42 pm [INFO]   {} registering http handler /document post
-16/02/23, 12:44:42 pm [INFO]   {} registering http handler /fn_script post
-. . . . . . . . . . 
-16/02/23, 12:44:43 pm [INFO] f9f61d4940e3a8e5be8bc80faf6e36a2 96e746f5cbbee1ac {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":"test_step1"} args.retry {"max_attempts":3,"type":"constant","interval":5000}
-16/02/23, 12:44:44 pm [INFO] f9f61d4940e3a8e5be8bc80faf6e36a2 96e746f5cbbee1ac {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":"test_step1"} Result of _executeFn test_step1 {"success":true,"code":200,"data":{"args":{},"data":"{\"data\":{\"lan\":\"12345\"}}","files":{},"form":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Length":"24","Content-Type":"application/json","Host":"httpbin.org","Traceparent":"00-f9f61d4940e3a8e5be8bc80faf6e36a2-f6c0a5ce67f5b07c-01","User-Agent":"axios/0.25.0","X-Amzn-Trace-Id":"Root=1-63edd7e4-0b8b6ba319833492520e6b0c"},"json":{"data":{"lan":"12345"}},"method":"POST","origin":"180.188.224.177","url":"https://httpbin.org/anything"},"message":"OK","headers":{"date":"Thu, 16 Feb 2023 07:14:44 GMT","content-type":"application/json","content-length":"598","connection":"close","server":"gunicorn/19.9.0","access-control-allow-origin":"*","access-control-allow-credentials":"true"}}
-16/02/23, 12:44:44 pm [INFO] f9f61d4940e3a8e5be8bc80faf6e36a2 96e746f5cbbee1ac {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":""} Validate Response JSON Schema Success
+[11:35:05.264] INFO (17113): [START] Load definitions from /home/gurjot/data/cli-test/card91/card91/src/definitions
+[11:35:05.281] DEBUG (17113): Definitions loaded and registered to ajvInstance
+. . . . . . . . . . . . .
+[11:35:05.282] INFO (17113): [END] Load definitions
+[11:35:05.282] INFO (17113): [START] Load mappings from /home/gurjot/data/cli-test/card91/card91/src/mappings
+[11:35:05.282] DEBUG (17113): Mappings {}
+[11:35:05.282] INFO (17113): [END] Load mappings
+[11:35:05.282] INFO (17113): [START] Load data sources from /home/gurjot/data/cli-test/card91/card91/src/datasources
+[11:35:05.293] DEBUG (17113): evaluating datasource api
+[11:35:05.293] DEBUG (17113): evaluated datasource api {"type":"axios","base_url":"https://httpbin.org"}
 ```
-:::note
-If you set any other value in NODE_ENV then the logs are dumped in OTEL format by default.
-:::
 
-
-#### Loggin for events
-You can add any custom attribute in the OTEL logs whenever any event is triggered on your service. The value for the custom identifier will be picked up from event body, params, query, or headers.   
-
-#### Custom log attributes for all events
+#### Custom log attributes
+##### Custom log attributes for all events
+You can add any custom attribute in the logs whenever any event is triggered on your service. The value for the custom identifier can be picked up from event body, params, query, or headers.   
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
@@ -167,12 +171,6 @@ Please make sure to add ? in case any field is optional like `body?.data?.lan` s
 :::
 
 ** Sample Logs **
-- Dev format
-```
-21/02/23, 11:54:06 am [INFO] 48c894ed7d65caa236e8cc0664ee4e5e 5af2d3d564e86fb6 {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"} Processing event /test/:id.http.post
-21/02/23, 11:54:06 am [INFO] 48c894ed7d65caa236e8cc0664ee4e5e 5af2d3d564e86fb6 {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"} event inputs {"baseUrl":"","body":{"data":{"lan":"12345"}},"fresh":false,"hostname":"localhost","ip":"::ffff:172.22.0.1","ips":[],"method":"POST","originalUrl":"/test/12?mobileNumber=9878987898","params":{"id":"12"},"path":"/test/12","protocol":"http","query":{"mobileNumber":"9878987898"},"route":{"path":"/test/:id","stack":[{"name":"<anonymous>","keys":[],"regexp":{"fast_star":false,"fast_slash":false},"method":"post"},{"name":"<anonymous>","keys":[],"regexp":{"fast_star":false,"fast_slash":false},"method":"post"}],"methods":{"post":true}},"secure":false,"stale":true,"subdomains":[],"xhr":false,"headers":{"content-type":"application/json","user-agent":"PostmanRuntime/7.29.2","accept":"*/*","postman-token":"835edd29-7c36-4e11-9b79-c661bbd911b0","host":"localhost:4000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"46"},"files":[]}
-21/02/23, 11:54:06 am [INFO] 48c894ed7d65caa236e8cc0664ee4e5e 5af2d3d564e86fb6 {"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"} event body and eventSpec exist
-```
 - OTEL format
 ```json
 {"Body":"Processing event /test/:id.http.post","Timestamp":"1676960742403000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
@@ -180,12 +178,12 @@ Please make sure to add ? in case any field is optional like `body?.data?.lan` s
 {"Body":"event body and eventSpec exist","Timestamp":"1676960742404000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 ```
 
-#### Custom log attributes at event level
+##### Custom log attributes at event level
 
 You can override log attributes at event level also. You can specify customized log attributes for specific event.
 
 :::note
-This will override default custom attributes as defined above [13.3.3.4.1](../telemetry/intro#133341-custom-log-attributes-for-all-events).
+This will override default custom attributes as defined in the [previous section](../telemetry/overview.md#custom-log-attributes-for-all-events).
 :::
 
 To enable this feature ,you need to specify:
@@ -200,9 +198,6 @@ log_attributes:
   identifier: 1
 ```
 ** Sample Logs **
-
-- OTEL Format
-
 ```json
 { Body: "return value [] 200 %o"
     Timestamp: "1688565778237000000"
@@ -227,7 +222,7 @@ log_attributes:
       "task_id": ""
     }}
 ```
-#### Custom on_error logging in workflow/tasks
+##### Custom on_error logging in workflow/tasks
 
 In case you want to log specific attributes when an error happens in a task, set those values in `on_error.log_attributes` of that task.
 
@@ -247,7 +242,6 @@ on_error:
 
 ** Sample logs **
 
-- OTEL format
 ```json
     {Timestamp: "1688563866502000000"
     SeverityNumber: 17
@@ -274,8 +268,8 @@ on_error:
       }
     }}
 ```
-####  Usage of Logger Instance in Custom JS/TS Functions
-This feature enables developers to utilize a Logger Instance in custom JS or TS functions. The Logger Instance assists in logging information, warnings, and errors during the execution of the function. The feature ensures robust logging capabilities and facilitates debugging and monitoring of the application.
+####  Usage of Logger Instance in Custom js/ts Functions
+This feature enables developers to utilize a Logger Instance in custom js or ts functions. The Logger Instance assists in logging information, warnings, and errors during the execution of the function. The feature ensures robust logging capabilities and facilitates debugging and monitoring of the application.
 
 ** Sample code **
 ```
