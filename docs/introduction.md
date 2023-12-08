@@ -77,7 +77,7 @@ The three main pillars of Godspeed framework: [eventsources](event_sources/overv
 
 1. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
 
-    1.1. [**Events:**](/docs/events/overview.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
+    1.1. [**Events:**](/docs/event_sources/standardized_event_schema.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
 
 2. [**DataSources:**](/docs/data_sources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
 
