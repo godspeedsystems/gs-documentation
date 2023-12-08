@@ -1,4 +1,4 @@
-# Godspeed - Our Philosophy
+# Godspeed - Meta Framework
 
 This document is meant for technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.
 
@@ -33,7 +33,7 @@ The framework includes essential functionalities of a 'modern microservice' by d
 Developers can deliver simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, upskilling on the way as the projects proceed. In most cases, only a few in the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
 
 ### Easy brownfield adoption
-Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](CLI.md). 
+Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](CLI.md). Godspeed ships as a node module. Hence it can be imported in any nodejs , bunjs or springboot project easily or developers can even reuse the existing event soures and data sources without any hassle.
 
 ### Security
 
@@ -43,7 +43,7 @@ The framework can read the environmental variables from a secure source like K8s
 Developer should be able to implement anything they need, or replace existing [eventsources](event_sources/overview.md) or [datasources](data_sources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
 
 ### Scale, performance and monitoring
-For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud with ease, via service templates and the Godspeed command line.
+For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud.
 
 For performance, we believe the datasources (APIs and DBs) are the bottlenecks most of the time, and hence the framework allows an easy integration of a cache of choice, over the calls to the [datasources](data_sources/overview.md). An easier way to setup Graphql like subscriptions and dual writes is planned.
 
