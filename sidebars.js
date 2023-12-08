@@ -233,7 +233,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "14. AI Module",
+          label: "14. Web-UI Starter Kit",
           items: [
             {
               type: "doc",
