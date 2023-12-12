@@ -1,13 +1,7 @@
----
-sidebar_position: 1
-title: UI-Kit React App
-toc_min_heading_level: 2
-toc_max_heading_level: 4
----
-
+# Web-UI Starter Kit
 ## Introduction
 
-Godspeed gskit helps you to generate bare metal front-end from OpenAPI/Swagger API spec. An AI agent generates the Front-end Template with API connections in place.
+Godspeed Web-UI Starter Kit simplifies the generation of a foundational front-end from OpenAPI/Swagger API specs. An AI agent creates the template with pre-established API connections.
 
 > An Engineering Powered AI Scaffolding agent to help you generate codebase from bare minimum requirements.
 
@@ -31,11 +25,10 @@ Currently we support [React](https://react.dev/).
 
 ---
 
-##### What you required to run this package
+##### Essentials for Running this Package:
 
-- OpenAI API/Microservice spec, [Link](https://swagger.io/specification/)
-- OpenAI/ChatGPT API Secret Key, [Link
-  ](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
+- OpenAI API/Microservice spec [Link](https://swagger.io/specification/)
+- OpenAI/ChatGPT API Secret Key [Link](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
 
 ---
 
