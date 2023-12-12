@@ -30,7 +30,7 @@ Godspeed Language Tool is the extnsion used to increase the productivity.
 ### Things you can do it with Godspeed Language Tools
 
 #### Crate an Event
-- You can also add body , params , response in the event customise it. 
+- You can also add body, params, response in the event customise it. 
 
 ![preview](/img/video-gif/godspeed_event.gif "Godspeed Event Sample")
 
