@@ -25,7 +25,7 @@ Currently we support [React](https://react.dev/).
 
 ---
 
-##### Essentials for Running this Package:
+##### Essentials for Running this Package
 
 - OpenAI API/Microservice spec [Link](https://swagger.io/specification/)
 - OpenAI/ChatGPT API Secret Key [Link](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
