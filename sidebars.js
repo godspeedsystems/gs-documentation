@@ -219,7 +219,7 @@ const sidebars = {
         {
           type: "doc",
           label: "12. VScode extention",
-          id: "language_tools"
+          id: "vscode_extension/languageTools"
         },
         {
           type: "category",
