@@ -9,11 +9,6 @@ toc_max_heading_level: 4
 
 Hello developers Thank You for using Godspeed Microservice Framework. 
 
-
->  Visual Studio Code is a code editor, we are using vscode to edit the godspeed project based on our requirements. 
-
-Godspeed Language Tool is the extnsion used to increase the productivity.
-
 ### Pre-requisites:
 
 1. VS Code editor
