@@ -60,58 +60,63 @@ const sidebars = {
           ]
         },
         {
+          type: "doc",
+          label: "4. CLI",
+          id: "CLI"
+        },
+        {
           type: "category",
-          label: "4. Event sources",
+          label: "5. Event sources",
           items: [
             {
               type: "doc",
-              label: "4.1. Overview",
+              label: "5.1. Overview",
               id: "event_sources/overview"
             },
             {
               type: "doc",
-              label: "4.2. Standardized event schema",
+              label: "5.2. Standardized event schema",
               id: "event_sources/standardized_event_schema"
             },
             {
               type: "doc",
-              label: "4.3. Examples",
+              label: "5.3. Examples",
               id: "event_sources/examples"
             },{
               type: "doc",
-              label: "4.4. Create custom event source",
+              label: "5.4. Create custom event source",
               id: "event_sources/create_your_event_source"
             },
 
             {
               type: "doc",
-              label: "4.5. Create event source plugin",
+              label: "5.5. Create event source plugin",
               id: "event_sources/create_eventsource_plugin"
             },
             {
               type: "doc",
-              label: "4.6 Event source plugins",
+              label: "5.6 Event source plugins",
               id: "event_sources/event_source_plugins"
             },
           ],
         },
         {
           type: "category",
-          label: "5. Workflows/Functions",
+          label: "6. Workflows/Functions",
           items: [
             {
               type: "doc",
-              label: "5.1. Overview",
+              label: "6.1. Overview",
               id: "workflows/overview"
             },
             {
               type: "doc",
-              label: "5.2. Native language functions",
+              label: "6.2. Native language functions",
               id: "workflows/native_language_functions"
             },
             {
               type: "doc",
-              label: "5.3. Yaml-DSL functions",
+              label: "6.3. Yaml-DSL functions",
               id: "workflows/yaml_dsl_functions"
             },
             // {
@@ -121,12 +126,12 @@ const sidebars = {
             // },
             {
               type: "doc",
-              label: "5.4. Inbuilt workflows",
+              label: "6.4. Inbuilt workflows",
               id: "workflows/inbuilt_workflows"
             },
             {
               type: "doc",
-              label: "5.5. Caching",
+              label: "6.5. Caching",
               id: "caching/overview"
             },
             // {
@@ -138,26 +143,26 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "6. DataSources",
+          label: "7. DataSources",
           items: [
             {
               type: "doc",
-              label: "6.1. Overview",
+              label: "7.1. Overview",
               id: "data_sources/overview"
             },
             {
               type: "doc",
-              label: "6.2. Create Custom DataSource",
+              label: "7.2. Create Custom DataSource",
               id: "data_sources/create_your_data_source"
             },
             {
               type: "doc",
-              label: "6.3. Create DataSource Plugin",
+              label: "7.3. Create DataSource Plugin",
               id: "data_sources/create_Datasource_plugin"
             },
             {
               type: "doc",
-              label: "6.4. DataSource plugins",
+              label: "7.4. DataSource plugins",
               id: "data_sources/datasource_plugins"
             },
           ],
@@ -180,47 +185,43 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "7. Authorization",
+          label: "8. Authorization",
           items: [
             {
               type: "doc",
-              label: "7.1. Overview",
+              label: "8.1. Overview",
               id: "authorization/overview"
             },
           ],
         },
         {
           type: "category",
-          label: "8. Config",
+          label: "9. Config",
           items: [
             {
               type: "doc",
-              label: "8.1. Overview",
+              label: "9.1. Overview",
               id: "config/overview"
             },
           ],
         },
         {
           type: "category",
-          label: "9. Inline scripting",
+          label: "10. Inline scripting",
           items: [
             {
               type: "doc",
-              label: "9.1. Overview",
+              label: "10.1. Overview",
               id: "inline_scripting/overview"
             },
           ],
         },
         {
           type: "doc",
-          label: "10. Mappings",
+          label: "11. Mappings",
           id: "mappings"
         },
-        {
-          type: "doc",
-          label: "11. CLI",
-          id: "CLI"
-        },
+ 
         {
           type: "doc",
           label: "12. Swagger Specs",
@@ -229,7 +230,7 @@ const sidebars = {
         {
           type: "doc",
           label: "13. VScode extention",
-          id: "language_tools"
+          id: "vscode_extension/languageTools"
         },
         {
           type: "category",
@@ -244,7 +245,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "15. AI Module",
+          label: "15. Web-UI Starter Kit",
           items: [
             {
               type: "doc",
@@ -464,5 +465,3 @@ const sidebars = {
 };
 
 module.exports = sidebars;
-
-
