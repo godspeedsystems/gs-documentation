@@ -15,9 +15,6 @@ Hello developers Thank You for using Godspeed Microservice Framework.
 
 2. Godspeed Framework Version V2
 
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-    <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/Yir19zd492I" frameborder="0" allowfullscreen></iframe>
-</div>
 
 
 ### Steps for Using the Language Tool Extension.
@@ -119,7 +116,7 @@ tasks:
           required: true
     ```
 
-  ![preview](/img/video-gif/paramsSnippet.gif "Godspeed Workflow Sample")
+  ![preview](/img/video-gif/paramsSnippet.gif "Godspeed params Sample")
 
   - For Body - 
 
@@ -134,7 +131,7 @@ tasks:
           schema:
             type: string
     ```
-![preview](/img/video-gif/bodysnippet.gif "Godspeed Workflow Sample")
+![preview](/img/video-gif/bodysnippet.gif "Godspeed body Sample")
 
   - For responses - 
 
@@ -149,7 +146,7 @@ tasks:
             schema:
               type: object
     ```
-![preview](/img/video-gif/resopnseSnippet.gif "Godspeed Workflow Sample")
+![preview](/img/video-gif/resopnseSnippet.gif "Godspeed response Sample")
 
 
 ###### In Workflow 
@@ -183,5 +180,12 @@ tasks:
   ```
 
   - fn should be one of inbuilt functions or from the plugins (it starts with datasources) [samples](../workflows/yaml_dsl_functions.md).
+
+### For more information you can watch our full Deatiled video on language tools and snippets of it on our [Youtube](https://www.youtube.com/embed/Yir19zd492I) channel. 
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+    <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/Yir19zd492I" frameborder="0" allowfullscreen></iframe>
+</div>
+
 
 ### Thank You !
