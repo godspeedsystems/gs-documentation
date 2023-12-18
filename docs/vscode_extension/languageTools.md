@@ -41,6 +41,8 @@ Hello developers Thank You for using Godspeed Microservice Framework.
 
 - sample of eventsnippet
 
+![preview](/img/video-gif/eventsnippet.gif "Godspeed Event Sample")
+
 
 ```
 http.get./event-endpoint:
@@ -76,8 +78,8 @@ http.get./event-endpoint:
 
 - If you type `Godspeed Workflow` in the src/workflow (path) then it will give a snippet of sample workflow which includes summary, description, id, tasks, fn and args.
 
-- You can also add [Built-in Tasks](../workflows/inbuilt_workflows.md) in the workflows. There are snippets for that task. 
 
+![preview](/img/video-gif/workflowsnippet.gif "Godspeed Workflow Sample")
 
 ```
 summary: 'the title'
@@ -88,6 +90,11 @@ tasks:
     fn: com.gs.return
     args: <%  %>
 ```
+- You can also add [Built-in Tasks](../workflows/inbuilt_workflows.md) in the workflows. There are snippets for that task. 
+
+- For Examples -
+
+![preview](/img/video-gif/workflowsnippet.gif "Godspeed Workflow Sample")
 
 
 #### Rules to Write an Event
@@ -97,7 +104,7 @@ tasks:
 - There are some key-value pairs in the event and workflows, which needs to be filled to get a proper output, below are the examples of it.
 
 
-###### In Event
+#### In Event
 
 - There are few key-value pairs which are important to the workflow, those are mandatory in the event.
 
@@ -112,6 +119,8 @@ tasks:
           required: true
     ```
 
+  ![preview](/img/video-gif/paramsSnippet.gif "Godspeed Workflow Sample")
+
   - For Body - 
 
     - content , application/json, schema, type
@@ -125,6 +134,8 @@ tasks:
           schema:
             type: string
     ```
+![preview](/img/video-gif/bodysnippet.gif "Godspeed Workflow Sample")
+
   - For responses - 
 
     - 200, content, application/json schema, type
@@ -138,6 +149,7 @@ tasks:
             schema:
               type: object
     ```
+![preview](/img/video-gif/resopnseSnippet.gif "Godspeed Workflow Sample")
 
 
 ###### In Workflow 
@@ -155,6 +167,8 @@ tasks:
 #### Event 
 
   - Minimun length of the description and summary is 50 letters and minimum length is 2.
+
+
 
 #### Workflow 
   - To define an Id in the Workflow id should be all in small letters , without spaces, without numbers and minimum charactors is 2 and maximum length is 45
