@@ -913,7 +913,7 @@ Framework exported interfaces/functions allow developer with flexibility to writ
 
 #### CTX: 
 :::note
- (Every function/workflow has accessibility to ctx object which is passed as an orgument and further more you can access the properties by destructuring it.)
+ (Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.)
 :::
 
 ##### what is CTX ?
