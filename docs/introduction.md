@@ -1,3 +1,6 @@
+---
+slug: /
+---
 # Godspeed - Meta Framework
 
 This document is meant for technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.

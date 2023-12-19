@@ -20,21 +20,24 @@ RUN npm install
 # Switch to the node user vs. root
 USER node
 # Expose port 3000
+# Build the Docusaurus app
+
 EXPOSE 3000
 # Start the app in debug mode so we can attach the debugger
 CMD ["npm", "start"]
 
-## Production ##################################################################
-# Also define a production target which doesn't use devDeps
+# ## Production ##################################################################
+# # Also define a production target which doesn't use devDeps
 FROM base as production
 WORKDIR /home/node/app
 COPY --chown=node:node --from=development /home/node/app/node_modules /home/node/app/node_modules
 # Build the Docusaurus app
 RUN npm run build
+CMD ["npm", "start"]
 
-## Deploy ######################################################################
-# Use a stable nginx image
+# ## Deploy ######################################################################
+# # Use a stable nginx image
 FROM nginx:stable-alpine as deploy
 WORKDIR /home/node/app
 # Copy what we've installed/built from production
-COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/
+COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/docs

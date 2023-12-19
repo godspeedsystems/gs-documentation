@@ -5,13 +5,12 @@
 replicaCount: 1
 
 image:
-  repository: adminmindgrep/docs
+  repository: godspeedsystems.azurecr.io/godspeed-docs
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 'latest'
+  tag: 'v10'
 
-imagePullSecrets: 
-- name: regcred
+
 name: ""
 nameOverride: "docs"
 fullnameOverride: ""
@@ -57,29 +56,30 @@ service:
 ingress:
   enabled: true
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
+    kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "240"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "240"   
   hosts:
-    - host: test-docs.godspeed.systems
+    - host: gsdoc.godspeed.systems
       paths: []
   tls:
-   - secretName: docs-tls
+   - secretName: gsdoc-tls
      hosts:
-       - test-docs.godspeed.systems
+       - gsdoc.godspeed.systems
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
 
 autoscaling:
   enabled: false
@@ -108,4 +108,12 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: workload
+          operator: In
+          values:
+          - godspeed
