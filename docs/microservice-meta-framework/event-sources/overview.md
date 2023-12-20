@@ -51,5 +51,5 @@ title: Eventsources
 
 ```
 
-To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](event_sources/event_source_plugins.md).
+To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](event-sources/event_source_plugins.md).
 
