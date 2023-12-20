@@ -31,7 +31,7 @@ const sidebars = {
         {
           type: "doc",
           label: "2. Tenets and Design Principles",
-          id: "tenets_and_design_principles",
+          id: "tenets-and-design-principles",
         },
         {
           type: "category",
@@ -40,22 +40,22 @@ const sidebars = {
             {
               type: "doc",
               label: "3.1. Overview",
-              id: "getting_started/overview"
+              id: "getting-started/overview"
             },
             {
               type: "doc",
               label: "3.2. Sample project",
-              id: "getting_started/create_hello_world"
+              id: "getting-started/create-hello-world"
             },
             {
               type: "doc",
               label: "3.3. Blog project",
-              id: "getting_started/create_blog_project"
+              id: "getting-started/create-blog-project"
             },
             // {
             //   type: "doc",
             //   label: "3.4. Godspeed on Existing project",
-            //   id: "getting_started/gs_on_existing_proj"
+            //   id: "getting-started/gs_on_existing_proj"
             // }
           ]
         },
@@ -264,22 +264,22 @@ const sidebars = {
           //     {
           //       type: "doc",
           //       label: "3.1. Overview",
-          //       id: "getting_started/overview"
+          //       id: "getting-started/overview"
           //     },
           //     {
           //       type: "doc",
           //       label: "3.2. Sample project",
-          //       id: "getting_started/create_hello_world"
+          //       id: "getting-started/create-hello-world"
           //     },
           //     {
           //       type: "doc",
           //       label: "3.3. Blog project",
-          //       id: "getting_started/create_blog_project"
+          //       id: "getting-started/create-blog-project"
           //     },
           //     // {
           //     //   type: "doc",
           //     //   label: "3.4. Godspeed on Existing project",
-          //     //   id: "getting_started/gs_on_existing_proj"
+          //     //   id: "getting-started/gs_on_existing_proj"
           //     // }
           //   ]
           // },
