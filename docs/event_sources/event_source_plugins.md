@@ -54,3 +54,6 @@ cron-as-eventsource is a plugin which running in the background that will execut
 
 Kafka is your dynamic data stream and event maestro! As a datasource, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka. 
 
+### 4. [graphql-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-graphql-as-eventsource)
+
+GraphQL is a query language and runtime for APIs that enables clients to request precisely the data they need. It allows developers to describe the structure of the data they require, providing a more efficient and flexible alternative to traditional REST APIs. GraphQL empowers front-end developers to shape their API requests, minimizing over-fetching and under-fetching of data.

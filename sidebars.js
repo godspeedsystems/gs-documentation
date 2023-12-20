@@ -206,39 +206,50 @@ const sidebars = {
           ],
         },
         {
+          type: "category",
+          label: "10. Inline scripting",
+          items: [
+            {
+              type: "doc",
+              label: "10.1. Overview",
+              id: "inline_scripting/overview"
+            },
+          ],
+        },
+        {
           type: "doc",
-          label: "10. Mappings",
+          label: "11. Mappings",
           id: "mappings"
         },
  
         {
           type: "doc",
-          label: "11. Swagger Specs",
+          label: "12. Swagger Specs",
           id: "Swagger_specs"
         },
         {
           type: "doc",
-          label: "12. VScode extention",
-          id: "language_tools"
+          label: "13. VScode extention",
+          id: "vscode_extension/languageTools"
         },
         {
           type: "category",
-          label: "13. Telemetry",
+          label: "14. Telemetry",
           items: [
             {
               type: "doc",
-              label: "13.1. Overview",
+              label: "14.1. Overview",
               id: "telemetry/overview"
             },
           ],
         },
         {
           type: "category",
-          label: "14. AI Module",
+          label: "15. Web-UI Starter Kit",
           items: [
             {
               type: "doc",
-              label: "14.1. React App",
+              label: "15.1. React App",
               id: "ai_modules/react_app"
             },
           ],
@@ -454,5 +465,3 @@ const sidebars = {
 };
 
 module.exports = sidebars;
-
-

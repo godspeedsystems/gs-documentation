@@ -7,99 +7,6 @@
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
 
-## Using on_error
-
-You have the flexibility to include an `on_error` handler at both the task level and within the `each_parallel` loop level.
-
-Here's an illustrative example:
-- In the event of a task failure for any `task_value`, the program will follow the `on_error` defined at the task level. If `continue` is set to false, it will halt the execution of subsequent tasks in the `tasks` list for the current `task_value` in the `value` list. For instance, in the given workflow, if the `each_task1` step for `task_value` 1 fails with `continue` set to false, the `each_task2` will not be executed.
-- If all tasks within the loop fail, control is directed to the `on_error` defined at the loop level.
-
-**1. Workflow level on_error handling**
-
-**2. Task level on_error handling**
-
-:::note
-The `on_error` handler at the loop level is triggered exclusively when all tasks within the loop have failed. If at least one task within the loop succeeds, this handler will not be executed.
-:::
-
-#### Example for workflow level error handling
-
-```yaml
-summary: calling the thirdparty api with headers to check on error
-description: testing on_error in workflow level with custom message
-on_error:
-  response:
-    success: false
-    code: 500
-    data: 'Workflow is broken, returned custom response'  
-tasks:
-    - id: on_error_at_workflow_04
-      fn: datasource.api.get./profile
-      args:
-        headers:
-          Content-Type: application/json
-          x-hasura-admin-secret: <% inputs.headers['auth'] %>
-          x-hasura-role: <% inputs.headers['role'] %>
-          x-hasura-user-id: <% inputs.headers['id'] %>
-```
-If the `on_error` is not specified at the task level in the above workflow, but it is defined at the workflow level, then in the event of any task failure, the workflow-level `on_error` will be activated, returning a specified custom response.
-
-
-#### Example for task level error handling
-
-```yaml
-summary: Testing on_error at task level
-tasks:
-  - id: task_level_1 
-    fn: com.gs.transform # if we use this args in transform function they will set as response 
-    args: 
-      success: false
-      code: 500
-      data: "task 1 executed"
-    on_error: 
-      continue: false 
-      response:
-        code: 400
-        data: "error occured"
-    
-  - id: task_level_2
-    fn: com.gs.return
-    args: "task 2 executed"
-```
-In the given example, error handling is implemented at the task level, and it activates when a specific task fails. The `continue` variable, which is false by default, determines whether to proceed with the next task in case of a failure. If `continue` is set to true, the subsequent workflow will be executed. If set to false, the current task exits with a custom response specified in the `on_error`.
-
-
-**When both task-level and workflow-level `on_error` are specified, any error occurring in the tasks will trigger the task-level `on_error`, thereby overriding the `on_error` specified at the workflow level.**
-
-#### Special case on error
-
-```yaml
-summary: testing tsaks within workflow
-tasks:
-  - id: task_level_1 
-    fn: com.gs.transform 
-    args: 
-      success: false # if we use this args in transform function they will set as response 
-      code: 500
-      data: "task 1 executed"
-    on_error: 
-      continue: true 
-      tasks:  
-        - id: on_error_task1
-          fn: com.gs.transform
-          args: 
-            code: 400
-            data: "on error task 1 executed"
-    
-  - id: task_level_2
-    fn: com.gs.return
-    args: <% outputs.task_level_1 %> 
-```
-
-In the given example, instead of specifying a custom response in `on_error` for tasks, we include tasks directly. This approach proves beneficial when additional functions need to be performed in the event of a task failure.
-
-
 ## com.gs.transform
 
 This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.
@@ -154,7 +61,7 @@ tasks:
 Executes the child tasks in parallel.
 :::
 
-The parallel function is employed when we intend to include sub-tasks within the main tasks.
+Parallel execution of tasks involves running multiple tasks simultaneously, leveraging concurrency to enhance efficiency, reduce processing time, and maximize resource utilization in a system or function.In this cases we choose parallel inbuilt function
 
 
 #### Example event for parallel inbuilt function
@@ -335,6 +242,8 @@ The `args` parameter consists of a list of values within the `value` field, each
 
 #### Error handling in each_sequential functions
 
+You have the option to include "on_error" at both the task level and within the "each_sequential" loop.
+
 ```yaml
   summary: For each sample
   description: Here we transform the response of for loop
@@ -358,6 +267,14 @@ The `args` parameter consists of a list of values within the `value` field, each
       fn: com.gs.transform
       args: <% outputs.each_sequential_step1 %>
 ```
+
+Consider the above example:
+- In the event of a task failure for any task_value, the control is transferred to the "on_error" specified at the task level. If "continue" is set to false, it interrupts the loop; otherwise, it proceeds to the next tasks.
+- If all tasks fail within the loop, control shifts to the "on_error" specified at the loop level.
+
+:::note
+on_error at loop level only gets executed when all the tasks are failed. If even one task gets successful then it won't get executed.
+:::
 
 
 ## com.gs.each_parallel
@@ -399,15 +316,17 @@ The `args` parameter comprises a list of values in the `value` field, each paire
 ```
 
 
-#### Error handling in each_sequential functions
+#### Error handling in each_parallel
+
+You have the option to include "on_error" at both the task level and within each parallel loop.
 
 ```yaml
   summary: For each sample
   description: Here we transform the response of for loop
   tasks:
-    - id: each_sequential_step1
+    - id: each_parallel_step1
       description: for each
-      fn: com.gs.each_sequential
+      fn: com.gs.each_parallel
       value: [1, 2, 3, 4]
       tasks:
         - id: each_task1
@@ -416,14 +335,27 @@ The `args` parameter comprises a list of values in the `value` field, each paire
           on_error: # on_error at task level
             continue: false
             response: <%Coffee/JS expression%> | String
+        - id: each_task2
+          fn: com.gs.transform
+          args: <% 'each_task2 ' + task_value %>
       on_error: # on_error at loop level
         continue: true
         response: <%Coffee/JS expression%> | String
-    - id: each_sequential_step2
+    - id: each_parallel_step2
       description: return the response
       fn: com.gs.transform
-      args: <% outputs.each_sequential_step1 %>
+      args: <% outputs.each_parallel_step1 %>
 ```
+
+Consider the above example:
+- If a task fails for any task_value, control is directed to the "on_error" defined at the task level. If "continue" is set to false, it interrupts the execution for the subsequent tasks in the `tasks` section for the current `task_value` in the `value` list. For instance, in the provided workflow, if the `each_task1` step of `task_value` 1 fails, the `each_task2` won't be executed when "continue" is set to false.
+- If all tasks fail within the loop, control shifts to the "on_error" specified at the loop level.
+
+:::note
+The "on_error" at the loop level is only executed when all tasks fail. If even one task is successful, it won't be executed.
+:::
+
+
 
 ## com.gs.return
 
@@ -606,14 +538,90 @@ tasks:
 
 ```
 
-##### Using on_error
+## Using on_error
 
-You have an option to include an `on_error` handler at both the task level and within the `each_sequential` loop level.
+You have the flexibility to define "on_error" at both the workflow level and the task level based on your specific needs. Refer to the following section for more detailed information. [know more](/docs/workflows/yaml_dsl_functions.md#error-handling)
 
-Here's an example to illustrate:
-- If a task encounters a failure for any `task_value`, the program will follow the `on_error` defined at the task level. If `continue` is set to false, it will terminate the loop; otherwise, it will proceed to the next tasks.
-- In the event that all tasks within the loop fail, the program will direct control to the `on_error` defined at the loop level.
+**1. Workflow level on_error handling**
+
+**2. Task level on_error handling**
 
 :::note
-The `on_error` handler at the loop level is exclusively triggered when all tasks within the loop have failed. If at least one task within the loop succeeds, this handler will not be executed.
+The `on_error` handler at the loop level is triggered exclusively when all tasks within the loop have failed. If at least one task within the loop succeeds, this handler will not be executed.
 :::
+
+#### Example for workflow level error handling
+
+```yaml
+summary: calling the thirdparty api with headers to check on error
+description: testing on_error in workflow level with custom message
+on_error:
+  response:
+    success: false
+    code: 500
+    data: 'Workflow is broken, returned custom response'  
+tasks:
+    - id: on_error_at_workflow_04
+      fn: datasource.api.get./profile
+      args:
+        headers:
+          Content-Type: application/json
+          x-hasura-admin-secret: <% inputs.headers['auth'] %>
+          x-hasura-role: <% inputs.headers['role'] %>
+          x-hasura-user-id: <% inputs.headers['id'] %>
+```
+If the `on_error` is not specified at the task level in the above workflow, but it is defined at the workflow level, then in the event of any task failure, the workflow-level `on_error` will be activated, returning a specified custom response.
+
+
+#### Example for task level error handling
+
+```yaml
+summary: Testing on_error at task level
+tasks:
+  - id: task_level_1 
+    fn: com.gs.transform # if we use this args in transform function they will set as response 
+    args: 
+      success: false
+      code: 500
+      data: "task 1 executed"
+    on_error: 
+      continue: false 
+      response:
+        code: 400
+        data: "error occured"
+    
+  - id: task_level_2
+    fn: com.gs.return
+    args: "task 2 executed"
+```
+In the given example, error handling is implemented at the task level, and it activates when a specific task fails. The `continue` variable, which is false by default, determines whether to proceed with the next task in case of a failure. If `continue` is set to true, the subsequent workflow will be executed. If set to false, the current task exits with a custom response specified in the `on_error`.
+
+
+**When both task-level and workflow-level `on_error` are specified, any error occurring in the tasks will trigger the task-level `on_error`, thereby overriding the `on_error` specified at the workflow level.**
+
+#### Special case on error
+
+```yaml
+summary: testing tsaks within workflow
+tasks:
+  - id: task_level_1 
+    fn: com.gs.transform 
+    args: 
+      success: false # if we use this args in transform function they will set as response 
+      code: 500
+      data: "task 1 executed"
+    on_error: 
+      continue: true 
+      tasks:  
+        - id: on_error_task1
+          fn: com.gs.transform
+          args: 
+            code: 400
+            data: "on error task 1 executed"
+    
+  - id: task_level_2
+    fn: com.gs.return
+    args: <% outputs.task_level_1 %> 
+```
+
+In the given example, instead of specifying a custom response in `on_error` for tasks, we include tasks directly. This approach proves beneficial when additional functions need to be performed in the event of a task failure.

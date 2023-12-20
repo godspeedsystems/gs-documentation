@@ -8,7 +8,7 @@ Framework exported interfaces/functions allow developer with flexibility to writ
 
 ### CTX 
 :::note
- (Every function/workflow has accessibility to ctx object which is passed as an orgument and further more you can access the properties by destructuring it.)
+ (Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.)
 :::
 
 ### what is CTX ?
@@ -77,7 +77,7 @@ Every workflow response should be in GSStatus. it has the below properties.
     data?: any;
     headers?: {
         [key: string]: any;
-    };
+   };
 ```
 :::
 
@@ -122,6 +122,117 @@ The above is a sample of how a js file is configured and used.For every function
 
 
 
+### Calling javascript function from Yaml workflow
+
+In YAML workflows, it is possible to invoke JavaScript functions to introduce special functionality or extensions.
+
+- Scaffolding 
+
+![Scaffolding Image](https://res.cloudinary.com/dzdcjchdc/image/upload/v1702045959/Screenshot_from_2023-12-08_20-02-21_mxzkep.png)
 
 
 
+- Event
+
+<details>
+<summary>Example event</summary>
+
+```yaml
+http.post./helloworld:
+  fn: helloworld
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: number
+```
+</details>
+
+- Yaml workflow
+
+```yaml
+id: helloworld
+tasks:
+  - id: first_task
+    fn: test
+    args: 
+      x: <% inputs.body.x %>
+      y: <% inputs.body.y %>
+```
+
+- Javascript workflow
+
+```js
+const {GSStatus} = require('@godspeedsystems/core');
+
+module.exports = async(ctx,args)=>{
+    const responseData = parseInt(args.x)+parseInt(args.y);
+    return new GSStatus(true, 200, undefined, responseData, undefined);
+};
+
+```
+
+This is how we access the args `(ctx,args)` here args is a json object
+
+:::info
+GSStatus is a built-in class in Godspeed that we utilize to return responses from workflows.
+:::
+
+- Sample response
+
+![Response Image](https://res.cloudinary.com/dzdcjchdc/image/upload/v1702045093/Screenshot_from_2023-12-08_19-45-45_zrxxil.png)
+
+
+### Calling js function from an event
+
+Likewise, you have the option to directly invoke a JavaScript function from an event.
+
+- Event
+
+<details>
+<summary>Example event</summary>
+
+```yaml
+http.post./helloworld:
+  fn: test
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: number
+
+```
+</details>
+
+
+- Javascript function
+
+
+```js
+const {GSStatus} = require('@godspeedsystems/core');
+
+module.exports = async(ctx)=>{
+    const x = parseInt(ctx.inputs.data.body.x)
+    const y = parseInt(ctx.inputs.data.body.y)
+    const responseData = x+y
+    return new GSStatus(true, 200, undefined, responseData, undefined);
+};
+
+```
+:::tip
+When calling a JavaScript function directly from the event, ensure that you access the inputs from the `ctx`, as demonstrated in the provided JavaScript file.
+:::

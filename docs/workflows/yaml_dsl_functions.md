@@ -35,7 +35,7 @@ tasks:
 ```
 
 #### Decoupled Architechture
-YAML [workflows](../design_principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+YAML [workflows](/docs//tenets_and_design_principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
 
 
 #### Client-Agnostic Decoupling:
@@ -173,9 +173,12 @@ summary: upload file
 
 - **response** - You can define custom responses with distinct status codes and messages to distinguish between different types of errors using customized error messages.
 
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HYzIOQ-ozSA?si=qASQ2Ofqqb5VFUlo" frameBorder="0" allowFullScreen></iframe>
+</div>
 
 
- ### Error handling in Task level
+ ### Error handling in Workflow level
 
 ```yaml
 summary: Hello world
@@ -196,30 +199,26 @@ tasks:
     args: 'Hello World!' 
 ```
 
- ### Error handling in Sub task level
+ ### Error handling in task level
 
 ```yaml
-  summary: For each sample
-  description: Here we transform the response of for loop
-  tasks:
-    - id: each_sequential_step1
-      description: for each
-      fn: com.gs.each_sequential
-      value: [1, 2, 3, 4]
-      tasks:
-        - id: each_task1
-          fn: com.gs.transform
-          args: <% 'each_task1 ' + task_value %>
-          on_error: # on_error at task level
-            continue: false
-            response: <%Coffee/JS expression%> | String
-      on_error: # on_error at loop level
-        continue: true
-        response: <%Coffee/JS expression%> | String
-    - id: each_sequential_step2
-      description: return the response
-      fn: com.gs.transform
-      args: <% outputs.each_sequential_step1 %>
+summary: Testing on_error at task level
+tasks:
+  - id: task_level_1 
+    fn: com.gs.transform # if we use this args in transform function they will set as response 
+    args: 
+      success: false
+      code: 500
+      data: "task 1 executed"
+    on_error: 
+      continue: false 
+      response:
+        code: 400
+        data: "error occured"
+    
+  - id: task_level_2
+    fn: com.gs.return
+    args: "task 2 executed"
 ```
 
 ## Built-in functions
