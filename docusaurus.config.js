@@ -64,6 +64,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           lastVersion: 'current',
           versions: {
@@ -151,7 +152,7 @@ const config = {
             items: [
               {
                 label: 'Github',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/godspeedsystems',
               },
             ],
           },

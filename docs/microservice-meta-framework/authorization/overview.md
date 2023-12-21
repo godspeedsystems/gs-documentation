@@ -1,6 +1,6 @@
 # Authorization
-:::note
-Implementing into the framework soon...
+:::tip Note
+Currently the job of Authentication is left to the individual plugins.
 :::
 The framework provides authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
 
@@ -82,7 +82,7 @@ tasks:
         data: <% inputs.body %>
           jwt_payload: <% inputs.user %>
 ```
-
+<!-- 
 ## Datasources authentication
 At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
 
@@ -259,4 +259,4 @@ args:
   data:
     include: <% inputs.body.include %>
     where: <% inputs.body.where %> # where clause from authz workflow will be merged with this
-```
+``` -->

@@ -17,7 +17,7 @@ function HomepageHeader() {
         <div>
           <Link
             className="button"
-            to="/docs/getting_started/overview">
+            to="/microservice-meta-framework/getting-started/overview">
             <button className={styles.doc_button2}>Godspeed getting started 📝</button>
           </Link>
         </div>

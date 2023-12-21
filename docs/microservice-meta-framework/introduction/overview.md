@@ -40,7 +40,7 @@ Teams can adopt Godspeed by simply including the NPM module or jar in their exis
 The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](authorization/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
 
 ### Flexibility
-Developer should be able to implement anything they need, or replace existing [eventsources](event_sources/overview.md) or [datasources](data_sources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
+Developer should be able to implement anything they need, or replace existing [eventsources](event-sources/overview.md) or [datasources](data_sources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
 
 ### Scale, performance and monitoring
 For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud.
@@ -61,13 +61,13 @@ The standardized guardrails with clearly defined developer's boundaries, ensure 
 
 ## Design Principles
 
-In order to serve the [Goals](#aims) and [Tenets](/docs/tenets_and_design_principles.md#tenets) of the framework, we have followed certain [design principles](/docs/tenets_and_design_principles.md#design-principles).
+In order to serve the [Goals](#aims) and [Tenets](/docs/tenets-and-design-principles.md#tenets) of the framework, we have followed certain [design principles](/docs/tenets-and-design-principles.md#design-principles).
 
 ## Framework architecture
 
-The three main pillars of Godspeed framework: [eventsources](event_sources/overview.md), [datasources](data_sources/overview.md), and [functions or workflows](workflows/overview.md). 
+The three main pillars of Godspeed framework: [eventsources](event-sources/overview.md), [datasources](data_sources/overview.md), and [functions or workflows](workflows/overview.md). 
 
-> Do read more about them in the [design principles](/docs/tenets_and_design_principles.md#design-principles) section.
+> Do read more about them in the [design principles](/docs/tenets-and-design-principles.md#design-principles) section.
 
 ![framework-architecture](/img/framework-architecture.png)
 
@@ -75,9 +75,9 @@ The three main pillars of Godspeed framework: [eventsources](event_sources/overv
 
 ### Building blocks of framework:
 
-1. [**EventSources:**](/docs/event_sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
+1. [**EventSources:**](/docs/event-sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
 
-    1.1. [**Events:**](/docs/event_sources/standardized_event_schema.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
+    1.1. [**Events:**](/docs/event-sources/standardized-event-schema.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
 
 2. [**DataSources:**](/docs/data_sources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
 
