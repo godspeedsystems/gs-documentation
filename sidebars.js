@@ -245,11 +245,11 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "15. Web-UI Starter Kit",
+          label: "14. Web-UI Starter Kit",
           items: [
             {
               type: "doc",
-              label: "15.1. React App",
+              label: "14.1. React App",
               id: "ai_modules/react_app"
             },
           ],
