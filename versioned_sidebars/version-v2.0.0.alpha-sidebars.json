@@ -8,7 +8,7 @@
     {
       "type": "doc",
       "label": "2. Getting started",
-      "id": "getting_started"
+      "id": "getting-started"
     },
     {
       "type": "category",
@@ -17,12 +17,12 @@
         {
           "type": "doc",
           "label": "3.1. Overview",
-          "id": "event_sources/overview"
+          "id": "event-sources/overview"
         },
         {
           "type": "doc",
           "label": "3.3. Custome Event Source",
-          "id": "event_sources/custome_event_source"
+          "id": "event-sources/custome_event_source"
         }
       ]
     },

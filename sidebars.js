@@ -23,101 +23,129 @@ const sidebars = {
       type: "category",
       label: "1. Microservice Meta Framework",
       items:  [
-        {
-          type: "doc",
-          label: "1. Introduction",
-          id: "introduction",
-        },
-        {
-          type: "doc",
-          label: "2. Tenets and Design Principles",
-          id: "tenets_and_design_principles",
-        },
+
         {
           type: "category",
-          label: "3. Getting started",
+          label: "1. Introduction",
           items: [
             {
               type: "doc",
-              label: "3.1. Overview",
-              id: "getting_started/overview"
+              label: "1.1. Overview",
+              id: "microservice-meta-framework/introduction/overview"
             },
             {
               type: "doc",
-              label: "3.2. Sample project",
-              id: "getting_started/create_hello_world"
+              label: "1.2. Tenets",
+              id: "microservice-meta-framework/introduction/tenets"
             },
             {
               type: "doc",
-              label: "3.3. Blog project",
-              id: "getting_started/create_blog_project"
+              label: "1.3. Design Principles",
+              id: "microservice-meta-framework/introduction/design-principles"
             },
-            // {
-            //   type: "doc",
-            //   label: "3.4. Godspeed on Existing project",
-            //   id: "getting_started/gs_on_existing_proj"
-            // }
+            {
+              type: "doc",
+              label: "1.4. Guard Rails",
+              id: "microservice-meta-framework/introduction/guard-rails"
+            },
+          ]
+        },
+
+        // {
+        //   type: "doc",
+        //   label: "1. Introduction",
+        //   id: "microservice-meta-framework/introduction",
+        // },
+        // {
+        //   type: "doc",
+        //   label: "2. Tenets and Design Principles",
+        //   id: "microservice-meta-framework/tenets-and-design-principles",
+        // },
+        {
+          type: "category",
+          label: "2. Getting started",
+          items: [
+            {
+              type: "doc",
+              label: "2.1. Overview",
+              id: "microservice-meta-framework/getting-started/overview"
+            },
+            {
+              type: "doc",
+              label: "2.2. Sample project",
+              id: "microservice-meta-framework/getting-started/create-hello-world"
+            },
+            {
+              type: "doc",
+              label: "2.3. Blog project",
+              id: "microservice-meta-framework/getting-started/create-blog-project"
+            },
           ]
         },
         {
           type: "doc",
-          label: "4. CLI",
-          id: "CLI"
+          label: "3. CLI",
+          id: "microservice-meta-framework/CLI"
         },
         {
           type: "category",
-          label: "5. Event sources",
+          label: "4. Event sources",
           items: [
             {
               type: "doc",
-              label: "5.1. Overview",
-              id: "event_sources/overview"
+              label: "4.1. Overview",
+              id: "microservice-meta-framework/event-sources/overview"
             },
             {
               type: "doc",
-              label: "5.2. Standardized event schema",
-              id: "event_sources/standardized_event_schema"
+              label: "4.2. Standardized event schema",
+              id: "microservice-meta-framework/event-sources/standardized-event-schema"
             },
             {
               type: "doc",
-              label: "5.3. Examples",
-              id: "event_sources/examples"
+              label: "4.3. Examples",
+              id: "microservice-meta-framework/event-sources/examples"
             },{
               type: "doc",
-              label: "5.4. Create custom event source",
-              id: "event_sources/create_your_event_source"
+              label: "4.4. Create custom event source",
+              id: "microservice-meta-framework/event-sources/create-custom-event-source"
             },
 
             {
               type: "doc",
-              label: "5.5. Create event source plugin",
-              id: "event_sources/create_eventsource_plugin"
+              label: "4.5. Create event source plugin",
+              id: "microservice-meta-framework/event-sources/create-eventsource-plugin"
             },
             {
               type: "doc",
-              label: "5.6 Event source plugins",
-              id: "event_sources/event_source_plugins"
+              label: "4.6 Event source plugins",
+              id: "microservice-meta-framework/event-sources/event-source-plugins"
+            },
+            {
+              type: "doc",
+              label: "4.7. Swagger Specs",
+              id: "microservice-meta-framework/swagger-specs"
             },
           ],
         },
         {
           type: "category",
-          label: "6. Workflows/Functions",
+          label: "5. Workflows/Functions",
           items: [
             {
               type: "doc",
-              label: "6.1. Overview",
-              id: "workflows/overview"
+              label: "5.1. Overview",
+              id: "microservice-meta-framework/workflows/overview"
             },
             {
               type: "doc",
-              label: "6.2. Native language functions",
-              id: "workflows/native_language_functions"
+              label: "5.2. Native language functions",
+              id: "microservice-meta-framework/workflows/native-language-functions"
             },
             {
               type: "doc",
-              label: "6.3. Yaml-DSL functions",
-              id: "workflows/yaml_dsl_functions"
+              label: "5.3. Yaml-DSL functions",
+              id: "microservice-meta-framework/workflows/yaml-dsl-functions"
             },
             // {
             //   type: "doc",
@@ -126,13 +154,13 @@ const sidebars = {
             // },
             {
               type: "doc",
-              label: "6.4. Inbuilt workflows",
-              id: "workflows/inbuilt_workflows"
+              label: "5.4. Inbuilt workflows",
+              id: "microservice-meta-framework/workflows/inbuilt-workflows"
             },
             {
               type: "doc",
-              label: "6.5. Caching",
-              id: "caching/overview"
+              label: "5.5. Caching",
+              id: "microservice-meta-framework/caching"
             },
             // {
             //   type: "doc",
@@ -143,27 +171,27 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "7. DataSources",
+          label: "6. DataSources",
           items: [
             {
               type: "doc",
-              label: "7.1. Overview",
-              id: "data_sources/overview"
+              label: "6.1. Overview",
+              id: "microservice-meta-framework/datasources/overview"
             },
             {
               type: "doc",
-              label: "7.2. Create Custom DataSource",
-              id: "data_sources/create_your_data_source"
+              label: "6.2. Create Custom DataSource",
+              id: "microservice-meta-framework/datasources/create-custom-datasource"
             },
             {
               type: "doc",
-              label: "7.3. Create DataSource Plugin",
-              id: "data_sources/create_Datasource_plugin"
+              label: "6.3. Create DataSource Plugin",
+              id: "microservice-meta-framework/datasources/create-datasource-plugin"
             },
             {
               type: "doc",
-              label: "7.4. DataSource plugins",
-              id: "data_sources/datasource_plugins"
+              label: "6.4. DataSource plugins",
+              id: "microservice-meta-framework/datasources/datasource-plugins"
             },
           ],
         },
@@ -185,75 +213,62 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "8. Authorization",
+          label: "7. Authorization",
           items: [
             {
               type: "doc",
-              label: "8.1. Overview",
-              id: "authorization/overview"
+              label: "7.1. Overview",
+              id: "microservice-meta-framework/authorization/overview"
             },
           ],
         },
         {
           type: "category",
-          label: "9. Config",
+          label: "8. Configs and Mappings",
+          items: [
+            {
+              type: "doc",
+              label: "8.1. Config",
+              id: "microservice-meta-framework/config/overview"
+            },
+            {
+              type: "doc",
+              label: "8.2. Mappings",
+              id: "microservice-meta-framework/mappings"
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "9. Inline scripting",
           items: [
             {
               type: "doc",
               label: "9.1. Overview",
-              id: "config/overview"
+              id: "microservice-meta-framework/inline-scripting"
             },
           ],
         },
-        {
-          type: "category",
-          label: "10. Inline scripting",
-          items: [
-            {
-              type: "doc",
-              label: "10.1. Overview",
-              id: "inline_scripting/overview"
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "11. Mappings",
-          id: "mappings"
-        },
+        
  
+      
         {
           type: "doc",
-          label: "12. Swagger Specs",
-          id: "Swagger_specs"
-        },
-        {
-          type: "doc",
-          label: "13. VScode extention",
-          id: "vscode_extension/languageTools"
+          label: "10. VScode extention",
+          id: "microservice-meta-framework/vscode-extension/language-tools"
         },
         {
           type: "category",
-          label: "14. Telemetry",
+          label: "11. Telemetry",
           items: [
             {
               type: "doc",
-              label: "14.1. Overview",
-              id: "telemetry/overview"
+              label: "12.1. Overview",
+              id: "microservice-meta-framework/telemetry/overview"
             },
           ],
         },
-        {
-          type: "category",
-          label: "14. Web-UI Starter Kit",
-          items: [
-            {
-              type: "doc",
-              label: "14.1. React App",
-              id: "ai_modules/react_app"
-            },
-          ],
-        }
+        
         
       ]
       
@@ -275,22 +290,22 @@ const sidebars = {
           //     {
           //       type: "doc",
           //       label: "3.1. Overview",
-          //       id: "getting_started/overview"
+          //       id: "getting-started/overview"
           //     },
           //     {
           //       type: "doc",
           //       label: "3.2. Sample project",
-          //       id: "getting_started/create_hello_world"
+          //       id: "getting-started/create-hello-world"
           //     },
           //     {
           //       type: "doc",
           //       label: "3.3. Blog project",
-          //       id: "getting_started/create_blog_project"
+          //       id: "getting-started/create-blog-project"
           //     },
           //     // {
           //     //   type: "doc",
           //     //   label: "3.4. Godspeed on Existing project",
-          //     //   id: "getting_started/gs_on_existing_proj"
+          //     //   id: "getting-started/gs_on_existing_proj"
           //     // }
           //   ]
           // },
@@ -312,17 +327,17 @@ const sidebars = {
           //     {
           //       type: "doc",
           //       label: "4.2. Overview",
-          //       id: "event_sources/overview"
+          //       id: "event-sources/overview"
           //     },
           //     {
           //       type: "doc",
           //       label: "4.3. Event Source Plugins",
-          //       id: "event_sources/event_source_plugins"
+          //       id: "event-sources/event_source_plugins"
           //     },
           //     {
           //       type: "doc",
           //       label: "4.4. Create Your Event Source",
-          //       id: "event_sources/create_your_event_source"
+          //       id: "event-sources/create-your-event-source"
           //     },
           //   ],
           // },
@@ -452,15 +467,26 @@ const sidebars = {
         {
           type: "doc",
           label: "2.1. Elasticgraph",
-          id: "elasticgraph_orm/elasticgraph"
+          id: "elasticgraph-orm/elasticgraph"
         },
         {
           type: "doc",
           label: "2.2 Feature Set Of Elasticgraph",
-          id: "elasticgraph_orm/feature-set-of-elasticgraph"
+          id: "elasticgraph-orm/feature-set-of-elasticgraph"
         },
       ]
-   }
+   },
+   {
+    type: "category",
+    label: "3. Web-UI Starter Kit",
+    items: [
+      {
+        type: "doc",
+        label: "3.1. React App",
+        id: "ai-modules/react-app"
+      },
+    ],
+  }
   ]
 };
 
