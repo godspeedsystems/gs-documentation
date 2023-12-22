@@ -35,7 +35,7 @@ tasks:
 ```
 
 #### Decoupled Architechture
-YAML [workflows](/docs/microservice-meta-framework/introduction/design-principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+YAML [workflows](/docs/microservices-framework/introduction/design-principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
 
 
 #### Client-Agnostic Decoupling:
@@ -87,7 +87,7 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
 
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md)
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/inbuilt-workflows.md)
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 
@@ -225,4 +225,4 @@ tasks:
 
  The framework comes equipped with the following built-in functions.These functions are readily available for developers to use in their code, simplifying tasks like mathematical calculations, string manipulation, input/output operations, and more. They save time and effort by offering efficient and reliable solutions for common programming challenges.
 
- [Godspeed Built-in function](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md)
+ [Godspeed Built-in function](/docs/microservices-framework/workflows/inbuilt-workflows.md)

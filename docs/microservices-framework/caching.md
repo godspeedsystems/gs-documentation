@@ -15,7 +15,7 @@ url: redis[s]://[[username][:password]@][host][:port][/db-number]
 ```
 
 ### Configuration
-Define default caching datasource in [static configuration](/docs/microservice-meta-framework/config-and-mappings/config.md)
+Define default caching datasource in [static configuration](/docs/microservices-framework/config-and-mappings/config.md)
 
 ```yaml
 log_level: debug

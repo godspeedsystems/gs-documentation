@@ -2,10 +2,10 @@
 # Logging
 
 ### Log level
-The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables)
+The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables)
 
 ### Log fields masking
-If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
+If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
 redact: ['a.b.c', 'a.b.*', 'req.headers']
@@ -34,7 +34,7 @@ Sample masked logs:
 ```
 
 ### Log format
-When observability is [enabled](overview.md/#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
+When observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
 {"Body":"adding body schema for /upload_multiple_docs.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -48,7 +48,7 @@ When observability is [enabled](overview.md/#enable-observability) i.e. OTEL_ENA
 ```   
    
 ** pino pretty format **
-When observability is [disabled](overview.md/#enable-observability) i.e. OTEL_ENABLED env variable is set to false or NODE_ENV is set to 'dev' then the logs are dumpde in [pino pretty format](https://www.npmjs.com/package/pino-pretty).
+When observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false or NODE_ENV is set to 'dev' then the logs are dumpde in [pino pretty format](https://www.npmjs.com/package/pino-pretty).
   
 Sample Logs:
 ```
@@ -70,7 +70,7 @@ You can add any custom attribute in the logs whenever any event is triggered on 
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
-- `log_attributes` variable as [environment variable](/docs/microservice-meta-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
+- `log_attributes` variable as [environment variable](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml

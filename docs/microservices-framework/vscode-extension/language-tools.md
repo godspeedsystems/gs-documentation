@@ -87,7 +87,7 @@ tasks:
     fn: com.gs.return
     args: <%  %>
 ```
-- You can also add [Built-in Tasks](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md) in the workflows. There are snippets for that task. 
+- You can also add [Built-in Tasks](/docs/microservices-framework/workflows/inbuilt-workflows.md) in the workflows. There are snippets for that task. 
 
 - For Examples -
 
@@ -155,7 +155,7 @@ tasks:
 
   - tasks , id, fn , args 
 
-  - in the few built in tasks there are keys like `cases` in  [com.gs.switch](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md#comgsswitch) and `conditions` in [com.gs.ifelse](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md#comgsif) , `values` [com.gs.each_sequential](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md#comgseach_sequential) are the mandatory keys.
+  - in the few built in tasks there are keys like `cases` in  [com.gs.switch](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsswitch) and `conditions` in [com.gs.ifelse](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsif) , `values` [com.gs.each_sequential](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgseach_sequential) are the mandatory keys.
 
 
 ### Rules
