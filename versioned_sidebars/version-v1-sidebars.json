@@ -76,7 +76,8 @@
         "microservices/datasources/extensible-datasources",
         "microservices/datasources/aws",
         "microservices/datasources/redis",
-        "microservices/datasources/rabbitmq"
+        "microservices/datasources/rabbitmq",
+        "microservices/datasources/soap"
       ]
     },
     {

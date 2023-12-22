@@ -349,7 +349,7 @@ body:
         data: HELLO from CRON
  ```
 
- ### 6.2.3 RabbitMQ event
+### 6.2.6 RabbitMQ event
 
 > A RabbitMQ event is specified as `{queue_name}.{datasourceName}` in [the RabbitMQ event specification](#example-spec-for-RabbitMQ-event).
 
@@ -394,4 +394,53 @@ tasks:
         method: publish
       data: <% inputs %>
       # Here we are publishing an event data to another queue
+```
+
+### 6.2.6 Soap event
+
+#### Datasource for Soap
+
+The datasources for Soap are defined in src/datasources. [Refer Soap as datasource](./datasources/soap/#8111-example-spec) for more information.
+
+#### Example spec for Soap event
+
+``` yaml
+'/wsdltest.http.get': # event id. Will include path params. For ex. com.abc.do_kyc/{bank_id}/process/{user_id}
+  fn: soap
+  summary: add soap
+  description: print sum
+  produces:
+    - application/json
+  parameters:
+    - name: status
+      in: query
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Returns the greeting.
+      schema:
+        type: string
+    '400':
+      description: Invalid status value
+
+  ```
+
+#### Example spec for Soap workflow 
+
+```yaml
+summary: Returning sum
+id: soap_sum
+tasks:
+    - id: step1 
+      description: Return sum
+      fn: com.gs.soap
+      args: # similar to Axios format
+        datasource: soap
+        config:
+          method: Subtract
+        data: 
+          intA: 1
+          intB: 2
+
 ```

@@ -21,7 +21,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: "category",
-      label: "1. Microservice Meta Framework",
+      label: "1. Microservices Framework",
       items:  [
 
         {
@@ -31,22 +31,22 @@ const sidebars = {
             {
               type: "doc",
               label: "1.1. Overview",
-              id: "microservice-meta-framework/introduction/overview"
+              id: "microservices-framework/introduction/overview"
             },
             {
               type: "doc",
               label: "1.2. Tenets",
-              id: "microservice-meta-framework/introduction/tenets"
+              id: "microservices-framework/introduction/tenets"
             },
             {
               type: "doc",
               label: "1.3. Design Principles",
-              id: "microservice-meta-framework/introduction/design-principles"
+              id: "microservices-framework/introduction/design-principles"
             },
             {
               type: "doc",
               label: "1.4. Guard Rails",
-              id: "microservice-meta-framework/introduction/guard-rails"
+              id: "microservices-framework/introduction/guard-rails"
             },
           ]
         },
@@ -54,12 +54,12 @@ const sidebars = {
         // {
         //   type: "doc",
         //   label: "1. Introduction",
-        //   id: "microservice-meta-framework/introduction",
+        //   id: "microservices-framework/introduction",
         // },
         // {
         //   type: "doc",
         //   label: "2. Tenets and Design Principles",
-        //   id: "microservice-meta-framework/tenets-and-design-principles",
+        //   id: "microservices-framework/tenets-and-design-principles",
         // },
         {
           type: "category",
@@ -68,24 +68,24 @@ const sidebars = {
             {
               type: "doc",
               label: "2.1. Overview",
-              id: "microservice-meta-framework/getting-started/overview"
+              id: "microservices-framework/getting-started/overview"
             },
             {
               type: "doc",
               label: "2.2. Sample project",
-              id: "microservice-meta-framework/getting-started/create-hello-world"
+              id: "microservices-framework/getting-started/create-hello-world"
             },
             {
               type: "doc",
               label: "2.3. Blog project",
-              id: "microservice-meta-framework/getting-started/create-blog-project"
+              id: "microservices-framework/getting-started/create-blog-project"
             },
           ]
         },
         {
           type: "doc",
           label: "3. CLI",
-          id: "microservice-meta-framework/CLI"
+          id: "microservices-framework/CLI"
         },
         {
           type: "category",
@@ -94,37 +94,37 @@ const sidebars = {
             {
               type: "doc",
               label: "4.1. Overview",
-              id: "microservice-meta-framework/event-sources/overview"
+              id: "microservices-framework/event-sources/overview"
             },
             {
               type: "doc",
               label: "4.2. Standardized event schema",
-              id: "microservice-meta-framework/event-sources/standardized-event-schema"
+              id: "microservices-framework/event-sources/standardized-event-schema"
             },
             {
               type: "doc",
               label: "4.3. Examples",
-              id: "microservice-meta-framework/event-sources/examples"
+              id: "microservices-framework/event-sources/examples"
             },{
               type: "doc",
               label: "4.4. Create custom event source",
-              id: "microservice-meta-framework/event-sources/create-custom-event-source"
+              id: "microservices-framework/event-sources/create-custom-event-source"
             },
 
             {
               type: "doc",
               label: "4.5. Create event source plugin",
-              id: "microservice-meta-framework/event-sources/create-eventsource-plugin"
+              id: "microservices-framework/event-sources/create-eventsource-plugin"
             },
             {
               type: "doc",
               label: "4.6 Event source plugins",
-              id: "microservice-meta-framework/event-sources/event-source-plugins"
+              id: "microservices-framework/event-sources/event-source-plugins"
             },
             {
               type: "doc",
               label: "4.7. Swagger Specs",
-              id: "microservice-meta-framework/swagger-specs"
+              id: "microservices-framework/event-sources/swagger-specs"
             },
           ],
         },
@@ -135,17 +135,17 @@ const sidebars = {
             {
               type: "doc",
               label: "5.1. Overview",
-              id: "microservice-meta-framework/workflows/overview"
+              id: "microservices-framework/workflows/overview"
             },
             {
               type: "doc",
               label: "5.2. Native language functions",
-              id: "microservice-meta-framework/workflows/native-language-functions"
+              id: "microservices-framework/workflows/native-language-functions"
             },
             {
               type: "doc",
               label: "5.3. Yaml-DSL functions",
-              id: "microservice-meta-framework/workflows/yaml-dsl-functions"
+              id: "microservices-framework/workflows/yaml-dsl-functions"
             },
             // {
             //   type: "doc",
@@ -155,12 +155,12 @@ const sidebars = {
             {
               type: "doc",
               label: "5.4. Inbuilt workflows",
-              id: "microservice-meta-framework/workflows/inbuilt-workflows"
+              id: "microservices-framework/workflows/inbuilt-workflows"
             },
             {
               type: "doc",
               label: "5.5. Caching",
-              id: "microservice-meta-framework/caching"
+              id: "microservices-framework/workflows/caching"
             },
             // {
             //   type: "doc",
@@ -176,22 +176,22 @@ const sidebars = {
             {
               type: "doc",
               label: "6.1. Overview",
-              id: "microservice-meta-framework/datasources/overview"
+              id: "microservices-framework/datasources/overview"
             },
             {
               type: "doc",
               label: "6.2. Create Custom DataSource",
-              id: "microservice-meta-framework/datasources/create-custom-datasource"
+              id: "microservices-framework/datasources/create-custom-datasource"
             },
             {
               type: "doc",
               label: "6.3. Create DataSource Plugin",
-              id: "microservice-meta-framework/datasources/create-datasource-plugin"
+              id: "microservices-framework/datasources/create-datasource-plugin"
             },
             {
               type: "doc",
               label: "6.4. DataSource plugins",
-              id: "microservice-meta-framework/datasources/datasource-plugins"
+              id: "microservices-framework/datasources/datasource-plugins"
             },
           ],
         },
@@ -218,7 +218,7 @@ const sidebars = {
             {
               type: "doc",
               label: "7.1. Overview",
-              id: "microservice-meta-framework/authorization/overview"
+              id: "microservices-framework/authorization/overview"
             },
           ],
         },
@@ -229,12 +229,12 @@ const sidebars = {
             {
               type: "doc",
               label: "8.1. Config",
-              id: "microservice-meta-framework/config-and-mappings/config"
+              id: "microservices-framework/config-and-mappings/config"
             },
             {
               type: "doc",
               label: "8.2. Mappings",
-              id: "microservice-meta-framework/config-and-mappings/mappings"
+              id: "microservices-framework/config-and-mappings/mappings"
             },
           ],
         },
@@ -245,7 +245,7 @@ const sidebars = {
             {
               type: "doc",
               label: "9.1. Overview",
-              id: "microservice-meta-framework/inline-scripting/overview"
+              id: "microservices-framework/inline-scripting/overview"
             },
           ],
         },
@@ -255,7 +255,7 @@ const sidebars = {
         {
           type: "doc",
           label: "10. VScode extention",
-          id: "microservice-meta-framework/vscode-extension/language-tools"
+          id: "microservices-framework/vscode-extension/language-tools"
         },
         {
           type: "category",
@@ -264,22 +264,22 @@ const sidebars = {
             {
               type: "doc",
               label: "11.1. Overview",
-              id: "microservice-meta-framework/telemetry/overview"
+              id: "microservices-framework/telemetry/overview"
             },
             {
               type: "doc",
               label: "11.2. Configuration",
-              id: "microservice-meta-framework/telemetry/configuration"
+              id: "microservices-framework/telemetry/configuration"
             },
             {
               type: "doc",
               label: "11.3. Logging",
-              id: "microservice-meta-framework/telemetry/logging"
+              id: "microservices-framework/telemetry/logging"
             },
             {
               type: "doc",
               label: "11.4. Custom metrics and traces",
-              id: "microservice-meta-framework/telemetry/custom-metrics"
+              id: "microservices-framework/telemetry/custom-metrics"
             },
           ],
         },

@@ -2,10 +2,10 @@
 # Logging
 
 ### Log level
-The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables)
+The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables)
 
 ### Log fields masking
-If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
+If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
 redact: ['a.b.c', 'a.b.*', 'req.headers']
@@ -70,7 +70,7 @@ You can add any custom attribute in the logs whenever any event is triggered on 
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
-- `log_attributes` variable as [environment variable](/docs/microservice-meta-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservice-meta-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
+- `log_attributes` variable as [environment variable](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml
