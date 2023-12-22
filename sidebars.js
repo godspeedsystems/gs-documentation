@@ -481,7 +481,7 @@ const sidebars = {
       items:[
         {
           type: "doc",
-          label: "2.1. Elasticgraph",
+          label: "2.1 Elasticgraph",
           id: "elasticgraph-orm/elasticgraph"
         },
         {
