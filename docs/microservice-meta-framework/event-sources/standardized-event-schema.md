@@ -2,7 +2,7 @@
 ## Introduction
 In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details.
 
-**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](/docs/tenets-and-design-principles.md#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
+**We closely follow the OpenAPI specification; this is a fundamental aspect of all events that adhere to a [standard structure](/docs/microservice-meta-framework/introduction/design-principles.md#schema-driven-development), which is one of the core design principles of Godspeed, regardless of their source or protocol.**
 
 <!-- **When switching between eventsources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the eventsource name, method, and path. However, for Kafka events, the start line combines the datasource name, topic name, and group ID.** -->
 
@@ -10,7 +10,7 @@ The event schema, for each eventsource, closely follows the OpenAPI specificatio
 - The name/topic/URL of the event
 - The event handler workflow
 - Input and output schema with the validation error handling
-- [Authorization](authorization/overview.md) checks 
+- [Authorization](/docs/microservice-meta-framework/authorization/overview.md) checks 
 
 ## An HTTP event
 - The framework provides request and response schema validation out of the box.
@@ -55,7 +55,7 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
 ```
 - The event's first line comprises three key elements: the type of eventsource (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the eventsource plugin, and it is the only line that changes across all events.
 
-For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](/docs/workflows/overview.md).
+For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](/docs/microservice-meta-framework/workflows/overview.md).
 
 The inputs (event) object has following properties:
 
@@ -169,4 +169,4 @@ Sample spec for response schema.
 
 <img src="https://ik.imagekit.io/pavanKillada/Screenshot%20from%202023-10-20%2015-51-58.png?updatedAt=1697797912694" alt="response schema error" />
 
-We saw the Http event above, now we'll see the Kafka and Cron in the [examples](./examples)
+We saw the Http event above, now we'll see the Kafka and Cron in the [examples](/docs/microservice-meta-framework/event-sources/examples.md)

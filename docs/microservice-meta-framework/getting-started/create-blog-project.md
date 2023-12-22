@@ -150,6 +150,6 @@ godspeed dev
     <img src="../../static/img/swagger_response.png" alt="swagger spec default" />
  -->
 
-**Voila!** Your API backend is up and running. You can use Postman to test your API's.
+**Voila!** Your API backend is up and running. You can use Postman or swagger to test your API's.
 
 Happy building with Godspeed!

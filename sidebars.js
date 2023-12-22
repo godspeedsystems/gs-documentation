@@ -229,12 +229,12 @@ const sidebars = {
             {
               type: "doc",
               label: "8.1. Config",
-              id: "microservice-meta-framework/config/overview"
+              id: "microservice-meta-framework/config-and-mappings/config"
             },
             {
               type: "doc",
               label: "8.2. Mappings",
-              id: "microservice-meta-framework/mappings"
+              id: "microservice-meta-framework/config-and-mappings/mappings"
             },
           ],
         },
@@ -245,7 +245,7 @@ const sidebars = {
             {
               type: "doc",
               label: "9.1. Overview",
-              id: "microservice-meta-framework/inline-scripting"
+              id: "microservice-meta-framework/inline-scripting/overview"
             },
           ],
         },
@@ -263,8 +263,23 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "12.1. Overview",
+              label: "11.1. Overview",
               id: "microservice-meta-framework/telemetry/overview"
+            },
+            {
+              type: "doc",
+              label: "11.2. Configuration",
+              id: "microservice-meta-framework/telemetry/configuration"
+            },
+            {
+              type: "doc",
+              label: "11.3. Logging",
+              id: "microservice-meta-framework/telemetry/logging"
+            },
+            {
+              type: "doc",
+              label: "11.4. Custom metrics and traces",
+              id: "microservice-meta-framework/telemetry/custom-metrics"
             },
           ],
         },

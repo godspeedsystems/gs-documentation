@@ -160,7 +160,7 @@ Any kind of entity which provides read and write mechanism for data and acts as 
 ### Steps to create custom datasource as eventsource :
 
 
-1. To create datasource follow [How to create custom datasource](./../data_sources/create_your_data_source.md)
+1. To create datasource follow [How to create custom datasource](/docs/microservice-meta-framework/datasources/create-custom-datasource.md)
 
 ```
     .
