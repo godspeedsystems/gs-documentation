@@ -25,7 +25,7 @@ We use scripting in workflows/functions for dynamic evaluation of variables in <
 
 #### Accessing ctx properties using scripting
 
-The values of all [`ctx`](/docs/microservice-meta-framework/workflows/native-language-functions.md#ctx) properties can be assessed using scripting tags `<% %>`
+The values of all [`ctx`](/docs/microservices-framework/workflows/native-language-functions.md#ctx) properties can be assessed using scripting tags `<% %>`
 
 - Evaluating the inputs using scripting
 
@@ -85,7 +85,7 @@ tasks:
 
 The framework provides coffee/js for
 
-- Transformations in [`com.gs.transform`](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md#comgsreturn)
+- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsreturn)
 - Dynamic evaluation or workflow or task variables, event variables, datasource variables.
 
 

@@ -85,7 +85,7 @@ Sample strucutre of config files.
 ```
 
 ### Elasticgraph Setup
-The framework has [inbuilt feature](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md) of setting up Elasticgraph model automatically whenever a new configuration is added in `src/datasources/eg_config/` directory. In case, you are getting any error in the setup, then you can refer execute below step for manual setup:
+The framework has [inbuilt feature](/docs/microservices-framework/workflows/inbuilt-workflows.md) of setting up Elasticgraph model automatically whenever a new configuration is added in `src/datasources/eg_config/` directory. In case, you are getting any error in the setup, then you can refer execute below step for manual setup:
 
 > During the project setup, if you have not selected elasticsearch, then you will have to execute `godspeed update` in project root directory, outside the dev container. This will add elasticsearch in the dev container environment.
 

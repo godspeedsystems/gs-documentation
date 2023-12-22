@@ -37,7 +37,7 @@ The user has the ability to write JavaScript files and can invoke them from even
 
 ##### Developer Defined Functions
 
-Developers can establish their own JavaScript functions within the project by generating a new JavaScript file at any location. These functions must be exported, allowing them to be invoked in YAML workflows by specifying the JavaScript file path in the 'fn' keyword. [refer](/docs/microservice-meta-framework/workflows/native-language-functions.md)
+Developers can establish their own JavaScript functions within the project by generating a new JavaScript file at any location. These functions must be exported, allowing them to be invoked in YAML workflows by specifying the JavaScript file path in the 'fn' keyword. [refer](/docs/microservices-framework/workflows/native-language-functions.md)
 
 ### Example for native language
 
@@ -85,7 +85,7 @@ module.exports = function greet(name){
 ```
 
 ### Yaml-DSL Workflows
-YAML DSL serves as the default language for creating general workflows.[Read More](/docs/microservice-meta-framework/workflows/yaml-dsl-functions.md)
+YAML DSL serves as the default language for creating general workflows.[Read More](/docs/microservices-framework/workflows/yaml-dsl-functions.md)
 
 ### Structure of a Yaml Workflow
 Every Workflow has the following attributes.
@@ -128,7 +128,7 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
 
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservice-meta-framework/workflows/inbuilt-workflows.md) or developer defined functions [YAML](/docs/microservice-meta-framework/workflows/yaml-dsl-functions.md), [JavaScript](/docs/microservice-meta-framework/workflows/native-language-functions.md).
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/inbuilt-workflows.md) or developer defined functions [YAML](/docs/microservices-framework/workflows/yaml-dsl-functions.md), [JavaScript](/docs/microservices-framework/workflows/native-language-functions.md).
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 

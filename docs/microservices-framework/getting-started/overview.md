@@ -26,7 +26,7 @@ Godspeed CLI is the command center of a Godspeed project. It allows you to creat
    npm install -g @godspeedsystems/godspeed
 ```
 
-Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservice-meta-framework/CLI.md) for more information.
+Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information.
 
 ```bash
    godspeed --help
