@@ -69,8 +69,9 @@ multiLingual = true
 type = 'date'
 multiLingual = false
 ```
-:::tip
-	If you want to use `type = Float` then you need to specify in [custom-mappings.yaml](./elasticgraph.md/#custom-elasticsearch-mapping)
+:::info
+If you want to use `type = Float` then you need to specify in [custom-mappings.yaml](/docs/elasticgraph-orm/elasticgraph.md#custom-elasticsearch-mapping)
+
 :::
 
 Corresponding document of an Event, when returned from the API will look like shown below. It does not matter which underlying database the information is being fetched from.

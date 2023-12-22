@@ -191,7 +191,7 @@ title: Table of Contents
 [15. **Roadmap**](roadmap.md)      
 
 [16. **FAQ**](faq.md)      
-    [16.1 What is the learning curve of the microservice framework?](faq.md/#151-what-is-the-learning-curve-of-the-microservice-framework)      
+    [16.1 What is the learning curve of the microservice framework?](faq.md/#151-what-is-the-learning-curve-of-the-microservices-framework)      
     [16.2 What is the development process and quality metrics?](faq.md/#152-what-is-the-development-process-and-quality-metrics)      
     [16.3 How can we adopt new versions of used technology easily and fast? For example, the new Postgres release.](faq.md/#153-how-can-we-adopt-new-versions-of-used-technology-easily-and-fast-for-example-the-new-postgres-release)      
     [16.4 How easy is it to add new technology in place of an existing one, or add something absolutely new and unique (not existing in the framework)         ?](faq.md/#154-how-easy-is-it-to-add-new-technology-in-place-of-an-existing-one-or-add-something-absolutely-new-and-unique-not-existing-in-the-framework)      

@@ -143,6 +143,7 @@ DEBUG=*,-elasticsearch node ../gs_service/elasticgraph/lib/mappingGenerator/reIn
 ## Reindexing after mapping updates
 
 If we have made any changes to the mapping, such as adding new fields, we will need to reindex our data to apply the changes to the existing documents. To reindex in Elasticsearch,run the following command:
+
 ```bash
 $ cd <path-to-elasticgraph-repo>
 DEBUG=*,-elasticsearch node ../gs_service/elasticgraph/lib/mappingGenerator/reIndexer.js ./datasources/eg_config/eg1 backend all|<comma seprated list of defined entity types>

@@ -35,6 +35,7 @@ Sample masked logs:
 
 ### Log format
 When observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
+
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
 {"Body":"adding body schema for /upload_multiple_docs.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}

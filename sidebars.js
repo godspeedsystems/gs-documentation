@@ -21,7 +21,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: "category",
-      label: "1. Microservice Meta Framework",
+      label: "1. Microservices Framework",
       items:  [
 
         {
@@ -124,7 +124,7 @@ const sidebars = {
             {
               type: "doc",
               label: "4.7. Swagger Specs",
-              id: "microservices-framework/swagger-specs"
+              id: "microservices-framework/event-sources/swagger-specs"
             },
           ],
         },
@@ -160,7 +160,7 @@ const sidebars = {
             {
               type: "doc",
               label: "5.5. Caching",
-              id: "microservices-framework/caching"
+              id: "microservices-framework/workflows/caching"
             },
             // {
             //   type: "doc",
