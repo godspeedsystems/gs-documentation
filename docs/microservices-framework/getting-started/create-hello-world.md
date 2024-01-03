@@ -3,7 +3,7 @@
 
 ## Creating a godspeed project.
 
-Let's create a project that includes a simple 'hello world' example for both [events](/docs/microservices-framework/event-sources/standardized-event-schema.md) and [functions](/docs/microservices-framework/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
+Let's create a project that includes a simple 'hello world' example for both [events](/docs/microservices-framework/event-sources/event-types.md) and [functions](/docs/microservices-framework/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
 1. Create a project using Godspeed CLI with below command:
 ```bash

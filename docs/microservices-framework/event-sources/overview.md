@@ -8,7 +8,9 @@ title: Eventsources
   **Here Kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
 
 
-## Types of eventsources
+## Types of eventsources 
+Based on functionality and the nature of the information they provide to the system, eventsources can be divided as below.
+
   1. Eventsource
     - It can act only as an eventsource
     - has its own client initialization

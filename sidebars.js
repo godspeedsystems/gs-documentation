@@ -98,13 +98,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.2. Standardized event schema",
-              id: "microservices-framework/event-sources/standardized-event-schema"
+              label: "4.2. Event Types",
+              id: "microservices-framework/event-sources/event-types"
             },
             {
               type: "doc",
-              label: "4.3. Examples",
-              id: "microservices-framework/event-sources/examples"
+              label: "4.3. Schema Validation",
+              id: "microservices-framework/event-sources/schema-validation"
             },{
               type: "doc",
               label: "4.4. Create custom event source",
@@ -120,11 +120,6 @@ const sidebars = {
               type: "doc",
               label: "4.6 Event source plugins",
               id: "microservices-framework/event-sources/event-source-plugins"
-            },
-            {
-              type: "doc",
-              label: "4.7. Swagger Specs",
-              id: "microservices-framework/event-sources/swagger-specs"
             },
           ],
         },
