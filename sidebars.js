@@ -126,6 +126,11 @@ const sidebars = {
               label: "4.7. Swagger Specs",
               id: "microservices-framework/event-sources/swagger-specs"
             },
+            {
+              type: "doc",
+              label: "4.8. Express File upload",
+              id: "microservices-framework/event-sources/express_fileupload"
+            },
           ],
         },
         {
