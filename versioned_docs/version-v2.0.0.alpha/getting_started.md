@@ -83,10 +83,10 @@ godspeed create **hello-world** # hello-world is the name of the app
 
 
      
-4. Running the dev server. Navigate to the project root directory and run.
+4. Running the service. Navigate to the project root directory and run.
 
 ```bash
-> godspeed dev
+> godspeed serve
 ```
 
 5. It will start your app on localhost on port 3000. You can try out your hello-world API is live.
@@ -141,10 +141,10 @@ godspeed gen-crud-api
 ```
 **This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma**
 
-6. Run `godspeed dev` to start the development server.
+6. Run `godspeed serve` to start the service.
 
 ```bash
-godspeed dev
+godspeed serve
 ```
 
 **Voila!** Your API backend is up and running. You can use Postman to test your APIs.

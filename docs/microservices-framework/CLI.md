@@ -134,7 +134,6 @@ Options:
   -h, --help                             display help for command
 
 
-For detailed documentation visit https://godspeed.systems
 
 
 ```
@@ -145,6 +144,15 @@ For detailed documentation visit https://godspeed.systems
 2. While using `--from-example` you have to mention any name from the available examples. [available names are hello-world, mongo-as-prisma]
 
 :::
+
+
+### Running the service
+
+You can run your Godspeed project using `godspeed serve` command. This will run your project in auto-watch mode.
+
+```bash
+ godspeed serve
+```
 
 ### prisma
 
@@ -450,10 +458,4 @@ $ godspeed devops-plugin update
 ❯ @godspeedsystems/plugins-prisma-as-datastore 
 ```
 
-### dev
 
-You can run your Godspeed project using `godspeed dev` command.
-
-```bash
- godspeed dev
-```

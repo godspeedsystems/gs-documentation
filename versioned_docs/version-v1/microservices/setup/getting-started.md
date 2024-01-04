@@ -109,7 +109,7 @@ Godspeed framework relies on [Prisma ORM](https://www.prisma.io/) to interact wi
 #### Step 8: Start the service for local development in watch mode
 
 ```sh
-  godspeed dev
+  godspeed serve
 ```
 
 :::tip

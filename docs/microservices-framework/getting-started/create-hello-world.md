@@ -65,10 +65,10 @@ Framework will give you below folder structure.
 type: express
 port: 3000
 ```
-3.  Run `godspeed dev` to start the development server.
+3.  Run `godspeed serve` to start the development server.
 
 ```bash
-godspeed dev
+godspeed serve
 ```
 4. The server is up and running on port 3000 ([http://localhost:3000/helloworld](http://localhost:3000/helloworld))
 

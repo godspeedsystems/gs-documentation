@@ -324,8 +324,8 @@ $ godspeed plugin update
 
 ## 6.dev
 
-You can run your godspeed project using `godspeed dev` command.
+You can run your godspeed project using `godspeed serve` command.
 
 ```bash
- godspeed dev
+ godspeed serve
 ```

@@ -26,7 +26,23 @@ Godspeed CLI is the command center of a Godspeed project. It allows you to creat
    npm install -g @godspeedsystems/godspeed
 ```
 
+### Install VSCode Plugin
+Please refer to [this page](/docs/microservices-framework/vscode-extension/language-tools.md) to install Godspeed's VSCode plugin which will assist you with development.
+
+### Creating your project
+You can create a blank project like this.
+```bash
+  godspeed create <project_name>
+```
+You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/create-hello-world.md) and [Blog](/docs/microservices-framework/getting-started/create-blog-project.md) projects. 
+
+### Building and running your project
+
+You can build your project using the `godspeed build` command, and clean using `godspeed clean`. You can start your server on localhost or production machine using `godspeed serve`. It will run in autowatch mode over your local file changes. 
+
+### For any help
 Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information.
+
 
 ```bash
    godspeed --help
@@ -62,9 +78,6 @@ Commands:
   prisma                          proxy to prisma commands with some add-on
                                   commands to handle prisma datasources.
   help [command]                  display help for command
-
-
-For detailed documentation visit https://godspeed.systems
 
     
 ```
