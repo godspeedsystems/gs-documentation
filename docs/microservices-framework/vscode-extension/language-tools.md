@@ -21,7 +21,7 @@ Hello developers Thank You for using Godspeed Microservice Framework.
 
 - Open your [VS Code](https://code.visualstudio.com/) app.
 
-- Go to the Extension section and serach Godspeed Language Tools. 
+- Go to the Extension section and search Godspeed Language Tools. 
 
 - Install the Godspeed Language Tool Extension in your VS Code. 
 

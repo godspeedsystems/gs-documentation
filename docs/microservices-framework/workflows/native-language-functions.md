@@ -1,7 +1,6 @@
-# Native Language Functions
+# Native Language Workflows
 
-Native language functions are primarily written in JavaScript or TypeScript. This allows users to create custom functions.
-A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
+"Since the framework currently supports Node.js and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic."
 
 
 Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.

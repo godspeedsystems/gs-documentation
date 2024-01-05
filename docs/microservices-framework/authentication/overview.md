@@ -1,4 +1,4 @@
-# Authorization
+# Authentication
 :::tip Note
 Currently the job of Authentication is left to the individual plugins.
 :::
@@ -48,7 +48,7 @@ http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate:
                 required: [application_id]
 ```
 
-### JWT authorization
+### JWT authentication
 
 You can configure JWT settings within the `eventsources/http.yaml`. Here's an example of such a configuration:
 ```yaml

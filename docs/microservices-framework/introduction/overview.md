@@ -37,7 +37,7 @@ Teams can adopt Godspeed by simply including the NPM module or jar in their exis
 
 ### Security
 
-The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](/docs/microservices-framework/authorization/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
+The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](/docs/microservices-framework/authentication/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
 
 ### Flexibility
 Developer should be able to implement anything they need, or replace existing [eventsources](/docs/microservices-framework/event-sources/overview.md) or [datasources](/docs/microservices-framework/datasources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
@@ -77,7 +77,7 @@ The three main pillars of Godspeed framework: [eventsources](/docs/microservices
 
 1. [**EventSources:**](/docs/microservices-framework/event-sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
 
-    1.1. [**Events:**](/docs/microservices-framework/event-sources/event-types.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
+    1.1. [**Events:**](/docs/microservices-framework/event-sources/overview.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable). 
 
 2. [**DataSources:**](/docs/microservices-framework/datasources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
 
