@@ -1,49 +1,6 @@
-# Yaml-DSL Workflows
+# Workflow-DSL
 
-## Introduction
-
-YAML DSL serves as the default language for creating general workflows. 
-
-#### Zero Boiler Plate
-Yaml follows zero-bolier-plate approach reducing or eliminating repetitive and unnecessary code or setup, allowing developers to focus on essential tasks, resulting in cleaner and more efficient code.
-
-```yaml
-summary: workflow to cache task results
-id: cache_wf
-tasks:
-  - id: cache_step1
-    caching:
-      key: cache_step1
-      invalidate: cache_step2
-      cache_on_failure : false
-      expires: 60
-      force: false
-    fn: datasource.api.post./anything
-    args:
-        data:
-          name: 'hello'
-  - id: cache_step2
-    caching:
-      key: cache_step2
-      cache_on_failure : false
-      expires: 60
-      force: false
-    fn: datasource.api.post./anything
-    args:
-        data:
-          name: 'cache'
-```
-
-#### Decoupled Architechture
-YAML [workflows](/docs/microservices-framework/introduction/design-principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
-
-
-#### Client-Agnostic Decoupling:
-
-  If you develop your code in JavaScript, you are essentially using the native JavaScript client exposed by Prisma. Later, if you decide to switch from Prisma to TypeORM, you can keep the same YAML configuration. All you need to do is adapt the TypeORM client to conform to the YAML DSL of datasources. In this scenario, only the datasource implementation would change, while the rest of your code remains unchanged. For Example [Axios](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)
-
-  When leveraging a Prisma API, it is possible to craft YAML configurations today and seamlessly incorporate them into a Java-based workflow at a later time. This decoupling empowers a seamless transition between various programming languages, provided they uphold compatibility with the identical YAML configuration format.
-
+-A Workflow DSL (Domain-Specific Language) refers to a specialized programming language or notation designed for expressing and defining workflows or processes within a specific domain 
 
 ## Structure of a Workflow
 Every Workflow has the following attributes.
@@ -51,7 +8,19 @@ Every Workflow has the following attributes.
 - **summary** - This provides a descriptive title for a workflow, enhancing code readability.
 - **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
 
-## Examples
+
+### Tasks and Attributes within a task
+The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
+
+- **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
+
+- **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
+
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/inbuilt-workflows.md)
+
+- **args** - Every handler function has its own argument structure, which is kept in the args key.
+
+### Example Workflows
 #### Example 1:
 ```yaml
 id: hello_world_function
@@ -79,18 +48,6 @@ tasks:
       fn: com.gs.transform #Inbuilt function that converts the code written in <%%>.
       args: <% outputs.sum_step1 %> #we access the first task output and return it.
 ```
-
-### Tasks and Attributes within a task
-The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
-
-- **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
-
-- **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
-
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/inbuilt-workflows.md)
-
-- **args** - Every handler function has its own argument structure, which is kept in the args key.
-
 
 
 #### Inputs
@@ -121,7 +78,7 @@ tasks:
 ```
 The output of every task and function can be expected in the following format within other task
 
-## Components of Response
+### Components of Response
 
 Developers can easily transmit data by sending a JSON object containing the following components.
 
@@ -220,6 +177,115 @@ tasks:
     fn: com.gs.return
     args: "task 2 executed"
 ```
+
+
+## Scripting in workflows
+
+We use scripting in workflows/functions for dynamic evaluation of variables in <% %> tags.
+
+
+#### Accessing ctx properties using scripting
+
+The values of all [`ctx`](/docs/microservices-framework/workflows/native-language-functions.md#ctx) properties can be assessed using scripting tags `<% %>`
+
+- Evaluating the inputs using scripting
+
+```yaml
+summary: Summing x + y
+description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
+tasks:
+  - id: sum_step1
+    description: add two numbers
+    fn: com.gs.transform
+    args: <% inputs.body.x + inputs.body.y %>
+```
+
+- Evaluating the outputs using scripting
+
+```yaml
+summary: Summing x + y
+description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
+tasks:
+  - id: sum_step1
+    description: add two numbers
+    fn: com.gs.transform
+    args: <% inputs.body.x + inputs.body.y %>
+
+  - id: sum_step2
+    fn: com.gs.return
+    args: <% outputs.sum_step1 %>
+```
+
+- Evaluating the outputs using scripting bracket notation
+
+```yaml
+  summary: parallel function
+  tasks:
+    - id: parallel
+      fn: com.gs.parallel
+      tasks:
+        - id: 1st
+          fn: com.gs.return
+          args: "నమస్కారం"
+
+        - id: 2nd
+          fn: com.gs.return
+          args: "नमस्ते"
+
+        - id: 3rd
+          fn: com.gs.return
+          args: "Hello"
+
+    - id: step2
+      fn: com.gs.return
+      args: |
+        <% outputs["1st"] %>
+```
+
+### Use of Coffee/JS for scripting
+
+The framework provides coffee/js for
+
+- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsreturn)
+- Dynamic evaluation or workflow or task variables, event variables, datasource variables.
+
+
+
+#### Define language at workflow level
+Global configuration for language is overridden by defining specific language inside <coffee/js% %>. 
+
+- Scripting with coffee
+
+```
+summary: test the coffee scripting
+id: coffee_workflow
+description: Test the coffee script
+tasks:
+  - id: sum
+    fn: com.gs.transform
+    args: |
+        <coffee% if inputs.query.name
+                    return "Hello Shirisha"
+                 else 
+                    return "Hello Developer"
+         %>
+```
+- Scripting with Javascript
+
+```
+summary: performing js scrpit 
+tasks:
+  - id: first_task
+    fn: com.gs.return
+    args: |
+      <js%
+      if(inputs.query.name){
+        return `Hello ${inputs.query.name}!`
+      }
+      return 'Hello Developer!'
+      %>
+```
+
 
 ## Built-in functions
 

@@ -197,11 +197,7 @@ const sidebars = {
             //   label: "5.3. Custom workflows",
             //   id: "workflows/custom_workflows"
             // },
-            {
-              type: "doc",
-              label: "5.4. Caching",
-              id: "microservices-framework/workflows/caching"
-            },
+        
             // {
             //   type: "doc",
             //   label: "5.4. Retry",
@@ -232,6 +228,11 @@ const sidebars = {
               type: "doc",
               label: "6.4. DataSource plugins",
               id: "microservices-framework/datasources/datasource-plugins"
+            },
+            {
+              type: "doc",
+              label: "6.5. Caching",
+              id: "microservices-framework/datasources/caching"
             },
           ],
         },
