@@ -1,4 +1,4 @@
-# Data source Plugins
+# List of Plugins
 
 Godspeed framework adopts a pluggable approach that empowers you to define data sources effortlessly. Our framework graciously provides an interface that caters to diverse data source needs. Here's a glimpse into the exceptional data source plugins meticulously crafted by our core framework team.
 

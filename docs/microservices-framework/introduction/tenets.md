@@ -14,7 +14,7 @@ For example, decoupled [event sources](/docs/microservices-framework/event-sourc
 All projects of an organization should follow standardized and systematic implementation for ensuring maintainability and easy adoption by new developers.
 Godspeed is called a meta-framework, or a framework of frameworks, because it unifies the way in which microservices are developed across the organization, even with varying languages and frameworks like Nodejs, BunJS, Java Springboot (coming soon), Golang/Python (coming in 2024) etc., via its standardized abstractions & scaffolding. 
 
-Further the standardization includes established industry standards into system design, such as [OpenTelemetry](/docs/microservices-framework/telemetry/overview.md) for observability, Swagger specifications for API and event schema, and [Prisma](/docs/microservices-framework/datasources/datasource-plugins.md#1-prisma-as-datasource) for database model definition.
+Further the standardization includes established industry standards into system design, such as [OpenTelemetry](/docs/microservices-framework/telemetry/overview.md) for observability, Swagger specifications for API and event schema, and [Prisma](https://www.prisma.io/) for database model definition.
 
 <!-- ---
 

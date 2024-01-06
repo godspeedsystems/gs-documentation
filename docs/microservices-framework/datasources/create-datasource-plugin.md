@@ -6,7 +6,8 @@ In this section, let us understand how a developer can contribute a plugin to go
 Follow these step-by-step guidelines to receive detailed instructions on contributing your plugin. Become an integral part of the world's first meta framework, setting the course for innovation and excellence. 
 Watch the videos below for better understanding!
 
-1.How to create plugins using godspeed?
+## 1.How to create plugins using godspeed?
+
 Here is a video which helps you create a plugin using the godspeed. Do watch for better understanding
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
@@ -14,7 +15,7 @@ Here is a video which helps you create a plugin using the godspeed. Do watch for
 </div>
 
 
-2.Create and use plugins using godspeed
+## 2.Create and use plugins using godspeed
 Watch here the video where we demonstrate how to create and use plugins using godspeed.
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>

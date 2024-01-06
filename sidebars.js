@@ -226,8 +226,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.4. DataSource plugins",
-              id: "microservices-framework/datasources/datasource-plugins"
+              label: "6.4. List of Plugins",
+              id: "microservices-framework/datasources/list-of-plugins"
             },
             {
               type: "doc",
