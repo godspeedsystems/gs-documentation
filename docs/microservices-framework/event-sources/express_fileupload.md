@@ -84,4 +84,3 @@ tasks:
 ### Example success response
 
 ![image](https://res.cloudinary.com/dzdcjchdc/image/upload/v1704369051/Screenshot_from_2024-01-04_17-20-32_dfzirt.png)
-
