@@ -330,7 +330,7 @@ godspeed build
 ### dev
 You can run your project using dev command.
 ```
-godspeed dev
+godspeed serve
 ```
 
 ### gen-api-docs

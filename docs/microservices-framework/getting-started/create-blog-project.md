@@ -122,10 +122,10 @@ Command generates the below respective folders and files in the Events and Funct
                 └── update.yaml
 ```
 
-8. Run `godspeed dev` to start the development server.
+8. Run `godspeed serve` to start the development server.
 
 ```bash
-godspeed dev
+godspeed serve
 ```
 9. Go to [http://localhost:3000/api-docs](http://localhost:3000/api-docs) to see the API endpoints in the swagger.
 

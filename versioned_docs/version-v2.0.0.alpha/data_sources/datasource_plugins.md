@@ -35,7 +35,7 @@ import { PrismaDataSource } from '@godspeedsystems/plugins-prisma-as-datasource'
 export default PrismaDataSource;
 ```
 
-4. Run `godspeed dev` or `npm run dev` to restart the server.
+4. Run `godspeed serve`. If for any reason new code is not reflected just run `godspeed build` once and then run in auto-watch mode with `godspeed serve`.
 
 
 ### 2. axios-as-datasource [npm](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)

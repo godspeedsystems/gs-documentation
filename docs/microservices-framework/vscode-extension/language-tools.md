@@ -179,7 +179,7 @@ tasks:
   String is longer than the maximum length of 50.
   ```
 
-  - fn should be one of inbuilt functions or from the plugins (it starts with datasources) [samples](../workflows/yaml_dsl_functions.md).
+  - fn should be one of inbuilt functions or from the plugins (it starts with datasources) [samples](../workflows/yaml-dsl-functions.md).
 
 ### For more information you can watch our full Deatiled video on language tools and snippets of it on our [Youtube](https://www.youtube.com/embed/Yir19zd492I) channel. 
 
