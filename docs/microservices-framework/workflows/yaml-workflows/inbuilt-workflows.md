@@ -7,7 +7,7 @@
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
 
-## com.gs.transform
+### com.gs.transform
 
 This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.
 
@@ -56,7 +56,7 @@ tasks:
 ```
 
 
-## com.gs.parallel
+### com.gs.parallel
 :::tip control flow function
 Executes the child tasks in parallel.
 :::
@@ -117,7 +117,7 @@ The above event will trigger the below function
         <% outputs["1st"] %>
 ```
 
-## com.gs.switch
+### com.gs.switch
 :::tip control flow function
 The classic switch-case flow execution
 :::
@@ -184,7 +184,7 @@ tasks:
 ```
 
 
-## com.gs.each_sequential
+### com.gs.each_sequential
 
 :::tip control flow function
 The classic for-each flow execution
@@ -277,7 +277,7 @@ on_error at loop level only gets executed when all the tasks are failed. If even
 :::
 
 
-## com.gs.each_parallel
+### com.gs.each_parallel
 
 The `args` parameter comprises a list of values in the `value` field, each paired with its respective tasks. These tasks run concurrently for each value in the `value` list. The resulting output, `each_parallel`, is an array containing the status of the last task executed in each iteration.
 
@@ -357,7 +357,7 @@ The "on_error" at the loop level is only executed when all tasks fail. If even o
 
 
 
-## com.gs.return
+### com.gs.return
 
 :::tip return statement
 The classic return statement
@@ -398,7 +398,7 @@ tasks:
         %>
 ```
 
-## com.gs.log
+### com.gs.log
 
 During the workflow execution, it records intermediate inputs and outputs in the Pino logging format. The parameters include `level`, which can be set to any value from the [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options), and `data`, which accepts a CoffeeScript/JavaScript expression to be evaluated at runtime or any other data type, such as a string or number, that you wish to log.
 
@@ -465,7 +465,7 @@ tasks:
 
 
 
-## com.gs.if
+### com.gs.if
 :::tip control flow function
 The classic if-else flow execution
 :::
@@ -538,9 +538,9 @@ tasks:
 
 ```
 
-## Using on_error
+### Using on_error
 
-You have the flexibility to define "on_error" at both the workflow level and the task level based on your specific needs. Refer to the following section for more detailed information. [know more](/docs/microservices-framework/workflows/yaml-dsl-functions.md#error-handling)
+You have the flexibility to define "on_error" at both the workflow level and the task level based on your specific needs. Refer to the following section for more detailed information. [know more](/docs/microservices-framework/workflows/yaml-workflows/overview.md#error-handling)
 
 **1. Workflow level on_error handling**
 

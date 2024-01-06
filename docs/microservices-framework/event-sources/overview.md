@@ -5,10 +5,12 @@ title: Eventsources
 
   Eventsources in Godspeed framework captures event and allows you to define entry or trigger points of application. Like `express` type, eventsource will allow you to expose your application through REST API or a `cron` type eventsource to schedule a recurring call to a workflow. To know the design principles of the eventsource, refer [this](/docs/microservices-framework/event-sources/event-source-plugins.md).
 
-  **Here Kafka works as datasource and an eventsource. To have look at the configuration, events and workflows, checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
+  **Here Kafka works as datasource and an eventsource. To have a look at the configuration, events and workflows, checkout [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
 
 
-## Types of eventsources
+## Types of eventsources 
+Based on functionality and the nature of the information they provide to the system, eventsources can be divided as below.
+
   1. Eventsource
     - It can act only as an eventsource
     - has its own client initialization

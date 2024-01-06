@@ -5,7 +5,7 @@ Guardrails in the context of software development refer to a set of predefined r
 
 At Godspeed, our development philosophy revolves around four core guardrails, shaping a robust and innovative approach to software creation:
 
-**1.Schema driven development:**
+### 1.Schema driven development:
 
 Embracing the power of structured data, Godspeed follows a schema-driven development approach. This guardrail ensures that the events, workflows within the software are defined by clear and well-documented schemas. 
 
@@ -16,7 +16,7 @@ Dive deeper into the fascinating world of schema-driven development by watching 
 </div>
 
 
-**2.Configure over code:**
+### 2.Configure over code:
 
 At Godspeed, we believe in empowerment over complexity. That's why we champion configuration over endless coding. This guardrail encourages the use of high-level abstractions and configuration settings, giving developers the power to tailor the software's behavior without getting lost in the weeds of complex code changes.
 
@@ -30,7 +30,7 @@ Ready to unravel the magic of configure over code? Take a closer look in the vid
 
 
 
-**3.Security:**
+### 3.Security:
 
 At Godspeed, security is non-negotiable. We've fortified our software with robust security standards and practices, including secure coding, strong authentication, and proactive vulnerability mitigation. 
 
@@ -42,7 +42,7 @@ Watch the video below to see how we keep your digital fortress impregnable."
 
 
 
-**4. Decoupled Architecture:**
+### 4. Decoupled Architecture:
 
 Godspeed's guardrail of decoupled architecture advocates for the separation of concerns within the software. By modularizing components and minimizing dependencies, this approach enhances scalability, maintainability, and collaboration among development teams. 
 

@@ -2,7 +2,7 @@
 Godspeed provides caching of the tasks using redis as cache. You can cache the result of any task in the workflows. 
 Caching can take various forms, including in-memory caching and the upcoming addition of Elasticsearch for caching.
 
-:::tip **Coming soon in V2**
+:::tip **Coming soon in V2. Check this [github issue](https://github.com/godspeedsystems/gs-node-service/issues/737#issue-2018054496) for more info**
 :::
 
 ## Specifications

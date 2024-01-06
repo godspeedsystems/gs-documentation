@@ -6,6 +6,11 @@ In the Godspeed Framework, data sources are fundamental components that enable u
 
 Data sources can be seamlessly integrated into your workflow tasks using a standardized syntax. The key element for invoking data sources is the fn attribute, which is namespaced under datasource. Here's an example of how data sources are used within a workflow task:
 
+Data sources can be divided into two types, Datastore as datasource and API as a datasource
+
+
+<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704478971/Screenshot_from_2024-01-05_23-52-33_e8ihnh.png" alt="event types" />
+
 ```yaml
 id: workflow_1
 description: This workflow will fetch the user with userId from the mongo database
@@ -25,6 +30,11 @@ In this example:
   - `mongo`: name of data source,this can be any data base that you select can checkout [database list](/docs/getting-started/create-blog-project#prisma-supports-wide-range-of-databases)
   - `User`: entity name
   - `findOne`: method to be invoked in entity name
+
+
+:::tip **Godspeed has a prisma as a datasource plugin as well, which means a uniformed access atleast for all prisma based datasources**
+:::
+
 
 To enable this seamless interaction with data sources, the Godspeed Framework allows you to configure data sources within your project. For instance, the example mentions the use of the "prisma-as-datastore" plugin to define the "mongo" data source. This configuration step ensures that the framework can establish connections and communicate effectively with the specified data source.
 

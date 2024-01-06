@@ -98,39 +98,67 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "4.2. Standardized event schema",
-              id: "microservices-framework/event-sources/standardized-event-schema"
+              label: "4.2. Event Schema",
+              id: "microservices-framework/event-sources/event-schema"
+            },
+            
+            {
+              type: "category",
+              label: "4.3. Event Types",
+              items:[
+                {
+                  type: "doc",
+                  label: "4.3.1. Overview",
+                  id: "microservices-framework/event-sources/event-types/overview"
+                },
+                {
+                  type: "doc",
+                  label: "4.3.2. Http Events",
+                  id: "microservices-framework/event-sources/event-types/http-events"
+                },
+                {
+                  type: "doc",
+                  label: "4.3.3. Cron Events",
+                  id: "microservices-framework/event-sources/event-types/cron-events"
+                },
+                {
+                  type: "doc",
+                  label: "4.3.4. Kafka Events",
+                  id: "microservices-framework/event-sources/event-types/kafka-events"
+                },
+              ]
+             
             },
             {
               type: "doc",
-              label: "4.3. Examples",
-              id: "microservices-framework/event-sources/examples"
+              label: "4.4. Schema Validation",
+              id: "microservices-framework/event-sources/schema-validation"
             },{
               type: "doc",
-              label: "4.4. Create custom event source",
+              label: "4.5. Create custom event source",
               id: "microservices-framework/event-sources/create-custom-event-source"
             },
 
             {
               type: "doc",
-              label: "4.5. Create event source plugin",
+              label: "4.6. Create event source plugin",
               id: "microservices-framework/event-sources/create-eventsource-plugin"
             },
             {
               type: "doc",
-              label: "4.6 Event source plugins",
+              label: "4.7. List of plugins",
               id: "microservices-framework/event-sources/event-source-plugins"
             },
-            {
-              type: "doc",
-              label: "4.7. Swagger Specs",
-              id: "microservices-framework/event-sources/swagger-specs"
-            },
+            // {
+            //   type: "doc",
+            //   label: "4.7. Swagger Specs",
+            //   id: "microservices-framework/event-sources/swagger-specs"
+            // },
           ],
         },
         {
           type: "category",
-          label: "5. Workflows/Functions",
+          label: "5. Workflows",
           items: [
             {
               type: "doc",
@@ -139,29 +167,37 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "5.2. Native language functions",
+              label: "5.2. Native language workflows",
               id: "microservices-framework/workflows/native-language-functions"
             },
             {
-              type: "doc",
-              label: "5.3. Yaml-DSL functions",
-              id: "microservices-framework/workflows/yaml-dsl-functions"
+              type: "category",
+              label: "5.3. Yaml workflows",
+              // id: "microservices-framework/workflows/yaml-dsl-functions"
+              items:[
+                {
+                  type: "doc",
+                  label: "5.3.1. Overview",
+                  id: "microservices-framework/workflows/yaml-workflows/overview"
+                },
+                {
+                  type: "doc",
+                  label: "5.3.2. Workflow DSL",
+                  id: "microservices-framework/workflows/yaml-workflows/workflow-dsl"
+                },
+                {
+                  type: "doc",
+                  label: "5.3.3. Inbuilt workflows",
+                  id: "microservices-framework/workflows/yaml-workflows/inbuilt-workflows"
+                }
+              ]
             },
             // {
             //   type: "doc",
             //   label: "5.3. Custom workflows",
             //   id: "workflows/custom_workflows"
             // },
-            {
-              type: "doc",
-              label: "5.4. Inbuilt workflows",
-              id: "microservices-framework/workflows/inbuilt-workflows"
-            },
-            {
-              type: "doc",
-              label: "5.5. Caching",
-              id: "microservices-framework/workflows/caching"
-            },
+        
             // {
             //   type: "doc",
             //   label: "5.4. Retry",
@@ -190,8 +226,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.4. DataSource plugins",
-              id: "microservices-framework/datasources/datasource-plugins"
+              label: "6.4. List of Plugins",
+              id: "microservices-framework/datasources/list-of-plugins"
+            },
+            {
+              type: "doc",
+              label: "6.5. Caching",
+              id: "microservices-framework/datasources/caching"
             },
           ],
         },
@@ -213,12 +254,12 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "7. Authorization",
+          label: "7. Authentication",
           items: [
             {
               type: "doc",
               label: "7.1. Overview",
-              id: "microservices-framework/authorization/overview"
+              id: "microservices-framework/authentication/overview"
             },
           ],
         },
@@ -506,3 +547,14 @@ const sidebars = {
 };
 
 module.exports = sidebars;
+
+
+// As discussed in the previous blog of the series, we have discussed about four main issues of FOSS community
+// 1.unethical uses 
+// 2. lack of contribution by community.
+// 3. lack of sustainability of open core model 
+//   - difficult to sustain 
+//   - inherant conflict 
+// 4. open core model - limited version - only used for marketing - no practical use
+
+// In this blog  ,let us review what could be an alternative approach for the community which is fair for everybody
