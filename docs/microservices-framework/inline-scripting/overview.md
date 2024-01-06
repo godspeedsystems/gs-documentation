@@ -85,7 +85,7 @@ tasks:
 
 The framework provides coffee/js for
 
-- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsreturn)
+- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn)
 - Dynamic evaluation or workflow or task variables, event variables, datasource variables.
 
 

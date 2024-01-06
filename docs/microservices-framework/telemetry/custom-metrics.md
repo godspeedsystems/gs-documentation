@@ -103,7 +103,7 @@ logs:
         attributes: 
 ```
 
-The logs are dumped in OTEL format. Please refer to [OTEL Logging Data model](#https://opentelemetry.io/docs/reference/specification/logs/data-model/) for understanding of fields dumped in the logs.
+The logs are dumped in OTEL format. Please refer to [OTEL Logging Data model](https://opentelemetry.io/docs/reference/specification/logs/data-model/) for understanding of fields dumped in the logs.
 > `message` and `params` are part of `Body` field and `attributes` are part of `Attributes` field in the log.
 
 #### Example spec
