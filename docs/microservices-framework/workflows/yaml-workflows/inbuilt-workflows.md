@@ -540,7 +540,7 @@ tasks:
 
 ### Using on_error
 
-You have the flexibility to define "on_error" at both the workflow level and the task level based on your specific needs. Refer to the following section for more detailed information. [know more](/docs/microservices-framework/workflows/yaml-workflows/overview.md#error-handling)
+You have the flexibility to define "on_error" at both the workflow level and the task level based on your specific needs. Refer to the following section for more detailed information. [know more](/docs/microservices-framework/workflows/yaml-workflows/workflow-dsl.md#error-handling)
 
 **1. Workflow level on_error handling**
 

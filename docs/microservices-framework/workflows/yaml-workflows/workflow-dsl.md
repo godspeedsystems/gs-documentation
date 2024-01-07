@@ -16,7 +16,7 @@ The `tasks` attribute is used to define a list of tasks or steps that need to be
 
 - **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
 
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/inbuilt-workflows.md)
+- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md)
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 
@@ -246,7 +246,7 @@ tasks:
 
 The framework provides coffee/js for
 
-- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsreturn)
+- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn)
 - Dynamic evaluation or workflow or task variables, event variables, datasource variables.
 
 
@@ -291,4 +291,4 @@ tasks:
 
  The framework comes equipped with the following built-in functions.These functions are readily available for developers to use in their code, simplifying tasks like mathematical calculations, string manipulation, input/output operations, and more. They save time and effort by offering efficient and reliable solutions for common programming challenges.
 
- [Godspeed Built-in function](/docs/microservices-framework/workflows/inbuilt-workflows.md)
+ [Godspeed Built-in function](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md)

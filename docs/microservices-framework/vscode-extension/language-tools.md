@@ -87,7 +87,7 @@ tasks:
     fn: com.gs.return
     args: <%  %>
 ```
-- You can also add [Built-in Tasks](/docs/microservices-framework/workflows/inbuilt-workflows.md) in the workflows. There are snippets for that task. 
+- You can also add [Built-in Tasks](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md) in the workflows. There are snippets for that task. 
 
 - For Examples -
 
@@ -155,7 +155,7 @@ tasks:
 
   - tasks , id, fn , args 
 
-  - in the few built in tasks there are keys like `cases` in  [com.gs.switch](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsswitch) and `conditions` in [com.gs.ifelse](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgsif) , `values` [com.gs.each_sequential](/docs/microservices-framework/workflows/inbuilt-workflows.md#comgseach_sequential) are the mandatory keys.
+  - in the few built in tasks there are keys like `cases` in  [com.gs.switch](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsswitch) and `conditions` in [com.gs.ifelse](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsif) , `values` [com.gs.each_sequential](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgseach_sequential) are the mandatory keys.
 
 
 ### Rules
@@ -179,7 +179,7 @@ tasks:
   String is longer than the maximum length of 50.
   ```
 
-  - fn should be one of inbuilt functions or from the plugins (it starts with datasources) [samples](../workflows/yaml-dsl-functions.md).
+  - fn should be one of inbuilt functions or from the plugins (it starts with datasources) [samples](/docs/microservices-framework/workflows/yaml-workflows/).
 
 ### For more information you can watch our full Deatiled video on language tools and snippets of it on our [Youtube](https://www.youtube.com/embed/Yir19zd492I) channel. 
 
