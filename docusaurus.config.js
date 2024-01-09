@@ -40,7 +40,7 @@ const config = {
         indexDocSidebarParentCategories: 0,
 
         // whether to index blog pages
-        indexBlog: true,
+        indexBlog: false,
       
         // whether to index static pages
         // /404.html is never indexed
