@@ -41,7 +41,7 @@ jobs:
       with:
         repository: godspeedsystems/azure-helm 
         path: azure-helm       
-        token: ${{ secrets.GITHUB_TOKEN }} 
+        token: ${{ secrets.GIT_TOKEN }} 
 
     - name: Edit helm chart and push back to github
       run: | 
@@ -57,4 +57,4 @@ jobs:
           git commit -m "Upgraded the dev image tag of gs-documentation to ${{ github.run_id }}"
           git push
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+        GH_TOKEN: ${{ secrets.GIT_TOKEN }}          
