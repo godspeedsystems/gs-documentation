@@ -1,9 +1,8 @@
-# Authentication
+# Overview
 :::tip Note
 Currently the job of Authentication is left to the individual plugins.
 :::
-The framework provides authorization, to verify if any event/model is authorized to access specific information or is allowed to execute certain actions.
-
+The framework delegates authentication responsibilities to individual plugins. Additionally, for other microservices, you have the flexibility to integrate various secret mechanisms. Copy the respective index.ts file and customize it to add logic based on your specific needs.
 
 ## Event spec
 Add authn: true or authn: false in the event DSL to enable or disable authentication for any event.
@@ -48,40 +47,33 @@ http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate:
                 required: [application_id]
 ```
 
-### JWT authentication
+## Authorization
+Authorization is a crucial component of access control, determining who can access what resources and perform specific actions. 
 
-You can configure JWT settings within the `eventsources/http.yaml`. Here's an example of such a configuration:
-```yaml
-jwt:
-  issuer: ISS_KEY #iss
-  audience: AUD_KEY #aud
-  secretOrKey: SECRET_KEY
-```
-The provided snippet contains payload information and a secret key. Once the above snippet is added to the `eventsources/http.yaml`, authentication for all the events will be *true* by default. 
+<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" />
 
-Options which can be passed for JWT config are:
+### Types of Authorization
+1. Role-Based Access Control (RBAC):
+RBAC is a widely-used authorization model where access is granted based on predefined roles. Users are assigned roles, and these roles dictate the permissions associated with accessing resources and performing actions.
 
-![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
+2. Attribute-Based Access Control (ABAC):
+ABAC is a dynamic authorization model that considers various attributes associated with users, resources, actions, and context. Policies are defined based on these attributes, allowing for more granular control over access.
 
-When configuring the JWT settings, if you do not provide either the `secretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an error.
+### Key Agents in Authorization
+Authorization involves four key agents:
 
-Additionally, if you specify an `issuer` or `audience` value in the configuration, and the token values differ from those specified in the configuration payload, the response will be 'Unauthorized.'
+a. User
+Users are entities seeking access to resources or the ability to perform actions within a system.
 
-To ensure proper functionality, it is necessary to export these environment variables within your environment.
+b. Resource
+Resources are entities or data within a system that users may want to access or manipulate.
 
-### Access JWT payload in workflow DSL
-You can access the complete JWT payload in `<% inputs.user %>` in workflow DSL as given below:
+c. Action
+Actions define the specific operations or activities that users may want to perform on resources.
 
-```yaml
-summary: Call an API and transform the 
-tasks:
-    - id: api_step1
-      description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.post./anything
-      args:
-        data: <% inputs.body %>
-          jwt_payload: <% inputs.user %>
-```
+d. Context
+Context refers to the circumstances or conditions under which a user's request for access is evaluated. This includes factors such as time, location, or any other relevant contextual information.
+
 <!-- 
 ## Datasources authentication
 At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
