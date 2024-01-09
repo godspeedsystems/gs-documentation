@@ -1,0 +1,59 @@
+name: Prod CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**/values.yaml'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+          
+    - name: Login to docker
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}   
+
+    - name: Login to ACR
+      uses: docker/login-action@v3
+      with:
+        registry: godspeedsystems.azurecr.io
+        username: ${{ secrets.AZURE_CLIENT_ID }}
+        password: ${{ secrets.AZURE_CLIENT_SECRET }} 
+
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: godspeedsystems.azurecr.io/godspeed-docs-dev:${{ github.run_id }}
+
+
+    - name: Checkout argocd Repo
+      uses: actions/checkout@v4
+      with:
+        repository: godspeedsystems/azure-helm 
+        path: azure-helm       
+        token: ${{ secrets.GIT_TOKEN }} 
+
+    - name: Edit helm chart and push back to github
+      run: | 
+          pwd
+          ls 
+          cd azure-helm/prod/gs-documentation
+          pwd
+          OLD_TAG=`grep "tag: " values.yaml | awk '{print $2}'`
+          sed -i "s/$OLD_TAG/'${{ github.run_id }}'/g" values.yaml
+          git config user.name "avtar-mindgrep"
+          git config user.email "avtar@godspeed.systems"
+          git add values.yaml
+          git commit -m "Upgraded the production image tag of gs-documentation to ${{ github.run_id }}"
+          git push
+      env:
+        GH_TOKEN: ${{ secrets.GIT_TOKEN }}          

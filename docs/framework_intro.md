@@ -1,3 +1,6 @@
+---
+slug: /
+---
 # Introduction
 
 Every microservice in the Godspeed framework has three fundamental abstractions, and the developer needs to work with just these three.
