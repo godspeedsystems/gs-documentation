@@ -258,8 +258,13 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "7.1. Overview",
+              label: "7.1.Overview",
               id: "microservices-framework/authentication/overview"
+            },
+            {
+              type: "doc",
+              label: "7.2.JWT Authentication",
+              id: "microservices-framework/authentication/jwt-authentication"
             },
           ],
         },
