@@ -11,7 +11,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'http://localhost:3000',
+  url: 'http://0.0.0.0:3000',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/docs',
@@ -85,7 +85,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'docs/microservices-framework/introduction',
+          editUrl: 'docs/microservices-framework/introduction/overview',
           routeBasePath: '/',
           lastVersion: 'current',
           versions: {
