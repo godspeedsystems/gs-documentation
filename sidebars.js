@@ -269,9 +269,20 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
-          label: "8.Authorization",
-          id: "microservices-framework/authorization"
+          type: "category",
+          label: "8. Authorization",
+          items: [
+            {
+              type: "doc",
+              label: "8.1.Overview",
+              id: "microservices-framework/authorization/overview"
+            },
+            {
+              type: "doc",
+              label: "8.2.Authz Usecases",
+              id: "microservices-framework/authorization/authz-usecases"
+            },
+          ],
         },
         {
           type: "category",

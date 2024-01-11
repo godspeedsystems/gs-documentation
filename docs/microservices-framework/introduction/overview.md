@@ -37,7 +37,7 @@ Teams can adopt Godspeed by simply including the NPM module or jar in their exis
 
 ### Security
 
-The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](/docs/microservices-framework/authentication/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
+The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](/docs/microservices-framework/authorization/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
 
 ### Flexibility
 Developer should be able to implement anything they need, or replace existing [eventsources](/docs/microservices-framework/event-sources/overview.md) or [datasources](/docs/microservices-framework/datasources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
