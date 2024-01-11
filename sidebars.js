@@ -266,6 +266,11 @@ const sidebars = {
               label: "7.2.JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication"
             },
+            {
+              type: "doc",
+              label: "7.3.Authorization",
+              id: "microservices-framework/authentication/authorization"
+            },
           ],
         },
         {
