@@ -266,36 +266,36 @@ const sidebars = {
               label: "7.2.JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication"
             },
-            {
-              type: "doc",
-              label: "7.3.Authorization",
-              id: "microservices-framework/authentication/authorization"
-            },
           ],
         },
         {
+          type: "doc",
+          label: "8.Authorization",
+          id: "microservices-framework/authorization"
+        },
+        {
           type: "category",
-          label: "8. Configs and Mappings",
+          label: "9. Configs and Mappings",
           items: [
             {
               type: "doc",
-              label: "8.1. Config",
+              label: "9.1. Config",
               id: "microservices-framework/config-and-mappings/config"
             },
             {
               type: "doc",
-              label: "8.2. Mappings",
+              label: "9.2. Mappings",
               id: "microservices-framework/config-and-mappings/mappings"
             },
           ],
         },
         {
           type: "category",
-          label: "9. Inline scripting",
+          label: "10. Inline scripting",
           items: [
             {
               type: "doc",
-              label: "9.1. Overview",
+              label: "10.1. Overview",
               id: "microservices-framework/inline-scripting/overview"
             },
           ],
@@ -305,31 +305,31 @@ const sidebars = {
       
         {
           type: "doc",
-          label: "10. VScode extention",
+          label: "11. VScode extention",
           id: "microservices-framework/vscode-extension/language-tools"
         },
         {
           type: "category",
-          label: "11. Telemetry",
+          label: "12. Telemetry",
           items: [
             {
               type: "doc",
-              label: "11.1. Overview",
+              label: "12.1. Overview",
               id: "microservices-framework/telemetry/overview"
             },
             {
               type: "doc",
-              label: "11.2. Configuration",
+              label: "12.2. Configuration",
               id: "microservices-framework/telemetry/configuration"
             },
             {
               type: "doc",
-              label: "11.3. Logging",
+              label: "12.3. Logging",
               id: "microservices-framework/telemetry/logging"
             },
             {
               type: "doc",
-              label: "11.4. Custom metrics and traces",
+              label: "12.4. Custom metrics and traces",
               id: "microservices-framework/telemetry/custom-metrics"
             },
           ],
