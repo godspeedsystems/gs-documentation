@@ -2,7 +2,7 @@
  
 ## Introduction
 - Authorization is a crucial component of access control, determining who can access what resources and perform specific actions.
-- Authorization in the microservice framework works at two levels: one at the event itself and the second at the task and datasource level. It supports multi-level tenancy using Attribute-Based Access Control (ABAC) in addition to plain Role-Based Access Control (RBAC). 
+- Authorization in the microservice framework works at two levels: one at the event itself and the second at the task and datasource level. It supports multi-level tenancy using Attribute-Based Access Control (ABAC) in addition to plain Role-Based Access Control (RBAC). ABAC is often more suited for complex and dynamic multi-tenant access.
 - The GSCloudEvent.user object is populated by the event source plugin or as a task in the authz workflow. Subsequently, the remaining authz workflow tasks can access this information, enrich it, and utilize it for further authorization logic.
 
 <!-- <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" /> -->
@@ -218,6 +218,14 @@ authz:
 
 ## Examples 
 
+In the Framework, authorization can be implemented at different levels: event level, task level, and even within datasource plugins. Each level offers flexibility and customization options to meet specific requirements
+
+:::tip Note
+- Authz configuration can also be set at the event source level, serving as the default configuration.
+- Unless an event explicitly specifies authz: false or overrides its authz settings, all events will inherit the authz configuration from the event source.
+:::
+
+
 <!-- ### Scaffolding of the example
 To better understand the folder structure of the example, review the following scaffolding:
 
@@ -250,11 +258,11 @@ To better understand the folder structure of the example, review the following s
          -->
 
 ### A. Authorization at event level 
-events/helloworld2.yaml
+events/helloworld.yaml
 ```yaml
-"http2.get./helloworld2":
+"http.get./helloworld":
   authn: true
-  fn: helloworld2 # if the below authentication condition returns true, fn helloworld2 gets called
+  fn: helloworld # if the below authentication condition returns true, fn helloworld2 gets called
   authz: # enabling authz in event level
     - fn: com.gs.transform 
       id: try_auth_2_authz
@@ -298,11 +306,11 @@ events/helloworld2.yaml
 - Whenever an API is triggered with authorization enabled, the event source plugin parses the JWT in its request middleware and verifies user data, such as user.role in the example above. If the condition evaluates to true, the corresponding workflow is executed. Otherwise, it proceeds to execute the else case, indicating "Authorization failed."
 
 ### B. Authorization at task level 
-functions/helloworld2.yaml
+functions/helloworld.yaml
 ```yaml
-id: helloworld2_workflow
+id: helloworld_workflow
 tasks:
-  - id: helloworld2_workflow_first_task
+  - id: helloworld_workflow_first_task
     fn: com.gs.transform
     args: 
       code: 200
@@ -348,7 +356,9 @@ module.exports = {
 }
 ``` -->
 
-## How a datastore plugin's execute() method can access authz permission data?
+<!-- ### C.How a datastore plugin's execute() method can access authz permission data? -->
+
+### C. Accessing Authz Permissions in Datastore Plugin's execute()
 
 - Plugins can access user data through args.authzPerms in the execute() method. The structure of this data is defined by the developer, following the format supported by the specific datasource plugin. For example, it could include fields like {can_access_columns, no_access_columns, additionalWhereClause}. 
 - Subsequently, the plugin is responsible for adjusting its query to the datasource based on the information provided in args.authzPerms
@@ -391,3 +401,5 @@ async execute(ctx: GSContext, args: PlainObject): Promise<GSStatus> {
 :::tip Note
 Currently the datasouce plugin level authz handling has not been adopted by any plugin. You can perhaps pick up prisma plugin and help us achieve that. Else just wait for a short while and we will update the prisma to plugin to handle this.
 :::
+
+
