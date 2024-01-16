@@ -10,7 +10,7 @@ The default scripting language is CoffeeScript, and if you wish to change it, yo
 <summary>Configuring the default scripting language in default.yaml</summary>
 
 ```yaml
-lang: coffee
+lang: javascript
 ```
 </details>
 

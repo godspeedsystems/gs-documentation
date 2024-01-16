@@ -124,7 +124,12 @@ summary: upload file
 ## Error handling
  The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
 
+
  - **continue** - The "continue" key accepts a boolean value, which can be either "true" or "false." When it's set to "true," the system will proceed to the next task even if an error occurs, effectively ignoring the error. On the other hand, if it's set to "false," the system will return a custom response and exit the workflow when an error is encountered.
+
+:::tip
+The default value for the Continue variable is set to true, enabling the execution of the second task in the event of a failure in the first task. To halt the workflow execution after a task failure, it is necessary to set the Continue variable to false.
+:::
 
 - **log_attributes** - Log attributes assist in pinpointing the precise locations of breakpoints where errors occurred and provide visibility into the logged messages within the terminal.
 
