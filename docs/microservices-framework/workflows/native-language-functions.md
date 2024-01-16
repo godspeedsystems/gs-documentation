@@ -10,7 +10,7 @@ Framework exported interfaces/functions allow developer with flexibility to writ
  (Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.)
 :::
 
-### what is CTX ?
+### What is CTX ?
 
 CTX includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
 
@@ -36,7 +36,7 @@ To access outputs of tasks executed before the current task, developer can destr
   const firstTaskOutput = outputs[firstTaskId]
 ```
 
-### datasources
+### Datasources
     
 With datasources we can access all Datasources, their clients and methods.
 
@@ -48,7 +48,7 @@ const responseData = await datasources.mongo.client.Restaurant.create({
 })
 
 ```
-### childLogger
+### ChildLogger
 
 with childLogger you have accessibility to framework logger.
 
@@ -61,11 +61,31 @@ with childLogger you have accessibility to framework logger.
 
 ### GSStatus
 
-The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
+:::tip Note
+- Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
+-  In TS/JS tasks, developers are not obliged to manually set ctx.outputs; the framework handles it automatically.
+- In Godspeed.ts, when handling event handler responses, if success is not explicitly defined, it is assumed to be success:true, code:200 ,data :event handler's response
+:::
+
+For example:
+
+```
+const {GSStatus} = require("@godspeedsystems/core");
+
+module.exports = ctx => {
+  const {inputs} = ctx; 
+  const responseData = inputs.data.body.name
+  return responseData 
+  //works same as return new GSStatus(true, 200, undefined, responseData, undefined);
+};
+  
+```
+
+The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response manually and dispatch it.
 
 :::note
 
-Every workflow response should be in GSStatus. it has the below properties.
+GSStatushas the below properties.
 
 ### GSStatus Properties
 

@@ -7,34 +7,9 @@
 
 <!-- <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" /> -->
 
-## The How!!
-
-
-- The framework itself will not handle authentication tasks, such as processing JWT, parsing headers, or validating based on JWT policies, and it won't automatically add that information to the GSCloudEvent.user object. 
-- However, parsing JWT or other similar keys can still be achieved through either of the following methods:
-
-### The Event Source plugin.
-For handling JWT or similar keys, it is recommended that each event source plugin adheres to a standardized JWT handling configuration. In the case of JWT, the configuration typically includes details such as the issuer, audience, and secret key.
-
-:::tip Note
-Godspeed's recommended standardized JWT configuration in eventsource's config file, as supported by [express](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/express-as-http/README.md), [apollo graphql](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/graphql-as-eventsource/README.md) plugins.
-:::
-
-
-
-Example configuration:
-
-```yaml
-jwt:
-  issuer: YOUR_ISSUER
-  audience: YOUR_AUDIENCE
-  secretOrKey: YOUR_SECRET_KEY
-```
-This configuration ensures consistent and secure handling of JWTs across various event source plugin handlers. 
-
-### Authz Workflow Task
-- Another approach for handling JWT or similar keys is to implement a task within the authorization (authz) workflow. 
-- In this scenario, the authz workflow can include a task specifically designed to process and enrich the user object with information obtained from the JWT or other keys.
+## Authz Workflow Task
+- The approach for handling JWT or similar keys is to implement a task within the authorization (authz) workflow. 
+- The authz workflow can include a task specifically designed to process and enrich the user object with information obtained from the JWT or other keys.
 
 - The authz (authorization) workflow is designed to accept either the DSL of tasks from the core framework's workflows or the path of a specific function or workflow.
 

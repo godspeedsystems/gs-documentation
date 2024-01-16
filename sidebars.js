@@ -310,14 +310,16 @@ const sidebars = {
               id: "microservices-framework/inline-scripting/overview"
             },
           ],
-        },
-        
- 
-      
+        },     
         {
           type: "doc",
           label: "11. VScode extention",
           id: "microservices-framework/vscode-extension/language-tools"
+        },
+        {
+          type: "doc",
+          label: "12. Plugins",
+          id: "microservices-framework/plugins"
         },
         {
           type: "category",
