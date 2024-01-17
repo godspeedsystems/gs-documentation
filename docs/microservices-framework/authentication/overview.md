@@ -1,11 +1,15 @@
-# Overview
-:::tip Note
-Currently the job of Authentication is left to the individual plugins.
-:::
-The framework delegates authentication responsibilities to individual plugins. Additionally, for other microservices, you have the flexibility to integrate various secret mechanisms such as Auth0, OAuth2, Keycloak, etc. Copy the respective index.ts file and customize it to add logic based on your specific needs.
+# About Authentication
 
-## Event spec
-Add authn: true or authn: false in the event DSL to enable or disable authentication for any event.
+Authentication is the process of confirming the identity of an individual, system, or entity. It involves verifying that the entity attempting to access a system or resource is indeed who or what it claims to be. In case of the API and event driven architecture realm, we need to know the user who is trying to access the system. _Who is this user?_
+
+Following separation of concerns (or decoupling) as a first principle, the job of authentication and loading the user information is delegated to individual eventsource plugins as part of their native `middleware` capability. Here you may use JWT, Auth0, OAuth2, Keycloak etc. as per your requirement.
+
+The currently supported Express, Fastify and Apollo Graphql [plugins](https://github.com/godspeedsystems/gs-plugins) support JWT authentication out of the box. In case you need to customize, you can copy the code from our plugins repository and modify that to suit your purpose.
+
+
+## Enabling JWT Authentication
+You can [setup jwt configuration](./jwt-authentication.md) in the event source's configuration file, and override it in each individual event as applicable.
+We follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, all endpoints will go through JWT authentication, unless you explicityly set `authn:false` in their schema.
 ```yaml
 http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate: 
   authn: true

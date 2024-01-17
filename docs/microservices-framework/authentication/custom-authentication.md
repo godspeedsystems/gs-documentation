@@ -1,10 +1,11 @@
 # Custom Authentication
 
 ## Introduction
-Custom authentication provides flexibility when not using JWT. This approach allows customization of authentication, enabling the use of alternative key forms. Developers can implement custom middleware for tasks such as decrypting and parsing the custom form. Additionally, other protocols like OAuth2 offer the ability to connect with authentication providers such as Google and Facebook.
+Custom authentication provides flexibility when not using JWT. This approach allows customization of authentication, enabling the use of alternative forms. Developers can implement custom middleware for tasks such as decrypting and parsing custom keys. Additionally, other protocols like OAuth2 offer the ability to connect with authentication providers such as Google and Facebook.
 
 ## How to setup Custom auth?
-- Currently it can be done by customizing eventsource
+Here is a list of points on how you can do it
+- Currently it can be done by customizing the eventsource. For this you can copy paste the closest event source from our plugins repository and paste it in your `eventsources/types` folder as `<eventsource_name>.ts`. Then go ahead and modify it as per your need. 
 - The custom middleware can be added in either initClient() as global middleware or in subscribeToEvent() as API middleware in the code below
 - Follow the comments added in the code below for customizing auth.
 
@@ -12,7 +13,7 @@ Custom authentication provides flexibility when not using JWT. This approach all
 Go through the eventsources [fastify](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/fastify-as-http/src/index.ts) and [graphql](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/graphql-as-eventsource/src/index.ts) for better understanding.
 :::
 
-- In the below code ,we are discussing how to customize by using the express.ts code
+- In the below code we are discussing how to customize by using the express.ts code
 
 
 #### initializing client and execution ( src/eventsources/types/express.ts ) :
@@ -155,19 +156,6 @@ export default class EventSource extends GSEventSource {
     return event;
   }
 }
-
-const SourceType = 'ES';
-const Type = 'express'; // this is the loader file of the plugin, So the final loader file will be `types/${Type.js}`
-const CONFIG_FILE_NAME = 'http'; // in case of event source, this also works as event identifier, and in case of datasource works as datasource name
-const DEFAULT_CONFIG = { port: 3000, docs: { endpoint: '/api-docs' } };
-
-export  {
-  EventSource,
-  SourceType,
-  Type,
-  CONFIG_FILE_NAME,
-  DEFAULT_CONFIG
-};
 ```
 
 
