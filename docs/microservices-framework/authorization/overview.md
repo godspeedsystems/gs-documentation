@@ -5,25 +5,25 @@ Authorization is a crucial component of access control, determining who can acce
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" />
 
 ### Types of Authorization
-1. Role-Based Access Control (RBAC):
+1. **Role-Based Access Control (RBAC)**:
 RBAC is a widely-used authorization model where access is granted based on predefined roles. Users are assigned roles, and these roles dictate the permissions associated with accessing resources and performing actions.
 
-2. Attribute-Based Access Control (ABAC):
-ABAC is a dynamic authorization model that considers various attributes associated with users, resources, actions, and context. Policies are defined based on these attributes, allowing for more granular control over access.
+2. **Attribute-Based Access Control (ABAC)**:
+ABAC is a dynamic authorization model that considers various attributes associated with **users, resources, actions, and context**. Policies are defined based on these attributes, allowing for more granular control over access.
 
 ### Key Agents in Authorization
 Authorization involves four key agents:
 
-a. User
+a. **User**
 Users are entities seeking access to resources or the ability to perform actions within a system.
 
-b. Resource
+b. **Resource**
 Resources are entities or data within a system that users may want to access or manipulate.
 
-c. Action
+c. **Action**
 Actions define the specific operations or activities that users may want to perform on resources.
 
-d. Context
+d. **Context**
 Context refers to the circumstances or conditions under which a user's request for access is evaluated. This includes factors such as time, location, or any other relevant contextual information.
 
 <!-- 

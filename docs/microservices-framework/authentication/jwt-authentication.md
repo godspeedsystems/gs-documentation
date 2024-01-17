@@ -7,13 +7,13 @@ While other microservices might have a unique approach to authentication , you h
 
 However, on this page, our focus will be on exploring JWT authentication.
 
-## How to setup custom auth?
+## Handling JWT
 
 - The framework itself will not handle authentication tasks, such as processing JWT, parsing headers, or validating based on JWT policies, and it won't automatically add that information to the GSCloudEvent.user object. 
-- However, parsing JWT or other similar keys can still be achieved using the following method
+- However, parsing JWT can still be achieved using the following method
 
 ### The Event Source plugin.
-For handling JWT or similar keys, it is recommended that each event source plugin adheres to a standardized JWT handling configuration. In the case of JWT, the configuration typically includes details such as the issuer, audience, and secret key.
+For handling JWT , it is recommended that each event source plugin adheres to a standardized JWT handling configuration. In the case of JWT, the configuration typically includes details such as the issuer, audience, and secret key.
 
 :::tip Note
 Godspeed's recommended standardized JWT configuration in eventsource's config file, as supported by [express](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/express-as-http/README.md), [apollo graphql](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/graphql-as-eventsource/README.md) plugins.
@@ -31,6 +31,10 @@ jwt:
   secretOrKey: SECRET_KEY
 ```
 The provided snippet contains payload information and a secret key. Once the above snippet is added to the `eventsources/http.yaml`, authentication for all the events will be *true* by default. 
+
+:::tip Note
+We support passport JWT . To know more ,Check [this](https://www.passportjs.org/)
+:::
 
 Options which can be passed for JWT config are:
 

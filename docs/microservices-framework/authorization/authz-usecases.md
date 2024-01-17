@@ -1,9 +1,9 @@
 # Authorization Usecases
  
-## Introduction
-- Authorization is a crucial component of access control, determining who can access what resources and perform specific actions.
-- Authorization in the microservice framework works at two levels: one at the event itself and the second at the task and datasource level. It supports multi-level tenancy using Attribute-Based Access Control (ABAC) in addition to plain Role-Based Access Control (RBAC). ABAC is often more suited for complex and dynamic multi-tenant access.
-- The GSCloudEvent.user object is populated by the event source plugin or as a task in the authz workflow. Subsequently, the remaining authz workflow tasks can access this information, enrich it, and utilize it for further authorization logic.
+## The User Object
+- Where do we populate the user object? The GSCloudEvent.data.user object is populated by the middleware in the eventsource. It serializes and loads the user data like role, id or any other necessary detail for the subsequent authz workflows, or the event handler workflow to use. 
+- You can enrich the user here. The frameork allows you to enrich user information in the authz workflows as well, if that is more convenient for you to as compared to customizing the event source middlewares to achieve the same result. Its a matter of careful design where you choose to store and retrieve your user data and access policies. 
+- Having said that, the framework allows you full freedom to enrich user data in either the event source's middleware or in authz workflows. 
 
 <!-- <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" /> -->
 
@@ -13,9 +13,9 @@
 
 - The authz (authorization) workflow is designed to accept either the DSL of tasks from the core framework's workflows or the path of a specific function or workflow.
 
-Developers can choose between the two options based on their preferences and requirements:
+Developers can define the authorization workflow using the following method.
 
-#### Using the Path of a Function/Workflow:
+<!-- #### Using the Path of a Function/Workflow:
 -  Developers can specify the path to a custom function or workflow to be used as the authorization workflow.
 This method provides more flexibility, allowing developers to implement custom logic in their chosen programming language.
 
@@ -23,11 +23,11 @@ This method provides more flexibility, allowing developers to implement custom l
 ```yaml
 # example 
 authz: com.biz.custom_authz_workflow
-```
+``` -->
 
 #### Using Core Framework's Workflows' Tasks DSL:
 
-- Alternatively,Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows.
+- Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows.
 - This approach allows for a declarative definition of tasks within the authz workflow.
 
 ```yaml
@@ -57,7 +57,7 @@ authz:
 
 ```
 
-- Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus
+- Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus or true
 - These instructions may enrich the context and user data, or load and run authorization checks, or do both.
 
 ## Responses
@@ -114,8 +114,8 @@ authz:
         <js%  
           if (inputs.user.role === 'admin') { 
             return {
-              success: false, 
-              message: "Authorization failed custom response",
+              success: true, 
+              message: "Authorization passed",
             }
           } else {
              return {
@@ -145,8 +145,8 @@ authz:
         <js% 
           if (inputs.user.role === 'admin') {
             return {
-              success: false, 
-              message: "Authorization failed custom response",
+              success: true, 
+              message: "Authorization passed",
               data: {x: 2}
             }
           } else {
@@ -175,8 +175,8 @@ authz:
         <js% 
           if (inputs.user.role === 'admin') {
             return {
-              success: false, 
-              message: "Authorization failed custom response",
+              success: true, 
+              message: "Authorization passed",
               data: {x: 2 ,message: "helloworld"}
             }
           } else {
@@ -196,7 +196,7 @@ authz:
 In the Framework, authorization can be implemented at different levels: event level, task level, and even within datasource plugins. Each level offers flexibility and customization options to meet specific requirements
 
 :::tip Note
-- Authz configuration can also be set at the event source level, serving as the default configuration.
+- Following Zero Trust Policy,Authz configuration can also be set at the event source level, serving as the default configuration.
 - Unless an event explicitly specifies authz: false or overrides its authz settings, all events will inherit the authz configuration from the event source.
 :::
 
@@ -237,7 +237,7 @@ events/helloworld.yaml
 ```yaml
 "http.get./helloworld":
   authn: true
-  fn: helloworld # if the below authentication condition returns true, fn helloworld2 gets called
+  fn: helloworld # if the below authentication condition returns true, fn helloworld gets called
   authz: # enabling authz in event level
     - fn: com.gs.transform 
       id: try_auth_2_authz
@@ -246,7 +246,7 @@ events/helloworld.yaml
           if (inputs.user.role === 'admin') { 
             return {
               success: true, #if success: false, the message and data given below will be returned
-              message: "Authorization failed custom response",
+              message: "Authorization passed",
               data: {x: 2 ,message: "helloworld"} 
             }
           } else {
@@ -333,12 +333,29 @@ module.exports = {
 
 <!-- ### C.How a datastore plugin's execute() method can access authz permission data? -->
 
-### C. Accessing Authz Permissions in Datastore Plugin's execute()
+### C. Restricting datastore access
 
-- Plugins can access user data through args.authzPerms in the execute() method. The structure of this data is defined by the developer, following the format supported by the specific datasource plugin. For example, it could include fields like {can_access_columns, no_access_columns, additionalWhereClause}. 
+- Plugins can access user data through args.authzPerms in the execute() method. The structure of this data is defined by the plugin, following the format supported by the specific datasource plugin.
+- For example, it could include fields like {can_access_columns, no_access_columns, additionalWhereClause}. 
+```
+data: [ 
+        //Your access policies for further finegrained datastore access, 
+        // as interpreted and used by the datastore plugin to implement restricted database access over any database. 
+        { 
+          userTableName: { //to be merged in DB query by the datastore plugin 
+            where: { 
+              tenant_id: "xyz", sub_tenant_id: "abc" 
+            }, 
+            no_access_fields: ['PII-A', 'sensitiveB'] 
+          } 
+        }
+      ]
+```
+
+
 - Subsequently, the plugin is responsible for adjusting its query to the datasource based on the information provided in args.authzPerms
 
-example.ts
+
 ```ts
 async execute(ctx: GSContext, args: PlainObject): Promise<GSStatus> {
     const {
@@ -374,7 +391,7 @@ async execute(ctx: GSContext, args: PlainObject): Promise<GSStatus> {
 
 
 :::tip Note
-Currently the datasouce plugin level authz handling has not been adopted by any plugin. You can perhaps pick up prisma plugin and help us achieve that. Else just wait for a short while and we will update the prisma to plugin to handle this.
+Currently the datasouce plugin level authz handling has not been adopted by any plugin. You can perhaps [pick up a plugin](https://github.com/godspeedsystems/gs-plugins) and help us achieve that. Else just wait for a short while and we will update the prisma to plugin to handle this.
 :::
 
 

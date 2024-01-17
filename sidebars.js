@@ -266,6 +266,11 @@ const sidebars = {
               label: "7.2.JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication"
             },
+            {
+              type: "doc",
+              label: "7.3.Custom Authentication",
+              id: "microservices-framework/authentication/custom-authentication"
+            },
           ],
         },
         {
@@ -309,17 +314,17 @@ const sidebars = {
               label: "10.1. Overview",
               id: "microservices-framework/inline-scripting/overview"
             },
+            {
+              type: "doc",
+              label: "10.2. Script Plugins",
+              id: "microservices-framework/inline-scripting/script-plugins"
+            },
           ],
         },     
         {
           type: "doc",
           label: "11. VScode extention",
           id: "microservices-framework/vscode-extension/language-tools"
-        },
-        {
-          type: "doc",
-          label: "12. Plugins",
-          id: "microservices-framework/plugins"
         },
         {
           type: "category",
