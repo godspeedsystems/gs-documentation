@@ -1,18 +1,37 @@
-# Authorization Usecases
- 
-## The User Object
-- Where do we populate the user object? The GSCloudEvent.data.user object is populated by the middleware in the eventsource. It serializes and loads the user data like role, id or any other necessary detail for the subsequent authz workflows, or the event handler workflow to use. 
-- You can enrich the user here. The frameork allows you to enrich user information in the authz workflows as well, if that is more convenient for you to as compared to customizing the event source middlewares to achieve the same result. Its a matter of careful design where you choose to store and retrieve your user data and access policies. 
-- Having said that, the framework allows you full freedom to enrich user data in either the event source's middleware or in authz workflows. 
+# Authorization in the framework
+
+The authorization workflows in the framework can be setup at 
+- The eventsouce level, applicable to all events
+- At the event level, overriding eventsource configuration
+- At the task level, restricting access of the user to the information stored in a datastore
+```yaml
+authz: 
+  - id: authz_task_1
+    summary: apply the rules over enriched context. Returns true or false or a GSStatus
+    fn: | 
+      <% 
+        success: user.role === 'admin' && user.department === 'HR'
+      %>
+```
+
+## What do we need for authorization
+We need the user, resource, context and action information, along with the access policies or rules. This information can be accessed from `ctx.user.data.{user,headers,params,query,body}`
+
+### Loading the necessary user information for authorization
+- The `GSCloudEvent.data.user `object is initially populated by the middleware in the eventsource. For ex. in the JWT case. It serializes and loads the user data like role, id or any other necessary detail for the subsequent authz workflows, or the event handler workflow to use. 
+- You can enrich the user in your `authz` workflows. The framework allows you to enrich user information in the authz workflows.  
+- Its a matter of careful design where you choose to store and retrieve your user data and access policies. Having said that, the framework allows you full freedom to enrich user data in either the event source's middleware or in authz workflows. 
 
 <!-- <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" /> -->
 
-## Authz Workflow Task
+## Authz workflows
+The framework allows you to specify [yaml taks](../workflows/yaml-workflows/overview.md) to run authorization workflows, at three places - event source, event or yaml task.
+
 - The approach for handling JWT or similar keys is to implement a task within the authorization (authz) workflow. 
 - The authz workflow can include a task specifically designed to process and enrich the user object with information obtained from the JWT or other keys.
+- Finally the authz has to tell whether the user is allowed to do this action, and if yes, then what kind of data is the user allowed to retrieve in response? Hint: consider database access? Even if a user is allowed to read a table, is he allowed to read all the rows? Or is he allowed to read all the columns?
 
-- The authz (authorization) workflow is designed to accept either the DSL of tasks from the core framework's workflows or the path of a specific function or workflow.
-
+### Example authorization workflows
 Developers can define the authorization workflow using the following method.
 
 <!-- #### Using the Path of a Function/Workflow:
@@ -25,9 +44,9 @@ This method provides more flexibility, allowing developers to implement custom l
 authz: com.biz.custom_authz_workflow
 ``` -->
 
-#### Using Core Framework's Workflows' Tasks DSL:
+#### Authorization tasks DSL
 
-- Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows.
+- Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's [workflows](../workflows/yaml-workflows/overview.md).
 - This approach allows for a declarative definition of tasks within the authz workflow.
 
 ```yaml
@@ -59,16 +78,15 @@ authz:
 
 - Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus or true
 - These instructions may enrich the context and user data, or load and run authorization checks, or do both.
-
-## Responses
-- When task does not return true or {success: true} (explicitly), it is assumed a failure, the framework reads the {code, message, body} of the GSStatus and try to return response with status code as per the following rules
+- When one task fails the whole workflow is considered to be failed.
+- Following the zero trust policy, when a task does not return `true` or `{success: true}` (explicitly), it is assumed a failure. The framework reads the {code, message, body} of the GSStatus returned by the workflow and try to return response with status code as per the following rules
 
 :::tip Note
-- Following Zero trust policy, whenever GSStatus is not returned with success: true or when GSStatus.code === 403, the authorization will be considered failed. 
-- Next tasks in the series of tasks will not be executed. The event or workflow task at which the user's authz has failed will exit with GSStatus
+- Following Zero trust policy, whenever GSStatus is not returned with `success: true` or `true`, or in the case when `GSStatus.code === 403`, the authorization will be considered failed. 
+- Next tasks in the series of tasks will not be executed. The event or workflow task at which the user's authz has failed will exit.
 :::
 
-### Rules 
+### Response code, message and data from authorization failure
 
 **1. If GSStatus is returned with success: false ,default code is 403, unless developer specified a 4XX or 5XX code**
 ##### Sample authz task
@@ -232,7 +250,33 @@ To better understand the folder structure of the example, review the following s
 ```            
          -->
 
-### A. Authorization at event level 
+### A. Authorization at event source level
+You can set authz workflows that apply to all events of a particular event source, unless explicitly overriden by an event definition by setting `authz: false` or `authz:` to another workflow.
+
+```yaml
+type: express
+authz: # enabling authz in event level
+  - fn: com.gs.transform 
+    id: authz_task
+    args: | # if this condition fails, the else gets executed
+      <js% 
+        if (inputs.user.role === 'admin') { 
+          return {
+            success: true,
+            message: "Authorization passed",
+            data: {tableA: {no_access: ['fieldA'], where: {tenant_id: inputs.user.tenant_id}} 
+          }
+        } else {
+            return {
+            success: false, 
+            code: 403,
+            message: "Authorization failed"
+          }
+        }
+      %>
+```
+
+### B. Authorization at event level 
 events/helloworld.yaml
 ```yaml
 "http.get./helloworld":
@@ -280,7 +324,7 @@ events/helloworld.yaml
 ```
 - Whenever an API is triggered with authorization enabled, the event source plugin parses the JWT in its request middleware and verifies user data, such as user.role in the example above. If the condition evaluates to true, the corresponding workflow is executed. Otherwise, it proceeds to execute the else case, indicating "Authorization failed."
 
-### B. Authorization at task level 
+### C. Authorization at task level 
 functions/helloworld.yaml
 ```yaml
 id: helloworld_workflow
@@ -333,9 +377,9 @@ module.exports = {
 
 <!-- ### C.How a datastore plugin's execute() method can access authz permission data? -->
 
-### C. Restricting datastore access
+### D. Restricting datastore access
 
-- Plugins can access user data through args.authzPerms in the execute() method. The structure of this data is defined by the plugin, following the format supported by the specific datasource plugin.
+- Plugins can access user data through `args.authzPerms` in the `GSDatasource.execute()` method. The structure of this data is defined by the plugin, following the format supported by the specific datasource plugin.
 - For example, it could include fields like {can_access_columns, no_access_columns, additionalWhereClause}. 
 ```
 data: [ 
