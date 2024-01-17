@@ -10,7 +10,7 @@ The event schema, for each eventsource, closely follows the OpenAPI specificatio
 - The name/topic/URL of the event
 - The event handler workflow(fn)
 - Input and output schema with the validation error handling
-- [Authorization](/docs/microservices-framework/authentication/overview.md) checks 
+- [Authorization](/docs/microservices-framework/authorization/overview.md) checks 
 
 
 ##  Event types

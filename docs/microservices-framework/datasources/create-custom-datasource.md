@@ -1,4 +1,4 @@
-# Create a Custom Data Source.
+# Create a Custom Data Source
 
 ## Data Source 
 

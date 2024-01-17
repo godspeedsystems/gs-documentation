@@ -5,14 +5,56 @@
 
 Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.
 
-### CTX 
-:::note
+### GSContext
+:::tip note
  (Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.)
 :::
 
-### what is CTX ?
+### What is GSContext ?
 
-CTX includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
+[GSContext](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+
+It includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them). You can also keep immutable state (personal copy, personal view, for concurrency) etc.
+
+Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `config`, `mappings` etc, is available in the `GSContext` object.
+
+```ts
+
+// Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
+
+export class GSContext { //span executions
+    outputs: { [key: string]: GSStatus; }; //DAG result. This context has a trace history and responses of all instructions in the DAG, which are are stored in this object against task ids
+
+  log_events: GSLogEvent[] = [];
+
+  config: PlainObject; //The config folder with env vars, default, and other config files. We use node-config module for Nodejs for the same.  
+
+  datasources: PlainObject; //All the datasource exported clients
+
+  log_events: GSLogEvent[] = []; //All the errors during an event handler workflow execution are captured in this list. Framework does not do anything with this. But a developer may want to have access to the errors that happened.
+
+  config: PlainObject; //app config
+
+  datasources: PlainObject; //app config
+
+  mappings: PlainObject; // The static mappings of your project under /mappings
+
+  functions: PlainObject; //All the functions you have written in /functions + all the Godspeed's YAML DSL functions
+ //like com.gs.each_parallel
+
+  plugins: PlainObject; // The utility functions to be used in scripts. Not be confused with eventsource or datasource as plugin.
+
+  exitWithStatus?: GSStatus; // Useful when a YAML workflow is being executed. If this is set to non null value containing a GSStatus, the workflow will exit with this status. This will apply to only the immediate yaml workflow. But not its caller workflow. 
+
+  logger: pino.Logger; // For logging using pino for Nodejs. This has multiple useful features incudign biding some key values with the logs that are produced.  
+
+  childLogger: pino.Logger; //Child logger of logger with additional binding to print {workflow_name, task_id} with every log entry
+
+
+  forAuth?: boolean = false; //Whether this native or yaml workflow is being run as parth of the authz tasks
+}
+```
+
 
 :::tip Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
 :::
@@ -36,7 +78,7 @@ To access outputs of tasks executed before the current task, developer can destr
   const firstTaskOutput = outputs[firstTaskId]
 ```
 
-### datasources
+### Datasources
     
 With datasources we can access all Datasources, their clients and methods.
 
@@ -48,7 +90,7 @@ const responseData = await datasources.mongo.client.Restaurant.create({
 })
 
 ```
-### childLogger
+### ChildLogger
 
 with childLogger you have accessibility to framework logger.
 
@@ -61,11 +103,31 @@ with childLogger you have accessibility to framework logger.
 
 ### GSStatus
 
-The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response and dispatch it.
+:::tip Note
+- Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
+-  In TS/JS tasks, developers are not obliged to manually set ctx.outputs; the framework handles it automatically.
+- In Godspeed.ts, when handling event handler responses, if success is not explicitly defined, it is assumed to be success:true, code:200 ,data :event handler's response
+:::
+
+For example:
+
+```
+const {GSStatus} = require("@godspeedsystems/core");
+
+module.exports = ctx => {
+  const {inputs} = ctx; 
+  const responseData = inputs.data.body.name
+  return responseData 
+  //works same as return new GSStatus(true, 200, undefined, responseData, undefined);
+};
+  
+```
+
+The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response manually and dispatch it.
 
 :::note
 
-Every workflow response should be in GSStatus. it has the below properties.
+GSStatus has the below properties.
 
 ### GSStatus Properties
 
