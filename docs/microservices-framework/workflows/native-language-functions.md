@@ -12,7 +12,11 @@ Framework exported interfaces/functions allow developer with flexibility to writ
 
 ### What is GSContext ?
 
-GSContext includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them), immutable state (personal copy, personal view, for concurrency)
+[GSContext](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+
+It includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them). You can also keep immutable state (personal copy, personal view, for concurrency) etc.
+
+Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
 ```ts
 
