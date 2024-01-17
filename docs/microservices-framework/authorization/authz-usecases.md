@@ -15,7 +15,7 @@ authz:
 ```
 
 ## What do we need for authorization
-We need the user, resource, context and action information, along with the access policies or rules. This information can be accessed from `ctx.user.data.{user,headers,params,query,body}`
+We need the user, resource, context and action information. This information can be accessed from `ctx.user.data.{user,headers,params,query,body}` We also need the access policies or rules. These can exist within the microservice or API code, or they can be loaded from a rule engine or a databse, and executed here in the runtime of this event handling. 
 
 ### Loading the necessary user information for authorization
 - The `GSCloudEvent.data.user `object is initially populated by the middleware in the eventsource. For ex. in the JWT case. It serializes and loads the user data like role, id or any other necessary detail for the subsequent authz workflows, or the event handler workflow to use. 
