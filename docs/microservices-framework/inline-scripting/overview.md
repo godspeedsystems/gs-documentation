@@ -14,7 +14,8 @@ lang: js
 ```
 </details>
 
-:::tip We write scripting in '<% %>' tags within various examples in this page below.
+:::tip
+Godspeed's YAML DSL supports inline scripting in yaml files within eventsources, datasources and workflows.
 :::
 
 
