@@ -594,7 +594,7 @@ tasks:
     fn: com.gs.return
     args: "task 2 executed"
 ```
-In the given example, error handling is implemented at the task level, and it activates when a specific task fails. The `continue` variable, which is false by default, determines whether to proceed with the next task in case of a failure. If `continue` is set to true, the subsequent workflow will be executed. If set to false, the current task exits with a custom response specified in the `on_error`.
+In the given example, error handling is implemented at the task level, and it activates when a specific task fails. The `continue` variable, which is true by default, determines whether to proceed with the next task in case of a failure. If `continue` is set to true, the subsequent workflow will be executed. If set to false, the current task exits with a custom response specified in the `on_error`.
 
 
 **When both task-level and workflow-level `on_error` are specified, any error occurring in the tasks will trigger the task-level `on_error`, thereby overriding the `on_error` specified at the workflow level.**
