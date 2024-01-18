@@ -32,7 +32,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: godspeedsystems.azurecr.io/godspeed-docs-dev:${{ github.run_id }}
+        tags: godspeedsystems.azurecr.io/godspeed-docs:${{ github.run_id }}
 
 
     - name: Checkout argocd Repo
