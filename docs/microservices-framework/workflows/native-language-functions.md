@@ -297,3 +297,46 @@ module.exports = async(ctx)=>{
 :::tip
 When calling a JavaScript function directly from the event, ensure that you access the inputs from the `ctx`, as demonstrated in the provided JavaScript file.
 :::
+
+### Invoking functions from JS/TS functions
+
+- When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
+- They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it. 
+- All functions within a Godspeed project, including those written in YAML, JavaScript (JS), or TypeScript (TS), are accessible through the ctx.functions object.
+- Similarly, all datasources utilized in a Godspeed project are conveniently available under the ctx.datasources object.
+ 
+:::tip
+ - Every information you require or intend to store about the current event, workflow, loaded functions, datasources, logger, config, mappings etc is readily available within the GSContext (ctx) object..
+:::
+
+- Follow the comments added in example below to understand how to call functions from ts/js functions.
+
+ ```
+ export default async function (ctx: GSContext, args: any) {
+
+    //Calling functions (yaml, js, ts) from within a ts/js function, in a godspeed project's functions folder. All functions are available under ctx.functions. 
+    const res = await ctx.functions['com.gs.helloworld2'](ctx, {nice: "name", ...args});
+
+    //Calling datasource functions. All datasources are available under ctx.datasources hood.
+    const res = await ctx.datasources.aws.execute(ctx, {
+
+         //Pass exactly same args as this aws service's method takes
+        ...args,
+
+        //Along with args, pass meta object
+        // meta can contain {entityType, method}
+        meta: {entityType: 's3', method: 'listBuckets'},
+
+        //Or meta can contain {fnNameInWorkflow} which is same as 
+        //the 'fn' that we write when invoking datasource from yaml workflow
+        //For example, this will also work
+
+        //meta: {fnNameInWorkflow: 'datasource.aws.s3.listBuckets'}
+    });
+    if (!res.success) {
+        return new GSStatus(false, res.code || 500, undefined, {message: "Internal Server Error", info: res.message})
+    }
+    return new GSStatus(true, 200, undefined, res );
+}
+
+ ```
