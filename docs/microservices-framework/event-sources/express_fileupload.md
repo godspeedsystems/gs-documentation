@@ -1,5 +1,7 @@
 # Uploading file
 
+The Express plugin allows you to upload your files
+
 ## Steps to use fileupload feature
 
 Framework will give you below folder structure.
@@ -28,9 +30,9 @@ Framework will give you below folder structure.
             └── helloworld.yaml
 ```
 
-The default file size accepted is 50MB. If you wish to specify a custom file size, you can modify the value in **"./src/eventsources/http.yaml"**.
+The default file size accepted is 50MB. If you wish to specify a custom file size, you can modify the value in `"./src/eventsources/http.yaml`".
 
-### update http.yaml( src/eventsources/http.yaml )
+### Configuration( src/eventsources/http.yaml )
 ```yaml
 type: express
 port: 3003
