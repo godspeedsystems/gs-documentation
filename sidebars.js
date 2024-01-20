@@ -149,6 +149,11 @@ const sidebars = {
               label: "4.7. List of plugins",
               id: "microservices-framework/event-sources/event-source-plugins"
             },
+            {
+              type: "doc",
+              label: "4.8. Validation Error",
+              id: "microservices-framework/event-sources/on-validation-error"
+            },
             // {
             //   type: "doc",
             //   label: "4.7. Swagger Specs",

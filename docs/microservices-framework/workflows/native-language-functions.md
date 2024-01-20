@@ -18,8 +18,8 @@ It includes all the context specific information like tracing information, actor
 
 Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
-```ts
 
+```js
 // Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
 
 export class GSContext { //span executions
@@ -300,18 +300,18 @@ When calling a JavaScript function directly from the event, ensure that you acce
 
 ### Invoking functions from JS/TS functions
 
-- When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
-- They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it. 
-- All functions within a Godspeed project, including those written in YAML, JavaScript (JS), or TypeScript (TS), are accessible through the ctx.functions object.
-- Similarly, all datasources utilized in a Godspeed project are conveniently available under the ctx.datasources object.
+<!-- - When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
+- They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it.  -->
+- All functions within a Godspeed project, including those written in YAML, JavaScript (JS), or TypeScript (TS), are accessible through the `ctx.functions` object.
+- Similarly, all datasources utilized in a Godspeed project are conveniently available under the `ctx.datasources` object.
  
 :::tip
- - Every information you require or intend to store about the current event, workflow, loaded functions, datasources, logger, config, mappings etc is readily available within the GSContext (ctx) object..
+ - Every information you require or intend to store about the current event, workflow, loaded functions, datasources, logger, config, mappings etc is readily available within the `GSContext` (ctx) object..
 :::
 
 - Follow the comments added in example below to understand how to call functions from ts/js functions.
 
- ```
+ ```ts
  export default async function (ctx: GSContext, args: any) {
 
     //Calling functions (yaml, js, ts) from within a ts/js function, in a godspeed project's functions folder. All functions are available under ctx.functions. 
