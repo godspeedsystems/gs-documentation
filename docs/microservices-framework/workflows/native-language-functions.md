@@ -111,7 +111,7 @@ with childLogger you have accessibility to framework logger.
 
 For example:
 
-```
+```ts
 const {GSStatus} = require("@godspeedsystems/core");
 
 module.exports = ctx => {
@@ -131,7 +131,7 @@ GSStatus has the below properties.
 
 ### GSStatus Properties
 
-```bash
+```yaml
     success: boolean;
     code?: number;
     message?: string;
@@ -336,7 +336,8 @@ When calling a JavaScript function directly from the event, ensure that you acce
     if (!res.success) {
         return new GSStatus(false, res.code || 500, undefined, {message: "Internal Server Error", info: res.message})
     }
-    return new GSStatus(true, 200, undefined, res );
+    return res
+    // works same as return new GSStatus(true, 200, undefined, res );
 }
 
  ```

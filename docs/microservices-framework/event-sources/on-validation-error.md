@@ -8,19 +8,27 @@
 - For more info about Request Validation and its applications, refer [this](/docs/microservices-framework/event-sources/schema-validation.md#request-schema-validation)
 
 :::tip Note
-The `on_request_validation_error` and `on_response_validation_error` handlers are used to override the default errors thrown by the framework (specifically, schema validation errors) and allow developers to customize errors based on their requirements.
+- We utilize the AJV library for validating both request and response data, and the response format adheres to the standard AJV error format.
+- The `on_request_validation_error` and `on_response_validation_error` handlers are used to override the default errors thrown by the framework (specifically, schema validation errors) and allow developers to customize errors based on their requirements.
 :::
 
 ### on_request_validation_error
 
 - To customize the error response in cases where request schema validation fails, you can utilize the `on_request_validation_error` handler. Demonstrating its use in the below example
 
+:::tip Note
+- The framework deals with both request and response errors the same way, except for the error codes and keys.
+- For request validation errors, the associated error code is 400, and the key used is `on_request_validation_error`.
+- In the case of response validation errors, the corresponding error code is 500, and the key employed is `on_response_validation_error`.
+:::
+
+
 ### Example
 
 ```yaml
-"http.get./helloworld":
-  fn: helloworld
-  on_request_validation_error: request_error #can be fn path, or a series of tasks
+"http.get./validation":
+  fn: test_validation
+  on_request_validation_error: on_request_validation #can be fn path, or a series of tasks
   params:
   - name: num_1
     in: query
@@ -39,83 +47,55 @@ The `on_request_validation_error` and `on_response_validation_error` handlers ar
         application/json:
           schema:
             type: object
+      
 ```
-functions/request_error.yaml
+functions/on_request_validation.yaml
 ```yaml 
-summary: Customizing request_validation_error
+summary: customizing req_response_error
 tasks:
-  - id: request_validation_error
-    fn: com.gs.transform
-    args: {success: false, code: 400, message: "request error", data: {req: request schema validation failed}}
+  - id: default_error
+    fn: on_request_default_error
+    args: {}
+  
+  # - id: default_error_format   **Uncomment this section to get the default error format (Response A)
+  #   fn: com.gs.return 
+  #   args: <% outputs.default_error.data %>
+
+  - id: customized_request_error  #This section returns the customized_request_error
+    fn: com.gs.transform 
+    args: 
+      success: false 
+      code: 400
+      data:
+        message: 
+          <% outputs.default_error.data.message %>
+          Check the error at <% outputs.default_error.data.error.instancePath %>
+          and there <% outputs.default_error.data.error.message %>
 ```
 
-functions/helloworld.yaml
+functions/on_request_default_error.ts
+```ts
+import {GSStatus, GSContext} from "@godspeedsystems/core"
+
+export default async function (ctx: GSContext, args: any) {
+    const reqData =await ctx.inputs.data.validation_error.data
+    return new GSStatus(false, 400, undefined, reqData, undefined);
+}
+```
+
+
+functions/test_validation.yaml
 ```yaml
 summary: This is test function
 tasks:
-  - id: helloworld
+  - id: test_function
     fn: com.gs.return
     args: 
       data: <% "This is number two " + inputs.query.num_2 %>
 ```
+Response
+- A: Default Error Format
+<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705958247/Screenshot_from_2024-01-23_02-44-24_xcb02y.png" alt="response_error" />
 
-Postman Response
-<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705779010/Screenshot_from_2024-01-21_00-59-51_mn2ok5.png" alt="event types" />
-
-- Customized on_request_validation_error was triggered due to a mismatch between the expected data type in the request schema and the actual input received. The request schema defines num_2 as a number, but the provided input was in string format.
-
-## Response Validation
-- Checking that the data returned by an API or a service complies with the expected format and constraints. This ensures that the response is structured correctly and contains valid information. If the specified criteria are not met, it results in a response validation error. 
-- For more info about Response Validation and its applications, refer [this](/docs/microservices-framework/event-sources/schema-validation.md#response-schema-validation)
-
-### on_response_validation_error
-- To customize the error response in cases where response schema validation fails, you can utilize the `on_response_validation_error` handler. Demonstrating its use in the below example
-
-### Example
-
-```yaml
-"http.get./helloworld":
-  fn: helloworld
-  on_response_validation_error: response_error #can be fn path, or a series of tasks
-  params:
-  - name: num_1
-    in: query
-    required: false
-    schema:
-      type: number
-  - name: num_2
-    in: query
-    required: true
-    schema:
-      type: number
-
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: string
-```
-functions/response_error.yaml
-```yaml 
-summary: Customizing response_validation_error
-tasks:
-  - id: response_validation_error
-    fn: com.gs.transform
-    args: {success: false, code: 400, message: "response error", data: {res: response schema validation failed}}
-```
-
-functions/helloworld.yaml
-```yaml
-summary: This is test function
-tasks:
-  - id: helloworld
-    fn: com.gs.return
-    args: 
-      data: <% "This is number two " + inputs.query.num_2 %>
-```
-
-Postman Response
-<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705779055/Screenshot_from_2024-01-21_00-59-36_d5dzdn.png" alt="response validation error" />
-
-- The on_response_validation_error customization was triggered due to a discrepancy between the expected response schema, which specifies a string result, and the actual response generated, which turned out to be an object.
+- B: Customized Error
+<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705958229/Screenshot_from_2024-01-23_02-44-45_pgeokv.png" alt="event types" />
