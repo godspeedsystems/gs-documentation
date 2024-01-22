@@ -336,6 +336,10 @@ When calling a JavaScript function directly from the event, ensure that you acce
     if (!res.success) {
         return new GSStatus(false, res.code || 500, undefined, {message: "Internal Server Error", info: res.message})
     }
+  //If a developer only returns data without setting keys like "success" or "code" in the response,
+  // the framework assumes it is just the data. 
+  //In such cases, the response code defaults to 200, and success is assumed to be true.
+    
     return res
     // works same as return new GSStatus(true, 200, undefined, res );
 }
