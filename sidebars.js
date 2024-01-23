@@ -130,10 +130,27 @@ const sidebars = {
              
             },
             {
-              type: "doc",
-              label: "4.4. Schema Validation",
-              id: "microservices-framework/event-sources/schema-validation"
-            },{
+              type: "category",
+              label: "4.4. Validations",
+              items: [
+                {
+                  type: "doc",
+                  label: "4.4.1. Schema Validation",
+                  id: "microservices-framework/event-sources/validations/schema-validation"
+                },
+                {
+                  type: "doc",
+                  label: "4.4.2. Validation Error",
+                  id: "microservices-framework/event-sources/validations/validation-error"
+                },
+              ]
+            },
+            // {
+            //   type: "doc",
+            //   label: "4.4. Schema Validation",
+            //   id: "microservices-framework/event-sources/schema-validation"
+            // },
+            {
               type: "doc",
               label: "4.5. Create custom event source",
               id: "microservices-framework/event-sources/create-custom-event-source"
@@ -149,11 +166,11 @@ const sidebars = {
               label: "4.7. List of plugins",
               id: "microservices-framework/event-sources/event-source-plugins"
             },
-            {
-              type: "doc",
-              label: "4.8. Validation Error",
-              id: "microservices-framework/event-sources/on-validation-error"
-            },
+            // {
+            //   type: "doc",
+            //   label: "4.8. Validation Error",
+            //   id: "microservices-framework/event-sources/on-validation-error"
+            // },
             // {
             //   type: "doc",
             //   label: "4.7. Swagger Specs",
