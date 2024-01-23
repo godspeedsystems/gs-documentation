@@ -59,6 +59,10 @@ Framework will give you below folder structure.
             └── helloworld.yaml
 ```
 
+:::tip Note
+We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
+:::
+
 2. 3000 is the default port number,if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"**
 
 ```yaml
