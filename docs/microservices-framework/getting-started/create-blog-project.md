@@ -15,7 +15,11 @@ godspeed create blog-app --from-example mongo-as-prisma # blog-app is the name o
 
 Framework will give you below folder structure.
 ```
-    .
+    ├── config
+    │   ├── custom-environment-variables.yaml
+    │   |
+    |   ├── default.yaml  
+    |   
     ├── src
         ├── datasources
         │   ├── types
@@ -34,9 +38,19 @@ Framework will give you below folder structure.
         │   └── http.yaml
         |
         └── functions
+        │   |
+        |   └── helloworld.yaml     
+        |
+        └── mappings
+        |   |
+        |   └── index.yaml        
+        |
+        └── plugins
             |
-            └── helloworld.yaml
+            └── sample.js               
 ```
+
+- The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
 
 2. Navigate to you project folder
 
