@@ -4,7 +4,7 @@
 
 ## Request and Response Validation
 - Verifying that incoming API requests have the required parameters and that those parameters meet specific criteria like data types.  If the specified criteria are not met, it results in a request validation error. 
-- For more info about Request Validation and its applications, refer [this](/docs/microservices-framework/event-sources/validations/schema-validation.md)
+- For more info about Request Validation and its applications, refer [this](/docs/microservices-framework/event-sources/validations/schema-validation.md#request-schema-validation)
 
 :::tip Note
 - We utilize the AJV library for validating both request and response data, and the response format adheres to the standard AJV error format.
