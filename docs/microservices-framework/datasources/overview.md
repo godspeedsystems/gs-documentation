@@ -14,6 +14,8 @@ Data sources can be divided into two types, Datastore as datasource and API as a
 
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704478971/Screenshot_from_2024-01-05_23-52-33_e8ihnh.png" alt="event types" />
 
+
+
 ```yaml
 id: workflow_1
 description: This workflow will fetch the user with userId from the mongo database

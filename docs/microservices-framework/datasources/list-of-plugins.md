@@ -26,6 +26,8 @@ $  godspeed plugin add
 ├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
 │  ◯   │ excel-as-datasource                    │ excel as datasource plugin for Godspeed Framework                              │
 ├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│  ◯   │ mangoose-as-datasource                 │ mongoose-as-datasource as datasource plugin for Godspeed Framework             │
+├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
 │  ◯   │ mailer-as-datasource                   │ mailer as datasource plugin for Godspeed Framework                             │
 ├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
 │  ◯   │ kafka-as-datasource-as-eventsource     │ kafka as datasource-as-eventsource plugin for Godspeed Framework               │
@@ -50,7 +52,7 @@ Prisma-as-datasource plugin provide functionality to access most popular databas
 Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 🌐✨
 
 
-### 3. [aws-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
+### 3. [aws-as-datasource](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/aws-as-datasource/README.md)
 
 AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application. 🚀
 
@@ -69,7 +71,10 @@ Nodemailer as a datasource: Amp up your communication game by using a mailer as 
 Redis as a datasource: Elevate your data game with the speed and efficiency of Redis. Use it as a powerhouse for caching, real-time analytics, and lightning-fast data retrieval. Embrace the key-value magic to supercharge your application's performance. Ready to Rediscover efficiency? 🚀
 
 
-### 7. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
+### 7. [mongoose-as-datasource](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)
+Mongoose as a datasource: It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
+
+### 8. [kafka-as-datasource-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
 Kafka is your dynamic data stream and event maestro! As a data source, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka. 
 
