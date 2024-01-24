@@ -345,3 +345,18 @@ When calling a JavaScript function directly from the event, ensure that you acce
 }
 
  ```
+### Handling event handler return
+
+:::tip note
+If a native JS task exclusively returns data, it is equivalent to returning GSStatus(true, 200, undefined, <response_of_fn>).
+:::
+
+```yaml
+import {GSStatus, GSContext} from "@godspeedsystems/core"
+
+export default async function (ctx: GSContext, args: any) {
+    const reqData =await ctx.inputs.data.body.name
+    return reqData
+    // the above is equal to "return new GSStatus(true, 200, undefined, reqData, undefined);""
+}
+```
