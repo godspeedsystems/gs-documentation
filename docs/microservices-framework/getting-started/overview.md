@@ -82,4 +82,17 @@ Commands:
     
 ```
 
+## Swagger Specs
 
+- To enable swagger ui add docs in "./src/eventsources/http.yaml"
+
+- / is the default endpoint,if you want to provide your custom swagger endpoint, you can modify the endpoint from "./src/eventsources/http.yaml"
+
+- Update http.yaml( src/eventsources/http.yaml )
+
+```
+type: express
+port: 3000
+docs:
+  endpoint: /
+```

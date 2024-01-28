@@ -24,7 +24,9 @@ tasks:
       args: <% inputs.body %>
   ```
 
-#### On validation error handler
+- To know about validation_error, refer [this](/docs/microservices-framework/event-sources/validations/validation-error.md)
+
+<!-- #### On validation error handler
   ```yaml
   summary: Handle json scehma validation error
   id: error_handler
@@ -36,4 +38,4 @@ tasks:
           value:
             event: <% inputs.event %>
             validation_error: <% inputs.validation_error %>
-  ```
+  ``` -->
