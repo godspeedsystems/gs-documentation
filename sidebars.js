@@ -126,6 +126,11 @@ const sidebars = {
                   label: "4.3.4. Kafka Events",
                   id: "microservices-framework/event-sources/event-types/kafka-events"
                 },
+                {
+                  type: "doc",
+                  label: "4.3.5. Apollo Graphql Events",
+                  id: "microservices-framework/event-sources/event-types/graphql-events"
+                },
               ]
              
             },
