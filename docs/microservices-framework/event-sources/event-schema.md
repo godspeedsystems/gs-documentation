@@ -4,7 +4,7 @@ An event schema defines the structured format or blueprint for representing data
 
 ## Http 
 
-**Request Schema**
+### Request Schema
 
 Sample spec for request schema.
 ```yaml
@@ -27,7 +27,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 - Furthermore, you have an option to specify responses, including status codes and response body types, among other things.
 
 
-**Response Schema**
+### Response Schema
 Sample spec for response schema.
 ```yaml
 "http.get./helloworld":
@@ -53,18 +53,16 @@ Sample spec for response schema.
 
 The structure of Kafka event schema
 
-```yaml
-{datasourceName}.{topic_name}.{group_id}:
-  fn: kafka_consume #the workflow handler to invoke
-  body: # Schema of the Kafka message's body
-  on_request_validation_error:
-```
+> A [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource) event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the Kafka event specification](#example-spec-for-kafka-event).
 
-Example
+Within the Kafka event structure, the content of the message is captured and made accessible as `inputs.body`, facilitating its integration into the handler workflow for processing.
 
-```yaml
-# event for consume data from Topic
-kafka.publish-producer1.kafka_proj: // event key
+### Example spec for Kafka event
+
+``` yaml
+ # event for consume data from Topic
+Kafka.publish-producer1.kafka_proj: // event key
+  id: kafka_consumer
   fn: kafka_consume
   body:
     description: The body of the query
@@ -72,12 +70,25 @@ kafka.publish-producer1.kafka_proj: // event key
       application/json: 
         schema:
           type: string
-
-```
+ ```
 
 ## Apollo Graphql
 
-Apollo Graphql event schema
+### GraphQL Configuration 
+
+(src/eventsources/Apollo.yaml)
+```yaml
+type: graphql
+port: 4000
+```
+
+:::tip note
+Ensure the event key prefix aligns with the name of the configuration YAML file. In this example, the prefix for the Event key is Apollo. The event schema follows REST standards, resembling HTTP events.
+:::
+
+### Apollo Graphql event schema
+
+(src/events/create_category.yaml)
 ```yaml
 Apollo.post./mongo/category:
   summary: Create a new Category
@@ -100,6 +111,7 @@ Apollo.post./mongo/category:
 
 :::tip note
 - The first line is changed for each protocol.
-- cron does not need any validation.
-- kafka consumers dont need authentication or authorization 
+- Cron does not need any validation.
+- Kafka consumers dont need authentication or authorization 
+- Two types of events- sync([http](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/express-as-http/README.md),[Apollo Graphql](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/graphql-as-eventsource/README.md)) and async([cron](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/cron-as-eventsource/README.md),[kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka-as-datasource-as-eventsource/README.md))
 :::
