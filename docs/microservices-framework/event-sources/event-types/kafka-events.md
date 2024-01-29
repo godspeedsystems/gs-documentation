@@ -26,6 +26,10 @@ tasks:
 
 - To know about validation_error, refer [this](/docs/microservices-framework/event-sources/validations/validation-error.md)
 
+:::tip note
+- Response_validation_error, authz, authn are not applicable to this protocol since there is no response (thus no error handling for the same). Similarly, Kafka consumers don't require authentication or authorization, and hence, they are not specified here.
+:::
+
 <!-- #### On validation error handler
   ```yaml
   summary: Handle json scehma validation error

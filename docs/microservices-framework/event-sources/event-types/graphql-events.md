@@ -2,15 +2,20 @@
 
 - The GraphQL event configuration in Godspeed allows seamless integration of GraphQL APIs, emphasizing simplicity and efficiency in API development. The configuration file (Apollo.yaml) specifies the GraphQL type and port, ensuring alignment with the event key prefix.
 
-### GraphQL Configuration (src/eventsources/Apollo.yaml)
+### GraphQL Configuration 
+
+(src/eventsources/Apollo.yaml)
 ```yaml
 type: graphql
 port: 4000
 ```
+:::tip note
 Ensure the event key prefix aligns with the name of the configuration YAML file. In this example, the prefix for the Event key is Apollo. The event schema follows REST standards, resembling HTTP events.
+:::
 
-### GraphQL Event (src/events/create_category.yaml)
+### GraphQL Event 
 
+(src/events/create_category.yaml)
 ```yaml
 Apollo.post./mongo/category:
   summary: Create a new Category
@@ -31,9 +36,10 @@ Apollo.post./mongo/category:
           type: object
 ```
 
-### GraphQL Workflow (src/functions/create.yaml)
+### GraphQL Workflow 
 
-```
+(src/functions/create.yaml)
+```yaml
 summary: Create Category
 tasks:
   - id: mongo_category_create
