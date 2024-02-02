@@ -76,6 +76,10 @@ authz:
 
 ```
 
+:::tip 
+The authz notation mentioned above is currently in the implementation phase and will be released soon. Stay tuned for updates.
+:::
+
 - Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus or true
 - These instructions may enrich the context and user data, or load and run authorization checks, or do both.
 - When one task fails the whole workflow is considered to be failed.
