@@ -34,6 +34,7 @@ Use `godspeed help` command for available commands.
 
 Happy building microservices with Godspeed! 🚀🎉
 ```
+### Scaffolding
 Framework will give you below folder structure.
 ```
     ├── config
