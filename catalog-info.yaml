@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gs-documentation
+  annotations:
+    github.com/project-slug: godspeedsystems/gs-documentation
+    argocd/app-name: "gsdoc"
+spec:
+  type: other
+  lifecycle: production
+  owner: default
