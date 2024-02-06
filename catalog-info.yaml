@@ -4,7 +4,8 @@ metadata:
   name: gs-documentation
   annotations:
     github.com/project-slug: godspeedsystems/gs-documentation
+    argocd/app-name: "gsdoc"
 spec:
   type: other
-  lifecycle: unknown
+  lifecycle: production
   owner: default
