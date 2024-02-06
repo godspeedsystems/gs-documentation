@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gs-documentation
+  annotations:
+    github.com/project-slug: godspeedsystems/gs-documentation
+spec:
+  type: other
+  lifecycle: unknown
+  owner: default
