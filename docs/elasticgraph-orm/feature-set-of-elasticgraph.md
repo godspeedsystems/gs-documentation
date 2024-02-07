@@ -4,7 +4,7 @@ title: Feature, Configurations & API
 ---
 
 # About ElasticGraph
-## Benifits
+## Benefits
 
 ### Productivity
 EG saves LOT of effort in development of an Elasticsearch based app because it *abstracts some most common data operations into a simple configurable abstractions* saving hundreds to thousand lines of code, makes the code neat, elegantly abstracts business logic in configurable text files and saves many hours of development and testing.
