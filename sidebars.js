@@ -374,8 +374,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "12.4. Custom metrics and traces",
-              id: "microservices-framework/telemetry/custom-metrics"
+              label: "12.4. Custom traces, logs and metrics (BPM)",
+              id: "microservices-framework/telemetry/custom-metrics-logs-traces"
             },
           ],
         },

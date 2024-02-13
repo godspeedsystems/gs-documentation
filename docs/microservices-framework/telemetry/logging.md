@@ -34,8 +34,8 @@ Sample masked logs:
 ```
 
 ### Log format
-When observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
-
+** OTEL format **   
+When NODE_ENV is not set to 'dev' i.e. 'prod', 'uat', etc., then logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/). For example,
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
 {"Body":"adding body schema for /upload_multiple_docs.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -47,11 +47,13 @@ When observability is [enabled](/docs/microservices-framework/telemetry/configur
 {"Body":"Result of _executeFn test_step1 {\"success\":true,\"code\":200,\"data\":{\"args\":{},\"data\":\"{\\\"data\\\":{\\\"lan\\\":\\\"12345\\\"}}\",\"files\":{},\"form\":{},\"headers\":{\"Accept\":\"application/json, text/plain, */*\",\"Content-Length\":\"24\",\"Content-Type\":\"application/json\",\"Host\":\"httpbin.org\",\"Traceparent\":\"00-a58ef2d7ff7725c39f1e058bf22fe724-2f13e28430d61bdb-01\",\"User-Agent\":\"axios/0.25.0\",\"X-Amzn-Trace-Id\":\"Root=1-63edd835-22cff8e60555fa522c8544cf\"},\"json\":{\"data\":{\"lan\":\"12345\"}},\"method\":\"POST\",\"origin\":\"180.188.224.177\",\"url\":\"https://httpbin.org/anything\"},\"message\":\"OK\",\"headers\":{\"date\":\"Thu, 16 Feb 2023 07:16:05 GMT\",\"content-type\":\"application/json\",\"content-length\":\"598\",\"connection\":\"close\",\"server\":\"gunicorn/19.9.0\",\"access-control-allow-origin\":\"*\",\"access-control-allow-credentials\":\"true\"}}","Timestamp":"1676531765810000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":"test_step1"}}
 {"Body":"Validate Response JSON Schema Success","Timestamp":"1676531765811000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":""}}
 ```   
-   
-** pino pretty format **
-When observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false or NODE_ENV is set to 'dev' then the logs are dumpde in [pino pretty format](https://www.npmjs.com/package/pino-pretty).
-  
-Sample Logs:
+
+:::tip 
+  To get the tracing information (like TraceId, SpanId or TraceFlags) in the OTEL logs for co-relation between logs and traces, observability should be [enabled](configuration.md/#enable-observability) i.e. OTEL_ENABLED=true.
+:::
+
+** Dev format **   
+When NODE_ENV is set to 'dev' then the logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty). For example, 
 ```
 [11:35:05.264] INFO (17113): [START] Load definitions from /home/gurjot/data/cli-test/card91/card91/src/definitions
 [11:35:05.281] DEBUG (17113): Definitions loaded and registered to ajvInstance
@@ -64,6 +66,7 @@ Sample Logs:
 [11:35:05.293] DEBUG (17113): evaluating datasource api
 [11:35:05.293] DEBUG (17113): evaluated datasource api {"type":"axios","base_url":"https://httpbin.org"}
 ```
+
 
 ### Custom log attributes
 #### 1. For all events
@@ -193,22 +196,3 @@ on_error:
       }
     }}
 ```
-###  Usage of Logger Instance in Custom js/ts Functions
-This feature enables developers to utilize a Logger Instance in custom js or ts functions. The Logger Instance assists in logging information, warnings, and errors during the execution of the function. The feature ensures robust logging capabilities and facilitates debugging and monitoring of the application.
-
-** Sample code **
-```
-module.exports = function(args, {childLogger, promClient, tracer}) {
-    for (let i = 0; i < 1000; i++) {
-        childLogger.error("print log i: %s", i);
-    }
-    return "OK"
-}
-```
-** Function Parameters: **
-
-- ** args: ** Represents the arguments passed to the custom JS/TS function. Developers can use this parameter to accept input data and perform necessary computations within the function.
-- ** {childLogger, promClient, tracer}: ** This object contains three properties, which are as follows:
-  - ** childLogger: ** A Logger Instance that developers can use to log messages, errors, and other relevant information during the function's execution.
-  - ** promClient: ** A library that provides a Prometheus client for collecting metrics and exposing them to Prometheus monitoring system.
-  - **tracer: ** A library used for distributed tracing, which can be beneficial in identifying and resolving issues across microservices.
