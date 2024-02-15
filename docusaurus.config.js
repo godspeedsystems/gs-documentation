@@ -11,7 +11,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'http://0.0.0.0:3000',
+  url: 'https://godspeed.systems',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/docs',
@@ -44,7 +44,7 @@ const config = {
       
         // whether to index static pages
         // /404.html is never indexed
-        indexPages: false,
+        indexPages: true,
       
         // language of your documentation, see next section
         language: "en",
