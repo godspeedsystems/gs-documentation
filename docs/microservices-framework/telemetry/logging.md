@@ -34,7 +34,9 @@ Sample masked logs:
 ```
 
 ### Log format
-When observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true and NODE_ENV is not set to 'dev' then logs are dunped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/).
+Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:
+- observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true.
+- NODE_ENV is not set to 'dev'.
 
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -49,7 +51,9 @@ When observability is [enabled](/docs/microservices-framework/telemetry/configur
 ```   
    
 ** pino pretty format **
-When observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false or NODE_ENV is set to 'dev' then the logs are dumpde in [pino pretty format](https://www.npmjs.com/package/pino-pretty).
+Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:
+- observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false.
+- NODE_ENV is set to 'dev'.
   
 Sample Logs:
 ```
