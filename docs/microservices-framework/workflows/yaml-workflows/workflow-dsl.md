@@ -252,7 +252,7 @@ The framework provides coffee/js for
 - Dynamic evaluation or workflow or task variables, event variables, datasource variables.
 
 #### Default language
-You can provide default value of language globally in `defaults.lang` key in `config/default.yaml`. It will be applicable for all the workflows unless overridden.    
+The default language is `js`. You can provide default value of language globally in `defaults.lang` key in `config/default.yaml`. It will be applicable for all the workflows unless overridden.    
 ```yaml title=config/default.yaml
 defaults:
   lang: coffee
