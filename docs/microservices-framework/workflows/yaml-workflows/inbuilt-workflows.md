@@ -3,17 +3,15 @@
 **The framework comes equipped with the following built-in functions.**
 
 ## Godspeed Built-in functions
-
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
-
 ### com.gs.transform
-
-This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.
-
+This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting. By default, all the framework defined functions or developer written functions, have to return either [GSStatus](../native-language-functions.md/#gsstatus) or data.   
+Now lets see how the framework qualifies your return as GSStatus or simple data.
+The framework sees that your returned data has one of `code` or `success` meta-keys. If present, it looks for the other GSStatus keys and set them. If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data   
+It adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.
 
 #### Example event for transform function
-
 <details>
 <summary>Example event for transform function</summary>
 
@@ -36,25 +34,69 @@ This function enables you to convert data from one format to another using Coffe
 ```
 </details>
 
-
-
 The above event will trigger the below function 
 
-#### Example function for transform ( transform.yaml )
-
-
-```yaml
+```yaml title='Example 1'
 summary: This function returns the greet message with name provided in query parameters
+# The framework adds code, success in the response and returns everything 
+# as part of data because these args don't qualify as GSStatus.
 tasks:
-  - id: return_hello_world
-    fn: com.gs.return
+  - id: hello_task1
+    fn: com.gs.transform
     args: 'Hello'
 
-  - id: return_with_status
+  - id: transform_result
     fn: com.gs.transform 
-    args: <% outputs.return_hello_world.data + inputs.query.name %>
+    args: <% outputs.hello_task1.data + inputs.query.name %>
+
+Output:
+  code: 200
+  success: true
+  data: "Hello <inputs.query.name>"   
 ```
 
+```yaml title='Example 2'
+summary: This function returns data present in the args
+# these args qualifies as GSStatus. The framework ignores the extra 
+# keys because data key is already present in the args.
+tasks:
+  - id: first_task
+    fn: com.gs.transform
+    args: 
+      code: 400
+      success: false
+      data: "Invalid input error"
+      key1: "E001"
+      key2: "E002"
+      headers: 
+        title: "MS1"
+
+Output:
+  code: 400
+  success: false
+  data: "Invalid input error"
+  headers: 
+    title: "MS1"  
+```
+
+```yaml title='Example 3'
+summary: This function returns all the keys present in the args 
+# as GSStatus.data as there is no data key defined.
+# These args don't qualify as GSStatus
+tasks:
+  - id: first_task
+    fn: com.gs.transform
+    args: 
+      key1: "E001"
+      key2: "E002"
+
+Output:
+  code: 200
+  success: true
+  data: 
+    key1: "E001"
+    key2: "E002" 
+```
 
 ### com.gs.parallel
 :::tip control flow function
@@ -365,6 +407,10 @@ The classic return statement
 
 When the return statement is invoked, it causes the current function to exit and returns control to the function caller, effectively terminating the function's execution.
 
+:::note[Important]
+This function does the transformation in the same way as [com.gs.transform](#comgstransform) except that it exits from the current function.
+:::
+
 #### Example event for return inbuilt function
 
 <details>
@@ -377,26 +423,43 @@ When the return statement is invoked, it causes the current function to exit and
 </details>
 
 
-#### Example function for return ( return.yaml )
-
-```yaml
-summary: returning the data
-description: Here we sum two hardcoded x and y values. Feel free to try using API input
+```yaml title='Example 1'
+summary: This function returns only the 'Hello' string 
+# and causes the function to exit from task1.
 tasks:
-  - id: first
-    fn: com.gs.return
+  - id: hello_task1
+    fn: com.gs.transform
     args: 
-      data: |
-        <js%
-          {
-            let data = {};
-            data.body = inputs.body;
-            data.name = inputs.headers.name
-            data.city = inputs.params.city
-            return data;
-          }
-        %>
+      code: 200
+      success: true
+      data: "Hello"
+
+  - id: transform_result
+    fn: com.gs.transform 
+    args: <% outputs.hello_task1.data + inputs.query.name %>
+
+Output:
+  code: 200
+  success: true
+  data: "Hello"   
 ```
+
+:::warning[Deprecated]
+This is com.gs.return v1 like behavior.   
+If the developer uses a flag called `defaults.returnV1Compatible: true` in `config/default.yaml` then the code, success and other GSStatus meta-keys are not copied from args to the finally returned GSStatus.   
+The final response has `success: true`, `code: 200` and `data: <complete args>`
+
+The same above example would return the following output:
+```yaml
+code: 200
+success: true
+data: 
+  code: 200
+  success: true
+  data: "Hello"
+```
+:::
+
 
 ### com.gs.log
 
