@@ -8,7 +8,7 @@ Any kind of entity which provides read and write mechanism for data is considere
 
 
 <details>
-  <summary>let's use kafka as an example of an datasource :</summary>
+  <summary>let's use kafka as an example of a datasource :</summary>
 
 #### Project structure
 
