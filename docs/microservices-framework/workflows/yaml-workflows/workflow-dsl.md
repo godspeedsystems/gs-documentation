@@ -8,7 +8,6 @@ Every Workflow has the following attributes.
 - **summary** - This provides a descriptive title for a workflow, enhancing code readability.
 - **tasks** - This specifies that tasks, which can be workflows or sub-workflows, will be executed sequentially, one after the other. These tasks can call other workflows defined in YAML or JavaScript/TypeScript.
 
-
 ### Tasks and Attributes within a task
 The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
 
@@ -122,13 +121,11 @@ summary: upload file
 ```
 
 ## Error handling
- The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
+ The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.   
 
-
- - **continue** - The "continue" key accepts a boolean value, which can be either "true" or "false." When it's set to "true," the system will proceed to the next task even if an error occurs, effectively ignoring the error. On the other hand, if it's set to "false," the system will return a custom response and exit the workflow when an error is encountered.
-
+- **continue** - The "continue" key accepts a boolean value, which can be either "true" or "false." When it's set to "true," the system will proceed to the next task even if an error occurs, effectively ignoring the error. On the other hand, if it's set to "false," the system will return a custom response and exit the workflow when an error is encountered.   
 :::tip
-The default value for the Continue variable is set to true, enabling the execution of the second task in the event of a failure in the first task. To halt the workflow execution after a task failure, it is necessary to set the Continue variable to false.
+The default value for the continue variable is set to false. You can control the default behavior of continue by setting `default.on_error.continue` key in `config/default.yaml`
 :::
 
 - **log_attributes** - Log attributes assist in pinpointing the precise locations of breakpoints where errors occurred and provide visibility into the logged messages within the terminal.
@@ -249,12 +246,17 @@ tasks:
 
 ### Use of Coffee/JS for scripting
 
-The framework provides coffee/js for
+The framework provides coffee/js for   
 
 - Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn)
 - Dynamic evaluation or workflow or task variables, event variables, datasource variables.
 
-
+#### Default language
+You can provide default value of language globally in `defaults.lang` key in `config/default.yaml`. It will be applicable for all the workflows unless overridden.    
+```yaml title=config/default.yaml
+defaults:
+  lang: coffee
+```
 
 #### Define language at workflow level
 Global configuration for language is overridden by defining specific language inside <coffee/js% %>. 
