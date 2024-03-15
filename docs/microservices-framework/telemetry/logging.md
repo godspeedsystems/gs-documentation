@@ -35,7 +35,10 @@ Sample masked logs:
 
 ### Log format
 ** OTEL format **   
-When NODE_ENV is not set to 'dev' i.e. 'prod', 'uat', etc., then logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/). For example,
+Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:
+- observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true.
+- NODE_ENV is not set to 'dev'.
+
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
 {"Body":"adding body schema for /upload_multiple_docs.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -47,13 +50,16 @@ When NODE_ENV is not set to 'dev' i.e. 'prod', 'uat', etc., then logs are dumped
 {"Body":"Result of _executeFn test_step1 {\"success\":true,\"code\":200,\"data\":{\"args\":{},\"data\":\"{\\\"data\\\":{\\\"lan\\\":\\\"12345\\\"}}\",\"files\":{},\"form\":{},\"headers\":{\"Accept\":\"application/json, text/plain, */*\",\"Content-Length\":\"24\",\"Content-Type\":\"application/json\",\"Host\":\"httpbin.org\",\"Traceparent\":\"00-a58ef2d7ff7725c39f1e058bf22fe724-2f13e28430d61bdb-01\",\"User-Agent\":\"axios/0.25.0\",\"X-Amzn-Trace-Id\":\"Root=1-63edd835-22cff8e60555fa522c8544cf\"},\"json\":{\"data\":{\"lan\":\"12345\"}},\"method\":\"POST\",\"origin\":\"180.188.224.177\",\"url\":\"https://httpbin.org/anything\"},\"message\":\"OK\",\"headers\":{\"date\":\"Thu, 16 Feb 2023 07:16:05 GMT\",\"content-type\":\"application/json\",\"content-length\":\"598\",\"connection\":\"close\",\"server\":\"gunicorn/19.9.0\",\"access-control-allow-origin\":\"*\",\"access-control-allow-credentials\":\"true\"}}","Timestamp":"1676531765810000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":"test_step1"}}
 {"Body":"Validate Response JSON Schema Success","Timestamp":"1676531765811000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":""}}
 ```   
-
 :::tip 
   To get the tracing information (like TraceId, SpanId or TraceFlags) in the OTEL logs for co-relation between logs and traces, observability should be [enabled](configuration.md/#enable-observability) i.e. OTEL_ENABLED=true.
 :::
 
-** Dev format **   
-When NODE_ENV is set to 'dev' then the logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty). For example, 
+** pino pretty format **
+Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:
+- observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false.
+- NODE_ENV is set to 'dev'.
+  
+Sample Logs:
 ```
 [11:35:05.264] INFO (17113): [START] Load definitions from /home/gurjot/data/cli-test/card91/card91/src/definitions
 [11:35:05.281] DEBUG (17113): Definitions loaded and registered to ajvInstance

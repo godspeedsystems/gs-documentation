@@ -1,6 +1,6 @@
 ## Base ########################################################################
 # Use a larger node image to do the build for native deps (e.g., gcc, python)
-FROM node:lts as base
+FROM node:18.19 as base
 
 # Reduce npm log spam and colour during install within Docker
 ENV NPM_CONFIG_LOGLEVEL=warn
@@ -33,10 +33,12 @@ WORKDIR /home/node/app
 COPY --chown=node:node --from=development /home/node/app/node_modules /home/node/app/node_modules
 # Build the Docusaurus app
 RUN npm run build
+CMD ["npm", "run", "serve"]
+ 
 
-# ## Deploy ######################################################################
-# # Use a stable nginx image
-FROM nginx:stable-alpine as deploy
-WORKDIR /usr/share/nginx/html
-# Copy what we've installed/built from production
-COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/docs
+# # ## Deploy ######################################################################
+# # # Use a stable nginx image
+# FROM nginx:stable-alpine as deploy
+# WORKDIR /usr/share/nginx/html
+# # Copy what we've installed/built from production
+# COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/docs
