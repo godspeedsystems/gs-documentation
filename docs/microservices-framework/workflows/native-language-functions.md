@@ -105,12 +105,11 @@ with childLogger you have accessibility to framework logger.
 
 :::tip Note
 - Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
--  In TS/JS tasks, developers are not obliged to manually set ctx.outputs; the framework handles it automatically.
-- In Godspeed.ts, when handling event handler responses, if success is not explicitly defined, it is assumed to be success:true, code:200 ,data :event handler's response
+- In TS/JS tasks, developers are not obliged to manually set ctx.outputs; the framework handles it automatically.
+- When handling [event handler responses](#handling-event-handler-return), if success is not explicitly defined, it is assumed to be success: true, code: 200, data: event handler's response.
 :::
 
 For example:
-
 ```ts
 const {GSStatus} = require("@godspeedsystems/core");
 
@@ -124,13 +123,7 @@ module.exports = ctx => {
 ```
 
 The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response manually and dispatch it.
-
-:::note
-
 GSStatus has the below properties.
-
-### GSStatus Properties
-
 ```yaml
     success: boolean;
     code?: number;
@@ -140,48 +133,35 @@ GSStatus has the below properties.
         [key: string]: any;
    };
 ```
-:::
 
 We set the values as below
-
 ```js
 response = new GSStatus(true, 200, undefined, responseData, undefined);
 ctx.outputs[id] = response;
 ```
 
-
 ```js
 module.exports = async(ctx)=>{
-
   const {GSStatus} = require('@godspeedsystems/core');
   const {inputs, childLogger, datasources} = ctx;
   const prismaClient = datasources.mongo.client;
-
   try {
-
     inputs.body = inputs.data.body;
     childLogger.info('inputs: %o', inputs.body);
-    
     const responseData = await prismaClient.Restaurant.create({
       data: inputs.body
     })
     ctx.outputs[id] = responseData;
-
     return new GSStatus(true, 200, undefined, responseData, undefined);
-
   } catch (error) {
-
     return new GSStatus(false, 500, undefined, error, undefined);
-
   }
 }
 
 module.exports.id = 'main';
 ```
 
-The above is a sample of how a js file is configured and used.For every function it comes up with a ctx called context which helps in maintained and passing the data with the functions and method
-
-
+The above is a sample of how a js file is configured and used. For every function it comes up with a ctx called context which helps in maintaining and passing the data with the functions and method.
 
 ### Calling javascript function from Yaml workflow
 
@@ -346,17 +326,19 @@ When calling a JavaScript function directly from the event, ensure that you acce
 
  ```
 ### Handling event handler return
+By default, all the framework defined functions or developer written functions, have to return either [GSStatus](#gsstatus) or data.   
+Now lets see how the framework qualifies your return as GSStatus or simple data.
+The framework sees that your returned data has one of `code` or `success` meta-keys.    
+> If present, it looks for the other GSStatus keys and set them.    
+> If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.
 
-:::tip note
-If a native JS task exclusively returns data, it is equivalent to returning GSStatus(true, 200, undefined, <response_of_fn>).
-:::
-
-```yaml
+For example,
+```javascript
 import {GSStatus, GSContext} from "@godspeedsystems/core"
 
 export default async function (ctx: GSContext, args: any) {
-    const reqData =await ctx.inputs.data.body.name
-    return reqData
-    // the above is equal to "return new GSStatus(true, 200, undefined, reqData, undefined);""
+    const reqData =await ctx.inputs.data.body.name;
+    return reqData;
+    // same as "return new GSStatus(true, 200, undefined, reqData, undefined);"
 }
 ```
