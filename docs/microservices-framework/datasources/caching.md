@@ -1,7 +1,8 @@
 # Caching
 Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the workflows. 
 Caching can take various forms, including in-memory caching and the upcoming addition of Elasticsearch for caching.   
-For now, Godspeed provides two pre-defined types of cache i.e. redis and in-memory cache.
+For now, Godspeed provides two pre-defined types of cache i.e. redis and in-memory cache.   
+Godspeed allow using multiple caches in a single service with a default cache. Cache datasource should implement abstract class `GSCacheAsDatasource` [code is below](#how-to-write-your-own-cache-plugin). You can make multiple caches using this abstract class.
 
 > You can read and return from cache if data is present there, before executing any task where caching instruction is set.   
 > The data is stored in form of [GSStatus](../workflows/native-language-functions.md/#gsstatus) of the executed task. Both success and failure statuses can be stored and loaded.
@@ -42,7 +43,9 @@ Alternatively, you can specify `redis-as-datasource` or `mem-cache-as-datasource
 godspeed plugin add <plugin-name>
 ```
 
-Once you add the desired cache, you can find its configuration in the `src/datasources` e.g. `redis.yaml`. All the redis database related configuration need to be set in this file.
+Once you add the desired cache, you can find its code in `src/types/redis.ts` where you can reuse our existing plugins or have code of your own plugin.    
+You can find its configuration in the `src/datasources` e.g. `redis.yaml`. All the redis database related configuration need to be set in this file. The `redis.yaml` is an instance of `type: redis`. You can have multiple instances of `type: redis` called `redis1.yaml`, `redis2.yaml` etc. 
+
 ```bash
 ├── api.yaml
 ├── redis.yaml
@@ -62,7 +65,37 @@ server_url: https://api.example.com:8443/v1/api
 caching: <redis or mem-cache>
 ```
 
-### Caching instruction
+### How to use caching in your tasks
+#### Using caching in Typescript/Javascript tasks
+:::note
+Currently caching support is not provided when you call a datasource or function/workflow from typescript code. Check this [github issue](https://github.com/godspeedsystems/gs-node-service/issues/1008) for more information.
+:::
+For now if you want to use cache datasource within typescript code, you need to call it like any other datasource from within a typescript code. You need to manage caching and invalidations in your code. This requires some boilerplate till the above issue is implemented.
+
+```javascript
+export default async function (ctx: GSContext, args: any) {
+  const redis_client = ctx.datasources['redis'].client;
+  let res: GSStatus;
+  const key = 'helloworld2';
+
+  try {
+    const cached_value = await redis_client.get(key);
+    if (!cached_value) {
+      res = await ctx.functions['com.gs.helloworld2'](ctx, {nice: "name", ...args});
+      await redis_client.set(key, JSON.stringify(res));
+    } else {
+      return JSON.parse(cached_value);
+    } 
+  } catch(ex) {
+    return new GSStatus(false, 500, undefined, {message: "Internal Server Error", info: ex.message});
+  }
+
+  return res;
+}
+```
+
+#### Using caching in YAML tasks
+##### Caching instruction
 Caching instruction has the following specifications.
 ```yaml
 caching:
@@ -79,13 +112,14 @@ caching:
       EX: 200 <timer in seconds, until the cached result is valid> # Can pass any of RedisOptions, if supported by the specific caching Datasource 
 ```
 :::noteRemember
+* `options` are [redis options](https://redis.io/commands/set/) supported by redis cache. mem-cache does not support these options.
 * `caching.before` instruction is used to read the result from cache and gets executed before the task execution.   
 * `caching.after` instruction is used to write the result in cache and gets executed after the task execution.   
 * In case where the result is present and returned from the cache, `caching.after` instruction doesn't get executed for that task.
 * `datasource` specified in the caching instruction overrides the [default cache datasource](#default-cache).
 :::
 
-#### Sample
+##### Sample
 Here is the caching spec to write in the workflow.
 ```yaml title=config/default.yaml
 caching: redis
@@ -129,9 +163,33 @@ tasks:
       name: helloworld3
 ```
 
-### Steps to create Custom Cache Datasource
+### How to write your own cache plugin
+You need to implement abstract class `GSCacheAsDatasource` interface to write your own cache plugin.
+```javascript
+export abstract class GSCachingDataSource extends GSDataSource {
+  //Redis options are available [here](https://redis.io/commands/set/) Client may or may not support all actions. RedisOptions is a superset based on what Redis supports
+  public abstract set(key:string, val: any, options: RedisOptions): any; 
+  public abstract get(key: string): any; //Return the value stored against the key
+  public abstract del(key: string): any; //Delete the key
+}
+
+export type RedisOptions = {
+  EX? : number,
+  PX? : number,
+  EXAT?: number,
+  NX?: boolean,
+  XX?: boolean,
+  KEEPTTL?: boolean,
+  GET?: boolean
+}
+```
+
+#### Sample caching datasource implementation
+This code is sourced from [mem-cache plugin](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/mem-cache-as-datasource/README.md). You can use this as a reference to make or customise your own caching implementations.
+
 <details>
-  <summary>let's use mem-cache as an example of a datasource:</summary>
+  <summary>mem-cache datasource plugin</summary>
+
 
 #### Project structure
 ```bash
@@ -154,7 +212,7 @@ type: mem-cache
 ```javascript
 import { GSContext, GSCachingDataSource, PlainObject, logger } from "@godspeedsystems/core";
 
-export default class DataSource extends GSDataSource {
+export default class DataSource extends GSCachingDataSource {
   protected async initClient(): Promise<PlainObject> {
     this.client = {};
     return this.client;
