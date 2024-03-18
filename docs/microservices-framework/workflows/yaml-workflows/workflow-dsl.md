@@ -121,10 +121,15 @@ summary: upload file
 ```
 
 ## Error handling
- The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.   
+The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
 
-- **continue** - The "continue" key accepts a boolean value, which can be either "true" or "false." When it's set to "true," the system will proceed to the next task even if an error occurs, effectively ignoring the error. On the other hand, if it's set to "false," the system will return a custom response and exit the workflow when an error is encountered.   
 :::tip
+Think of it like a `catch` in 3rd Gen programming.
+:::
+
+- **continue** - The "continue" key accepts a boolean value, which can be either "true" or "false". When it's set to "true" the system will proceed to the next task even if an error occurs, effectively ignoring the error. But the GSStatus output of the failed task will be accessible to the next tasks.   
+On the other hand, if it's set to "false" the system will return a custom response and exit the workflow when an error is encountered.
+:::info
 The default value for the continue variable is set to false. You can control the default behavior of continue by setting `default.on_error.continue` key in `config/default.yaml`
 :::
 
@@ -182,120 +187,9 @@ tasks:
 
 
 ## Scripting in workflows
-
-We use scripting in workflows/functions for dynamic evaluation of variables in <% %> tags.
-
-
-#### Accessing ctx properties using scripting
-
-The values of all [`ctx`](/docs/microservices-framework/workflows/native-language-functions.md#ctx) properties can be assessed using scripting tags `<% %>`
-
-- Evaluating the inputs using scripting
-
-```yaml
-summary: Summing x + y
-description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
-tasks:
-  - id: sum_step1
-    description: add two numbers
-    fn: com.gs.transform
-    args: <% inputs.body.x + inputs.body.y %>
-```
-
-- Evaluating the outputs using scripting
-
-```yaml
-summary: Summing x + y
-description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
-tasks:
-  - id: sum_step1
-    description: add two numbers
-    fn: com.gs.transform
-    args: <% inputs.body.x + inputs.body.y %>
-
-  - id: sum_step2
-    fn: com.gs.return
-    args: <% outputs.sum_step1 %>
-```
-
-- Evaluating the outputs using scripting bracket notation
-
-```yaml
-  summary: parallel function
-  tasks:
-    - id: parallel
-      fn: com.gs.parallel
-      tasks:
-        - id: 1st
-          fn: com.gs.return
-          args: "నమస్కారం"
-
-        - id: 2nd
-          fn: com.gs.return
-          args: "नमस्ते"
-
-        - id: 3rd
-          fn: com.gs.return
-          args: "Hello"
-
-    - id: step2
-      fn: com.gs.return
-      args: |
-        <% outputs["1st"] %>
-```
-
-### Use of Coffee/JS for scripting
-
-The framework provides coffee/js for   
-
-- Transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn)
-- Dynamic evaluation or workflow or task variables, event variables, datasource variables.
-
-#### Default language
-The default language is `js`. You can provide default value of language globally in `defaults.lang` key in `config/default.yaml`. It will be applicable for all the workflows unless overridden.    
-```yaml title=config/default.yaml
-defaults:
-  lang: coffee
-```
-
-#### Define language at workflow level
-Global configuration for language is overridden by defining specific language inside <coffee/js% %>. 
-
-- Scripting with coffee
-
-```
-summary: test the coffee scripting
-id: coffee_workflow
-description: Test the coffee script
-tasks:
-  - id: sum
-    fn: com.gs.transform
-    args: |
-        <coffee% if inputs.query.name
-                    return "Hello Shirisha"
-                 else 
-                    return "Hello Developer"
-         %>
-```
-- Scripting with Javascript
-
-```
-summary: performing js scrpit 
-tasks:
-  - id: first_task
-    fn: com.gs.return
-    args: |
-      <js%
-      if(inputs.query.name){
-        return `Hello ${inputs.query.name}!`
-      }
-      return 'Hello Developer!'
-      %>
-```
-
+You can use [inline scripting](../../inline-scripting/overview.md) in workflows/functions for dynamic evaluation of variables.
 
 ## Built-in functions
+The framework comes equipped with the following built-in functions.These functions are readily available for developers to use in their code, simplifying tasks like mathematical calculations, string manipulation, input/output operations, and more. They save time and effort by offering efficient and reliable solutions for common programming challenges.
 
- The framework comes equipped with the following built-in functions.These functions are readily available for developers to use in their code, simplifying tasks like mathematical calculations, string manipulation, input/output operations, and more. They save time and effort by offering efficient and reliable solutions for common programming challenges.
-
- [Godspeed Built-in function](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md)
+[Godspeed Built-in function](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md)
