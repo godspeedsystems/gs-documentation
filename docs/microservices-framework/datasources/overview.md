@@ -15,6 +15,7 @@ Data sources can be divided into two types, Datastore as datasource and API as a
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704478971/Screenshot_from_2024-01-05_23-52-33_e8ihnh.png" alt="event types" />
 
 
+Example 1: Datastore as Datasource [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
 
 ```yaml
 id: workflow_1
@@ -27,20 +28,44 @@ tasks:
         userId: <% inputs.params.userId %>
 ```
 
+
 In this example:
 
-`datasource.mongo.User.findOne` is the data source function, which can be described as below:
+`datasource.mongo.User.findOne` is the datasource function, which can be described as below:
 
   - `datasource`: fixed namespace for all data sources
   - `mongo`: name of data source,this can be any data base that you select can checkout [database list](/docs/getting-started/create-blog-project#prisma-supports-wide-range-of-databases)
   - `User`: entity name
   - `findOne`: method to be invoked in entity name
 
+the workflow is consuming the datasource `mongo` and finding one document from User entity.
 
 :::tip **Godspeed has a prisma as a datasource plugin as well, which means a uniformed access atleast for all prisma based datasources**
 :::
 
+To enable this seamless interaction with datasources, the Godspeed Framework allows you to configure data sources within your project. For instance, the example mentions the use of the "prisma-as-datastore" plugin to define the "mongo" data source. This configuration step ensures that the framework can establish connections and communicate effectively with the specified data source.
 
-To enable this seamless interaction with data sources, the Godspeed Framework allows you to configure data sources within your project. For instance, the example mentions the use of the "prisma-as-datastore" plugin to define the "mongo" data source. This configuration step ensures that the framework can establish connections and communicate effectively with the specified data source.
+In the above example there is a `mongo` datasource defined in the project, you are free to name your datasource as you like. a default config of your datasource is present in `src/datasources` folder. To use datasources advance features you configure your datasource.yaml file, to get more details about your specific datasource checkout their respective docs.
 
-In the above example there is a `mongo` datasource defined in the project using [prisma-as-datastore](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore) plugin.
+
+Example 2: API Datasource  [axios-as-datasource](/docs/microservices-framework/datasources/list-of-plugins#2-axios-as-datasource)
+
+```yaml
+id: post_api_send_anthing
+tasks:
+  - id: send_anything
+    # Fetching loan offers from rule engine for the given bank and pan card
+    fn: datasource.api_datasource.post./anything
+    args:
+      data:
+        message: <%inputs.body.message%>
+```
+
+In the above example:
+
+`datasource.api_datasource.post./anything` is the datasource function, which can be described as below:
+
+  - `datasource`: fixed namespace for all data sources
+  - `api_datasource`: name of data source,
+  - `post`: API method
+  - `./anything`: API endpoint
