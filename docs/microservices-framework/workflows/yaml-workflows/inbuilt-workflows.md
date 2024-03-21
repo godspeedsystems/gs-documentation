@@ -3,16 +3,13 @@
 **The framework comes equipped with the following built-in functions.**
 
 ## Godspeed Built-in functions
-
 The Godspeed framework offers a robust set of built-in functions to empower developers in orchestrating workflows seamlessly. Some of these essential functions include  ["com.gs.parallel"](#comgsparallel) enabling the execution of tasks in a sequential or parallel manner, respectively. For conditional logic, the framework provides ["com.gs.switch"](#comgsswitch), ["com.gs.if"](#comgsif) functions to make decisions based on specific criteria. Developers can iterate through tasks with ["com.gs.each_sequential"](#comgseach_sequential) and ["com.gs.each_parallel"](#comgseach_parallel) for controlled repetition. To capture and communicate data between tasks, ["com.gs.return"](#comgsreturn) comes in handy, while ["com.gs.log"](#comgslog) aids in logging crucial information for monitoring and debugging purposes. These built-in functions collectively enhance the efficiency and flexibility of workflow automation within the Godspeed framework.
 
-
 ### com.gs.transform
-
-This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.
-
-
-#### Example event for transform function
+This function enables you to convert data from one format to another using CoffeeScript or JavaScript scripting.   
+See below a sample workflow:
+> The first task is doing the transformation and giving 'Hello' as output.   
+> The second task is doing the transformation (concatenation of the output of the first task with query params of the request).
 
 <details>
 <summary>Example event for transform function</summary>
@@ -36,25 +33,68 @@ This function enables you to convert data from one format to another using Coffe
 ```
 </details>
 
-
-
-The above event will trigger the below function 
-
-#### Example function for transform ( transform.yaml )
-
-
-```yaml
+```yaml title='Example 1'
 summary: This function returns the greet message with name provided in query parameters
 tasks:
-  - id: return_hello_world
-    fn: com.gs.return
+  - id: hello_task1
+    fn: com.gs.transform
     args: 'Hello'
 
-  - id: return_with_status
+  - id: transform_result
     fn: com.gs.transform 
-    args: <% outputs.return_hello_world.data + inputs.query.name %>
+    args: <% outputs.hello_task1.data + inputs.query.name %>
+
+Output:
+  code: 200
+  success: true
+  data: "Hello <inputs.query.name>"   
 ```
 
+This functions always return [GSStatus](../native-language-functions.md/#gsstatus). Please check [response handling](../native-language-functions.md/#handling-event-handler-return) to know how `com.gs.transform` args are transformed as GSStatus.    
+The above example doesn't qualify as GSStatus so the framework adds `code: 200` and `success: true` in the response. Check out various examples given below:
+
+```yaml title='Example 2'
+summary: This function returns data present in the args
+# these args qualifies as GSStatus. The framework ignores the extra 
+# keys because data key is already present in the args.
+tasks:
+  - id: first_task
+    fn: com.gs.transform
+    args: 
+      code: 400
+      success: false
+      data: "Invalid input error"
+      key1: "E001"
+      key2: "E002"
+      headers: 
+        title: "MS1"
+
+Output:
+  code: 400
+  success: false
+  data: "Invalid input error"
+  headers: 
+    title: "MS1"  
+```
+
+```yaml title='Example 3'
+summary: This function returns all the keys present in the args 
+# as GSStatus.data as there is no data key defined.
+# These args don't qualify as GSStatus
+tasks:
+  - id: first_task
+    fn: com.gs.transform
+    args: 
+      key1: "E001"
+      key2: "E002"
+
+Output:
+  code: 200
+  success: true
+  data: 
+    key1: "E001"
+    key2: "E002" 
+```
 
 ### com.gs.parallel
 :::tip control flow function
@@ -363,9 +403,12 @@ The "on_error" at the loop level is only executed when all tasks fail. If even o
 The classic return statement
 :::
 
-When the return statement is invoked, it causes the current function to exit and returns control to the function caller, effectively terminating the function's execution.
+Return statement, in any programming language, ends the execution of a function and returns the control to the function from where it was called.   
+Similarly, when the `com.gs.return` function is used, it causes the current function to exit and returns control to the calling function/workflow, effectively terminating the function's execution.
 
-#### Example event for return inbuilt function
+:::note[Important]
+This function does the transformation in the same way as [com.gs.transform](#comgstransform) except that it terminates the current function's execution.
+:::
 
 <details>
 <summary>Example event for return inbuilt function</summary>
@@ -376,35 +419,71 @@ When the return statement is invoked, it causes the current function to exit and
 ```
 </details>
 
-
-#### Example function for return ( return.yaml )
-
-```yaml
-summary: returning the data
-description: Here we sum two hardcoded x and y values. Feel free to try using API input
+```yaml title='Example 1'
+summary: This function returns only the 'Hello' string 
+# and causes the function to exit from task1.
 tasks:
-  - id: first
+  - id: hello_task1
     fn: com.gs.return
     args: 
-      data: |
-        <js%
-          {
-            let data = {};
-            data.body = inputs.body;
-            data.name = inputs.headers.name
-            data.city = inputs.params.city
-            return data;
-          }
-        %>
+      code: 200
+      success: true
+      data: "Hello"
+
+  - id: transform_result
+    fn: com.gs.transform 
+    args: <% outputs.hello_task1.data + inputs.query.name %>
+
+Output:
+  code: 200
+  success: true
+  data: "Hello"   
 ```
 
-### com.gs.log
+:::infoexception
+com.gs.return doesn't immediately return when used inside [com.gs.parallel](#comgsparallel) function. On the contrary, the output of all the parallel tasks is returned as given in the below example:
+```yaml
+summary: return from com.gs.parallel
+tasks:
+- id: step1
+    fn: com.gs.parallel
+    tasks:
+      - id: 1st
+        fn: com.gs.return
+        args: "hello"
+      - id: 2nd
+        fn: com.gs.return
+        args: "nice"
+      - id: 3rd
+        fn: com.gs.return
+        args: "world"       
+```
+Output:
+```json
+[
+    {
+        "code": 200,
+        "success": true,
+        "data": "hello"
+    },
+    {
+        "code": 200,
+        "success": true,
+        "data": "nice"
+    },
+    {
+        "code": 200,
+        "success": true,
+        "data": "world"
+    }
+]
+```
+:::
 
+### com.gs.log
 During the workflow execution, it records intermediate inputs and outputs in the Pino logging format. The parameters include `level`, which can be set to any value from the [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options), and `data`, which accepts a CoffeeScript/JavaScript expression to be evaluated at runtime or any other data type, such as a string or number, that you wish to log.
 
-
 #### Example event for log inbuilt function
-
 <details>
 <summary>Example event for log inbuilt function</summary>
 
@@ -440,9 +519,7 @@ During the workflow execution, it records intermediate inputs and outputs in the
 ```
 </details>
 
-
 #### Example function using log ( log.yaml )
-
 ```yaml
 summary: Summing x + y
 description: Here we sum two hardcoded x and y values. Feel free to try using API inputs from body or params!
@@ -462,8 +539,6 @@ tasks:
     fn: com.gs.return
     args: <js% (outputs.sum_step1) %>
 ```
-
-
 
 ### com.gs.if
 :::tip control flow function
