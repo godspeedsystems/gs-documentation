@@ -19,7 +19,7 @@ title: Overview
 
 ## Introduction
 
-Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework facilitates this process through a YAML-based Domain Specific Language (DSL) for defining workflows and tasks that encapsulate the business logic. These defined workflows can either be linked to events as their handlers or invoked from within other workflows, allowing for a versatile and seamless automation.
+Within the system, Workflows serve as the core engine responsible for actual computations and orchestrating the flow of operations. The framework framework streamlines this process using a YAML-based Domain Specific Language (DSL) designed for precisely defining workflows and tasks that encapsulate critical business logic. These defined workflows can seamlessly integrate with events as their handlers or be invoked internally from other workflows, allowing for a versatile and seamless automation.
 
 ### Types of workflows
 Godspeed supports two types for functions
@@ -35,16 +35,13 @@ Godspeed supports two types for functions
 ### Native Language Workflows
 The user has the ability to write JavaScript files and can invoke them from events when implementing intricate functionalities.
 
-##### Developer Defined Functions
+### Developer Defined Functions
 
-Developers can establish their own JavaScript functions within the project by generating a new JavaScript file at any location. These functions must be exported, allowing them to be invoked in YAML workflows by specifying the JavaScript file path in the 'fn' keyword. [refer](/docs/microservices-framework/workflows/native-language-functions.md)
+Developers can establish their own JavaScript functions within the project by generating a new JavaScript file at any location within `Functions` folder of `src` defined in root. These functions must be exported, allowing them to be invoked in YAML workflows by specifying the JavaScript file path in the 'fn' keyword. [refer](/docs/microservices-framework/workflows/native-language-functions.md)
 
 ### Example for native language
 
 #### Event
-
-<details>
-<summary>Event</summary>
 
 ```yaml
 http.get./greet:
@@ -63,7 +60,6 @@ http.get./greet:
               type: string  
 ```
 
-</details>
 
 
 #### Yaml file
