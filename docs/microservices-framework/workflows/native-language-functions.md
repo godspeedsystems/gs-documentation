@@ -102,13 +102,7 @@ with childLogger you have accessibility to framework logger.
 ```
 
 ### GSStatus
-
-:::tip Note
-- Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
-- In TS/JS tasks, developers are not obliged to manually set ctx.outputs; the framework handles it automatically.
-- When handling [event handler responses](#handling-event-handler-return), if success is not explicitly defined, it is assumed to be success: true, code: 200, data: event handler's response.
-:::
-
+Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
 For example:
 ```ts
 const {GSStatus} = require("@godspeedsystems/core");
@@ -137,31 +131,78 @@ GSStatus has the below properties.
 We set the values as below
 ```js
 response = new GSStatus(true, 200, undefined, responseData, undefined);
-ctx.outputs[id] = response;
 ```
 
-```js
-module.exports = async(ctx)=>{
-  const {GSStatus} = require('@godspeedsystems/core');
-  const {inputs, childLogger, datasources} = ctx;
-  const prismaClient = datasources.mongo.client;
-  try {
-    inputs.body = inputs.data.body;
-    childLogger.info('inputs: %o', inputs.body);
-    const responseData = await prismaClient.Restaurant.create({
-      data: inputs.body
-    })
-    ctx.outputs[id] = responseData;
-    return new GSStatus(true, 200, undefined, responseData, undefined);
-  } catch (error) {
-    return new GSStatus(false, 500, undefined, error, undefined);
-  }
+:::tip Note
+Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
+:::
+
+<details>
+<summary>How to use GSContext and return from a JS/TS workflow</summary>
+
+```javascript
+import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
+import Pino from 'pino';
+
+export default function (ctx: GSContext, args: PlainObject) {
+    const {
+        inputs: {
+            data: {
+                params, body, query, user, headers
+            }
+        }, 
+        childLogger, 
+        logger,
+        outputs, 
+        functions, 
+        datasources
+    }: {
+        inputs: GSCloudEvent, 
+        childLogger: Pino.Logger, // Define CustomLogger if necessary
+        logger: Pino.Logger,
+        outputs: PlainObject, // Adjust the type accordingly
+        functions: PlainObject, // Adjust the type accordingly
+        datasources: PlainObject // Adjust the type accordingly
+    } = ctx;
+
+    // Will print with workflow_name and task_id attributes
+    childLogger.info('Server is running healthy');
+    // Will print without workflow_name and task_id attributes
+    logger.info('Arguments passed %o', args);
+    logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
+    logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
+    logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
+    logger.info('Total functions found in the project %s', Object.keys(functions).length);
+
+    // Returning only data
+    return 'Its working! ' + body.name;
+
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        code: 200,
+        // success: true,
+        // headers: undefined
+    }
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        // code: 200,
+        success: true,
+        // headers: undefined
+    }
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        code: 200,
+        success: true,
+        headers: undefined
+    }  
 }
-
-module.exports.id = 'main';
 ```
+</details>
 
-The above is a sample of how a js file is configured and used. For every function it comes up with a ctx called context which helps in maintaining and passing the data with the functions and method.
+The above is a sample of how a js file is configured and used. For every function it comes up with a ctx called [GSContext](#gscontext) which helps in maintaining and passing the data with the functions and method.
 
 ### Calling javascript function from Yaml workflow
 
@@ -329,8 +370,19 @@ When calling a JavaScript function directly from the event, ensure that you acce
 By default, all the framework defined functions or developer written functions, have to return either [GSStatus](#gsstatus) or data.   
 Now lets see how the framework qualifies your return as GSStatus or simple data.
 The framework sees that your returned data has one of `code` or `success` meta-keys.    
-> If present, it looks for the other GSStatus keys and set them.    
-> If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.
+
+** [Non Authz (normal) workflows](../workflows/overview.md) **    
+**i. ** If both are present, it looks for the other GSStatus keys and set them.  
+**ii. ** If only code is present and lies between 200-399, then success is assumed to be true else false. It looks for the other GSStatus keys and set them.   
+**iii. ** If only success is present, then code is assumed to be 200. It looks for the other GSStatus keys and set them.   
+**iv. ** If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.   
+
+** [Authz workflows](../authorization/authz-usecases.md/#authz-workflows) **   
+Check [reponse handling](../authorization/authz-usecases.md/#response-code-message-and-data-from-authorization-failure) in case of authorization workflows.
+
+:::info
+You can study the code [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/functions/com/gs/transform.ts) to understand both of the above scenarios better.
+:::
 
 For example,
 ```javascript
