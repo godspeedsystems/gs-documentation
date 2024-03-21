@@ -1,4 +1,5 @@
-# Create a blog project
+# Advance Guide
+
 ### Steps for creating a sample blog project.
 
 Let's create a project which includes a Prisma schema(`mongo.prisma`) for creating a blog app using mongodb.

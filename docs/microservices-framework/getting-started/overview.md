@@ -34,7 +34,7 @@ You can create a blank project like this.
 ```bash
   godspeed create <project_name>
 ```
-You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/create-hello-world.md) and [Blog](/docs/microservices-framework/getting-started/create-blog-project.md) projects. 
+You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/guide.md) and [Blog](/docs/microservices-framework/getting-started/advance-guide.md) projects. 
 
 ### Building and running your project
 
@@ -83,5 +83,5 @@ Commands:
 ```
 
 :::tip
-To understand the general scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/create-hello-world.md#scaffolding) 
+To understand the general scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/guide.md#scaffolding) 
 :::
