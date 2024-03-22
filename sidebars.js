@@ -165,9 +165,36 @@ const sidebars = {
               id: "microservices-framework/event-sources/create-eventsource-plugin",
             },
             {
-              type: "doc",
-              label: "4.7. List of plugins",
-              id: "microservices-framework/event-sources/event-source-plugins",
+              type: "category",
+              label: "4.7. Eventsource Plugins",
+              // id: "microservices-framework/event-sources/event-source-plugins",
+              items: [
+                {
+                  type: "doc",
+                  label: "4.7.1. Overview",
+                  id: "microservices-framework/event-sources/event-source-plugins/Overview",
+                },
+                {
+                  type: "doc",
+                  label: "4.7.2. Express - Http Eventsource",
+                  id: "microservices-framework/event-sources/event-source-plugins/Express Http Eventsource",
+                },
+                {
+                  type: "doc",
+                  label: "4.7.3. Cron Eventsource",
+                  id: "microservices-framework/event-sources/event-source-plugins/Cron Eventsource",
+                },
+                {
+                  type: "doc",
+                  label: "4.7.4. Kafka Eventsource",
+                  id: "microservices-framework/event-sources/event-source-plugins/Kafka Eventsource",
+                },
+                {
+                  type: "doc",
+                  label: "4.7.5. GraphQl Eventsource",
+                  id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
+                },
+              ],
             },
             // {
             //   type: "doc",
@@ -249,10 +276,52 @@ const sidebars = {
               label: "6.3. Create DataSource Plugin",
               id: "microservices-framework/datasources/create-datasource-plugin",
             },
+
             {
-              type: "doc",
-              label: "6.4. List of Plugins",
-              id: "microservices-framework/datasources/list-of-plugins",
+              type: "category",
+              label: "6.4. Datasource Plugins",
+              items: [
+                {
+                  type: "doc",
+                  label: "6.4.1. Overview",
+                  id: "microservices-framework/datasources/datasource-plugins/Overview",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.2. Prisma Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.3. Axios Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.4. AWS Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.5. Nodemailer Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.6. Redis Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.7. Mongoose Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.7. Kafka Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
+                },
+              ],
             },
             {
               type: "doc",
