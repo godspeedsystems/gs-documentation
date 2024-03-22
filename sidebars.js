@@ -194,6 +194,11 @@ const sidebars = {
                   label: "4.7.5. GraphQl Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
                 },
+                {
+                  type: "doc",
+                  label: "4.7.6. Fastify Eventsource",
+                  id: "microservices-framework/event-sources/event-source-plugins/Fastify Eventsource",
+                },
               ],
             },
             // {
@@ -320,6 +325,11 @@ const sidebars = {
                   type: "doc",
                   label: "6.4.7. Kafka Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "6.4.8. Memcached Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
                 },
               ],
             },
