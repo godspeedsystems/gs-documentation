@@ -7,11 +7,13 @@ In the previous section we got an understanding on how to setup godspeed for you
 Let's create a project that includes a simple 'hello world' example for both [events](/docs/microservices-framework/event-sources/event-schema.md) and [functions](/docs/microservices-framework/workflows/overview.md) to provide an overview of how these components function within the Godspeed framework.
 
 1. Create a project using Godspeed CLI with below command:
+
 ```bash
 godspeed create hello-world # hello-world is the name of the app
 ```
 
 Below is the sample for creating a project
+
 ```bash
 > godspeed create hello-world # hello-world is the name of the app
 
@@ -31,20 +33,23 @@ Below is the sample for creating a project
 dependencies installed successfully!
 
 Successfully created the project hello-world.
-Use `godspeed help` command for available commands. 
+Use `godspeed help` command for available commands.
 
 Happy building microservices with Godspeed! 🚀🎉
 ```
+
 ### The Project Scaffolding
+
 Framework will give you below folder structure.
+
 ```
     ├── config
     │   ├── custom-environment-variables.yaml
     │   |
-    |   ├── default.yaml  
+    |   ├── default.yaml
     |
-    ├── eslintrc.json  
-    | 
+    ├── eslintrc.json
+    |
     ├── src
         ├── datasources
         │   ├── types
@@ -64,42 +69,45 @@ Framework will give you below folder structure.
         |
         └── functions
         │   |
-        |   └── helloworld.yaml     
+        |   └── helloworld.yaml
         |
         └── mappings
         |   |
-        |   └── index.yaml        
+        |   └── index.yaml
         |
         └── plugins
             |
-            └── sample.js   
+            └── sample.js
 ```
 
 :::tip Note
+
 - The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
 - The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
 - We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
-:::
-
 
 2. The default port number is `3000`, if you want to provide your custom port number, you can modify the port number from **"./src/eventsources/http.yaml"** also if you want to configure and use http eventsources advance features please checkout the [express-as-http](/docs/microservices-framework/event-sources/event-source-plugins#1-express-as-http) plugin
+
 ```yaml
 type: express
 port: 3000
 ```
+
 3.  Run `godspeed serve` to start the development server.
 
 ```bash
 godspeed serve
 ```
-4. The server is up and running on port 3000 ([http://localhost:3000/helloworld](http://localhost:3000/helloworld))
 
+4. The server is up and running on port 3000 ([http://localhost:3000/api/v1/helloworld](http://localhost:3000/api/v1/helloworld))
 
-<img src="https://ik.imagekit.io/pavanKillada/helloworld.webp?updatedAt=1697782618204" alt="hello world output"/>
+:::tip Note
+
+- Here, '/api/v1' is the base_url for the HTTP service. You can modify the base_url from [./src/eventsources/http.yaml](/docs/microservices-framework/event-sources/event-types/http-events#update-httpyaml-srceventsourceshttpyaml-).
+
+![hello world output](./hello_world.png)
 
 **Voila!** Your API backend is up and running. You can use Postman to test your API's.
-
-
 
 ### You can also run godspeed project in Repl:
 
@@ -107,10 +115,9 @@ godspeed serve
 <img src="https://ik.imagekit.io/pavanKillada/replit.png?updatedAt=1699698406263" width="800" height="400" alt="replit" />
 </a>
 
-
 <br />
 
-#### Now lets understand how our `helloworld` api endpoint is working behind the scene 
+#### Now lets understand how our `helloworld` api endpoint is working behind the scene
 
 ### Event schema
 
@@ -118,94 +125,74 @@ godspeed serve
 
 ```yaml
 "http.get./helloworld":
-  fn: hello_switch
+  fn: helloworld
   authn: false
-  params:
-    - name: name
-      in: query
-      schema:
-        type: string  
-        enum: ['hello', 'bye']
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: object
 ```
 
-lets understand the first line from the above snippet `http.get./helloworld`: [[ know more ]](/docs/microservices-framework/event-sources/event-schema)
+lets understand the first line from the above snippet `http.get./helloworld`: [[know more]](/docs/microservices-framework/event-sources/event-schema)
+
 #### `http`: Protocol http eventsource
+
 #### `get` : method
+
 #### `/helloworld`: endpoint
 
 We are exposing an endpoint with a `get` method on `http` protocol. this endpoint is calling a workflow [a simple function ] `fn`: `helloworld` second line of the above code snippet.
 
-### Workflow schema 
+### Workflow schema
 
 **"./src/events/helloworld.yaml"**
 
 ```yaml
-summary: hello world summary
-description: Lets hit an API and send data to Kafka
+id: helloworld
 tasks:
   - id: first_task
     fn: com.gs.transform
     args:
-      name: <%inputs.query.name%>
+      name: "Hello World!"
 ```
 
-the helloworld event is calling the above code snippet ([workflow]((/docs/microservices-framework/workflows/overview))) and executing a task from tasks with id `first_task`, which is then calling `fn: com.gs.transform` function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview). 
+the helloworld event is calling the above code snippet ([workflow](<(/docs/microservices-framework/workflows/overview)>)) and executing a task from tasks with id `first_task`, which is then calling `fn: com.gs.transform` function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview).
 
 <br />
-So far we have seen how can we use express with godspeed and also we created an endpoint which return a `hello world` message. Godspeed framework make it easy for you to get started quickly saving your time setting everthing from scratch. 
+So far we have seen how can we use express with godspeed and also we created an endpoint which return a `hello world` message. Godspeed framework make it easy for you to get started quickly saving your time setting everthing from scratch.
 
 Up to this point, we've explored integrating Express with Godspeed, also we created an endpoint that returns a simple 'hello world' message. The Godspeed framework streamlines the process, enabling you to kickstart your projects swiftly without the hassle of setting up everything from scratch.
 
 ### How to protect your route/endpoint with jwt tokens
 
-configure the eventsource to enable jwt authentication 
+configure the eventsource to enable jwt authentication
 
 **"./src/eventsources/http.yaml"**
+
 ```
 type: express
 jwt:
   issuer: <#config.issues#> # must be equal to the key iss in your jwt token
   audience: <#config.audience#> #must be equal to the key aud in your jwt token
   secretOrKey: <#config.secret#>
-  ```
-
-And now update your event and set `authn: true` 
-
-**"./src/events/helloworld.yaml"**
-```yaml
-"http.get./helloworld":
-  fn: hello_switch
-  authn: true
-  params:
-    - name: name
-      in: query
-      schema:
-        type: string  
-        enum: ['hello', 'bye']
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: object
 ```
 
+And now update your event and set `authn: true`
+
+**"./src/events/helloworld.yaml"**
+
+```yaml
+"http.get./helloworld":
+  fn: helloworld
+  authn: true
+```
 
 ### [Use native workflows/functions](/docs/microservices-framework/workflows/native-language-functions)
 
-Developers can write workflows in native Javascript and Typescript also, lets see how the above `helloworld.yaml` workflow would look like in js/ts to get the same output. 
+Developers can write workflows in native Javascript and Typescript also, lets see how the above `helloworld.yaml` workflow would look like in js/ts to get the same output.
 
 ```js
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
 
 export default async function execute(ctx: GSContext, args: PlainObject) {
-    return `Hello ${ctx.inputs.data.params.name}`;
+  const responseData = { name: "Hello World!" };
+  return new GSStatus(true, 200, undefined, responseData, undefined);
 }
 ```
 
@@ -225,13 +212,10 @@ tasks:
   - id: first_task
     fn: com.gs.transform
     args:
-      name: <%inputs.query.name%>
+      name: "Hello World!"
     on_error:
-      continue: false 
+      continue: false
       response:
         code: 400
         data: "error occured"
 ```
-
-
-

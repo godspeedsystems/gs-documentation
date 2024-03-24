@@ -1,20 +1,21 @@
 # HTTP events
+
 HTTP events accept inputs such as body, headers, path parameters, and query parameters. On the other hand, Kafka events only accept inputs in the form of body.
 
 ### HTTP Event Schema
-- The framework provides request and response schema validation out of the box.
-- To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance, 
 
+- The framework provides request and response schema validation out of the box.
+- To switch between events, you'll need to adjust the event schema based on the expected inputs. For instance,
 
 This event schema is supported by [HTTP express eventsource](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http#godspeed-express-plugin)
 
 ```yaml
-http.post./mongo/user/search/{id}: #This is the only thing that changes across all the events 
+http.post./mongo/user/search/{id}: #This is the only thing that changes across all the events
   summary: Update a user # as per Swagger spec
   description: Update user from database # as per Swagger spec
   fn: com.biz.mongo.user.update # function to be invoked
   on_validation_error: com.jfs.handle_validation_error
-  params:       # params as per Swagger spec
+  params: # params as per Swagger spec
     - name: id
       in: path
       required: true
@@ -23,13 +24,13 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
     - name: name
       in: query
       required: false
-      schema: 
+      schema:
         type: string
   body: #as per Swagger spec
     content:
       application/json:
         schema:
-          $ref: '#/definitions/mongo/BusinessProfile' #defined for definition section.
+          $ref: "#/definitions/mongo/BusinessProfile" #defined for definition section.
   responses: #as per Swagger spec
     200:
       content:
@@ -38,10 +39,11 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
             type: object
     500:
       content:
-        application/json: 
+        application/json:
           schema:
             type: string
 ```
+
 - The event's first line comprises three key elements: the type of eventsource (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the eventsource plugin, and it is the only line that changes across all events.
 
 #### Accessing Event Properties in Workflows
@@ -49,23 +51,23 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
 For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](/docs/microservices-framework/workflows/overview.md).
 
 The inputs (event) object has following properties:
-If you have jwt authentication like strategy implemented, then 
+If you have jwt authentication like strategy implemented, then
+
 - **past user object can be accessed as**:`<%inputs.user%>`
 
-- **query can be accessed as**: `<%inputs.query.var_name%>`  Present in case of http events
+- **query can be accessed as**: `<%inputs.query.var_name%>` Present in case of http events
 
-- **params can be accessed as**: `<%inputs.params.path_param%>`  Present in case of http events
+- **params can be accessed as**: `<%inputs.params.path_param%>` Present in case of http events
 
-- **headers can be accessed as**: `<%inputs.headers.some_header_key%>`  Present in case of http events
+- **headers can be accessed as**: `<%inputs.headers.some_header_key%>` Present in case of http events
 
-- **body can be accessed as**: `<%inputs.body.key%>`  Present for all events except for http events which don't have a body. For ex. http.get
+- **body can be accessed as**: `<%inputs.body.key%>` Present for all events except for http events which don't have a body. For ex. http.get
 
-- **files can be accessed as**: `<%input.files%>`  Any files uploaded via HTTP event. Not present in other kind of events
-
+- **files can be accessed as**: `<%input.files%>` Any files uploaded via HTTP event. Not present in other kind of events
 
 ### Swagger Specs
 
-#### Steps to add Swagger specs in project. 
+#### Steps to add Swagger specs in project.
 
 Framework will give you below folder structure.
 
@@ -92,14 +94,17 @@ Framework will give you below folder structure.
             |
             └── helloworld.yaml
 ```
-1. To enable swagger ui add `docs` in  **"./src/eventsources/http.yaml"**
+
+1. To enable swagger ui add `docs` in **"./src/eventsources/http.yaml"**
 
 2. `/` is the default endpoint,if you want to provide your custom swagger endpoint, you can modify the endpoint from **"./src/eventsources/http.yaml"**
 
 #### Update http.yaml( src/eventsources/http.yaml )
+
 ```yaml
 type: express
 port: 3000
+base_url: /api/v1
 docs:
   endpoint: /
 ```
@@ -109,25 +114,27 @@ Both [express](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/e
 :::
 
 #### Custom server URL and custom Info:
+
 In the `http.yaml` file, you have the option to incorporate a custom server URL for API documentation. By including this custom server URL, any autogenerated documentation or Swagger specifications will feature this URL within the `servers` section. Additionally, you can enhance the documentation by specifying a custom `title`, `version`, and `contact information` through the addition of `info`.
 
 ```yaml
 type: express
 port: 3000
+base_url: /api/v1
 docs:
   endpoint: /
-  info: 
+  info:
     version: 0.0.1
-    title: 'Godspeed: Sample Microservice'
+    title: "Godspeed: Sample Microservice"
     description: Sample API calls demonstrating the functionality of Godspeed framework
-    termsOfService: 'http://swagger.io/terms/'
+    termsOfService: "http://swagger.io/terms/"
     contact:
       name: Mindgrep Technologies Pvt Ltd
       email: talktous@mindgrep.com
-      url: 'https://docs.mindgrep.com/docs/microservices/intro'
+      url: "https://docs.mindgrep.com/docs/microservices/intro"
     license:
       name: Apache 2.0
-      url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+      url: "https://www.apache.org/licenses/LICENSE-2.0.html"
   servers:
     - url: https://api.example.com:8443/api
       description: staging
@@ -136,6 +143,5 @@ docs:
 For example,
 
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1706042485/Screenshot_from_2024-01-24_02-11-15_frejtp.png" alt="swaggers"/>
-
 
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1706042039/Screenshot_from_2024-01-24_02-03-33_n1i8yw.png" alt="swagger"/>
