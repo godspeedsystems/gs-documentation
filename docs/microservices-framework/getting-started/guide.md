@@ -219,3 +219,10 @@ tasks:
         code: 400
         data: "error occured"
 ```
+
+:::tip Note
+For further learning resources and materials to kickstart your Godspeed development journey, please check out the following video.
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
+</div>
