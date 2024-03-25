@@ -74,11 +74,11 @@ const sidebars = {
               label: "2.2. Guide",
               id: "microservices-framework/getting-started/guide",
             },
-            {
-              type: "doc",
-              label: "2.3. Advance Guide",
-              id: "microservices-framework/getting-started/advance-guide",
-            },
+            // {
+            //   type: "doc",
+            //   label: "2.3. Advance Guide",
+            //   id: "microservices-framework/getting-started/advance-guide",
+            // },
           ],
         },
         {
