@@ -1,6 +1,6 @@
 # Caching
 Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the workflows.   
-Godspeed provides two pre-defined types of cache i.e. redis and in-memory. It allows using multiple caches in a single service with a default cache. Cache datasource should implement abstract class `GSCacheAsDatasource` [code is below](#how-to-write-your-own-cache-plugin). You can make multiple caches using this abstract class.
+Godspeed provides two pre-defined types of cache i.e. [redis](./datasource-plugins/Redis%20Datasource.md) and in-memory. It allows using multiple caches in a single service with a default cache. Cache datasource should implement abstract class `GSCacheAsDatasource` [code is below](#how-to-write-your-own-cache-plugin). You can make multiple caches using this abstract class.
 
 > You can read and return from cache if data is present there, before executing any task where caching instruction is set.   
 > The data is stored in form of [GSStatus](../workflows/native-language-functions.md/#gsstatus) of the executed task. Both success and failure statuses can be stored and loaded.
