@@ -221,7 +221,14 @@ tasks:
 ```
 
 :::tip Note
-For further learning resources and materials to kickstart your Godspeed development journey, please check out the following video.
+For further learning resources and materials to kickstart your Godspeed development journey, please clone the [gs-node-templates](https://github.com/godspeedsystems/gs-node-templates.git) repository. This repository contains two examples.
+
+- hello_world
+- LOS
+
+In the given video, we explain the LOS code.
+
+- Before running the LOS code, ensure that 'PostgreSQL' and 'Kafka' are running on your system. Modify the PostgreSQL URL according to your PostgreSQL connection string and configure Kafka settings in the '.env' file to align with your Kafka setup.
 
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
