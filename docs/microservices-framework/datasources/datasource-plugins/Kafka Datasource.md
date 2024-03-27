@@ -7,7 +7,7 @@ A brief description of how to use Kafka plug-in in our godspeed framework as Dat
 ## Steps to use kafka plug-in in godspeed framework:
 
 ## How to Use
-- Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-kafka-as-datasource-as-eventsource` to integrate the plugin.
+**a. ** Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-kafka-as-datasource-as-eventsource` to integrate the plugin.
 
 ```
 > godspeed plugin add
@@ -31,23 +31,17 @@ A brief description of how to use Kafka plug-in in our godspeed framework as Dat
 └──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
 ```
 
-### Example usage Datasource (Producer):
-
-1. Update configuration file based on your requirements in `Datasource/kafka.yaml`.
-#### kafka config ( src/datasources/kafka.yaml )
-```yaml
-type: kafka
+### Use as Datasource (Producer)
+**1. ** Update configuration file based on your requirements in `src/datasource/kafka.yaml` file.
+```yaml title=src/datasources/kafka.yaml
+type: kafka 
 clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 ```
 
-
-
-#### kafka event for Producer ( src/events/kafka_pub.yaml )
-In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
-```yaml
+**2. ** In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
+```yaml title=src/events/kafka_pub.yaml
 # event for Publish
-
 'http.post./kafka-pub':
   fn: kafka-publish
   body:
@@ -68,13 +62,10 @@ In the event, we establish an HTTP endpoint that accepts parameters such as the 
             properties:
               name:
                 type: string
-
 ```
-#### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
 
-In workflow we need to mension `datasource.kafka.producer` as function (fn) to Produce data.
-
-```yaml
+**3. ** In workflow we need to mension `datasource.kafka.producer` as function `fn` to produce data.
+```yaml title=src/functions/kafka-publish.yaml
 id: kafka-publish
 summary: kafka publish message
 tasks:
@@ -85,26 +76,21 @@ tasks:
         message: <% inputs.body.message%>
 ```
 
-### Example usage EventSource (Consumer):
-
-1. Update configuration file based on your requirements in `Eventsources/kafka.yaml`.
-#### kafka config ( kafka.yaml )
-```yaml
+### Use as EventSource (Consumer)
+**1. ** Update configuration file based on your requirements in `src/eventsources/kafka.yaml`.
+```yaml title=src/eventsources/kafka.yaml
 type: kafka
 groupId: "kafka_proj"
 
 ```
 
-#### kafka event for consumer ( src/events/kafka_pub.yaml )
-
-To use Consumer we need to follow the below event key format.
-
-```
- kafka.{Topic}.{GroupId}
+**2. ** To use Consumer we need to follow the below event key format.
+```yaml title=src/events/kafka_pub.yaml
+kafka.{Topic}.{GroupId}: 
 ```
 The consumer event is triggered whenever a new message arrives on the specified topic. Upon triggering, it retrieves the incoming message and forwards it to the `kafka_consume` function. Inside this function, the incoming message is processed, and the result is then returned.
 
-``` yaml
+``` yaml title=src/events/kafka_pub.yaml
 # event for consume data from Topic
 kafka.publish-producer1.kafka_proj: // event key
   id: kafka__consumer
@@ -116,8 +102,8 @@ kafka.publish-producer1.kafka_proj: // event key
         schema:
           type: string
 ```
-#### kafka workflow for Consumer ( src/functions/kafka_consume.yaml )
-```yaml
+**3. ** kafka workflow for consumer
+```yaml title=src/functions/kafka_consume.yaml
 # function for consume data
 id: kafka-consumer
 summary: consumer

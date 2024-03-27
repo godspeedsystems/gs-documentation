@@ -4,25 +4,24 @@ Sending emails in your Node.js application has never been smoother. The Godspeed
 
 ## Features
 
-- **Effortless Setup:** Get up and running in minutes with our easy-to-follow setup guide.
-- **Dynamic Templating:** Craft personalized emails with dynamic content using popular templating engines.
-- **Error Resilience:** Robust error handling ensures reliable email delivery, even in challenging scenarios.
-- **Scalable and Secure:** Designed for scalability and security, so your email system can grow with your application.
+**- Effortless Setup:** Get up and running in minutes with our easy-to-follow setup guide.    
+**- Dynamic Templating:** Craft personalized emails with dynamic content using popular templating engines.    
+**- Error Resilience:** Robust error handling ensures reliable email delivery, even in challenging scenarios.   
+**- Scalable and Secure:** Designed for scalability and security, so your email system can grow with your application.
 
 Whether you're sending transactional emails, newsletters, or notifications, this plugin empowers you to deliver messages with Godspeed. Let's elevate your email game together!
 
-## example usage:
+## Example usage
 
-#### mailer config ( src/datasources/mail.yaml )
-```yaml
+### Config
+```yaml title=src/datasources/mail.yaml
 type: mail
 user: 'godspeed@gmail.com'
 pass: 'rmeb bjak xcam xkub'
 ```
 
-#### mailer event for Producer ( src/events/mail_send_event.yaml )
-
-```yaml
+### Event for Producer
+```yaml title=src/events/mail_send_event.yaml
 http.post./mail:
   summary: sending_mail
   description: sending_mail
@@ -41,9 +40,8 @@ http.post./mail:
 
 ```
 
-#### mailer workflow for send mail ( src/functions/mail_send.yaml )
-
-```yaml
+### Workflow to send mail
+```yaml title=src/functions/mail_send.yaml
 summary: send
 tasks:
   - id: send_mail

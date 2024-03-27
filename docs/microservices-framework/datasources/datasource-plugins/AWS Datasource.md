@@ -3,7 +3,7 @@ AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Serv
 ## Steps to use aws plug-in in godspeed framework:
 
 ### How to install
-- Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-aws-as-datasource` to integrate the plugin.
+**a. ** Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-aws-as-datasource` to integrate the plugin.
 
 ```
 > godspeed plugin add
@@ -20,18 +20,11 @@ AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Serv
 │ ❯◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
 └──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
 ```
-- The plugin can also be directly installed by running `npm i @godspeedsystems/aws-as-datasource` command
+**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/aws-as-datasource` command
 
 ### Configuration
 
-In your <aws_ds_name>.yaml file, you will need to configure
-- type: aws (type of the datasource)
-- default_client_config (optional) for initializing your clients, as per the aws config specs
-- Client type to client name mappings via the `types` key
-- `services` contains settings for the services you want to invoke via this datasource. 
-  - Each service has a type like s3, lamdba etc.
-  - They can have their own config overriding the default under the `config` key
-  - Note: There can be multiple services configured for the same type. Check `s3` and `s3_1` below
+In your `<aws_ds_name>.yaml` file, you will need to configure   
 
 ```yaml
 type: aws
@@ -67,14 +60,17 @@ services:
     type: lambda
 ```
 
+**1. ** type: aws (type of the datasource)   
+**2. ** default_client_config (optional) for initializing your clients, as per the aws config specs   
+**3. ** Client type to client name mappings via the `types` key   
+**4. ** `services` contains settings for the services you want to invoke via this datasource. Each service has a type like s3, lamdba etc. They can have their own config overriding the default under the `config` key.    
+There can be multiple services configured for the same type. For example, `s3` and `s3_1` in the above configuration.
+
 ### Example usage
 
 In an event, we establish HTTP endpoint that accepts json objects in request body. When this endpoint is invoked, it triggers the `aws_list` function with the args coming from request body.
 
-#### Example event schema
-```yaml
-# event for create
-
+```yaml title=event
 "http.post./aws":
   fn: aws_list
   body:
@@ -83,22 +79,18 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
     200:
       content:
          application/json:
-
 ```
 
-#### Example YAML workflow
-
-In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function (fn) to perform operations in this case `datasource.aws.s3.listObjects`.
-
-```yaml
+```yaml title=workflow
 id: aws_workflow
 tasks:
   - id: aws_list
     fn: datasource.aws.s3.listObjects
     args: <% inputs.body %>
 ```
-#### Example TS workflow
-```ts
+In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function `fn` to perform operations in this case `datasource.aws.s3.listObjects`.
+
+```ts title='TS workflow'
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
 export default async function (ctx: GSContext, args: any) {
@@ -118,9 +110,7 @@ export default async function (ctx: GSContext, args: any) {
 }
 ```
 ### Example to upload file on aws s3
-
-Event
-```yaml
+```yaml title=event
 # event for upload s3 file
 
 "http.post./aws":

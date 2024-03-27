@@ -3,7 +3,7 @@ Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly i
 <!-- The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs. -->
 
 ## How to Use
-- Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the `@godspeedsystems/plugins-axios-as-datasource` to integrate the plugin.
+**a. ** Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the `@godspeedsystems/plugins-axios-as-datasource` to integrate the plugin.
 
 ```
 godspeed plugin add   
@@ -26,26 +26,22 @@ godspeed plugin add
 
 ```
 
-- The plugin can also be directly installed by running `npm i @godspeedsystems/axios-as-datasource` command
+**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/axios-as-datasource` command
 
-- You will find the files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
+**c. ** You will find the files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
 
-### axios.ts (src/datasources/types/axios.ts)
-
-```typescript
+```typescript title=src/datasources/types/axios.ts
 import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
 export default DataSource;
 ```
 
-### axios config (src/datasources/api.yaml)
-
-```yaml
+```yaml title=src/datasources/api.yaml
 type: axios
 base_url: http://localhost:4000
 ```
 
-### Axios Workflow (src/functions/sample.yaml)
-```
+### Sample axios workflow
+```yaml title=src/functions/sample.yaml
 id: sample
 tasks:
   - id: first_task
@@ -54,11 +50,11 @@ tasks:
       headers:
       data:
       timeout:
-      params:
+      params: 
 ```
 The axios request configuration options, such as headers, params, data, and timeout, can be directly passed as arguments (args).
 
-```
+```yaml
 args:
     headers:
       'X-Requested-With': 'XMLHttpRequest'
@@ -75,17 +71,19 @@ args:
 
 The Godspeed Axios Plugin offers the following advantages:
 
-1. **Axios Integration:** The plugin abstracts away the complexities of setting up Axios instances, making it effortless to configure and execute HTTP requests.
+**1. Axios Integration:** The plugin abstracts away the complexities of setting up Axios instances, making it effortless to configure and execute HTTP requests.
 
-2. **Unified DataSource:** Developers can use a uniform API to define data sources that make HTTP requests using Axios. This enhances consistency and ease of use across different parts of the application.
+**2. Unified DataSource:** Developers can use a uniform API to define data sources that make HTTP requests using Axios. This enhances consistency and ease of use across different parts of the application.
 
-3. **Error Handling:** The plugin includes robust error handling, allowing developers to gracefully handle various scenarios, such as server timeouts, request setup failures, and server-side errors.
+**3. Error Handling:** The plugin includes robust error handling, allowing developers to gracefully handle various scenarios, such as server timeouts, request setup failures, and server-side errors.
 
-4. **Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven workflows.
+**4. Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven workflows.
 
 
 ## Plugin Components
-
+:::info
+You can deep dive into the plugin code [here](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)
+:::
 The plugin consists of the following key components:
 
 ### 1. `DataSource` Class
@@ -107,8 +105,8 @@ The plugin consists of the following key components:
 - `DEFAULT_CONFIG`: A default configuration object with Axios options like base URL and other settings.
 
 
-### Axios retry
-- Defaults set retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
+### 3. Axios retry
+**a. ** Defaults set retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
 
 ```yaml
 type: axios
@@ -121,11 +119,9 @@ retry:
     type: constant ##[constant,exponential,random]
     interval: PT15s
 ```
-
 the above config works on two conditions if status from the api is 500,501 or 502 and message value is as mentioned in the config. When condition is optional and if retry is without when condition, the retry will be made on failures of the API.
 
-- Override at task level within args object of the axios method call.
-
+**b. ** Override at task level within args object of the axios method call.
 ```yaml
 id: some_workflow
 tasks:
@@ -146,13 +142,9 @@ tasks:
       min_interval: PT5s
       max_internal: PT15s
 ```
+The sample config can be modified as per the usecase of your application. For example,
 
-
-
-The sample config can be modified as per the usecase of your application.
-
-#### sample config `api.yaml`
-```yaml
+```yaml title=src/datasources/api.yaml
 type: axios
 base_url: https://httpbin.org
 
@@ -186,11 +178,10 @@ retry:
     # max_internal: PT15s
 ```
 
-### Authentication 
-#### API calls with token refresh logic and authentication can also be configured in your datasource config file, by setting `authn` and the `fn` is called before calling the API endpoint and token will be refreshed on statusCode mentioned in the array of [`statusCode`](/docs/microservices-framework/datasources/list-of-plugins#sample-config-apiyaml).
+### 4. Authentication 
+API calls with token refresh logic and authentication can also be configured in your datasource config file, by setting `authn` and the `fn` is called before calling the API endpoint and token will be refreshed on statusCode mentioned in the array of [`statusCode`](/docs/microservices-framework/datasources/list-of-plugins#sample-config-apiyaml).
 
-
-example `fn` of `authn`
+Example `fn` of `authn`:
 ```ts
 
 import { logger } from "@godspeedsystems/core";
