@@ -1,7 +1,7 @@
-The Godspeed mem-cache Plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
+The Godspeed mem-cache plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
 
-## How to add mem-cache plugin in your project:
-- Create a godspeed project from the CLI and add the mem-cache plugin from the CLI and select the `@godspeedsystems/plugins-mem-cache-as-datasource` to integrate the plugin.
+## How to add mem-cache plugin in your project
+**- ** Create a godspeed project from the CLI and add the mem-cache plugin from the CLI and select the `@godspeedsystems/plugins-mem-cache-as-datasource` to integrate the plugin.
 
 ```
 macbookpro@MacbookPros-MBP gs-test-project % godspeed plugin add   
@@ -29,18 +29,13 @@ macbookpro@MacbookPros-MBP gs-test-project % godspeed plugin add
 └────┴───────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 
 ```
-- You will find the files in your project related to the plugin at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
-
-Configure your data source.
-### mem-cache config (src/datasources/mem-cache.yaml)
-```yaml
+**- ** You will find the files in your project related to the plugin at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
+```yaml title=src/datasources/mem-cache.yaml
 type: mem-cache
 ```
-Here are some example workflows of using this plugin in your Godspeed workflows:
 
-### Sample events and workflows:
+### Sample usage
 Create two events and two function handlers for each event by the name helloworld2 and helloworld3 respectively.
-
 ```yaml
 # Events
 "http.get./helloworld2":
