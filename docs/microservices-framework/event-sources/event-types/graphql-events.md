@@ -17,7 +17,7 @@ Ensure the event key prefix aligns with the name of the configuration YAML file.
 
 (src/events/create_category.yaml)
 ```yaml
-Apollo.post./mongo/category:
+graphql.post./mongo/category:
   summary: Create a new Category
   description: Create Category from the database
   fn: create
@@ -50,8 +50,8 @@ tasks:
 ```
 
 :::tip note
-- use gosdspeed gen-graphql-schema to auto generate graphql schema.
-- use godspeed dev to start server.
+- use godspeed gen-graphql-schema to auto generate graphql schema.
+- use godspeed serve to start server.
 
 :::
 

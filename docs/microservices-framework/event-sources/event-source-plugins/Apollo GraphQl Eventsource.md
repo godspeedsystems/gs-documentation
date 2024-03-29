@@ -50,7 +50,7 @@ port: 4000
 
 #### GraphQL Event (src/events/create_category.yaml)
 ```yaml
-Apollo.post./mongo/category:
+graphql.post./mongo/category:
   summary: Create a new Category
   description: Create Category from the database
   fn: create
@@ -78,9 +78,9 @@ tasks:
     args:
       data: <% inputs.body %>
 ```
-4. use `gosdspeed gen-graphql-schema` to auto generate graphql schema.
+4. use `godspeed gen-graphql-schema` to auto generate graphql schema.
 
-5. use `godspeed dev `to start server. 
+5. use `godspeed serve `to start server. 
 
 This configuration emphasizes the simplicity of implementing GraphQL within the Godspeed framework, promoting efficiency and clarity in API development.
 
