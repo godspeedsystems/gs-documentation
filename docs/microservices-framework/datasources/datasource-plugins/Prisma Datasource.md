@@ -140,3 +140,8 @@ tasks:
       where:
         id: <% inputs.params.id %>
 ```
+- [Discord](https://discord.com/invite/mjBa3RvTP5)
+- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)
+- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+

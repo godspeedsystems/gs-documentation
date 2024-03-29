@@ -153,3 +153,9 @@ When a call has an error the datasource returns following `GSStatus`.
   ```bash
   godspeed serve
   ```
+
+
+- [Discord](https://discord.com/invite/mjBa3RvTP5)
+- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)
+- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-mongoose-as-datasource)
