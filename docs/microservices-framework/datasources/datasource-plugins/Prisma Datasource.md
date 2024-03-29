@@ -1,8 +1,13 @@
+---
+# Display h2 to h5 headings
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
 npm [package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
-
+## Overview
 Prisma-as-datasource plugin provide functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through [Prisma ORM](https://www.prisma.io/docs).
-
 
 **"Prisma: Bridging Databases for Seamless Development. One Toolkit, Any Database."**
 
@@ -27,8 +32,9 @@ Prisma supports a variety of data sources, allowing you to connect to and work w
 
 **8. PlanetScale**: PlanetScale is a database-as-a-service platform designed for distributed SQL databases. It provides a managed, scalable, and highly available database solution for modern, cloud-native applications.
 
-## How to Use
-**a. ** Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-prisma-as-datastore` to integrate the plugin.
+## How to add plugin
+### Add plugin
+Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-prisma-as-datastore` to integrate the plugin.
 
 ```
 > godspeed plugin add
@@ -52,16 +58,20 @@ Prisma supports a variety of data sources, allowing you to connect to and work w
 └──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
 ```
 
-**b. **  You will find the a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
-
+### Related files
+You will find the a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
 ```typescript title=prisma.ts
 import { DataSource } from '@godspeedsystems/plugins-prisma-as-datastore';
 export default DataSource;
 ```
-**c. ** Now, you can create your prisma schema in `src/datasources` directory. 
+Now, you can create your prisma schema in `src/datasources` directory. 
 
-### 1. Sample schema
-Check out a sample schema created for mongo database as given below:
+## How to use
+You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema).
+
+<details>
+<summary>Sample prisma schema for mongo database</summary>
+
 ```prisma title=src/datasources/mongo.prisma
 datasource db {
   provider = "mongodb"
@@ -97,14 +107,63 @@ enum Role {
 }
 ```
 
-### 2. Generate prisma client
+</details>
+
+### Support for multiple prisma schema
+By default, only single prisma schema can be created in a project that can use only one database as given in the above example.   
+To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the below sample prisma schema:
+
+<details>
+<summary>Support multiple prisma schemas</summary>
+
+```prisma title=src/datasources/mongo.prisma
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/mongo"
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  role      Role     @default(USER)
+  posts     Post[]
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+```
+
+</details>
+
+Once you [generate prisma client](#generate-prisma-client), the multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
+
+### Generate prisma client
 This command will generate the prisma client and will sync the database with prisma schema
 ```bash
 godspeed prisma prepare
 ```
 
-### 3. Generate CRUD APIs
-You can generate the CRUD API'S enter the below command
+### Generate CRUD APIs
+You can generate the CRUD API'S enter the below command:
 ```bash
 godspeed gen-crud-api
 ```
@@ -112,8 +171,9 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according defined prisma schema
 
-### 4. Sample API
-```yaml title=events/mongo.yaml
+### Sample API
+Here is a sample event and workflow which is fetching data from the database.
+```yaml title=src/events/mongo.yaml
 http.get./mongo/post/{id}:
   summary: Fetch Post
   description: Fetch Post from database
@@ -140,6 +200,58 @@ tasks:
       where:
         id: <% inputs.params.id %>
 ```
+
+### Database Encryption
+Godspeed provides AES-256 GCM both way deterministic hashing encryption in Prisma plugin. You can apply encryption only on `String` type fields.
+
+#### Annotate prisma schema
+In your prisma schema, add `/// @encrypted` annotation to the fields you want to encrypt.
+
+<details>
+<summary>sample schema to encrypt email field</summary>
+
+```prisma title=src/datasources/mongo.prisma
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/mongo"
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  email     String   @unique  /// @encrypted
+  name      String?
+  role      Role     @default(USER)
+  posts     Post[]
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+```
+
+</details>
+
+#### Add secret
+You can specify secret in `prisma_secret` variable in [config environment variables](../../config-and-mappings/config.md/#custom-environment-variablesyaml).
+
+## Reference links
 - [Discord](https://discord.com/invite/mjBa3RvTP5)
 - [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)
 - [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
