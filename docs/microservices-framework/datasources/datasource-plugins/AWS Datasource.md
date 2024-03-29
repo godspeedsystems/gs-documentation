@@ -164,3 +164,9 @@ module.exports = async (ctx: GSContext) => {
 
 };
 ```
+
+
+- [Discord](https://discord.com/invite/mjBa3RvTP5)
+- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource)
+- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
