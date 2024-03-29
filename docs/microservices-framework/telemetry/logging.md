@@ -8,7 +8,8 @@ The minimum level set to log above this level. Please refer [Pino log levels](ht
 If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
-redact: ['a.b.c', 'a.b.*', 'req.headers']
+log: # log setting of the project
+  redact: ['a.b.c', 'a.b.*', 'req.headers'] #pino redact rules. Default null.
 ```
 By specifying the above redaction paths, the objects which have these properties will be masked in the logs.
 
@@ -20,7 +21,8 @@ Please refer [Pino redaction paths](https://github.com/pinojs/pino/blob/master/d
 If you want to mask any field in the objects in all deep nesting levels then you can use `**.<field_name>` convention instead of specifying each path explicitly.
 For example, 
 ```yaml title="config/default.yaml"
-redact: ['**.mobileNumber'] 
+log:
+  redact: ['**.mobileNumber'] 
 ```
 By specifying the above redaction path, `mobileNumber` field will be redacted in logs in all nesting levels.   
    
@@ -75,16 +77,17 @@ You can add any custom attribute in the logs whenever any event is triggered on 
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
-- `log_attributes` variable as [environment variable](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
+- `attributes`variable as at `log` level  [environment variable](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml
-log_attributes: 
-  mobileNumber: "query?.mobileNumber"
-  id: "params?.id"
-  lan: "body?.data?.lan"
-  name: "headers?.name"
-  gender: <% mappings.Gender %>
+log:
+  attributes: 
+    mobileNumber: "query?.mobileNumber"
+    id: "params?.id"
+    lan: "body?.data?.lan"
+    name: "headers?.name"
+    gender: <% mappings.Gender %>
 ```
 
 - location of the identifier in the request payload. As specified in the above example, 
@@ -161,12 +164,12 @@ For ex.
 summary: add custom error logs on workflow
 id: validation_error
 tasks:
-    - id: error_transform
-      fn: com.biz.error_log
+  - id: error_transform
+    fn: com.biz.error_log
 on_error:
-    log_attributes:
-        error_type: "enter your custom error type here"
-        error_message: "xyz value is required"
+  log_attributes:
+    error_type: "enter your custom error type here"
+    error_message: "xyz value is required"
 ```
 
 #### Sample logs
