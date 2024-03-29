@@ -40,7 +40,7 @@ type: axios
 base_url: http://localhost:4000
 ```
 
-### Sample axios workflow
+### Sample axios datasource yaml workflow
 ```yaml title=src/functions/sample.yaml
 id: sample
 tasks:
@@ -52,17 +52,35 @@ tasks:
       timeout:
       params: 
 ```
+
+### Sample axios datasource js/ts workflow
+```js
+import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext, args: {loan_offer: PlainObject, pan_number: string}) {
+    const client: GSDataSource = ctx.datasources.lms;
+
+    const res =  await client.execute(ctx, {
+        meta: {
+            method: 'get',
+            url: '/api/items',
+        },
+        data: args
+    });
+    return res;
+};
+```
 The axios request configuration options, such as headers, params, data, and timeout, can be directly passed as arguments (args).
 
 ```yaml
 args:
-    headers:
-      'X-Requested-With': 'XMLHttpRequest'
-    params:
-      ID: 12345
-    data:
-      firstName: 'Fred'
-    timeout: 1000
+  headers:
+    'X-Requested-With': 'XMLHttpRequest'
+  params:
+    ID: 12345
+  data:
+    firstName: 'Fred'
+  timeout: 1000
 ```
  To get more clarity checkout about [Axios configuration]( https://axios-http.com/docs/req_config)
 
@@ -106,7 +124,7 @@ The plugin consists of the following key components:
 
 
 ### 3. Axios retry
-**a. ** Defaults set retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
+###  **a. ** Set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
 
 ```yaml
 type: axios
@@ -121,7 +139,8 @@ retry:
 ```
 the above config works on two conditions if status from the api is 500,501 or 502 and message value is as mentioned in the config. When condition is optional and if retry is without when condition, the retry will be made on failures of the API.
 
-**b. ** Override at task level within args object of the axios method call.
+### **b. ** Override retry logic at task level within args object of the axios method call.
+
 ```yaml
 id: some_workflow
 tasks:
@@ -131,6 +150,8 @@ tasks:
     args:
       data:
         data: <%inputs.body.data%>
+      headers:
+        Content-Type: application/json
     on_error:
       continue: false
     retry: # By default the datasource has constant retry set in its yaml. Here we override the retry to exponential
@@ -177,13 +198,19 @@ retry:
     # min_interval: PT5s
     # max_internal: PT15s
 ```
+Retry interval values will be based on [ISO Temporal Duration standard](https://tc39.es/proposal-temporal/docs/duration.html)
+### 4. Authentication of API calls with token refresh logic
 
-### 4. Authentication 
-API calls with token refresh logic and authentication can also be configured in your datasource config file, by setting `authn` and the `fn` is called before calling the API endpoint and token will be refreshed on statusCode mentioned in the array of [`statusCode`](/docs/microservices-framework/datasources/list-of-plugins#sample-config-apiyaml).
+HTTP requests sometimes need authentication, means they are validated against a token which is passed in the headers
+and also the token needs to be refreshed before the API call. 
+
+Please checkout the above sample config of the datasource.
+
+API calls with token refresh logic and authentication is configured in your datasource config file, by setting `authn` and the `fn` is called before calling the API endpoint and token will be refreshed on statusCode mentioned in the array of [`statusCode`](/docs/microservices-framework/datasources/list-of-plugins#sample-config-apiyaml).
 
 Example `fn` of `authn`:
-```ts
 
+```ts
 import { logger } from "@godspeedsystems/core";
 
 const axios = require('axios');
@@ -219,7 +246,27 @@ module.exports = async function (ctx: any) {
 }
 ```
 
+### 4.1 Skip auth
+
+In an axios datasource call, if `skipAuth` is set in `args` then auth flow will be ignored. This is useful when generating token from the same api.
+
+example workflow:
+```yaml
+id: some_workflow
+tasks:
+  - id: post-anything
+    # Fetching loan offers from rule engine for the given bank and pan card
+    fn: datasource.api_datasource.post./anything
+    args:
+      skipAuth: true
+```
 ## Conclusion
 
 The Godspeed Axios Plugin is a valuable addition to the Godspeed framework, providing a standardized way to make HTTP requests using the Axios library. With this plugin, you can easily integrate with external APIs, handle responses, and streamline data retrieval within your applications.
 
+
+
+- [Discord](https://discord.com/invite/mjBa3RvTP5)
+- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)
+- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)

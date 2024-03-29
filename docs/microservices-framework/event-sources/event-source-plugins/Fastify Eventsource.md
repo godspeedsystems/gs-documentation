@@ -146,3 +146,4 @@ We are excited to see the innovative projects you will create with the Fastify p
 - [Discord](https://discord.gg/c4DcdBA9)
 - [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)
 - [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+

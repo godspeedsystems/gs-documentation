@@ -112,3 +112,8 @@ We value your feedback and contributions. If you have any questions, suggestions
 
 We're excited to see how you leverage the Godspeed Redis Plugin in your projects and look forward to collaborating with you to make your applications even more powerful. Happy coding!
 
+- [Discord](https://discord.com/invite/mjBa3RvTP5)
+- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/redis-as-datasource)
+- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
+- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-redis-as-datasource)
+
