@@ -251,9 +251,61 @@ enum Role {
 #### Add secret
 You can specify secret in `prisma_secret` variable in [config environment variables](../../config-and-mappings/config.md/#custom-environment-variablesyaml).
 
-## Reference links
-- [Discord](https://discord.com/invite/mjBa3RvTP5)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+### Database authorization
+The plugin provides rows and columns level authorization access as explained in [Authorization](../../authorization/authz-usecases.md#d-restricting-datastore-access). If you are not allowed to access something, then empty data is returned.   
+**- **empty rows (e.g. in case where query trespasses access boundaries)   
+**- **empty fields (e.g. in case all the fields in the query are not allowed to access)    
 
+Check the below clauses which are available in this plugin and provides database level restricted access.
+
+#### where
+Additonal row level access to be applied on the DB query.
+
+#### select
+Additional columns which should be returned in the DB query.
+
+#### can_access
+Columns which are allowed to access. When can_access is present no_access will be ignored.
+
+#### no_access
+Columns which are not allowed to access. If no_access is set, then you will not be able to specify    
+**a) ** where clause on columns not allowed. This includes direct field match, and nested AND and OR queries.       
+**b) ** select clause on columns not allowed.
+
+<details>
+<summary>Sample workflows for restricted datastore access</summary>
+In the below authz workflow can_acces, no_access and where conditions are provided. These conditions will be applied while fetching author details.
+
+```yaml title=authz_wf.yaml
+authz: 
+  - id: authz_task_1
+    summary: return access columns
+    fn: com.gs.transform
+      args:
+        can_access: 
+          - col1
+          - col2
+        no_access:
+          - col3
+        where:
+          tenant: <% inputs.headers.client_id %>
+```
+
+```yaml title=fetch_author.yaml
+summary: Fetch author
+tasks:
+  - id: fetch_author
+    fn: datasource.mysql.author.findUnique
+    authz:
+      - fn: authz_wf
+        args: <% inputs %>
+    args:
+      where:
+        id: <% inputs.params.id %>
+```
+</details>
+
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
