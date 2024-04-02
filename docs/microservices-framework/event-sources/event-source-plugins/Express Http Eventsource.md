@@ -267,10 +267,7 @@ We value your feedback and contributions. If you have questions, suggestions, or
 
 We're excited to see what you'll create with the Express plugin, and we look forward to collaborating with you to make your projects even more successful. Happy coding!
 
-### Get in Touch
-
-- [Discord](https://discord.com/invite/mjBa3RvTP5)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-express-as-http)
-
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/express-as-http)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-express-as-http)
