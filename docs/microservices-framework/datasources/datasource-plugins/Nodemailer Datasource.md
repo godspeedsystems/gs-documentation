@@ -54,7 +54,7 @@ tasks:
   
 ```
 
-- [Discord](https://discord.com/invite/mjBa3RvTP5)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)

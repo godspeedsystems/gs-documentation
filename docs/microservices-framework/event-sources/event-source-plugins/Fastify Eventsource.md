@@ -141,9 +141,7 @@ We welcome your feedback and contributions. If you have questions, suggestions, 
 
 We are excited to see the innovative projects you will create with the Fastify plugin, and we look forward to collaborating with you to make your projects even more successful. Happy coding!
 
-### Get in Touch
-
-- [Discord](https://discord.gg/c4DcdBA9)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-fastify-as-http)
