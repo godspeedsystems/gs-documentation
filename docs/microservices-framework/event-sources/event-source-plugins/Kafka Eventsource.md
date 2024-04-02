@@ -125,8 +125,8 @@ tasks:
       args: <% inputs %>
 ```
 
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
-- [Discord](https://discord.com/invite/mjBa3RvTP5)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)

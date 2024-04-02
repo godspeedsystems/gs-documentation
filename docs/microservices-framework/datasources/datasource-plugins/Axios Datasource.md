@@ -264,9 +264,7 @@ tasks:
 
 The Godspeed Axios Plugin is a valuable addition to the Godspeed framework, providing a standardized way to make HTTP requests using the Axios library. With this plugin, you can easily integrate with external APIs, handle responses, and streamline data retrieval within your applications.
 
-
-
-- [Discord](https://discord.com/invite/mjBa3RvTP5)
-- [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)
-- [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)
-- [Npm Package](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
+## Reference links
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)   
+**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
