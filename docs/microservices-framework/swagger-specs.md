@@ -7,6 +7,8 @@ Framework will give you below folder structure.
 ```
     .
     ├── src
+        ├── docs
+        │    └── http-swagger.json 
         ├── datasources
         │   ├── types
         │   |    └── axios.ts
@@ -27,6 +29,9 @@ Framework will give you below folder structure.
             |
             └── helloworld.yaml
 ```
+
+When a service boots up, framework store the swagger docs for http events in the `src/docs/http-swagger.json`
+
 1. To enable swagger ui add `docs` in  **"./src/eventsources/http.yaml"**
 
 2. `/` is the default endpoint,if you want to provide your custom swagger endpoint, you can modify the endpoint from **"./src/eventsources/http.yaml"**
@@ -52,6 +57,11 @@ docs:
     - url: https://api.example.com:8443/api
       description: staging
 ```
+### Generate Swagger UI with tags and operationId
+
+For tags: Either developer gives `tags` array in schema of event or the id of the file is used as tags. If none of this is present, then the framwork uses `${method}_${endpoint}` remove `/` from endpoint
+
+For operationId: developer can give `operationId`, or id in the event shema. If none of this is present, then the summary of the event used to generate the operationId.
 
 For example,
 ![Swagger specs](https://docs.godspeed.systems/assets/images/swagger_spec-5218946d179677ac711303f8d406b4ee.png)
