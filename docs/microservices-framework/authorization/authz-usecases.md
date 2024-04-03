@@ -368,17 +368,18 @@ module.exports = {
 ### D. Restricting datastore access
 
 **1. ** Plugins can access user data through `args.meta.authzPerms` in the `GSDatasource.execute()` method. The structure of this data is defined by the plugin, following the format supported by the specific datasource plugin.    
-**2. ** For example, it could include fields like {can_access_columns, no_access_columns, additionalWhereClause}. 
-```
+**2. ** For example, it could include fields like {can_access, no_access, where}. 
+```json title='Sample output of authz workflow authz_wf.yaml'
 data: [ 
         //Your access policies for further finegrained datastore access, 
         // as interpreted and used by the datastore plugin to implement restricted database access over any database. 
         { 
           userTableName: { //to be merged in DB query by the datastore plugin 
-            where: { 
+            where: { //additional filters to be applied on the DB query
               tenant_id: "xyz", sub_tenant_id: "abc" 
             }, 
-            no_access_fields: ['PII-A', 'sensitiveB'] 
+            no_access: ['PII-A', 'sensitiveB'],  //columns which should not be accessible
+            can_access: ['tenant_id']  //columns which are accessible
           } 
         }
       ]
@@ -387,39 +388,40 @@ data: [
 **3. ** Subsequently, the plugin is responsible for adjusting its query to the datasource based on the information provided in args.authzPerms
 
 ```ts
-async execute(ctx: GSContext, args: PlainObject): Promise<GSStatus> {
+  async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+    const { childLogger } = ctx;
     const {
-      meta: { entityType: serviceName, method , authzPerms, fnNameInWorkflow},
-      ...rest
-    } = args;
-    const finalDbArgs = modifyDbQuery(rest, authzPerms);// Modify sql select clause or mongodb query here to allow only permissible tables, rows and columns to be accessed by the given user in the given context
+      meta: { entityType, method, fnNameInWorkflow, authzPerms }, ...rest } = args as { meta: { entityType: string, method: string, fnNameInWorkflow: string, authzPerms: AuthzPerms }, rest: PlainObject };
+    if (authzPerms) {
+      const authzFailRes = modifyForAuthz(this.client, rest, authzPerms, entityType, method);
+      if (authzFailRes) {
+        return authzFailRes;
+      }
+    }
+    // Now authz checks are set in select fields and passed in where clause
+    let prismaMethod: any;
     try {
-    //@ts-ignore
-      const response = await this.client[method](finalDbArgs);
-      return new GSStatus(true, 200, undefined, response);
-    } catch(err: Error) {
-      return new GSStatus(false, err.$metadata?.httpStatusCode || 500, undefined, { message: "Internal server error" });
+        const client = this.client;
+        if (entityType && !client[entityType]) {
+          logger.error('Invalid entityType %s in %s', entityType, fnNameInWorkflow);
+          return new GSStatus(false, 400, undefined, { error: `Invalid entityType ${entityType} in ${fnNameInWorkflow}`});
+        }
+        prismaMethod = client[entityType][method];
+        if (method && !prismaMethod) {
+          logger.error('Invalid CRUD method %s in %s', method, fnNameInWorkflow);
+          return new GSStatus(false, 500, undefined, { error: 'Internal Server Error'});
+        }
 
+        const prismaResponse = await prismaMethod.bind(client)(rest);
+        return new GSStatus(true, responseCode(method), undefined, prismaResponse);
+    } catch (error: any) {
+      logger.error('Error in executing Prisma query for args %o \n Error: %o', args, error);
+      return new GSStatus(false, 400, error.message, JSON.stringify(error.message));
     }
   }
 ```
-<!-- // async execute(ctx: GSContext, args: PlainObject): Promise<GSStatus> {
-//     const {
-//       meta: { entityType: serviceName, method , authzPerms, fnNameInWorkflow},
-//       ...rest
-//     } = args;
-//     //Now do whatever
-//     try {
-//     //@ts-ignore
-//       const response = await this.client[method](rest);
-//       return new GSStatus(true, 200, undefined, response);
-//     } catch(err: Error) {
-//       return new GSStatus(false, err.$metadata?.httpStatusCode || 500, undefined, { message: "Internal server error" });
 
-//     }
-//   } -->
-
-#### Example: [prisma-as-datasource plugin](../datasources/list-of-plugins.md/#1-prisma-as-datasource)
+#### Example: [prisma-as-datasource plugin](../datasources/datasource-plugins/Prisma%20Datasource.md/#database-authorization)
 <details>
 <summary>Restricted datastore access</summary>
 In the below authz workflow can_acces, no_access and where conditions are provided. These conditions will be applied while fetching author details.
