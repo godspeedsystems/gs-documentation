@@ -389,7 +389,7 @@ data: [
 
 ```ts
   async execute(ctx: GSContext, args: PlainObject): Promise<any> {
-    const { logger } = ctx;
+    const { childLogger } = ctx;
     const {
       meta: { entityType, method, fnNameInWorkflow, authzPerms }, ...rest } = args as { meta: { entityType: string, method: string, fnNameInWorkflow: string, authzPerms: AuthzPerms }, rest: PlainObject };
     if (authzPerms) {
@@ -401,20 +401,19 @@ data: [
     // Now authz checks are set in select fields and passed in where clause
     let prismaMethod: any;
     try {
-      if (this.client) {
         const client = this.client;
         if (entityType && !client[entityType]) {
-          return new GSStatus(false, 400, undefined, `Invalid entityType '${entityType}' in ${fnNameInWorkflow}.`);
+          logger.error('Invalid entityType %s in %s', entityType, fnNameInWorkflow);
+          return new GSStatus(false, 400, undefined, { error: `Invalid entityType ${entityType} in ${fnNameInWorkflow}`});
         }
-
         prismaMethod = client[entityType][method];
         if (method && !prismaMethod) {
-          return new GSStatus(false, 500, undefined, `Invalid CRUD method '${method}' in ${fnNameInWorkflow}`);
+          logger.error('Invalid CRUD method %s in %s', method, fnNameInWorkflow);
+          return new GSStatus(false, 500, undefined, { error: 'Internal Server Error'});
         }
 
         const prismaResponse = await prismaMethod.bind(client)(rest);
         return new GSStatus(true, responseCode(method), undefined, prismaResponse);
-      }
     } catch (error: any) {
       logger.error('Error in executing Prisma query for args %o \n Error: %o', args, error);
       return new GSStatus(false, 400, error.message, JSON.stringify(error.message));

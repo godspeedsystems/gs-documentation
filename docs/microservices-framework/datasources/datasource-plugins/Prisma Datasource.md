@@ -256,27 +256,14 @@ The plugin provides rows and columns level authorization access as explained in 
 **- **empty rows (e.g. in case where query trespasses access boundaries)   
 **- **empty fields (e.g. in case all the fields in the query are not allowed to access)    
 
-Check the below clauses which are available in this plugin and provides database level restricted access.
+
+:::info
+Check the below clauses which are available in this plugin and provides database level restricted access. For further enhancements and updates in database access, check this [Github issue](https://github.com/godspeedsystems/gs-plugins/issues/162). 
+:::
 
 #### where
-Additonal row level access to be applied on the DB query.
-
-#### select
-Additional columns which should be returned in the DB query.
-
-#### can_access
-Columns which are allowed to access. When can_access is present no_access will be ignored.
-
-#### no_access
-Columns which are not allowed to access. If no_access is set, then you will not be able to specify    
-**a) ** where clause on columns not allowed. This includes direct field match, and nested AND and OR queries.       
-**b) ** select clause on columns not allowed.
-
-<details>
-<summary>Sample workflows for restricted datastore access</summary>
-In the below authz workflow can_acces, no_access and where conditions are provided. These conditions will be applied while fetching author details.
-
-```yaml title=authz_wf.yaml
+Additonal row level access to be applied on the DB query. For example, check below a sample authz instruction:
+```yaml
 authz: 
   - id: authz_task_1
     summary: return access columns
@@ -290,6 +277,50 @@ authz:
         where:
           tenant: <% inputs.headers.client_id %>
 ```
+Here, `where` clause restricts returning only those rows where this condition is true.
+
+#### select
+Additional columns which should be returned in the DB query.
+
+#### can_access
+Columns which are allowed to access. When can_access is present no_access will be ignored.
+
+#### no_access
+Columns which are not allowed to access.
+
+:::note Remember
+If no_access/can_access is set, then you will not be able to specify:  
+**a) ** where clause on columns not allowed. This includes direct field match, and nested AND and OR queries.       
+**b) ** select clause on columns not allowed.
+:::
+
+<details>
+<summary>Sample workflow with inline authz instruction</summary>
+In the below workflow with inline authz instruction can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
+
+```yaml title=fetch_author.yaml
+summary: Fetch author
+tasks:
+  - id: fetch_author
+    fn: datasource.mysql.author.findUnique
+    authz:
+      - fn: com.gs.transform
+        args:
+          # can_access: 
+          #   - col1
+          #   - col2
+          no_access:
+            - col3
+          where:
+            tenant: <% inputs.headers.client_id %>
+    args:
+      where:
+        id: <% inputs.params.id %>
+```
+</details>
+
+<details>
+<summary>Sample workflow calling a separate authz workflow</summary>
 
 ```yaml title=fetch_author.yaml
 summary: Fetch author
@@ -302,6 +333,22 @@ tasks:
     args:
       where:
         id: <% inputs.params.id %>
+```
+
+In the below authz workflow can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
+```yaml title=authz_wf.yaml
+summary: authz workflow
+  - id: authz_task_1
+    summary: return access columns
+    fn: com.gs.transform
+      args:
+        can_access: 
+          - col1
+          - col2
+        # no_access:
+        #   - col3
+        where:
+          tenant: <% inputs.headers.client_id %>
 ```
 </details>
 
