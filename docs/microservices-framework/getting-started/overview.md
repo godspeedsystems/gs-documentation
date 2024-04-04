@@ -34,7 +34,7 @@ You can create a blank project like this.
 ```bash
   godspeed create <project_name>
 ```
-You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/guide.md) and [Blog](/docs/microservices-framework/getting-started/advance-guide.md) projects. 
+You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/guide.md). 
 
 ### Building and running your project
 
