@@ -37,7 +37,9 @@ Commands:
   clean                           clean the previous build.
   gen-crud-api                    scans your prisma datasources and generate
                                   CRUD APIs events and workflows
+  serve                           build and preview the production build in watch mode.
   build                           build the godspeed project.
+  preview                         preview the production build.
   devops-plugin                   manage(add, remove, update) godspeed plugins
                                   for devops.
   plugin                          manage(add, remove, update) eventsource and
