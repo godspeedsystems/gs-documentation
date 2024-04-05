@@ -34,7 +34,7 @@ You can create a blank project like this.
 ```bash
   godspeed create <project_name>
 ```
-You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/guide.md). 
+You can create a project with pre-made examples as well. Check [Hello World](/docs/microservices-framework/getting-started/guide.md) and [Build a Full-Stack Web App with Godspeed and React](https://github.com/godspeedsystems/gs-node-templates/tree/master/FullStack_App_With_React). 
 
 ### Building and running your project
 
