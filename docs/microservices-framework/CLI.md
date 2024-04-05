@@ -1,4 +1,9 @@
-# Godspeed CLI
+---
+sidebar_position: 1
+title: Godspeed CLI
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
 
 CLI to create and manage Godspeed projects.
 
@@ -471,15 +476,25 @@ otel installed successfully!
 Observability has been enabled
 ```
 
+The above command performs these two functions:
 ##### A. Installs `@godspeedsystems/tracing` package
-By installing the package, auto-instrumentation of the following plugins is enabled to collect traces:   
-**1. ** [http](https://nodejs.org/api/http.html) and [https](https://nodejs.org/api/https.html) requests.
-**1. ** 
+This package includes auto-instrumentation of the following plugins to collect traces:   
+**1. ** [http](https://nodejs.org/api/http.html) and [https](https://nodejs.org/api/https.html) requests.   
+**2. ** [Prisma datasource plugin](../microservices-framework/datasources/datasource-plugins/Prisma%20Datasource.md).
 
-##### B. sets OTEL_ENABLED env variable to true
+##### B. Sets OTEL_ENABLED env variable to true
+By setting `OTEL_ENABLED` to true, the following actions are performed:   
+**1. Traces**: starts the auto-instrumentation of traces present in the `@godspeedsystems/tracing` package.   
+**2. Metrics**: starts exposing application metrics at `/metrics` endpoint of the service. Currently, the framework exposes HTTP and [Prisma datasource](../microservices-framework/datasources/datasource-plugins/Prisma%20Datasource.md) metrics.    
+**3. Logs**: starts dumping the service logs in [OTEL log format](./telemetry/logging.md/#log-format) in console provided NODE_ENV is not equal to 'dev'
+
+:::infoTelemetry data for custom plugins
+Follow this [Github issue](https://github.com/godspeedsystems/gs-tracing/issues/2) to know how auto-instrumentation can be enabled for the other custom [eventsource](../event-sources/event-source-plugins/) and [datasource](../datasources/datasource-plugins/Overview.md) plugins.   
+Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/issues/1016) to know how prometheus based metrics can be exposed for the other custom [eventsource](../event-sources/event-source-plugins/) and [datasource](../datasources/datasource-plugins/Overview.md) plugins.
+:::
 
 #### otel disable
-The `godspeed otel disable` command allows the user to disable [observability](./telemetry/overview.md) in Godspeed. It uninstalls `@godspeedsystems/tracing` package from your project and sets OTEL_ENABLED env variable to false.   
+The `godspeed otel disable` command allows the user to disable [observability](./telemetry/overview.md) in Godspeed.    
 ```bash
 $ godspeed otel disable
        ,_,   ╔════════════════════════════════════╗
@@ -489,3 +504,8 @@ $ godspeed otel disable
 otel uninstalled successfully!
 Observability has been disabled in the project
 ```
+
+The above command performs these two functions:
+##### A. Uninstalls `@godspeedsystems/tracing` package from your service.
+##### B. Sets OTEL_ENABLED env variable to false
+Setting `OTEL_ENABLED` to false stops all the actions performed in [otel enable](#b-sets-otel_enabled-env-variable-to-true) command   

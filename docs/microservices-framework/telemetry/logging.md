@@ -1,10 +1,17 @@
+---
+sidebar_position: 1
+title: Logs
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+## Log level
+The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log.level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables).
+```yaml title=config/default.yaml
+log:
+  level: debug
+```
 
-# Logging
-
-### Log level
-The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables)
-
-### Log fields masking
+## Log fields masking
 If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
@@ -35,11 +42,11 @@ Sample masked logs:
 {"Body":"this.id: hello_world, output: {\"request_data\":{\"payload\":{\"data\":{\"body\":{\"mobileNumber\":\"*****\"}}}}}","Timestamp":"1684221387898000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"unknown_service:node","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"hello_world"}}
 ```
 
-### Log format
+## Log format
 ** OTEL format **   
-Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:
-- observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true.
-- NODE_ENV is not set to 'dev'.
+Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:   
+**a) ** observability is [enabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to true.   
+**b) ** NODE_ENV is not set to 'dev'.
 
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -57,9 +64,9 @@ Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference
 :::
 
 ** pino pretty format **
-Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:
-- observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false.
-- NODE_ENV is set to 'dev'.
+Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:   
+**a) ** observability is [disabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to false.   
+**b) ** NODE_ENV is set to 'dev'.
   
 Sample Logs:
 ```
@@ -75,9 +82,8 @@ Sample Logs:
 [11:35:05.293] DEBUG (17113): evaluated datasource api {"type":"axios","base_url":"https://httpbin.org"}
 ```
 
-
-### Custom log attributes
-#### 1. For all events
+## Custom log attributes
+### 1. For all events
 You can add any custom attribute in the logs whenever any event is triggered on your service. The value for the custom identifier can be picked up from event body, params, query, or headers.   
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
@@ -115,7 +121,7 @@ Please make sure to add ? in case any field is optional like `body?.data?.lan` s
 {"Body":"event body and eventSpec exist","Timestamp":"1676960742404000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 ```
 
-#### 2. At event level
+### 2. At event level
 
 You can override log attributes at event level also. You can specify customized log attributes for specific event.
 
@@ -159,7 +165,7 @@ log_attributes:
       "task_id": ""
     }}
 ```
-#### 3. Custom on_error logging in workflow/tasks
+### 3. Custom on_error logging in workflow/tasks
 
 In case you want to log specific attributes when an error happens in a task, set those values in `on_error.log_attributes` of that task.
 

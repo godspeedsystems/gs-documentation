@@ -54,5 +54,11 @@ The below architecture diagram explains the implementation of observability in G
 ## Features
 Godspeed provides the following features to implement observability:
 
-### Enable/disable observability
-You can enable/disable observability in Godspeed 
+### 1. Enable/disable observability
+You can [enable/disable OTel](../CLI.md/#otel) in Godspeed.
+
+### 2. Configurations of OTel endpoints
+You can [configure](./configuration.md) various OTel endpoints in Godspeed.
+
+### 3. Add custom traces, logs and metrics in the workflows
+You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows.

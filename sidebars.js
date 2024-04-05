@@ -440,18 +440,34 @@ const sidebars = {
               id: "microservices-framework/telemetry/overview",
             },
             {
-              type: "doc",
+              type: "category",
               label: "12.2. Configuration",
-              id: "microservices-framework/telemetry/configuration",
+              items: [
+                {
+                  type: "doc",
+                  label: "12.2.1. Generic",
+                  id: "microservices-framework/telemetry/configuration",
+                },
+                {
+                  type: "doc",
+                  label: "12.2.2. Traces",
+                  id: "microservices-framework/telemetry/tracing",
+                },
+                {
+                  type: "doc",
+                  label: "12.2.3. Metrics",
+                  id: "microservices-framework/telemetry/metrics",
+                },
+                {
+                  type: "doc",
+                  label: "12.2.4. Logs",
+                  id: "microservices-framework/telemetry/logging",
+                },
+              ]
             },
             {
               type: "doc",
-              label: "12.3. Logging",
-              id: "microservices-framework/telemetry/logging",
-            },
-            {
-              type: "doc",
-              label: "12.4. Custom traces, logs and metrics (BPM)",
+              label: "12.3. Custom traces, logs and metrics (BPM)",
               id: "microservices-framework/telemetry/custom-metrics-logs-traces"
             },
           ],
