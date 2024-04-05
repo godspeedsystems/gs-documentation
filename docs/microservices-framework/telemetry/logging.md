@@ -1,10 +1,17 @@
+---
+sidebar_position: 1
+title: Logs
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+---
+## Log level
+The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log.level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables).
+```yaml title=config/default.yaml
+log:
+  level: debug
+```
 
-# Logging
-
-### Log level
-The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log_level` in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables)
-
-### Log fields masking
+## Log fields masking
 If you want to hide sensitive information in logs then define the fields which need to be hidden in `redact` feature in [Static variables](/docs/microservices-framework/config-and-mappings/config.md#static-variables). Redaction path syntax is standard JSON object lookup.   
 For example, 
 ```yaml title="config/default.yaml"
@@ -35,10 +42,11 @@ Sample masked logs:
 {"Body":"this.id: hello_world, output: {\"request_data\":{\"payload\":{\"data\":{\"body\":{\"mobileNumber\":\"*****\"}}}}}","Timestamp":"1684221387898000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"unknown_service:node","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"hello_world"}}
 ```
 
-### Log format
-Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:
-- observability is [enabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to true.
-- NODE_ENV is not set to 'dev'.
+## Log format
+** OTEL format **   
+Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) when all of the below conditions are satisfied:   
+**a) ** observability is [enabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to true.   
+**b) ** NODE_ENV is not set to 'dev'.
 
 ```json
 {"Body":"adding body schema for /upload_doc.http.post","Timestamp":"1676531763727000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{}}
@@ -51,11 +59,14 @@ Logs are dumped in [OTEL Logging format](https://opentelemetry.io/docs/reference
 {"Body":"Result of _executeFn test_step1 {\"success\":true,\"code\":200,\"data\":{\"args\":{},\"data\":\"{\\\"data\\\":{\\\"lan\\\":\\\"12345\\\"}}\",\"files\":{},\"form\":{},\"headers\":{\"Accept\":\"application/json, text/plain, */*\",\"Content-Length\":\"24\",\"Content-Type\":\"application/json\",\"Host\":\"httpbin.org\",\"Traceparent\":\"00-a58ef2d7ff7725c39f1e058bf22fe724-2f13e28430d61bdb-01\",\"User-Agent\":\"axios/0.25.0\",\"X-Amzn-Trace-Id\":\"Root=1-63edd835-22cff8e60555fa522c8544cf\"},\"json\":{\"data\":{\"lan\":\"12345\"}},\"method\":\"POST\",\"origin\":\"180.188.224.177\",\"url\":\"https://httpbin.org/anything\"},\"message\":\"OK\",\"headers\":{\"date\":\"Thu, 16 Feb 2023 07:16:05 GMT\",\"content-type\":\"application/json\",\"content-length\":\"598\",\"connection\":\"close\",\"server\":\"gunicorn/19.9.0\",\"access-control-allow-origin\":\"*\",\"access-control-allow-credentials\":\"true\"}}","Timestamp":"1676531765810000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":"test_step1"}}
 {"Body":"Validate Response JSON Schema Success","Timestamp":"1676531765811000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"a58ef2d7ff7725c39f1e058bf22fe724","SpanId":"751bc314bb6286b4","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"9537a882ae58","process.pid":61741},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","task_id":""}}
 ```   
-   
+:::tip 
+  To get the tracing information (like TraceId, SpanId or TraceFlags) in the OTEL logs for co-relation between logs and traces, observability should be [enabled](configuration.md/#enable-observability) i.e. OTEL_ENABLED=true.
+:::
+
 ** pino pretty format **
-Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:
-- observability is [disabled](/docs/microservices-framework/telemetry/configuration.md#enable-observability) i.e. OTEL_ENABLED env variable is set to false.
-- NODE_ENV is set to 'dev'.
+Logs are dumped in [pino pretty format](https://www.npmjs.com/package/pino-pretty) when any of the below conditions is satisfied:   
+**a) ** observability is [disabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to false.   
+**b) ** NODE_ENV is set to 'dev'.
   
 Sample Logs:
 ```
@@ -71,8 +82,8 @@ Sample Logs:
 [11:35:05.293] DEBUG (17113): evaluated datasource api {"type":"axios","base_url":"https://httpbin.org"}
 ```
 
-### Custom log attributes
-#### 1. For all events
+## Custom log attributes
+### 1. For all events
 You can add any custom attribute in the logs whenever any event is triggered on your service. The value for the custom identifier can be picked up from event body, params, query, or headers.   
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
@@ -110,7 +121,7 @@ Please make sure to add ? in case any field is optional like `body?.data?.lan` s
 {"Body":"event body and eventSpec exist","Timestamp":"1676960742404000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"unknown_service:node","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 ```
 
-#### 2. At event level
+### 2. At event level
 
 You can override log attributes at event level also. You can specify customized log attributes for specific event.
 
@@ -154,7 +165,7 @@ log_attributes:
       "task_id": ""
     }}
 ```
-#### 3. Custom on_error logging in workflow/tasks
+### 3. Custom on_error logging in workflow/tasks
 
 In case you want to log specific attributes when an error happens in a task, set those values in `on_error.log_attributes` of that task.
 
@@ -200,22 +211,3 @@ on_error:
       }
     }}
 ```
-###  Usage of Logger Instance in Custom js/ts Functions
-This feature enables developers to utilize a Logger Instance in custom js or ts functions. The Logger Instance assists in logging information, warnings, and errors during the execution of the function. The feature ensures robust logging capabilities and facilitates debugging and monitoring of the application.
-
-** Sample code **
-```
-module.exports = function(args, {childLogger, promClient, tracer}) {
-    for (let i = 0; i < 1000; i++) {
-        childLogger.error("print log i: %s", i);
-    }
-    return "OK"
-}
-```
-** Function Parameters: **
-
-- ** args: ** Represents the arguments passed to the custom JS/TS function. Developers can use this parameter to accept input data and perform necessary computations within the function.
-- ** {childLogger, promClient, tracer}: ** This object contains three properties, which are as follows:
-  - ** childLogger: ** A Logger Instance that developers can use to log messages, errors, and other relevant information during the function's execution.
-  - ** promClient: ** A library that provides a Prometheus client for collecting metrics and exposing them to Prometheus monitoring system.
-  - **tracer: ** A library used for distributed tracing, which can be beneficial in identifying and resolving issues across microservices.
