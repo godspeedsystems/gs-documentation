@@ -1,18 +1,25 @@
 # Godspeed CLI
+
 CLI to create and manage Godspeed projects.
 
 ## About
+
 Godspeed CLI is the primary way to interact with your Godspeed project from the command line. It provides a bunch of useful functionalities during the project development lifecycle.
 
 ## How to install
+
 ```bash
 npm install -g @godspeedsystems/godspeed
 ```
+
 or
+
 ```bash
 yarn global add @godspeedsystems/godspeed
 ```
+
 Once Godspeed CLI is installed, the `godspeed` command can be called from command line. When called without arguments, it displays its help and command usage.
+
 ```
 $  godspeed
 ```
@@ -23,6 +30,8 @@ $  godspeed
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 Usage: Godspeed CLI [options] [command]
 
 CLI tool for godspeed framework.
@@ -47,10 +56,15 @@ Commands:
   prisma                          proxy to prisma commands with some add-on
                                   commands to handle prisma datasources.
   help [command]                  display help for command
+
+
 For detailed documentation visit https://godspeed.systems
+
+
 ```
 
 ## Supported commands & arguments
+
 | Command                            | Options                         | Description                                                                     |
 | ---------------------------------- | ------------------------------- | ------------------------------------------------------------------------------- |
 | create <projectName></projectName> | --from-template, --from-example | create a new godspeed project.                                                  |
@@ -63,16 +77,21 @@ For detailed documentation visit https://godspeed.systems
 | prisma                             | prepare                         | generates your prisma client for database and sync the database with the schema |
 
 ### create
+
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
 
 ```bash
 $  godspeed create my-service
 ```
+
 ```bash
+
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
 
 …  waiting   Cloning project template.
 ✔  success   Cloning template successful.
@@ -80,23 +99,30 @@ $  godspeed create my-service
 …  waiting   Generating project files.
 ✔  success   Successfully generated godspeed project files.
 
+
 dependencies installed successfully!
 
 Successfully created the project my-service.
 Use `godspeed help` command for available commands. 
 
 Happy building microservices with Godspeed! 🚀🎉
+
+
 ```
 
 #### Options for `create` command
+
 ```bash
 $  godspeed help create
 ```
 ```
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 Usage: Godspeed CLI create [options] <projectName>
 
 create a new godspeed project.
@@ -108,29 +134,44 @@ Options:
   --from-template <projectTemplateName>  create a project from a template.
   --from-example <exampleName>           create a project from examples.
   -h, --help                             display help for command
+
+
+
+
 ```
 
 :::note
+
 1. While using `--from-template` you have to mention the path of the project folder which you want to clone as template
 2. While using `--from-example` you have to mention any name from the available examples. [available names are hello-world, mongo-as-prisma]
+
 :::
 
+
 ### Running the service
+
 You can run your Godspeed project using `godspeed serve` command. This will run your project in auto-watch mode.
+
 ```bash
  godspeed serve
 ```
 
 ### prisma
+
 The `prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
+
 ```bash
 $  godspeed prisma [options]
 ```
 
 #### prisma prepare
+
 The `godspeed prisma prepare` generates your prisma client for database and sync the database with the schema.
+
 ```bash
+
 $ godspeed prisma prepare
+
 ```
 
 ```
@@ -138,6 +179,8 @@ $ godspeed prisma prepare
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 Environment variables loaded from .env
 Prisma schema loaded from src/datasources/mongo.prisma
 Environment variables loaded from .env
@@ -163,10 +206,14 @@ See other ways of importing Prisma Client: http://pris.ly/d/importing-client
 The database is already in sync with the Prisma schema.
 
 ✔ Generated Prisma Client (v5.4.2) to ./node_modules/@prisma/client in 115ms
+
+
 ```
 
 ### gen-crud-api
+
 The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma[name of your prisma schema].
+
 ```bash
 $  godspeed gen-crud-api
 ```
@@ -177,6 +224,9 @@ $  godspeed gen-crud-api
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
+
 > blog-app@1.0.0 gen-crud-api
 > npx @godspeedsystems/api-generator
 
@@ -184,19 +234,25 @@ Select datasource / schema to generate CRUD APIs
 (x) mongo.prisma
 ( ) For all
 ( ) Cancel
+
 ```
 
 ### plugin
+
 Godspeed plugins are the way to extend the core Godspeed framework. Currently we support adding eventsource and datasource as plugin.
+
 ```bash
 $  godspeed help plugin
 
 ```
 ```
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 Usage: Godspeed CLI plugin [options] [command]
 
 manage(add, remove, update) eventsource and datasource plugins for godspeed.
@@ -212,9 +268,12 @@ Commands:
 
 
 For detailed documentation visit https://godspeed.systems
+
+
 ```
 
 #### plugin add
+
 The `godspeed plugin add` command allows the user to select a plugin from the list of available plugins and add them to the project.
 
 ```bash
@@ -226,6 +285,8 @@ $  godspeed plugin add
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 ? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
 │      │ Name                                   │ Description                                                                    │
@@ -243,15 +304,22 @@ $  godspeed plugin add
 ```
 
 #### plugin remove
+
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.
+
 ```bash
 $  godspeed plugin remove
+
 ```
 ```
+
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 ? Please select godspeed plugin to uninstall: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
 │      │ Name                                   │ Description                                                                    │
@@ -265,7 +333,9 @@ $  godspeed plugin remove
 ```
 
 #### plugin update
+
 The `godspeed plugin update` command allows the user to select a plugin from the list of available plugins and update them.
+
 ```bash
 $  godspeed plugin update
 ```
@@ -276,6 +346,8 @@ $  godspeed plugin update
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
+
+
 ? Please select godspeed plugin to update: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
 │      │ Name                                   │ Description                                                                    │
