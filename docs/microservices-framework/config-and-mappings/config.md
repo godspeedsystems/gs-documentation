@@ -87,17 +87,20 @@ Any configuration which includes secrets or passwords is recommended to be defin
 This file contains some predefined variables. Below is a sample file which defines the static variables used in Godspeed.
 ```yaml
 log:
-  level: debug
+  redact: # ['a.b.c', 'a.b.*', 'req.headers', 'mobileNumber'] #pino redact rules. Default null.
+  level: debug #by default info
+  sync: true #By default sync is false. For debugging, keep it true. For performance keep it false.
+  timestamp: stdTimeFunctions.isoTime #Pino date formats
+  bindings: # should pid and hostname be enabled in pino log bindings.
+    pid: false
+    hostname: true 
 defaults:
   lang: coffee #default language of inline scripting e.g. js/coffee
   on_error:
     continue: false # default behavior of on_error.continue property
-redact: [] # fields to hide. Sample: ['ns', 'req.headers']
 server_url: https://api.example.com:8443/v1/api
 httpbin: # sample api datasource url
   base_url: https://httpbin.org
-request_body_limit: 50mb
-file_size_limit : 50mb
 ```
 
 Here, `defaults` key has the variables which are used by the framework for default values in workflow DSL.    
