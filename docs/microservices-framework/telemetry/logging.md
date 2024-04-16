@@ -195,58 +195,102 @@ You can add any custom attribute in the logs whenever any event is triggered on 
 
 ** To enable this feature for common logging attributes across all events ,you need to specify two things: **
 
-- `attributes`variable as at `log` level  [environment variable](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) or [static variable](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
+**1. ** `log.attributes` variable as in [config](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml
 log:
   attributes: 
-    mobileNumber: "query?.mobileNumber"
-    id: "params?.id"
-    lan: "body?.data?.lan"
-    name: "headers?.name"
+    mobileNumber: <% query.mobileNumber %>
+    id: <% params.id %>
+    lan: <% body.data.lan %>
+    name: <% headers.name %>
     gender: <% mappings.Gender %>
 ```
 
-- location of the identifier in the request payload. As specified in the above example, 
-  - if mobileNumber is present in query params then specify `query?.mobileNumber`.
-  - if id is present in path params then specify `params?.id`.
-  - if lan is present in data field inside body then specify `body?.data?.lan`.
-  - if name is present in headers then specify `headers?.name`.
-  - if gender is present in data field inside mappings then specify `<% mappings.Gender %>`.
-
-
-:::note
-Please make sure to add ? in case any field is optional like `body?.data?.lan` so that it works well with undefined values. This will add lan in the logs if it is present else it will not get added.
-:::
+**2. ** location of the identifier in the request payload. As specified in the above example,     
+**- ** if mobileNumber is present in query params then specify `query.mobileNumber`.   
+**- ** if id is present in path params then specify `params.id`.   
+**- ** if lan is present in data field inside body then specify `body.data.lan`.   
+**- ** if name is present in headers then specify `headers.name`.   
+**- ** if gender is present in data field inside mappings then specify `<% mappings.Gender %>`.   
 
 ##### Sample Logs 
-- OTEL format
 ```json
-{"Body":"Processing event /test/:id.http.post","Timestamp":"1676960742403000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
-{"Body":"event inputs {\"baseUrl\":\"\",\"body\":{\"data\":{\"lan\":\"12345\"}},\"fresh\":false,\"hostname\":\"localhost\",\"ip\":\"::ffff:172.22.0.1\",\"ips\":[],\"method\":\"POST\",\"originalUrl\":\"/test/12?mobileNumber=9878987898\",\"params\":{\"id\":\"12\"},\"path\":\"/test/12\",\"protocol\":\"http\",\"query\":{\"mobileNumber\":\"9878987898\"},\"route\":{\"path\":\"/test/:id\",\"stack\":[{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"},{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"}],\"methods\":{\"post\":true}},\"secure\":false,\"stale\":true,\"subdomains\":[],\"xhr\":false,\"headers\":{\"content-type\":\"application/json\",\"user-agent\":\"PostmanRuntime/7.29.2\",\"accept\":\"*/*\",\"postman-token\":\"9e57df7d-0a75-48b6-bc52-921bd5c045b7\",\"host\":\"localhost:4000\",\"accept-encoding\":\"gzip, deflate, br\",\"connection\":\"keep-alive\",\"content-length\":\"46\"},\"files\":[]}","Timestamp":"1676960742403000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
-{"Body":"event body and eventSpec exist","Timestamp":"1676960742404000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
+{"Body":"Processing event /test/:id.http.post","Timestamp":"2024-04-10T09:40:45.191Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
+{"Body":"event inputs {\"baseUrl\":\"\",\"body\":{\"data\":{\"lan\":\"12345\"}},\"fresh\":false,\"hostname\":\"localhost\",\"ip\":\"::ffff:172.22.0.1\",\"ips\":[],\"method\":\"POST\",\"originalUrl\":\"/test/12?mobileNumber=9878987898\",\"params\":{\"id\":\"12\"},\"path\":\"/test/12\",\"protocol\":\"http\",\"query\":{\"mobileNumber\":\"9878987898\"},\"route\":{\"path\":\"/test/:id\",\"stack\":[{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"},{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"}],\"methods\":{\"post\":true}},\"secure\":false,\"stale\":true,\"subdomains\":[],\"xhr\":false,\"headers\":{\"content-type\":\"application/json\",\"user-agent\":\"PostmanRuntime/7.29.2\",\"accept\":\"*/*\",\"postman-token\":\"9e57df7d-0a75-48b6-bc52-921bd5c045b7\",\"host\":\"localhost:4000\",\"accept-encoding\":\"gzip, deflate, br\",\"connection\":\"keep-alive\",\"content-length\":\"46\"},\"files\":[]}","Timestamp":"2024-04-10T09:40:45.196Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
+{"Body":"event body and eventSpec exist","Timestamp":"2024-04-10T09:40:45.197Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 ```
 
-#### 2. At event level
+#### 2. At eventsource level
 
-You can override log attributes at event level also. You can specify customized log attributes for specific event.
+You can override log attributes at eventsource level also. You can specify customized log attributes for specific eventsource. This will override default custom attributes as defined in the [previous section](../telemetry/logging.md/#1-for-all-events).
 
-:::note
-This will override default custom attributes as defined in the [previous section](../telemetry/overview.md#custom-log-attributes-for-all-events).
-:::
-
-To enable this feature ,you need to specify:
-
-- `log_attributes` on event level which contains custom identifiers
-
-For example, this is the sample static configuration:
+To enable this feature, you need to specify `log.attributes` variable in the eventsource config.
 ```yaml
-log_attributes: 
-  msgparameter:
-    fruit: apple
-  identifier: 1
+type: express
+port: 3000
+base_url: /api/v1 #the base url of the http service
+
+#Basic swagger setup
+docs:
+  endpoint: /api-docs # the url on which the service will start
+
+log:
+  attributes:
+    event_type: myevent   
 ```
+
+##### Sample Logs
+```json
+{ Body: "return value [] 200 %o"
+    Timestamp: "2024-04-10T09:40:45.197Z000000"
+    SeverityNumber: 9
+    SeverityText: "INFO"
+    TraceId: "3fba9b9bd5d10d00b1b730b74c8eba51"
+    SpanId: "985e8a8d6a18568b"
+    TraceFlags: "01"
+    Resource: {
+      "service.name": "sample_app",
+      "host.hostname": "6295f63d9181",
+      "process.pid": 13956
+    }
+    Attributes: {
+      "event": "/helloworld",
+      "workflow_name": "helloworld",
+      "file_name": "helloworld",
+      "event_type": "myevent"
+    }}
+```
+
+#### 3. At event level
+
+You can override log attributes at event level also. You can specify customized log attributes for specific event. This will override default custom attributes as defined in the [previous section](../telemetry/logging.md/#2-at-eventsource-level).
+
+To enable this feature ,you need to specify `log.attributes` on event level which contains custom identifiers.
+```yaml
+"http.get./helloworld":
+  fn: helloworld
+  authn: false
+  log:
+    attributes:
+      msgparameter:
+        fruit: apple
+      identifier: 1
+  params:
+    - name: name
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: string
+```
+
 ##### Sample Logs
 ```json
 { Body: "return value [] 200 %o"
@@ -262,9 +306,9 @@ log_attributes:
       "process.pid": 13956
     }
     Attributes: {
-      "event": "/postgres/user/search.http.post",
-      "workflow_name": "com.biz.postgres.user.search",
-      "file_name": "com.biz.postgres.user.search",
+      "event": "/helloworld",
+      "workflow_name": "helloworld",
+      "file_name": "helloworld",
       "msgparameter": {
         "fruit": "apple"
       },
@@ -272,7 +316,7 @@ log_attributes:
       "task_id": ""
     }}
 ```
-#### 3. Custom on_error logging in workflow/tasks
+#### 4. Custom on_error logging in workflow/tasks
 
 In case you want to log specific attributes when an error happens in a task, set those values in `on_error.log_attributes` of that task.
 
@@ -305,13 +349,13 @@ on_error:
       "process.pid": 8455
     }
     Attributes: {
-      "event": "/postgres/user/search.http.post",
-      "workflow_name": "com.biz.postgres.user.search",
-      "file_name": "com.biz.postgres.user.search",
+      "event": "/helloworld",
+      "workflow_name": "helloworld",
+      "file_name": "helloworld",
       "msgparameter": {
         "fruit": "apple"
       },
-      "task_id": "",
+      "task_id": "response_validation_error_handler",
       "error": {
         "error_type": "enter your custom error type here",
         "error_message": "xyz value is required"
