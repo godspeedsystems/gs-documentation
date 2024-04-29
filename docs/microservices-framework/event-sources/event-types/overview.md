@@ -39,6 +39,11 @@ We have [bounty](https://forum.godspeed.systems/t/1-million-developer-bounty-pro
 :::
 - `S3:` Amazon S3 provides real-time access to stored objects and can be used for synchronous operations like serving web content, its internal processes and features are optimized for `asynchronous`.
 - `Google Pub/Sub:` Google Cloud Pub/Sub enables real-time messaging with synchronous operations for immediate communication. Its architecture also supports `asynchronous` messaging, ensuring scalability and efficiency. You can use Google pub/sub to access events like new email on gmail.
-- `Amazon SQS:` :Amazon SQS is a fully managed message queuing service designed for both synchronous and asynchronous operations. It offers immediate message processing while optimizing for scalability through `asynchronous` handling. 
+- `Amazon SQS:` :Amazon SQS is a fully managed message queuing service designed for both synchronous and asynchronous operations. It offers immediate message processing while optimizing for scalability through `asynchronous` handling.
 
 
+Dive deeper into the fascinating world of Events by watching the video below...
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dVt6GPSgY7A" frameBorder="0" allowFullScreen></iframe>
+</div>
