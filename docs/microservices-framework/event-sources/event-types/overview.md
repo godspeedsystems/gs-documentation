@@ -42,7 +42,7 @@ We have [bounty](https://forum.godspeed.systems/t/1-million-developer-bounty-pro
 - `Amazon SQS:` :Amazon SQS is a fully managed message queuing service designed for both synchronous and asynchronous operations. It offers immediate message processing while optimizing for scalability through `asynchronous` handling.
 
 
-Dive deeper into the fascinating world of Events by watching the video below...
+**To learn more about Schema Driven Development and Events in Godspeed, please watch the video provided below…**
 
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/dVt6GPSgY7A" frameBorder="0" allowFullScreen></iframe>

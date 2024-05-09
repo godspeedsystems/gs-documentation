@@ -56,7 +56,7 @@ Based on functionality and the nature of the information they provide to the sys
 To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](/docs/microservices-framework/event-sources/event-source-plugins.md).
 
 
-Dive deeper into the fascinating world of Event sources by watching the video below...
+**To learn more about Event sources, Schema Driven Development, and Separation of Concerns in Godspeed, please watch the video provided below…**
 
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/WaoWe1dekNk" frameBorder="0" allowFullScreen></iframe>
