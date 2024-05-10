@@ -69,3 +69,9 @@ In the above example:
   - `api_datasource`: name of data source,
   - `post`: API method
   - `./anything`: API endpoint
+
+**To learn more about Datasources, please watch the video provided below…**
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/NsH9hLCL92Y" frameBorder="0" allowFullScreen></iframe>
+</div>
