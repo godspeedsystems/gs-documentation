@@ -675,18 +675,18 @@ const sidebars = {
           id: "elasticgraph-orm/feature-set-of-elasticgraph",
         },
       ],
-    },
-    {
-      type: "category",
-      label: "3. Web-UI Starter Kit",
-      items: [
-        {
-          type: "doc",
-          label: "3.1. React App",
-          id: "ai-modules/react-app",
-        },
-      ],
-    },
+    }
+    // {
+    //   type: "category",
+    //   label: "3. Web-UI Starter Kit",
+    //   items: [
+    //     {
+    //       type: "doc",
+    //       label: "3.1. React App",
+    //       id: "ai-modules/react-app",
+    //     },
+    //   ],
+    // },
   ],
 };
 
