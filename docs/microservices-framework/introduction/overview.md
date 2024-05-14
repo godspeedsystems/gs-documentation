@@ -82,7 +82,7 @@ The three main pillars of Godspeed framework: [eventsources](/docs/microservices
 
    1.1. [**Events:**](/docs/microservices-framework/event-sources/overview.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable).
 2. [**DataSources:**](/docs/microservices-framework/datasources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
-3. [**Workflows or Functions:**](/docs/microservices-framework/workflows/overview.md) The events invoke functions or workflows which contain the business logic.
+3. [**Pure Workflows or Functions:**](/docs/microservices-framework/workflows/overview.md) The events invoke pure functions or workflows which contain the business logic. They take JSON as input and return JSON based output.
 4. [**Config:**](/docs/microservices-framework/config-and-mappings/config.md) The configuration variables as well as their values are defined in yaml files under `config/` directory. Some variables are specific to the framework and rest variables can be created as per the business use cases.
 5. [**ENV:**](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) Sensitive data, like database URLs, that require concealment are specified in .env files and made available in the rest of the project via GSContext object.
 

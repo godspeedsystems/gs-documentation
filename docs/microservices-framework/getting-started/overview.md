@@ -21,6 +21,10 @@ In this section, you will learn how to install the meta-framework using the comm
   # swagger endpoint as setup in eventsources/http.yaml)
 ```
 
+
+The default port number is `3000`, API base url is `/`, and swagger docs url is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
+
+
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '80%', height: '80%' }} src="https://www.youtube.com/embed/f1jlvaM7Sbo" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
@@ -50,8 +54,13 @@ This will create a basic project with Express eventsource, a sample endpoint (ev
 
 ![Scaffolding of a new project](../../../static/img/scaffolding_new_proj.png)
 
+
+- The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
+- The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
+- We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
+
 :::tip
-To understand the general scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/guide.md#the-project-scaffolding) 
+To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/guide.md#the-project-scaffolding) 
 :::
 
 ### Referencing pre-made project templates
@@ -73,6 +82,11 @@ A more complex fintech project with diverse use cases for issuing loans via mult
 Repository - [Loan Origination System](https://github.com/godspeedsystems/gs-node-templates/tree/master/LOS). 
 
 _Check the Readme.md and Setup.md files in this repo as it requires a docker container of Postgres and Kafka to be running. Dockerfile is provided in the project._
+
+**A walkthough on a meta-framework project with Loan Origination System example**
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
+</div>
 
 ### Building and running your project
 
