@@ -425,14 +425,14 @@ const sidebars = {
             },
           ],
         },
-        {
-          type: "doc",
-          label: "11. VScode extention",
-          id: "microservices-framework/vscode-extension/language-tools",
-        },
+        // {
+        //   type: "doc",
+        //   label: "11. VScode extention",
+        //   id: "microservices-framework/vscode-extension/language-tools",
+        // },
         {
           type: "category",
-          label: "12. Telemetry",
+          label: "11. Telemetry",
           items: [
             {
               type: "doc",
