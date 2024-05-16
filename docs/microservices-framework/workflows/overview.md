@@ -39,6 +39,12 @@ The user has the ability to write JavaScript files and can invoke them from even
 
 Developers can establish their own JavaScript functions within the project by generating a new JavaScript file at any location within `Functions` folder of `src` defined in root. These functions must be exported, allowing them to be invoked in YAML workflows by specifying the JavaScript file path in the 'fn' keyword. [refer](/docs/microservices-framework/workflows/native-language-functions.md)
 
+### Demonstration
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/66TxoXEPKUc" frameBorder="0" allowFullScreen></iframe>
+</div>
+
 ### Example for native language
 
 #### Event
@@ -207,9 +213,3 @@ Yaml workflows allow decoupled architecture. This promotes modularity, flexibili
 - #### Client-Agnostic Decoupling:
 
   If you develop your code in JavaScript, you are essentially using the native JavaScript client exposed by Prisma. Later, if you decide to switch from Prisma to TypeORM, you can keep the same YAML configuration. All you need to do is adapt the TypeORM client to conform to the YAML DSL of datasources. In this scenario, only the datasource implementation would change, while the rest of your code remains unchanged.
-
-### Demonstration
-
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/66TxoXEPKUc" frameBorder="0" allowFullScreen></iframe>
-</div>

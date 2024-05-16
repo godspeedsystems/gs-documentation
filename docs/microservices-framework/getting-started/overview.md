@@ -12,11 +12,6 @@ In this section, you will learn how to install the Godspeed framework using the 
 2. Git
 3. VS Code or any code editor
 
-### Demonstration
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-    <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/vTxdXZveNqM" frameborder="0" allowfullscreen></iframe>
-</div>
-
 ### Installation
 
 Godspeed CLI is the command center of a Godspeed project. It allows you to create & manage your Godspeed project. It is shipped via [npm](https://www.npmjs.com/package/@godspeedsystems/godspeed). You can go ahead and install it using the below command.
