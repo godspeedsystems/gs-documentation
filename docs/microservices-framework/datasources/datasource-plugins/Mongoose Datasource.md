@@ -125,11 +125,42 @@ The arguments to any `Function_Name` are to be passed in two ways:
 ```typescript
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
+// Option 1: 
+// Calling function on Mongoose model directly and sending data with status code
+// Here you handle errors/try/catch yourself
 export default async function (ctx: GSContext, args: any) {
-    const ds: GSDataSource = ctx.datasources.mongoose1;
+    const ds: GSDataSource = ctx.datasources.mongoose;
+    // If this function is called by another function (yaml or JS), the caller may have passed args object. In case not, then initialize args yourself.
+    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
+    try {
+      const response = ds.SomeModel.findOne(...args);
+      return {
+        code: 200,
+        data: response
+      }
+      //return response; Framework will automatically add code: 200 in case of HTTP
+    } catch (err: any) {
+      ctx.childLogger.error(`Found error in Mongoose query ${err}`);
+      return {
+        code: 500,
+        data: {
+          error: err,
+          message: err.message
+        }
+      }
+    }
+}
+
+//Option 2: Handles response codes, errors creation of GSStatus directly
+export default async function (ctx: GSContext, args: any) {
+    const ds: GSDataSource = ctx.datasources.mongoose;
+    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
     //Will need to set a meta object in the args to pass entitType and method
     args.meta = {entityType: 'SomeModel', method: 'findOne'};
     const response = await ds.execute(ctx, args);
+    // response.code will be 500 in case of error, and 200 otherwise
+    // In case or error, response.data will have message and error keys, like we saw 
+    // in the above TS example
     return response;
 }
 ```
