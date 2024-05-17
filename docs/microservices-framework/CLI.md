@@ -47,15 +47,12 @@ Options:
 
 Commands:
   create [options] <projectName>  create a new godspeed project.
-  dev                             run godspeed development server.
+  serve                           run the development server in watch mode.
+  build                           build the godspeed project.
   clean                           clean the previous build.
+  preview                         run the build in a hosted environment like            production                      or development.
   gen-crud-api                    scans your prisma datasources and generate
                                   CRUD APIs events and workflows
-  serve                           build and preview the production build in watch mode.
-  build                           build the godspeed project.
-  preview                         preview the production build.
-  devops-plugin                   manage(add, remove, update) godspeed plugins
-                                  for devops.
   plugin                          manage(add, remove, update) eventsource and
                                   datasource plugins for godspeed.
   prisma                          proxy to prisma commands with some add-on
@@ -68,20 +65,7 @@ For detailed documentation visit https://godspeed.systems
 
 ```
 
-## Supported commands & arguments
-
-| Command                            | Options                         | Description                                                                     |
-| ---------------------------------- | ------------------------------- | ------------------------------------------------------------------------------- |
-| create <projectName></projectName> | --from-template, --from-example | create a new godspeed project.                                                  |
-| dev                                |                                 | Start the dev server.                                                           |
-| clean                              |                                 | clean the previous build.                                                       |
-| build                              |                                 | build the godspeed project.                                                     |
-| devops-plugins                     | add, remove, update             | manage devops plugins for godspeed.                                             |
-| plugins                            | add, remove, update             | manage eventsource and datasource plugins for godspeed.                         |
-| gen-crud-api                       |                                 | generate CRUD APIs based on prisma schema.                                      |
-| prisma                             | prepare                         | generates your prisma client for database and sync the database with the schema |
-
-### create
+### Creating a new project
 
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
 
@@ -115,141 +99,46 @@ Happy building microservices with Godspeed! 🚀🎉
 
 ```
 
-#### Options for `create` command
+### Running the service for local development
 
-```bash
-$  godspeed help create
-```
-```
-
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-Usage: Godspeed CLI create [options] <projectName>
-
-create a new godspeed project.
-
-Arguments:
-  projectName                            name of the project.
-
-Options:
-  --from-template <projectTemplateName>  create a project from a template.
-  --from-example <exampleName>           create a project from examples.
-  -h, --help                             display help for command
-
-
-
-
-```
-
-:::note
-
-1. While using `--from-template` you have to mention the path of the project folder which you want to clone as template
-2. While using `--from-example` you have to mention any name from the available examples. [available names are hello-world, mongo-as-prisma]
-
-:::
-
-
-### Running the service
-
-You can run your Godspeed project using `godspeed serve` command. This will run your project in auto-watch mode.
+You can run your Godspeed project using `godspeed serve` command. This will build and run your project in auto-watch mode.
 
 ```bash
  godspeed serve
 ```
 
-### prisma
+:::tip
 
-The `prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
+In order to run a full stack application with Godspeed service as your backend, you can use Lerna. Check the example of full stack application in [gs-node-templates repository](https://github.com/godspeedsystems/gs-node-templates).
 
-```bash
-$  godspeed prisma [options]
-```
-
-#### prisma prepare
-
-The `godspeed prisma prepare` generates your prisma client for database and sync the database with the schema.
-
-```bash
-
-$ godspeed prisma prepare
-
-```
-
-```
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
+:::
 
 
-Environment variables loaded from .env
-Prisma schema loaded from src/datasources/mongo.prisma
-Environment variables loaded from .env
-Prisma schema loaded from src/datasources/mongo.prisma
-Datasource "db": MongoDB database "test" at "cluster0.syzyst8.mongodb.net"
+### Building the service for hosted deployment
 
-✔ Generated Prisma Client (v5.4.2) to ./node_modules/@prisma/client in 114ms
-
-Start using Prisma Client in Node.js (See: https://pris.ly/d/client)
-
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
-or start using Prisma Client at the edge (See: https://pris.ly/d/accelerate)
-
-import { PrismaClient } from '@prisma/client/edge'
-const prisma = new PrismaClient()
-
-
-See other ways of importing Prisma Client: http://pris.ly/d/importing-client
-
-
-The database is already in sync with the Prisma schema.
-
-✔ Generated Prisma Client (v5.4.2) to ./node_modules/@prisma/client in 115ms
-
-
-```
-
-### gen-crud-api
-
-The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma[name of your prisma schema].
+You can build your Godspeed project using `godspeed build` command. This will build your project and copy the contents in `/dist` folder. 
 
 ```bash
-$  godspeed gen-crud-api
+ godspeed build
 ```
 
+### Running the service in hosted environment
+
+You can run your Godspeed project using `godspeed preview` command. This will require `godspeed build` to be run prior because preview renders the project from the `dist` folder. 
+
+```bash
+ godspeed preview
 ```
 
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
+### Using Plugins
 
-
-
-> blog-app@1.0.0 gen-crud-api
-> npx @godspeedsystems/api-generator
-
-Select datasource / schema to generate CRUD APIs
-(x) mongo.prisma
-( ) For all
-( ) Cancel
-
-```
-
-### plugin
-
-Godspeed plugins are the way to extend the core Godspeed framework. Currently we support adding eventsource and datasource as plugin.
+Godspeed plugins are the way to extend the core Meta Framework. Currently we support adding eventsource and datasource as plugin.
 
 ```bash
 $  godspeed help plugin
 
 ```
+
 ```
 
        ,_,   ╔════════════════════════════════════╗
@@ -365,82 +254,96 @@ $  godspeed plugin update
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### devops-plugin
-Godspeed devops-plugins are the way to extend the core Godspeed framework. Currently we support adding eventsource and datasource as devops-plugin.
-```bash
-$  godspeed help devops-plugin
-```
+
+
+
+### Generating CRUD API
+
+Currently the framework generates CRUD API using Prisma's database model files and ORM client. 
+
+:::tip
+You can use prisma commands without yourself installing prisma through Godspeed, via `godspeed prisma <prisma_command_and_args>`. The `godspeed prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
+:::
+
+Steps
+1. If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `godspeed prisma db pull`. This will generate your .prisma file. 
+  
+  1.1 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch. 
+  
+  1.2 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
+
+  If your file name is lending_service_db.prisma, your file content should look like this. 
+  ```prisma
+    datasource db {
+      provider = "postgresql" // or "mysql", "sqlite", "sqlserver" etc.
+      url      = env("POSTGRES_URL")
+    }
+
+    generator client {
+      provider = "prisma-client-js"
+      output   = "./prisma-clients/lending_service_db"
+      previewFeatures = ["metrics"]
+    }
+
+    model User {
+      id               Int               @id @default(autoincrement())
+      pan_number            String            @unique ///@encrypted
+    }
+  ```
+2. Run `godspeed prisma prepare`. It will 
+
+  2.1 Generate your prisma client for your given schema and DB. It will place the generated client in the `src/datasources/prisma-clients/` folder. This is achieved internally by `prisma generate` command. 
+
+  2.2 It will setup the provided schema on the database which is provided in the .prisma file. This is achieved internally by the command `prisma db push`
+
+  ```bash
+
+  $ godspeed prisma prepare
+  ```
+  
+3. Generate CRUD API
+ 
+  The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/<prisma_db_name>.prisma
+
+  ```bash
+  $  godspeed gen-crud-api
+  ```
 
 ```
+
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-Usage: Godspeed CLI devops-plugin [options] [command]
 
-manages godspeed devops-plugins.
 
-Options:
-  -h, --help      display help for command
 
-Commands:
-  install         install a godspeed devops plugin
-  list [options]  list of available godspeed devops plugins
-  remove          remove a godspeed devops plugin
-  update          update a godspeed devops plugin
-  k8s             installed godspeed devops plugin
-  help [command]  display help for command
+> blog-app@1.0.0 gen-crud-api
+> npx @godspeedsystems/api-generator
 
-For detailed documentation visit https://godspeed.systems
-
-  To see help for any installed devops plugin, you can run:
-  <plugin-name> help
-```
-
-#### devops-plugin install
-The `godspeed devops-plugin install` command allows the user to select a devops plugin from the list of available plugins and add them to the operating system.
-```bash
-$ godspeed devops-plugin install
-```
+Select datasource / schema to generate CRUD APIs
+(x) mongo.prisma
+( ) For all
+( ) Cancel
 
 ```
+  4. Inspect generated events, definitions and functions.
 
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select devops plugin to install. (Use arrow keys)
-❯ @godspeedsystems/k8s  
-(Move up and down to reveal more choices)
-```
+    ![img](../../static/img/generated_crud_api.png)
 
-#### devops-plugin remove
-The `godspeed devops-plugin remove` command allows the user to select a devops plugin from the list of installed plugins and remove them from the operating system.
-```bash
-$ godspeed devops-plugin remove
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select a devops plugin to remove. (Use arrow keys)
-❯ @godspeedsystems/k8s  
-(Move up and down to reveal more choices)
-```
+    4.1 Generated events use definitions defined in `src/definitions` folder, which are in JSON schema format
+    
+    4.2 Generated functions are currently YAML functions
 
-#### devops-plugin update
-The `godspeed devops-plugin update` command allows the user to select a devops plugin from the list of installed plugins and update them.
-```bash
-$ godspeed devops-plugin update
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select devops plugin to update. (Use arrow keys)
-❯ @godspeedsystems/k8s  
-(Move up and down to reveal more choices)
-```
+  5. Swagger spec would have been automatically generated. 
 
-### otel
+  6. Open your swagger endpoint in the browser and test your CRUD app from end to end
+  
+   `localhost:<http_port>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
+
+  7. To expose same API via Graphql, simply add Graphql plugin and change your event URIs which have `http` to `http & graphql`, keeping the rest as the same. See how to do this in detail in the [Apollo Graphql plugin documentation](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)
+
+### Enabling and disabling Open Telemetry
 CLI provides `otel` command to enable/disable observability in Godspeed.
 ```bash
 $ godspeed help otel
@@ -462,7 +365,6 @@ Commands:
 
 For detailed documentation visit https://godspeed.systems
 ```
-
 #### otel enable
 The `godspeed otel enable` command allows the user to enable [observability](./telemetry/overview.md) in Godspeed to collect traces, metrics and logs.    
 

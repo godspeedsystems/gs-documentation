@@ -153,6 +153,9 @@ Your Swagger docs are automatically generated and stored in `/docs` folder when 
 ### Graphql setup with schema generation
 Check out the [Apollo Graphql plugin documentation](../event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md) for more details.
 
+### CRUD API generation
+Checkout how to generate CRUD APIs in a [step by step guide](../CRUD_API.md).
+
 ### Using Plugins
 Checkout the available plugins for [eventsources](../event-sources/event-source-plugins.md) and [datasources](../datasources/list-of-plugins.md) which allow you to get started with bunch of eventsources and datasources with simple configurations. 
 
