@@ -7,6 +7,12 @@ In the Godspeed Framework, data sources are fundamental components that enable u
 
 Data sources can be seamlessly integrated into your workflow tasks using a standardized syntax. The key element for invoking data sources is the fn attribute, which is namespaced under datasource. Here's an example of how data sources are used within a workflow task:
 
+### Demonstration
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/NsH9hLCL92Y" frameBorder="0" allowFullScreen></iframe>
+</div>
+
 ## Data source types
 
 Data sources can be divided into two types, Datastore as datasource and API as a datasource
