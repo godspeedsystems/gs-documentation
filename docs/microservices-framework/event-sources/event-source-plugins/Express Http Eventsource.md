@@ -135,7 +135,7 @@ http.get./sample_api:
     # authn: false #to disable global default setting of JWT authn, say authn: false.
     # authz: overriden.custom.authz_fn #here you can add path to a JS/TS/YAML function file or put inline YAML workflow for custom authz
     id: # Swagger id. by default calculated from the event URI
-    operationId: #Swagger operationId. by default calculated from the event URI
+    operationId: #Swagger if not set explicitly, the `id` is used. if `id` not set `summary` is used. If that is also not set, `${method}_${apiEndPoint}` with whitespace replaced by `_` is used
     tags: #swagger tags. by default, a tag is generated from the `folder_path+event_file_name`
     summary: #swagger description
     description: #swaggers summary 
@@ -164,6 +164,10 @@ http.get./sample_api:
     log: #custom attributes to add with log statements wherever they are printed by the handlers called by this event
       attributes:
         event_name: sample
+    # authn: false
+    # authz: false
+    # on_request_validation_error:
+    # on_response_validation_error:
 ```
 
 #### Format of HTTP event URI

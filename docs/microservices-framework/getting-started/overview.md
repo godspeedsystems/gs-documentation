@@ -15,7 +15,6 @@ In this section, you will learn how to install the meta-framework using the comm
   npm install -g @godspeedsystems/godspeed
   godspeed create my_new_project
   cd my_new_project
-  npm i
   godspeed serve
   # open localhost:3000/api-docs ( as per default port and 
   # swagger endpoint as setup in eventsources/http.yaml)
@@ -48,6 +47,16 @@ You can create a new project like this.
   godspeed create <project_name>
 ```
 > This may take some time to install the required npm plugins and create your project. Be patient!
+
+### Building and running your project
+
+**Building** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
+
+**Clean**  With `godspeed clean` you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful if you have deleted some files in your `src` repo. When you delete something from `src`, it doesn't delete the files in the `dist`. You may need to clean up the dist folder to remove old references to deleted files in `src`
+
+**Local development in auto-watch mode** You can start your server on localhost using `godspeed serve`. It will run the project in autowatch mode over your local file changes.
+
+**Production deployment:** Build your project and then run `godspeed preview` to serve directly from the `dist` folder 
 
 #### Scaffolding of a meta-framework project
 This will create a basic project with Express eventsource, a sample endpoint (event) and event handler function for the same. It will show you possible configurations of Express service with JWT authn and autorization workflows.
@@ -88,15 +97,7 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
   <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
 </div>
 
-### Building and running your project
 
-**Building** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
-
-**Clean**  With `godspeed clean` you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful if you have deleted some files in your `src` repo. When you delete something from `src`, it doesn't delete the files in the `dist`. You may need to clean up the dist folder to remove old references to deleted files in `src`
-
-**Local development in auto-watch mode** You can start your server on localhost using `godspeed serve`. It will run the project in autowatch mode over your local file changes.
-
-**Production deployment:** Build your project and then run `godspeed preview` to serve directly from the `dist` folder 
 
 ### For any help
 Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#plugin)  

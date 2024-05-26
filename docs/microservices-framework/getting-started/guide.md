@@ -147,7 +147,7 @@ Your Swagger docs are automatically generated and stored in `/docs` folder when 
 - **Eventsource level** (refer the `docs` section in http.yaml). This is applicable for Express and Fastify eventsources.
 - **Event level**
   - When you enable authentication on an event, its security scheme is set accordingly in generated swagger. By default authentication is enabled on all events when enabled on eventsource instance level itself.
-  - `requestBody`, `params`, `responses` ,`operationId`, `id`, `summary`, `description` are also picked up from event spec.
+  - `requestBody`, `params`, `responses` ,`operationId`, `id`, `summary`, `description`, `tags` are also picked up or auto-calculated from event spec.
 
 
 ### Graphql setup with schema generation

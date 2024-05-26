@@ -19,17 +19,19 @@ The meta-framework follows a generic schema for defining events - their inputs, 
 
 ```yaml
 http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
-  fn: function_greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  fn: function_greet #Required. The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters. 
   
   #optional configurations
   #Swagger components
   body: #same as requestBody in Swagger world
-  params:
-  responses:
-  id: #if not provided, when generating swagger, this is generated from the URI of the event by default
-  operationId: #if not provided, when generating swagger this is generated from the URI of the event by default
+  params: #same as swagger `parameters` schema
+  responses: #same as swagger `responses` schema
+  id: # swagger. if not provided, when generating swagger, this is generated from the URI of the event by default
+  operationId: # swagger if not provided, check if `id` is set. If that is also not set, use the summary to generate the operationId
   summary:
-  #Other framework components
+  tags: # swagger if you give `tags` array in schema of event, framework uses that to add tags to your generated spec. Else it uses the path and name of the file containing the event as tags. For ex. <folder_name>_<file_name> 
+  
+  #Other non-swagger components (optional)
   authn: #custom authentication. Currently plugins support JWT. Can be customized
   authz: #your custom authz workflow
   on_request_validation_error: #when validation fails

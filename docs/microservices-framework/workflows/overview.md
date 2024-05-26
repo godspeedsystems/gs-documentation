@@ -33,7 +33,7 @@ Godspeed supports two types for functions
 **These two functions can invoke each other based on the flow of execution.**
 
 ### Native Language Workflows
-The user has the ability to write JavaScript files and can invoke them from events when implementing intricate functionalities.
+The user has the ability to write JavaScript or Typescript files and can invoke them from events when implementing intricate functionalities.
 
 ### Developer Defined Functions
 
