@@ -1,25 +1,113 @@
 # Native Language Workflows
 
-"Since the framework currently supports Node.js and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic."
+Since the framework currently supports Node.js and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
 
+### Example Typescript function
+```typescript
+import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
+import Pino from 'pino';
 
-Framework exported interfaces/functions allow developer with flexibility to write js/ts workflows while empowering them with the frameworks capabilities.
+export default function (ctx: GSContext, args: PlainObject) {
+    const {
+        inputs: {
+            data: {
+                params, body, query, user, headers
+            }
+        }, 
+        childLogger, 
+        logger,
+        outputs, 
+        functions, 
+        datasources,
+        mappings
+    }: {
+        inputs: GSCloudEvent, 
+        childLogger: Pino.Logger, // Define CustomLogger if necessary
+        logger: Pino.Logger,
+        outputs: PlainObject, // Adjust the type accordingly
+        functions: PlainObject, // Adjust the type accordingly
+        datasources: PlainObject, // Adjust the type accordingly
+        mappings: PlainObject
+    } = ctx;
 
-### GSContext
-:::tip note
- (Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.)
+    // Will print with workflow_name and task_id attributes
+    childLogger.info('Server is running healthy');
+    // Will print without workflow_name and task_id attributes
+    logger.info('Arguments passed %o', args);
+    logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
+    logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
+    logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
+    logger.info('Total functions found in the project %s', Object.keys(functions).length);
+
+    // Returning only data
+    return 'Its working! ' + body.name;
+
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        code: 200,
+        // success: true,
+        // headers: undefined
+    }
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        code: 200,
+        success: true,
+        // headers: undefined
+    }
+    //SAME AS
+    return {
+        data: 'Its working! ' + body.name,
+        code: 200,
+        success: true,
+        headers: undefined
+    }
+    // SAME AS
+    return new GSStatus(true, 200, undefined, 'Its working! ' + body.name, undefined);  
+}
+```
+
+:::tip
+For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions.md#invoking-functions-from-jsts-functions) at the bottom of the page. 
 :::
 
-### What is GSContext ?
+#### GSContext
+The above is a sample of how JS/TS functions are authored. Functions which are called as event handlers or functions which are called by other YAML workflows have two arguments passed to them
+- GSContext - carries the loaded components of this project, and as well the inputs of the current event.
+- Arguments - a key-value object (JSON)
 
-[GSContext](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+#### args
+The second parameter of the function call is args. This parameter is useful when this function is called from a YAML workflow in Godspeed. The `args` passed in the yaml task of the caller YAML workflow is passed as `args` here. It is a JSON object.
 
-It includes all the context specific information like tracing information, actor, environment, headers, payload, shared state (if this ctx is shared with other instruction threads, this part can be shared with them). You can also keep immutable state (personal copy, personal view, for concurrency) etc.
+##### Caller YAML function
+```yaml
+  summary: some workflow
+  tasks:
+    - id: first_task
+      fn: some_function
+      args:
+        name: mastersilv3r
+```
+##### Callee Typescript function
+```typescript
+  export default function (ctx: GSContext, args: PlainObject) {
+    ctx.logger.info(args.name); //Prints 'mastersilv3r'
+  }
+```
+### More about GSContext
+:::tip note
+ Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
+:::
 
-Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `config`, `mappings` etc, is available in the `GSContext` object.
+Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+
+It includes all the context specific information like tracing information, actor, environment, headers, payload etc.
+
+Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
 
-```js
+```typescript
 // Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
 
 export class GSContext { //span executions
@@ -60,16 +148,16 @@ export class GSContext { //span executions
 :::
 
 
-### Inputs
+#### Inputs
 
-Inputs Provide you all the Information you passed to event like headers, params, query params etc.
+Inputs Provide you all the Information you passed to event like `headers`, `params`, `query`, `params` (path params), `body` & `user` (parsed JWT information).
 
 
 ```javascript
   const {inputs} = ctx;
-  inputs.body = inputs.data.body;
+  const body = inputs.data.body;
 ```
-### Outputs
+#### Outputs
 
 To access outputs of tasks executed before the current task, developer can destruct ctx object just like how inputs and datasources.If we have more then one task, we can access first task outputs in second task with Outputs object. we should access first task output by useing it's id.
 
@@ -78,9 +166,9 @@ To access outputs of tasks executed before the current task, developer can destr
   const firstTaskOutput = outputs[firstTaskId]
 ```
 
-### Datasources
+#### Accessing Datasource Clients
     
-With datasources we can access all Datasources, their clients and methods.
+With [datasources](../datasources/overview.md) we can access all datasources, their clients and methods.
 
 ```javascript
 
@@ -92,7 +180,7 @@ const responseData = await datasources.mongo.client.Restaurant.create({
 ```
 ### ChildLogger
 
-with childLogger you have accessibility to framework logger.
+With childLogger you have accessibility to Pino logger instance with context information set - for example the `log.attributes` set in eventsource or event level.
 
 ```javascript
 
@@ -101,21 +189,10 @@ with childLogger you have accessibility to framework logger.
 
 ```
 
-### GSStatus
-Developers can now exclusively return data from tasks, functions, and event handlers within a workflow.
-For example:
-```ts
-const {GSStatus} = require("@godspeedsystems/core");
+### Returning from a function
 
-module.exports = ctx => {
-  const {inputs} = ctx; 
-  const responseData = inputs.data.body.name
-  return responseData 
-  //works same as return new GSStatus(true, 200, undefined, responseData, undefined);
-};
-  
-```
-
+#### GSStatus
+Developers can return pure JSON object in response, or return GSStatus if they use Typescript.
 The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response manually and dispatch it.
 GSStatus has the below properties.
 ```yaml
@@ -128,52 +205,12 @@ GSStatus has the below properties.
    };
 ```
 
-We set the values as below
-```js
-response = new GSStatus(true, 200, undefined, responseData, undefined);
+We return with GSStatus as below
+```typescript
+ return new GSStatus(true, 200, 'OK', responseData, headers);
 ```
-
-:::tip Note
-Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
-:::
-
-<details>
-<summary>How to use GSContext and return from a JS/TS workflow</summary>
-
-```javascript
-import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
-import Pino from 'pino';
-
-export default function (ctx: GSContext, args: PlainObject) {
-    const {
-        inputs: {
-            data: {
-                params, body, query, user, headers
-            }
-        }, 
-        childLogger, 
-        logger,
-        outputs, 
-        functions, 
-        datasources
-    }: {
-        inputs: GSCloudEvent, 
-        childLogger: Pino.Logger, // Define CustomLogger if necessary
-        logger: Pino.Logger,
-        outputs: PlainObject, // Adjust the type accordingly
-        functions: PlainObject, // Adjust the type accordingly
-        datasources: PlainObject // Adjust the type accordingly
-    } = ctx;
-
-    // Will print with workflow_name and task_id attributes
-    childLogger.info('Server is running healthy');
-    // Will print without workflow_name and task_id attributes
-    logger.info('Arguments passed %o', args);
-    logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
-    logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
-    logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
-    logger.info('Total functions found in the project %s', Object.keys(functions).length);
-
+#### Different ways to return from a event handler
+```typescript
     // Returning only data
     return 'Its working! ' + body.name;
 
@@ -181,13 +218,15 @@ export default function (ctx: GSContext, args: PlainObject) {
     return {
         data: 'Its working! ' + body.name,
         code: 200,
+        message: 'OK', //HTTP protocol message to be returned from service
         // success: true,
         // headers: undefined
     }
     //SAME AS
     return {
         data: 'Its working! ' + body.name,
-        // code: 200,
+        code: 200,
+        message: 'OK', //HTTP protocol message to be returned from service
         success: true,
         // headers: undefined
     }
@@ -195,128 +234,16 @@ export default function (ctx: GSContext, args: PlainObject) {
     return {
         data: 'Its working! ' + body.name,
         code: 200,
+        message: 'OK', //HTTP protocol message to be returned from service
         success: true,
         headers: undefined
-    }  
-}
-```
-</details>
-
-The above is a sample of how a js file is configured and used. For every function it comes up with a ctx called [GSContext](#gscontext) which helps in maintaining and passing the data with the functions and method.
-
-### Calling javascript function from Yaml workflow
-
-In YAML workflows, it is possible to invoke JavaScript functions to introduce special functionality or extensions.
-
-- Scaffolding 
-
-![Scaffolding Image](https://res.cloudinary.com/dzdcjchdc/image/upload/v1702045959/Screenshot_from_2023-12-08_20-02-21_mxzkep.png)
-
-
-
-- Event
-
-<details>
-<summary>Example event</summary>
-
-```yaml
-http.post./helloworld:
-  fn: helloworld
-  body:
-    content:
-      application/json:
-        schema:
-          type: object
-
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: number
-```
-</details>
-
-- Yaml workflow
-
-```yaml
-id: helloworld
-tasks:
-  - id: first_task
-    fn: test
-    args: 
-      x: <% inputs.body.x %>
-      y: <% inputs.body.y %>
+    }
+    // SAME AS returning GSStatus like this
+    return new GSStatus(true, 200, 'OK', 'Its working! ' + body.name, headers);  
 ```
 
-- Javascript workflow
-
-```js
-const {GSStatus} = require('@godspeedsystems/core');
-
-module.exports = async(ctx,args)=>{
-    const responseData = parseInt(args.x)+parseInt(args.y);
-    return new GSStatus(true, 200, undefined, responseData, undefined);
-};
-
-```
-
-This is how we access the args `(ctx,args)` here args is a json object
-
-:::info
-GSStatus is a built-in class in Godspeed that we utilize to return responses from workflows.
-:::
-
-- Sample response
-
-![Response Image](https://res.cloudinary.com/dzdcjchdc/image/upload/v1702045093/Screenshot_from_2023-12-08_19-45-45_zrxxil.png)
-
-
-### Calling js function from an event
-
-Likewise, you have the option to directly invoke a JavaScript function from an event.
-
-- Event
-
-<details>
-<summary>Example event</summary>
-
-```yaml
-http.post./helloworld:
-  fn: test
-  body:
-    content:
-      application/json:
-        schema:
-          type: object
-
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: number
-
-```
-</details>
-
-
-- Javascript function
-
-
-```js
-const {GSStatus} = require('@godspeedsystems/core');
-
-module.exports = async(ctx)=>{
-    const x = parseInt(ctx.inputs.data.body.x)
-    const y = parseInt(ctx.inputs.data.body.y)
-    const responseData = x+y
-    return new GSStatus(true, 200, undefined, responseData, undefined);
-};
-
-```
-:::tip
-When calling a JavaScript function directly from the event, ensure that you access the inputs from the `ctx`, as demonstrated in the provided JavaScript file.
+:::tip Note
+Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
 :::
 
 ### Invoking functions from JS/TS functions
@@ -324,35 +251,28 @@ When calling a JavaScript function directly from the event, ensure that you acce
 <!-- - When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
 - They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it.  -->
 - All functions within a Godspeed project, including those written in YAML, JavaScript (JS), or TypeScript (TS), are accessible through the `ctx.functions` object.
-- Similarly, all datasources utilized in a Godspeed project are conveniently available under the `ctx.datasources` object.
- 
-:::tip
- - Every information you require or intend to store about the current event, workflow, loaded functions, datasources, logger, config, mappings etc is readily available within the `GSContext` (ctx) object..
-:::
-
-- Follow the comments added in example below to understand how to call functions from ts/js functions.
+- Ofcourse you can also `import` them in the standard Typescript or Javascript way
+- Similarly, all datasource clients initialised in a Godspeed project are conveniently available under the `ctx.datasources` object.
 
  ```ts
  export default async function (ctx: GSContext, args: any) {
 
-    //Calling functions (yaml, js, ts) from within a ts/js function, in a godspeed project's functions folder. All functions are available under ctx.functions. 
-    const res = await ctx.functions['com.gs.helloworld2'](ctx, {nice: "name", ...args});
-
-    //Calling datasource functions. All datasources are available under ctx.datasources hood.
+    //Calling functions (yaml, js, ts) from within a ts/js function, in a meta framework's project's functions folder, all project functions are available under ctx.functions. 
+    const res = await ctx.functions['com.gs.helloworld2'](ctx, args);
+    //Same As
+    const res = await require('com/gs/helloworld2')(ctx, args);
+    // Calling datasource functions. All datasources are available under ctx.datasources hood.
+    // OPTION 1
+    // Every datasource exposes a client key. The client may be a single instance like in case of Axios, or multiple datasource client instances like in case of AWS, or database models like in case of Mongoose (depending on the plugin used).
+    const res = await ctx.datasources.aws.client.s3.listBuckets(args);
+    // OPTION 2
+    // All datasources have an execute method. This may be preferable in case you want to utlise the full capabilities of the plugin wrapped over the native clients, like error handling checks and response codes, retries, caching etc. 
     const res = await ctx.datasources.aws.execute(ctx, {
-
          //Pass exactly same args as this aws service's method takes
         ...args,
-
+        meta: {entityType: 's3', method: 'listBuckets'}
         //Along with args, pass meta object
         // meta can contain {entityType, method}
-        meta: {entityType: 's3', method: 'listBuckets'},
-
-        //Or meta can contain {fnNameInWorkflow} which is same as 
-        //the 'fn' that we write when invoking datasource from yaml workflow
-        //For example, this will also work
-
-        //meta: {fnNameInWorkflow: 'datasource.aws.s3.listBuckets'}
     });
     if (!res.success) {
         return new GSStatus(false, res.code || 500, undefined, {message: "Internal Server Error", info: res.message})
@@ -383,14 +303,3 @@ Check [reponse handling](../authorization/authz-usecases.md/#response-code-messa
 :::info
 You can study the code [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/functions/com/gs/transform.ts) to understand both of the above scenarios better.
 :::
-
-For example,
-```javascript
-import {GSStatus, GSContext} from "@godspeedsystems/core"
-
-export default async function (ctx: GSContext, args: any) {
-    const reqData =await ctx.inputs.data.body.name;
-    return reqData;
-    // same as "return new GSStatus(true, 200, undefined, reqData, undefined);"
-}
-```
