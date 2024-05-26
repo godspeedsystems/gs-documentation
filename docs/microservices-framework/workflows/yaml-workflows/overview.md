@@ -37,14 +37,13 @@ tasks:
     fn: datasource.api.post./anything
     args:
         data:
-          name: 'cache'
+          name: 'mastersilv3r'
 ```
 
-### Decoupled Architechture
-YAML [workflows](/docs/microservices-framework/introduction/design-principles.md#standardized-yaml-based-dsl-and-configurations) allow decoupled architecture. This promotes modularity, flexibility, scalability, reusability, and easier testing and debugging. It allows different parts of a system to be developed and maintained independently, enhancing overall system robustness and adaptability.
+### Programming language independence
+This will be useful when we have polyglot implementation of the metaframework in more than one languages. Then YAML [workflows](/docs/microservices-framework/introduction/design-principles.md#standardized-yaml-based-dsl-and-configurations) can be ported to projects written in other languages.
 
-
-### Client-Agnostic Decoupling:
+### Decoupling with datasources
 
   If you develop your code in JavaScript, you are essentially using the native JavaScript client exposed by Prisma. Later, if you decide to switch from Prisma to TypeORM, you can keep the same YAML configuration. All you need to do is adapt the TypeORM client to conform to the YAML DSL of datasources. In this scenario, only the datasource implementation would change, while the rest of your code remains unchanged. For Example [Axios](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)
 

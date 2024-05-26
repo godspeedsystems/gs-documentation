@@ -12,10 +12,10 @@ Every Workflow has the following attributes.
 The `tasks` attribute is used to define a list of tasks or steps that need to be performed within a workflow or automation process. Each task is typically represented as a separate item in the list, and they are executed sequentially or in parallel, depending on the workflow's configuration. The `tasks` attribute helps organize and specify the specific actions or operations that need to be carried out as part of the workflow, making it a crucial component for defining the workflow's logic and behavior.
 
 - **id** - This is essential for improved logging visibility and is a mandatory requirement for each task. Furthermore, it plays a crucial role in accessing the output of the task in subsequent tasks through the 'outputs.{task_id}' path, as demonstrated in the example-2 above.
+- **summary** - This provides a summarised title for a task, enhancing code readability.
+- **description** - In this field, we can provide a detailed description of what the task actually accomplishes.
 
-- **description** - In this field, we can provide a detailed description of what the workflows actually accomplish.
-
-- **fn** - This specifies the handler that will be executed for this task. It can be a [built-in functions](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md)
+- **fn** - This specifies the handler that will be executed for this task. It can be [built-in YAML functions](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md) or functions written by developers in [YAML](./overview.md) or [Typescript](../native-language-functions.md).
 
 - **args** - Every handler function has its own argument structure, which is kept in the args key.
 
@@ -50,16 +50,16 @@ tasks:
 
 
 #### Inputs
- These are typically used to represent the input data or parameters required for a task. In the below workflow, we see references to `inputs.body.name`, which suggests that the task expects a value named "name" as input. This input data can come from external sources.
+ These are typically used to represent the input data or parameters captured from an event or the YAML workflow invocation. In the below workflow, we see references to `inputs.body.name`, which suggests that the task expects a value named "name" as input. This input data can come from external sources. In inputs, you will get `query`, `params`, `body`, `headers` & `user`.
 
 #### Outputs
-These represent the results or data produced by a task. In the below workflow, we have references like `outputs.transform_fn_step1.data`, indicating that the "data" produced by the task named "transform_fn_step1" is accessible as an output. This data can be used as input for subsequent tasks or for other purposes within the workflow.
+These represent the results produced by a task. In the below workflow, we have references like `outputs.transform_fn_step1.data`, indicating that the "data" produced by the task named "transform_fn_step1" is accessible as an output. This data can be used as input for subsequent tasks or for other purposes within the workflow.
 
 ```yaml
 summary: Invoke an API and convert the custom function provided in the arguments into the YAML functions format.
 tasks:
     - id: transform_fn_step1
-      description: find fn name
+      description: decide which function to call in next step
       fn: com.gs.transform
       args: |
         <js%
@@ -90,35 +90,7 @@ Upon the completion of each function execution, whether successful or not, the G
 - **code**: standard HTTP response codes[1xx, 2xx, 3xx, 4xx, 5xx] Default value is 200
 - **message**: any string explaining the response. Optional
 - **data**: the actual data returned from the task/function. Optional
-
-
-
-
-## Retry
-When an operation fails, instead of giving up immediately, the retry mechanism allows the system to make multiple subsequent attempts to execute the same operation, with the hope that the issue causing the failure is temporary and will be resolved in subsequent tries.
-
-Retry strategies can vary and may include parameters such as the maximum number of retry attempts, the type of retry algorithm (e.g., constant, exponential, or random intervals between retries), and the conditions under which retries should be triggered.
-
-```yaml
-summary: upload file
-  id: upload_file
-  tasks:
-    - id: step1 # the response of this will be accessible within the parent step key, under the step1 sub key
-      description: upload documents
-      fn: datasource.mongo.document.post
-      args:
-        params:
-        file_key: files
-        files: <% inputs.files %>
-
-      retry:
-        max_attempts: 5
-        type: constant/exponential/random
-        interval: PT15m/PT15s
-        #can select either 'internal' or use min and max interval.
-        min_interval: PT5s
-        max_interval: PT10s
-```
+- **headers**: any headers you want to set in response (in case of sync eventsources only)
 
 ## Error handling
 The `on_error` section defines how errors are managed within a workflow. It allows you to control whether the workflow should continue or stop in case of an error, what response or data to return in the event of an error, and how to log specific attributes related to the error. Additionally, it lets you specify a sequence of tasks to execute when an error occurs, enabling customized error handling and recovery procedures within the workflow.
