@@ -100,7 +100,7 @@ tasks:
         custom_response_header: 'something'
 ```
 
-The helloworld event is calling the above [event handler workflow](<(/docs/microservices-framework/workflows/overview)>) and executing a task from tasks with id `first_task`, which is then calling [`fn: com.gs.return`](../workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn) function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview).
+The helloworld event is calling the above [event handler workflow](</docs/microservices-framework/workflows/overview>) and executing a task from tasks with id `first_task`, which is then calling [`fn: com.gs.return`](../workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn) function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview).
 
 
 So far we have seen how can we use Express plugin and also we created an endpoint which returns a response with some code and headers. Meta-framework make it easy for you to get started quickly saving your time setting everthing from scratch, and as well helps you do incremental development with best practices based guardrails.
