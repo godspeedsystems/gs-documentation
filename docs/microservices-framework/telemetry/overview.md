@@ -12,7 +12,7 @@ It allows developers to have access to more accurate information about system fa
 
 An observability implementation includes a practice of collecting telemetry data such as:   
 **1. Metrics**: Collecting values about known performance measurements from your applications and infrastructure you can put on dashboards or use for alerting. It helps you find out when there’s a problem.    
-**2. Traces**: Collecting the trace od user requests throughout the various components of your applications and infrastructure. It helps you find out where a problem happens.   
+**2. Traces**: Collecting the trace of user requests throughout the various components of your applications and infrastructure. It helps you find out where a problem happens.   
 **3. Logs**: Collecting errors, warnings, and other information about events happening within applications and infrastructure. It helps you find out the cause of a problem.    
 
 ## Using OpenTelemetry
