@@ -77,7 +77,7 @@ Pre-made projects are a great place to start learning about the meta-framework. 
 
 #### Basic Project
 
-Repository - [Hello World](/docs/microservices-framework/getting-started/guide.md)
+Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
 
 #### Full Stack App
 A full stack app with Godspeed based backend and an embedded React project for frontend.
