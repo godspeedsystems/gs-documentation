@@ -1,52 +1,115 @@
 # Starting with Godspeed's meta-framework for Nodejs.
 
-In this section, you will learn how to install the meta-framework using the command line interface (CLI) and how to either create a new project with the framework or (in case of an existing Nodejs project) integrate Godspeed into it.
+In this section, you will learn how to 
+1. Install the meta-framework using the command line interface (CLI)
+2. Check Express server setup
+3. Check an HTTP endpoint and its controller (handler) function
+4. Open your API endpoint in Swagger UI and test it out
+5. See available plugins
 
 
 ### Pre-requisites:
 
-1. Node 18 and npm
+1. Nodejs v18 (or Bunjs) 
+2. Npm
 2. Git
 3. VS Code or any code editor
+3. Linux, Mac, Windows and other OS supporting Nodejs or Bunjs
 
-### Quick start
+### Step 1: Installation
 
 ```bash
   npm install -g @godspeedsystems/godspeed
-  godspeed create my_new_project
-  cd my_new_project
-  godspeed serve
-  # open localhost:3000/api-docs ( as per default port and 
-  # swagger endpoint as setup in eventsources/http.yaml)
 ```
 
+### Step 2: Create a project and start the server
 
-The default port number is `3000`, API base url is `/`, and swagger docs url is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
+1. `godspeed create my_new_project` #replace my_new_project with name of your project. This may take some time to install the required npm plugins and create your project. Be patient!
 
+2. `cd my_new_project` #Go to your project folder
+3. `godspeed serve` #Start the project
+4. Check the logs. They will show http Express server is running on port 3000 
+   ```
+   [16:46:45.437] INFO (15281 on wwwabcomin-HP-EliteBook-840-G3): [Production Server][Running] ('express:' event source, '3001' port).
+   ```
+
+### Step 3: Test the helloworld API
+1. Open `localhost:3000/api-docs` to open Swagger UI.
+
+   ![img](../../../static/img/swagger_helloworld.png)
+2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
+3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. 
+  ```
+    http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
+    fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
+    params: # JSON-Schema of API parameters like query, headers, path params. Note: This is set as per Swagger standard's `parameters` syntax
+      - name: name # This is our name query param
+        in: headersss # Notice the in: query This could be `path` or `headers` as well
+        required: true # Notice the `name` parameter is required
+        schema:
+          type: string
+    responses: # JSON-Schema of API responses for different status codes. Note: This is set as per Swagger standard's `responses` syntax
+      200:
+        content:
+          application/json:
+            schema:
+              type: string
+  ```
+### Step 4: Test the validation of API inputs and outputs
+
+Almost every application needs validation of data sent in inputs to the API and response sent back by the service. You want to make sure wrong data does not enter your service nor do you return wrong response for an API call. Let's try this feature in the framework.
+
+1. Open your browser and hit the `/helloworld` endpoint via `localhost:3000/helloworld`. Or, run `curl -i localhost:3000/helloworld` from your terminal.
+2. This should return an error with code `400` because you have not passed `name` in query - as expected by the schema of `helloworld` API. 
+
+```
+{
+  "validation_error": {
+    "success": false,
+    "code": 400,
+    "message": "request validation failed.",
+    "error": "must have required property 'name' in query",
+    "data": {
+      "message": "The API cannot be executed due to a failure in request params schema validation.",
+      "error": {
+        "instancePath": "",
+        "schemaPath": "#/required",
+        "keyword": "required",
+        "params": {
+          "missingProperty": "name"
+        },
+        "message": "must have required property 'name' in query"
+      }
+    }
+  }
+}
+
+```
+3. If you hit `localhost:3000/helloworld?name=mastersilv3r`, it should work.
+```
+Hello mastersilv3r
+```
+
+ 
+3. If you need access to the Swagger collection, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
+
+4. If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
+
+
+Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
+
+### Video Tutorial - Short
+There is a longer and detailed introduction video as well, below in this page.
+
+> Note: This video mentions `godspeed dev`. This is now replaced with `godspeed serve` command. As well the `from-examples` param of `godspeed create` command is deprecated and is not advised to use. If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '80%', height: '80%' }} src="https://www.youtube.com/embed/f1jlvaM7Sbo" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
 
-### Installation
-
-Godspeed CLI is the command center of a Godspeed project. It allows you to create & manage your Godspeed project. It is shipped via [npm](https://www.npmjs.com/package/@godspeedsystems/godspeed). You can go ahead and install it using the below command.
-
-
-```bash
-   npm install -g @godspeedsystems/godspeed
-```
+### CLI
 
 _To know more about all CLI commands, [click here](../CLI#supported-commands--arguments)_
-
-
-
-### Creating your project
-You can create a new project like this.
-```bash
-  godspeed create <project_name>
-```
-> This may take some time to install the required npm plugins and create your project. Be patient!
 
 ### Building and running your project
 
@@ -91,6 +154,8 @@ A more complex fintech project with diverse use cases for issuing loans via mult
 Repository - [Loan Origination System](https://github.com/godspeedsystems/gs-node-templates/tree/master/LOS). 
 
 _Check the Readme.md and Setup.md files in this repo as it requires a docker container of Postgres and Kafka to be running. Dockerfile is provided in the project._
+
+### Video Tutorial - Longer and in depth
 
 **A walkthough on a meta-framework project with Loan Origination System example**
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
