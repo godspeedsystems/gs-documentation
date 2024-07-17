@@ -38,7 +38,8 @@ In this section, you will learn how to
 
    ![img](../../../static/img/swagger_helloworld.png)
 2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
-3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. 
+3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. YOu will notice the configuration of the API call are in YAML format.
+
   ```
     http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
     fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
@@ -55,6 +56,10 @@ In this section, you will learn how to
             schema:
               type: string
   ```
+:::tip
+In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. This naming approach may be new for you. The general norm across the larger developer community is to call only `async events` as `events` - for ex. Kafka or web socket message. But in Godspeed world we consider both sync APIs (REST, Graphql) and async events (Message bus, web socket, cron) - as events. All events, whether API calls or websocket messages, trigger functions which can be thought of as event handlers (see `fn` instruction in the yaml above). The sync events return a response while async events dont have a concept of response.
+:::
+
 ### Step 4: Test the validation of API inputs and outputs
 
 Almost every application needs validation of data sent in inputs to the API and response sent back by the service. You want to make sure wrong data does not enter your service nor do you return wrong response for an API call. Let's try this feature in the framework.

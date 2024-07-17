@@ -22,6 +22,9 @@ Kafka is your dynamic data stream and event maestro! As a datasource, it floods 
 
 GraphQL is a query language and runtime for APIs that enables clients to request precisely the data they need. It allows developers to describe the structure of the data they require, providing a more efficient and flexible alternative to traditional REST APIs. GraphQL empowers front-end developers to shape their API requests, minimizing over-fetching and under-fetching of data.
 
+### 5. [fastify-as-eventsource](https://www.npmjs.com/package/@godspeedsystems/plugins-fastify-as-http)
+
+
 ## How to add plugin in your project?
 To integrate these plugins into your project, simply use the command:
 
