@@ -232,7 +232,6 @@ If authorization is enabled at eventsource level for all its events, but you wis
 
 ### Reference Projects
 
-:::tip Note
 For further learning resources and materials to kickstart your Godspeed development journey, please clone the [gs-node-templates](https://github.com/godspeedsystems/gs-node-templates.git) repository. This repository contains following examples for now.
 
 - hello_world
@@ -240,8 +239,20 @@ For further learning resources and materials to kickstart your Godspeed developm
 - Loan Origination System - the most complex example with fintech usecase
   - Before running the LOS code, do read its setup.md file
 
-#### A walkthough on a Godspeed project with Loan Origination System example
+### Detailed Walkthrough & Playlist
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="280" height="156" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
+#### Walkthrough
+A walkthough on a Godspeed project with Loan Origination System example
+
+<div style={{ margin: '20px auto' }}>
+  <iframe src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
 </div>
+
+#### Detailed Explainer Playlist
+:::tip
+[Watch here](https://www.youtube.com/watch?v=GdJ0ghpQ7oA&list=PLRuRJ3PaaJ7ti9bfStNTXqsxxW9wvwA_H)
+:::
+
+### There is more
+
+For the sake of brevity this section does not include every feature of Godspeed. But feel free to browse the documentatin for more insights and gems!
