@@ -6,12 +6,9 @@ title: Generating CRUD API
 
 Currently the framework generates CRUD API using Prisma's database model files and ORM client. It uses the [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM. And it generates `http` eventsource based CRUD API by default. Currently supported http eventsources are [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md) and [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md). You can expose it via Graphql eventsource as well, with currently supported [Apollo Graphql plugin](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md).   
 
-:::tip
-You can use prisma commands without yourself installing prisma through Godspeed, via `godspeed prisma <prisma_command_and_args>`. The `godspeed prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
-:::
 
 ### Steps to generate CRUD API over REST and Graphql
-1. If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `godspeed prisma db pull`. This will generate your .prisma file. 
+1. If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `prisma db pull`. This will generate your .prisma file. 
   
   1.1 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch. 
   

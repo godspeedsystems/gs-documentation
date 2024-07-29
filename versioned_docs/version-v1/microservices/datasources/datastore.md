@@ -106,18 +106,9 @@ import { PrismaClient } from './src/datasources/generated-clients/mongo2'
 const prisma = new PrismaClient()
 ```
 
-#### Step 2: godspeed prisma db push
+#### Step 2: prisma db push
 ```
-$ godspeed prisma db push --schema=./src/datasources/mongo.prisma 
-                      _                                   _ 
-   __ _    ___     __| |  ___   _ __     ___    ___    __| |
-  / _` |  / _ \   / _` | / __| | '_ \   / _ \  / _ \  / _` |
- | (_| | | (_) | | (_| | \__ \ | |_) | |  __/ |  __/ | (_| |
-  \__, |  \___/   \__,_| |___/ | .__/   \___|  \___|  \__,_|
-  |___/                        |_|                          
-Environment variables loaded from .env
-Prisma schema loaded from src/datasources/mongo.prisma
-Datasource "db"
+$ prisma db push --schema=./src/datasources/mongo.prisma 
 
 The database is already in sync with the Prisma schema.
 
