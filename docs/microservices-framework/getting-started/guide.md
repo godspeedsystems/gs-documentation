@@ -98,7 +98,7 @@ import { GSContext, PlainObject } from "@godspeedsystems/core";
 
 export default function (ctx: GSContext) {
     const {body, headers, params, query, user} = ctx.inputs.data;
-    const name: string = params?.name; //name expected in request query
+    const name: string = query.name; //name expected in request query
     return {
         data: 'Its working! ' + name, //the data key gets set as the body in API response
         code: 200, //Response status code
