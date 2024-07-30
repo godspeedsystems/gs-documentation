@@ -38,14 +38,14 @@ In this section, you will learn how to
 
    ![img](../../../static/img/swagger_helloworld.png)
 2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
-3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. YOu will notice the configuration of the API call are in YAML format.
+3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. You will notice the configuration of the API call are in YAML format.
 
   ```
     http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
     fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
     params: # JSON-Schema of API parameters like query, headers, path params. Note: This is set as per Swagger standard's `parameters` syntax
       - name: name # This is our name query param
-        in: headersss # Notice the in: query This could be `path` or `headers` as well
+        in: query # Notice the in: query This could be `path` or `headers` as well
         required: true # Notice the `name` parameter is required
         schema:
           type: string
