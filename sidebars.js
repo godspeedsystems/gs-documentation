@@ -297,15 +297,64 @@ const sidebars = {
                   id: "microservices-framework/datasources/datasource-plugins/Overview",
                 },
                 {
-                  type: "doc",
-                  label: "7.4.2. Prisma Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                  type: "category",
+                  label: "7.4.2. DB Datasource",
+                  items: [
+                    {
+                     type: "doc",
+                     label: "7.4.2.1. Overview",
+                     id: "microservices-framework/datasources/datasource-plugins/db-datasource/Overview",
+                   },
+                   {
+                    type: "doc",
+                    label: "7.4.2.2. MongoDB",
+                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/MongoDB",
+                   },
+                   {
+                    type: "doc",
+                    label: "7.4.2.3. MySQL",
+                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/MySQL",
+                   },
+                    {
+                    type: "doc",
+                    label: "7.4.2.4. PostgreSQL",
+                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/PostgreSQL",
+                   },
+                   {
+                    type: "doc",
+                    label: "7.4.2.5. SQLite",
+                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/SQLite",
+                   },
+                   {
+                     type: "doc",
+                     label: "7.4.2.6. SQL Server",
+                     id: "microservices-framework/datasources/datasource-plugins/db-datasource/SQLServer",
+                    },
+                    {
+                      type: "doc",
+                      label: "7.4.2.7. CokroachDB",
+                      id: "microservices-framework/datasources/datasource-plugins/db-datasource/CokroachDB",
+                    },
+                     {
+                       type: "doc",
+                       label: "7.4.2.8. MariaDB",
+                       id: "microservices-framework/datasources/datasource-plugins/db-datasource/MariaDB",
+                      },
+                  //id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "7.4.3. Axios Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                },
+                  type: "category",
+                  label: "7.4.3. API Datasource",
+                 //id: "microservices-framework/datasources/datasource-plugins/Api Datasources",
+                  items: [
+                   {
+                    type: "doc",
+                    label: "7.4.3.1. Axios",
+                    id: "microservices-framework/datasources/datasource-plugins/api-datasource/Axios Datasource",
+                   },
+                  ], 
+                 },
                 {
                   type: "doc",
                   label: "7.4.4. AWS Datasource",
@@ -321,11 +370,11 @@ const sidebars = {
                   label: "7.4.6. Redis Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
                 },
-                {
-                  type: "doc",
-                  label: "7.4.7. Mongoose Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
-                },
+                // {
+                //   type: "doc",
+                //   label: "7.4.7. Mongoose Datasource",
+                //   id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
+                // },
                 {
                   type: "doc",
                   label: "7.4.7. Kafka Datasource",
