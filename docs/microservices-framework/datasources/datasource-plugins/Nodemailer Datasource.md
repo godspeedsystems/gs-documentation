@@ -11,6 +11,30 @@ Sending emails in your Node.js application has never been smoother. The Godspeed
 
 Whether you're sending transactional emails, newsletters, or notifications, this plugin empowers you to deliver messages with Godspeed. Let's elevate your email game together!
 
+## How to Use
+Open the godspeed project in vscode and then add the plugin from the CLI of vscode, selecting mailer-as-datastore plugin.
+The plugin can also be directly installed by running npm i @godspeedsystems/plugins-mailer-as-datastore command.
+
+> godspeed plugin add
+       ,_,   ╔════════════════════════════════════╗
+      (o,o)  ║        Welcome to Godspeed         ║
+     ({___}) ║    World's First Meta Framework    ║
+       " "   ╚════════════════════════════════════╝
+? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
+┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
+│      │ Name                               │ Description                                                        │
+├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
+│  ◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
+├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
+│  ◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
+├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
+│  ◯   │ excel-as-datasource                │ excel as datasource plugin for Godspeed Framework                  │
+├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
+│ ❯◯   │ mailer-as-datasource               │ mailer as datasource plugin for Godspeed Framework                 │
+├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
+│  ◯   │ kafka-as-datasource-as-eventsource │ kafka as datasource-as-eventsource plugin for Godspeed Framework   │
+└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+
 ## Example usage
 
 ### Config
@@ -19,6 +43,7 @@ type: mail
 user: 'godspeed@gmail.com'
 pass: 'rmeb bjak xcam xkub'
 ```
+Please make sure to use [app-specific-pasword](https://support.google.com/accounts/answer/185833?hl=en) here
 
 ### Event for Producer
 ```yaml title=src/events/mail_send_event.yaml
