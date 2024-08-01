@@ -14,7 +14,11 @@ Currently the framework generates CRUD API using Prisma's database model files a
   
   1.2 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
 
-  If your file name is lending_service_db.prisma, your file content should look like this. 
+  1.3 Also, you have to add a new variable to the .env file whose value is the direct database connection string.
+  ```
+    POSTGRES_URL= postgresql://postgres:postgres@172.23.0.2:5432/emp
+  ```
+If your file name is lending_service_db.prisma, your file content should look like this. 
   ```prisma
     datasource db {
       provider = "postgresql" // or "mysql", "sqlite", "sqlserver" etc.
