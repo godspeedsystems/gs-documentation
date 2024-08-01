@@ -336,16 +336,6 @@ const sidebars = {
                   label: "7.4.8. Memcached Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
                 },
-                {
-                  type: "doc",
-                  label: "7.4.9. Excel Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Excel Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "7.4.10. Dynamodb Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Dynamodb Datasource",
-                }
               ],
             },
             {
