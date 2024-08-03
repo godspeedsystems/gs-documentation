@@ -1,5 +1,6 @@
 PostgreSQL can also be connected using the Prisma-as-datasource plugin.
 
+### Pre-requisites
 In order to use PostgreSQL database you need:
  1.	an existing godspeed project with “prisma-as-datasource plugin” installed
  2.	a PostgreSQL database server running
@@ -20,15 +21,16 @@ If you are running PostgreSQL locally, your connection URL will be like this:
 ```
 DATABASE_URL="postgresql://johndoe:password@localhost:5432/mydb?schema=public"
 ```
-
+### Setting Environment Variable
 You can define the database connection url as an environment variable in .env as :
 ```
 DATABASE_URL="postgresql://janedoe:jdoe@localhost:5432/janedoe?schema=db_godspeed"
 ```
 And then this environment variable is provided in the url field of the datasource block in your prisma schema  src/datasources/Postgre.prisma
 
+### Sample prisma schema for PostgreSQl
 <details>
-<summary> Sample prisma schema for PostgreSQL database  </summary>
+<summary> Sample prisma schema </summary>
 
 ```src/datasources/Postgre.prisma
 

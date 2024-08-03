@@ -3,34 +3,16 @@
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
-
-npm [package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+**- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
+     
+**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
 ## Overview
-Prisma-as-datasource plugin provide functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through [Prisma ORM](https://www.prisma.io/docs).
+Prisma-as-datasource plugin provides functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through [Prisma ORM](https://www.prisma.io/docs).
 
 **"Prisma: Bridging Databases for Seamless Development. One Toolkit, Any Database."**
 
 Prisma is a modern and open-source database toolkit that simplifies database access for developers. It offers a strongly typed query builder, schema migrations, support for various databases, real-time data synchronization, and enhanced security, making it a powerful tool for efficient and secure database interactions in web applications.
-
-## Databases supported by Prisma 
-Prisma supports a variety of data sources, allowing you to connect to and work with different database systems. As of my last knowledge update in September 2021, Prisma supports the following data sources:
-
-**1. PostgreSQL**: Prisma has strong support for PostgreSQL, one of the most popular open-source relational database systems.
-
-**2. MySQL**: Prisma can be used with MySQL, another widely used open-source relational database management system.
-
-**3. SQLite**: SQLite is a serverless, self-contained, and zero-configuration database engine, and Prisma supports it as well.
-
-**4. SQL Server**: Prisma offers support for Microsoft SQL Server, a popular commercial relational database management system.
-
-**5. MongoDB (Experimental)**: Prisma also has experimental support for MongoDB, a NoSQL database, although this support may not be as mature as for relational databases.
-
-**6. CockroachDB**: A distributed, resilient SQL database for large-scale, cloud-native applications.
-
-**7. MariaDB**: An open-source, high-performance relational database system and MySQL-compatible alternative.
-
-**8. PlanetScale**: PlanetScale is a database-as-a-service platform designed for distributed SQL databases. It provides a managed, scalable, and highly available database solution for modern, cloud-native applications.
 
 ## How to add plugin
 ### Add plugin
@@ -59,112 +41,64 @@ Create a godspeed project from the CLI , open the created project in vscode and 
 ```
 
 ### Related files
-You will find the a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
+You will find a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
 ```typescript title=prisma.ts
 import { DataSource } from '@godspeedsystems/plugins-prisma-as-datastore';
 export default DataSource;
 ```
-Now, you can create your prisma schema in `src/datasources` directory. 
 
 ## How to use
 You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema).
+`src/datasources` directory and giving your db_connection_url in .env file.  
 
 <details>
-<summary>Sample prisma schema for mongo database</summary>
+#SamplePrisma
+<summary>Sample prisma schema </summary>
 
-```prisma title=src/datasources/mongo.prisma
+prisma title = src/datasources/db_name.prisma
+```
 datasource db {
-  provider = "mongodb"
-  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
+  provider = "db_name"   // for example, mysql, postgresql or mongodb
+  url      = env("DB_URL") // add your DB_URL string in .env file
 }
 
 generator client {
   provider = "prisma-client-js"
+  output = "./prisma-clients/db_name" // here you can give name for your prisma-client     
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
-  posts     Post[]
+
 }
 
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  title     String
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String   @db.ObjectId
+  
 }
 
-enum Role {
-  USER
-  ADMIN
-}
 ```
-
 </details>
 
 ### Support for multiple prisma schema
-By default, only single prisma schema can be created in a project that can use only one database as given in the above example.   
-To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the below sample prisma schema:
-
-<details>
-<summary>Support multiple prisma schemas</summary>
-
-```prisma title=src/datasources/mongo.prisma
-datasource db {
-  provider = "mongodb"
-  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
-}
-
-generator client {
-  provider = "prisma-client-js"
-  output = "./prisma-clients/mongo"
-}
-
-model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
-  posts     Post[]
-}
-
-model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  title     String
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String   @db.ObjectId
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-```
-
-</details>
-
-Once you [generate prisma client](#generate-prisma-client), the multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
+By default, only single prisma schema can be created in a project that can use only one database. To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema.
 
 ### Generate prisma client
-This command will generate the prisma client and will sync the database with prisma schema
-```bash
-godspeed prisma prepare
-```
+Run `godspeed prisma prepare`. It will 
+
+  4.1 Generate your prisma client for your given schema and DB. It will place the generated client in the `src/datasources/prisma-clients/` folder. This is achieved internally by `prisma generate` command. 
+
+  4.2 It will setup the provided schema on the database which is provided in the .prisma file. This is achieved internally by the command `prisma db push`
+
+  ```bash
+  
+  $ godspeed prisma prepare
+ 
+  ```
+Once you [generate prisma client](#generate-prisma-client), the multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
 
 ### Generate CRUD APIs
 You can generate the CRUD API'S enter the below command:
 ```bash
+
 godspeed gen-crud-api
 ```
 * This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma
@@ -213,7 +147,7 @@ In your prisma schema, add `/// @encrypted` annotation to the fields you want to
 ```prisma title=src/datasources/mongo.prisma
 datasource db {
   provider = "mongodb"
-  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
+  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env file, you can add your own database connection string
 }
 
 generator client {
@@ -251,7 +185,7 @@ enum Role {
 #### Add secret
 You can specify secret in `prisma_secret` variable in [config environment variables](../../config-and-mappings/config.md/#custom-environment-variablesyaml).
 
-### Database authorization
+### Database Authorization
 The plugin provides rows and columns level authorization access as explained in [Authorization](../../authorization/authz-usecases.md#d-restricting-datastore-access). If you are not allowed to access something, then empty data is returned.   
 **- **empty rows (e.g. in case where query trespasses access boundaries)   
 **- **empty fields (e.g. in case all the fields in the query are not allowed to access)    

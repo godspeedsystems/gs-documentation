@@ -5,7 +5,6 @@ In this section, you will learn how to
 2. Check Express server setup
 3. Check an HTTP endpoint and its controller (handler) function
 4. Open your API endpoint in Swagger UI and test it out
-5. See available plugins
 
 
 ### Pre-requisites:
@@ -164,10 +163,8 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
 
 **A walkthough on a meta-framework project with Loan Origination System example**
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameBorder="0" allowFullScreen></iframe>
 </div>
-
-
 
 ### For any help
 Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#plugin)  

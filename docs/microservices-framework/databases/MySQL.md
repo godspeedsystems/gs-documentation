@@ -1,5 +1,7 @@
 MySQL, a widely used open-source relational database management system can be connected easily using the Prisma-as-datasource plugin.
 
+### Pre-requisites
+
 In order to use MySql database you need:
  1.	an existing godspeed project with “prisma-as-datasource plugin” installed
  2.	a MySQL database server running
@@ -21,6 +23,7 @@ If you are running MySQL locally, your connection URL will be like this:
 "mysql://root:password@localhost:3306/yourdb"
 ```
 
+### Setting Environment Variable
 You can define the database connection url as an environment variable in .env as :
 ```
 DATABASE_URL="mysql://root:password@localhost:3306/yourdb"
@@ -33,17 +36,19 @@ datasource db {
   url      = env("DATABASE_URL") 
 }
 ```
+
+### Sample prisma schema for MariaDB
 <details>
-<summary> Sample prisma schema for MySql database  </summary>
+<summary> Sample prisma schema for MariaDb </summary>
 
 ```
 datasource db {
-  provider = "mysql"
+  provider = "mariadb"
   url      = env("DATABASE_URL")
 }
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/mysql"
+  output = "./prisma-clients/mariadb"
   previewFeatures = ["metrics"]
 }
 

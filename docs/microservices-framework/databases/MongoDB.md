@@ -1,12 +1,13 @@
 MongoDB is a popular NoSQL database. In Godspeed, you can connect to MongoDB in two ways:
-### 1. Using Mongoose-as-datasource Plugin
-### 2. Using Prisma-as-datasource Plugin
+#### 1. [Using Mongoose-as-datasource Plugin](#mongoose-as-datasource-plugin) [(Plugin Repository)](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datastore)
+#### 2. [Using Prisma-as-datastore Plugin](#prisma-as-datastore-plugin) [(Plugin Repository)](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datasource)
 
-## Mongoose as a datasource: 
+## Mongoose as datasource Plugin
+
 This plugin provides seamless integration with MongoDB through the Mongoose library. With this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
-## How to Use
-**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the 'mongoose-as-datastore` to integrate the plugin.
+### How to Use
+**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select 'mongoose-as-datasource' to integrate the plugin.
 ```
 > godspeed plugin add
        ,_,   ╔════════════════════════════════════╗
@@ -17,14 +18,14 @@ This plugin provides seamless integration with MongoDB through the Mongoose libr
 ┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
 │      │ Name                               │ Description                                                        │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ mongoose-as-datastore                │ Mongoose as a datasource plugin for Godspeed Framework.              │
+│ ❯◯   │ mongoose-as-datasource            │ Mongoose as a datasource plugin for Godspeed Framework             │
 └──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
 ```
-**- ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-mongoose-as-datastore` command.   
+**- ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-mongoose-as-datasource` command.   
 **- ** You will find two files in your project related to the Prisma plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
-import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datastore';
+import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datasource';
 export default DataSource;
 ```
 
@@ -38,7 +39,7 @@ successResponseCodes: #default response codes for success responses
   findOneAndUpdate: 201
   findOneAndDelete: 202
 ```
- ![Alt text](../../../../../static/img/mongoose_folder_structure.png)
+ ![Alt text](../../../static/img/mongoose_folder_structure.png)
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
 the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
 calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
@@ -49,7 +50,7 @@ calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workfl
 ### Setting up Mongoose models
 This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.html) from `datasources/<datasource_name>/models` folder.
 
-![Alt text](../../../../../static/img/mongoose_folder_structure.png)
+![Alt text](../../../static/img/mongoose_folder_structure.png)
 
 **Example Mongoose model file**   
 These files are stored in `datasources/<datasource_name>/models` folder Your TS or JS file should export as following
@@ -189,12 +190,13 @@ When a call has an error the datasource returns following `GSStatus`.
   ```bash
   godspeed serve
   ```
-## 2. Using Prisma-as-datasource Plugin
+## Prisma as Datastore Plugin
+
 Prisma has experimental support for MongoDB, although this support may not be as mature as for relational databases. 
 Make sure you have access to a MongoDB 4.2+ server with a replica set deployment. As, MongoDB database connector uses transactions to support nested writes, which require a replica set deployment. The easiest way to deploy a replica set is with Atlas.
 
-## How to Use
-**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the 'prisma-as-datastore` to integrate the plugin.
+### How to Use
+**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the 'prisma-as-datastore' to integrate the plugin.
 
 ```
 > godspeed plugin add
@@ -206,7 +208,7 @@ Make sure you have access to a MongoDB 4.2+ server with a replica set deployment
 ┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
 │      │ Name                               │ Description                                                        │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
+│ ❯◯   │ prisma-as-datastore                │ Prisma as a datastore plugin for Godspeed Framework.              │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
 │  ◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
@@ -220,14 +222,19 @@ Make sure you have access to a MongoDB 4.2+ server with a replica set deployment
 
 ### Related files
 You will find a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
+
 ```typescript title=prisma.ts
 import { DataSource } from '@godspeedsystems/plugins-prisma-as-datastore';
 export default DataSource;
 ```
-Now, you can create your prisma schema in `src/datasources` directory. 
+### Set your connection url in .env file, See example
 
-## How to start
-You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema).
+```
+MONGO_TEST_URL=mongodb+srv://atlas_username:pswd@cluster0.w3bbqrp.mongodb.net/prisma_test?retryWrites=true&w=majority&appName=Cluster0
+```
+### Create your prisma schema
+
+Now, you can create your [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) in `src/datasources` directory. 
 
 <details>
 <summary>Sample prisma schema for mongo database</summary>
@@ -235,7 +242,7 @@ You can start using this plugin by writing a [prisma schema](https://www.prisma.
 ```prisma title=src/datasources/mongo.prisma
 datasource db {
   provider = "mongodb"
-  url      = env("MONGO_TEST_URL") //Connection string can be found in the .env folder. you can add your own database connection string
+  url      = env("MONGO_TEST_URL")  //Connection string added in the .env file
 }
 
 generator client {
@@ -274,7 +281,6 @@ enum Role {
 By default, only single prisma schema can be created in a project that can use only one database as given in the above example.   
 To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema:
 
-
 ### Generate prisma client
 This command will generate the prisma client and will sync the database with prisma schema
 ```bash
@@ -292,7 +298,8 @@ godspeed gen-crud-api
 * Now you can view the event and workflows according defined prisma schema
 
 ### Sample API
-Here is a sample event and workflow which is fetching data from the database.
+Here is a sample event and workflow for mongodb, which is fetching data from the database.
+
 ```yaml title=src/events/mongo.yaml
 http.get./mongo/post/{id}:
   summary: Fetch Post
@@ -324,8 +331,7 @@ tasks:
 ## Reference links
 **- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
 **- ** [Mongoose Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+**- ** [npm package for Prisma](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
  
 

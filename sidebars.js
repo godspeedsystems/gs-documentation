@@ -62,17 +62,17 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "2. Getting started",
+          label: "2. Guide",
           items: [
             {
               type: "doc",
-              label: "2.1. Overview",
-              id: "microservices-framework/getting-started/overview",
+              label: "2.1. Getting Started",
+              id: "microservices-framework/guide/get-started",
             },
             {
               type: "doc",
-              label: "2.2. Guide",
-              id: "microservices-framework/getting-started/guide",
+              label: "2.2. Brief Walkthrough",
+              id: "microservices-framework/guide/walkthrough",
             },
             // {
             //   type: "doc",
@@ -86,69 +86,118 @@ const sidebars = {
           label: "3. CLI",
           id: "microservices-framework/CLI",
         },
+   
+        {
+          type: "category",
+          label: "4. Databases",
+          items: [
+            {
+              type: "doc",
+              label: "4.1. Overview",
+              id: "microservices-framework/databases/Overview",
+            },
+            {
+              type: "doc",
+              label: "4.2. MongoDB",
+              id: "microservices-framework/databases/MongoDB",
+            },
+            {
+               type: "doc",
+               label: "4.3. MySQL",
+               id: "microservices-framework/databases/MySQL",
+             },
+             {
+              type: "doc",
+              label: "4.4. PostgreSQL",
+              id: "microservices-framework/databases/PostgreSQL",
+             },
+           
+             {
+               type: "doc",
+                label: "4.5 SQL Server",
+                id: "microservices-framework/databases/SQLServer",
+             },
+             {
+                type: "doc",
+                label: "4.6 CokroachDB",
+                id: "microservices-framework/databases/CokroachDB",
+             },
+             {
+                type: "doc",
+                label: "4.7 MariaDB",
+                id: "microservices-framework/databases/MariaDB",
+             },
+             {
+              type: "doc",
+              label: "4.8. PlanetScale",
+              id: "microservices-framework/databases/PlanetScale",
+            },
+          ],
+        },
+      
         {
           type: "doc",
-          label: "4. Generate CRUD API",
+          label: "5. Generate CRUD API",
           id: "microservices-framework/CRUD_API",
         },
         {
           type: "category",
-          label: "5. Event sources",
+          label: "6. Event sources",
           items: [
             {
               type: "doc",
-              label: "5.1. Overview",
+              label: "6.1. Overview",
               id: "microservices-framework/event-sources/overview",
             },
             {
               type: "doc",
-              label: "5.2. Event Schema",
+              label: "6.2. Event Schema",
               id: "microservices-framework/event-sources/event-schema",
             },
 
             {
               type: "category",
-              label: "5.3. Event Types",
+              label: "6.3. Event Types",
               items: [
                 {
                   type: "doc",
-                  label: "5.3.1. Overview",
+                  label: "6.3.1. Overview",
                   id: "microservices-framework/event-sources/event-types/overview",
                 },
                 {
                   type: "doc",
-                  label: "5.3.2. Http Events",
+                  label: "6.3.2. Http Events",
                   id: "microservices-framework/event-sources/event-types/http-events",
                 },
                 {
                   type: "doc",
-                  label: "5.3.3. Cron Events",
+                  label: "6.3.3. Cron Events",
                   id: "microservices-framework/event-sources/event-types/cron-events",
                 },
                 {
                   type: "doc",
-                  label: "5.3.4. Kafka Events",
+                  label: "6.3.4. Kafka Events",
                   id: "microservices-framework/event-sources/event-types/kafka-events",
                 },
                 {
                   type: "doc",
-                  label: "5.3.5. Apollo Graphql Events",
+                  label: "6.3.5. Apollo Graphql Events",
                   id: "microservices-framework/event-sources/event-types/graphql-events",
                 },
               ],
             },
             {
               type: "category",
-              label: "5.4. Validations",
+              label: "6.4. Validations",
               items: [
                 {
                   type: "doc",
-                  label: "5.4.1. Schema Validation",
+                  label: "6.4.1. Schema Validation",
                   id: "microservices-framework/event-sources/validations/schema-validation",
                 },
                 {
                   type: "doc",
-                  label: "5.4.2. Validation Error",
+                  label: "6.4.2. Validation Error",
                   id: "microservices-framework/event-sources/validations/validation-error",
                 },
               ],
@@ -160,48 +209,48 @@ const sidebars = {
             // },
             {
               type: "doc",
-              label: "5.5. Create custom event source",
+              label: "6.5. Create custom event source",
               id: "microservices-framework/event-sources/create-custom-event-source",
             },
 
             {
               type: "doc",
-              label: "5.6. Create event source plugin",
+              label: "6.6. Create event source plugin",
               id: "microservices-framework/event-sources/create-eventsource-plugin",
             },
             {
               type: "category",
-              label: "5.7. Eventsource Plugins",
+              label: "6.7. Eventsource Plugins",
               // id: "microservices-framework/event-sources/event-source-plugins",
               items: [
                 {
                   type: "doc",
-                  label: "5.7.1. Overview",
+                  label: "6.7.1. Overview",
                   id: "microservices-framework/event-sources/event-source-plugins/Overview",
                 },
                 {
                   type: "doc",
-                  label: "5.7.2. Express - Http Eventsource",
+                  label: "6.7.2. Express - Http Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Express Http Eventsource",
                 },
                 {
                   type: "doc",
-                  label: "5.7.3. Cron Eventsource",
+                  label: "6.7.3. Cron Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Cron Eventsource",
                 },
                 {
                   type: "doc",
-                  label: "5.7.4. Kafka Eventsource",
+                  label: "6.7.4. Kafka Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Kafka Eventsource",
                 },
                 {
                   type: "doc",
-                  label: "5.7.5. GraphQl Eventsource",
+                  label: "6.7.5. GraphQl Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
                 },
                 {
                   type: "doc",
-                  label: "5.7.6. Fastify Eventsource",
+                  label: "6.7.6. Fastify Eventsource",
                   id: "microservices-framework/event-sources/event-source-plugins/Fastify Eventsource",
                 },
               ],
@@ -220,36 +269,36 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "6. Workflows",
+          label: "7. Workflows",
           items: [
             {
               type: "doc",
-              label: "6.1. Overview",
+              label: "7.1. Overview",
               id: "microservices-framework/workflows/overview",
             },
             {
               type: "doc",
-              label: "6.2. Native language workflows",
+              label: "7.2. Native language workflows",
               id: "microservices-framework/workflows/native-language-functions",
             },
             {
               type: "category",
-              label: "6.3. Yaml workflows",
+              label: "7.3. Yaml workflows",
               // id: "microservices-framework/workflows/yaml-dsl-functions"
               items: [
                 {
                   type: "doc",
-                  label: "6.3.1. Overview",
+                  label: "7.3.1. Overview",
                   id: "microservices-framework/workflows/yaml-workflows/overview",
                 },
                 {
                   type: "doc",
-                  label: "6.3.2. Workflow DSL",
+                  label: "7.3.2. Workflow DSL",
                   id: "microservices-framework/workflows/yaml-workflows/workflow-dsl",
                 },
                 {
                   type: "doc",
-                  label: "6.3.3. Inbuilt workflows",
+                  label: "7.3.3. Inbuilt workflows",
                   id: "microservices-framework/workflows/yaml-workflows/inbuilt-workflows",
                 },
               ],
@@ -269,127 +318,78 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "7. DataSources",
+          label: "8. DataSources",
           items: [
             {
               type: "doc",
-              label: "7.1. Overview",
+              label: "8.1. Overview",
               id: "microservices-framework/datasources/overview",
             },
             {
-              type: "doc",
-              label: "7.2. Create Custom DataSource",
-              id: "microservices-framework/datasources/create-custom-datasource",
-            },
-            {
-              type: "doc",
-              label: "7.3. Create DataSource Plugin",
-              id: "microservices-framework/datasources/create-datasource-plugin",
-            },
-
-            {
               type: "category",
-              label: "7.4. Datasource Plugins",
+              label: "8.2. Datasource Plugins",
               items: [
                 {
                   type: "doc",
-                  label: "7.4.1. Overview",
+                  label: "8.2.1. Overview",
                   id: "microservices-framework/datasources/datasource-plugins/Overview",
                 },
                 {
-                  type: "category",
-                  label: "7.4.2. DB Datasource",
-                  items: [
-                    {
-                     type: "doc",
-                     label: "7.4.2.1. Overview",
-                     id: "microservices-framework/datasources/datasource-plugins/db-datasource/Overview",
-                   },
-                   {
-                    type: "doc",
-                    label: "7.4.2.2. MongoDB",
-                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/MongoDB",
-                   },
-                   {
-                    type: "doc",
-                    label: "7.4.2.3. MySQL",
-                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/MySQL",
-                   },
-                    {
-                    type: "doc",
-                    label: "7.4.2.4. PostgreSQL",
-                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/PostgreSQL",
-                   },
-                   {
-                    type: "doc",
-                    label: "7.4.2.5. SQLite",
-                    id: "microservices-framework/datasources/datasource-plugins/db-datasource/SQLite",
-                   },
-                   {
-                     type: "doc",
-                     label: "7.4.2.6. SQL Server",
-                     id: "microservices-framework/datasources/datasource-plugins/db-datasource/SQLServer",
-                    },
-                    {
-                      type: "doc",
-                      label: "7.4.2.7. CokroachDB",
-                      id: "microservices-framework/datasources/datasource-plugins/db-datasource/CokroachDB",
-                    },
-                     {
-                       type: "doc",
-                       label: "7.4.2.8. MariaDB",
-                       id: "microservices-framework/datasources/datasource-plugins/db-datasource/MariaDB",
-                      },
-                  //id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "7.4.3. API Datasource",
-                 //id: "microservices-framework/datasources/datasource-plugins/Api Datasources",
-                  items: [
-                   {
-                    type: "doc",
-                    label: "7.4.3.1. Axios",
-                    id: "microservices-framework/datasources/datasource-plugins/api-datasource/Axios Datasource",
-                   },
-                  ], 
+                  type: "doc",
+                  label: "8.2.2. Prisma Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                 },
+                 {
+                   type: "doc",
+                   label: "8.2.3. Axios Datasource",
+                   id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
                  },
                 {
                   type: "doc",
-                  label: "7.4.4. AWS Datasource",
+                  label: "8.2.4. AWS Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
                 },
                 {
                   type: "doc",
-                  label: "7.4.5. Nodemailer Datasource",
+                  label: "8.2.5. Nodemailer Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
                 },
                 {
                   type: "doc",
-                  label: "7.4.6. Redis Datasource",
+                  label: "8.2.6. Redis Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
                 },
-                // {
-                //   type: "doc",
-                //   label: "7.4.7. Mongoose Datasource",
-                //   id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
-                // },
                 {
                   type: "doc",
-                  label: "7.4.7. Kafka Datasource",
+                  label: "8.2.7. Mongoose Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "8.2.8. Kafka Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
                 },
                 {
                   type: "doc",
-                  label: "7.4.8. Memcached Datasource",
+                  label: "8.2.9. Memcached Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
                 },
               ],
             },
             {
               type: "doc",
-              label: "7.5. Caching",
+              label: "8.3. Create Custom DataSource",
+              id: "microservices-framework/datasources/create-custom-datasource",
+            },
+            {
+              type: "doc",
+              label: "8.4. Create DataSource Plugin",
+              id: "microservices-framework/datasources/create-datasource-plugin",
+            },
+
+            {
+              type: "doc",
+              label: "8.5. Caching",
               id: "microservices-framework/datasources/caching",
             },
           ],
@@ -412,69 +412,69 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "8. Authentication",
+          label: "9. Authentication",
           items: [
             {
               type: "doc",
-              label: "8.1.Overview",
+              label: "9.1.Overview",
               id: "microservices-framework/authentication/overview",
             },
             {
               type: "doc",
-              label: "8.2.JWT Authentication",
+              label: "9.2.JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication",
             },
             {
               type: "doc",
-              label: "8.3.Custom Authentication",
+              label: "9.3.Custom Authentication",
               id: "microservices-framework/authentication/custom-authentication",
             },
           ],
         },
         {
           type: "category",
-          label: "9. Authorization",
+          label: "10. Authorization",
           items: [
             {
               type: "doc",
-              label: "9.1.Overview",
+              label: "10.1.Overview",
               id: "microservices-framework/authorization/overview",
             },
             {
               type: "doc",
-              label: "9.2.Authz Usecases",
+              label: "10.2.Authz Usecases",
               id: "microservices-framework/authorization/authz-usecases",
             },
           ],
         },
         {
           type: "category",
-          label: "10. Configs and Mappings",
+          label: "11. Configs and Mappings",
           items: [
             {
               type: "doc",
-              label: "10.1. Config",
+              label: "11.1. Config",
               id: "microservices-framework/config-and-mappings/config",
             },
             {
               type: "doc",
-              label: "10.2. Mappings",
+              label: "11.2. Mappings",
               id: "microservices-framework/config-and-mappings/mappings",
             },
           ],
         },
         {
           type: "category",
-          label: "11. Inline scripting",
+          label: "12. Inline scripting",
           items: [
             {
               type: "doc",
-              label: "11.1. Overview",
+              label: "12.1. Overview",
               id: "microservices-framework/inline-scripting/overview",
             },
             {
               type: "doc",
-              label: "11.2. Script Plugins",
+              label: "12.2. Script Plugins",
               id: "microservices-framework/inline-scripting/script-plugins",
             },
           ],
@@ -486,7 +486,7 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "12. Telemetry",
+          label: "13. Telemetry",
           items: [
             {
               type: "doc",
@@ -526,6 +526,7 @@ const sidebars = {
             },
           ],
         },
+       
       ],
 
       // {
@@ -713,7 +714,9 @@ const sidebars = {
       //     },
       //   ],
       // },
+    
     },
+
     {
       type: "category",
       label: "2. ElasticGraph ORM",
@@ -729,7 +732,12 @@ const sidebars = {
           id: "elasticgraph-orm/feature-set-of-elasticgraph",
         },
       ],
-    }
+    },
+    {
+      type: "doc",
+      label: " FAQs",
+      id: "microservices-framework/faqs"
+    },
     // {
     //   type: "category",
     //   label: "3. Web-UI Starter Kit",
@@ -755,3 +763,4 @@ module.exports = sidebars;
 // 4. open core model - limited version - only used for marketing - no practical use
 
 // In this blog  ,let us review what could be an alternative approach for the community which is fair for everybody
+
