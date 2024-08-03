@@ -71,7 +71,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "2.2. Brief Walkthrough",
+              label: "2.2. Detailed Walkthrough",
               id: "microservices-framework/guide/walkthrough",
             },
             // {
@@ -86,55 +86,6 @@ const sidebars = {
           label: "3. CLI",
           id: "microservices-framework/CLI",
         },
-   
-        {
-          type: "category",
-          label: "4. Databases",
-          items: [
-            {
-              type: "doc",
-              label: "4.1. Overview",
-              id: "microservices-framework/databases/Overview",
-            },
-            {
-              type: "doc",
-              label: "4.2. MongoDB",
-              id: "microservices-framework/databases/MongoDB",
-            },
-            {
-               type: "doc",
-               label: "4.3. MySQL",
-               id: "microservices-framework/databases/MySQL",
-             },
-             {
-              type: "doc",
-              label: "4.4. PostgreSQL",
-              id: "microservices-framework/databases/PostgreSQL",
-             },
-           
-             {
-               type: "doc",
-                label: "4.5 SQL Server",
-                id: "microservices-framework/databases/SQLServer",
-             },
-             {
-                type: "doc",
-                label: "4.6 CokroachDB",
-                id: "microservices-framework/databases/CokroachDB",
-             },
-             {
-                type: "doc",
-                label: "4.7 MariaDB",
-                id: "microservices-framework/databases/MariaDB",
-             },
-             {
-              type: "doc",
-              label: "4.8. PlanetScale",
-              id: "microservices-framework/databases/PlanetScale",
-            },
-          ],
-        },
-      
         {
           type: "doc",
           label: "5. Generate CRUD API",
@@ -325,71 +276,142 @@ const sidebars = {
               label: "8.1. Overview",
               id: "microservices-framework/datasources/overview",
             },
+            // {
+            //   type: "doc",
+            //   label: "8.5. Create Custom DataSource",
+            //   id: "microservices-framework/datasources/create-custom-datasource",
+            // },
             {
               type: "category",
-              label: "8.2. Datasource Plugins",
+              label: "8.2. Databases",
               items: [
                 {
                   type: "doc",
                   label: "8.2.1. Overview",
-                  id: "microservices-framework/datasources/datasource-plugins/Overview",
+                  id: "microservices-framework/databases/Overview",
                 },
                 {
                   type: "doc",
-                  label: "8.2.2. Prisma Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                  label: "8.2.2. MongoDB",
+                  id: "microservices-framework/databases/MongoDB",
+                },
+                {
+                   type: "doc",
+                   label: "8.2.3. MySQL",
+                   id: "microservices-framework/databases/MySQL",
                  },
                  {
-                   type: "doc",
-                   label: "8.2.3. Axios Datasource",
-                   id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                  type: "doc",
+                  label: "8.2.4. PostgreSQL",
+                  id: "microservices-framework/databases/PostgreSQL",
                  },
-                {
+               
+                 {
+                   type: "doc",
+                    label: "8.2.5 SQL Server",
+                    id: "microservices-framework/databases/SQLServer",
+                 },
+                 {
+                    type: "doc",
+                    label: "8.2.6 CokroachDB",
+                    id: "microservices-framework/databases/CokroachDB",
+                 },
+                 {
+                    type: "doc",
+                    label: "8.2.7 MariaDB",
+                    id: "microservices-framework/databases/MariaDB",
+                 },
+                 {
                   type: "doc",
-                  label: "8.2.4. AWS Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "8.2.5. Nodemailer Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "8.2.6. Redis Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "8.2.7. Mongoose Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "8.2.8. Kafka Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "8.2.9. Memcached Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
+                  label: "8.2.8. PlanetScale",
+                  id: "microservices-framework/databases/PlanetScale",
                 },
               ],
             },
             {
-              type: "doc",
-              label: "8.3. Create Custom DataSource",
-              id: "microservices-framework/datasources/create-custom-datasource",
+              type: "category",
+              label: "8.4. Datasource Plugins",
+              items: [
+                {
+                  type: "doc",
+                  label: "8.4.1. Overview",
+                  id: "microservices-framework/datasources/datasource-plugins/Overview",
+                },
+                {
+                  type: "doc",
+                  label: "8.4.2. Prisma Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+                 },
+                 {
+                   type: "doc",
+                   label: "8.4.3. Axios Datasource",
+                   id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                 },
+                {
+                  type: "doc",
+                  label: "8.4.4. AWS Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "8.4.5. Nodemailer Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "8.4.6. Redis Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
+                },
+                {
+                  type: "doc",
+                  label: "8.4.7. Mongoose Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
+                },
+
+                {
+                  type: "doc",
+                  label: "8.4.8. Kafka Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
+                },
+                
+                {
+                  type: "category",
+                  label: "8.4.9 ElasticGraph",
+                  items: [
+                    {
+                      type: "doc",
+                      label: "8.4.9.1 Elasticgraph as Datasource",
+                      id: "elasticgraph-orm/elasticgraph",
+                    },
+                    {
+                      type: "doc",
+                      label: "8.4.9.2 Feature Set of Elasticgraph",
+                      id: "elasticgraph-orm/feature-set-of-elasticgraph",
+                    },
+                  ],
+                },
+                {
+                  type: "doc",
+                  label: "8.4.10. Memcached Datasource",
+                  id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
+                },
+              ],
             },
+            // {
+            //   type: "doc",
+            //   label: "8.5. Create Custom DataSource",
+            //   id: "microservices-framework/datasources/create-custom-datasource",
+            // },
+          
             {
               type: "doc",
-              label: "8.4. Create DataSource Plugin",
+              label: "8.6. Create DataSource Plugin",
               id: "microservices-framework/datasources/create-datasource-plugin",
             },
 
             {
               type: "doc",
-              label: "8.5. Caching",
+              label: "8.7. Caching",
               id: "microservices-framework/datasources/caching",
             },
           ],
@@ -717,22 +739,7 @@ const sidebars = {
     
     },
 
-    {
-      type: "category",
-      label: "2. ElasticGraph ORM",
-      items: [
-        {
-          type: "doc",
-          label: "2.1 Elasticgraph",
-          id: "elasticgraph-orm/elasticgraph",
-        },
-        {
-          type: "doc",
-          label: "2.2 Feature Set Of Elasticgraph",
-          id: "elasticgraph-orm/feature-set-of-elasticgraph",
-        },
-      ],
-    },
+    
     {
       type: "doc",
       label: " FAQs",

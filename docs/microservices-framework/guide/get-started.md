@@ -108,7 +108,7 @@ There is a longer and detailed introduction video as well, below in this page.
 > Note: This video mentions `godspeed dev`. This is now replaced with `godspeed serve` command. As well the `from-examples` param of `godspeed create` command is deprecated and is not advised to use. If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-    <iframe style={{ position: 'absolute', top: 10, left: 10, width: '80%', height: '80%' }} src="https://www.youtube.com/embed/f1jlvaM7Sbo" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
+    <iframe style={{ position: 'absolute', top: 10, left: 10, width: '80%', height: '80%' }} src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
 
 ### CLI
@@ -163,7 +163,7 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
 
 **A walkthough on a meta-framework project with Loan Origination System example**
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameBorder="0" allowFullScreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
 </div>
 
 ### For any help

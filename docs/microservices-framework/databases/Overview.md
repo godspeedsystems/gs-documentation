@@ -1,6 +1,6 @@
 
- The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL datasbases. The developer only needs to specify or generate the schema for a datastore, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself. 
- The framework provides functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)
+ The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL datasbases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself. 
+ The framework provides functionality to access most popular databases like PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)
 
 [Prisma ORM](https://www.prisma.io/docs) is a powerful tool for efficient and secure database interactions in web applications. 
 
@@ -10,7 +10,7 @@
 
 **2. [MySQL](MySQL)**: Prisma can be used with MySQL, another widely used open-source relational database management system.
 
-**3. [SQLite](SQLite)**: SQLite is a serverless, self-contained, and zero-configuration database engine, and Prisma supports it as well.
+**3. [SQLite](https://www.prisma.io/docs/orm/overview/databases/sqlite)**: SQLite is a serverless, self-contained, and zero-configuration database engine, and Prisma supports it as well.
 
 **4. [SQL Server](SQLServer)**: Prisma offers support for Microsoft SQL Server, a popular commercial relational database management system.
 

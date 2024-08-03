@@ -53,22 +53,22 @@ If your schema name is lending_service_db.prisma, your file content should look 
     }
   ```
 
-<!-- 
-  3.1 If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `prisma db pull`. This will generate your .prisma file. 
+
+  4.1 If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `prisma db pull`. This will generate your .prisma file. 
   
-  3.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.  -->
+  4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.  -->
   
-  Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
+  4.3 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
 
     
-### Step 4. Generate prisma client
+### Step 5. Generate prisma client
 Run `godspeed prisma prepare`. It will generate your prisma client for given schema and DB and will place the generated client in the `src/datasources/prisma-clients/` folder.
 
  ```bash
   $ godspeed prisma prepare
  ```
   
-### Step 5. Generate CRUD API
+### Step 6. Generate CRUD API
  
   The `godspeed gen-crud-api` command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/<db_name>.prisma
 
