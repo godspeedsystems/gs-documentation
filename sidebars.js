@@ -381,12 +381,12 @@ const sidebars = {
                     {
                       type: "doc",
                       label: "8.4.9.1 Elasticgraph as Datasource",
-                      id: "elasticgraph-orm/elasticgraph",
+                      id: "microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph",
                     },
                     {
                       type: "doc",
                       label: "8.4.9.2 Feature Set of Elasticgraph",
-                      id: "elasticgraph-orm/feature-set-of-elasticgraph",
+                      id: "microservices-framework/datasources/datasource-plugins/elasticgraph/feature-set-of-elasticgraph",
                     },
                   ],
                 },
