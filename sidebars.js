@@ -276,11 +276,6 @@ const sidebars = {
               label: "8.1. Overview",
               id: "microservices-framework/datasources/overview",
             },
-            // {
-            //   type: "doc",
-            //   label: "8.5. Create Custom DataSource",
-            //   id: "microservices-framework/datasources/create-custom-datasource",
-            // },
             {
               type: "category",
               label: "8.2. Databases",
@@ -397,11 +392,11 @@ const sidebars = {
                 },
               ],
             },
-            // {
-            //   type: "doc",
-            //   label: "8.5. Create Custom DataSource",
-            //   id: "microservices-framework/datasources/create-custom-datasource",
-            // },
+            {
+              type: "doc",
+              label: "8.5. Create Custom DataSource",
+              id: "microservices-framework/datasources/create-custom-datasource",
+            },
           
             {
               type: "doc",
