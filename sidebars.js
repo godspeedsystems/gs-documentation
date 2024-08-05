@@ -345,6 +345,8 @@ const sidebars = {
                     type: "doc",
                     label: "8.4.3.1 Axios",
                     id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                  },
+                 ]
                 },
                 {
                   type: "doc",
@@ -549,7 +551,11 @@ const sidebars = {
         },
        
       ],
-
+    },
+  ],
+};
+module.exports = sidebars;
+    
       // {
       //   type: "doc",
       //   label: "1. Introduction",
@@ -736,8 +742,6 @@ const sidebars = {
       //   ],
       // },
     
-    },
-
     
     // {
     //   type: "doc",
@@ -755,11 +759,6 @@ const sidebars = {
     //     },
     //   ],
     // },
-  ],
-};
-
-module.exports = sidebars;
-
 // As discussed in the previous blog of the series, we have discussed about four main issues of FOSS community
 // 1.unethical uses
 // 2. lack of contribution by community.
@@ -769,4 +768,3 @@ module.exports = sidebars;
 // 4. open core model - limited version - only used for marketing - no practical use
 
 // In this blog  ,let us review what could be an alternative approach for the community which is fair for everybody
-
