@@ -739,11 +739,11 @@ const sidebars = {
     },
 
     
-    {
-      type: "doc",
-      label: " FAQs",
-      id: "microservices-framework/faqs"
-    },
+    // {
+    //   type: "doc",
+    //   label: " FAQs",
+    //   id: "microservices-framework/faqs"
+    // },
     // {
     //   type: "category",
     //   label: "3. Web-UI Starter Kit",
