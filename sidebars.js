@@ -323,90 +323,97 @@ const sidebars = {
                 },
               ],
             },
+             {
+              type: "doc",
+              label: "8.3. Create Custom DataSource",
+              id: "microservices-framework/datasources/create-custom-datasource",
+            },
+          
+            {
+              type: "doc",
+              label: "8.4. Create DataSource Plugin",
+              id: "microservices-framework/datasources/create-datasource-plugin",
+            },
             {
               type: "category",
-              label: "8.4. Datasource Plugins",
+              label: "8.5. Datasource Plugins",
               items: [
                 {
                   type: "doc",
-                  label: "8.4.1. Overview",
+                  label: "8.5.1. Overview",
                   id: "microservices-framework/datasources/datasource-plugins/Overview",
                 },
                 {
                   type: "doc",
-                  label: "8.4.2. Prisma Datasource",
+                  label: "8.5.2. Prisma Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
                  },
                  {
-                   type: "doc",
-                   label: "8.4.3. Axios Datasource",
-                   id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                 },
+                  type: "category",
+                  label: "8.5.3 API Datasource",
+                  items: [
+                   {
+                    type: "doc",
+                    label: "8.5.3.1 HTTP (Axios)",
+                    id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                   },
+                  ]
+                 }
+                   
                 {
                   type: "doc",
-                  label: "8.4.4. AWS Datasource",
+                  label: "8.5.4. AWS Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
                 },
                 {
                   type: "doc",
-                  label: "8.4.5. Nodemailer Datasource",
+                  label: "8.5.5. Nodemailer Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
                 },
                 {
                   type: "doc",
-                  label: "8.4.6. Redis Datasource",
+                  label: "8.5.6. Redis Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
                 },
                 {
                   type: "doc",
-                  label: "8.4.7. Mongoose Datasource",
+                  label: "8.5.7. Mongoose Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
                 },
 
                 {
                   type: "doc",
-                  label: "8.4.8. Kafka Datasource",
+                  label: "8.5.8. Kafka Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
                 },
                 
                 {
                   type: "category",
-                  label: "8.4.9 ElasticGraph",
+                  label: "8.5.9 ElasticGraph",
                   items: [
                     {
                       type: "doc",
-                      label: "8.4.9.1 Elasticgraph as Datasource",
+                      label: "8.5.9.1 Elasticgraph as Datasource",
                       id: "microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph",
                     },
                     {
                       type: "doc",
-                      label: "8.4.9.2 Feature Set of Elasticgraph",
+                      label: "8.5.9.2 Feature Set of Elasticgraph",
                       id: "microservices-framework/datasources/datasource-plugins/elasticgraph/feature-set-of-elasticgraph",
                     },
                   ],
                 },
                 {
                   type: "doc",
-                  label: "8.4.10. Memcached Datasource",
+                  label: "8.5.10. Memcached Datasource",
                   id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
                 },
               ],
             },
+           
             {
               type: "doc",
-              label: "8.5. Create Custom DataSource",
-              id: "microservices-framework/datasources/create-custom-datasource",
-            },
-          
-            {
-              type: "doc",
-              label: "8.6. Create DataSource Plugin",
-              id: "microservices-framework/datasources/create-datasource-plugin",
-            },
-
-            {
-              type: "doc",
-              label: "8.7. Caching",
+              label: "8.6. Caching",
               id: "microservices-framework/datasources/caching",
             },
           ],
@@ -737,7 +744,7 @@ const sidebars = {
     
     {
       type: "doc",
-      label: " FAQs",
+      label: "How to Guide",
       id: "microservices-framework/faqs"
     },
     // {
