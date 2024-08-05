@@ -338,10 +338,14 @@ const sidebars = {
                   id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
                  },
                  {
-                   type: "doc",
-                   label: "8.4.3. Axios Datasource",
-                   id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                 },
+                  type: "category",
+                  label: "8.4.3 API Datasource",
+                  items: [
+                  {
+                    type: "doc",
+                    label: "8.4.3.1 Axios",
+                    id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+                },
                 {
                   type: "doc",
                   label: "8.4.4. AWS Datasource",
