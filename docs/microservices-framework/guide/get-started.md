@@ -24,7 +24,6 @@ In this section, you will learn how to
 ### Step 2: Create a project and start the server
 
 1. `godspeed create my_new_project` #replace my_new_project with name of your project. This may take some time to install the required npm plugins and create your project. Be patient!
-
 2. `cd my_new_project` #Go to your project folder
 3. `godspeed serve` #Start the project
 4. Check the logs. They will show http Express server is running on port 3000 
