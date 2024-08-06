@@ -335,7 +335,6 @@ const sidebars = {
               label: "7.4. Create DataSource Plugin",
               id: "microservices-framework/datasources/create-datasource-plugin",
             },
-
             {
               type: "category",
               label: "7.5. Datasource Plugins",
