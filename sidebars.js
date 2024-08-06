@@ -323,12 +323,7 @@ const sidebars = {
                 },
               ],
             },
-<<<<<<< HEAD
-
-            {
-=======
              {
->>>>>>> 60806f959a3996dccac9959f4be4cc499c4a2577
               type: "doc",
               label: "8.3. Create Custom DataSource",
               id: "microservices-framework/datasources/create-custom-datasource",
@@ -339,11 +334,6 @@ const sidebars = {
               label: "8.4. Create DataSource Plugin",
               id: "microservices-framework/datasources/create-datasource-plugin",
             },
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 60806f959a3996dccac9959f4be4cc499c4a2577
             {
               type: "category",
               label: "8.5. Datasource Plugins",
@@ -362,7 +352,6 @@ const sidebars = {
                   type: "category",
                   label: "8.5.3 API Datasource",
                   items: [
-<<<<<<< HEAD
                   {
                     type: "doc",
                     label: "8.5.3.1 HTTP (Axios)",
@@ -370,16 +359,6 @@ const sidebars = {
                   },
                  ]
                 },
-=======
-                   {
-                    type: "doc",
-                    label: "8.5.3.1 HTTP (Axios)",
-                    id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                   },
-                  ]
-                 }
-                   
->>>>>>> 60806f959a3996dccac9959f4be4cc499c4a2577
                 {
                   type: "doc",
                   label: "8.5.4. AWS Datasource",
@@ -430,11 +409,6 @@ const sidebars = {
                 },
               ],
             },
-<<<<<<< HEAD
-
-=======
-           
->>>>>>> 60806f959a3996dccac9959f4be4cc499c4a2577
             {
               type: "doc",
               label: "8.6. Caching",
@@ -573,16 +547,10 @@ const sidebars = {
               id: "microservices-framework/telemetry/custom-metrics-logs-traces"
             },
           ],
-        },
-          {
-            type: "doc",
-            label: "14. How to Guide",
-            id: "microservices-framework/faqs"
-          },
-       
-      ],
-    },
-  ],
+        }
+      ]
+    }
+  ]
 };
 module.exports = sidebars;
     
@@ -773,19 +741,7 @@ module.exports = sidebars;
       // },
     
     
-<<<<<<< HEAD
-    // {
-    //   type: "doc",
-    //   label: " FAQs",
-    //   id: "microservices-framework/faqs"
-    // },
-=======
-    {
-      type: "doc",
-      label: "How to Guide",
-      id: "microservices-framework/faqs"
-    },
->>>>>>> 60806f959a3996dccac9959f4be4cc499c4a2577
+   
     // {
     //   type: "category",
     //   label: "3. Web-UI Starter Kit",
