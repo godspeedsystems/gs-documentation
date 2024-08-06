@@ -7,7 +7,7 @@ title: How To Guide
 This section will give answers to your most pressing questions about using the godspeed meta-framework ? This "How to Guide" is designed to help you get the most out of our product, by providing clear and concise answers to all your frequently asked questions.
 <!-- It is designed to be easy to follow and understand, with step-by-step instructions and screenshots to help illustrate each process.  -->
 
-- **Why my API is giving "Unauthorized" in response?**
+- **How can I skip/disable authentication for a particular endpoint if it is giving "Unauthorized" in response?**
 
   Check jwt configuration in the event source's configuration file (It will be http.yaml if using express). If jwt spec is set up here, then all endpoints will go through JWT authentication, unless you explicitly set authn:false in your event as:
   ```
@@ -37,12 +37,20 @@ This section will give answers to your most pressing questions about using the g
     audience: JWT_AUD
     secretOrKey: JWT_SECRET
   ```
-  To export above defined variables, enter export command in the terminal as:
+  To export above defined variables to your environment, use the following syntax based on the environment which you are using:
+  For shell
    ```
-    $ export MY_DATASOURCE_BASE_URL = https://httpbin.org/
+    $ export JWT_SECRET=mysecret
+    $ export JWT_ISS= mycompany
+   ```
+  For windows powershell
+   ```
+    $env:JWT_SECRET= "mysecret"
+    $env:JWT_ISS= "mycompany"
+     
    ```
   After exporting the environment variable, you can access this variable in your project by using 
-  scripting <% config.my_datasource.base_url %>
+  scripting <% config.jwt.issuer %>
 
 - **How to build the project again, if I have deleted some files in my `src` repo ?**
 

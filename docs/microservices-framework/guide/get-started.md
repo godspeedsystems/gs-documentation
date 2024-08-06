@@ -136,7 +136,7 @@ This will create a basic project with Express eventsource, a sample endpoint (ev
 - We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
 
 :::tip
-To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/guide.md#the-project-scaffolding) 
+To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough.md#the-project-scaffolding) 
 :::
 
 ### Referencing pre-made project templates
@@ -144,7 +144,7 @@ Pre-made projects are a great place to start learning about the meta-framework. 
 
 #### Basic Project
 
-Repository - [Hello World](/docs/microservices-framework/getting-started/guide.md)
+Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
 
 #### Full Stack App
 A full stack app with Godspeed based backend and an embedded React project for frontend.
@@ -167,7 +167,7 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
 </div>
 
 ### For any help
-Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#plugin)  
+Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#using-plugins)  
 
 
 ```bash
