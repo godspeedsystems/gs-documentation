@@ -13,7 +13,7 @@ You can use prisma commands without yourself installing prisma through Godspeed,
 ### Step 1. Create a godspeed project 
 Create a new project from the CLI and open the created project in vscode
   
-   godspeed create my_new_project  #replace my_new_project with name of your project.
+  [(See How to create)](./guide/get-started.md#step-2:-create-a-project-and-start-the-server)
 
 ### Step 2. Add the prisma plugin
 Add the 'prisma-as-datastore' plugin from the CLI of vscode

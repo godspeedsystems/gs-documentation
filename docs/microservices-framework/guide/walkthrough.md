@@ -25,9 +25,9 @@ You may want to check why you should use the [4th generation](https://godspeed.s
 
 ### Moving forward
 :::tip
-As mentioned in the [getting started](./overview.md) section all APIs and async events are together referred to as `events`. And hence any source like Express, Fastify, Kafka, Apollo Graphql are called [EventSources](../event-sources/overview.md).
+As mentioned in the [getting started](./get-started.md) section all APIs and async events are together referred to as `events`. And hence any source like Express, Fastify, Kafka, Apollo Graphql are called [EventSources](../event-sources/overview.md).
 :::
-In [getting started](./overview.md) section we created a project that includes a simple 'hello world' example which uses an http Express [eventsource](../event-sources/overview.md), [events](/docs/microservices-framework/event-sources/event-schema.md) and [event handler functions](/docs/microservices-framework/workflows/overview.md). 
+In [getting started](./get-started.md) section we created a project that includes a simple 'hello world' example which uses an http Express [eventsource](../event-sources/overview.md), [events](/docs/microservices-framework/event-sources/event-schema.md) and [event handler functions](/docs/microservices-framework/workflows/overview.md). 
 
 
 Now we can move into further details.
@@ -47,6 +47,7 @@ Now lets understand how our `helloworld` api endpoint is working behind the scen
 ```yaml
 "http.get./helloworld":
   fn: helloworld # event handler function - the logic resides here
+  authn: false
   params: #same as Swagger params.
     - name: name
       in: query

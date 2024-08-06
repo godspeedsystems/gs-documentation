@@ -24,7 +24,6 @@ In this section, you will learn how to
 ### Step 2: Create a project and start the server
 
 1. `godspeed create my_new_project` #replace my_new_project with name of your project. This may take some time to install the required npm plugins and create your project. Be patient!
-
 2. `cd my_new_project` #Go to your project folder
 3. `godspeed serve` #Start the project
 4. Check the logs. They will show http Express server is running on port 3000 
@@ -37,7 +36,7 @@ In this section, you will learn how to
 
    ![img](../../../static/img/swagger_helloworld.png)
 2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
-3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. You will notice the configuration of the API call are in YAML format.
+3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. You will notice the configuration of the API call is in YAML format.
 
   ```
     http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
@@ -103,9 +102,9 @@ Hello mastersilv3r
 Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
 
 ### Video Tutorial - Short
-There is a longer and detailed introduction video as well, below in this page.
+There is a longer and detailed introduction video as well, below on this page.
 
-> Note: This video mentions `godspeed dev`. This is now replaced with `godspeed serve` command. As well the `from-examples` param of `godspeed create` command is deprecated and is not advised to use. If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
+> If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '80%', height: '80%' }} src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
@@ -136,7 +135,7 @@ This will create a basic project with Express eventsource, a sample endpoint (ev
 - We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
 
 :::tip
-To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/getting-started/guide.md#the-project-scaffolding) 
+To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough.md#the-project-scaffolding) 
 :::
 
 ### Referencing pre-made project templates
@@ -144,7 +143,7 @@ Pre-made projects are a great place to start learning about the meta-framework. 
 
 #### Basic Project
 
-Repository - [Hello World](/docs/microservices-framework/getting-started/guide.md)
+Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
 
 #### Full Stack App
 A full stack app with Godspeed based backend and an embedded React project for frontend.
@@ -161,13 +160,13 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
 
 ### Video Tutorial - Longer and in depth
 
-**A walkthough on a meta-framework project with Loan Origination System example**
+**Walkthrough the Loan Origination System project made using our meta framework**
 <div style={{ margin: '20px auto', textAlign: 'center' }}>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
 </div>
 
 ### For any help
-Try running in the below command line to see available Godspeed commands. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#plugin)  
+Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#using-plugins)  
 
 
 ```bash
