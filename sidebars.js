@@ -21,7 +21,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: "category",
-      label: "1. Microservices Framework",
+      label: "Microservices Framework",
       items: [
         {
           type: "category",
@@ -360,15 +360,7 @@ const sidebars = {
                     id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
                   },
                  ]
-                },
-                   {
-                    type: "doc",
-                    label: "7.5.3.1 HTTP (Axios)",
-                    id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                   },
-                  ]
-                 },
-                
+                },               
                 {
                   type: "doc",
                   label: "7.5.4. AWS Datasource",
@@ -419,8 +411,6 @@ const sidebars = {
                 },
               ],
             },
-
-           
             {
               type: "doc",
               label: "7.6. Caching",
@@ -566,8 +556,9 @@ const sidebars = {
             id: "microservices-framework/faqs"
           }, 
         ],
-     };
-
+     }
+  ]
+};
 module.exports = sidebars;
     
       // {
