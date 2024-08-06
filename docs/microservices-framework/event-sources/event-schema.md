@@ -48,7 +48,7 @@ Lets understand the first line from the above snippet `http.get./greet`.
 
 `/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
 
-We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling a an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
+We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
 
 
 ## Http 
@@ -83,6 +83,14 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
           schema:
             type: object
 ```
+**To get a quick understanding of HTTP event scehma, please watch the video provided below…**
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/WsNwInEaWFw?si=2uEG_Tp5x36v9vAB" frameBorder="0" allowFullScreen></iframe>
+</div>
+
+<!-- <div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/cp1qgIz1PNw?si=4Qngtu-WXoC-LQeY" frameBorder="0" allowFullScreen></iframe>
+</div> -->
 
 ## Kafka
 

@@ -58,6 +58,10 @@ To understand the actions taken when selecting the pre-defined plugins and their
 
 **To learn more about Event sources in Godspeed, please watch the video provided below…**
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
+<!-- <div style={{ margin: '20px auto', textAlign: 'center' }}>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/WaoWe1dekNk" frameBorder="0" allowFullScreen></iframe>
+</div> -->
+
+<div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/cp1qgIz1PNw?si=4Qngtu-WXoC-LQeY" frameBorder="0" allowFullScreen></iframe>
 </div>
