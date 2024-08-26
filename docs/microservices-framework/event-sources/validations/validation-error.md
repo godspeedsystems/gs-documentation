@@ -4,8 +4,8 @@
 
 ## Request and Response Validation
 - Verifying that incoming API requests have the required parameters and that those parameters meet specific criteria like data types.  If the specified criteria are not met, it results in a request validation error. 
-- For more info about Request Validation and its applications, refer [this](/docs/microservices-framework/event-sources/validations/schema-validation.md#request-schema-validation)
-
+- For more info about Request Validation and its applications, refer [this](/docs/microservices-framework/event-sources/validations/schema-validation.md#request-schema-validation).
+- Similarly, When an API response does not meet the expected criteria, it results in a response validation error.
 :::tip Note
 - We utilize the AJV library for validating both request and response data, and the response format adheres to the standard AJV error format.
 - The `on_request_validation_error` and `on_response_validation_error` handlers are used to override the default errors thrown by the framework (specifically, schema validation errors) and allow developers to customize errors based on their requirements.
@@ -52,12 +52,12 @@ tasks:
       success: false 
       code: 400
       data:    
-        message: #inputs.validation_error returns the default framework error
-          <% inputs.validation_error.data.message + "Check the error at"%> 
-          <% inputs.validation_error.data.error.instancePath + " and there" %>
-          <% inputs.validation_error.data.error.message %>
+        message: <% inputs.validation_error.data.message %>
+     #  inputs.validation_error returns the default framework error
+     #  or you can give 
+     #  message: <% inputs.validation_error.data.errors[0] %>
+     
 ```
-
 functions/test_validation.yaml
 ```yaml
 summary: This is test function
