@@ -24,10 +24,17 @@ DATABASE_URL="postgresql://johndoe:password@localhost:5432/mydb?schema=public"
 ### Setting Environment Variable
 You can define the database connection url as an environment variable in .env as :
 ```
-DATABASE_URL="postgresql://janedoe:jdoe@localhost:5432/janedoe?schema=db_godspeed"
+DATABASE_URL="postgresql://johndoe:password@localhost:5432/mydb?schema=public"
 ```
-And then this environment variable is provided in the url field of the datasource block in your prisma schema  src/datasources/Postgre.prisma
+In the above examples, DATABASE_URL is just a variable name given to connection url, this same environment variable name will be then provided in the url field of the datasource block in your prisma schema src/datasources/fileName.prisma as:
 
+```
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") 
+}
+
+```
 ### Sample prisma schema for PostgreSQl
 <details>
 <summary> Sample prisma schema </summary>
