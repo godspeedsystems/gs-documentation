@@ -7,7 +7,7 @@ In order to use MySql database you need:
  2.	a MySQL database server running
  3.	and database connection URL
 
-### CONNECTION_URL
+### CONNECTION URL
 The format of the connection URL for MySQL looks as follows 
 ```
 mysql://USER:PASSWORD@HOST:PORT/DATABASE
@@ -37,18 +37,18 @@ datasource db {
 }
 ```
 
-### Sample prisma schema for MariaDB
+### Sample prisma schema for MySQL
 <details>
-<summary> Sample prisma schema for MariaDb </summary>
+<summary> Sample prisma schema for MySQL </summary>
 
 ```
 datasource db {
-  provider = "mariadb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/mariadb"
+  output = "./prisma-clients/mysql"
   previewFeatures = ["metrics"]
 }
 

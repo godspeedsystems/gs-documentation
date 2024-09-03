@@ -28,7 +28,7 @@ Create a godspeed project from the CLI , open the created project in vscode and 
 ┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
 │      │ Name                               │ Description                                                        │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
+│ ❯◯   │ prisma-as-datastore                │ Prisma as a datastore plugin for Godspeed Framework.              │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
 │  ◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
 ├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
@@ -48,36 +48,84 @@ export default DataSource;
 ```
 
 ## How to use
-You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema).
-`src/datasources` directory and giving your db_connection_url in .env file.  
+You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) in `src/datasources/db_name.prisma`.
+Before that, you need to set your database connection url in .env file.  
+
+### Setting Environment Variable
+You can define the database connection url as an environment variable in .env as :
+```
+DB_URL="mysql://root:password@localhost:3306/yourdb"
+```
+And then this environment variable is provided in the url field of the datasource block in your prisma schema.
 
 <details>
-#SamplePrisma
-<summary>Sample prisma schema </summary>
+### Sample prisma schema
+<summary>Sample prisma schema for relational databases</summary>
 
-prisma title = src/datasources/db_name.prisma
 ```
-datasource db {
-  provider = "db_name"   // for example, mysql, postgresql or mongodb
-  url      = env("DB_URL") // add your DB_URL string in .env file
-}
 
+datasource db {
+  provider = "db_name" // for example, mysql, postgresql or mongodb 
+  url      = env("DB_URL") //DB_URL will be read from .env file
+}
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/db_name" // here you can give name for your prisma-client     
+  output = "./prisma-clients/db_name"
+  previewFeatures = ["metrics"]
 }
-
 model User {
-
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
 }
 
 model Post {
-  
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
 }
-
 ```
 </details>
 
+<details>
+<summary>Sample prisma schema for mongo database</summary>
+
+```prisma title=src/datasources/mongo.prisma
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DB_URL")  //Connection string added in the .env file
+}
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/mongo"
+}
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  role      Role     @default(USER)
+  posts     Post[]
+}
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+}
+enum Role {
+  USER
+  ADMIN
+}
+```
+</details>
 ### Support for multiple prisma schema
 By default, only single prisma schema can be created in a project that can use only one database. To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema.
 
@@ -89,21 +137,42 @@ Run `godspeed prisma prepare`. It will
   4.2 It will setup the provided schema on the database which is provided in the .prisma file. This is achieved internally by the command `prisma db push`
 
   ```bash
-  
   $ godspeed prisma prepare
- 
   ```
 Once you [generate prisma client](#generate-prisma-client), the multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
 
 ### Generate CRUD APIs
 You can generate the CRUD API'S enter the below command:
 ```bash
-
 godspeed gen-crud-api
 ```
 * This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma
 
 * Now you can view the event and workflows according defined prisma schema
+
+### How to import prisma client in custom eventsource  
+In case you have to perform any database query in custom eventsource, then you can do that as explained below:
+1. Import the Prisma Client module from your project's data sources directory into your custom eventsource ts file:
+  ```
+  import {PrismaClient} from "../../datasources/prisma-clients/schemaName";
+  ```
+  Replace schemaName with the actual name of your schema.prisma file
+
+2. Create a Prisma Client Object:
+
+   Instantiate a new Prisma Client object as:
+   ```
+    const db_client = new PrismaClient();
+   ```
+
+3. Access the Prisma Client in Custom EventSources:
+   Within your custom EventSource, you can now directly access the client object to perform database queries. For example:
+   ```
+   const existingUser = await db_client.user.findFirst({
+       			 	where: { id: user.githubId }
+     				 });
+   const newUser = await db_client.user.create({ data: userObj });
+   ```
 
 ### Sample API
 Here is a sample event and workflow which is fetching data from the database.

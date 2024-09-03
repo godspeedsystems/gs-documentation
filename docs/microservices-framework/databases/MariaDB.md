@@ -2,7 +2,7 @@ MariaDB is a fork of MySQL, created to maintain MySQL’s features while ensurin
 
 ### Pre-requisites
 In order to use MariaDB database you need:
- 1.	an existing godspeed project with “prisma-as-datasource plugin” installed
+ 1.	an existing godspeed project with “prisma-as-datastore plugin” installed
  2.	a MariaDB database server running
  3.	and database connection URL
 
@@ -25,7 +25,7 @@ datasource db {
 }
 ```
 <details>
-<summary> Sample prisma schema for cockroachDB database  </summary>
+<summary> Sample prisma schema for mariaDB database  </summary>
 
 ```
 datasource db {
