@@ -1,8 +1,8 @@
-PostgreSQL can also be connected using the Prisma-as-datasource plugin.
+PostgreSQL can also be connected using the Prisma-as-datastore plugin.
 
 ### Pre-requisites
 In order to use PostgreSQL database you need:
- 1.	an existing godspeed project with “prisma-as-datasource plugin” installed
+ 1.	an existing godspeed project with “prisma-as-datastore plugin” installed
  2.	a PostgreSQL database server running
  3.	and database connection URL
 
@@ -39,7 +39,7 @@ datasource db {
 <details>
 <summary> Sample prisma schema </summary>
 
-```src/datasources/Postgre.prisma
+```src/datasources/Postgres.prisma
 
 datasource db {
   provider = "PostgreSQL"
@@ -47,7 +47,7 @@ datasource db {
 }
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/PostgreSQL"
+  output = "./prisma-clients/Postgres"
   previewFeatures = ["metrics"]
 }
 
@@ -80,6 +80,6 @@ Then You can generate the CRUD API'S by entering the below command:
 ```bash
 godspeed gen-crud-api
 ```
-* This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/Postgre.prisma
+* This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/Postgres.prisma
 
 * Now you can view the event and workflows according to the defined prisma schema

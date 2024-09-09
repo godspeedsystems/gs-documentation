@@ -94,6 +94,7 @@ If the command has run successfully Prisma will generate models from your databa
 #### 3.2 If you don't have an existing database,
 
 Then add the data models to your Prisma schema in datasources/schema.prisma as:
+### Sample prisma schema
 
 ```
 datasource db {
@@ -146,6 +147,31 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according defined prisma schema
 
+## How to import prisma client in custom eventsource  
+
+In case you have to perform any database query in custom eventsource, then you can do that as explained below:
+
+1. Import the Prisma Client module from your project's data sources directory into your custom eventsource ts file:
+  ```
+  import {PrismaClient} from "../../datasources/prisma-clients/schemaName";
+  ```
+  Replace schemaName with the actual name of your schema.prisma file
+
+2. Create a Prisma Client Object:
+
+   Instantiate a new Prisma Client object as:
+   ```
+    const db_client = new PrismaClient();
+   ```
+
+3. Access the Prisma Client in Custom EventSources:
+   Within your custom EventSource, you can now directly access the client object to perform database queries. For example:
+   ```
+   const existingUser = await db_client.user.findFirst({
+       			 	where: { id: user.githubId }
+     				 });
+   const newUser = await db_client.user.create({ data: userObj });
+   ```
 ### Sample API
 Here is a sample event and workflow which is fetching data from the database.
 ```yaml title=src/events/mongo.yaml
