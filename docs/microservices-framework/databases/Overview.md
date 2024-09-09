@@ -2,7 +2,7 @@
  The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL datasbases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself. 
  The framework provides functionality to access most popular databases like PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
  
-# List of currently supported Databases 
+## List of currently supported Databases 
 
 **1. [PostgreSQL](PostgreSQL)**: Prisma has strong support for PostgreSQL, one of the most popular open-source relational database systems.
 

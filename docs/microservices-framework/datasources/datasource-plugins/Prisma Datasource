@@ -48,101 +48,60 @@ export default DataSource;
 ```
 
 ## How to use
+You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema).
+`src/datasources` directory and giving your db_connection_url in .env file.  
 
-### 1. Write a prisma schema
+<details>
+#SamplePrisma
+<summary>Sample prisma schema </summary>
 
-  1.1 You can start using this plugin by writing a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema). For this you need to create a file with .prisma extension inside `src/datasources/`.
-
-  1.2 Set the url field of the datasource block in your schema to your database connection URL as shown below:
-
-  src/datasources/schema.prisma
-  ```
-    datasource db { 
-    provider = "mysql"      // name of database provider
-    url      = env("DB_URL")  // DB_URL string will be added in .env file
-    }
-  ```
-  Set provider to the type of database you are using. In this case it’s mysql. The url property will take the value of the connection url which is defined in the .env file.
-
-### 2. Set your Database Connection URL
-
-Set your Database Connection URL as environment variable in .env file as per the format. The format of the connection URL for your database depends on the [database](../../databases/Overview.md) you use. For PostgreSQL, it looks as below
-
- DB_URL = postgresql://USER:PASSWORD@HOST:PORT/DATABASE
- 
- The parts spelled all-uppercased are placeholders for your specific connection details
- 
- Example Connection String
-  ```
-    DB_URL = "postgresql://johndoe:password@localhost:5432/mydb?schema=public"
-  ```
-### 3. Generate data models
-
-The next step is to generate or define the data models. Prisma uses the connection url you provided to connect to the database. 
-
-#### 3.1 If you have an existing database
-
-To connect with your existing database, first install prisma and run prisma db pull command by giving path of your schema.prisma file.
-```
-npm install prisma --save-dev
-
-prisma db pull --schema = src/datasources/schema.prisma
-```
-
-If the command has run successfully Prisma will generate models from your database server and save in schema.prisma file. If the Prisma schema is new to you, have a look at their [documentation](https://www.prisma.io/docs/getting-started).
-
-#### 3.2 If you don't have an existing database,
-
-Then add the data models to your Prisma schema in datasources/schema.prisma as:
-
+prisma title = src/datasources/db_name.prisma
 ```
 datasource db {
-  provider = "PostgreSQL"    // database provider name which you are using
-  url      = env("DB_URL")   // DB_URL is the name of env variable
+  provider = "db_name"   // for example, mysql, postgresql or mongodb
+  url      = env("DB_URL") // add your DB_URL string in .env file
 }
+
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/dbName"
-  previewFeatures = ["metrics"]
+  output = "./prisma-clients/db_name" // here you can give name for your prisma-client     
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  
 }
 
 ```
-:::tip  Support for multiple prisma schema
-:::
-By default, only single prisma schema can be created in a project that can use only one database. To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema. 
+</details>
 
-### 4. Generate prisma client
+### Support for multiple prisma schema
+By default, only single prisma schema can be created in a project that can use only one database. To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema.
 
-Run `godspeed prisma prepare`. It will generate your prisma client for given schema and will place the generated client in the `src/datasources/prisma-clients/` folder. This is achieved internally by `prisma generate` command. 
-It will also setup the provided schema on database. This is achieved internally by the command `prisma db push`
+### Generate prisma client
+Run `godspeed prisma prepare`. It will 
+
+  4.1 Generate your prisma client for your given schema and DB. It will place the generated client in the `src/datasources/prisma-clients/` folder. This is achieved internally by `prisma generate` command. 
+
+  4.2 It will setup the provided schema on the database which is provided in the .prisma file. This is achieved internally by the command `prisma db push`
 
   ```bash
-    $ godspeed prisma prepare
+  
+  $ godspeed prisma prepare
+ 
   ```
-Once you [generated prisma client](#generate-prisma-client), multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
+Once you [generate prisma client](#generate-prisma-client), the multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
 
 ### Generate CRUD APIs
-You can generate the CRUD API'S by entering the below command:
+You can generate the CRUD API'S enter the below command:
 ```bash
+
 godspeed gen-crud-api
 ```
-* This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/schema.prisma
+* This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma
 
 * Now you can view the event and workflows according defined prisma schema
 
