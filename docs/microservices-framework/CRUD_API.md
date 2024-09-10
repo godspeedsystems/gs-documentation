@@ -34,7 +34,7 @@ To connect with the database, give your db_connection_url in .env file.
 
 Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) file in `src/datasources` directory
 
-If your schema name is lending_service_db.prisma, your file content should look like this. 
+If your schema name is lms.prisma, your file content should look like this. 
   ```prisma
     datasource db {
       provider = "postgresql"  // or "mysql", "sqlite", "sqlserver" etc.
@@ -43,7 +43,7 @@ If your schema name is lending_service_db.prisma, your file content should look 
 
     generator client {
       provider = "prisma-client-js"
-      output   = "./prisma-clients/lending_service_db"
+      output   = "./prisma-clients/lms"
       previewFeatures = ["metrics"]
     }
 

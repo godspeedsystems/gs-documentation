@@ -140,45 +140,20 @@ Once you [generated prisma client](#generate-prisma-client), multiple clients ge
 
 ### Generate CRUD APIs
 You can generate the CRUD API'S by entering the below command:
-```bash
-godspeed gen-crud-api
-```
-* This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/schema.prisma
-
-* Now you can view the event and workflows according defined prisma schema
-
-## How to import prisma client in custom eventsource  
-
-In case you have to perform any database query in custom eventsource, then you can do that as explained below:
-
-1. Import the Prisma Client module from your project's data sources directory into your custom eventsource ts file:
+  ```bash
+    godspeed gen-crud-api
   ```
-  import {PrismaClient} from "../../datasources/prisma-clients/schemaName";
-  ```
-  Replace schemaName with the actual name of your schema.prisma file
+* This command will generate the crud apis based on the sample schema provided at ./src/datasources/schema.prisma
 
-2. Create a Prisma Client Object:
+* You can now view events and workflows generated under events and functions folder. They follow a structure similar to the APIs below.
 
-   Instantiate a new Prisma Client object as:
-   ```
-    const db_client = new PrismaClient();
-   ```
-
-3. Access the Prisma Client in Custom EventSources:
-   Within your custom EventSource, you can now directly access the client object to perform database queries. For example:
-   ```
-   const existingUser = await db_client.user.findFirst({
-       			 	where: { id: user.githubId }
-     				 });
-   const newUser = await db_client.user.create({ data: userObj });
-   ```
 ### Sample API
-Here is a sample event and workflow which is fetching data from the database.
-```yaml title=src/events/mongo.yaml
-http.get./mongo/post/{id}:
+If your schema name is mysql.prisma and model name if 'post', then your event and workflow to fetch data from the database, will look like :
+```yaml title = src/events/post.yaml
+http.get./mysql/post/{id}:
   summary: Fetch Post
   description: Fetch Post from database
-  fn: com.biz.mongo.post.one
+  fn: com.biz.mysql.post.one
   params:
     - name: id
       in: path
@@ -192,11 +167,11 @@ http.get./mongo/post/{id}:
           type: object
 ```
 
-```yaml title=com/biz/mongo/post/one.yaml
+```yaml title= src/functions/com/biz/post/one.yaml
 summary: Fetch Post
 tasks:
-  - id: mongo_post_one
-    fn: datasource.mongo.Post.findUnique
+  - id: mysql_post_one
+    fn: datasource.mysql.Post.findUnique
     args:
       where:
         id: <% inputs.params.id %>
