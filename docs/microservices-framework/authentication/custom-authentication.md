@@ -222,7 +222,6 @@ export default class EventSource extends GSEventSource {
       failureRedirect: '/user/error'
     }), async (req, res) => {   
       const user: any = req.user;
-      console.log("User response ",user);
     }
   );
     passport.serializeUser(function (user, done) {
