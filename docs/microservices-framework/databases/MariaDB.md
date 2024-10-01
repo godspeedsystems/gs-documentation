@@ -7,7 +7,6 @@ In order to use MariaDB database you need:
  3.	and database connection URL
 
 ### CONNECTION_URL
-
 ```
 mariadb://USER:PASSWORD@HOST:PORT/DATABASE
 ```
