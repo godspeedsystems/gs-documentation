@@ -121,16 +121,19 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Godspeed',
+        href: 'https://godspeed.systems',
+        
         logo: {
           alt: 'Godspeed Logo',
           src: 'img/Gs-logo.png',
+          href: 'https://godspeed.systems'
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Documentation',
+            label: 'Documentation'
           },
           {
             type: 'docsVersionDropdown',
