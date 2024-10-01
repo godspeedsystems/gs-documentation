@@ -121,7 +121,6 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Godspeed',
-        href: 'https://godspeed.systems',
         
         logo: {
           alt: 'Godspeed Logo',

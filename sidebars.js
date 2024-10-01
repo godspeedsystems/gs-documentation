@@ -449,14 +449,15 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "8.3. OAuth2 Authentication",
-              id: "microservices-framework/authentication/oauth2-authentication",
+              label: "8.3. Custom Authentication",
+              id: "microservices-framework/authentication/custom-authentication",
             },
             {
               type: "doc",
-              label: "8.4.Custom Authentication",
-              id: "microservices-framework/authentication/custom-authentication",
+              label: "8.4. OAuth2 Authentication",
+              id: "microservices-framework/authentication/oauth2-authentication",
             },
+            
           ],
         },
         {
