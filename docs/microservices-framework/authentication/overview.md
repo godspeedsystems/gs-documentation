@@ -4,5 +4,5 @@ Authentication is the process of confirming the identity of an individual, syste
 
 Following separation of concerns (or decoupling) as a first principle, the job of authentication and loading the user information is delegated to individual eventsource plugins as part of their native `middleware` capability. Here you may use JWT, Auth0, OAuth2, Keycloak etc. as per your requirement.
 
-The currently supported Express, Fastify and Apollo Graphql [plugins](https://github.com/godspeedsystems/gs-plugins) support JWT authentication out of the box. In case you need to customize, you can copy the code from our plugins repository and modify that to suit your purpose.
+The currently supported Express, Fastify and Apollo Graphql [plugins](https://github.com/godspeedsystems/gs-plugins) support JWT and OAuth2 authentication out of the box. In case you need to customize, you can copy the code from our plugins repository and modify that to suit your purpose.
 

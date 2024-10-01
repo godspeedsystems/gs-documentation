@@ -79,7 +79,7 @@
   }
   ```
   If your auth_route = '/auth/github', hit localhost:4000/auth/github, it will take you to your chosen provider's authorization page i.e. Github in this case. 
-  After authenticating the user successfully, it will redirect to the success_redirect_url i.e '/verify/user' in this case. 
+  After authenticating the user successfully, it will redirect to the success_redirect_url i.e '/verify/user' in this case.
 
 
 
