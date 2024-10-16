@@ -245,8 +245,9 @@ For further learning resources and materials to kickstart your Godspeed developm
 #### Walkthrough
 A walkthough on a Godspeed project with Loan Origination System example
 
-<div style={{ margin: '20px auto' }}>
-  <iframe src="https://www.youtube.com/embed/BTPHPoI3dh0" frameBorder="0" allowFullScreen></iframe>
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/BTPHPoI3dh0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 #### Detailed Explainer Playlist

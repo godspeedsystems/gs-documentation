@@ -11,8 +11,8 @@ Embracing the power of structured data, Godspeed follows a schema-driven develop
 
 Dive deeper into the fascinating world of schema-driven development by watching the video below...
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/jtn8rvfs7lo" frameBorder="0" allowFullScreen></iframe>
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/jtn8rvfs7lo" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
@@ -22,8 +22,9 @@ At Godspeed, we believe in empowerment over complexity. That's why we champion c
 
 Ready to unravel the magic of configure over code? Take a closer look in the video below, where we break it down in simple terms!"
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/7y7-gx80Nsc" frameBorder="0" allowFullScreen></iframe>
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/7y7-gx80Nsc" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
@@ -36,8 +37,8 @@ At Godspeed, security is non-negotiable. We've fortified our software with robus
 
 Watch the video below to see how we keep your digital fortress impregnable."
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/nVn86r3Sguo" frameBorder="0" allowFullScreen></iframe>
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/nVn86r3Sguo" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
@@ -48,8 +49,7 @@ Godspeed's guardrail of decoupled architecture advocates for the separation of c
 
 Watch the below video for more understanding.
 
-<div style={{ margin: '20px auto', textAlign: 'center' }}>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tVWDbVPsLFQ" frameBorder="0" allowFullScreen></iframe>
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/tVWDbVPsLFQ" frameborder="0" allowfullscreen></iframe>
 </div>
-
 
