@@ -82,7 +82,7 @@ e.g. John, following response will be returned from the server.
   ```
 Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
 
-To understand working of this API [Lets Walkthrough your first Godspeed Project](http://localhost:3000/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
+To understand working of this API [Lets Walkthrough your first Godspeed Project](https://godspeed.systems/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
 
 ### Troubleshooting Common Errors
 

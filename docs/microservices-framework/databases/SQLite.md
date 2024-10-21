@@ -3,9 +3,7 @@ When you use SQLite with Prisma ORM, the database is created and managed entirel
 
 ### Pre-requisites
 
-In order to use SQLite in Godspeed Meta-framework, you need:
- 1.	A godspeed project with “prisma-as-datastore plugin” installed and
- 2.	SqLite datasource connector 
+A godspeed project with “prisma-as-datastore plugin” installed
 
 See [How to set up SQLite on your computer](https://www.prisma.io/dataguide/sqlite/setting-up-a-local-sqlite-database#setting-up-sqlite-on-windows) 
 
@@ -32,10 +30,10 @@ If the database file doesn't exist at the specified path, it will automatically 
 sqlite.prisma
 ```
 datasource db {
-  provider = "sqlite"
-  url      = "file:./testing.db"  # target files from the project root
+  provider= "sqlite"
+  url  = "file:./testing.db"  # target files from the project root
   or
-  url      = "file:/Users/john/testing.db"   # target files from any other place in your file system
+  url  = "file:/Users/john/testing.db"   # target files from any other place in your file system
 }
 ```
 
