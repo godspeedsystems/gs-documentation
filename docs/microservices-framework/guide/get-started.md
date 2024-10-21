@@ -19,14 +19,15 @@ This guide walks you through the installation of **Godspeed**, and how to create
 
 ### **Step 1: Install Godspeed**
 <!-- #### **Windows/Linux:** -->
-1. **Ensure Node.js and Npm is installed**:
-   - Verify Node.js and npm versions by running the following commands:
+1. **Ensure Node.js, Npm and Git is installed**:
+   - Verify versions by running the following commands:
      ```bash
      node -v
      npm -v
+     git -v
      ```
    - You should see something like `v18.x.x` for Node.js and `8.x.x` or higher for npm.
-   If Node.js is not installed, download and install it from [nodejs.org](https://nodejs.org/).
+   If Node.js is not installed, download and install it first.
 
 2. **Install Godspeed globally**:
    - Run this command to install the Godspeed meta-framework:
@@ -228,7 +229,7 @@ There is a longer and detailed introduction video as well, below on this page.
 - We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
 
 :::tip
-To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough.md#the-project-scaffolding) 
+To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough#moving-forward)
 ::: 
 
 > If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
