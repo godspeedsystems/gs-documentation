@@ -186,9 +186,9 @@ Configure the eventsource to enable jwt authentication. More detailed informatio
 ```
 type: express
 jwt:
-  issuer: <#config.issues#> # must be equal to the key iss in your jwt token
-  audience: <#config.audience#> #must be equal to the key aud in your jwt token
-  secretOrKey: <#config.secret#>
+  issuer: <%config.issuer%> 
+  audience: <%config.audience%> 
+  secretOrKey: <%config.secret%>
 ```
 *This enables JWT authentication on all your endpoints for the given eventsource. *
 
@@ -203,7 +203,7 @@ You can disable authn on any endpoint by setting `authn: false`
 ### Authorization (RBAC, ABAC, PBAC)
 The meta-framework gives you full freedom to handle authorization [(more details here)](../authorization/overview.md) based on RBAC, ABAC or PBAC, in a generic way, independent of the event source. You can integrate any IAM or policy engine to use with the meta-framework. 
 
-**Autorization at eventsource level**
+**Authorization at eventsource level**
 Authorization can be a list of YAML instructions or just one function which could be in turn TS, JS or YAML function in Godspeed's DSL.
 
 ```yaml
@@ -231,14 +231,25 @@ If authorization is enabled at eventsource level for all its events, but you wis
   authz: com.biz.user_is_allowed_for_this_event 
 ```
 
-### Reference Projects
+### Referencing pre-made project templates
+Pre-made projects are a great place to start learning about the meta-framework. You can refer these pre-made examples to learn about different features of meta-framework, and reuse the code from there. Feel free to clone, refer and re-use the repos given below.
 
-For further learning resources and materials to kickstart your Godspeed development journey, please clone the [gs-node-templates](https://github.com/godspeedsystems/gs-node-templates.git) repository. This repository contains following examples for now.
+#### Basic Project
 
-- hello_world
-- Full stack React based application
-- Loan Origination System - the most complex example with fintech usecase
-  - Before running the LOS code, do read its setup.md file
+Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
+
+#### Full Stack App
+A full stack app with Godspeed based backend and an embedded React project for frontend.
+
+Repository - [With Godspeed and React](https://github.com/godspeedsystems/gs-node-templates/tree/master/FullStack_App_With_React).
+
+#### Loan Origination System
+
+A more complex fintech project with diverse use cases for issuing loans via multiple lenders, policies, loan offers, KYC, loan account creation etc in a microservice based design.
+
+Repository - [Loan Origination System](https://github.com/godspeedsystems/gs-node-templates/tree/master/LOS). 
+
+_Check the Readme.md and Setup.md files in this repo as it requires a docker container of Postgres and Kafka to be running. Dockerfile is provided in the project._
 
 ### Detailed Walkthrough & Playlist
 

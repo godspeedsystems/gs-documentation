@@ -121,7 +121,6 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Godspeed',
-        
         logo: {
           alt: 'Godspeed Logo',
           src: 'img/Gs-logo.png',

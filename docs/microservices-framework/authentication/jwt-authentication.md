@@ -1,76 +1,239 @@
 # JWT Authentication
-All currently available _sync_ event sources support JWT authentication mechanism out of the box. For ex. Apollo Graphql, Express, Fastify.
 
-## Enabling JWT Authentication
-You can [setup jwt configuration](./jwt-authentication.md) in the event source's configuration file, and override it in each individual event as applicable.
-The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, all endpoints will go through JWT authentication, unless you explicityly set `authn:false` in their schema.
+**JWT (JSON Web Token)** is a standard method for securely transmitting information between two parties as a JSON object. It’s commonly used for authentication and authorization in web applications.
+In Godspeed, you can easily implement JWT authentication to protect routes, control access to resources and ensure secure API communication.
+Currently supported event sources which can leverage this mechanism are:
+1. Express
+2. Apollo GraphQL
+3. Fastify
 
-### Disabling authentication on an endpoint
-```yaml
-http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate: 
-  authn: false # explicitly disable jwt authentication on this endpoint
-  fn: com.biz.kyc.ckyc.ckyc_initiate
-  ...
+### What is JWT?  
+A JWT consists of three parts:
+1. **Header**: Contains the signing algorithm and token type (e.g., `HS256`, `JWT`).
+2. **Payload**: Stores claims or data such as user identity, roles, and permissions.
+3. **Signature**: Ensures the integrity of the token. It’s created using the header, payload, and a secret key.
+
+<!-- <details>
+<summary> Authentication Process using JWT: </summary>
+ 1. Client login: The client sends credentials (e.g., username and password) to the server.
+ 2. Token creation: Upon successful login, the server generates a JWT signed with a secret and sends it to the client.
+ 3. Token usage: The client includes the JWT in the `Authorization` header of subsequent requests to access protected resources.
+ 4. Token validation: The server validates the JWT in incoming requests, checking its signature, expiration, and payload.
+ 5. Authorization: If the token is valid, the server grants access to the requested resource.
+</details> -->
+
+A typical JWT looks like this:
 ```
-
-
-## For plugin creators
-For handling JWT , it is recommended that each event source plugin adheres to a standardized JWT handling configuration. In the case of JWT, the configuration typically includes details such as the `issuer`, `audience`, and `secretOrkey`.
-
-
-You can configure JWT settings within the `eventsources/<plugin_name>.yaml`. Here's an example of such a configuration:
-
-### Example Configuration
-
-```yaml
-type: express
-jwt:
-  issuer: <#config.issues#> # must be equal to the key iss in your jwt token
-  audience: <#config.audience#> #must be equal to the key aud in your jwt token
-  secretOrKey: <#config.secret#>
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```
-The provided snippet contains payload information and a secret key. Once the above snippet is added to the `eventsources/http.yaml`, authentication for all the events will be *true* by default. 
+<details>
+<summary> Example JWT Payload </summary>
 
-:::tip Note
-The Express plugin is implemented using passport JWT . To know more check [passport documentation](https://www.passportjs.org/)
-:::
-
-The options supported by passport sdk are:
-
-![jwt_config_options](https://docs.godspeed.systems/assets/images/jwtconfig_options-7c650cde2021eae6cdc15d4029afe6ff.png) 
-
-When configuring the JWT settings, if you do not provide either the `secretOrKeyProvider` or the `secretOrKey` property from the configuration options mentioned above, it will result in an error.
-
-Additionally, if you specify an `issuer` or `audience` value in the configuration, and the token values differ from those specified in the configuration payload, the response will be 'Unauthorized.'
-
-
-## Access JWT payload in event handlers or workflows
-You can access the complete JWT payload in `<% inputs.user %>` in YAML workflows inline scripts, and as `ctx.inputs.data.user` when writing JS/TS functions
-
-### Example access from inline scripting with YAML
-This is applicable in `functions` and in `authz` workflows in event source or event definitions.
-```yaml
-summary: Call an API and transform the 
-tasks:
-    - id: api_step1
-      description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.post./anything
-      args:
-        data: <% inputs.body %>
-          jwt_payload: <% inputs.user %>
 ```
-
-### Example JS/TS workflow
-```typescript
-export default async function (ctx: GSContext, args: any) {
-    
-    //Ctx object has the basics you need to write any business logic in TS/JS
-    const {
-        inputs
-    } = ctx;
-    //Accessing deserialized inputs from the event source
-    const {user, body, params, query, headers} = inputs.data;
-    return {'user': inputs.data.user};
-    //return new GSStatus(true, 200, undefined, {'user': inputs.data.user});
+{
+  "iss": "https://your-app.com",
+  "sub": "user123",
+  "aud": "https://your-app.com/api",
+  "exp": 1692425600,
+  "nbf": 1692425000,
+  "iat": 1692424400,
+  "jti": "token123",
+  "username": "john.doe",
+  "email": "john.doe@example.com",
+  "roles": ["admin", "user"]
 }
 ```
+</details>
+
+### How JWT Authentication Works in Godspeed
+When a client makes a request to a protected route, they need to include a valid JWT in the request header. 
+The server validates the token, extracts the payload, and grants access to the resource if the token is valid.
+In the case of an expired or invalid token, the client will receive a `401 Unauthorized` response.
+
+:::tip Note
+In our Express eventsource plugin, JWT Authentication is implemented using passport-jwt which is a strategy for authenticating with a JSON Web Token. To know more about, you can check [passport documentation](https://www.passportjs.org/)
+:::
+
+### Disabling JWT Authentication at Event Level
+
+  The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, authentication for all the events will be true by default, unless you explicitly set authn:false in their event schema.
+  If you don't want users to be authenticated, you can disable any end-point by writing authn: false in your event schema like this:
+
+  ```
+  http.get./helloworld:
+    fn: helloworld
+    authn: false
+    params:
+      - name: name
+        in: query
+        required: true
+  ```
+
+### Setup and implementation of JWT authentication in Godspeed.
+
+### Step 1: Setting up Environment
+
+**1.** In Godspeed, any configuration which includes secrets or passwords is recommended to be defined using environment variables only. For this, open custom-environment-variables.yaml file which is placed under `config/` in your root project directory and add your jwt configs there like:
+
+  ```
+  jwtSecret: JWT_SECRET
+  audience:  JWT_AUDIENCE     
+  issuer: JWT_ISSUER
+
+  ```
+
+**2.** Now, you need to export these variables in environment. This can be done in two ways:
+
+  **(a)** Set environment variables in .env file which is under your project's root folder /.env as shown below:
+  ```
+    JWT_SECRET= mysecret            #the secret
+    JWT_AUDIENCE= godspeedsystemms  #aud in jwt token
+    JWT_ISSUER= godspeed            #iss in jwt token
+
+  ```
+
+  **(b)** Export these variables to your environment, follow the below syntax to export, based on the shell, you are using:
+  <details>
+  <summary> For git bash  </summary>
+   ```
+      $ export JWT_SECRET=mysecret
+      $ export JWT_ISS= mycompany
+   ```
+  </details>
+
+  <details> <summary> For windows powershell  </summary>
+  
+   ```
+    $env:JWT_SECRET= "mysecret"
+    $env:JWT_ISS= "mycompany"   
+   ```
+   </details>
+
+  After exporting the environment variable, you can access these variable anywhere in your project by using inline
+  scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts workflows.
+
+:::tip Note 
+If you do not set these environment variables mentioned above, it will result in an error while running your project. And if the token values set in header differ from those specified in the configuration, the response will be 'Unauthorized.'
+:::
+
+### Step 2: Enable JWT Auth in your project's eventsource configuration file.
+JWT configuration is written under authn: in the event source's configuration file. For Express, config file name will be http.yaml. Open this file and Set up jwt authn as shown below.
+
+'src/eventsources/http.yaml'
+```
+  type: express
+  port: 4000
+  #auth settings to run by default on every event
+  authn:
+    jwt:			
+      secretOrKey: <% config.jwtSecret %> # to access jwtSecret from config
+      audience: <% config.audience %>   
+      issuer: <% config.issuer %>     
+```
+Once you have enabled it here, authentication will be true for all endpoints, unless you explicitly set authn:false in their event schema.
+
+<details>
+<summary> User Login API Example using JWT Authentciation  </summary>
+
+**Event**
+```yaml
+# Login with username and password
+http.post./login:   # defines the POST request that will be triggered when a client hits /login endpoint.
+  fn: verifyLogin   # the workflow to handle the request
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+          required:
+            - username
+            - password
+  responses:
+    '200':
+      description: 'Login successful'
+      content:
+        application/json:
+          schema:
+            type: object
+    '401':
+      description: 'Invalid credentials'
+      content:
+        application/json:
+          schema:
+            type: string
+            example: 'Invalid username or password'
+```
+**Workflow (verifyLogin.ts)**
+```
+  import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
+  import jwt from 'jsonwebtoken';
+  export default function (ctx: GSContext, args: PlainObject) {
+      const {
+          inputs: {
+              data: {
+                body
+              }
+          }, 
+      
+      }= ctx;
+    logger.info("user info received %o", body);
+    // Dummy user validation (replace with your authentication logic)
+    if (body.username === 'user' && body.password === 'password') {
+      // Create a JWT token
+      const token = jwt.sign(
+        { sub: '1234567890', name: 'John Doe', role: 'user' },  // Payload
+        ctx.config.jwtSecret,  // access Secret key from config
+        { expiresIn: '1h', issuer: ctx.config.issuer, audience: ctx.config.audience }  // jwt Options
+      );
+      logger.info("Token generated %s", token);
+      return new GSStatus(true, 200, 'Login Successful',{JWT: token}, undefined);  
+    } else {
+      return new GSStatus(true, 401, undefined, 'Invalid Credentials',  undefined); 
+    }
+  }
+```
+</details>
+
+### How to access JWT payload
+When a client You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
+
+Example access from inline scripting with YAML
+```
+summary: protected route workflow 
+tasks:
+  - id: check_payload_user
+    description: return user object
+    fn: com.gs.return
+    args:
+      data: 
+        jwt_payload: <% inputs.user %>
+```
+
+Example access from JS/TS workflow
+```
+import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
+export default function (ctx: GSContext, args: PlainObject) {
+    const {
+        inputs: {
+            data: {
+               user		
+            }
+        }, 
+    }= ctx;
+
+return new GSStatus(true, 200, undefined, {'Payload user': user}, undefined);  
+}
+
+```
+
+### Standardized JWT Configuration (For Plugin Creators)
+
+For consistency across plugins, it's recommended to use a standardized configuration format for JWT settings (issuer, audience, secret key) in eventsources/<plugin_name>.yaml.
+

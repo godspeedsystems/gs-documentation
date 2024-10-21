@@ -1,50 +1,141 @@
-# Starting with Godspeed's meta-framework for Nodejs.
+# Getting Starting with Godspeed
 
 In this section, you will learn how to 
 1. Install the meta-framework using the command line interface (CLI)
-2. Check Express server setup
-3. Check an HTTP endpoint and its controller (handler) function
-4. Open your API endpoint in Swagger UI and test it out
+2. Create a new project in godspeed
+3. Open your API endpoint in Swagger UI and test it out
 
 
 ### Pre-requisites:
 
-1. Nodejs v18 (or Bunjs) 
+1. Nodejs v18 (or higher) or Bunjs 
 2. Npm
 2. Git
 3. VS Code or any code editor
 3. Linux, Mac, Windows and other OS supporting Nodejs or Bunjs
 
-### Step 1: Installation
+---
+This guide walks you through the installation of **Godspeed**, and how to create and run your first project using the `create` command. It also provides troubleshooting solutions for common errors.
 
-```bash
-  npm install -g @godspeedsystems/godspeed
-```
+### **Step 1: Install Godspeed**
+<!-- #### **Windows/Linux:** -->
+1. **Ensure Node.js and Npm is installed**:
+   - Verify Node.js and npm versions by running the following commands:
+     ```bash
+     node -v
+     npm -v
+     ```
+   - You should see something like `v18.x.x` for Node.js and `8.x.x` or higher for npm.
+   If Node.js is not installed, download and install it from [nodejs.org](https://nodejs.org/).
 
-### Step 2: Create a project and start the server
+2. **Install Godspeed globally**:
+   - Run this command to install the Godspeed meta-framework:
+     ```bash
+     npm install -g @godspeedsystems/godspeed
+     ```
+3. **Verify installation**:
+   - Run the following command to ensure Godspeed is installed:
+     ```bash
+     godspeed --version
+     ```
+---
+### **Step 2: Create Your First Godspeed Project**
 
-1. `godspeed create my_new_project` #replace my_new_project with name of your project. This may take some time to install the required npm plugins and create your project. Be patient!
-2. `cd my_new_project` #Go to your project folder
-3. `godspeed serve` #Start the project
-4. Check the logs. They will show http Express server is running on port 3000 
+1. **Create a new Godspeed project**:
+   - Use the `create` command to set up a new project:
+     ```bash
+     godspeed create my_new_project
+     ```
+   - Replace `my_new_project` with the name of your project.
+   - This step may take some time as it installs required npm plugins and creates the project structure. Be patient!
+
+2. **Navigate to your project folder**:
+   ```bash
+   cd my_new_project
    ```
-   [16:46:45.437] INFO (15281 on wwwabcomin-HP-EliteBook-840-G3): [Production Server][Running] ('express:' event source, '3001' port).
+3. **Start the server**:
+   - Start the project with this command:
+     ```bash
+     godspeed serve
+     ```
+   - Check the logs. They should indicate that the **Express server** is running on **port 3000**.
+   Example log:
+   ```bash
+   [16:46:45.437] INFO (15281 on localhost): [Production Server][Running] ('express:' event source, '3000' port).
    ```
+---
 
-### Step 3: Test the helloworld API
-1. Open `localhost:3000/api-docs` to open Swagger UI.
+### **Step 3: Test the Helloworld API**
 
-   ![img](../../../static/img/swagger_helloworld.png)
-2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
-3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. You will notice the configuration of the API call is in YAML format.
+1. **Open Swagger UI**:
+   - Open your browser and navigate to `http://localhost:3000/api-docs`. This will display the **Swagger UI**.
+    ![img](../../../static/img/swagger_helloworld.png)
+
+2. **TRY IT OUT**:
+   - In the Swagger UI, locate the `/helloworld` endpoint.
+<!-- :::tip -->
+Click the **Try it out** button and send a request to test the API, It will ask you to fill the name. Once you fill and submit the name parameter, 
+e.g. John, following response will be returned from the server.
+<!-- ::: -->
+  ```
+    Hello `John`      
+  ```
+Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
+
+To understand working of this API [Lets Walkthrough your first Godspeed Project](http://localhost:3000/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
+
+### Troubleshooting Common Errors
+
+**Error: Not Able to reach Template repository or hello-world is not a valid example**
+
+![git-not-installed](../../../static/img/git-error.jpeg)
+
+While creating a new godspeed project, if you face above error, it means Git is not installed on your system. 
+The framework needs **Git** to clone the template for your new project.
+
+**Solution**:
+1. **Install Git**:
+   - After installation, verify by running:
+       ```bash
+       git --version
+       ```
+2. **Re-run the Godspeed create command**:
+   - Once Git is installed, rerun the command:
+     ```bash
+     godspeed create my_new_project
+     ```
+---
+
+**Error: Running scripts is disabled on this system (Windows)**
+
+This error occurs because of Windows PowerShell's execution policy, which restricts running scripts by default.
+![running_scripts](../../../static/img/scripts-error1.jpeg)
+**Solution:**
+1. Open PowerShell **as Administrator**.
+2. Run the following command to allow script execution:
+   ```bash
+   Set-ExecutionPolicy RemoteSigned
+   ```
+3. Press **Y** to confirm.
+4. Close PowerShell and rerun your `godspeed serve` command.
+
+**Note**: This change allows local scripts to run, but blocks downloaded scripts unless they're signed by a trusted publisher.
+
+
+## Walking through your first Godspeed project
+
+### Why is Swagger asking you to fill the name?
+
+  Checkout how helloworld API endpoint is defined in your project.
+  Go to `src/events/helloworld.yaml` file, which is the event schema of this API call in YAML format.
 
   ```
     http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
     fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
     params: # JSON-Schema of API parameters like query, headers, path params. Note: This is set as per Swagger standard's `parameters` syntax
-      - name: name # This is our name query param
-        in: query # Notice the in: query This could be `path` or `headers` as well
-        required: true # Notice the `name` parameter is required
+      - name: name   # This is our name query param
+        in: query    # Notice the in: query, it can be `path` or `headers` as well
+        required: true # true means `name` parameter is required
         schema:
           type: string
     responses: # JSON-Schema of API responses for different status codes. Note: This is set as per Swagger standard's `responses` syntax
@@ -55,12 +146,15 @@ In this section, you will learn how to
               type: string
   ```
 :::tip
-In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. This naming approach may be new for you. The general norm across the larger developer community is to call only `async events` as `events` - for ex. Kafka or web socket message. But in Godspeed world we consider both sync APIs (REST, Graphql) and async events (Message bus, web socket, cron) - as events. All events, whether API calls or websocket messages, trigger functions which can be thought of as event handlers (see `fn` instruction in the yaml above). The sync events return a response while async events dont have a concept of response.
+In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. All events, whether API calls or websocket messages, trigger workflows/functions which can be thought of as event handlers (see `fn:` instruction in the yaml above). 
+The sync events return a response while async events dont have a concept of response.
 :::
 
-### Step 4: Test the validation of API inputs and outputs
+This naming approach may be new for you. The general norm across the larger developer community is to call only `async events` as `events` - for ex. Kafka or web socket message. But in Godspeed world we consider both sync APIs (REST, Graphql) and async events (Message bus, web socket, cron) - as events. 
 
-Almost every application needs validation of data sent in inputs to the API and response sent back by the service. You want to make sure wrong data does not enter your service nor do you return wrong response for an API call. Let's try this feature in the framework.
+### Testing the validation of API inputs and outputs
+
+Almost every application needs validation of data sent in request to the API and response sent back by the service, to make sure that wrong data could not enter your service nor should it return wrong response for an API call. Let's try this feature in the framework.
 
 1. Open your browser and hit the `/helloworld` endpoint via `localhost:3000/helloworld`. Or, run `curl -i localhost:3000/helloworld` from your terminal.
 2. This should return an error with code `400` because you have not passed `name` in query - as expected by the schema of `helloworld` API. 
@@ -93,42 +187,41 @@ Almost every application needs validation of data sent in inputs to the API and 
 Hello mastersilv3r
 ```
 
- 
-3. If you need access to the Swagger collection, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
+#### Swagger Collection
 
-4. If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
+ If you need access to the Swagger collection of godspeed project, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
 
+#### Postman Collection
 
-Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
+ If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
+
+### For any help
+Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#using-plugins)  
+
+```bash
+   godspeed --help
+```
 
 ### Video Tutorial - Short
 There is a longer and detailed introduction video as well, below on this page.
-
-> If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
 
-### CLI
+### Some important commands
 
-_To know more about all CLI commands, [click here](../CLI#supported-commands--arguments)_
-
-### Building and running your project
-
-**Building** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
+**Build** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
 
 **Clean**  With `godspeed clean` you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful if you have deleted some files in your `src` repo. When you delete something from `src`, it doesn't delete the files in the `dist`. You may need to clean up the dist folder to remove old references to deleted files in `src`
 
-**Local development in auto-watch mode** You can start your server on localhost using `godspeed serve`. It will run the project in autowatch mode over your local file changes.
+**Serve**  You can start your server on localhost using `godspeed serve`. It will run the project in auto-watch mode over your local file changes.
 
-**Production deployment:** Build your project and then run `godspeed preview` to serve directly from the `dist` folder 
+**Preview**  Build your project and run `godspeed preview` to serve directly from the `dist` folder that is Production deployment.
 
 #### Scaffolding of a meta-framework project
-This will create a basic project with Express eventsource, a sample endpoint (event) and event handler function for the same. It will show you possible configurations of Express service with JWT authn and autorization workflows.
 
 ![Scaffolding of a new project](../../../static/img/scaffolding_new_proj.png)
-
 
 - The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
 - The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
@@ -136,27 +229,9 @@ This will create a basic project with Express eventsource, a sample endpoint (ev
 
 :::tip
 To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough.md#the-project-scaffolding) 
-:::
+::: 
 
-### Referencing pre-made project templates
-Pre-made projects are a great place to start learning about the meta-framework. You can refer these pre-made examples to learn about different features of meta-framework, and reuse the code from there. Feel free to clone, refer and re-use the repos given below.
-
-#### Basic Project
-
-Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
-
-#### Full Stack App
-A full stack app with Godspeed based backend and an embedded React project for frontend.
-
-Repository - [With Godspeed and React](https://github.com/godspeedsystems/gs-node-templates/tree/master/FullStack_App_With_React).
-
-#### Loan Origination System
-
-A more complex fintech project with diverse use cases for issuing loans via multiple lenders, policies, loan offers, KYC, loan account creation etc in a microservice based design.
-
-Repository - [Loan Origination System](https://github.com/godspeedsystems/gs-node-templates/tree/master/LOS). 
-
-_Check the Readme.md and Setup.md files in this repo as it requires a docker container of Postgres and Kafka to be running. Dockerfile is provided in the project._
+> If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
 ### Video Tutorial - Longer and in depth
 
@@ -167,42 +242,3 @@ _Check the Readme.md and Setup.md files in this repo as it requires a docker con
 </div>
 
 
-### For any help
-Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#using-plugins)  
-
-
-```bash
-   godspeed --help
-```
-   
-```bash
-    
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-Usage: Godspeed CLI [options] [command]
-
-CLI tool for godspeed framework.
-
-Options:
-  -V, --version                   output the version number
-  -h, --help                      display help for command
-
-Commands:
-  create [options] <projectName>  create a new godspeed project.
-  serve                           run godspeed development server.
-  clean                           clean the previous build.
-  gen-crud-api                    scans your prisma datasources and generate
-                                  CRUD APIs events and workflows
-  build                           build the godspeed project.
-  plugin                          manage(add, remove, update) eventsource and
-                                  datasource plugins for godspeed.
-  prisma                          proxy to prisma commands with some add-on
-                                  commands to handle prisma datasources.
-  help [command]                  display help for command
-
-    
-```

@@ -306,21 +306,26 @@ const sidebars = {
                     label: "7.2.5 SQL Server",
                     id: "microservices-framework/databases/SQLServer",
                  },
-                 {
-                    type: "doc",
-                    label: "7.2.6 CokroachDB",
-                    id: "microservices-framework/databases/CokroachDB",
-                 },
-                 {
-                    type: "doc",
-                    label: "7.2.7 MariaDB",
-                    id: "microservices-framework/databases/MariaDB",
-                 },
-                 {
+                {
                   type: "doc",
-                  label: "7.2.8. PlanetScale",
-                  id: "microservices-framework/databases/PlanetScale",
+                  label: "7.2.6. SqLite",
+                  id: "microservices-framework/databases/SQLite",
                 },
+                {
+                  type: "doc",
+                  label: "7.2.7 CokroachDB",
+                  id: "microservices-framework/databases/CokroachDB",
+               },
+               {
+                  type: "doc",
+                  label: "7.2.8 MariaDB",
+                  id: "microservices-framework/databases/MariaDB",
+               },
+               {
+                type: "doc",
+                label: "7.2.9. PlanetScale",
+                id: "microservices-framework/databases/PlanetScale",
+              },
               ],
             },
 
