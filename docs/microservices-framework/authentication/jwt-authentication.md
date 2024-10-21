@@ -7,44 +7,8 @@ Currently supported event sources which can leverage this mechanism are:
 2. Apollo GraphQL
 3. Fastify
 
-### What is JWT?  
-A JWT consists of three parts:
-1. **Header**: Contains the signing algorithm and token type (e.g., `HS256`, `JWT`).
-2. **Payload**: Stores claims or data such as user identity, roles, and permissions.
-3. **Signature**: Ensures the integrity of the token. It’s created using the header, payload, and a secret key.
+To Learn more about JWT and Payload [Click Here](http://localhost:3000/docs/microservices-framework/authentication/jwt)
 
-<!-- <details>
-<summary> Authentication Process using JWT: </summary>
- 1. Client login: The client sends credentials (e.g., username and password) to the server.
- 2. Token creation: Upon successful login, the server generates a JWT signed with a secret and sends it to the client.
- 3. Token usage: The client includes the JWT in the `Authorization` header of subsequent requests to access protected resources.
- 4. Token validation: The server validates the JWT in incoming requests, checking its signature, expiration, and payload.
- 5. Authorization: If the token is valid, the server grants access to the requested resource.
-</details> -->
-
-A typical JWT looks like this:
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-```
-<details>
-<summary> Example JWT Payload </summary>
-
-```
-{
-  "iss": "https://your-app.com",
-  "sub": "user123",
-  "aud": "https://your-app.com/api",
-  "exp": 1692425600,
-  "nbf": 1692425000,
-  "iat": 1692424400,
-  "jti": "token123",
-  "username": "john.doe",
-  "email": "john.doe@example.com",
-  "roles": ["admin", "user"]
-}
-```
-</details>
 
 ### How JWT Authentication Works in Godspeed
 When a client makes a request to a protected route, they need to include a valid JWT in the request header. 
@@ -134,7 +98,7 @@ JWT configuration is written under authn: in the event source's configuration fi
 Once you have enabled it here, authentication will be true for all endpoints, unless you explicitly set authn:false in their event schema.
 
 <details>
-<summary> User Login API Example using JWT Authentciation  </summary>
+<summary> User Login Example using JWT Authentciation  </summary>
 
 **Event**
 ```yaml
@@ -202,7 +166,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 </details>
 
 ### How to access JWT payload
-When a client You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
+You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
 
 Example access from inline scripting with YAML
 ```
