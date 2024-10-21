@@ -7,7 +7,7 @@ Currently supported event sources which can leverage this mechanism are:
 2. Apollo GraphQL
 3. Fastify
 
-To Learn more about JWT and Payload [Click Here](http://localhost:3000/docs/microservices-framework/authentication/jwt)
+To Learn more about JWT and Payload [Click Here](/docs/microservices-framework/authentication/jwt)
 
 
 ### How JWT Authentication Works in Godspeed
