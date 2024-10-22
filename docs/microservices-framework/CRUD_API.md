@@ -2,11 +2,15 @@
 title: Generating CRUD API
 --- 
 
-Currently the framework generates CRUD API using Prisma's database model files and ORM client. It uses the [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM. And it generates `http` eventsource based CRUD API by default. Currently supported http eventsources are [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md) and [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md). You can expose it via Graphql eventsource as well, with currently supported [Apollo Graphql plugin](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md).   
+The gen-crud-api command in Godspeed is a powerful tool that automatically generates CRUD (Create, Read, Update, Delete) APIs for your data models. 
+<!-- This command significantly simplifies the process of building back-end APIs, allowing you to focus on other parts of your application. -->
 
-:::tip
-You can use prisma commands without yourself installing prisma through Godspeed, via `godspeed prisma <prisma_command_and_args>`. The `godspeed prisma` command is a proxy to prisma commands with some add-on commands to handle prisma datasources.
-:::
+The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates **http** eventsource based CRUD APIs by default. 
+
+**Currently supported eventsources:**
+- Http eventsource: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md) 
+- Http eventsource: [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
+- Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)  
 
 ### Steps to generate CRUD API over REST and Graphql
 
@@ -15,32 +19,47 @@ Create a new project from the CLI and open the created project in vscode
   
   [(See How to create)](./guide/get-started.md#step-2:-create-a-project-and-start-the-server)
 
-### Step 2. Add the prisma plugin
+### Step 2. Install the prisma plugin
 Add the 'prisma-as-datastore' plugin from the CLI of vscode
 
   [(See How to add Prisma plugin)](./datasources/datasource-plugins/Prisma%20Datasource.md#add-plugin)
 
-### Step 3: Set your Database_Connection_URL
+### Step 3: Set your Database Connection URL
 
-To connect with the database, give your db_connection_url in .env file.
- ```
-    POSTGRES_URL= postgresql://postgres:postgres@172.23.0.2:5432/yourdb
-    or
-    MYSQL_URL = mysql://root:password@localhost:3306/yourdb
-    or
-    MONGO_ATLAS_URL = mongodb+srv://atlas_username:pswd@cluster0.w3bbqrp.mongodb.net/yourdb?retryWrites=true&w=majority&appName=Cluster0
-    or
-    SQLITE_URL="file:./enter_your_file_name.db"
- ```
-### Step 4. Create prisma schema 
+Database connection URL is required to connect your project to a database and it should be configured within your project’s .env file.
+
+**General Format**
+
+Each database type has a specific URL format, but most follow the general structure:
+```bash
+protocol://username:password@host:port/database_name
+```
+Here, You can check the list of [**supported databases**](https://godspeed.systems/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases) and [**Connection URL format**](https://godspeed.systems/docs/microservices-framework/databases/MySQL#connection-url) for the database you're using.
+
+**Add the Database connection URL in .env file as:**
+```.env
+DATABASE_URL= "postgresql://postgres:postgres@localhost:5432/yourdb" //for postgres
+ or
+DATABASE_URL= "file:./enter_your_file_name.db"  //for SQLite
+```
+And then this environment variable is to be provided in the url field of the datasource block in the prisma schema 
+(/src/datasources/_.prisma)
+```
+datasource db {
+  provider = "database_provider_name",
+  url      = env("DATABASE_URL") 
+}
+```
+### Step 4. Create Prisma Schema 
 
 Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) file in `src/datasources` directory
 
-If your schema name is lms.prisma, your file content should look like this. 
+If your schema name is **lms.prisma**, your file content should look like this. 
+
   ```prisma
     datasource db {
-      provider = "postgresql"  // or "mysql", "sqlite", "sqlserver" etc.
-      url      = env("POSTGRES_URL")     // this is the variable name given to your db_connecion_url in .env
+      provider = "Name of Database Provider"  // "mysql", "sqlite", "sqlserver" etc.
+      url      = env("DATABASE_URL")     // this is the variable name given to your db_connecion_url in .env
     }
 
     generator client {
@@ -55,7 +74,6 @@ If your schema name is lms.prisma, your file content should look like this.
     }
   ```
 
-
   4.1 If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `prisma db pull`. This will generate your .prisma file. 
   
   4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.  -->
@@ -63,8 +81,8 @@ If your schema name is lms.prisma, your file content should look like this.
   4.3 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
 
     
-### Step 5. Generate prisma client
-Run `godspeed prisma prepare`. It will generate your prisma client for given schema and DB and will place the generated client in the `src/datasources/prisma-clients/` folder.
+### Step 5. Generate prisma client and sync your database
+Run `godspeed prisma prepare`. This command will generate the prisma client and will sync the database with prisma schema. The generated client will be stored in `src/datasources/prisma-clients/` folder.
 
  ```bash
   $ godspeed prisma prepare
@@ -79,24 +97,21 @@ Run `godspeed prisma prepare`. It will generate your prisma client for given sch
   ```
 
 ```
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
 
-
-
 > blog-app@1.0.0 gen-crud-api
 > npx @godspeedsystems/api-generator
 
 Select datasource / schema to generate CRUD APIs
-(x) mongo.prisma
+(x) lms.prisma
 ( ) For all
 ( ) Cancel
 
 ```
-And your CRUD API will be generated.
+**And your CRUD API will be generated.**
 
 Inspect generated events, definitions and functions.
 
