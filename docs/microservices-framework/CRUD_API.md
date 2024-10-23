@@ -30,7 +30,7 @@ To connect with the database, give your db_connection_url in .env file.
     or
     MONGO_ATLAS_URL = mongodb+srv://atlas_username:pswd@cluster0.w3bbqrp.mongodb.net/yourdb?retryWrites=true&w=majority&appName=Cluster0
     or
-    SQLITE_URL="file:./enter_your_file_name.db"
+    SQLITE_URL="file:/enter_your_file_name.db"
  ```
 ### Step 4. Create prisma schema 
 
