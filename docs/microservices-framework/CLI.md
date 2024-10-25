@@ -4,27 +4,21 @@ title: Godspeed CLI
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
-
 CLI to create and manage Godspeed projects.
 
-## About
-
+### About
 Godspeed CLI is the primary way to interact with your Godspeed project from the command line. It provides a bunch of useful functionalities during the project development lifecycle.
 
-## How to install
+### How to install
 
 ```bash
 npm install -g @godspeedsystems/godspeed
 ```
-
 or
-
 ```bash
 yarn global add @godspeedsystems/godspeed
 ```
-
 Once Godspeed CLI is installed, the `godspeed` command can be called from command line. When called without arguments, it displays its help and command usage.
-
 ```
 $  godspeed
 ```
@@ -35,16 +29,11 @@ $  godspeed
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
-
 Usage: Godspeed CLI [options] [command]
-
 CLI tool for godspeed framework.
-
 Options:
   -V, --version                   output the version number
   -h, --help                      display help for command
-
 Commands:
   create [options] <projectName>  create a new godspeed project.
   serve                           run the development server in watch mode.
@@ -58,15 +47,12 @@ Commands:
   prisma                          proxy to prisma commands with some add-on
                                   commands to handle prisma datasources.
   help [command]                  display help for command
-
-
-For detailed documentation visit https://godspeed.systems
-
-
 ```
 
-### Creating a new project
+### Godspeed Commands
 
+### Create: To create a new project
+---
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
 
 ```bash
@@ -74,13 +60,10 @@ $  godspeed create my-service
 ```
 
 ```bash
-
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 …  waiting   Cloning project template.
 ✔  success   Cloning template successful.
@@ -88,19 +71,16 @@ $  godspeed create my-service
 …  waiting   Generating project files.
 ✔  success   Successfully generated godspeed project files.
 
-
 dependencies installed successfully!
 
 Successfully created the project my-service.
 Use `godspeed help` command for available commands. 
 
 Happy building microservices with Godspeed! 🚀🎉
-
-
 ```
-
-### Running the service for local development
-
+---
+### Serve: To Run the service for local development
+---
 You can run your Godspeed project using `godspeed serve` command. This will build and run your project in auto-watch mode.
 
 ```bash
@@ -108,44 +88,33 @@ You can run your Godspeed project using `godspeed serve` command. This will buil
 ```
 
 :::tip
-
 In order to run a full stack application with Godspeed service as your backend, you can use Lerna. Check the example of full stack application in [gs-node-templates repository](https://github.com/godspeedsystems/gs-node-templates).
-
 :::
-
-
-### Building the service for hosted deployment
-
+---
+### Build: Building the service for hosted deployment
+---
 You can build your Godspeed project using `godspeed build` command. This will build your project and copy the contents in `/dist` folder. 
 
 ```bash
  godspeed build
 ```
-
-### Running the service in hosted environment
-
+---
+### Preview: Running the service in hosted environment
 You can run your Godspeed project using `godspeed preview` command. This will require `godspeed build` to be run prior because preview renders the project from the `dist` folder. 
-
 ```bash
  godspeed preview
 ```
-
-### Using Plugins
-
+### Help plugin: To get help in Plugin commands
+---
 Godspeed plugins are the way to extend the core Meta Framework. Currently we support adding eventsource and datasource as plugin.
-
 ```bash
 $  godspeed help plugin
-
 ```
-
 ```
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 Usage: Godspeed CLI plugin [options] [command]
 
@@ -160,26 +129,22 @@ Commands:
   update               Update an eventsource/datasource plugin.
   help [command]       display help for command
 
-
 For detailed documentation visit https://godspeed.systems
 
-
 ```
-
-#### plugin add
-
+---
+#### Plugin Add: To install godspeed plugin
+---
 The `godspeed plugin add` command allows the user to select a plugin from the list of available plugins and add them to the project.
 
 ```bash
 $  godspeed plugin add
 ```
 ```bash
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 ? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
@@ -196,7 +161,7 @@ $  godspeed plugin add
 │  ◯   │ cron-as-eventsource                    │ Cron as eventsource plugin for Godspeed Framework                              │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
-
+---
 #### plugin remove
 
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.

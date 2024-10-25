@@ -13,12 +13,9 @@ In this section, you will learn how to
 2. Git
 3. VS Code or any code editor
 3. Linux, Mac, Windows and other OS supporting Nodejs or Bunjs
-
 ---
-This guide walks you through the installation of **Godspeed**, and how to create and run your first project using the `create` command. It also provides troubleshooting solutions for common errors.
-
+This guide walks you through the installation of Godspeed, and how to create and run your first project using the `create` command. It also provides troubleshooting solutions for common errors.
 ### **Step 1: Install Godspeed**
-<!-- #### **Windows/Linux:** -->
 1. **Ensure Node.js, Npm and Git is installed**:
    - Verify versions by running the following commands:
      ```bash
@@ -26,9 +23,8 @@ This guide walks you through the installation of **Godspeed**, and how to create
      npm -v
      git -v
      ```
-   - You should see something like `v18.x.x` for Node.js and `8.x.x` or higher for npm.
-   If Node.js is not installed, download and install it first.
-
+   - You should see something like `v18.x.x` for Node.js and `8.x.x` or higher for npm if installed.
+   - It will show error in case any of above pre-reqisites is not installed, so download and install it first.
 2. **Install Godspeed globally**:
    - Run this command to install the Godspeed meta-framework:
      ```bash
@@ -39,7 +35,7 @@ This guide walks you through the installation of **Godspeed**, and how to create
      ```bash
      godspeed --version
      ```
----
+---     
 ### **Step 2: Create Your First Godspeed Project**
 
 1. **Create a new Godspeed project**:
@@ -59,11 +55,11 @@ This guide walks you through the installation of **Godspeed**, and how to create
      ```bash
      godspeed serve
      ```
-   - Check the logs. They should indicate that the **Express server** is running on **port 3000**.
-   Example log:
-   ```bash
-   [16:46:45.437] INFO (15281 on localhost): [Production Server][Running] ('express:' event source, '3000' port).
-   ```
+Check the logs. They should indicate that the **Express server** is running on **port 3000**.
+  Example log:
+  ```bash
+  INFO:[Production Server Running]('express:' eventsource, '3000' port) Try it out at: http://localhost:3000/api-docs
+  ```
 ---
 
 ### **Step 3: Test the Helloworld API**
@@ -72,12 +68,10 @@ This guide walks you through the installation of **Godspeed**, and how to create
    - Open your browser and navigate to `http://localhost:3000/api-docs`. This will display the **Swagger UI**.
     ![img](../../../static/img/swagger_helloworld.png)
 
-2. **TRY IT OUT**:
-   - In the Swagger UI, locate the `/helloworld` endpoint.
-<!-- :::tip -->
-Click the **Try it out** button and send a request to test the API, It will ask you to fill the name. Once you fill and submit the name parameter, 
-e.g. John, following response will be returned from the server.
-<!-- ::: -->
+2. **Try It Out**:
+- In the Swagger UI, locate the `/helloworld` endpoint.
+
+  Click the **`Try it out`** button and send a request to test the API, It will ask you to fill the name. Once you fill and submit the name parameter,(e.g. John) then following response will be returned from the server.
   ```
     Hello `John`      
   ```
@@ -91,8 +85,8 @@ To understand working of this API [Lets Walkthrough your first Godspeed Project]
 
 ![git-not-installed](../../../static/img/git-error.jpeg)
 
-While creating a new godspeed project, if you face above error, it means Git is not installed on your system. 
-The framework needs **Git** to clone the template for your new project.
+While creating a new godspeed project, if you face above error, it means **Git is not installed** on your system. 
+The framework needs Git to clone the template for your new project.
 
 **Solution**:
 1. **Install Git**:
@@ -106,7 +100,6 @@ The framework needs **Git** to clone the template for your new project.
      godspeed create my_new_project
      ```
 ---
-
 **Error: Running scripts is disabled on this system (Windows)**
 
 This error occurs because of Windows PowerShell's execution policy, which restricts running scripts by default.
@@ -125,11 +118,22 @@ This error occurs because of Windows PowerShell's execution policy, which restri
 
 ## Walking through your first Godspeed project
 
-### Why is Swagger asking you to fill the name?
+- **Scaffolding of a meta-framework project**
 
-  Checkout how helloworld API endpoint is defined in your project.
-  Go to `src/events/helloworld.yaml` file, which is the event schema of this API call in YAML format.
+![Scaffolding of a new project](../../../static/img/scaffolding_new_proj.png)
 
+- The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md), [datasources](/docs/microservices-framework/datasources/overview.md), [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
+- The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
+- We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
+
+:::tip
+To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough#moving-forward)
+::: 
+
+- **Why is Swagger asking you to fill the name?**
+
+  /helloworld API endpoint asks you to fill in the name parameter because the API has been configured to require this parameter as part of the query string.
+  Go to `src/events/helloworld.yaml` file, which is the event schema of this API in YAML format.
   ```
     http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
     fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
@@ -146,6 +150,13 @@ This error occurs because of Windows PowerShell's execution policy, which restri
             schema:
               type: string
   ```
+  In this helloworld.yaml file, the params section defines that the API requires a name parameter to be passed in the query string. Let’s break it down:
+- **params:** This section describes the input the API expects. In this case, the API expects a name parameter, which  must be provided by the user when they call the /helloworld endpoint.
+- **name: name:** This line specifies that the query parameter is called name.
+- **in: query:** This tells Swagger and the Godspeed server that the name parameter should be included in the query string of the URL (e.g., /helloworld?name=John).
+- **required: true:** The name parameter is mandatory. This means the API will not work unless this parameter is provided by the user.
+- **schema: { type: string }:** The name parameter must be a string, which further validates that the input should be text.
+
 :::tip
 In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. All events, whether API calls or websocket messages, trigger workflows/functions which can be thought of as event handlers (see `fn:` instruction in the yaml above). 
 The sync events return a response while async events dont have a concept of response.
@@ -212,25 +223,9 @@ There is a longer and detailed introduction video as well, below on this page.
 
 ### Some important commands
 
-**Build** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
 
-**Clean**  With `godspeed clean` you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful if you have deleted some files in your `src` repo. When you delete something from `src`, it doesn't delete the files in the `dist`. You may need to clean up the dist folder to remove old references to deleted files in `src`
 
-**Serve**  You can start your server on localhost using `godspeed serve`. It will run the project in auto-watch mode over your local file changes.
 
-**Preview**  Build your project and run `godspeed preview` to serve directly from the `dist` folder that is Production deployment.
-
-#### Scaffolding of a meta-framework project
-
-![Scaffolding of a new project](../../../static/img/scaffolding_new_proj.png)
-
-- The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
-- The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
-- We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
-
-:::tip
-To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough#moving-forward)
-::: 
 
 > If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
