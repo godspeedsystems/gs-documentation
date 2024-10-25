@@ -51,7 +51,6 @@ datasource db {
 }
 ```
 ### Step 4. Create Prisma Schema 
-
 Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) file in `src/datasources` directory
 
 If your schema name is **lms.prisma**, your file content should look like this. 
