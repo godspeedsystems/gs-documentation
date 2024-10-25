@@ -58,7 +58,7 @@ This guide walks you through the installation of Godspeed, and how to create and
 Check the logs. They should indicate that the **Express server** is running on **port 3000**.
   Example log:
   ```bash
-  INFO: [Production Server][Running] ('express:' event source, '3000' port).
+  INFO:[Production Server Running]('express:' eventsource, '3000' port) Try it out at: http://localhost:3000/api-docs
   ```
 ---
 
