@@ -7,6 +7,11 @@ title: How To Guide
 This section will give answers to your most pressing questions about using the godspeed meta-framework ? This "How to Guide" is designed to help you get the most out of our product, by providing clear and concise answers to all your frequently asked questions.
 <!-- It is designed to be easy to follow and understand, with step-by-step instructions and screenshots to help illustrate each process.  -->
 
+- **How to generate a crud-api using SQLite in Godspeed ?**
+
+  Follow this [SQLite CRUD API guide](https://godspeed.systems/docs/microservices-framework/databases/SQLite) to setup SQLite and generate crud api. 
+
+
 - **How to read variables from .env file in express.ts ?**
 
   If you have defined a variable in .env as
