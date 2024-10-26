@@ -20,7 +20,7 @@ Whether you're having trouble with setup, configurations or understanding the fr
 To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
 - [setup.bat](../../../static/setup.bat) (for Windows)
-- [setup.sh](../../../static/setup.bat) (for Ubantu)
+- [setup.sh](../../../static/setup.sh) (for Ubantu)
 
 It simplifies the installation process by checking all required tools in one go.
 
