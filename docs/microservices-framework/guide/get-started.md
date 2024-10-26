@@ -4,7 +4,7 @@
 - Creating your first project and running it locally.
 
 :::tip Need Help?
-**Ask Godspeed GPT First!**
+**[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
 
 Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)
 :::
@@ -15,12 +15,17 @@ Whether you're having trouble with setup, configurations or understanding the fr
 3. Git
 4. VS Code or any code editor
 
+### **Step 1: Install Godspeed**  
 :::tip
-To install prerequisites and Godspeed through our Easy Installation Script, Download this script file [setup.bat](../../../static/script/setup.bat)
-- It simplifies the installation process by checking all required tools in one go.
+To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
+- [setup.bat](../../../static/setup.bat) (for Windows)
+- [setup.sh](../../../static/setup.bat) (for Ubantu)
+
+It simplifies the installation process by checking all required tools in one go.
+
 <details>
-<summary> See How to execute this script in Windows: </summary>
+<summary> See How to execute this script in Windows </summary>
 
 1. Run Command Prompt as Administrator.
 
@@ -32,9 +37,20 @@ To install prerequisites and Godspeed through our Easy Installation Script, Down
 ```
 </details>
 
+<details>
+<summary> See How to execute this script in Ubantu </summary>
+
+  After downloading setup.sh file, Just execute it from shell as:
+
+```
+  sudo bash setup.sh
+```
+</details>
+
+
 Once the script finishes, you are ready to **[Create Your First Project](/docs/microservices-framework/guide/get-started#step-2-create-your-first-project)**
 
-### **Step 1: Install Godspeed manually**  
+### To Install godspeed framework manually follow the steps given below:
 1. **Ensure Node.js, Npm and Git is installed**:
    - Verify versions by running the following commands from terminal:
      ```bash
