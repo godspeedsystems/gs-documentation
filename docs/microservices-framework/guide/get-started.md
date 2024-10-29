@@ -19,7 +19,9 @@ Whether you're having trouble with setup, configurations or understanding the fr
 :::tip
 To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
+
 - [setup.bat](../../../static/setup.bat) (for Windows)
+
 - [setup.sh](../../../static/setup.sh) (for Ubuntu)
 
 It simplifies the installation process by checking all required tools in one go.
@@ -40,7 +42,7 @@ It simplifies the installation process by checking all required tools in one go.
 <details>
 <summary> See How to execute this script in Ubuntu </summary>
 
-  After downloading setup.sh file, Just execute it from shell as:
+After downloading setup.sh file, Just execute it from shell as:
 
 ```
   sudo bash setup.sh
