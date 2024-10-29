@@ -57,20 +57,11 @@ In the event, we establish an HTTP endpoint that accepts parameters such as the 
             message:
               type: string
           required: ['message']
-  responses:
-    200:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
 
 ```
 #### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
 
-In workflow we need to mension `datasource.kafka.producer` as function (fn) to Produce data.
+In workflow we need to mension `datasource.kafka.producer` as function (fn) to produce data.
 
 ```yaml
 id: kafka-publish
@@ -80,7 +71,7 @@ tasks:
       fn: datasource.kafka.producer
       args:
         topic: "publish-producer1"
-        message: <% inputs.body.message%>
+        message: <% inputs.body.message %>
 ```
 
 ### Example usage EventSource (Consumer):
@@ -103,7 +94,7 @@ To use Consumer we need to follow the below event key format.
 The consumer event is triggered whenever a new message arrives on the specified topic. Upon triggering, it retrieves the incoming message and forwards it to the `kafka_consume` function. Inside this function, the incoming message is processed, and the result is then returned.
 
 ``` yaml
-# event for consume data from Topic
+# event to consume data from Topic
 kafka.publish-producer1.kafka_proj: // event key
   id: kafka__consumer
   fn: kafka_consume

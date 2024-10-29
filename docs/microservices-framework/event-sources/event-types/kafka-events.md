@@ -7,10 +7,18 @@ Within the Kafka event structure, the content of the message is captured and mad
 
 ``` yaml
  # event for consume data from Topic
-Kafka.publish-producer1.kafka_proj: // event key
+Kafka.publish-producer1.kafka_proj:   # event key
   id: kafka_consumer
   fn: kafka_consume
-  body: #same body structure for all the events
+  body:    
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:    # the content of the message is captured here
+              type: string
+          required: ['message']
  ```
 
 #### Example workflow consuming a Kafka event

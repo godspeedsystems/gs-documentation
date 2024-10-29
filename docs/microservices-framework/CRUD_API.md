@@ -8,8 +8,7 @@ The gen-crud-api command in Godspeed is a powerful tool that automatically gener
 The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates **http** eventsource based CRUD APIs by default. 
 
 **Currently supported eventsources:**
-- Http eventsource: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md) 
-- Http eventsource: [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
+- Http eventsources: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md),   [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
 - Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)  
 
 ### Steps to generate CRUD API over REST and Graphql
@@ -75,7 +74,7 @@ If your schema name is **lms.prisma**, your file content should look like this.
 
   4.1 If you already have an existing database, you can [introspect it](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql) and generate the Prisma model file using `prisma db pull`. This will generate your .prisma file. 
   
-  4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.  -->
+  4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.
   
   4.3 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
 
