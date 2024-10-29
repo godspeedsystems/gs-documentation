@@ -1,23 +1,58 @@
 # Getting Starting with Godspeed
+**This guide will walk you through:**
+- Installing the Godspeed Meta-Framework on your system.
+- Creating your first project and running it locally.
 
-In this section, you will learn how to 
-1. Install the meta-framework using the command line interface (CLI)
-2. Create a new project in godspeed
-3. Open your API endpoint in Swagger UI and test it out
+:::tip Need Help?
+**[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
 
+Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)
+:::
 
 ### Pre-requisites:
-
 1. Nodejs v18 (or higher) or Bunjs 
 2. Npm
-2. Git
-3. VS Code or any code editor
-3. Linux, Mac, Windows and other OS supporting Nodejs or Bunjs
----
-This guide walks you through the installation of Godspeed, and how to create and run your first project using the `create` command. It also provides troubleshooting solutions for common errors.
-### **Step 1: Install Godspeed**
+3. Git
+4. VS Code or any code editor
+
+### **Step 1: Install Godspeed**  
+:::tip
+To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
+:::
+- [setup.bat](../../../static/setup.bat) (for Windows)
+- [setup.sh](../../../static/setup.sh) (for Ubuntu)
+
+It simplifies the installation process by checking all required tools in one go.
+
+<details>
+<summary> See How to execute this script in Windows </summary>
+
+1. Run Command Prompt as Administrator.
+
+2. Use cd command to change the directory to where you downloaded the setup.bat file.
+
+3. Execute the script by writing its name.
+```
+  setup.bat
+```
+</details>
+
+<details>
+<summary> See How to execute this script in Ubuntu </summary>
+
+  After downloading setup.sh file, Just execute it from shell as:
+
+```
+  sudo bash setup.sh
+```
+</details>
+
+
+Once the script finishes, you are ready to **[Create Your First Project](/docs/microservices-framework/guide/get-started#step-2-create-your-first-project)**
+
+### To Install godspeed framework manually follow the steps given below:
 1. **Ensure Node.js, Npm and Git is installed**:
-   - Verify versions by running the following commands:
+   - Verify versions by running the following commands from terminal:
      ```bash
      node -v
      npm -v
@@ -36,7 +71,7 @@ This guide walks you through the installation of Godspeed, and how to create and
      godspeed --version
      ```
 ---     
-### **Step 2: Create Your First Godspeed Project**
+### **Step 2: Create Your First Project**
 
 1. **Create a new Godspeed project**:
    - Use the `create` command to set up a new project:
@@ -51,10 +86,9 @@ This guide walks you through the installation of Godspeed, and how to create and
    cd my_new_project
    ```
 3. **Start the server**:
-   - Start the project with this command:
-     ```bash
+  ```
      godspeed serve
-     ```
+  ```
 Check the logs. They should indicate that the **Express server** is running on **port 3000**.
   Example log:
   ```bash
@@ -221,11 +255,6 @@ There is a longer and detailed introduction video as well, below on this page.
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
 
-### Some important commands
-
-
-
-
 
 > If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
 
@@ -236,5 +265,4 @@ There is a longer and detailed introduction video as well, below on this page.
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/BTPHPoI3dh0" frameborder="0" allowfullscreen></iframe>
 </div>
-
 

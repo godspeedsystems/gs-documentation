@@ -12,7 +12,7 @@
 ( src/events/every_minute_task.yaml )
 ```yaml
 # event for Scheduling a task for every minute.
-cron.* * * * *.Asia/Kolkata: //event key
+cron.* * * * *.Asia/Kolkata:   # event key
   fn: every_minute
 
 ```
