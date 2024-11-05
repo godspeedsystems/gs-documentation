@@ -1,13 +1,21 @@
 # Event Schema
-The event schema, for each eventsource, closely follows the OpenAPI specification. It includes
+
+To define an event in Godspeed, you need to write an Event Schema. This schema is a structured YAML configuration that follows the OpenAPI specification, allowing you to define every detail of how the event should behave. All events adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.
+
+## Writing an event schema 
+
+It involves specifying:
+
 - The name/topic/URL of the event
-- The event handler workflow(fn)
-- Input and output schema with the validation error handling
-- [Authorization](/docs/microservices-framework/authorization/overview.md) checks 
+- The event handler Workflow (fn)
+- Input and Output schema
+- [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
+- [Authorization checks](/docs/microservices-framework/authorization/overview.md)
 
-It outlines the specific fields, data types, and structure that an event must adhere to. The schema serves as a standardized template, ensuring consistency in the implementation across projects in a company, whereby many kinds of eventsources are used.
+By writing an event schema, you provide a blueprint that defines how an incoming request or message should be handled, making your API endpoints easy to manage and highly configurable.
 
-## The generic event schema
+
+## The generic Event Schema
 Godspeed follows [Schema Driven Development & Single Source of Truth](../introduction/guard-rails.md#1schema-driven-development), [Configure Over Code](../introduction/guard-rails.md#2configure-over-code) and [Modular Architecture](../introduction/guard-rails.md#4-decoupled-architecture) approach in 
 - Listening to events from various sources and acting upon them.
 - Generating API documentation (Swagger) and other schemas like Graphql
@@ -36,7 +44,6 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
   log: #Open Telemetry compliant log attributes which help debug and search through logs better
     attributes:
 ```
-As you see, these attributes are technically not limited to any eventsource or protocol except for minor differences for ex, a message bus event or cron event (basically all async events) don't have a response. 
 Lets understand the first line from the above snippet `http.get./greet`.
 
 `http`: Protocol http eventsource (can be any)
@@ -47,15 +54,22 @@ Lets understand the first line from the above snippet `http.get./greet`.
 
 We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
 
-:::tip Note
-When switching between eventsources, the event schema undergoes significant changes. In the case of HTTP events, the start line includes the eventsource name, method, and path. However, for Kafka events, the start line combines the datasource name, topic name, and group ID.
-:::
+## Key Differences between a Sync and Async Event Schema
 
-Points to be undertaken :
-- The first line is changed for each protocol. 
-- You can apply multiple compatible eventsource instances in a URI for ex. `graphql & http.get./greeting`
-- Async consumers like Kafka dont need authentication or authorization, and don't have a response 
-- Async events like Cron do not have any input.
+When switching between eventsources, the event schema undergoes significant changes.
+- The first line is changed for each protocol:
+
+ In the case of sync events or HTTP events, the start line includes the eventsource name, method, and path. 
+
+ However, for async events, the start line combines the source name, topic and group ID (for Kafka), or schedule (for Cron).
+
+- Async events like Kafka do not have responses, authentication and authorization fields in schema.
+
+- Cron events do not have any input.
+
+:::tip Note
+You can apply multiple compatible eventsource instances in a URI for ex. `graphql & http.get./greeting`
+:::
 
 <details>
 <summary> Example HTTP Schema  </summary>
