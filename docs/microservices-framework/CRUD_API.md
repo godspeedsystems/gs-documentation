@@ -11,6 +11,12 @@ The framework generates CRUD API using Prisma's database model files and ORM cli
 - Http eventsources: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md),   [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
 - Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)  
 
+### Watch this video to see how CRUD API is generated in Godspeed 
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/UOtFzRaoQnE?si=P_NqkqfdBVY1jJop"  frameborder="0" allowfullscreen></iframe>
+</div>
+
 ### Steps to generate CRUD API over REST and Graphql
 
 ### Step 1. Create a godspeed project 
@@ -50,7 +56,7 @@ datasource db {
 }
 ```
 ### Step 4. Create Prisma Schema 
-Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) file in `src/datasources` directory
+Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema/overview#example) file in `src/datasources` directory
 
 If your schema name is **lms.prisma**, your file content should look like this. 
 
@@ -132,6 +138,10 @@ Inspect generated events, definitions and functions.
 
 #### To see generated CRUD API over http and graphql, check this video from 3:30
 
+
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/dVt6GPSgY7A?si=gYrEESjBpIOfuNM5&amp;start=205" frameborder="0" allowfullscreen></iframe>
 </div>
+
+
