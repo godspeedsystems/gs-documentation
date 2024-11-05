@@ -33,7 +33,7 @@ Each database type has a specific URL format, but most follow the general struct
 ```bash
 protocol://username:password@host:port/database_name
 ```
-Here, You can check the list of [**supported databases**](https://godspeed.systems/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases) and [**Connection URL format**](https://godspeed.systems/docs/microservices-framework/databases/MySQL#connection-url) for the database you're using.
+Here, You can check the list of [**supported databases**](/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases) and [**Connection URL format**](/docs/microservices-framework/databases/MySQL#connection-url) for the database you're using.
 
 **Add the Database connection URL in .env file as:**
 ```.env
