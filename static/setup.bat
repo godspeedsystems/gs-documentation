@@ -1,34 +1,88 @@
 @echo off
 SETLOCAL
 
-echo Installing Node.js (version 18 or higher) and Git...
+echo Installing Node.js, npm, Git, and Godspeed using winget...
 
-REM Check for Node.js installation
-where node >nul 2>nul
+REM Check if winget is available
+where winget >nul 2>nul
 IF ERRORLEVEL 1 (
-    echo Node.js is not installed. Installing Node.js...
-    powershell -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v18.20.4/node-v18.20.4-x64.msi' -OutFile 'nodejs.msi'"
-    start /wait msiexec.exe /i nodejs.msi /quiet
-    del nodejs.msi
-) ELSE (
-    echo Node.js is already installed.
+    echo Error: winget is not available. Please ensure you have Windows Package Manager installed.
+    goto :end
 )
 
-REM Check for Git installation
-where git >nul 2>nul
+REM Install Node.js (includes npm)
+echo Installing Node.js...
+winget install -e --id OpenJS.NodeJS
 IF ERRORLEVEL 1 (
-    echo Git is not installed. Installing Git...
-    powershell -Command "Invoke-WebRequest -Uri 'https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.1/Git-2.42.0-64-bit.exe' -OutFile 'git-installer.exe'"
-    start /wait git-installer.exe /SILENT
-    del git-installer.exe
+    echo Error: Node.js installation failed. Please check manually.
+    goto :end
 ) ELSE (
-    echo Git is already installed.
+    echo Node.js installation successful.
 )
 
-REM Install Godspeed
-echo Installing Godspeed globally using npm...
+REM Install Git
+echo Installing Git...
+winget install -e --id Git.Git
+IF ERRORLEVEL 1 (
+    echo Error: Git installation failed. Please check manually.
+    goto :end
+) ELSE (
+    echo Git installation successful.
+)
+
+REM Install Godspeed globally using npm
+echo Installing Godspeed...
 npm install -g @godspeedsystems/godspeed
+IF ERRORLEVEL 1 (
+    echo Error: Failed to install Godspeed. Please check your Node.js and npm setup.
+) ELSE (
+    echo Godspeed installation complete.
+)
 
+REM Version Checks
+echo Checking installed versions...
+echo -------------------------------------
+
+REM Check Node.js version
+echo Node.js version:
+node -v
+IF ERRORLEVEL 1 (
+    echo Error: Node.js is not recognized.
+) ELSE (
+    echo Node.js is correctly installed.
+)
+
+REM Check npm version
+echo npm version:
+npm -v
+IF ERRORLEVEL 1 (
+    echo Error: npm is not recognized.
+) ELSE (
+    echo npm is correctly installed.
+)
+
+REM Check Git version
+echo Git version:
+git --version
+IF ERRORLEVEL 1 (
+    echo Error: Git is not recognized.
+) ELSE (
+    echo Git is correctly installed.
+)
+
+REM Check Godspeed version
+echo Godspeed version:
+godspeed --version
+IF ERRORLEVEL 1 (
+    echo Error: Godspeed is not recognized.
+) ELSE (
+    echo Godspeed is correctly installed.
+)
+
+echo -------------------------------------
 echo Setup complete.
+echo Restarting terminal to apply changes...
+timeout /t 3 >nul
+start "" %COMSPEC%
+exit
 ENDLOCAL
-pause
