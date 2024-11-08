@@ -22,7 +22,7 @@ Datasources can be divided into two types, "Datastore as datasource" and "API as
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704478971/Screenshot_from_2024-01-05_23-52-33_e8ihnh.png" alt="event types" />
 
 
-Example 1: Datastore as Datastore [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
+Example 1: Datastore as Datasource [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
 
 ```yaml
 id: workflow_1
