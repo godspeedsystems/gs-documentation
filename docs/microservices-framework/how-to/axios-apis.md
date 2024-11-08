@@ -18,11 +18,11 @@ and retrying requests, which is especially useful for complex workflows or exter
 
 2. **Open the Axios Configuration file**: In your project, go to `src/datasources/<api.yaml>`. This file will define the base configuration for Axios.
 
-3. **Define the Axios Settings**: Configure Axios to set the base URL and any custom headers or authentication needed for interacting with the third-party API.
+In this file, you can set the base URL and any custom headers or authentication needed for interacting with the third-party API.
 
-   Example `api.yaml`:
+**Example api.yaml:**
 
-   ```yaml
+  ```yaml
    type: axios
    base_url: https://httpbin.org
 
@@ -36,15 +36,14 @@ and retrying requests, which is especially useful for complex workflows or exter
      interval: PT10S  # Retry every 10 seconds if there's an error
      type: constant
      
-   ```
+  ```
 
-   ### Explanation:
+  ### Explanation:
    - **base_url**: The base URL of the third-party API. You can use `https://httpbin.org` as base url for testing.
    - **timeout**: Time in milliseconds before an Axios request times out.
    - **headers**: Custom headers for authentication or content type.
    - **retry**: Retry configuration for failed API calls.
 
----
 
 ### **Step 2: Set Up an Event**
 

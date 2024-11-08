@@ -6,30 +6,23 @@ title: Guides
 This section will give answers to your most pressing questions about using the godspeed meta-framework. 
 It is designed to be easy to follow and understand, with step-by-step instructions to help illustrate each process.
 
-- **[How to create APIs in Godspeed framework ?](/docs/microservices-framework/how-to/create-api)**
+- **[How to create Rest APIs in Godspeed framework ?](/docs/microservices-framework/how-to/create-api)**
 
-- **[How to interact with external Rest APIs using axios ?](/docs/microservices-framework/how-to/axios-apis)**
+- **[How to generate crud apis ?](/docs/microservices-framework/CRUD_API)**
 
-- **[How to open Swagger UI ?](/docs/microservices-framework/guide/get-started#step-3-test-the-helloworld-api)**
+- **[How to open Swagger UI ?](/docs/microservices-framework/guide/get-started#step-3-access-swagger-ui)**
 
-- **[How to use typescript functions in godspeed ?](/docs/microservices-framework/workflows/native-language-functions)**
+- **[How to write typescript functions in godspeed ?](/docs/microservices-framework/workflows/native-language-functions)**
 
 - **[How to access database as datasource ?](/docs/microservices-framework/databases/Overview)**
 
 - **[How to add authentication in your Rest endpoints ?](/docs/microservices-framework/authentication/jwt-authentication)**
 
-- **[How to generate crud apis ?](/docs/microservices-framework/CRUD_API)**
-
+- **[How to interact with external Rest APIs using axios ?](/docs/microservices-framework/how-to/axios-apis)**
 - **[ How to create custom datasource ?](/docs/microservices-framework/datasources/create-custom-datasource)**
-
-<!-- - **How to handle callbacks and callback url as http endpoint ?**
- -->
-
-
-
-- **How to generate a crud-api using SQLite in Godspeed ?**
-
-  Follow this [SQLite CRUD API guide](https://godspeed.systems/docs/microservices-framework/databases/SQLite) to setup SQLite and generate crud api. 
+- **[How to handle callbacks for example Payment Gateway Callback ?](/docs/microservices-framework/how-to/callbacks)**
+ 
+- **[How to make a CRUD project using PostgreSQL in Godspeed ?](/docs/microservices-framework/databases/PostgreSQL)**
 
 
 - **How to read variables from .env file in express.ts ?**
@@ -64,48 +57,11 @@ It is designed to be easy to follow and understand, with step-by-step instructio
   const newUser = await client.user.create({ data: userObj });
   ```
 
-- **How to save and access Github OAuth2 credentials in godspeed project ?**
+- **[How to implement OAuth2 authentication in godspeed project ?](/docs/microservices-framework/authentication/oauth2-authentication)**
 
-  Once you have registered you oauth app on github, you'll be provided with a Client ID and Client Secret. These credentials are essential for authenticating users with your app. [Click here](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) to see how to register an oauth app.
-  Save this client_id and client_secret in your .env file
-  ```
-  .env
+- **[How can I skip/disable authentication for a particular endpoint if it is giving "Unauthorized" in response?](/docs/microservices-framework/authentication/jwt-authentication#disabling-jwt-authentication-at-event-level)**
 
-  GITHUB_CLIENT_ID= "**************"  
-  GITHUB_CLIENT_SECRET= "***********************"  
-  GITHUB_CALLBACK_URL= "http://localhost:3000/auth/github/callback"
 
-  ```
-  Then in your http.yaml file, add the following configuration under the authn section:
-```
-http.yaml
-
-  authn:
-    oauth2:
-      github:
-        client_id: <% process.env.GITHUB_CLIENT_ID %>  
-        client_secret: <% process.env.GITHUB_CLIENT_SECRET %>    
-        callback_url: <% process.env.GITHUB_CALLBACK_URL %>
-
-    jwt:
-      secretOrKey: <% process.env.JWT_SECRET %>  
-      audience: <% process.env.JWT_AUDIENCE %>     
-      issuer: <% process.env.JWT_ISSUER %>   
-```
-
-- **How can I skip/disable authentication for a particular endpoint if it is giving "Unauthorized" in response?**
-
-  Check jwt configuration in the event source's configuration file (It will be http.yaml if using express). If jwt spec is set up here, then all endpoints will go through JWT authentication, unless you explicitly set authn:false in your event as:
-  ```
-  http.get./helloworld:
-  fn: helloworld
-  authn: false
-  params: #same as Swagger params.
-    - name: name
-      in: query
-      schema:
-        type: string
-  ```
 
 - **How can I access the custom environment variables in my project environment ?**
 
@@ -133,11 +89,11 @@ http.yaml
   After exporting the environment variable, you can access this variable in your project by using 
   scripting <% config.jwt.issuer %>
 
-- **How to build the project again, if I have renamed some files in my `src` repo ?**
+- **How to update and run the project, if I have renamed some files in my `src` repo ?**
 
   With `godspeed clean` command you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful to clean up the  dist folder to remove old references to deleted files in `src`
 
-- **Where can I specify the connection_url of my database server ?**
+- **How can I give the connection_url of my database server ?**
  
   You can add your own database connection string in .env file which is under root folder /.env
   Open this file and specify your database connection string here.
@@ -148,14 +104,15 @@ http.yaml
     MY_DB_URL: postgresql://postgres:postgres@localhost:5432/test
    ```
 
-- **After generating crud api, if I make some changes in models like adding a new   column, then how to update it in prisma client and my database?**
+- **After generating crud api, if I make some changes in models like adding a new column, then how to update it in prisma client and my database?**
 
-  First, Do the changes in your prisma schema file located in the datasources/ directory, save it and then run 
+  First run
    ``` 
      $ godspeed clean
    ```
-  this command will remove all pre-compiled prisma-schema files from your `/dist` folder then run
+ - This command will remove all pre-compiled prisma-schema files from your `/dist` folder then 
+ - Do the changes in your prisma schema file located in the datasources/ directory, save it and then run
    ```
     $ godspeed prisma prepare
    ```
-  It will generate prisma client with the changes you have done in the schema and will sync the database with your  prisma schema
+  It will generate prisma client with the changes you have made in the schema and will sync the database with your prisma schema.
