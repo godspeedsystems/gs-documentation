@@ -5,11 +5,11 @@ title: Generating CRUD API
 The gen-crud-api command in Godspeed is a powerful tool that automatically generates CRUD (Create, Read, Update, Delete) APIs for your data models. 
 <!-- This command significantly simplifies the process of building back-end APIs, allowing you to focus on other parts of your application. -->
 
-The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates **http** eventsource based CRUD APIs by default. 
+The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates CRUD APIs served from **http** eventsource, which is Express.js by default. 
 
-**Currently supported eventsources:**
+<!-- **Currently supported eventsources:**
 - Http eventsources: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md),   [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
-- Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)  
+- Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)   -->
 
 ### Watch this video to see how CRUD API is generated in Godspeed 
 
@@ -17,7 +17,7 @@ The framework generates CRUD API using Prisma's database model files and ORM cli
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/UOtFzRaoQnE?si=P_NqkqfdBVY1jJop"  frameborder="0" allowfullscreen></iframe>
 </div>
 
-### Steps to generate CRUD API over REST and Graphql
+## Steps to generate CRUD API over REST
 
 ### Step 1. Create a godspeed project 
 Create a new project from the CLI and open the created project in vscode
@@ -25,7 +25,7 @@ Create a new project from the CLI and open the created project in vscode
   [(See How to create)](./guide/get-started.md#step-2:-create-a-project-and-start-the-server)
 
 ### Step 2. Install the prisma plugin
-Add the 'prisma-as-datastore' plugin from the CLI of vscode
+Add the 'prisma-as-datastore' plugin from the CLI
 
   [(See How to add Prisma plugin)](./datasources/datasource-plugins/Prisma%20Datasource.md#add-plugin)
 
