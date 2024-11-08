@@ -19,21 +19,6 @@ In the case of an expired or invalid token, the client will receive a `401 Unaut
 In our Express eventsource plugin, JWT Authentication is implemented using passport-jwt which is a strategy for authenticating with a JSON Web Token. To know more about, you can check [passport documentation](https://www.passportjs.org/)
 :::
 
-### Disabling JWT Authentication at Event Level
-
-  The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, authentication for all the events will be true by default, unless you explicitly set authn:false in their event schema.
-  If you don't want users to be authenticated, you can disable any end-point by writing authn: false in your event schema like this:
-
-  ```
-  http.get./helloworld:
-    fn: helloworld
-    authn: false
-    params:
-      - name: name
-        in: query
-        required: true
-  ```
-
 ### Setup and implementation of JWT authentication in Godspeed.
 
 ### Step 1: Setting up Environment
@@ -96,6 +81,22 @@ JWT configuration is written under authn: in the event source's configuration fi
       issuer: <% config.issuer %>     
 ```
 Once you have enabled it here, authentication will be true for all endpoints, unless you explicitly set authn:false in their event schema.
+
+
+### Disabling JWT Authentication at Event Level
+
+  The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, authentication for all the events will be true by default, unless you explicitly set authn:false in their event schema.
+  If you don't want users to be authenticated, you can disable any end-point by writing authn: false in your event schema like this:
+
+  ```
+  http.get./helloworld:
+    fn: helloworld
+    authn: false
+    params:
+      - name: name
+        in: query
+        required: true
+  ```
 
 <details>
 <summary> User Login Example using JWT Authentciation  </summary>
