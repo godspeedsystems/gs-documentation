@@ -19,8 +19,10 @@ Whether you're having trouble with setup, configurations or understanding the fr
 :::tip
 To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
+
 - [setup.bat](../../../static/setup.bat) (for Windows)
-- [setup.sh](../../../static/setup.sh) (for Ubantu)
+
+- [setup.sh](../../../static/setup.sh) (for Ubuntu)
 
 It simplifies the installation process by checking all required tools in one go.
 
@@ -33,14 +35,14 @@ It simplifies the installation process by checking all required tools in one go.
 
 3. Execute the script by writing its name.
 ```
-  C:\Users\HP\Downloads> setup.bat
+  setup.bat
 ```
 </details>
 
 <details>
-<summary> See How to execute this script in Ubantu </summary>
+<summary> See How to execute this script in Ubuntu </summary>
 
-  After downloading setup.sh file, Just execute it from shell as:
+After downloading setup.sh file, Just execute it from shell as:
 
 ```
   sudo bash setup.sh
@@ -265,5 +267,4 @@ There is a longer and detailed introduction video as well, below on this page.
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/BTPHPoI3dh0" frameborder="0" allowfullscreen></iframe>
 </div>
-
 

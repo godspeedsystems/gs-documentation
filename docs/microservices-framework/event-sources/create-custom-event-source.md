@@ -1,4 +1,4 @@
-# Create a Custom Eventsource.
+# Create a Custom Eventsource
 
 ## About Eventsources
 

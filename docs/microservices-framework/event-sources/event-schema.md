@@ -1,16 +1,21 @@
 # Event Schema
-In the meta-framework world, we call sync events (different APIs) and async events (ex. Kafka, Socket, Cron) as events altogether.
 
-An event schema defines 
-- The structured format or blueprint for representing data within an event
-- Authentication and authorization policy
-- Input and output validations
-- The event handler - the business logic for handling that event
-- The documentation of the event (for publishing the API spec)
+To define an event in Godspeed, you need to write an Event Schema. This schema is a structured YAML configuration that follows the OpenAPI specification, allowing you to define every detail of how the event should behave. All events adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.
 
-It outlines the specific fields, data types, and structure that an event must adhere to. The schema serves as a standardized template, ensuring consistency in the implementation across projects in a company, whereby many kinds of eventsources are used.
+## Writing an event schema 
 
-## The generic event schema
+It involves specifying:
+
+- The name/topic/URL of the event
+- The event handler Workflow (fn)
+- Input and Output schema
+- [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
+- [Authorization checks](/docs/microservices-framework/authorization/overview.md)
+
+By writing an event schema, you provide a blueprint that defines how an incoming request or message should be handled, making your API endpoints easy to manage and highly configurable.
+
+
+## The generic Event Schema
 Godspeed follows [Schema Driven Development & Single Source of Truth](../introduction/guard-rails.md#1schema-driven-development), [Configure Over Code](../introduction/guard-rails.md#2configure-over-code) and [Modular Architecture](../introduction/guard-rails.md#4-decoupled-architecture) approach in 
 - Listening to events from various sources and acting upon them.
 - Generating API documentation (Swagger) and other schemas like Graphql
@@ -39,21 +44,35 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
   log: #Open Telemetry compliant log attributes which help debug and search through logs better
     attributes:
 ```
-As you see, these attributes are technically not limited to any eventsource or protocol except for minor differences for ex, a message bus event or cron event (basically all async events) don't have a response. 
 Lets understand the first line from the above snippet `http.get./greet`.
 
 `http`: Protocol http eventsource (can be any)
 
-`get` : method (depends on the eventsource used. Can be topic for Kafka, for example.)
+`get` : method (depends on the eventsource used. Can be topic for Kafka)
 
 `/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
 
 We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
 
+## Key Differences between a Sync and Async Event Schema
 
-## Http 
+When switching between eventsources, the event schema undergoes significant changes.
+- The first line is changed for each protocol:
 
-### Example HTTP Schema
+ In the case of sync events or HTTP events, the start line includes the eventsource name, method, and path. 
+
+ However, for async events, the start line combines the source name, topic and group ID (for Kafka), or schedule (for Cron).
+
+- Async events like Kafka do not have responses, authentication and authorization fields in schema.
+
+- Cron events do not have any input.
+
+:::tip Note
+You can apply multiple compatible eventsource instances in a URI for ex. `graphql & http.get./greeting`
+:::
+
+<details>
+<summary> Example HTTP Schema  </summary>
 
 ```yaml
 http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
@@ -76,14 +95,16 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
       content:
         application/json: 
           schema:
-            type: string
+            type: object
     200:
       content:
         application/json:
           schema:
             type: object
 ```
-**To get a quick understanding of HTTP event scehma, please watch the video provided below…**
+</details>
+
+**To get a quick understanding of Event scehma, please watch the video provided below…**
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/WsNwInEaWFw?si=2uEG_Tp5x36v9vAB" frameborder="0" allowfullscreen></iframe>
@@ -93,77 +114,3 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
   <iframe width="560" height="315" src="https://www.youtube.com/embed/cp1qgIz1PNw?si=4Qngtu-WXoC-LQeY" frameBorder="0" allowFullScreen></iframe>
 </div> -->
 
-## Kafka
-
-The structure of Kafka event schema
-
-> A [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource) event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the Kafka event specification](#example-spec-for-kafka-event).
-
-Within the Kafka event structure, the content of the message is captured and made accessible as `inputs.body`, facilitating its integration into the handler workflow for processing.
-
-### Example spec for Kafka event
-
-``` yaml
- # event for consume data from Topic
-Kafka.publish-producer1.kafka_proj: // event key
-  id: kafka_consumer
-  fn: kafka_consume
-  body:
-    description: The body of the query
-    content:
-      application/json: 
-        schema:
-          type: string
- ```
-
-## Apollo Graphql
-
-### GraphQL Configuration 
-The Apollo Graphql plugin is currently configured and functions exactly the same as Express and Fastify eventsources. Except that it doesn't have swagger config and doesn't support file upload as of now.
-
-(src/eventsources/apollo.yaml)
-```yaml
-type: graphql
-port: 4000
-#eventsource level default settings (can be overriden at event level)
-authn:
-authz:
-on_request_validation_error:
-on_response_validation_error:
-```
-
-:::tip note
-Ensure the event key prefix aligns with the name of the configuration YAML file. In this example, the prefix for the Event key is Apollo. The event schema follows REST standards, resembling HTTP events.
-:::
-
-### Apollo Graphql event schema
-
-(src/events/create_category.yaml)
-```yaml
-apollo.post./mongo/category:
-  summary: Create a new Category
-  description: Create Category from the database
-  fn: create
-  body:
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            name:
-              type: string
-  responses:
-    content:
-      application/json:
-        schema:
-          type: object
-```
-
-:::tip note
-- The first line is changed for each protocol. 
-- You can apply multiple compatible eventsource instances in a URI for ex. `graphql & http.get./greeting`
-- Async consumers like Kafka dont need authentication or authorization, and don't have a response 
-- Async Cron does not have any input either, unlike Kafka.
-
-- Two types of events- sync([http](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/express-as-http/README.md),[Apollo Graphql](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/graphql-as-eventsource/README.md)) and async([cron](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/cron-as-eventsource/README.md),[kafka](https://github.com/godspeedsystems/gs-plugins/blob/main/plugins/kafka-as-datasource-as-eventsource/README.md))
-:::
