@@ -1,13 +1,31 @@
 ---
 sidebar_position: 1
-title: How To Guide
+title: Guides
 ---
-### Welcome to our "How to Guide"!
 
-This section will give answers to your most pressing questions about using the godspeed meta-framework ? This "How to Guide" is designed to help you get the most out of our product, by providing clear and concise answers to all your frequently asked questions.
-<!-- It is designed to be easy to follow and understand, with step-by-step instructions and screenshots to help illustrate each process.  -->
+This section will give answers to your most pressing questions about using the godspeed meta-framework. 
+It is designed to be easy to follow and understand, with step-by-step instructions to help illustrate each process.
 
-- **[How to create APIs in Godspeed framework ?](/docs/microservices-framework/how-to-guides/create-api.md)**
+- **[How to create APIs in Godspeed framework ?](/docs/microservices-framework/how-to/create-api)**
+
+- **[How to interact with external Rest APIs using axios ?](/docs/microservices-framework/how-to/axios-apis)**
+
+- **[How to open Swagger UI ?](/docs/microservices-framework/guide/get-started#step-3-test-the-helloworld-api)**
+
+- **[How to use typescript functions in godspeed ?](/docs/microservices-framework/workflows/native-language-functions)**
+
+- **[How to access database as datasource ?](/docs/microservices-framework/databases/Overview)**
+
+- **[How to add authentication in your Rest endpoints ?](/docs/microservices-framework/authentication/jwt-authentication)**
+
+- **[How to generate crud apis ?](/docs/microservices-framework/CRUD_API)**
+
+- **[ How to create custom datasource ?](/docs/microservices-framework/datasources/create-custom-datasource)**
+
+<!-- - **How to handle callbacks and callback url as http endpoint ?**
+ -->
+
+
 
 - **How to read variables from .env file in express.ts ?**
 

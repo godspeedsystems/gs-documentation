@@ -113,6 +113,27 @@ tasks:
       args: <% inputs %>
 ```
 
+## Project Structure:
+
+After implementing Kafka plugin, your project structure will look like this:
+
+```
+.
+├── src
+│   ├── datasources
+│   │   ├── types
+│   │   │    └── kafka.ts                    # Custom datasource logic
+│   │   └── kafka.yaml                       # Datasource configuration
+│   ├── events
+│   │   ├── kafka_publish_event.yaml         # Event to trigger the Kafka publish
+│   │   └── kafka_consumer_event.yaml        # Event to trigger the Kafka consume
+│   ├── eventsources
+│   │   └── kafka.yaml                       # Eventsource configuration
+│   └── functions
+│       ├── kafka-publish.yaml               # Workflow to publish message
+│       └── kafka-consume.yaml               # Workflow to consume message
+```
+
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   
 **- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
