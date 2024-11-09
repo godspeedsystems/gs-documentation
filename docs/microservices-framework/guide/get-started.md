@@ -6,7 +6,7 @@
 :::tip Need Help?
 **[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
 
-Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)
+Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in our guide](/docs/microservices-framework/guides)
 :::
 
 ### Watch this One-Click Installation & Step-by-Step Tutorial Guide
@@ -109,16 +109,16 @@ Example log:
 
   In Godspeed, the **Swagger UI** is typically accessed at the `/api-docs` endpoint, appended to the `base URL` and `port` where the server is running. Here’s the general format for accessing Swagger UI:
    ```plaintext
-    http://<BASE_URL>:<PORT>/api-docs
+    http://<BASE_URL>:<PORT>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
    ```
-  
+   
   Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
 
   **To access Swagger UI, navigate to the following default url:**
    ```plaintext
     http://localhost:3000/api-docs
    ```
-    ![img](../../../static/img/swagger_helloworld.png)
+  ![img](../../../static/img/swagger_helloworld.png)
 
 ### Step 4: Test the Helloworld API
 
@@ -252,11 +252,11 @@ Almost every application needs validation of data sent in request to the API and
 Hello mastersilv3r
 ```
 
-#### Swagger Collection
+### Swagger Collection
 
  If you need access to the Swagger collection of godspeed project, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
 
-#### Postman Collection
+### Postman Collection
 
  If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
 

@@ -23,29 +23,39 @@ In this file, you can set the base URL and any custom headers or authentication 
 **Example api.yaml:**
 
   ```yaml
-   type: axios
-   base_url: https://httpbin.org
+  type: axios
+  base_url: https://httpbin.org   # Base URL of the third-party API. You can use `https://httpbin.org` for testing.
 
-   timeout: 5000  # Timeout in milliseconds
-   headers:
-     Authorization: "Bearer <YOUR_ACCESS_TOKEN>"
-     Content-Type: application/json
+  # Following fields are optional, you can use them as per your requirement
+  curlifiedLogs: true   # to print all api calls in curl format
 
-   retry:
-     max_attempts: 3
-     interval: PT10S  # Retry every 10 seconds if there's an error
-     type: constant
+  authn:       # to do Authentication of API calls with token refresh logic
+    fn: my_bank.authn
+    refreshOn:
+      statusCode: [401]
+
+  headers:      # to set Common headers in all API calls
+    Content-Type: application/json
+    Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+
+  # Retry logic for failed API calls for ex on Internal server errors or request timeouts
+  retry:
+      when: #the condition
+        status: [500, 503] # an array or single value of codes (optional). Default 500
+        message: my custom expected message for retry #And (optionally) when response has this message
+      max_attempts: 5
+      type: constant # or random, exponential
+      interval: PT15s
+      # type: exponential
+      # min_interval: PT5s
+      # max_internal: PT15s
+      # type: random
+      # min_interval: PT5s
+      # max_internal: PT15s
      
   ```
 
-  ### Explanation:
-   - **base_url**: The base URL of the third-party API. You can use `https://httpbin.org` as base url for testing.
-   - **timeout**: Time in milliseconds before an Axios request times out.
-   - **headers**: Custom headers for authentication or content type.
-   - **retry**: Retry configuration for failed API calls.
-
-
-### **Step 2: Set Up an Event**
+### Step 2: Set Up an Event
 
 1. **Create an Event to Trigger the Workflow**: Define an HTTP event to trigger the workflow and call the third-party API.
  Example `fetchData.yaml`:
@@ -73,7 +83,7 @@ http.get./fetch-data:
    - **fn**: fn defines the workflow function to be called. here it is, fetchDataWorkflow.
 
 
-### **Step 3: Set Up Workflow to Use the Axios Datasource**
+### Step 3: Set Up Workflow to Use the Axios Datasource
 
  Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.yaml`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
 
@@ -89,7 +99,7 @@ http.get./fetch-data:
       continue: false
 ```
 
-   ### Explanation:
+  ### Explanation:
 
    - **fn: datasource.api.get./anything** - References a predefined Axios function `axiosRequest` to make the API call which contains:-
 
