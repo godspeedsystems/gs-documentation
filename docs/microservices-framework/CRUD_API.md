@@ -58,6 +58,18 @@ datasource db {
 ### Step 4. Create Prisma Schema 
 Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema/overview#example) file in `src/datasources` directory
 
+> **Important Note**:  
+> When configuring the Prisma client in your Godspeed project, ensure you add the `output` field in your Prisma schema's `generator` block. This field should point to this location `src/datasources/prisma-clients/<name_of_your_prisma_file>` where the generated Prisma client files will be stored.
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./prisma-clients/lms"  //just change the name of prisma schema here 
+  previewFeatures = ["metrics"]  // to be used in case you want to generate metrics for prisma queries for telemetry. 
+}
+```
+This setup ensures that the generated client is available at the specified path i.e. `src/datasources/prisma-clients/`
+
 If your schema name is **lms.prisma**, your file content should look like this. 
 
   ```prisma
@@ -68,8 +80,8 @@ If your schema name is **lms.prisma**, your file content should look like this.
 
     generator client {
       provider = "prisma-client-js"
-      output   = "./prisma-clients/lms"
-      previewFeatures = ["metrics"]
+      output   = "./prisma-clients/lms" //in place of lms, give the name of your prisma schema here 
+      previewFeatures = ["metrics"]  //if you want to generate metrics for prisma queries for telemetry 
     }
 
     model User {
@@ -82,11 +94,9 @@ If your schema name is **lms.prisma**, your file content should look like this.
   
   4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.
   
-  4.3 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
-
     
 ### Step 5. Generate prisma client and sync your database
-Run `godspeed prisma prepare`. This command will generate the prisma client and will sync the database with prisma schema. The generated client will be stored in `src/datasources/prisma-clients/` folder.
+Run `godspeed prisma prepare`. This command will generate the prisma client and will sync the database with prisma schema. The generated client will be stored in `src/datasources/prisma-clients/` folder which we specified above in the generator client block.
 
  ```bash
   $ godspeed prisma prepare
@@ -132,7 +142,7 @@ Inspect generated events, definitions and functions.
   
    `localhost:<http_port>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
 
-### To expose same API via Graphql
+<!-- ### To expose same API via Graphql
 
   Simply add Graphql plugin and change your event URIs which have `http` to `http & graphql`, keeping the rest as the same. See how to use Graphql in detail in the [Apollo Graphql plugin documentation](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)
 
@@ -142,6 +152,6 @@ Inspect generated events, definitions and functions.
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/dVt6GPSgY7A?si=gYrEESjBpIOfuNM5&amp;start=205" frameborder="0" allowfullscreen></iframe>
-</div>
+</div> -->
 
 
