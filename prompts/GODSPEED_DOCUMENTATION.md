@@ -1,6 +1,335 @@
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\custom-authentication.md ----
+---- Content from: D:\gs-documentation\docs\ai-modules\react-app.md ----
+
+# Web-UI Starter Kit
+## Introduction
+
+Godspeed Web-UI Starter Kit simplifies the generation of a foundational front-end from OpenAPI/Swagger API specs. An AI agent creates the template with pre-established API connections.
+
+> An Engineering Powered AI Scaffolding agent to help you generate codebase from bare minimum requirements.
+
+Currently we support [React](https://react.dev/).
+
+| Framework | Support     |
+| --------- | ----------- |
+| React     | ✅          |
+| Vue       | Coming Soon |
+| Svelte    | Coming Soon |
+| Angular   | Coming Soon |
+| Vanila JS | Coming Soon |
+
+---
+
+##### Tech Stack For React
+
+* React-Query
+* React-Router
+* Tailwind
+
+---
+
+##### Essentials for Running this Package
+
+- OpenAI API/Microservice spec [Link](https://swagger.io/specification/)
+- OpenAI/ChatGPT API Secret Key [Link](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
+
+---
+
+
+### Steps for creating a New Project
+* Install Godspeed GS-Kit by `npm i @godspeedsystems/uikit`
+* Go to a directory /root
+* create a .env file with these keys
+
+  ```
+  OPENAI_API_KEY=sk-xxx
+  OPENAI_ORG_KEY=org-xxx
+  ```
+
+  > Note: If you dont have `OPENAI_ORG_KEY` then skip it
+  >
+* run -
+
+  ```
+  npx @godspeedsystems/uikit {app_type}
+  ```
+* Enter any app type that you want, currently we are supporting 'React-Web' for react web app.
+   ```
+    npx @godspeedsystems/uikit react-web
+   ```
+* Other tamplates are ***coming soon***. 
+
+* It will ask you for the location and name of your OpenAPI file.
+```
+> npx @godspeedsystems/uikit react-web
+[WARN] Importing from 'langchain' is deprecated. See https://js.langchain.com/docs/getting-started/install#updating-from-0052 for upgrade instructions.
+┌  Generate front-end boilerplate using Godspeed
+│
+◆  What is the name of your project?
+│  gskit-app_GodspeedTrialProject
+└
+
+
+```
+* hit `Enter` after   
+* Then it will ask about the where is the OpenAPI Spec file is located. Mention your file path over there.
+```
+> npx @godspeedsystems/uikit react-web
+[WARN] Importing from 'langchain' is deprecated. See https://js.langchain.com/docs/getting-started/install#updating-from-0052 for upgrade instructions.
+┌  Generate front-end boilerplate using Godspeed
+│
+◇  What is the name of your project?
+│  gskit-app-godspeedTrial
+{ name: 'gskit-app-godspeedTrial' }
+│
+◆  Where is your OpenAPI spec file located?
+│  ./api.yaml_
+└
+```
+* AI agent will read the OpenAPI spec and generate a react project with fetch hooks and tailwind configured.
+* depends on the OpenAPI file it will take few seconds to create a project. In the below case the file name is api.yaml.
+```
+> npx @godspeedsystems/uikit react-web
+
+[WARN] Importing from 'langchain' is deprecated. See https://js.langchain.com/docs/getting-started/install#updating-from-0052 for upgrade instructions.
+┌  Generate front-end boilerplate using Godspeed
+│
+◇  What is the name of your project?
+│  gskit-app-godspeedTrial
+{ name: 'gskit-app-godspeedTrial' }
+│
+◇  Where is your OpenAPI spec file located?
+│  ./api.yaml
+│
+◒  Cloning template.cloned godspeedsystems/gskit-react#main to ./gskit-app-godspeedTrial
+◇  Template cloned
+│
+◇  Pick a Data fetching library
+│  React Query
+│
+◓  Generating Fetch Hooks...
+```
+* After the Project is created it looks like...
+```
+> npx @godspeedsystems/uikit react-web
+
+[WARN] Importing from 'langchain' is deprecated. See https://js.langchain.com/docs/getting-started/install#updating-from-0052 for upgrade instructions.
+┌  Generate front-end boilerplate using Godspeed
+│
+◇  What is the name of your project?
+│  gskit-app-godspeedTrial
+{ name: 'gskit-app-godspeedTrial' }
+│
+◇  Where is your OpenAPI spec file located?
+│  ./api.yaml
+│
+◒  Cloning template.cloned godspeedsystems/gskit-react#main to ./gskit-app-godspeedTrial
+◇  Template cloned
+│
+◇  Pick a Data fetching library
+│  React Query
+│
+◇  react-query fetch hooks generated
+│
+◇  Fetch hooks written to file
+```
+* One folder with the Project name will create in the root directory. ( your react project folder )
+* Go to the new app folder and install the dependencies by `npm install`
+* Run `npm start` command to run the react project.
+* The Project will run on http://localhost:3000.
+```
+Compiled successfully!
+
+You can now view gskit-react in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.0.188:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+```
+* if Port 3000 is busy it will ask to change the port.
+```
+? Something is already running on port 3000. Probably:
+  node /Users/other_port_path
+  in /Users/other_port_path
+
+Would you like to run the app on another port instead? › (Y/n)
+```
+* After This the project folder will created. 
+
+### What you will end up with
+
+* React js application.
+* Your Tailwind gets Configured.
+* Your React Query is configured.       
+* Ready for further development.
+
+
+---- Content from: D:\gs-documentation\docs\documentation_principles.md ----
+
+# Guiding Principles Of Documentation:
+
+Creating effective documentation is essential for clear communication and knowledge transfer. Here are some guiding principles for documentation:
+
+### Clarity: 
+Ensure that your documentation is easy to understand for your target audience. Use clear and concise language, avoid jargon, and define technical terms when necessary.
+
+### Consistency: 
+Maintain a consistent structure and formatting throughout your documentation. This includes headings, fonts, colors, and styles.
+
+### Accuracy: 
+Double-check all information to ensure it is up-to-date and correct. Inaccurate documentation can lead to misunderstandings and errors.
+
+### Relevance: 
+Include only information that is relevant to the audience's needs. Avoid unnecessary details and tangents.
+
+### Organization: 
+Use a logical and well-structured format. Group related information together, use headings and subheadings, and provide a table of contents if needed.
+
+### Accessibility:
+Make sure your documentation is easily accessible to the intended audience. This may involve using a user-friendly platform or ensuring that printed documents are readily available.
+
+### Version Control: 
+If your documentation changes over time, keep track of different versions. This is especially important for software documentation. Users should be able to access the documentation for the version they are using.
+
+### Visual Aids: 
+Incorporate visuals, such as diagrams, charts, screenshots, and videos, to complement text. Visual aids can enhance understanding and retention.
+
+### Feedback: 
+Encourage feedback from users. They can provide valuable insights on how to improve the documentation. Consider using surveys, comments, or a contact point for questions.
+
+### Searchability:
+Implement a search function if your documentation is digital. This makes it easier for users to find the information they need.
+
+### Context: 
+Provide context for the information. Explain why something is important or how it fits into a larger process. Context helps users make better use of the information.
+
+### Use Cases: 
+Include practical examples and use cases. Demonstrating how to apply the information can be more effective than theory alone.
+
+### Conciseness:
+Avoid unnecessary verbosity. Get to the point and be concise while still providing necessary information.
+
+### Cross-Referencing:
+Include links or references to related topics within your documentation. This helps users explore related information.
+
+### Testing:
+Before finalizing your documentation, have a test audience review it. They can identify areas that may be unclear or missing.
+
+### Security:
+Protect sensitive information. If your documentation includes confidential data, ensure it is only accessible to authorized users.
+
+### Maintenance:
+Keep your documentation up-to-date. As systems or processes change, your documentation should reflect those changes.
+
+### User-Centered:
+Always keep your target audience in mind. Your documentation should cater to their needs and expectations.
+
+### Simplicity:
+Keep it simple. Avoid overcomplicating your documentation. Simple, straightforward language is often more effective.
+
+### Training:
+Consider providing training on how to use your documentation effectively. Training can help users navigate and understand your documentation better.
+
+Remember that the effectiveness of documentation is measured by its ability to convey information clearly and help users achieve their goals. Tailor your documentation to the specific needs and preferences of your audience.
+
+---- Content from: D:\gs-documentation\docs\framework_intro.md ----
+
+# Introduction
+
+Every microservice in the Godspeed framework has three fundamental abstractions, and the developer needs to work with just these three.
+
+## Guiding principles of design
+
+### Three fundamental abstractions
+Every microservice in the Godspeed framework has three fundamental abstractions, and the developer needs to work with just these three.
+
+- **Event-sources:** In the Godspeed framework, Event Sources serve as a mechanism for defining the primary entry or initiation points of an application. For instance, you can opt for an 'express' type of Event Source to expose your application through REST APIs, or you may choose a 'cron' type Event Source to schedule recurring calls to specific workflows. This level of configurability empowers developers to finely tune the behavior of their application according to their requirements.
+
+  - **Events:** Events trigger workflows. Events are generated by event sources like REST endpoints, gRPC, message bus, webhooks, websockets, S3, and more...
+
+- **Workflows:** Workflows are triggered by events. They not only perform business logic but also provide orchestration over datasources and microservices, and data/API federation. They will use datasources to store or retrieve data, join across various datasources, transform data, emit events and send responses. The framework provides a YAML dsl with some inbuilt workflows. If YAML does not suffice for any particular case, developers can currently put JS/TS workflows alongside YAML workflows and use them. Coming in future: Support for other languages.
+
+- **Datasources:** Datasources are locations where data can be stored or read from. For example API datasource (another microservice or third party), datastores (RDBMS, document, key-value), file system, S3 storage, etc. A microservice can use multiple datasources. The framework provides abstractions for Authn/Authz making it easy for the developer to express the same in a low code manner.
+
+
+## Developer's work 
+The developer will utilize the framework's CLI to initiate a new microservice project and begin development. They will set up the necessary events, data sources, workflows, and configurations such as mappings, environment variables, and telemetry settings. When configuring data sources:
+
+- For databases, they can either define the database schema or auto-generate it from the existing database using the CLI.
+
+- When using axios plugin for APIs we can specify either OpenAPI schema or provide the corresponding URL.
+
+
+### design principles
+
+- **Standardization:** "Godspeed offers standardization features that allow you to seamlessly integrate a wide range of event sources without the need to modify the entire event structure. The only change required is the initial line of the event, and the framework will handle the rest, ensuring a unified event structure across all sources."
+
+
+
+
+### Salient Features
+
+:::tip Note
+Some of the features mentioned here are in the product roadmap and planned for upcoming releases.
+:::
+
+**Schema driven development**
+
+To initiate development, the developer needs to define the API and data schema.
+
+**YAML based DSL and configurations**
+
+Our YAML-based DSL simplifies the expression of policies, business logic, and configurations. It results in shorter and more comprehensible code compared to traditional programming, even for beginners. Developers can further customize this DSL to accommodate specific requirements.
+
+**Multi datastore support**
+
+The model configuration and unified CRUD API, which includes full-text search and autosuggest, offer interfaces to various types of datastores, whether SQL or NoSQL. This API is designed to handle validation, relationship management, transactions, denormalization, and multilingual support. Each integration adapts to the specific functionality required based on the nature of the data store.  
+
+
+**Data validation**
+
+The framework offers validation for third-party API requests and responses, datastore queries, and its own API endpoints. Developers are only required to define the schema for third-party APIs, their microservice APIs, and datastore models. The framework handles the rest. For more intricate validation scenarios, such as conditional validation based on attributes like subject, object, environment, or payload, developers can incorporate these rules into the application logic as part of the workflows.
+
+**Authentication**
+
+The microservice framework performs authentication on all incoming requests, extracting user roles and additional information from a valid JWT token for further processing. The platform allows integration with an IAM provider like ORY Kratos to provide identity services. This IAM provider generates a JWT token containing user ID, user information, and roles, which is utilized by the microservices to validate users.
+
+**Authorization** **(**<Highlight color="#D0F9E5">Planned</Highlight>**)**
+
+Each microservice handles the authorization process for incoming requests. Developers will define authorization rules for each microservice using straightforward configuration files. These rules encompass not only access to API endpoints but also provide fine-grained data access within datastores. The framework allows seamless integration with third-party authorization services through flexible abstractions.
+
+**Distributed transactions** **(**<Highlight color="#D0F9E5">Planned</Highlight>**)**
+
+Each domain’s orchestrator is able to use the Saga [pattern](https://www.baeldung.com/cs/saga-pattern-microservices) to ensure distributed transactions across multiple microservices.
+
+
+**Autogenerated documentation**
+
+The framework provides autogenerated documentation using CLI.
+
+**Autogenerated CRUD API**  **(**<Highlight color="#D0F9E5">Planned</Highlight>**)**
+
+The framework provides autogenereated CRUD APIs from database model. Generated API's can be extended by the developers as per their needs.
+
+
+**Multiple languages support**
+
+If YAML isn't sufficient to address a specific scenario, developers have the flexibility to create custom business logic in their language of choice. If they opt for JavaScript or TypeScript, they can conveniently include the code within the same microservice project. Support for other languages will follow the same approach and is part of our future plans.
+Every microservice in the Godspeed framework has three fundamental abstractions, and the developer needs to work with just these three.
+
+
+
+---- Content from: D:\gs-documentation\docs\language_tools.md ----
+
+# Coming soon...
+
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\custom-authentication.md ----
 
 # Custom Authentication
 
@@ -377,7 +706,7 @@ export {
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\jwt-auth-old.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\jwt-auth-old.md ----
 
 # JWT Authentication
 All currently available _sync_ event sources support JWT authentication mechanism out of the box. For ex. Apollo Graphql, Express, Fastify.
@@ -456,7 +785,7 @@ export default async function (ctx: GSContext, args: any) {
 }
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\jwt-authentication.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\jwt-authentication.md ----
 
 # JWT Authentication
 
@@ -478,21 +807,6 @@ In the case of an expired or invalid token, the client will receive a `401 Unaut
 :::tip Note
 In our Express eventsource plugin, JWT Authentication is implemented using passport-jwt which is a strategy for authenticating with a JSON Web Token. To know more about, you can check [passport documentation](https://www.passportjs.org/)
 :::
-
-### Disabling JWT Authentication at Event Level
-
-  The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, authentication for all the events will be true by default, unless you explicitly set authn:false in their event schema.
-  If you don't want users to be authenticated, you can disable any end-point by writing authn: false in your event schema like this:
-
-  ```
-  http.get./helloworld:
-    fn: helloworld
-    authn: false
-    params:
-      - name: name
-        in: query
-        required: true
-  ```
 
 ### Setup and implementation of JWT authentication in Godspeed.
 
@@ -520,19 +834,23 @@ In our Express eventsource plugin, JWT Authentication is implemented using passp
   **(b)** Export these variables to your environment, follow the below syntax to export, based on the shell, you are using:
   <details>
   <summary> For git bash  </summary>
-   ```
+
+   ```bash
       $ export JWT_SECRET=mysecret
       $ export JWT_ISS= mycompany
    ```
+
   </details>
 
-  <details> <summary> For windows powershell  </summary>
-  
-   ```
+  <details> 
+  <summary> For windows powershell  </summary>
+
+   ```bash
     $env:JWT_SECRET= "mysecret"
-    $env:JWT_ISS= "mycompany"   
+    $env:JWT_ISS= "mycompany"  
    ```
-   </details>
+
+  </details>
 
   After exporting the environment variable, you can access these variable anywhere in your project by using inline
   scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts workflows.
@@ -544,7 +862,7 @@ If you do not set these environment variables mentioned above, it will result in
 ### Step 2: Enable JWT Auth in your project's eventsource configuration file.
 JWT configuration is written under authn: in the event source's configuration file. For Express, config file name will be http.yaml. Open this file and Set up jwt authn as shown below.
 
-'src/eventsources/http.yaml'
+`src/eventsources/http.yaml`
 ```
   type: express
   port: 4000
@@ -557,8 +875,24 @@ JWT configuration is written under authn: in the event source's configuration fi
 ```
 Once you have enabled it here, authentication will be true for all endpoints, unless you explicitly set authn:false in their event schema.
 
-<details>
-<summary> User Login Example using JWT Authentciation  </summary>
+
+### Disabling JWT Authentication at Event Level
+
+  The plugins follow zero trust policy as a first principle, so if you have setup jwt spec at event source level, authentication for all the events will be true by default, unless you explicitly set authn:false in their event schema.
+  If you don't want users to be authenticated, you can disable any end-point by writing authn: false in your event schema like this:
+
+  ```
+  http.get./helloworld:
+    fn: helloworld
+    authn: false
+    params:
+      - name: name
+        in: query
+        required: true
+  ```
+
+
+### User Login Example using JWT Authentciation 
 
 **Event**
 ```yaml
@@ -623,7 +957,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
     }
   }
 ```
-</details>
+
 
 ### How to access JWT payload
 You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
@@ -663,7 +997,7 @@ For consistency across plugins, it's recommended to use a standardized configura
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\jwt.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\jwt.md ----
 
 ### What is JWT?  
 A JWT consists of three parts:
@@ -703,7 +1037,7 @@ eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKx
 ```
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\oauth2-authentication.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\oauth2-authentication.md ----
 
 # OAuth2 Authentication
 
@@ -799,7 +1133,7 @@ eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKx
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authentication\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authentication\overview.md ----
 
 # About Authentication
 
@@ -811,7 +1145,7 @@ The currently supported Express, Fastify and Apollo Graphql [plugins](https://gi
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authorization\authz-usecases.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authorization\authz-usecases.md ----
 
 # Authorization in the framework
 
@@ -1271,7 +1605,7 @@ tasks:
 </details>
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\authorization\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\authorization\overview.md ----
 
 
 # About Authorization
@@ -1480,7 +1814,7 @@ args:
     where: <% inputs.body.where %> # where clause from authz workflow will be merged with this
 ``` -->
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\CLI.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\CLI.md ----
 
 ---
 sidebar_position: 1
@@ -1773,7 +2107,7 @@ The above command performs these two functions:
 Setting `OTEL_ENABLED` to false stops all the actions performed in [otel enable](#b-sets-otel_enabled-env-variable-to-true) command   
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\config-and-mappings\config.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\config-and-mappings\config.md ----
 
 # Config
 ## Config structure
@@ -1885,7 +2219,7 @@ Here, `defaults` key has the variables which are used by the framework for defau
 **2. on_error.continue** - By default, the framework sets it to `false`. Check [on_error](../workflows/yaml-workflows/workflow-dsl.md/#error-handling) for more information.
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\config-and-mappings\mappings.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\config-and-mappings\mappings.md ----
 
 ---
 sidebar_position: 3
@@ -1963,7 +2297,7 @@ NewGender: <% mappings.Gender.Others %>
 title:  <% mappings.relations.title %>
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\CRUD_API.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\CRUD_API.md ----
 
 ---
 title: Generating CRUD API
@@ -1972,11 +2306,11 @@ title: Generating CRUD API
 The gen-crud-api command in Godspeed is a powerful tool that automatically generates CRUD (Create, Read, Update, Delete) APIs for your data models. 
 <!-- This command significantly simplifies the process of building back-end APIs, allowing you to focus on other parts of your application. -->
 
-The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates **http** eventsource based CRUD APIs by default. 
+The framework generates CRUD API using Prisma's database model files and ORM client. It uses Godspeed's [Prisma plugin](./datasources/datasource-plugins/Prisma%20Datasource.md) as the ORM and generates CRUD APIs served from **http** eventsource, which is Express.js by default. 
 
-**Currently supported eventsources:**
+<!-- **Currently supported eventsources:**
 - Http eventsources: [Express](./event-sources/event-source-plugins/Express%20Http%20Eventsource.md),   [Fastify](./event-sources/event-source-plugins/Fastify%20Eventsource.md)
-- Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)  
+- Graphql eventsource: [Apollo Graphql](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)   -->
 
 ### Watch this video to see how CRUD API is generated in Godspeed 
 
@@ -1984,7 +2318,7 @@ The framework generates CRUD API using Prisma's database model files and ORM cli
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/UOtFzRaoQnE?si=P_NqkqfdBVY1jJop"  frameborder="0" allowfullscreen></iframe>
 </div>
 
-### Steps to generate CRUD API over REST and Graphql
+## Steps to generate CRUD API over REST
 
 ### Step 1. Create a godspeed project 
 Create a new project from the CLI and open the created project in vscode
@@ -1992,7 +2326,7 @@ Create a new project from the CLI and open the created project in vscode
   [(See How to create)](./guide/get-started.md#step-2:-create-a-project-and-start-the-server)
 
 ### Step 2. Install the prisma plugin
-Add the 'prisma-as-datastore' plugin from the CLI of vscode
+Add the 'prisma-as-datastore' plugin from the CLI
 
   [(See How to add Prisma plugin)](./datasources/datasource-plugins/Prisma%20Datasource.md#add-plugin)
 
@@ -2025,6 +2359,18 @@ datasource db {
 ### Step 4. Create Prisma Schema 
 Now Create a [prisma schema](https://www.prisma.io/docs/orm/prisma-schema/overview#example) file in `src/datasources` directory
 
+> **Important Note**:  
+> When configuring the Prisma client in your Godspeed project, ensure you add the `output` field in your Prisma schema's `generator` block. This field should point to this location `src/datasources/prisma-clients/<name_of_your_prisma_file>` where the generated Prisma client files will be stored.
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./prisma-clients/lms"  //just change the name of prisma schema here 
+  previewFeatures = ["metrics"]  // to be used in case you want to generate metrics for prisma queries for telemetry. 
+}
+```
+This setup ensures that the generated client is available at the specified path i.e. `src/datasources/prisma-clients/`
+
 If your schema name is **lms.prisma**, your file content should look like this. 
 
   ```prisma
@@ -2035,8 +2381,8 @@ If your schema name is **lms.prisma**, your file content should look like this.
 
     generator client {
       provider = "prisma-client-js"
-      output   = "./prisma-clients/lms"
-      previewFeatures = ["metrics"]
+      output   = "./prisma-clients/lms" //in place of lms, give the name of your prisma schema here 
+      previewFeatures = ["metrics"]  //if you want to generate metrics for prisma queries for telemetry 
     }
 
     model User {
@@ -2049,11 +2395,9 @@ If your schema name is **lms.prisma**, your file content should look like this.
   
   4.2 Copy the generated file to `src/datasources` folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.
   
-  4.3 Make sure to note the `output` parameter in the .prisma file which should point to location in `src/datasources/prisma-clients/<name_of_your_prisma_file>` and `previewFeatures` is to be added in case you want to generate metrics for prisma queries for telemetry. 
-
     
 ### Step 5. Generate prisma client and sync your database
-Run `godspeed prisma prepare`. This command will generate the prisma client and will sync the database with prisma schema. The generated client will be stored in `src/datasources/prisma-clients/` folder.
+Run `godspeed prisma prepare`. This command will generate the prisma client and will sync the database with prisma schema. The generated client will be stored in `src/datasources/prisma-clients/` folder which we specified above in the generator client block.
 
  ```bash
   $ godspeed prisma prepare
@@ -2099,7 +2443,7 @@ Inspect generated events, definitions and functions.
   
    `localhost:<http_port>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
 
-### To expose same API via Graphql
+<!-- ### To expose same API via Graphql
 
   Simply add Graphql plugin and change your event URIs which have `http` to `http & graphql`, keeping the rest as the same. See how to use Graphql in detail in the [Apollo Graphql plugin documentation](./event-sources/event-source-plugins/Apollo%20GraphQl%20Eventsource.md)
 
@@ -2109,12 +2453,12 @@ Inspect generated events, definitions and functions.
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/dVt6GPSgY7A?si=gYrEESjBpIOfuNM5&amp;start=205" frameborder="0" allowfullscreen></iframe>
-</div>
+</div> -->
 
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\CokroachDB.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\CokroachDB.md ----
 
 Coackroch, a distributed database that is designed for scalability and high availability, is largely compatible with PostgreSQL, and can be used with Prisma plugin in the same way.
 
@@ -2190,7 +2534,7 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according to the defined prisma schema
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\MariaDB.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\MariaDB.md ----
 
 MariaDB is a fork of MySQL, created to maintain MySQL’s features while ensuring open-source development. It can be connected using the same way as MySql with Prisma plugin.
 
@@ -2265,7 +2609,7 @@ godspeed gen-crud-api
 * Now you can view the event and workflows according to the defined prisma schema
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\MongoDB.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\MongoDB.md ----
 
 MongoDB is a popular NoSQL database. In Godspeed, you can connect to MongoDB in two ways:
 #### 1. [Using Mongoose-as-datasource Plugin](#mongoose-as-datasource-plugin) [(Plugin Repository)](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datastore)
@@ -2608,7 +2952,7 @@ tasks:
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\MySQL.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\MySQL.md ----
 
 MySQL, a widely used open-source relational database management system can be connected easily using the Prisma-as-datasource plugin.
 
@@ -2697,11 +3041,13 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according to the defined prisma schema
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\Overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\Overview.md ----
 
 
  The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL datasbases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself. 
- The framework provides functionality to access most popular databases like PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
+
+
+ The framework provides functionality to access almost all popular databases through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
  
 ### List of currently supported Databases 
 
@@ -2756,7 +3102,7 @@ Now you can generate CRUD API using following command
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
     
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\PlanetScale.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\PlanetScale.md ----
 
 
 PlanetScale is also a relational database management system which can be connected using the Prisma-as-datasource plugin.
@@ -2837,7 +3183,7 @@ godspeed gen-crud-api
 * Now you can view the event and workflows according to the defined prisma schema
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\PostgreSQL.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\PostgreSQL.md ----
 
 PostgreSQL can also be connected using the Prisma-as-datastore plugin.
 
@@ -2925,7 +3271,7 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according to the defined prisma schema
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\SQLite.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\SQLite.md ----
 
 SQLite is a lightweight, serverless database engine that operates in-memory by default. This means it doesn't require a separate database server process or a network connection to access data.
 When you use SQLite with Prisma ORM, the database is created and managed entirely within your application's memory space.
@@ -3032,7 +3378,7 @@ godspeed gen-crud-api
 
 * Go to the src/Events and src/Functions to vview the events and workflowss generated as per your defined prisma schema.
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\databases\SQLServer.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\databases\SQLServer.md ----
 
 Microsoft SQL Server database can be connected using Prisma-as-datasource plugin.
 
@@ -3115,7 +3461,7 @@ godspeed gen-crud-api
 
 * Now you can view the event and workflows according to the defined prisma schema
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\caching.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\caching.md ----
 
 # Caching
 Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the workflows.   
@@ -3372,7 +3718,320 @@ export const Highlight = ({children, color}) => (
   </span>
 );-->
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\create-custom-datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\create-custom-datasource.md ----
+
+# Create a Custom Datasource
+
+**A datasource** in Godspeed is any entity that provides a read/write mechanism for data. For example, an API, a SQL or NoSQL datastore which includes RDBMS or mongodb,postgresql, key value stores, document stores etc. The congfiguration for each datasource lies in src/datasources directory.
+
+## Steps to Create a Custom Datasource in Godspeed
+
+You can create and interact with custom data source in few steps by:
+
+**1. Defining configuration file**
+
+**2. Implementing datasource logic and**
+
+**3. Creating event and workflow to manage interactions**
+
+Lets understand how to implement the above steps :
+
+### Step 1: Define Configuration file 
+
+- Inside the `datasources` directory, create `YAML` files to setup your datasource integrations. For example, chatgpt.yaml or kafka.yaml. 
+
+- In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined. 
+
+:::tip
+You can create multiple instances of same datasource type by creating multiple yaml files. For example, chatgpt1.yaml and chatgpt2.yaml. 
+
+FYI you can do the same for eventsources as well, For example http1.yaml and http2.yaml where both are of `type: express` and run on different ports.
+:::
+
+Let's see an example of creating chatgpt as custom datasource.
+
+```
+    .
+    ├── src
+        ├── datasources
+        │   ├── types
+        │   |    └── chatgpt.ts
+        |   |
+        │   └── chatgpt.yaml
+        │
+        ├── events
+        |
+        ├── eventsources
+        │   
+        └── functions
+```
+
+### Example
+
+Chatgpt Config file- `src/datasources/chatgpt.yaml`
+
+```yaml
+type: chatgpt  # should be same as the name of your datasource typescript file in `src/datasources/types/`
+
+# custom configurations as per your datasource logic
+model: gpt-4o  
+temperature: 1
+max_tokens: 200
+
+```
+This file defines the model, temperature, and token settings for the ChatGPT API.
+
+## Step 2: Implement datasource logic
+
+1. In `src/datasources/types`, create a TypeScript file for your datasource logic (e.g., `chatgpt.ts`).
+2. Import `GSDataSource` and other required modules from `@godspeedsystems/core`.
+3. Extend the `GSDataSource` abstract class to implement custom methods to interact with your custom datasource.
+4. Initialize and return your client by implementing the abstract `initClient()` method of `GSDatasource`.
+5. Once your client is initialized, then implement the  abstract `execute()` method of `GSDatasource`.
+
+### Template for your custom datasource logic :
+You can use the following template to start writing your custom datasource logic and then modify it as per your requirement.
+
+```typescript
+  import { GSContext,  GSDataSource, GSStatus, PlainObject,} from "@godspeedsystems/core";
+
+  export default class DataSource extends GSDataSource {
+  protected async initClient(): Promise<object> {
+      try {
+        
+        // initialize your client
+
+      } catch (error) {
+      throw error;
+      }
+  }
+  async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+      try {
+
+        // execute methods
+        
+      } catch (error) {
+        throw error;
+      }
+  }
+  }
+  const SourceType = 'DS';
+  const Type = "y"; // this is the loader file of the plugin, So the final loader file will be `types/${Type.js}`
+  const CONFIG_FILE_NAME = "y"; // in case of event source, this also works as event identifier, and in case of datasource works as datasource name
+  const DEFAULT_CONFIG = {};
+
+  export {
+    DataSource,
+    SourceType,
+    Type,
+    CONFIG_FILE_NAME,
+    DEFAULT_CONFIG
+  }
+ ```
+
+### Example Datasource Logic for GPT plugin 
+
+`src/datasources/types/chatgpt.ts`
+
+```typescript
+
+import { GSContext,  GSDataSource, GSStatus, logger, PlainObject,} from "@godspeedsystems/core";
+import OpenAI from 'openai';
+
+export default class DataSource extends GSDataSource {
+protected async initClient(): Promise<object> {
+  // initialize your client
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  return client;
+}
+
+async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+  const client = this.client as OpenAI;
+  const { prompt, meta: { fnNameInWorkflow } } = args;
+  // Parse method from fnNameInWorkflow
+  let method = fnNameInWorkflow?.split(".")[2];
+
+  // Validate that client and method are available
+  if (!client) {
+    return new GSStatus(false, 500, "ChatGPT client is not initialized");
+  }
+  if (!method) {
+    return new GSStatus(false, 400, "Method name is missing in fnNameInWorkflow");
+  }
+
+  // Use destructuring with defaults to get config values
+  const {  model= 'gpt-4o',temperature = 1, max_tokens = 500 } = this.config;
+
+    try {
+      // execute methods
+      if (method === "chat") {
+        // Execute ChatGPT completion
+        const response = await client.chat.completions.create({
+          model,
+          messages: [{ role: "user", content: prompt }],
+          temperature,
+          max_tokens,
+        });
+        const responseContent = response.choices[0]?.message?.content ?? "No response generated";
+        return new GSStatus(true, 200, "Success", responseContent);
+      } else {
+        return new GSStatus(false, 400, `Invalid method: ${method}`);
+      }
+    } catch (error) {
+      throw error;
+    }
+}
+}
+const SourceType = 'DS';
+const Type = "chatgpt"; // this is the loader file of the plugin, So the final loader file will be `types/${Type.js}`
+const CONFIG_FILE_NAME = "chatgpt"; // in case of event source, this also works as event identifier, and in case of datasource works as datasource name
+const DEFAULT_CONFIG = {};
+
+export {
+  DataSource,
+  SourceType,
+  Type,
+  CONFIG_FILE_NAME,
+  DEFAULT_CONFIG
+}
+```
+<!-- 
+<details>
+<summary> Datasource Logic for Kafka: </summary> 
+
+(src/datasources/types/kafka.ts)
+
+   ```typescript
+   import { GSContext, GSDataSource, PlainObject } from "@godspeedsystems/core";
+   import { Kafka } from "kafkajs";
+
+   export default class DataSource extends GSDataSource {
+     protected async initClient(): Promise<PlainObject> {
+       const kafka = new Kafka({
+         clientId: this.config.clientId,
+         brokers: this.config.brokers,
+       });
+       return kafka;
+     }
+
+     async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+       const { topic, message, meta: { fnNameInWorkflow } } = args;
+       let method = fnNameInWorkflow.split(".")[2];
+
+       if (this.client) {
+         if (method === "producer") {
+           const producer = this.client.producer();
+           await producer.connect();
+           const result = await producer.send({
+             topic: topic,
+             messages: [{ value: message }],
+           });
+           return result;
+         } else {
+           return "Invalid method";
+         }
+       }
+     }
+   }
+```
+
+#### Explanation of the Code:
+- **initClient**: Initializes the Kafka client based on the configuration in `kafka.yaml`.
+- **execute**: Defines a function that can either publish a message to Kafka or handle errors.
+</details>
+-->
+
+## Step 3: Define an Event to trigger the Datasource
+
+In the `src/events` directory, create an event file, e.g. `gpt.yaml`
+
+**Example (src/events/gpt.yaml)**
+
+```yaml
+http.post./chatgpt:
+  summary: "Generate response from ChatGPT"
+  description: "Endpoint to send a user prompt to ChatGPT and retrieve the AI-generated response."
+  fn: prompt
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            prompt:
+              type: string
+              description: "The user's prompt or question for ChatGPT to respond to."
+          required:
+            - prompt
+  responses:
+    200:
+      description: "Successful response from ChatGPT"
+      content:
+        application/json:
+          schema:
+            type: string
+```
+
+## Step 4: Define the Workflow
+
+In the `src/functions` directory, create a typescript workflow file (e.g., `prompt.ts`)
+
+```typescript
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
+export default async function (ctx: GSContext, args: any) {
+    const { inputs: {data: { body } }, }= ctx;
+    const prompt = body.prompt;    
+    const ds: GSDataSource = ctx.datasources.chatgpt;
+    
+    const response = await ds.execute(ctx, {
+        prompt,
+        meta: {fnNameInWorkflow: 'datasource.chatgpt.chat'}
+    });
+    return response;
+}
+```
+
+Or you can create workflow in yaml also :
+
+Example YAML Workflow (prompt.yaml)
+
+```yaml
+summary: "Get AI-driven response from ChatGPT with configurations from YAML file"
+tasks:
+  - id: request_chatgpt
+    fn: datasource.chatgpt.chat
+    args:
+      prompt: <% inputs.body.prompt %>
+```
+
+## Step 5: Access and Test the Custom Datasource
+
+1. **Start Your Godspeed Server**:
+   ```bash
+   godspeed serve
+   ```
+
+2. **Test the API Endpoint:**
+
+  Use Swagger UI at http://localhost:3000/api-docs or a tool like Postman to test the endpoint.
+  Send a POST request to /chatgpt with the prompt in the JSON body.
+
+  Example request:
+
+  ```json
+    {
+      "prompt": "How to create an API in godspeed ?"
+    }
+  ```
+
+3. **Verify the Response**:
+The API should respond with the ChatGPT-generated message in the format specified.
+
+
+
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\create-custom-datasource_old.md ----
 
 # Create a Custom Data Source
 
@@ -3382,9 +4041,34 @@ Any kind of entity which provides read and write mechanism for data is considere
 
 ### Steps to create Custom Datasource
 
+1. Inside the `datasources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
 
-<details>
-  <summary>let's use kafka as an example of a datasource :</summary>
+2. In your TypeScript file, use an import statement to bring in `GSDataSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSDataSource`.
+
+```
+    .
+    ├── src
+        ├── datasources
+        │   ├── types
+        │   |    └── custom_datasource.ts
+        |   |
+        │   └── custom_datasource.yaml
+        │
+        ├── events
+        | 
+        |
+        |
+        ├── eventsources
+        │   
+        |
+        └── functions
+```
+
+3. Afterward, you can access the methods provided by `GSDataSource`. Initialize your client by calling the `initClient()` function.
+
+4. Once your client is initialized, you can execute its methods using the `execute` function.
+
+Let's use kafka as an example of a datasource :
 
 #### Project structure
 
@@ -3416,14 +4100,14 @@ Any kind of entity which provides read and write mechanism for data is considere
             └── kafka-consume.yaml
 ```
 
-#### kafka config ( src/datasources/kafka.yaml )
+#### Kafka config ( src/datasources/kafka.yaml )
 ```yaml
 type: Kafka
 clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 ```
 
-#### initializing client and execution ( src/datasources/types/Kafka.ts ) :
+#### Initializing client and execution ( src/datasources/types/Kafka.ts ) :
 
 ```javascript
 import { GSContext, GSDataSource, PlainObject } from "@godspeedsystems/core";
@@ -3468,8 +4152,6 @@ export default class DataSource extends GSDataSource {
 
 ```
 
-
-
 #### Example Event ( src/events/kafka_publish_event.yaml ) :
 ```yaml
 'http.post./kafka-pub':
@@ -3495,8 +4177,7 @@ export default class DataSource extends GSDataSource {
 
 ```
 
-#### Function Example ( src/functions/kafka-publish.yaml ) :
-
+#### Workflow Example ( src/functions/kafka-publish.yaml )
 
 ```yaml
 id: kafka-publish
@@ -3509,39 +4190,9 @@ tasks:
         message: <% inputs.body.message%>
 
 ```
-</details>
 
 
-
-1. Inside the `datasources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
-
-2. In your TypeScript file, use an import statement to bring in `GSDataSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSDataSource`.
-
-```
-    .
-    ├── src
-        ├── datasources
-        │   ├── types
-        │   |    └── custom_datasource.ts
-        |   |
-        │   └── custom_datasource.yaml
-        │
-        ├── events
-        | 
-        |
-        |
-        ├── eventsources
-        │   
-        |
-        └── functions
-```
-
-3. Afterward, you can access the methods provided by `GSDataSource`. Initialize your client by calling the `initClient()` function.
-
-4. Once your client is initialized, you can execute its methods using the `execute` function.
-
-
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\create-datasource-plugin.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\create-datasource-plugin.md ----
 
 # Create Datasource plugins
 
@@ -3568,7 +4219,117 @@ Watch here the video where we demonstrate how to create and use plugins using go
 </div>
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\AWS Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\create-datasource-plugin2.md ----
+
+To create a custom data source in Godspeed, follow these steps:
+
+1. **Install the Godspeed Plugin Generator**:
+   Begin by installing `godspeed-plugin-generator` to easily set up the plugin structure. Run:
+   ```bash
+   npm install -g generator-godspeed-plugin
+   npm install -g yo
+   ```
+
+2. **Generate the Data Source Plugin**:
+   Run the generator in your project directory:
+   ```bash
+   yo godspeed-plugin
+   ```
+   When prompted, enter a name for your plugin and choose "DataSource" as the plugin type.
+
+3. **Configure the Data Source**:
+   In the `src/datasources` directory, create a YAML configuration file (e.g., `custom_datasource.yaml`). This file specifies details like the type of data source, configurations, and any specific parameters. For example:
+   ```yaml
+   type: my_custom_type
+   clientId: "my_project"
+   ```
+
+4. **Create the Data Source Class**:
+   In the `src/datasources/types` directory, create a TypeScript file with the same name as the type you specified in the YAML file (e.g., `my_custom_type.ts`). This file defines your custom data source class by extending `GSDataSource`. Implement two key methods:
+
+   - **`initClient()`**: Initializes the client for your data source.
+   - **`execute()`**: Executes operations with this data source.
+   
+   Here’s an example for an OpenAI API integration:
+   ```typescript
+   import { GSContext, GSDataSource, GSStatus, PlainObject } from "@godspeedsystems/core";
+   import OpenAI from 'openai';
+
+   export default class DataSource extends GSDataSource {
+     protected async initClient(): Promise<object> {
+       const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+       return client;
+     }
+
+     async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+       if (!this.client) {
+         this.client = await this.initClient();
+       }
+       const client = this.client as OpenAI;
+       const { prompt, meta: { fnNameInWorkflow } } = args;
+       const method = fnNameInWorkflow?.split(".")[2];
+       if (!method || method !== "execute") {
+         return new GSStatus(false, 400, "Invalid method");
+       }
+       const response = await client.chat.completions.create({
+         model: 'gpt-4o',
+         messages: [{ role: "user", content: prompt }],
+         temperature: 1,
+         max_tokens: 200
+       });
+       const responseContent = response.choices[0]?.message?.content || "No response";
+       return new GSStatus(true, 200, "Success", responseContent);
+     }
+   }
+
+   const SourceType = 'DS';
+   const Type = "gpt"; // Determines the loader file name
+   const CONFIG_FILE_NAME = "gpt"; // Used as the datasource name
+   const DEFAULT_CONFIG = {};
+   export { DataSource, SourceType, Type, CONFIG_FILE_NAME, DEFAULT_CONFIG };
+   ```
+
+5. **Define Event and Function Files**:
+   Create event and function YAML files to define how other components interact with this data source:
+   
+   - **Event Configuration (e.g., `gpt_event.yaml`)**:
+     ```yaml
+     http.post./chatgpt:
+       fn: datasource.gpt.execute
+       body:
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 prompt:
+                   type: string
+                   description: "User prompt"
+               required: ['prompt']
+       responses:
+         200:
+           content:
+             application/json:
+               schema:
+                 type: string
+     ```
+
+   - **Function Definition (e.g., `prompt.yaml`)**:
+     ```yaml
+     summary: "Fetch AI response"
+     tasks:
+       - id: request_chatgpt
+         fn: datasource.gpt.execute
+         args:
+           prompt: <% inputs.body.prompt %>
+     ```
+
+6. **Test and Deploy**:
+   Once the data source is configured, you can use the function definitions in workflows and test the integration to verify it meets your requirements.
+
+This approach ensures that your custom data source integrates smoothly with the Godspeed framework, allowing you to extend its functionality based on your project's unique requirements.
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\AWS Datasource.md ----
 
 AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application. 🚀 
 
@@ -3743,7 +4504,7 @@ module.exports = async (ctx: GSContext) => {
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Axios Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Axios Datasource.md ----
 
 Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 🌐✨
 
@@ -4018,7 +4779,7 @@ The Godspeed Axios Plugin is a valuable addition to the Godspeed framework, prov
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\elasticgraph\elasticgraph.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\elasticgraph\elasticgraph.md ----
 
 ---
 sidebar_position: 3
@@ -4230,7 +4991,7 @@ reconciled: #The type of entity
 Download the collection with documentation [here](https://api.postman.com/collections/17317391-ae9724b5-10ac-428a-b0d2-e7d8127659c0?access_key=PMAT-01HCM2RCXZCR9H840HKZRBXBP7)
 There you will see core CRUD API (same in sync and async). Each CRUD api has its documentation in the collection itself.
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\elasticgraph\feature-set-of-elasticgraph.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\elasticgraph\feature-set-of-elasticgraph.md ----
 
 ---
 sidebar_position: 3
@@ -4844,7 +5605,7 @@ This project started with the .collect() feature sometime in 2015, from there it
 
 Built with deep thought from the Himalayas.
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Kafka Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Kafka Datasource.md ----
 
 <!-- Kafka is your dynamic data stream and event maestro! As a data source, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka.  -->
 
@@ -4961,13 +5722,34 @@ tasks:
       args: <% inputs %>
 ```
 
+## Project Structure:
+
+After implementing Kafka plugin, your project structure will look like this:
+
+```
+.
+├── src
+│   ├── datasources
+│   │   ├── types
+│   │   │    └── kafka.ts                    # Custom datasource logic
+│   │   └── kafka.yaml                       # Datasource configuration
+│   ├── events
+│   │   ├── kafka_publish_event.yaml         # Event to trigger the Kafka publish
+│   │   └── kafka_consumer_event.yaml        # Event to trigger the Kafka consume
+│   ├── eventsources
+│   │   └── kafka.yaml                       # Eventsource configuration
+│   └── functions
+│       ├── kafka-publish.yaml               # Workflow to publish message
+│       └── kafka-consume.yaml               # Workflow to consume message
+```
+
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   
 **- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Memcached Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Memcached Datasource.md ----
 
 The Godspeed mem-cache plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
 
@@ -5082,7 +5864,7 @@ We're excited to see how you leverage the Godspeed mem-cache Plugin in your proj
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mem-cache-as-datasource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Mongoose Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Mongoose Datasource.md ----
 
 Mongoose as a datasource: It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
@@ -5278,7 +6060,7 @@ When a call has an error the datasource returns following `GSStatus`.
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Nodemailer Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Nodemailer Datasource.md ----
 
 Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
 
@@ -5342,7 +6124,7 @@ tasks:
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Overview.md ----
 
 Godspeed framework adopts a pluggable approach that empowers you to define data sources effortlessly. Our framework graciously provides an interface that caters to diverse data source needs. Here's a glimpse into the exceptional datasource plugins crafted by our core framework team.
 
@@ -5385,7 +6167,7 @@ you can specify plugin name to add directly to your project
 godspeed plugin add <plugin-name>
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Prisma Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Prisma Datasource.md ----
 
 ---
 # Display h2 to h5 headings
@@ -5723,7 +6505,7 @@ summary: authz workflow
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\datasource-plugins\Redis Datasource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\datasource-plugins\Redis Datasource.md ----
 
 Redis as a datasource: Elevate your data game with the speed and efficiency of Redis. Use it as a powerhouse for caching, real-time analytics, and lightning-fast data retrieval. Embrace the key-value magic to supercharge your application's performance. Ready to Rediscover efficiency? 🚀
 
@@ -5844,7 +6626,7 @@ We're excited to see how you leverage the Godspeed Redis Plugin in your projects
 **- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-redis-as-datasource)
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\list-of-plugins.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\list-of-plugins.md ----
 
 # List of Plugins
 
@@ -6549,7 +7331,7 @@ Kafka is your dynamic data stream and event maestro! As a data source, it floods
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\datasources\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\datasources\overview.md ----
 
 # Data Sources
 ## Overview
@@ -6575,7 +7357,7 @@ Datasources can be divided into two types, "Datastore as datasource" and "API as
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704478971/Screenshot_from_2024-01-05_23-52-33_e8ihnh.png" alt="event types" />
 
 
-Example 1: Datastore as Datastore [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
+Example 1: Datastore as Datasource [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
 
 ```yaml
 id: workflow_1
@@ -6632,7 +7414,7 @@ In the above example:
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\create-custom-event-source.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\create-custom-event-source.md ----
 
 # Create a Custom Eventsource
 
@@ -7203,7 +7985,7 @@ tasks:
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\create-eventsource-plugin.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\create-eventsource-plugin.md ----
 
 # Create Eventsource plugins 
 
@@ -7228,7 +8010,7 @@ Watch here the video where we demonstrate how to create and use plugins using go
     <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/YzvYjYujBMk" frameborder="0" allowfullscreen></iframe>
 </div>
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-schema.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-schema.md ----
 
 # Event Schema
 
@@ -7348,7 +8130,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Apollo GraphQl Eventsource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Apollo GraphQl Eventsource.md ----
 
 GraphQL is a query language and runtime for APIs that enables clients to request precisely the data they need. It allows developers to describe the structure of the data they require, providing a more efficient and flexible alternative to traditional REST APIs. GraphQL empowers front-end developers to shape their API requests, minimizing over-fetching and under-fetching of data.
 
@@ -7493,7 +8275,7 @@ This configuration emphasizes the simplicity of implementing GraphQL within the 
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-graphql-as-eventsource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Cron Eventsource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Cron Eventsource.md ----
 
 Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab.
 
@@ -7567,7 +8349,7 @@ tasks:
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Express Http Eventsource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Express Http Eventsource.md ----
 
 # Godspeed Express Plugin
 
@@ -7927,7 +8709,7 @@ Upon successful upload of the file in Postman, an autogenerated **`tmp`** folder
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-express-as-http)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\express-plugin.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\express-plugin.md ----
 
 ## Express-as-http Plugin 
 
@@ -7983,7 +8765,7 @@ We're excited to see what you'll create with the Express plugin, and we look for
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Fastify Eventsource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Fastify Eventsource.md ----
 
 ## Introduction
 
@@ -8134,7 +8916,7 @@ We are excited to see the innovative projects you will create with the Fastify p
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-fastify-as-http)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Kafka Eventsource.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Kafka Eventsource.md ----
 
 Kafka is a versatile messaging system designed to securely transfer data between various systems. Its functionality can be tailored through configuration, allowing it to serve as a reliable conduit for real-time event tracking or even function as a replicated distributed database. While it's often colloquially labeled as a queue, it's more precisely described as a hybrid system that combines characteristics and trade-offs from both queue and database systems.
 
@@ -8261,7 +9043,7 @@ tasks:
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins\Overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins\Overview.md ----
 
 Godspeed framework adopts a pluggable approach that empowers you to define eventsources effortlessly. Our framework provides an interface that caters to diverse eventsource needs. Here's a glimpse into the exceptional eventsource plugins crafted by our core framework team.
 
@@ -8303,7 +9085,7 @@ you can specify plugin name to add directly to your project
 godspeed plugin add <plugin-name>
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-source-plugins.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-source-plugins.md ----
 
  # Eventsource plugins
 
@@ -8371,7 +9153,7 @@ godspeed plugin add <plugin-name>
 ```
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-types\cron-events.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-types\cron-events.md ----
 
 
 # Cron event
@@ -8417,7 +9199,7 @@ tasks:
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-types\graphql-events.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-types\graphql-events.md ----
 
 # Apollo Graphql Event
 
@@ -8481,7 +9263,7 @@ This configuration emphasizes the simplicity of implementing GraphQL within the 
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-types\http-events.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-types\http-events.md ----
 
 # HTTP events
 
@@ -8632,7 +9414,7 @@ For example,
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1706042039/Screenshot_from_2024-01-24_02-03-33_n1i8yw.png" alt="swagger"/>
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-types\kafka-events.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-types\kafka-events.md ----
 
 # Kafka event
 > A [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource) event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the Kafka event specification](#example-spec-for-kafka-event).
@@ -8688,7 +9470,7 @@ tasks:
             validation_error: <% inputs.validation_error %>
   ``` -->
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\event-types\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\event-types\overview.md ----
 
 #  Event types
 Based on how processing is handled ,events can be classified into two types: synchronous (sync) and asynchronous (async) events, each suited for various protocols. 
@@ -8726,7 +9508,7 @@ We have [bounty](https://forum.godspeed.systems/t/1-million-developer-bounty-pro
 </div>
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\events-overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\events-overview.md ----
 
 # Introduction To Events
 Events are the core of creating responsive, real-time applications in godspeed. An event serves as a trigger that initiates specific actions or workflows based on defined conditions or inputs. Whether it’s an API call, a scheduled job, or a message arriving from a queue, events provide a structured way to handle incoming requests and data changes.
@@ -8759,7 +9541,7 @@ For more details on configuring each type of event, check out the dedicated sect
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\overview.md ----
 
 ---
 title: Eventsources
@@ -8832,7 +9614,7 @@ To understand the actions taken when selecting the pre-defined plugins and their
 </div>
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\validations\schema-validation.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\validations\schema-validation.md ----
 
 # JSON Schema validation
 
@@ -8988,7 +9770,7 @@ http.post./helloworld:
 
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\event-sources\validations\validation-error.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\event-sources\validations\validation-error.md ----
 
 # Validation Error
 
@@ -9075,148 +9857,7 @@ Response
 - In the case of response validation errors, the corresponding error code is 500, and the key employed is `on_response_validation_error`.
 :::
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\faqs.md ----
-
----
-sidebar_position: 1
-title: How To Guide
----
-### Welcome to our "How to Guide"!
-
-This section will give answers to your most pressing questions about using the godspeed meta-framework ? This "How to Guide" is designed to help you get the most out of our product, by providing clear and concise answers to all your frequently asked questions.
-<!-- It is designed to be easy to follow and understand, with step-by-step instructions and screenshots to help illustrate each process.  -->
-
-- **[How to create APIs in Godspeed framework ?](/docs/microservices-framework/how-to-guides/create-api.md)**
-
-- **How to read variables from .env file in express.ts ?**
-
-  If you have defined a variable in .env as
-  ```
-    FRONTEND_URL = http://localhost:3001
-  ```
-  You can read it in express.ts as:
-  ```
-    const frontendUrl = process.env.FRONTEND_URL ;
-  ```
-  And then use this variable in your ts code as:
-  ```
-    redirectUrl = `${frontendUrl}/verify?userId=${userId}
-  ```
-  Here, in the above example, we are redirecting user to frontEnd i.e. localhost:3001 passing userId as query parameter 
-
-- **How to import prisma client in eventsource config file: express.ts**  
-
-  Firstly import the prisma client in express.ts as:
-  ```
-  import {PrismaClient} from "../../datasources/prisma-clients/schemaName";
-  ```
-  then you can perform db queries by creating an object of PrismaClient as :
-  ```
-  const client = new PrismaClient();
-
-  const existingUser = await client.user.findFirst({
-       			 	where: { id: user.githubId }
-     				 });
-  const newUser = await client.user.create({ data: userObj });
-  ```
-
-- **How to save and access Github OAuth2 credentials in godspeed project ?**
-
-  Once you have registered you oauth app on github, you'll be provided with a Client ID and Client Secret. These credentials are essential for authenticating users with your app. [Click here](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) to see how to register an oauth app.
-  Save this client_id and client_secret in your .env file
-  ```
-  .env
-
-  GITHUB_CLIENT_ID= "**************"  
-  GITHUB_CLIENT_SECRET= "***********************"  
-  GITHUB_CALLBACK_URL= "http://localhost:3000/auth/github/callback"
-
-  ```
-  Then in your http.yaml file, add the following configuration under the authn section:
-```
-http.yaml
-
-  authn:
-    oauth2:
-      github:
-        client_id: <% process.env.GITHUB_CLIENT_ID %>  
-        client_secret: <% process.env.GITHUB_CLIENT_SECRET %>    
-        callback_url: <% process.env.GITHUB_CALLBACK_URL %>
-
-    jwt:
-      secretOrKey: <% process.env.JWT_SECRET %>  
-      audience: <% process.env.JWT_AUDIENCE %>     
-      issuer: <% process.env.JWT_ISSUER %>   
-```
-
-- **How can I skip/disable authentication for a particular endpoint if it is giving "Unauthorized" in response?**
-
-  Check jwt configuration in the event source's configuration file (It will be http.yaml if using express). If jwt spec is set up here, then all endpoints will go through JWT authentication, unless you explicitly set authn:false in your event as:
-  ```
-  http.get./helloworld:
-  fn: helloworld
-  authn: false
-  params: #same as Swagger params.
-    - name: name
-      in: query
-      schema:
-        type: string
-  ```
-
-- **How can I access the custom environment variables in my project environment ?**
-
-  To access the environment variables defined in yaml files under config/custom-environment-variables.yaml, first
-  you need to export this variable in the environment so that the variables can get value from your environment.
-  For Example, below is a sample of custom-environment-variables.yaml 
-  ```
-   jwt:
-    issuer: JWT_ISS
-    audience: JWT_AUD
-    secretOrKey: JWT_SECRET
-  ```
-  To export above defined variables to your environment, use the following syntax based on the environment which you are using:
-  For shell
-   ```
-    $ export JWT_SECRET=mysecret
-    $ export JWT_ISS= mycompany
-   ```
-  For windows powershell
-   ```
-    $env:JWT_SECRET= "mysecret"
-    $env:JWT_ISS= "mycompany"
-     
-   ```
-  After exporting the environment variable, you can access this variable in your project by using 
-  scripting <% config.jwt.issuer %>
-
-- **How to build the project again, if I have renamed some files in my `src` repo ?**
-
-  With `godspeed clean` command you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful to clean up the  dist folder to remove old references to deleted files in `src`
-
-- **Where can I specify the connection_url of my database server ?**
- 
-  You can add your own database connection string in .env file which is under root folder /.env
-  Open this file and specify your database connection string here.
-
-  Connection URL format: postgresql://username:password@host:port/database
-  Example : 
-   ```
-    MY_DB_URL: postgresql://postgres:postgres@localhost:5432/test
-   ```
-
-- **After generating crud api, if I make some changes in models like adding a new   column, then how to update it in prisma client and my database?**
-
-  First, Do the changes in your prisma schema file located in the datasources/ directory, save it and then run 
-   ``` 
-     $ godspeed clean
-   ```
-  this command will remove all pre-compiled prisma-schema files from your `/dist` folder then run
-   ```
-    $ godspeed prisma prepare
-   ```
-  It will generate prisma client with the changes you have done in the schema and will sync the database with your  prisma schema
-
----- Content from: D:\godspeed_docs\docs\microservices-framework\guide\advance-guide.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\guide\advance-guide.md ----
 
 # Advance Guide
 
@@ -9399,219 +10040,7 @@ godspeed serve
 Happy building with Godspeed!
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\guide\get-started-full.md ----
-
-# Starting with Godspeed's meta-framework for Nodejs.
-
-In this section, you will learn how to 
-1. Install the meta-framework using the command line interface (CLI)
-2. Check Express server setup
-3. Check an HTTP endpoint and its controller (handler) function
-4. Open your API endpoint in Swagger UI and test it out
-
-
-### Pre-requisites:
-
-1. Nodejs v18 (or Bunjs) 
-2. Npm
-2. Git
-3. VS Code or any code editor
-3. Linux, Mac, Windows and other OS supporting Nodejs or Bunjs
-
-### Step 1: Installation
-
-```bash
-  npm install -g @godspeedsystems/godspeed
-```
-
-### Step 2: Create a project and start the server
-
-1. `godspeed create my_new_project` #replace my_new_project with name of your project. This may take some time to install the required npm plugins and create your project. Be patient!
-2. `cd my_new_project` #Go to your project folder
-3. `godspeed serve` #Start the project
-4. Check the logs. They will show http Express server is running on port 3000 
-   ```
-   [16:46:45.437] INFO (15281 on wwwabcomin-HP-EliteBook-840-G3): [Production Server][Running] ('express:' event source, '3001' port).
-   ```
-
-### Step 3: Test the helloworld API
-1. Open `localhost:3000/api-docs` to open Swagger UI.
-
-   ![img](../../../static/img/swagger_helloworld.png)
-2. Check the `/helloworld` API endpoint in the Swagger UI. There is a `Try it out` button. Click that and hit the API. It will ask you to fill the name parameter for query. Why is Swagger asking for you to fill the name? Check the next point for that.
-3. Checkout how helloworld API endpoint is defined in your project's `src/events/helloworld.yaml` file. You will notice the configuration of the API call is in YAML format.
-
-  ```
-    http.get./helloworld: # `http` server listening via `get` method on `/helloworld` endpoint
-    fn: helloworld # the function handler to be called for this endpoint, available in `src/functions`
-    params: # JSON-Schema of API parameters like query, headers, path params. Note: This is set as per Swagger standard's `parameters` syntax
-      - name: name # This is our name query param
-        in: query # Notice the in: query This could be `path` or `headers` as well
-        required: true # Notice the `name` parameter is required
-        schema:
-          type: string
-    responses: # JSON-Schema of API responses for different status codes. Note: This is set as per Swagger standard's `responses` syntax
-      200:
-        content:
-          application/json:
-            schema:
-              type: string
-  ```
-:::tip
-In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. This naming approach may be new for you. The general norm across the larger developer community is to call only `async events` as `events` - for ex. Kafka or web socket message. But in Godspeed world we consider both sync APIs (REST, Graphql) and async events (Message bus, web socket, cron) - as events. All events, whether API calls or websocket messages, trigger functions which can be thought of as event handlers (see `fn` instruction in the yaml above). The sync events return a response while async events dont have a concept of response.
-:::
-
-### Step 4: Test the validation of API inputs and outputs
-
-Almost every application needs validation of data sent in inputs to the API and response sent back by the service. You want to make sure wrong data does not enter your service nor do you return wrong response for an API call. Let's try this feature in the framework.
-
-1. Open your browser and hit the `/helloworld` endpoint via `localhost:3000/helloworld`. Or, run `curl -i localhost:3000/helloworld` from your terminal.
-2. This should return an error with code `400` because you have not passed `name` in query - as expected by the schema of `helloworld` API. 
-
-```
-{
-  "validation_error": {
-    "success": false,
-    "code": 400,
-    "message": "request validation failed.",
-    "error": "must have required property 'name' in query",
-    "data": {
-      "message": "The API cannot be executed due to a failure in request params schema validation.",
-      "error": {
-        "instancePath": "",
-        "schemaPath": "#/required",
-        "keyword": "required",
-        "params": {
-          "missingProperty": "name"
-        },
-        "message": "must have required property 'name' in query"
-      }
-    }
-  }
-}
-
-```
-3. If you hit `localhost:3000/helloworld?name=mastersilv3r`, it should work.
-```
-Hello mastersilv3r
-```
-
- 
-3. If you need access to the Swagger collection, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
-
-4. If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
-
-
-Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the ``./src/eventsources/http.yaml` For customisation and using advanced features please **checkout the [express-as-http](../event-sources/event-source-plugins/Express%20Http%20Eventsource) plugin**
-
-### Video Tutorial - Short
-There is a longer and detailed introduction video as well, below on this page.
-
-> If you want some pre-made examples please check the [examples repository](https://github.com/godspeedsystems/gs-node-templates)
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-    <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/vudhjYjGeLQ?si=R4kTbH14-sAbKFBA" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
-</div>
-
-### CLI
-
-_To know more about all CLI commands, [click here](../CLI#supported-commands--arguments)_
-
-### Building and running your project
-
-**Building** You can build your project using the `godspeed build` command. This transpiles the TS files and copies all the source code into `/dist` folder of your project.
-
-**Clean**  With `godspeed clean` you can remove all pre-compiled files from your `/dist` folder. While build overrides `dist` everytime, `clean` command is useful if you have deleted some files in your `src` repo. When you delete something from `src`, it doesn't delete the files in the `dist`. You may need to clean up the dist folder to remove old references to deleted files in `src`
-
-**Local development in auto-watch mode** You can start your server on localhost using `godspeed serve`. It will run the project in autowatch mode over your local file changes.
-
-**Production deployment:** Build your project and then run `godspeed preview` to serve directly from the `dist` folder 
-
-#### Scaffolding of a meta-framework project
-This will create a basic project with Express eventsource, a sample endpoint (event) and event handler function for the same. It will show you possible configurations of Express service with JWT authn and autorization workflows.
-
-![Scaffolding of a new project](../../../static/img/scaffolding_new_proj.png)
-
-
-- The framework generates different folders like [config](/docs/microservices-framework/config-and-mappings/config.md),[datasources](/docs/microservices-framework/datasources/overview.md) , [events](/docs/microservices-framework/event-sources/event-schema.md), [eventsources](/docs/microservices-framework/event-sources/overview.md), [functions](/docs/microservices-framework/workflows/overview.md), [mappings](/docs/microservices-framework/config-and-mappings/mappings.md), [plugins](/docs/microservices-framework/inline-scripting/script-plugins.md),etc
-- The `eslintrc.json` file includes a curated list of recommended plugins that can be incorporated into the project.
-- We configure [swagger specs](/docs/microservices-framework/event-sources/event-types/http-events.md#swagger-specs) in src/eventsources/http.yaml
-
-:::tip
-To understand more about the scaffolding structure of the project , Check [here](/docs/microservices-framework/guide/walkthrough.md#the-project-scaffolding) 
-:::
-
-### Referencing pre-made project templates
-Pre-made projects are a great place to start learning about the meta-framework. You can refer these pre-made examples to learn about different features of meta-framework, and reuse the code from there. Feel free to clone, refer and re-use the repos given below.
-
-#### Basic Project
-
-Repository - [Hello World](https://github.com/godspeedsystems/gs-node-templates/tree/master/hello_world)
-
-#### Full Stack App
-A full stack app with Godspeed based backend and an embedded React project for frontend.
-
-Repository - [With Godspeed and React](https://github.com/godspeedsystems/gs-node-templates/tree/master/FullStack_App_With_React).
-
-#### Loan Origination System
-
-A more complex fintech project with diverse use cases for issuing loans via multiple lenders, policies, loan offers, KYC, loan account creation etc in a microservice based design.
-
-Repository - [Loan Origination System](https://github.com/godspeedsystems/gs-node-templates/tree/master/LOS). 
-
-_Check the Readme.md and Setup.md files in this repo as it requires a docker container of Postgres and Kafka to be running. Dockerfile is provided in the project._
-
-### Video Tutorial - Longer and in depth
-
-**Walkthrough the Loan Origination System project made using our meta framework**
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/BTPHPoI3dh0" frameborder="0" allowfullscreen></iframe>
-</div>
-
-
-### For any help
-Try the below command line which will show you the commands that can be used in the godspeed framework. Refer [the full CLI spec](/docs/microservices-framework/CLI.md) for more information, including [how to add plugins for eventsources and datasources](../CLI#using-plugins)  
-
-
-```bash
-   godspeed --help
-```
-   
-```bash
-    
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-Usage: Godspeed CLI [options] [command]
-
-CLI tool for godspeed framework.
-
-Options:
-  -V, --version                   output the version number
-  -h, --help                      display help for command
-
-Commands:
-  create [options] <projectName>  create a new godspeed project.
-  serve                           run godspeed development server.
-  clean                           clean the previous build.
-  gen-crud-api                    scans your prisma datasources and generate
-                                  CRUD APIs events and workflows
-  build                           build the godspeed project.
-  plugin                          manage(add, remove, update) eventsource and
-                                  datasource plugins for godspeed.
-  prisma                          proxy to prisma commands with some add-on
-                                  commands to handle prisma datasources.
-  help [command]                  display help for command
-
-    
-```
-
-
----- Content from: D:\godspeed_docs\docs\microservices-framework\guide\get-started.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\guide\get-started.md ----
 
 # Getting Starting with Godspeed
 **This guide will walk you through:**
@@ -9621,8 +10050,14 @@ Commands:
 :::tip Need Help?
 **[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
 
-Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)
+Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in our guide](/docs/microservices-framework/guides)
 :::
+
+### Watch this One-Click Installation & Step-by-Step Tutorial Guide
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+    <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
+</div>
 
 ### Pre-requisites:
 1. Nodejs v18 (or higher) or Bunjs 
@@ -9630,7 +10065,7 @@ Whether you're having trouble with setup, configurations or understanding the fr
 3. Git
 4. VS Code or any code editor
 
-### **Step 1: Install Godspeed**  
+### Step 1: Install Godspeed
 :::tip
 To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
@@ -9688,7 +10123,7 @@ Once the script finishes, you are ready to **[Create Your First Project](/docs/m
      godspeed --version
      ```
 ---     
-### **Step 2: Create Your First Project**
+### Step 2: Create Your First Project
 
 1. **Create a new Godspeed project**:
    - Use the `create` command to set up a new project:
@@ -9706,27 +10141,38 @@ Once the script finishes, you are ready to **[Create Your First Project](/docs/m
   ```
      godspeed serve
   ```
-Check the logs. They should indicate that the **Express server** is running on **port 3000**.
-  Example log:
+Check the logs. They should indicate that the **Express server** is running on **port 3000**
+
+Example log:
   ```bash
   INFO:[Production Server Running]('express:' eventsource, '3000' port) Try it out at: http://localhost:3000/api-docs
   ```
 ---
 
-### **Step 3: Test the Helloworld API**
+### Step 3: Access Swagger UI
 
-1. **Open Swagger UI**:
-   - Open your browser and navigate to `http://localhost:3000/api-docs`. This will display the **Swagger UI**.
-    ![img](../../../static/img/swagger_helloworld.png)
+  In Godspeed, the **Swagger UI** is typically accessed at the `/api-docs` endpoint, appended to the `base URL` and `port` where the server is running. Here’s the general format for accessing Swagger UI:
+   ```plaintext
+    http://<BASE_URL>:<PORT>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
+   ```
+   
+  Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
 
-2. **Try It Out**:
+  **To access Swagger UI, navigate to the following default url:**
+   ```plaintext
+    http://localhost:3000/api-docs
+   ```
+  ![img](../../../static/img/swagger_helloworld.png)
+
+### Step 4: Test the Helloworld API
+
 - In the Swagger UI, locate the `/helloworld` endpoint.
 
   Click the **`Try it out`** button and send a request to test the API, It will ask you to fill the name. Once you fill and submit the name parameter,(e.g. John) then following response will be returned from the server.
   ```
     Hello `John`      
   ```
-Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
+
 
 To understand working of this API [Lets Walkthrough your first Godspeed Project](https://godspeed.systems/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
 
@@ -9850,11 +10296,11 @@ Almost every application needs validation of data sent in request to the API and
 Hello mastersilv3r
 ```
 
-#### Swagger Collection
+### Swagger Collection
 
  If you need access to the Swagger collection of godspeed project, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
 
-#### Postman Collection
+### Postman Collection
 
  If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
 
@@ -9885,7 +10331,7 @@ There is a longer and detailed introduction video as well, below on this page.
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\guide\walkthrough.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\guide\walkthrough.md ----
 
 # Diving Deeper
 
@@ -10160,9 +10606,428 @@ A walkthough on a Godspeed project with Loan Origination System example
 For the sake of brevity this section does not include every feature of Godspeed. But feel free to browse the documentatin for more insights and gems!
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\how-to-guides\create-api.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\guides.md ----
 
-# Creating APIs
+---
+sidebar_position: 1
+title: Guides and FAQs
+---
+
+This section will give answers to your most pressing questions about using the godspeed meta-framework. 
+It is designed to be easy to follow and understand, with step-by-step instructions to help illustrate each process.
+
+### Setting up the APIs of your service
+
+- **[How to create Rest APIs in Godspeed framework?](/docs/microservices-framework/how-to/create-api)**
+
+- **[How to generate CRUD APIs?](/docs/microservices-framework/CRUD_API)**
+
+- **[How to open Swagger UI for your APIs?](/docs/microservices-framework/guide/get-started#step-3-access-swagger-ui)**
+
+- **[How to generate postman collection for your APIs?](/docs/microservices-framework/guide/get-started#postman-collection)**  
+
+- **[How to add JWT authentication in your Rest APIs?](/docs/microservices-framework/authentication/jwt-authentication)**
+
+- **[How to use OAuth2 for user login and protection of your endpoints?](/docs/microservices-framework/authentication/oauth2-authentication)**
+
+- **[How to disable authentication for a particular endpoint? ](/docs/microservices-framework/authentication/jwt-authentication#disabling-jwt-authentication-at-event-level)**
+
+- **[How to call REST APIs using Axios?](/docs/microservices-framework/how-to/axios-apis)**
+
+- **[How to call APIs using client SDK?](/docs/microservices-framework/datasources/create-custom-datasource)**
+
+- **[How to handle API callbacks and webhooks?](/docs/microservices-framework/how-to/callbacks)**
+
+
+
+### Writing your Workflows or Functions
+In Godspeed, the words Workflows and Functions mean one and the same thing, i.e. your business logic.
+
+- **[How to write typescript workflows in godspeed?](/docs/microservices-framework/workflows/native-language-functions)**
+
+- **[How to write yaml workflows in godspeed?](/docs/microservices-framework/workflows/yaml-workflows/workflow-dsl)**
+
+<!-- - **[When to prefer writing typescript workflows over yaml? And vice versa?]() -->
+
+### Accessing other APIs, databases and other datastores from workflows
+In Godspeed, datasource can mean any place where you send or retrieve data from. It could mean:
+- External APIs
+- Datastores
+  - Databases (Types - SQL, NoSQL, graph, key value, columnar, OLAP, OLTP, document)
+  - Caches
+  - Search engine
+  - Vector stores (specially useful for AI and recommendation engines)
+  - File system or files
+  - Memory
+
+- **[How to access databases using Prisma?](/docs/microservices-framework/databases/Overview)**
+
+- **[How to access databases using Mongoose?](/docs/microservices-framework/databases/MongoDB#mongoose-as-datasource-plugin)**
+
+- **[How to access any datastore by creating a custom datasource?](/docs/microservices-framework/datasources/create-custom-datasource)**
+
+- **[How to invoke datasource clients from typescript workflows?](/docs/microservices-framework/how-to/call-datasource)**
+
+- **[How to invoke datasource clients from yaml workflows?](/docs/microservices-framework/how-to/call-datasource)**
+
+- **[How to access the environment variables from the typescript workflows?](/docs/microservices-framework/how-to/short-faqs)**
+
+- **[How to update and run the project after renaming any file?](/docs/microservices-framework/how-to/short-faqs#how-to-update-and-run-the-project-after-renaming-any-file)**
+
+- **[How to handle secrets, api keys, connection_urls etc.?](/docs/microservices-framework/how-to/short-faqs#how-to-handle-secrets-api-keys-connection_urls-etc)**
+
+- **[How to update CRUD APIs after change in db model?](/docs/microservices-framework/how-to/short-faqs#how-to-update-crud-apis-after-change-in-db-model)**
+
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\how-to\axios-apis.md ----
+
+# Level up your data-fetching game with Axios
+
+In Godspeed, Axios is used as a datasource plugin for making HTTP requests to external APIs or services. 
+This allows your application to communicate with third-party services or other microservices by sending requests
+and receiving responses in a structured way. Axios simplifies the process of making requests, 
+handling authentication, managing headers, handling errors, 
+and retrying requests, which is especially useful for complex workflows or external integrations.
+
+## Step-by-Step Guide:
+
+### **Step 1: Configure Axios as a Datasource**
+
+1. Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the **"axios-as-datasource" plugin** to integrate the plugin.
+
+   ```bash
+   godspeed plugin add
+   ```
+
+2. **Open the Axios Configuration file**: In your project, go to `src/datasources/<api.yaml>`. This file will define the base configuration for Axios.
+
+In this file, you can set the base URL and any custom headers or authentication needed for interacting with the third-party API.
+
+**Example api.yaml:**
+
+  ```yaml
+  type: axios
+  base_url: https://httpbin.org   # Base URL of the third-party API. You can use `https://httpbin.org` for testing.
+
+  # Following fields are optional, you can use them as per your requirement
+  curlifiedLogs: true   # to print all api calls in curl format
+
+  authn:       # to do Authentication of API calls with token refresh logic
+    fn: my_bank.authn
+    refreshOn:
+      statusCode: [401]
+
+  headers:      # to set Common headers in all API calls
+    Content-Type: application/json
+    Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+
+  # Retry logic for failed API calls for ex on Internal server errors or request timeouts
+  retry:
+      when: #the condition
+        status: [500, 503] # an array or single value of codes (optional). Default 500
+        message: my custom expected message for retry #And (optionally) when response has this message
+      max_attempts: 5
+      type: constant # or random, exponential
+      interval: PT15s
+      # type: exponential
+      # min_interval: PT5s
+      # max_internal: PT15s
+      # type: random
+      # min_interval: PT5s
+      # max_internal: PT15s
+     
+  ```
+
+### Step 2: Set Up an Event
+
+1. **Create an Event to Trigger the Workflow**: Define an HTTP event to trigger the workflow and call the third-party API.
+ Example `fetchData.yaml`:
+
+```yaml
+http.get./fetch-data:
+  fn: fetchDataWorkflow
+  authn: false
+  params:
+    - name: test_input
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
+```
+  ### Explanation:
+   - **http.get./fetch-data:**: The first line of any http event defines the (protocol.Method./end-point)
+   Here, /fetch-data is the end point which will send a get request to third party API by calling a workflow.
+   - **fn**: fn defines the workflow function to be called. here it is, fetchDataWorkflow.
+
+
+### Step 3: Set Up Workflow to Use the Axios Datasource
+
+ Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.yaml`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
+
+```yaml
+  summary: Calls the third-party API using Axios
+  tasks:
+  - id: fetchDataWorkflow
+    fn: datasource.api.get./anything
+    args:
+      data:
+        <% inputs.query.id %>
+    on_error:
+      continue: false
+```
+
+  ### Explanation:
+
+   - **fn: datasource.api.get./anything** - References a predefined Axios function `axiosRequest` to make the API call which contains:-
+
+     - **api**: it will be the name of confguration file of the axios datasource. User can give it any name like api1, api2. Same name will be used here.
+     - **get**: HTTP method for example, Get/Post/Put
+     - **/anything**: The endpoint of the API, relative to the base URL. Here, /anything is the endpoint given by user relative to the base url defined in api.yaml above. So it will send request to this url https://httpbin.org/anything
+     - **params**: Optional query parameters.
+
+   - **on_error**: Defines error handling if the API call fails.
+
+
+### Step 4: Start the Server and Test the API:
+   ```bash
+   godspeed serve
+   ```
+
+   - Go to `http://localhost:3000/api-docs` to access Swagger UI.
+   - Test the `/fetch-data` endpoint to ensure the third-party API call is working and data is being returned.
+
+---
+
+Following these steps, you’ll be able to interact with third-party APIs in Godspeed using Axios while keeping the configuration modular and manageable.
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\how-to\call-datasource.md ----
+
+
+# Invoking Datasource Clients from TypeScript Workflows
+
+In Godspeed, all configured datasources can be accessed through `ctx.datasources`. 
+
+There are two main ways to invoke datasource methods depending on your needs.
+
+---
+
+## Option 1: Direct Access via `client` Key
+
+Each datasource has a `client` key to directly access its client instance. This might be:
+   - A **single client instance** (e.g., Axios)
+   - **Multiple service instances** (e.g., AWS services like S3, DynamoDB)
+   - **Database models** (e.g., MongoDB models via Mongoose)
+
+### Example
+To access AWS S3 services directly:
+
+```typescript
+const res = await ctx.datasources.aws.client.s3.listBuckets(args);
+```
+---
+
+## Option 2: Using the `execute` Method
+
+The `execute` method is available for all datasources and is often more flexible because it leverages the plugin’s full capabilities, including:
+   - **Error handling checks** and **response codes**
+   - **Retries** and **caching** mechanisms (if supported by the plugin)
+
+### **Usage**
+Pass arguments directly to the `execute` method, along with a `meta` object that specifies the `entityType` and `method`:
+```typescript
+const res = await ctx.datasources.aws.execute(ctx, {
+   ...args,
+   meta: { entityType: 's3', method: 'listBuckets' }
+});
+```
+---
+
+### Example TypeScript Function Using Datasources
+
+Below is a TypeScript function that demonstrates invoking both datasource clients and project functions:
+
+```typescript
+import { GSContext, GSStatus } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext, args: any) {
+    // Example of calling another function (YAML, JS, TS) within a project:
+    const helloRes = await ctx.functions['com.gs.helloworld2'](ctx, args);
+
+    // **Option 1**: Access AWS S3 directly via the `client` key
+    const s3Buckets = await ctx.datasources.aws.client.s3.listBuckets(args);
+
+    // **Option 2**: Access AWS S3 via the `execute` method, which uses plugin capabilities
+    const s3Res = await ctx.datasources.aws.execute(ctx, {
+        ...args,
+        meta: { entityType: 's3', method: 'listBuckets' }
+    });
+
+    // Handling response and status checks
+    if (!s3Res.success) {
+        return new GSStatus(false, s3Res.code || 500, undefined, {
+            message: "Internal Server Error",
+            info: s3Res.message
+        });
+    }
+    // Returning data in Godspeed:
+    // If only data is returned (without `success` or `code` keys), the framework defaults `success` to `true` and response code to `200`.
+    return s3Res;
+}
+```
+---
+
+<!-- 
+## Invoking Datasource Clients from Yaml Workflows
+
+In Godspeed, datasources can be accessed and invoked within YAML workflows using the datasource.<datasourceName>.<method> syntax. 
+
+This approach enables you to call methods on datasources directly from YAML, making it possible to perform complex API requests or database interactions without writing additional TypeScript or JavaScript code.
+
+### Example Yaml Workflow
+
+```yaml
+summary: "Get AI-driven response from ChatGPT"
+tasks:
+  - id: request_chatgpt
+    fn: datasource.chatgpt.chat # calling the chat method within chatgpt datasource.
+    args:           # arguments to be passed to the chat method in the datasource
+      prompt: <% inputs.body.prompt %>
+
+``` -->
+
+
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\how-to\callbacks.md ----
+
+# Handle Callbacks in Godspeed
+Handling callbacks in your application just requires setting up an **HTTP endpoint**.
+
+This endpoint will act as a listener for responses from third-party services, which send data or notifications to your server when specific events occur.
+
+### Steps to Handle Callbacks in Godspeed
+
+### 1. Define the Callback URL Endpoint
+
+To receive a callback, define an **HTTP endpoint** in Godspeed that the third-party service can use as the callback URL.
+
+1. **Create a New Event** in the `src/events` directory. This event will listen for incoming callback requests.
+
+Example **`callback-event.yaml`**:
+
+  ```yaml
+   http.post./callback:
+     summary: "Handle callbacks from external services"
+     description: "Endpoint to handle callback responses from external services."
+     fn: handleCallback
+     authn: false
+     body:
+       content:
+         application/json:
+           schema:
+             type: object
+             properties:
+               status:
+                 type: string
+               data:
+                 type: object
+             required: [status]
+     responses:
+       200:
+         description: Callback handled successfully
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 message:
+                   type: string
+                   example: Callback received and processed
+       400:
+         description: Invalid callback request
+   ```
+
+   **Explanation**:
+   - **Path**: The callback endpoint listens at `POST /callback`.
+   - **Body**: Defines the structure of the callback payload (e.g., `status` and `data` fields).
+   - **Responses**: Specifies possible responses, such as `200` for successful processing and `400` for invalid requests.
+
+---
+
+### 2. Create the Workflow to Process the Callback
+
+Define a workflow to process the callback data, handling any necessary business logic.
+
+1. **Create a Workflow File** in the `src/functions` directory to define how the callback data is processed.
+
+Example **`handleCallback.yaml`**:
+
+   ```yaml
+   id: handleCallback
+   summary: Process callback data from external service
+   tasks:
+     - id: validate_callback
+       fn: validateCallbackData
+       args:
+         data: <% inputs.body.data %>
+         status: <% inputs.body.status %>
+
+     - id: process_data
+       fn: processData
+       args:
+         data: <% validate_callback.result %>
+
+     - id: respond_success
+       args:
+         statusCode: 200
+         body:
+           message: Callback received and processed successfully
+   ```
+
+   **Explanation**:
+   - **validate_callback**: A task to validate incoming callback data.
+   - **process_data**: Processes the data after validation.
+   - **respond_success**: Responds with a `200` status code if all tasks are completed successfully.
+
+---
+
+### 3. Set the Callback URL with the Third-Party Service
+
+1. **Register the Callback URL** with the external service.
+   - Provide the callback URL in the following format: `http://<BASE_URL>:<PORT>/callback`
+   - Replace `<BASE_URL>` and `<PORT>` with your actual server's URL and port.
+
+   For example:
+   ```plaintext
+   http://localhost:3000/callback
+   ```
+
+2. **Test the Callback**:
+   - Use tools like **Postman** or a similar HTTP client to simulate a POST request to the `/callback` endpoint.
+   - Ensure the payload matches the expected schema to confirm the callback flow.
+
+---
+
+### Example Scenario: Handling Payment Gateway Callback
+
+Let’s say you’re integrating with a payment gateway, and you want to handle a payment status update callback:
+
+1. **Set Up Event and Workflow**: Follow the same steps as above to create the event (`payment_callback.yaml`) and workflow (`handlePaymentCallback`) files.
+2. **Register the Callback URL**: Provide the payment gateway with your callback URL.
+3. **Process the Callback**: In the `handlePaymentCallback` workflow, define specific tasks to validate payment status, log transactions, or update your database based on the callback data.
+
+---
+
+This setup gives you full control over handling incoming callbacks, allowing you to process and store data as required. Each component—from the event to the functions—can be customized to suit the specific needs of the callback use case.
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\how-to\create-api.md ----
+
+# Creating APIs in Godspeed
 
 ## Step-by-Step Guide to create APIs in Godspeed framework
 
@@ -10170,53 +11035,40 @@ Creating a REST API in Godspeed involves defining an **HTTP event** to handle in
   
   Here’s a step-by-step guide to setting up a REST API in Godspeed.
 
- ### Step 1: Set Up Your Godspeed Project
-  If you haven’t already, start by setting up a new Godspeed project:
-
-  Install Godspeed CLI:
-  ```bash
-  npm install -g @godspeedsystems/godspeed
-  ```
-  Create a New Project:
-  ```bash
-  godspeed create my_new_project
-  cd my_new_project
-  ```
-
-### Step 2: Confirm HTTP EventSource Configuration
-Check http.yaml Configuration: 
-
+### Step 1: Confirm HTTP EventSource Configuration
 Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsource) is installed and configured correctly.
+[Click here](/docs/microservices-framework/event-sources/event-source-plugins/Express%20Http%20Eventsource#instance-file) and check how the default http.yaml file look like
 
-### Step 3: Define the API Event
+### Step 2: Define the API or HTTP Event
   In Godspeed, each API endpoint is represented by an HTTP event. 
-  Here’s how to define an event to create a simple API that takes a name as input and returns a greeting.
+  Here’s how to define an event using to create a simple API that takes a name as input 
 
  **Create an Event:**
   
-  Create a YAML file in the src/events/ directory (e.g., greetUser.yaml).
+  Create a YAML file in the src/events/ directory (e.g., greet-user.yaml).
 
-  Define the HTTP Event in YAML: This event will handle POST requests at the /greet endpoint and expect a name in the request body.
+  Define the HTTP Event to handle POST requests at the /greet endpoint and expect a name in the request body and returns a greeting.
+
   ```yaml
-  http.post./greet:
-  fn: greetUserWorkflow   # Workflow to handle the request
-  summary: 'Greet a user'
-  description: 'Accepts a name in the request body and returns a greeting'
-  authn: false
-  body:
+  http.post./greet:     #  http.<method>./<endpoint_url>:
+  fn: greet-user-workflow   # path of the Workflow to handle the request
+  summary: Greet a user
+  description: Accepts a name in the request body and returns a greeting
+  authn: false  # to disable authentication for this event
+  body:         # http request body, follows the same syntax as swagger spec
     content:
       application/json:
         schema:
           type: object
           properties:
-            name:
-              type: string
-              description: "Name of the user to greet"
+            name:       # request body property name 
+              type: string  # request body property type 
+              description: Name of the user to greet
           required:
             - name
-  responses:
-    '200':
-      description: 'Greeting message'
+  responses:  # JSON-Schema of API responses set as per Swagger's standard responses syntax
+    200:
+      description: Greeting message
       content:
         application/json:
           schema:
@@ -10225,8 +11077,8 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
               message:
                 type: string
                 example: 'Hello, John!'
-    '400':
-      description: 'Bad request if name is missing'
+    400:
+      description: Bad request if name is missing
       content:
         application/json:
           schema:
@@ -10234,17 +11086,97 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
             properties:
               error:
                 type: string
-                example: 'Invalid request. 'name' is required.'        
+                example: Invalid request. 'name' is required.       
   ```
-### Step 4: Set Up the Workflow
-  Now, create a workflow to process the request. This workflow will take the name from the request and return a personalized greeting.
 
-  **Create a Workflow File:**
- 
-  In the src/workflows/ directory, create a file named greetUserWorkflow.yaml.
+### Step 3: Set Up the Workflow
+  Now, create a workflow/function to process the request in the src/functions/ directory. Workflow logic can be written either in typescript/javascript or in yaml.
 
-  Define the Workflow Logic in YAML: 
+ ### 3.1 Typescript function
+  Hereby sharing a typescript function which shows all that you get in your event handler workflow when an event is triggered. The generic input structure is constant whether for Express, Fastify, Kafka, Salesforce, Socket etc.
 
+  **All that you get in your typescript workflow:**
+
+  ```typescript
+  import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
+  import Pino from 'pino';
+
+  export default function (ctx: GSContext, args: any) {
+      const {
+          inputs: {
+              data: {
+                  params, //path parameters from endpoint url
+                  body,  // request body in case of http and graphql apis, event data in case of message bus or socket
+                  query, // query parameters from rest api
+                  user,  // user payload parsed from jwt token
+                  headers //request headers in case of http and graphql apis
+              }
+          }, 
+          childLogger, // context specific logger. Read pino childLogger for more information
+          logger, // Basic logger of the project, generally prefer childLogger for logging 
+          outputs, // outputs of previously executed tasks of yaml workflows (if any)
+          functions, // all loaded workflows/functions from the src/functions/ folder
+          datasources, //all configured datasources from src/datasources
+          mappings  //mappings from src/mappings folder. this is useful for loading key value configurations for business logic of your project
+      }: {
+          inputs: GSCloudEvent, 
+          childLogger: Pino.Logger, // you can also add custom attributes to childLogger
+          logger: Pino.Logger,
+          outputs: PlainObject, 
+          functions: PlainObject, 
+          datasources: PlainObject,
+          mappings: PlainObject
+      } = ctx;
+
+      // Will print with workflow_name and task_id attributes. 
+      childLogger.info('Server is running healthy');
+      // Will print without workflow_name and task_id attributes
+      logger.info('Arguments passed %o', args);
+      logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
+      logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
+      logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
+      logger.info('Total functions found in the project %s', Object.keys(functions).length);
+
+      // Returning only data
+      return 'Its working! ' + body.name;
+
+      //SAME AS
+      return {
+          data: 'Its working! ' + body.name,
+          code: 200,
+          // success: true,
+          // headers: undefined
+      }
+      //SAME AS
+      return {
+          data: 'Its working! ' + body.name,
+          code: 200,
+          success: true,
+          headers: undefined // or u can set response headers as key: value pairs, 
+          //for example headers:{custom-header1:"xyz" }
+      }
+  }
+  ```
+### Example typescript workflow to return greetings with user's name
+This workflow will take the name from the request and return a personalized greeting. 
+
+`greet-user-workflow.ts`
+```typescript
+  import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+  export default function (ctx: GSContext, args: PlainObject) {
+      const {
+        inputs: {
+              data: {
+                body
+              }
+          }, 
+      }= ctx;
+      return new GSStatus(true, 200, undefined, 'Hello ' + body.name, undefined);  
+  }
+
+```
+
+#### Example workflow in yaml:
   ```yaml
     summary: Workflow to greet the user by name
     id: greet_user
@@ -10256,13 +11188,28 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
           name: <% inputs.body.name %>
   ```
 ### Step 5: Test the API
-- Start the Godspeed Server:
+
+- **Start the Godspeed Server:**
   ```bash
   godspeed serve
   ```
-- Access Swagger UI: 
-  Open http://localhost:3000/api-docs in your browser to test your API endpoint. 
-  This is generated automatically for all defined events.
+- **Access Swagger UI:** 
+
+In Godspeed, the **Swagger UI** is generated automatically for all defined events for documenting and testing the APIs. 
+Swagger UI is typically accessed at the `/api-docs` endpoint, appended to the `base URL` and `port` where the server is running. 
+Here’s the general format for accessing Swagger UI:
+
+```plaintext
+http://<BASE_URL>:<PORT>/<http_docs_endpoint>` deafult example,  http://localhost:3000/api-docs
+```
+
+- If your server is hosted on `example.com` and running on port **8080**:
+  ```plaintext
+  http://example.com:8080/api-docs
+  ```
+Here is a Screenshot of sample Swagger UI :
+
+ ![img](../../../static/img/swagger_helloworld.png)
 
 - Test the /greet Endpoint:
 
@@ -10276,7 +11223,78 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
   Execute the request and verify the response.
   
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\inline-scripting\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\how-to\short-faqs.md ----
+
+# FAQs
+
+### How to update and run the project after renaming any file?
+  
+  With `godspeed clean` command you can remove all pre-compiled files from your `/dist` folder. It is useful to clean up the dist folder to remove old references to deleted/renamed files in `src`
+
+
+### How to handle secrets, api keys, connection_urls etc.?
+ 
+  You can add your own database connection string in .env file which is under root folder /.env
+  Open this file and specify your database connection string here.
+
+  Connection URL format: postgresql://username:password@host:port/database
+  Example : 
+   ```
+    MY_DB_URL: postgresql://postgres:postgres@localhost:5432/test
+   ```
+
+
+###  To access the environment variables defined in config/custom-environment-variables.yaml
+
+You can read it in two ways:
+  Option1: directly from env
+  Option2: through config file
+  ```
+    const frontendUrl = process.env.FRONTEND_URL ;
+  ```
+  And then use this variable in your ts code as:
+  ```
+    redirectUrl = `${frontendUrl}/verify?userId=${userId}
+  ```
+  Here, in the above example, we are redirecting user to frontEnd i.e. localhost:3001 passing userId as query parameter 
+
+  You need to export this variable in the environment so that the variables can get value from your environment.
+  For Example, below is a sample of custom-environment-variables.yaml 
+  ```
+   jwt:
+    issuer: JWT_ISS
+    audience: JWT_AUD
+    secretOrKey: JWT_SECRET
+  ```
+  To export above defined variables to your environment, use the following syntax based on the environment which you are using:
+  For shell
+   ```
+    $ export JWT_SECRET=mysecret
+    $ export JWT_ISS= mycompany
+   ```
+  For windows powershell
+   ```
+    $env:JWT_SECRET= "mysecret"
+    $env:JWT_ISS= "mycompany"
+     
+   ```
+  After exporting the environment variable, you can access this variable in your project by using 
+  scripting <% config.jwt.issuer %>
+
+### How to update CRUD APIs after change in db model?
+
+  First run
+   ``` 
+     $ godspeed clean
+   ```
+ - This command will remove all pre-compiled prisma-schema files from your `/dist` folder then 
+ - Do the changes in your prisma schema file located in the datasources/ directory, save it and then run
+   ```
+    $ godspeed prisma prepare
+   ```
+  It will generate prisma client with the changes you have made in the schema and will sync the database with your prisma schema. -->
+
+---- Content from: D:\gs-documentation\docs\microservices-framework\inline-scripting\overview.md ----
 
 # Scripting
 
@@ -10492,7 +11510,7 @@ authz:
 ```
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\inline-scripting\script-plugins.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\inline-scripting\script-plugins.md ----
 
 ---
 sidebar_position: 3
@@ -10573,7 +11591,7 @@ You can use these plugins in your workflows as given below:
 
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\introduction\design-principles.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\introduction\design-principles.md ----
 
 # Design Principles
 
@@ -10641,7 +11659,7 @@ The framework allows developer to specify the keys that may have sensitive infor
 Godspeed allows a developer to add auto-instrumentation which publishes logs, trace and APM information in OTEL standard format, supported by all major observability backends. The APM export captures not just the RAM, CPU information per node/pod/service, but also the latency information of the incoming API calls, with broken down spans giving breakup of latency across the calls to datastores or external APIs. This helps to find out exact bottlenecks. Further the logs and trace/spans are correlated to find out exactly where the error happened in a request spanning multiple microservices with each calling multiple datasources and doing internal computation. 
 Developer can also add custom logging, span creation and BPM metrics at task level. For ex. new user registration, failed login attempt etc.
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\introduction\guard-rails.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\introduction\guard-rails.md ----
 
 
 # GuardRails 
@@ -10700,7 +11718,7 @@ Watch the below video for more understanding.
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\introduction\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\introduction\overview.md ----
 
 ---
 slug: /
@@ -10795,7 +11813,7 @@ The three main pillars of Godspeed framework: [eventsources](/docs/microservices
 ![features](/img/features.png)
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\introduction\tenets.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\introduction\tenets.md ----
 
 # Tenets
 
@@ -10821,7 +11839,7 @@ Further the standardization includes established industry standards into system 
 
 In order to serve the [Goals](/docs/introduction#aims) and [Tenets](/docs/introduction#tenets) of the framework, here are the design principles we have followed. -->
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\swagger-specs.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\swagger-specs.md ----
 
 # Swagger Specs
 
@@ -10905,7 +11923,7 @@ For operationId: developer can give `operationId`, or `id` in the event shema. I
 For example,
 ![Swagger specs](https://docs.godspeed.systems/assets/images/swagger_spec-5218946d179677ac711303f8d406b4ee.png)
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\configuration.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\configuration.md ----
 
 ---
 sidebar_position: 1
@@ -10935,7 +11953,7 @@ export OTEL_SERVICE_NAME=sample_proj1
 ![Traces](/img/Traces.png) -->
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\custom-metrics-logs-traces.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\custom-metrics-logs-traces.md ----
 
 # Custom metrics, traces and logs (BPM)
 You can add custom metrics, traces and logs in the workflow DSL at each task level. Once you add these BPM (Business performance metrics) then these will be available out of the box along with APM (Application performance metrics).
@@ -11093,7 +12111,7 @@ tasks:
 ``` 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\logging.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\logging.md ----
 
 ---
 sidebar_position: 1
@@ -11466,7 +12484,7 @@ Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/is
 :::
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\metrics.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\metrics.md ----
 
 ---
 sidebar_position: 1
@@ -11488,7 +12506,7 @@ Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/is
 :::
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\overview.md ----
 
 ---
 sidebar_position: 1
@@ -11553,7 +12571,7 @@ You can [enable/disable OTel](../CLI.md/#otel) in Godspeed.
 You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows.
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\telemetry\tracing.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\telemetry\tracing.md ----
 
 ---
 sidebar_position: 1
@@ -11581,7 +12599,7 @@ Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/is
 ::: 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\vscode-extension\language-tools.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\vscode-extension\language-tools.md ----
 
 ---
 sidebar_position: 1
@@ -11775,41 +12793,49 @@ tasks:
 
 ### Thank You !
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\workflows\native-language-functions.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\workflows\native-language-functions.md ----
 
 # Native Language Workflows
 
-Since the framework currently supports Node.js and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
+Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
+
+:::tip
+In Godspeed, your function gets input in a standard JSON format and returns output in a standard JSON format, independent of the eventsource through which this function is triggered. Eventsource could be Express, Fastify, Apollo Graphql or event message bus like Kafka, RabbitMQ or socket message. This means Godspeed has a unified way to deal with all eventsources, giving you modular architecture and re-uasability of your functions.
+:::
 
 ### Example Typescript function
 ```typescript
 import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
 import Pino from 'pino';
 
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext, args: any) {
     const {
         inputs: {
             data: {
-                params, body, query, user, headers
+                params, //path parameters from endpoint url
+                body,  // request body in case of http and graphql apis, event data in case of message bus or socket
+                query, // query parameters from rest api
+                user,  // user payload parsed from jwt token
+                headers //request headers in case of http and graphql apis
             }
         }, 
-        childLogger, 
-        logger,
-        outputs, 
-        functions, 
-        datasources,
-        mappings
+        childLogger, // context specific logger. Read pino childLogger for more information
+        logger, // Basic logger of the project, generally prefer childLogger for logging 
+        outputs, // outputs of previously executed tasks of yaml workflows (if any)
+        functions, // all loaded workflows/functions from the src/functions/ folder
+        datasources, //all configured datasources from src/datasources
+        mappings  //mappings from src/mappings folder. this is useful for loading key value configurations for business logic of your project
     }: {
         inputs: GSCloudEvent, 
-        childLogger: Pino.Logger, // Define CustomLogger if necessary
+        childLogger: Pino.Logger, // you can also add custom attributes to childLogger
         logger: Pino.Logger,
-        outputs: PlainObject, // Adjust the type accordingly
-        functions: PlainObject, // Adjust the type accordingly
-        datasources: PlainObject, // Adjust the type accordingly
+        outputs: PlainObject, 
+        functions: PlainObject, 
+        datasources: PlainObject,
         mappings: PlainObject
     } = ctx;
 
-    // Will print with workflow_name and task_id attributes
+    // Will print with workflow_name and task_id attributes. 
     childLogger.info('Server is running healthy');
     // Will print without workflow_name and task_id attributes
     logger.info('Arguments passed %o', args);
@@ -11833,17 +12859,9 @@ export default function (ctx: GSContext, args: PlainObject) {
         data: 'Its working! ' + body.name,
         code: 200,
         success: true,
-        // headers: undefined
+        headers: undefined // or u can set response headers as key: value pairs, 
+        //for example headers:{custom-header1:"xyz" }
     }
-    //SAME AS
-    return {
-        data: 'Its working! ' + body.name,
-        code: 200,
-        success: true,
-        headers: undefined
-    }
-    // SAME AS
-    return new GSStatus(true, 200, undefined, 'Its working! ' + body.name, undefined);  
 }
 ```
 
@@ -11852,12 +12870,10 @@ For seeing how framework handles data returned from a function, including calcul
 :::
 
 #### GSContext
-The above is a sample of how JS/TS functions are authored. Functions which are called as event handlers or functions which are called by other YAML workflows have two arguments passed to them
-- GSContext - carries the loaded components of this project, and as well the inputs of the current event.
-- Arguments - a key-value object (JSON)
+GSContext carries the loaded components of this project and as well the inputs of the current event.
 
 #### args
-The second parameter of the function call is args. This parameter is useful when this function is called from a YAML workflow in Godspeed. The `args` passed in the yaml task of the caller YAML workflow is passed as `args` here. It is a JSON object.
+The second parameter of the function call is args. This parameter is useful when this function is called from a YAML workflow in Godspeed. The `args` passed in the yaml task of the caller YAML workflow is passed as `args` here. It can be of any native type like object, array, string, number, boolean.
 
 ##### Caller YAML function
 ```yaml
@@ -11871,7 +12887,7 @@ The second parameter of the function call is args. This parameter is useful when
 ##### Callee Typescript function
 ```typescript
   export default function (ctx: GSContext, args: PlainObject) {
-    ctx.logger.info(args.name); //Prints 'mastersilv3r'
+    ctx.logger.info(args.name);  //Prints 'mastersilv3r'
   }
 ```
 ### More about GSContext
@@ -11885,7 +12901,7 @@ It includes all the context specific information like tracing information, actor
 
 Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
-
+<!-- 
 ```typescript
 // Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
 
@@ -11920,11 +12936,11 @@ export class GSContext { //span executions
 
   forAuth?: boolean = false; //Whether this native or yaml workflow is being run as parth of the authz tasks
 }
-```
+``` -->
 
 
-:::tip Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
-:::
+<!-- :::tip Check out GSContext alias [<span style={{ color: 'green' }}>ctx</span>](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts) from line 971 and how we extract the variables like inputs,outputs,datasources.
+::: -->
 
 
 #### Inputs
@@ -12025,7 +13041,7 @@ We return with GSStatus as below
 Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
 :::
 
-### Invoking functions from JS/TS functions
+### Invoking functions and datasource clients from JS/TS functions
 
 <!-- - When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
 - They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it.  -->
@@ -12084,7 +13100,7 @@ You can study the code [here](https://github.com/godspeedsystems/gs-node-service
 :::
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\workflows\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\workflows\overview.md ----
 
 ---
 title: Workflows or Functions in Meta Framework
@@ -12130,7 +13146,7 @@ tasks:
       name: <%inputs.query.name%>
 ```
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\workflows\yaml-workflows\inbuilt-workflows.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\workflows\yaml-workflows\inbuilt-workflows.md ----
 
 # Built-in functions
 
@@ -12836,7 +13852,7 @@ tasks:
 In the given example, instead of specifying a custom response in `on_error` for tasks, we include tasks directly. This approach proves beneficial when additional functions need to be performed in the event of a task failure.
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\workflows\yaml-workflows\overview.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\workflows\yaml-workflows\overview.md ----
 
 # Overview
 
@@ -12891,7 +13907,7 @@ This will be useful when we have polyglot implementation of the metaframework in
 
 
 
----- Content from: D:\godspeed_docs\docs\microservices-framework\workflows\yaml-workflows\workflow-dsl.md ----
+---- Content from: D:\gs-documentation\docs\microservices-framework\workflows\yaml-workflows\workflow-dsl.md ----
 
 # Workflow-DSL
 
