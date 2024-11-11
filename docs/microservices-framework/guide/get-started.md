@@ -6,8 +6,14 @@
 :::tip Need Help?
 **[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
 
-Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)
+Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in our guide](/docs/microservices-framework/guides)
 :::
+
+### Watch this One-Click Installation & Step-by-Step Tutorial Guide
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+    <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
+</div>
 
 ### Pre-requisites:
 1. Nodejs v18 (or higher) or Bunjs 
@@ -15,7 +21,7 @@ Whether you're having trouble with setup, configurations or understanding the fr
 3. Git
 4. VS Code or any code editor
 
-### **Step 1: Install Godspeed**  
+### Step 1: Install Godspeed
 :::tip
 To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
 :::
@@ -73,7 +79,7 @@ Once the script finishes, you are ready to **[Create Your First Project](/docs/m
      godspeed --version
      ```
 ---     
-### **Step 2: Create Your First Project**
+### Step 2: Create Your First Project
 
 1. **Create a new Godspeed project**:
    - Use the `create` command to set up a new project:
@@ -91,27 +97,38 @@ Once the script finishes, you are ready to **[Create Your First Project](/docs/m
   ```
      godspeed serve
   ```
-Check the logs. They should indicate that the **Express server** is running on **port 3000**.
-  Example log:
+Check the logs. They should indicate that the **Express server** is running on **port 3000**
+
+Example log:
   ```bash
   INFO:[Production Server Running]('express:' eventsource, '3000' port) Try it out at: http://localhost:3000/api-docs
   ```
 ---
 
-### **Step 3: Test the Helloworld API**
+### Step 3: Access Swagger UI
 
-1. **Open Swagger UI**:
-   - Open your browser and navigate to `http://localhost:3000/api-docs`. This will display the **Swagger UI**.
-    ![img](../../../static/img/swagger_helloworld.png)
+  In Godspeed, the **Swagger UI** is typically accessed at the `/api-docs` endpoint, appended to the `base URL` and `port` where the server is running. Here’s the general format for accessing Swagger UI:
+   ```plaintext
+    http://<BASE_URL>:<PORT>/<http_docs_endpoint>` which is by default `localhost:3000/api-docs`
+   ```
+   
+  Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
 
-2. **Try It Out**:
+  **To access Swagger UI, navigate to the following default url:**
+   ```plaintext
+    http://localhost:3000/api-docs
+   ```
+  ![img](../../../static/img/swagger_helloworld.png)
+
+### Step 4: Test the Helloworld API
+
 - In the Swagger UI, locate the `/helloworld` endpoint.
 
   Click the **`Try it out`** button and send a request to test the API, It will ask you to fill the name. Once you fill and submit the name parameter,(e.g. John) then following response will be returned from the server.
   ```
     Hello `John`      
   ```
-Default port of your service is `3000` and Swagger endpoint is `/api-docs`. If you want to customise default settings, you can modify the `./src/eventsources/http.yaml`
+
 
 To understand working of this API [Lets Walkthrough your first Godspeed Project](https://godspeed.systems/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
 
@@ -235,11 +252,11 @@ Almost every application needs validation of data sent in request to the API and
 Hello mastersilv3r
 ```
 
-#### Swagger Collection
+### Swagger Collection
 
  If you need access to the Swagger collection of godspeed project, open it from `/docs` folder in your project. This is automatically generated from your API schema which we saw above. 
 
-#### Postman Collection
+### Postman Collection
 
  If you need the Postman Collection, import the Swagger file from `src/docs` in Postman.
 

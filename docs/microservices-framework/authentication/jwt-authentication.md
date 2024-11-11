@@ -45,19 +45,23 @@ In our Express eventsource plugin, JWT Authentication is implemented using passp
   **(b)** Export these variables to your environment, follow the below syntax to export, based on the shell, you are using:
   <details>
   <summary> For git bash  </summary>
-   ```
+
+   ```bash
       $ export JWT_SECRET=mysecret
       $ export JWT_ISS= mycompany
    ```
+
   </details>
 
-  <details> <summary> For windows powershell  </summary>
-  
-   ```
+  <details> 
+  <summary> For windows powershell  </summary>
+
+   ```bash
     $env:JWT_SECRET= "mysecret"
-    $env:JWT_ISS= "mycompany"   
+    $env:JWT_ISS= "mycompany"  
    ```
-   </details>
+
+  </details>
 
   After exporting the environment variable, you can access these variable anywhere in your project by using inline
   scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts workflows.
@@ -69,7 +73,7 @@ If you do not set these environment variables mentioned above, it will result in
 ### Step 2: Enable JWT Auth in your project's eventsource configuration file.
 JWT configuration is written under authn: in the event source's configuration file. For Express, config file name will be http.yaml. Open this file and Set up jwt authn as shown below.
 
-'src/eventsources/http.yaml'
+`src/eventsources/http.yaml`
 ```
   type: express
   port: 4000
@@ -98,8 +102,8 @@ Once you have enabled it here, authentication will be true for all endpoints, un
         required: true
   ```
 
-<details>
-<summary> User Login Example using JWT Authentciation  </summary>
+
+### User Login Example using JWT Authentciation 
 
 **Event**
 ```yaml
@@ -164,7 +168,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
     }
   }
 ```
-</details>
+
 
 ### How to access JWT payload
 You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.

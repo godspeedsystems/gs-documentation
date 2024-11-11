@@ -16,17 +16,26 @@ Lets understand how to implement the above steps :
 
 ### Step 1: Define Configuration file 
 
-Inside the `datasources` directory, create a `YAML` file with a specific name to configure the datasource (e.g., kafka.yaml, gpt.yaml). 
-In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined. Like this:-
+- Inside the `datasources` directory, create `YAML` files to setup your datasource integrations. For example, chatgpt.yaml or kafka.yaml. 
+
+- In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined. 
+
+:::tip
+You can create multiple instances of same datasource type by creating multiple yaml files. For example, chatgpt1.yaml and chatgpt2.yaml. 
+
+FYI you can do the same for eventsources as well, For example http1.yaml and http2.yaml where both are of `type: express` and run on different ports.
+:::
+
+Let's see an example of creating chatgpt as custom datasource.
 
 ```
     .
     ├── src
         ├── datasources
         │   ├── types
-        │   |    └── custom_datasource.ts
+        │   |    └── chatgpt.ts
         |   |
-        │   └── custom_datasource.yaml
+        │   └── chatgpt.yaml
         │
         ├── events
         |
@@ -37,23 +46,26 @@ In this YAML file, ensure you specify a `type` field, and there must be a corres
 
 ### Example
 
-GPT config file ( src/datasources/gpt.yaml )
+Chatgpt Config file- `src/datasources/chatgpt.yaml`
 
 ```yaml
-type: CHATGPT  # Defines the datasource type as Chatgpt
+type: chatgpt  # should be same as the name of your datasource typescript file in `src/datasources/types/`
+
+# custom configurations as per your datasource logic
 model: gpt-4o  
 temperature: 1
 max_tokens: 200
+
 ```
 This file defines the model, temperature, and token settings for the ChatGPT API.
 
 ## Step 2: Implement datasource logic
 
-1. In `src/datasources/types`, create a TypeScript file for your datasource logic (e.g., `kafka.ts`).
+1. In `src/datasources/types`, create a TypeScript file for your datasource logic (e.g., `chatgpt.ts`).
 2. Import `GSDataSource` and other required modules from `@godspeedsystems/core`.
-3. Extend the `GSDataSource` class to implement custom methods for interacting with your custom datasource.
-4. Initialize your client by calling the `initClient()` function.
-5. Once your client is initialized, you can execute its methods using the `execute` function.
+3. Extend the `GSDataSource` abstract class to implement custom methods to interact with your custom datasource.
+4. Initialize and return your client by implementing the abstract `initClient()` method of `GSDatasource`.
+5. Once your client is initialized, then implement the  abstract `execute()` method of `GSDatasource`.
 
 ### Template for your custom datasource logic :
 You can use the following template to start writing your custom datasource logic and then modify it as per your requirement.
@@ -97,7 +109,7 @@ You can use the following template to start writing your custom datasource logic
 
 ### Example Datasource Logic for GPT plugin 
 
-(src/datasources/types/gpt.ts)
+`src/datasources/types/chatgpt.ts`
 
 ```typescript
 
