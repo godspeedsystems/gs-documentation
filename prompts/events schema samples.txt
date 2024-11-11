@@ -1,0 +1,1261 @@
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\bookings.yaml ----
+
+# ONE
+http.get./user/bookings:
+  summary: Fetch User Bookings
+  description: Fetch User's Booking detail
+  fn: gs_bootcamp.bookings.one
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# CREATE
+http.post./user/booking:
+  summary: Create a new Booking
+  description: Create Booking in database
+  fn: gs_bootcamp.bookings.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Bookings'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+## UPDATE
+# http.put./user/bookings/{id}:
+#   summary: Update a Bookings
+#   description: Update Bookings from database
+#   fn: gs_bootcamp.bookings.update
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: '#/definitions/gs_bootcamp/Bookings'
+#   params:
+#     - name: id
+#       in: path
+#       required: true
+#       schema:
+#         type: string
+#   responses:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+
+## DELETE
+# http.delete./user/bookings/{id}:
+#   summary: Delete a Bookings
+#   description: Delete Bookings from database
+#   fn: gs_bootcamp.bookings.delete
+#   params:
+#     - name: id
+#       in: path
+#       required: true
+#       schema:
+#         type: string
+#   responses:
+#     '202':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# FETCH ALL
+# http.post./user/bookings:
+#   summary: Fetch all Bookings
+#   description: Fetch user Bookings from database
+#   fn: gs_bootcamp.bookings.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     content:
+#       application/json:
+#         schema:
+#           type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\bootcamp.yaml ----
+
+# ONE
+http.get./bootcamp/{id}:
+  summary: Fetch Bootcamp
+  description: Fetch Bootcamp from database
+  fn: gs_bootcamp.bootcamps.one
+  authn: false
+  params:
+   - name: id
+     in: path
+     required: true
+     schema:
+      type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+# ONE
+http.get./bootcamp/{id}/bookings:
+  summary: Fetch Bootcamp Bookings
+  description: Fetch Bootcamp bookings from database
+  fn: gs_bootcamp.bookings.bootcampBookings
+  authn: false
+  params:
+   - name: id
+     in: path
+     required: true
+     schema:
+      type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+# CREATE
+http.post./bootcamp:
+  summary: Create a new Bootcamp
+  description: Create Bootcamp from database
+  fn: gs_bootcamp.bootcamps.create
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Bootcamp'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./bootcamp/{id}:
+  summary: Update a Bootcamp
+  description: Update Bootcamp from database
+  fn: gs_bootcamp.bootcamps.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Bootcamp'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+## DELETE
+# http.delete./bootcamp/{id}:
+#   summary: Delete a Bootcamp
+#   description: Delete Bootcamp from database
+#   fn: gs_bootcamp.bootcamps.delete
+#   params:
+#     - name: id
+#       in: path
+#       required: true
+#       schema:
+#         type: string
+#   responses:
+#     '202':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# SEARCH
+http.post./bootcamps/search:
+  summary: Fetch all Bootcamps
+  description: Fetch multiple Bootcamps from database
+  fn: gs_bootcamp.bootcamps.search
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\certifications.yaml ----
+
+# ONE
+http.get./profile/certifications:
+  summary: Fetch Certifications
+  description: Fetch Certifications from database
+  fn: gs_bootcamp.certifications.one
+  # params:
+  #   - name: id
+  #     in: path
+  #     required: true
+  #     schema:
+  #       type: string
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./profile/certifications:
+  summary: Create a new Certifications
+  description: Create Certifications from database
+  fn: gs_bootcamp.certifications.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Certifications'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./profile/certifications/{id}:
+  summary: Update a Certifications
+  description: Update Certifications from database
+  fn: gs_bootcamp.certifications.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Certifications'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+#  DELETE
+http.delete./profile/certifications/{id}:
+  summary: Delete a Certifications
+  description: Delete Certifications from database
+  fn: gs_bootcamp.certifications.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # SEARCH
+# http.post./profile/certifications/search:
+#   summary: Fetch multiple Certifications
+#   description: Fetch multiple Certifications from database
+#   fn: gs_bootcamp.certifications.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\contacts.yaml ----
+
+# ONE
+http.get./user/contacts:
+  summary: Fetch Contacts
+  description: Fetch Contacts from database
+  fn: gs_bootcamp.contacts.one
+  # params:
+  #   - name: id
+  #     in: path
+  #     required: true
+  #     schema:
+  #       type: string
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./user/contacts:
+  summary: Create a new Contacts
+  description: Create Contacts from database
+  fn: gs_bootcamp.contacts.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Contacts'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+ # Send verification mail to user's email id           
+# http.post./user/contacts/send/verify_mail:
+#   summary: sending_verification_mail
+#   description: sending_mail
+#   fn: gs_bootcamp.contacts.send_mail
+
+#   responses:
+#     200:
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# http.get./user/contacts/mail/verified:
+#   summary: sending_verification_mail
+#   description: sending_mail
+#   fn: gs_bootcamp.contacts.emailVerified
+#   params:
+#     - name: token
+#       in: query
+#       required: true
+#       schema:
+#         type: string
+#     - name: userId
+#       in: query
+#       required: true
+#       schema:
+#         type: integer
+#   responses:
+#     200:
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+# UPDATE
+http.put./user/contacts/{id}:
+  summary: Update a Contacts
+  description: Update Contacts from database
+  fn: gs_bootcamp.contacts.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Contacts'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./user/contacts/{id}:
+  summary: Delete a Contacts
+  description: Delete Contacts from database
+  fn: gs_bootcamp.contacts.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\documents.yaml ----
+
+# event to upload s3 file
+# http.post./document/aws:
+#   fn: gs_bootcamp.documents.aws_upload
+#   body:
+#   content:
+#     multipart/form-data:
+#         schema:
+#         $ref: '#/definitions/gs_bootcamp/Documents'
+#   responses:
+#     200:
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+#   log:
+#     attributes:
+#       event_type: aws_upload
+
+# http.post./document/upload:
+#   fn: gs_bootcamp.documents.aws_upload
+#   body:
+#     content:
+#       multipart/form-data:
+#         schema:
+#           type: object
+#           properties:
+#             documentFile:
+#               type: string
+#               format: binary
+#   responses:
+#     200:
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# ONE
+# http.get./profile/documents:
+#   summary: Fetch Documents
+#   description: Fetch Documents from database
+#   fn: gs_bootcamp.documents.one
+#   # params:
+#   #   - name: id
+#   #     in: path
+#   #     required: true
+#   #     schema:
+#   #       type: string
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+# CREATE
+http.post./profile/documents:
+  summary: Create a new Documents
+  description: Create Documents from database
+  fn: gs_bootcamp.documents.create
+  body:
+    content:
+      multipart/form-data:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Documents'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+# http.put./profile/documents/{id}:
+#   summary: Update a Documents
+#   description: Update Documents from database
+#   fn: gs_bootcamp.documents.update
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: '#/definitions/gs_bootcamp/Documents'
+#   params:
+#     - name: id
+#       in: path
+#       required: true
+#       schema:
+#         type: string
+#   responses:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+
+# DELETE
+http.delete./profile/documents/{id}:
+  summary: Delete a Documents
+  description: Delete Documents from database
+  fn: gs_bootcamp.documents.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # SEARCH
+# http.post./profile/documents/search:
+#   summary: Fetch multiple Documents
+#   description: Fetch multiple Documents from database
+#   fn: gs_bootcamp.documents.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\education.yaml ----
+
+# ONE
+http.get./profile/education:
+  summary: Fetch Educational details
+  description: Fetch Education array from database
+  fn: gs_bootcamp.education.one
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./profile/education:
+  summary: Save new Education details
+  description: Create Education from database
+  fn: gs_bootcamp.education.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Education'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./profile/education/{id}:
+  summary: Update Education details
+  description: Update Education from database
+  fn: gs_bootcamp.education.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Education'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./profile/education/{id}:
+  summary: Delete a Education
+  description: Delete Education from database
+  fn: gs_bootcamp.education.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # SEARCH
+# http.post./profile/education/search:
+#   summary: Fetch multiple Education
+#   description: Fetch multiple Education from database
+#   fn: gs_bootcamp.education.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\experience.yaml ----
+
+# ONE
+http.get./profile/experience:
+  summary: Fetch experience details
+  description: Fetch experience array from database
+  fn: gs_bootcamp.experience.one
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./profile/experience:
+  summary: Save new experience details
+  description: Create experience from database
+  fn: gs_bootcamp.experience.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/WorkExperience'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./profile/experience/{id}:
+  summary: Update experience details
+  description: Update experience from database
+  fn: gs_bootcamp.experience.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/WorkExperience'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./profile/experience/{id}:
+  summary: Delete a experience
+  description: Delete experience from database
+  fn: gs_bootcamp.experience.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# SEARCH
+# http.post./profile/experience/search:
+#   summary: Fetch multiple experience
+#   description: Fetch multiple experience from database
+#   fn: gs_bootcamp.experience.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\location.yaml ----
+
+# ONE
+http.get./user/location:
+  summary: Fetch Location
+  description: Fetch Location from database
+  fn: gs_bootcamp.location.one
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# CREATE
+http.post./user/location:
+  summary: Create a new Location
+  description: Create Location from database
+  fn: gs_bootcamp.location.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Location'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./user/location:
+  summary: Update a Location
+  description: Update Location from database
+  fn: gs_bootcamp.location.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Location'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./user/location:
+  summary: Delete a Location
+  description: Delete Location from database
+  fn: gs_bootcamp.location.delete
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# SEARCH
+# http.post./user/location/search:
+#   summary: Fetch multiple Location
+#   description: Fetch multiple Location from database
+#   fn: gs_bootcamp.location.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\profile.yaml ----
+
+# http.get./linkedin/user/profile:
+#   summary: Get linkedin user profile
+#   description: Linkedin Fetch User profile
+#   fn: gs_bootcamp.profile.linkedin-profile
+#   authn: false
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# Get User Profile by userId
+http.get./user/profile:
+  summary: Get profile by userId
+  description: Fetch User Profile
+  fn: gs_bootcamp.profile.getByUser
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# Get Complete Profile View
+http.get./user/profileCompletion:
+  summary: To Get percentage of profile completion
+  description: To Get percentage of profile completion
+  fn: gs_bootcamp.profile.profileCompletion
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# Get Complete Profile View
+http.get./user/profileView:
+  summary: To Get Full Profile
+  description: Fetch Full Profile of user
+  fn: gs_bootcamp.profile.profileView
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # CREATE
+# http.post./user/profile:
+#   summary: Create a new Profile
+#   description: Create Profile from database
+#   fn: gs_bootcamp.profile.create
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: '#/definitions/gs_bootcamp/Profile'
+#   responses:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+
+# UPDATE
+http.post./user/profile:
+  summary: Update Profile
+  description: Update Profile from database
+  fn: gs_bootcamp.profile.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Profile'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE FULL PROFILE
+# http.put./user/profileView:
+#   summary: Update Full Profile
+#   description: Update Full Profile in database
+#   fn: gs_bootcamp.profile.updateAll
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: '#/definitions/gs_bootcamp/Profile'
+#   responses:
+#     '204':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+# DELETE
+# http.delete./user/profile:
+#   summary: Delete a Profile
+#   description: Delete Profile from database
+#   fn: gs_bootcamp.profile.delete
+#   responses:
+#     '202':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# SEARCH
+# http.post./user/profile//search:
+#   summary: Fetch multiple Profile
+#   description: Fetch multiple Profile from database
+#   fn: gs_bootcamp.profile.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\projects.yaml ----
+
+# ONE
+http.get./profile/projects:
+  summary: Fetch Projects
+  description: Fetch Projects array from database
+  fn: gs_bootcamp.projects.one
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./profile/projects:
+  summary: Save new project details
+  description: Create project
+  fn: gs_bootcamp.projects.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Projects'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./profile/projects/{id}:
+  summary: Update projects details
+  description: Update projects from database
+  fn: gs_bootcamp.projects.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/Projects'
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./profile/projects/{id}:
+  summary: Delete a Projects
+  description: Delete Projects from database
+  fn: gs_bootcamp.projects.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # SEARCH
+# http.post./profile/projects/search:
+#   summary: Fetch multiple Projects
+#   description: Fetch multiple Projects from database
+#   fn: gs_bootcamp.projects.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\sociallinks.yaml ----
+
+# ONE
+http.get./profile/sociallinks:
+  summary: Fetch SocialLinks
+  description: Fetch SocialLinks from database
+  fn: gs_bootcamp.sociallinks.one
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+
+# CREATE
+http.post./profile/sociallinks:
+  summary: Create a new SocialLinks
+  description: Create SocialLinks from database
+  fn: gs_bootcamp.sociallinks.create
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/SocialLinks'
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# UPDATE
+http.put./profile/sociallinks/{id}:
+  summary: Update a SocialLinks
+  description: Update SocialLinks from database
+  fn: gs_bootcamp.sociallinks.update
+  params:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/SocialLinks'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# DELETE
+http.delete./profile/sociallinks/{id}:
+  summary: Delete a SocialLink
+  description: Delete SocialLink from database
+  fn: gs_bootcamp.sociallinks.delete
+  params:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# # SEARCH
+# http.post./profile/sociallinks/search:
+#   summary: Fetch multiple SocialLinks
+#   description: Fetch multiple SocialLinks from database
+#   fn: gs_bootcamp.sociallinks.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+
+
+
+---- Content from: E:\gs_bootcamp_backend\gs-bootcamp-backend\src\events\gs_bootcamp\user.yaml ----
+
+# http.get./linkedin/user:
+#   summary: Get linkedin user 
+#   description: call userinfo api of linkedin
+#   fn: gs_bootcamp.user.linkedin-user
+#   authn: false
+#   params:
+#     - name: token
+#       in: query
+#       required: true
+#       schema:
+#         type: string
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# Verify Bootcamp user or save 
+http.get./verify/user:
+  summary: Verify bootcamp user or save 
+  description: Verify and save User in db
+  fn: gs_bootcamp.user.verifyBootcampUser
+  authn: false
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# Verify and save User 
+http.get./build/user:
+  summary: Verify and save User 
+  description: Verify and save User in db
+  fn: gs_bootcamp.user.verifyBuildUser
+  authn: false
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+# Get User 
+http.get./loggedin-user:
+  summary: Get session User
+  description: Fetch User
+  fn: gs_bootcamp.user.getUser
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+
+# Get User 
+http.get./user:
+  summary: Get session User
+  description: Fetch User
+  fn: gs_bootcamp.user.getUser
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+            
+http.get./userFullDetail:
+  summary: Get Full details of User
+  description: Fetch User details including profile
+  fn: gs_bootcamp.user.userView
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# Save User Responses for Question Set
+http.post./user/responses:
+  summary: Save Answers of User onboarding
+  description: Save answers in QuestionSet 
+  fn: gs_bootcamp.user.save_responses
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/QuestionSet'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# Get User info Form
+http.get./user/responses:
+  summary: Get Answers of Userinfo form
+  description: Get answers of QuestionSet 
+  fn: gs_bootcamp.user.get_responses
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+
+# UPDATE
+http.put./user:
+  summary: Update a User
+  description: Update User from database
+  fn: gs_bootcamp.user.update
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/gs_bootcamp/User/update'
+  responses:
+    content:
+      application/json:
+        schema:
+          type: object
+# DELETE Responses
+http.delete./user/responses:
+  summary: Delete onboarding Responses
+  description: Delete User responses
+  fn: gs_bootcamp.user.deleteResponses
+  responses:
+    '202':
+      content:
+        application/json:
+          schema:
+            type: object
+# DELETE
+# http.delete./user:
+#   summary: Delete a User
+#   description: Delete User from database
+#   fn: gs_bootcamp.user.delete
+#   responses:
+#     '202':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+
+# SEARCH
+# http.post./user/search:
+#   summary: Fetch multiple User
+#   description: Fetch multiple User from database
+#   fn: gs_bootcamp.user.search
+#   body:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#   responses:
+#     '200':
+#       content:
+#         application/json:
+#           schema:
+#             type: array
+

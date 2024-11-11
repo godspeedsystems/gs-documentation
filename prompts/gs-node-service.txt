@@ -1,0 +1,4838 @@
+
+
+---- Content from: sources.ts ----
+
+import { PlainObject } from "../../types";
+import { GSCloudEvent, GSContext, GSStatus } from "../interfaces";
+
+export type EventSources = { [key: string]: GSEventSource | GSDataSourceAsEventSource };
+
+export abstract class GSDataSource {
+  config: PlainObject;
+
+  client?: PlainObject;
+
+  constructor(config: PlainObject) {
+    this.config = config;
+  };
+
+  async init() {
+    this.client = await this.initClient();
+  }
+
+  protected abstract initClient(): Promise<PlainObject>;
+
+  abstract execute(
+    ctx: GSContext,
+    args: PlainObject,
+  ): Promise<any>
+};
+
+export type RedisOptions = {
+  EX? : number,
+  PX? : number,
+  EXAT?: number,
+  NX?: boolean,
+  XX?: boolean,
+  KEEPTTL?: boolean,
+  GET?: boolean
+}
+export abstract class GSCachingDataSource extends GSDataSource {
+
+  //Redis options are available [here](https://redis.io/commands/set/) Client may or may not support all actions. RedisOptions is a superset based on what Redis supports
+  public abstract set(key:string, val: any, options: RedisOptions): any; 
+
+  public abstract get(key: string): any; //Return the value stored against the key
+
+  public abstract del(key: string): any; //Delete the key
+}
+
+export abstract class GSDataSourceAsEventSource {
+  config: PlainObject;
+
+  // datasource: PlainObject;
+
+  client: false | PlainObject;
+
+  constructor(config: PlainObject, datasourceClient: PlainObject) {
+    this.config = config;
+    this.client = datasourceClient;
+  };
+
+  abstract subscribeToEvent(
+    eventKey: string,
+    eventConfig: PlainObject,
+    processEvent: (event: GSCloudEvent, eventConfig: PlainObject) => Promise<GSStatus>,
+    event?: PlainObject
+  ): Promise<void>
+};
+
+export abstract class GSEventSource {
+  config: PlainObject;
+
+  client: false | PlainObject;
+
+  datasources: PlainObject;
+
+  constructor(config: PlainObject, datasources: PlainObject) {
+    this.config = config;
+    this.client = false;
+    this.datasources = datasources;
+  };
+
+  public async init() {
+    this.client = await this.initClient();
+  }
+
+  protected abstract initClient(): Promise<PlainObject>;
+
+  abstract subscribeToEvent(
+    eventKey: string,
+    eventConfig: PlainObject,
+    processEvent: (event: GSCloudEvent, eventConfig: PlainObject) => Promise<GSStatus>,
+    event?: PlainObject
+  ): Promise<void>
+}
+
+---- Content from: eventSchema.js ----
+
+const taskSchema = require("./tasks.schema.json");
+const fnNameOrTasks = {
+    "anyOf": [
+        {
+            "type": "string"
+        },
+        {
+            "type": "array",
+            "items": [
+                {
+                    "$ref": "#/definitions/task"
+                }
+            ]
+        }
+    ]
+}
+module.exports = {
+    "$id": "event_schema",
+    "type": "object",
+    "properties": {
+        "fn": {
+            "type": "string"
+        },
+        "summary": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "body": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "object"
+                }
+            }
+        },
+        "params": {
+            "type": "array",
+            "$ref": "#/definitions/params"
+        },
+        "parameters": {
+            "type": "array",
+            "$ref": "#/definitions/params"
+        },
+        "responses": {
+            "type": "object"
+        },
+        "authn": {
+            "type": "boolean"
+        },
+        "authz": fnNameOrTasks,
+        "on_request_validation_error": fnNameOrTasks,
+        "on_response_validation_error": fnNameOrTasks
+    },
+    "additionalProperties": true,
+    "definitions": {
+        "params": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "in": {
+                            "enum": [
+                                "cookie",
+                                "path",
+                                "query",
+                                "header"
+                            ]
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "required": {
+                            "type": "boolean"
+                        },
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "allow_empty_value": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "in",
+                        "schema"
+                    ]
+                }
+            ],
+            "minItems": 1,
+            "maxItems": 10
+        },
+        "task": taskSchema
+    },
+    "errorMessage": "It's not a valid event definition. Refer above error for more detail."
+}
+
+
+
+---- Content from: index.ts ----
+
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+import { PlainObject } from '../common';
+import eventSchema from './eventSchema';
+import workflowSchema from './workflowSchema';
+import { logger } from '../../logger';
+
+const ajvInstance = new Ajv({ allErrors: true, coerceTypes: true, strictTuples: false, strictTypes: false, strict: false });
+addFormats(ajvInstance);
+require('ajv-errors')(ajvInstance);
+
+const validateEvent = ajvInstance.compile(eventSchema);
+const validateWorkflow = ajvInstance.compile(workflowSchema);
+
+export const isValidEvent = (event: PlainObject, eventKey: string): boolean => {
+  if (!validateEvent(event)) {
+    logger.error('Event validation failed for %s', eventKey);
+    logger.error(validateEvent.errors);
+    return false;
+  }
+  return true;
+};
+
+export const isValidWorkflow = (
+  workflow: PlainObject,
+  workflowKey: string
+): boolean => {
+  if (!validateWorkflow(workflow)) {
+    logger.error('Workflow validation failed for %s', workflowKey);
+    logger.error(validateWorkflow.errors);
+    return false;
+  }
+  return true;
+};
+
+export default ajvInstance;
+
+
+---- Content from: tasks.schema.json ----
+
+{
+    "$id": "task_schema",
+    "type": "object",
+    "$ref": "#/definitions/task",
+    "definitions": {
+        "task": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "fn": {
+                    "type": "string"
+                },
+                "args": {
+                    "anyOf": [
+                        {
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tasks": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "$ref": "#/definitions/task"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+
+---- Content from: workflowSchema.js ----
+
+const taskSchema = require("./tasks.schema.json");
+
+module.exports = {
+    "$id": "workflow_schema",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "summary": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "tasks": {
+            "type": "array",
+            "items": [
+                {
+                    "$ref": "#/definitions/task"
+                }
+            ]
+        }
+    },
+    "additionalProperties": true,
+    "definitions": {
+        "task": taskSchema
+    }
+}
+
+---- Content from: caching.ts ----
+
+import { GSContext, GSFunction } from './interfaces';
+import { PlainObject } from './common';
+import evaluateScript from './scriptRuntime';
+import { logger } from '../logger';
+import config from 'config';
+import { GSCachingDataSource } from './_interfaces/sources';
+import expandVariables from './expandVariables';
+import { P } from 'pino';
+
+export function checkCachingDs(caching: any, location?: PlainObject) {
+    //@ts-ignore
+    const datasources = global.datasources;
+
+    const cachingDsName: string = caching?.datasource || (config as any).caching;
+    const evaluatedCachingDsName = expandVariables(cachingDsName, location!);
+    if (!evaluatedCachingDsName) {
+        logger.fatal(location, 'Exiting. Set a non null caching datasource in config/default or in the caching instruction itself %o', caching);
+        process.exit(1);
+    }
+    const cachingDs: GSCachingDataSource = datasources[evaluatedCachingDsName];
+    if (!cachingDs) {
+        logger.fatal(location, 'Exiting. Could not find a valid datasource by the name %s in the caching instruction %o', cachingDsName, caching);
+        process.exit(1);
+    }
+}
+
+export async function evaluateCachingInstAndInvalidates(ctx: GSContext, caching: GSFunction, taskValue: any) {
+    let cachingInstruction: PlainObject | null = null;   
+    cachingInstruction = await evaluateScript(ctx, caching, taskValue);
+    if (!cachingInstruction) {
+        ctx.childLogger.error('Error in evaluating cachingInstruction %o', caching);
+        throw new Error('Error in evaluating caching script');
+    }
+    const cachingDsName: string = cachingInstruction?.datasource || (config as any).caching;
+    const cachingDs: GSCachingDataSource = ctx.datasources[cachingDsName];
+
+    if (cachingInstruction?.invalidate) {
+        ctx.childLogger.debug('Invalidating cache for key %s', cachingInstruction?.invalidate);
+        await cachingDs.del(cachingInstruction.invalidate);
+    }
+
+    return {
+        ...cachingInstruction,
+        "cachingDs": cachingDs
+    };
+}
+
+export async function fetchFromCache(cachingInstruction: PlainObject | null) {
+    let status;
+    const cachingDs: GSCachingDataSource = cachingInstruction?.cachingDs;
+
+    if (cachingInstruction?.key) {
+        // check in cache and return
+        status = await cachingDs.get(cachingInstruction?.key);
+    }
+    return status;
+}
+
+export async function setInCache(ctx: GSContext, cachingInstruction: PlainObject | null, status: any) {
+    const cachingDs: GSCachingDataSource = cachingInstruction?.cachingDs;
+
+    if (cachingInstruction?.key) {
+        if (status?.success || cachingInstruction.cache_on_failure) {
+            if (!status?.success) {
+                ctx.childLogger.debug('Storing failure task result in cache for %s and value %o', cachingInstruction.key, status);    
+            } else {
+                ctx.childLogger.debug('Storing task result in cache for %s and value %o', cachingInstruction.key, status);
+            }
+            await cachingDs.set(cachingInstruction.key, JSON.stringify(status), cachingInstruction.options);//{ EX: cachingInstruction.expires });
+        }
+    }
+}
+
+
+---- Content from: codeLoader.ts ----
+
+/*
+ * You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+ * © 2022 Mindgrep Technologies Pvt Ltd
+ */
+import { PlainObject } from './common';
+
+import glob from 'glob';
+import path from 'path';
+import { logger } from '../logger';
+
+export default function loadModules(
+  pathString: string,
+  global: boolean = false
+): PlainObject {
+  let api: PlainObject = {};
+  logger.info('Loading %s from %s', path.basename(pathString), pathString);
+
+  return new Promise((resolve, reject) => {
+    glob(
+      path.join(pathString, '**', '*.?(js)').replace(/\\/g, '/'),
+      function (err: Error | null, res: string[]) {
+        if (err) {
+          // reject(err);
+          logger.fatal('Error in loading files at path %s', pathString);
+          process.exit(1);
+
+        } else {
+          // logger.debug('processing files: %s', res);
+
+          Promise.all(
+            res.map((file: string) => {
+              return import(
+                path.relative(__dirname, file).replace(/\.(js)/, '')
+              ).catch((err) => {
+                  logger.fatal('Error in importing module %s %o', path.relative(__dirname, file), err);
+                  process.exit(1);
+
+                })
+                .then((module) => {
+                  if (file.match(/.*?\/plugins\//)) {
+                    const id = file
+                      .replace(/.*?\/(plugins)\//, '')
+                      .replace(/\//g, '_')
+                      .replace(/\.(js)/i, '')
+                      .replace(/\_index$/, '');
+
+                    // Load plugins at global level to provide backward compatibilty
+                    api = { ...api, ...module };
+
+                    // Load plugins with namespace using underscore notation
+                    if (id === 'index') {
+                      delete module.default;
+                      api = {
+                        ...api,
+                        ...module,
+                      };
+                    } else {
+                      for (let f in module) {
+                        if (f === 'default' && typeof module[f] === 'function') {
+                          api[id] = module[f];
+                        } else if (f !== 'default') {
+                          api[id + '_' + f] = module[f];
+                        }
+                      }
+                    }
+                  } else {
+                    const id = file
+                      .replace(/.*?\/functions\//, '')
+                      .replace(/\//g, '.')
+                      .replace(/\.(js)/i, '')
+                      .replace(/\.index$/, '');
+
+                    if (global) {
+                      api = {
+                        ...api,
+                        ...module,
+                      };
+                    } else {
+                      if (id == 'index') {
+                        api = {
+                          ...api,
+                          ...module,
+                        };
+                      } else {
+                        for (let f in module) {
+                          if (f == 'default') {
+                            api[id] = module[f];
+                          } else {
+                            api[id + '.' + f] = module[f];
+                          }
+                        }
+                      }
+                    }
+                  }
+                })
+                .catch((err) => {
+                  logger.fatal('Error in loading plugin or function in the namespace %o', err);
+                  process.exit(1);
+
+                });
+            })
+          ).then(() => {
+            resolve(api);
+          }).catch((err) => {
+              logger.fatal('Error in loading module %s %o',pathString, err);
+              process.exit(1);
+
+            });
+        }
+      }
+    );
+  });
+}
+
+if (require.main === module) {
+  (async () => {
+    try {
+      await loadModules('../plugins').then(console.log);
+    } catch (ex) {
+      logger.error('Caught exception: %o', (ex as Error).stack);
+    }
+  })();
+}
+
+
+---- Content from: common.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+export type CHANNEL_TYPE = 'messagebus' | 'REST' | 'gRpc' | 'socket' | 'cron';
+export type ACTOR_TYPE = 'user' | 'service'; // One who initializes a distributed request.
+export type EVENT_TYPE = 'INFO' | 'DEBUG' | 'WARN' | 'ERROR' | 'TRACE' | 'FATAL';
+
+export interface PlainObject {
+  [key: string]: any
+}
+
+
+---- Content from: configLoader.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import * as fs from 'fs';
+import * as process from 'process';
+import * as yaml from 'js-yaml';
+import { logger } from '../logger';
+import path from 'path';
+function iterate_yaml_directories(current_yaml_root: any) {
+  var recursive_object_state: any = {};
+
+  // list down all directories and iterate back on child directories
+  var files = fs.readdirSync(current_yaml_root);
+  files = files.sort(function (a, b) {
+    return b.split('.').length - a.split('.').length;
+  });
+
+  //To determine the yaml property for which the current iteration is for
+  const current_property = path.basename(current_yaml_root);
+
+
+  if (!recursive_object_state.hasOwnProperty(current_property))
+    recursive_object_state[current_property] = {};
+
+  for (const file of files) {
+    let temp_obj: any;
+    if (file.endsWith('.yaml') || file.endsWith('.yml') || file.endsWith('.json')) {
+      try {
+        temp_obj = yaml.load(
+          fs.readFileSync(current_yaml_root + '/' + file, { encoding: 'utf-8' })
+        );
+      } catch(err) {
+        logger.error(`Error while loading ${file}: ${err}`);
+        process.exit(1);
+      }
+
+      if (temp_obj) {
+        const temp_obj_keys = Object.keys(temp_obj);
+        for (var key in temp_obj_keys) {
+          key = temp_obj_keys[key];
+
+          if (file == 'index.yaml' || file == 'index.yml' || file == 'index.json') {
+            recursive_object_state[current_property][key] = temp_obj[key];
+          } else {
+            const file_name = file.slice(0, -5);
+            if (!recursive_object_state[current_property].hasOwnProperty(file_name)) {
+              recursive_object_state[current_property][file_name] = {};
+            }
+
+            recursive_object_state[current_property][file_name][key] = temp_obj[key];
+          }
+        }
+      }
+    } else if (!file.endsWith('.yaml')) {
+      if (file.includes('.') || current_yaml_root.includes('node_modules')) continue;
+      const next_yaml_root = current_yaml_root + '/' + file;
+      const intermediate_object_state = iterate_yaml_directories(
+        next_yaml_root
+      );
+
+      const intermediate_object_state_keys = Object.keys(intermediate_object_state);
+      for (var key in intermediate_object_state_keys) {
+        key = intermediate_object_state_keys[key];
+
+        if (!recursive_object_state[current_property].hasOwnProperty(key))
+          recursive_object_state[current_property][key] = {};
+
+        recursive_object_state[current_property][key] =
+          intermediate_object_state[key];
+      }
+    }
+  }
+  return recursive_object_state;
+};
+
+export default iterate_yaml_directories;
+
+if (require.main === module) {
+  var relative_config_root = process.argv.slice(2)[0];
+  var nested_yaml_result = iterate_yaml_directories(relative_config_root);
+  logger.info('yaml object %o', nested_yaml_result);
+  logger.info('object as string %s', JSON.stringify(nested_yaml_result, null, 2));
+}
+
+---- Content from: datasourceLoader.ts ----
+
+import { glob } from 'glob';
+import path from 'path';
+
+import { logger } from '../logger';
+import { PlainObject } from '../types';
+import expandVariables from './expandVariables';
+import loadYaml from './yamlLoader';
+import { GSDataSource } from './_interfaces/sources';
+
+// we need to scan only the first level of datasources folder
+export default async function (
+  pathString: string
+): Promise<{ [key: string]: GSDataSource }> {
+  let yamlDatasources = await loadYaml(pathString, false);
+
+  const prismaDatasources = await loadPrismaDsFileNames(pathString);
+  const datasourcesConfigs = { ...yamlDatasources, ...prismaDatasources };
+
+  if (datasourcesConfigs && !Object.keys(datasourcesConfigs).length) {
+    logger.fatal(
+      `There are no datasources defined in datasource dir: ${pathString}`
+    );
+    process.exit(1);
+  }
+  const datasources: { [key: string]: GSDataSource } = {};
+
+  for await (let dsName of Object.keys(datasourcesConfigs)) {
+    logger.info('Evaluating the inline yaml scripts in datasource config %s', dsName);
+    const location = { datasource_name: dsName };
+    datasourcesConfigs[dsName] = expandVariables(datasourcesConfigs[dsName], location);
+    logger.info('Evaluated the inline yaml scripts for datasource config %s', dsName);
+    logger.debug('Evaluated script %o', datasourcesConfigs[dsName]);
+
+    // let's load the loadFn and executeFn
+    // there is an assumption that for each datasource, the type's .ts file should be inside /datasources/types folder
+    const fileName = datasourcesConfigs[dsName].type;
+    if (!fileName) {
+      logger.warn(`Did not find any datasource 'type' key defined in ${dsName}.yaml. Ignoring this file.`);
+      continue;
+    }
+    await import(path.join(pathString, 'types', `${fileName}`)).then(
+      async (Module: GSDataSource) => {
+        const dsYamlConfig: PlainObject = datasourcesConfigs[dsName];
+        // @ts-ignore
+        const Constructor = Module.DataSource || Module.default;
+        if (!Constructor) {
+          logger.fatal('Expecting datasource %s module file to export GSDataSource under the DataSource or default key', dsName);
+        }
+        try {
+          const dsInstance = new Constructor({ ...dsYamlConfig, name: dsName });
+          await dsInstance.init(); // This should initialize and set the client in dsInstance
+          if (!dsInstance.client) {
+            throw new Error(
+              `Client could not be initialized in your datasource ${dsName}`
+            );
+          }
+          datasources[dsName] = dsInstance;
+
+        } catch (error: any) {
+          logger.fatal('Error in loading datasource %s \n with config %o \n error %s %o', dsName, dsYamlConfig, error.message, error.stack);
+          process.exit(1);
+        }
+
+      }
+    );
+  }
+  return datasources;
+}
+
+async function loadPrismaDsFileNames(pathString: string): Promise<PlainObject> {
+  let basePath = path.basename(pathString);
+  let prismaSchemas: PlainObject = {};
+
+  const files = glob.sync(
+    path.join(pathString, '**', '*.?(prisma)').replace(/\\/g, '/')
+  );
+  files.forEach((file: string) => {
+    if (file.includes('prisma-clients')) {
+      return;
+    }
+    const id = file
+      .replace(new RegExp(`.*?\/${basePath}\/`), '')
+      .replace(/\//g, '.')
+      .replace(/\.(prisma)/i, '')
+      .replace(/\.index$/, '');
+    prismaSchemas[id] = {
+      type: 'prisma',
+      name: id,
+    };
+    // prismaSchemas = {
+    //   ...prismaSchemas,
+    //   ...{
+    //     [id]: {
+    //       type: 'prisma',
+    //       name: id,
+    //     },
+    //   },
+    // };
+  });
+
+  return prismaSchemas;
+}
+
+
+---- Content from: definitionsLoader.ts ----
+
+import loadYaml from './yamlLoader';
+import ajvInstance from './validation';
+import { logger } from '../logger';
+
+const loadAndRegisterDefinitions = async (pathString: string) => {
+  const definitions = loadYaml(pathString, false);
+  logger.debug('Definitions: %o', definitions);
+  ajvInstance.addSchema({
+    $id: 'https://godspeed.systems/definitions.json',
+    definitions,
+  });
+  logger.debug('Definitions loaded and registered to ajvInstance');
+  return definitions;
+};
+
+export default loadAndRegisterDefinitions;
+
+
+---- Content from: eventLoader.ts ----
+
+/*
+ * You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+ * © 2022 Mindgrep Technologies Pvt Ltd
+ */
+
+import { PlainObject } from './common';
+import { checkFunctionExists } from './utils';
+import loadYaml from './yamlLoader';
+import { loadJsonSchemaForEvents } from './jsonSchemaValidation';
+import expandVariables from './expandVariables';
+import _ from 'lodash';
+import { logger } from '../logger';
+import { NativeFunctions, WorkflowJSON, createGSFunction } from './functionLoader';
+import { GSDataSourceAsEventSource, GSEventSource } from '../godspeed';
+import { EventSources } from './_interfaces/sources';
+
+const rewiteRefsToAbsolutePath = (
+  events: PlainObject
+): PlainObject | undefined => {
+  if (!Object.keys(events).length) {
+    // there are no events
+    return;
+  }
+  // deep copy
+  logger.debug('Replacing $refs in events with definitions.');
+  const deepCopyOfEvents = JSON.parse(JSON.stringify(events));
+  return Object.keys(deepCopyOfEvents).reduce(
+    (accumulator: PlainObject, eventKey: string) => {
+      let eventObject = deepCopyOfEvents[eventKey];
+      // logger.debug('eventObject %o', eventObject);
+
+      const bodyContent =
+        eventObject?.body?.content || eventObject?.data?.body?.content;
+
+      if (bodyContent) {
+        Object.keys(bodyContent).forEach((contentType: string) => {
+          let contentSchema = bodyContent[contentType].schema;
+          if (contentSchema) {
+            if (contentSchema.hasOwnProperty('$ref')) {
+              const defKey = contentSchema.$ref;
+              contentSchema.$ref =
+                'https://godspeed.systems/definitions.json' + defKey;
+              bodyContent[contentType].schema = contentSchema;
+            }
+          }
+        });
+      }
+
+      const responses =
+        eventObject?.responses || eventObject?.data?.schema?.responses;
+      // logger.debug('responses %o', responses);
+      if (responses) {
+        Object.keys(responses).forEach((responseCode) => {
+          let responseContent = responses[responseCode].content;
+          // logger.debug('responseContent %o', responseContent);
+          if (responseContent) {
+            Object.keys(responseContent).forEach((responseContentType) => {
+              let responseContentTypeSchema =
+                responseContent[responseContentType].schema;
+              if (responseContentTypeSchema) {
+                if (responseContentTypeSchema.hasOwnProperty('$ref')) {
+                  const defKey = responseContentTypeSchema.$ref;
+                  responseContentTypeSchema.$ref =
+                    'https://godspeed.systems/definitions.json' + defKey;
+                  responses[responseCode].content[responseContentType].schema =
+                    responseContentTypeSchema;
+                }
+              }
+            });
+          }
+        });
+      }
+
+      accumulator[eventKey] = eventObject;
+      return accumulator;
+    },
+    {}
+  );
+};
+
+export default async function loadEvents(
+  allFunctions: PlainObject,
+  nativeFunctions: NativeFunctions,
+  eventsFolderPath: string,
+  eventSources: EventSources
+) {
+  const events = await loadYaml(eventsFolderPath, true);
+  if (events && !Object.keys(events).length) {
+    logger.error(`There are no events defined in events dir: ${eventsFolderPath}. Exiting.`);
+    process.exit(1);
+  }
+
+  // logger.debug('event configs %o', events);
+  const location = { location: "Events loading" };
+  const evalEvents = expandVariables(rewiteRefsToAbsolutePath(events), location);
+
+  const checkFn = checkFunctionExists(events, allFunctions);
+
+  if (!checkFn.success) {
+    logger.fatal(`Error in loading functions for events. Error message: %s. Exiting. ${checkFn.message}`);
+    process.exit(1);
+  }
+  if (evalEvents) {
+    await loadJsonSchemaForEvents(evalEvents);
+  }
+
+  splitEventsByEventSources(evalEvents);
+
+  loadEventWorkflows(evalEvents, eventSources, allFunctions, nativeFunctions);
+  return evalEvents;
+};
+
+function splitEventsByEventSources(events: PlainObject) {
+  Object.keys(events).forEach((key: string) => {
+    const eventSourceName = key.split('.')[0];
+    if (!eventSourceName.includes('&')) {
+      return;
+    }
+    const eventSources = eventSourceName.split('&');
+    const commonKeyPart = key.replace(eventSourceName, ''); 
+    for (let eventSource of eventSources) {
+      eventSource = eventSource.trim();
+      const newKey = eventSource + commonKeyPart;
+      events[newKey] = JSON.parse(JSON.stringify(events[key]));
+    }
+    delete events[key];
+  });
+}
+  /**
+    * Iterate through all event definitions and 
+    * load the authz, on_request_validation_error, on_response_validation_error and any such workflows
+  */
+const FUNCTIONS_TO_LOAD = ['authz', 'on_request_validation_error', 'on_response_validation_error'];
+function loadEventWorkflows(events: PlainObject, eventSources: EventSources, allFunctions:{[key: string]: Function}, nativeFunctions: NativeFunctions) {
+  Object.keys(events).forEach((key: string) => {
+    const eventConfig = events[key];
+    const eventSourceName = key.split('.')[0];
+    const eventSource: GSEventSource | GSDataSourceAsEventSource = eventSources[eventSourceName];
+    if (!eventSource) {
+      logger.error(`No event source found for the event uri ${eventSourceName}`);
+      process.exit(1);
+    }
+    FUNCTIONS_TO_LOAD.forEach((functionType) => {
+      if(eventConfig[functionType] === 'false') { 
+        delete eventConfig[functionType];
+        //remove function for this functionType if event config explicity says false
+        //ex. authz: false or on_request_validation_error: false
+        //If authz is undefined null or 0 it will not override default config
+        //because of zero trust policy.
+        // functionConfig = null;
+        return;
+      }
+      let functionConfig: WorkflowJSON | string | Function | null;
+      if(eventConfig[functionType]) {
+        //for a non-falsy value, lets use this instead of the default config from event source
+        functionConfig = eventConfig[functionType];
+      } else if(eventSource.config[functionType]) {
+        //default value from event source
+        functionConfig = eventSource.config[functionType]; 
+      } else {
+        return;
+      }
+      let _function; //The loaded function
+      if (typeof functionConfig === 'string') {
+        //Is expected to be a valid function/workflow path
+        //For ex. authz: "com.biz.common_authz"
+        _function = allFunctions[functionConfig as string];
+      } else if (typeof functionConfig === 'object' ) {
+        //Is expected to be a `WorkflowJSON` declared within a yaml eventsource/event config
+        const taskLocation = { eventSourceType: eventConfig.type, eventKey: key, fn: functionType };
+        _function 
+          = createGSFunction(functionConfig as WorkflowJSON,allFunctions,nativeFunctions,null,taskLocation);
+      }
+      if (_function) {
+        eventConfig[functionType] = _function;
+      } else {
+        logger.error(`Could not find any valid function definition for %o when loading ${functionType} for event ${key}`, functionConfig);
+        process.exit(1);
+      }
+    });
+  });
+}
+
+
+
+---- Content from: eventsourceLoader.ts ----
+
+import path from "path";
+import { logger } from "../logger";
+import { PlainObject } from "../types";
+import loadYaml from "./yamlLoader";
+import { EventSources, GSDataSourceAsEventSource, GSEventSource } from "./_interfaces/sources";
+import expandVariables from "./expandVariables"; // Import the expandVariables function
+
+export default async function (eventsourcesFolderPath: string, datasources: PlainObject): Promise<{ [key: string]: GSEventSource | GSDataSourceAsEventSource }> {
+  const eventsourcesConfigs = await loadYaml(eventsourcesFolderPath, false);
+  if (eventsourcesConfigs && !Object.keys(eventsourcesConfigs).length) {
+    logger.fatal(`There are no event sources defined in eventsource dir: ${eventsourcesFolderPath}`);
+    process.exit(1);
+  }
+
+  const eventSources: EventSources = {};
+
+  for await (let esName of Object.keys(eventsourcesConfigs)) {
+    // let's load the event source
+    const eventSourceConfig = eventsourcesConfigs[esName];
+    logger.debug('evaluating event source %s', esName);
+    const location = { eventsource_name: esName };
+    eventsourcesConfigs[esName] = expandVariables(eventsourcesConfigs[esName], location);
+    logger.debug(
+      'evaluated eventsource %s %o',
+      esName,
+      eventsourcesConfigs[esName]
+    );
+
+    const fileName = eventsourcesConfigs[esName].type;
+    try {
+      const Module = await import(path.join(eventsourcesFolderPath, 'types', fileName));
+      const isPureEventSource = 'initClient' in Module.default.prototype;
+      // const isPureEventSource = !!Object.hasOwnProperty.call(Module.default.prototype, 'initClient');
+      let eventSourceInstance: GSEventSource | GSDataSourceAsEventSource;
+
+      let Constructor = Module.default;
+
+      if (isPureEventSource) {
+        eventSourceInstance = new Constructor(eventsourcesConfigs[esName], datasources) as GSEventSource;
+        if ('init' in eventSourceInstance) {
+          await eventSourceInstance.init();
+        }
+      } else {
+        let correspondingDatasource = datasources[esName]; // By design, datasource and event source need to share the same name.
+        if (!correspondingDatasource) {
+          logger.fatal(`Corresponding data source for event source ${esName} is not defined. Please ensure a data source type exists with the same file name in src/datasources directory`);
+          process.exit(1);
+        } else {
+          eventSourceInstance = new Constructor(eventsourcesConfigs[esName], correspondingDatasource.client) as GSDataSourceAsEventSource;
+        }
+      }
+
+      eventSources[esName] = eventSourceInstance;
+    } catch (error: any) {
+      logger.error('Failed to load event source %s %s %o', esName, error.message, error);
+      process.exit(1);
+    }
+  }
+
+  return eventSources;
+};
+
+---- Content from: expandVariables.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import config from 'config';
+import { PlainObject } from './common';
+import loadMappings from './mappingLoader';
+import { logger } from '../logger';
+
+//@ts-ignore
+const mappings = global.mappings;
+
+function substitute(value: string, location: PlainObject): any {
+  const initialStr = value;
+  try {
+    if ((value as string).match(/<(.*?)%/)) {
+      let script = (value as string).replace(/"?<(.*?)%\s*(.*?)\s*%>"?/, '$2');
+      //TODO: pass other context variables
+
+      if (! (script.match(/<(.*?)%/) && script.match(/%>/))) {
+        //@ts-ignore
+        value = Function('config', 'mappings', 'return ' + script)(config, global.mappings);
+      }
+    }
+  } catch (ex: any) {
+    if (initialStr.includes('inputs') || initialStr.includes('outputs')) {
+      logger.info(location, 'Could not compile script containing `inputs` or `outputs` because they are available during runtime and not loadtime. if intended use of this script is during runtime you should ignore this message. Original script: %s. Compiled script %s. Error message %s', initialStr, value, ex.message);
+    } else {
+      logger.fatal(location, 'Caught exception in script compilation, script: %s compiled script %s. Error message %s\n error %o %o', initialStr, value, ex.message, ex, ex.stack);
+      process.exit(1);
+    }
+  }
+  return value;
+}
+
+export default function compileScript(args: any, location: PlainObject) {
+  if (!args) {
+    return args;
+  }
+  if (typeof (args) == 'object') {
+    if (!Array.isArray(args)) {
+      let out: PlainObject = {};
+      for (let k in args) {
+        out[k] = compileScript(args[k], location);
+      }
+      return out;
+    } else {
+      let out: [any] = <any>[];
+      for (let k in <[any]>args) {
+        out[k] = compileScript(args[k], location);
+      }
+      return out;
+    }
+  } else if (typeof (args) == 'string') {
+    return substitute(args, location);
+  }
+
+  return args;
+}
+
+
+---- Content from: functionLoader.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import { PlainObject } from './common';
+import { GSContext, GSEachParallelFunction, GSEachSeriesFunction, GSFunction, GSIFFunction, GSParallelFunction, GSSeriesFunction, GSSwitchFunction } from './interfaces';
+import { checkDatasource, compileScript } from './utils';
+import loadYaml from './yamlLoader';
+import loadModules from './codeLoader';
+import {  logger } from '../logger';
+//@ts-ignore
+import path from 'path';
+
+/*
+    Two reasons to keep this module level variable
+    1. To check dangling else or elif tasks, set lastIfFn to the ifFn when encountered, 
+    and later check when loading elif and else tasks, whether `lastIfFn` is set or not.
+    2. An com.gs.GSIFFunction has optional else_fn which is either com.gs.elif or com.gs.else function.  
+*/
+let lastIfFn: GSIFFunction | null;
+
+// BaseJSON is common to workflow and task json
+type BaseJSON = {
+    fn?: string, //Even though in workflows developer does not need 
+    //to define fn, they are convereted to com.gs.sequential functions
+    id?: string,
+    workflow_name?: string,
+    on_error?: OnError
+}
+export type WorkflowJSON = BaseJSON & {
+    tasks: Array<TaskJSON>
+}
+type OnError = {
+    tasks: TasksJSON | GSFunction | null
+}
+type ParallelTaskJSON = WorkflowJSON & {
+    isParallel: boolean
+}
+type SwitchTaskJSON = WorkflowJSON & {
+    value: string | number | boolean,
+    cases: { [key: string]: TasksJSON },
+    defaults: TasksJSON
+}
+type CasesJSONLoaded = { [key: string]: GSFunction | null };
+type IfTaskJSON = WorkflowJSON & { condition: string }
+type EachTaskJSON = WorkflowJSON & { value: Array<any> }
+type TasksJSON = Array<TaskJSON> & { workflow_name?: string }
+type TaskJSON = BaseJSON & {
+    isEachParallel?: boolean,
+    authz?: TasksJSON | GSFunction,
+    args: any
+};
+
+// Developer written JS/TS or datasource functions
+export type NativeFunctions = {
+    [key: string]: Function | null
+}
+    ;
+
+/**
+ * 
+ * @param json a workflow or array of yaml tasks or a single yaml task
+ * @param workflows all workflows that exist whether loaded yet or in json form and yet to be loaded.
+ * @param nativeFunctions 
+ * @param onError 
+ * @returns GSFunction or null (in case of com.gs.elif or com.gs.else)
+ */
+export function createGSFunction(
+    json: WorkflowJSON | TasksJSON | TaskJSON,
+    workflows: PlainObject,
+    nativeFunctions: NativeFunctions,
+    onError: OnError | null,
+    location: PlainObject
+): GSFunction | null {
+    const childLogger = logger.child(location);
+    // initializeChildLogger(location);
+    // logger.setBindings(null);
+
+    
+    if (Array.isArray(json)) { //These are workflow tasks and this is TasksJSON
+        json = { tasks: json as TasksJSON, fn: 'com.gs.sequential', workflow_name: json?.workflow_name };
+    } else if (!json.fn) {
+        json.fn = 'com.gs.sequential';
+    }
+    childLogger.debug('Starting to parse and load GSFunction id: %s name: %s', json.id, json.workflow_name);
+
+    //First lets handle core framework control flow functions
+    //If this workflow is none of that then we will handle that after this switch block.
+    let tasks;
+
+    switch (json.fn) {
+        case 'com.gs.sequential':
+            tasks =
+                (json as WorkflowJSON)
+                    .tasks
+                    .map((taskJson: TaskJSON) => {
+                        taskJson.workflow_name = json.workflow_name;
+                        const taskLocation = {parent: location, workflow_name: json.workflow_name, task_id: taskJson.id};
+                        return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                    });
+
+            tasks = tasks.filter(Boolean);
+
+            return new GSSeriesFunction(json, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+        // case 'com.gs.dynamic_fn':
+        //     tasks =
+        //         (json as WorkflowJSON)
+        //             .tasks
+        //             .map((taskJson: TaskJSON) => {
+        //                 taskJson.workflow_name = json.workflow_name;
+        //                 return createGSFunction(taskJson, workflows, nativeFunctions, onError);
+        //             });
+        //     tasks = tasks.filter(Boolean);
+
+        //     return new GSDynamicFunction(json, workflows, nativeFunctions, undefined, tasks, false);
+
+        case 'com.gs.parallel':
+            tasks =
+                (json as WorkflowJSON)
+                    .tasks
+                    .map((taskJson: TaskJSON) => {
+                        taskJson.workflow_name = json.workflow_name;
+                        const taskLocation = { parent: location,  workflow_name: json.workflow_name, task_id: taskJson.id };
+                        return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                    });
+
+            tasks = tasks.filter(Boolean); //filter out falsy values from tasks
+
+            (json as ParallelTaskJSON).isParallel = true;
+            return new GSParallelFunction(json, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+        case 'com.gs.switch': {
+            const switchWorkflowJSON: SwitchTaskJSON = json as SwitchTaskJSON;
+            let args: Array<any> = [switchWorkflowJSON.value];
+            let cases: CasesJSONLoaded = {};
+
+            for (let c in switchWorkflowJSON.cases) {
+                switchWorkflowJSON.cases[c].workflow_name = switchWorkflowJSON.workflow_name;
+                //@ts-ignore
+                const taskLocation = { parent: location, case_workflow_name: switchWorkflowJSON.workflow_name, case: c, case_task_id: switchWorkflowJSON.cases[c].id };
+                cases[c] = createGSFunction(switchWorkflowJSON.cases[c], workflows, nativeFunctions, onError, taskLocation);
+            }
+
+            if (switchWorkflowJSON.defaults) {
+                switchWorkflowJSON.defaults.workflow_name = switchWorkflowJSON.workflow_name;
+                //@ts-ignore
+                const taskLocation = { parent: location, case_default_task_id: switchWorkflowJSON.defaults.id };
+                cases.default = createGSFunction(switchWorkflowJSON.defaults, workflows, nativeFunctions, onError, taskLocation);
+            }
+
+            args.push(cases);
+
+            // logger.debug('loading switch workflow cases %o', switchWorkflowJSON.cases);
+
+            return new GSSwitchFunction(json, workflows, nativeFunctions, undefined, args, false, location);
+        }
+
+        case 'com.gs.if': {
+            const ifWorkflowJSON = (json as IfTaskJSON);
+            let args: Array<any> = [ifWorkflowJSON.condition];
+
+            tasks = ifWorkflowJSON
+                .tasks
+                .map((taskJson: TaskJSON) => {
+                    taskJson.workflow_name = ifWorkflowJSON.workflow_name;
+                    const taskLocation = { parent: location, if_task_workflow_name: taskJson.workflow_name, if_task_task_id: taskJson.id } ;
+                    return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                });
+
+            tasks = tasks.filter(Boolean);
+            /* 
+                Create a series function which will be called 
+                by the GSIFFunction if condition evaluates to true.
+                Omit the `condition` from if task and make a series 
+                function with its child tasks
+             */
+
+            const tasksJSON: WorkflowJSON = { ...ifWorkflowJSON };
+            if ('condition' in tasksJSON) {
+                delete tasksJSON.condition;
+            }
+
+            const tasksGSSeriesFunction = new GSSeriesFunction(tasksJSON, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+            args.push(tasksGSSeriesFunction);
+
+
+            const ifFunction = new GSIFFunction(json, workflows, nativeFunctions, undefined, args, false, location);
+
+            // update the lastIfFn state to check later for dangling elif or else.
+            lastIfFn = ifFunction;
+
+            return ifFunction;
+        }
+
+        case 'com.gs.elif': {
+            const elifWorkflowJSON = (json as IfTaskJSON);
+            let args: Array<any> = [elifWorkflowJSON.condition];
+
+            tasks = elifWorkflowJSON
+                .tasks
+                .map((taskJson: TaskJSON) => {
+                    taskJson.workflow_name = elifWorkflowJSON.workflow_name;
+                    const taskLocation = { parent: location,  workflow_name: taskJson.workflow_name, task_id: taskJson.id };
+                    return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                });
+
+            tasks = tasks.filter(Boolean);
+            /* 
+                Create a series function which will be called 
+                by the GSIFFunction if condition evaluates to true.
+                Omit the `condition` from if task and make a series 
+                function with its child tasks
+             */
+
+            const tasksJSON: WorkflowJSON = { ...elifWorkflowJSON };
+            if ('condition' in tasksJSON) {
+                delete tasksJSON.condition;
+            }
+            let tasksGSSeriesFunction = new GSSeriesFunction(tasksJSON, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+            args.push(tasksGSSeriesFunction);
+
+            let elifFunction = new GSIFFunction(json, workflows, nativeFunctions, undefined, args, false, location);
+
+            if (!lastIfFn) {
+                childLogger.error(`If is missing before elif ${json.id}.`);
+                process.exit(1);
+            } else {
+                lastIfFn.else_fn = elifFunction;
+            }
+
+            lastIfFn = elifFunction;
+            return null;
+        }
+
+        case 'com.gs.else': {
+            tasks = (json as WorkflowJSON)
+                .tasks
+                .map((taskJson: TaskJSON) => {
+                    taskJson.workflow_name = json.workflow_name;
+                    const taskLocation = { parent: location,  else_task_workflow_name: taskJson.workflow_name, else_task_task_id: taskJson.id };
+                    return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                });
+
+            tasks = tasks.filter(Boolean);
+            let elseFunction = new GSSeriesFunction(json, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+            if (!lastIfFn) {
+                childLogger.error(`If task is missing before else task ${json.id}.`);
+                process.exit(1);
+            } else {
+                lastIfFn.else_fn = elseFunction;
+            }
+            // Reset the state to initial state, to handle next if/else/elseif flow.
+            lastIfFn = null;
+            return null;
+        }
+
+        case 'com.gs.each_parallel': {
+            let args: Array<any> = [(json as EachTaskJSON).value];
+            let tasks =
+                (json as WorkflowJSON)
+                    .tasks
+                    .map((taskJson: TaskJSON) => {
+                        taskJson.workflow_name = json.workflow_name;
+                        taskJson.isEachParallel = true;
+                        const taskLocation = { parent: location,  each_parallel_workflow_name: taskJson.workflow_name, each_parallel_task_id: taskJson.id };
+                        return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                    });
+
+            tasks = tasks.filter(Boolean);
+            //Get the tasks to do in every loop
+            let loopTasks = new GSSeriesFunction(json, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+
+            args.push(loopTasks);
+
+            if (json?.on_error?.tasks) {
+                json.on_error.tasks.workflow_name = json.workflow_name;
+                //@ts-ignore
+                const taskLocation = { parent: location,  workflow_name: json.workflow_name, task_id: json.on_error.tasks.id , section: 'on_error'};
+                json.on_error.tasks = createGSFunction(json.on_error.tasks as TasksJSON, workflows, nativeFunctions, null, taskLocation);
+            }
+
+            childLogger.debug('loading each parallel workflow %o', (json as WorkflowJSON).tasks);
+
+            return new GSEachParallelFunction(json, workflows, nativeFunctions, undefined, args, false, location);
+        }
+
+        case 'com.gs.each_sequential': {
+            let args: Array<any> = [(json as EachTaskJSON).value];
+
+            let tasks =
+                (json as WorkflowJSON)
+                    .tasks
+                    .map((taskJson: TaskJSON) => {
+                        taskJson.workflow_name = json.workflow_name;
+                        const taskLocation = { parent: location,  each_sequential_workflow_name: taskJson.workflow_name, each_sequential_task_id: taskJson.id };
+                        return createGSFunction(taskJson, workflows, nativeFunctions, onError, taskLocation);
+                    });
+
+            tasks = tasks.filter(Boolean);
+            let task = new GSSeriesFunction(json, workflows, nativeFunctions, undefined, tasks, false, undefined, location);
+            args.push(task);
+
+            if (json?.on_error?.tasks) {
+                json.on_error.tasks.workflow_name = json.workflow_name;
+                //@ts-ignore
+                const taskLocation = { parent: location, on_error_workflow_name: json.on_error.tasks.workflow_name, on_error_task_id: json.on_error.tasks.id , section: 'on_error'};
+                json.on_error.tasks = createGSFunction(json.on_error.tasks as TasksJSON, workflows, nativeFunctions, null, taskLocation);
+            }
+
+            childLogger.debug('loading each sequential workflow %o', (json as WorkflowJSON).tasks);
+
+            return new GSEachSeriesFunction(json, workflows, nativeFunctions, undefined, args, false, location);
+        }
+    }
+
+    /*  
+        This was not any of the core framework control functions.
+        This must be a `TaskJSON` which is either 
+        1. A developer written function (native JS/TS or yaml) or 
+        2. A datasource function (also native JS/TS function)
+    */
+    let subwf = false;
+    let fn;
+    let fnScript;
+    const taskJson: TaskJSON = json as TaskJSON;
+
+    if (taskJson.fn?.match(/<(.*?)%/) && taskJson.fn.includes('%>')) {
+        //@ts-ignore
+        const taskLocation = { ...location, ...{ workflow_name: taskJson.fn, task_id: taskJson.fn.id } };
+        fnScript = compileScript(taskJson.fn, taskLocation);
+    } else {
+        // Load the fn for this GSFunction
+        childLogger.debug('Loading fn %s, which is either the datasource or a JS/TS/YAML workflow', taskJson.fn);
+
+        /*      
+            First check if it's a native function (developer written or datasource)
+            but, special handling for datasource function, because
+            while using datasource fn, starts with datasource.{datasourceName} followed by . 
+            followed by the function or nested functions to be invoked
+            For ex. in com.gs.prisma tasks, it is in this format, `datasource.{datasourceName}.{entityName}.{method}`
+            where as, datasource clients are registered as `datasource.{datasourceName}`
+            So we want to extract the datasource.{datasourceName} part
+        */
+
+        let fnName: string = String(taskJson.fn).startsWith('datasource.')
+            ?
+            String(taskJson.fn).split('.').splice(0, 2).join('.')
+            :
+            taskJson.fn as string;
+
+        fn = nativeFunctions[fnName]; //Either a datasource or dev written JS/TS function 
+
+        if (!fn) {
+            // If not a native function, it should be a developer written Workflow as function
+            const existingWorkflowData = workflows[fnName];
+            if (!existingWorkflowData) {
+                childLogger.fatal(`Function specified by name ${fnName} not found in src/functions. Please ensure a function by this path exists.`);
+                process.exit(1);
+            }
+
+            subwf = true;
+            if (!(existingWorkflowData instanceof GSFunction)) { //Is still a Json data, not converted to GSFunction
+                existingWorkflowData.workflow_name = fnName;
+                const taskLocation = { ...location, ...{ workflow_name: existingWorkflowData.workflow_name, task_id: existingWorkflowData.id } };
+                fn = workflows[fnName] = createGSFunction(existingWorkflowData, workflows, nativeFunctions, onError, taskLocation);
+            } else { //Is a GSFunction already
+                fn = existingWorkflowData;
+            }
+        }
+    }
+
+
+    if (taskJson?.on_error?.tasks) {
+        taskJson.on_error.tasks.workflow_name = taskJson.workflow_name;
+        //@ts-ignore
+        const taskLocation = { ...location, ...{ on_error_task_id: taskJson.on_error.tasks.id } };
+        taskJson.on_error.tasks = createGSFunction(taskJson.on_error.tasks as TasksJSON, workflows, nativeFunctions, null, taskLocation);
+    } else if (taskJson?.on_error) {
+        // do nothing
+    } else if (onError) {
+        taskJson.on_error = onError;
+    }
+
+    if (taskJson.authz) {
+        taskJson.authz.workflow_name = json.workflow_name;
+        //@ts-ignore
+        const taskLocation = { ...location, ...{ workflow_name: taskJson.authz.workflow_name, task_id: taskJson.authz.id } };
+        taskJson.authz = createGSFunction(taskJson.authz as TasksJSON, workflows, nativeFunctions, onError, taskLocation) as GSFunction;
+    }
+
+    return new GSFunction(taskJson, workflows, nativeFunctions, fn as GSFunction, taskJson.args, subwf, fnScript, location);
+}
+
+// function setLocation(original: PlainObject, newLocation: PlainObject): PlainObject {
+//     // const taskLocation = { ...{parent: location}, ...{ workflow_name: json.workflow_name, task_id: taskJson.id  }};
+//     newLocation.parent = original;
+//     if (!original.workflow_name) {
+//         // newLocation.parent ||= {};
+//         newLocation.parent.workflow_name = newLocation.workflow_name;
+//         delete newLocation.workflow_name;
+//     } else 
+//     if (original.workflow_name === newLocation.workflow_name) {
+//         delete newLocation.workflow_name;
+//     }
+//     return newLocation;
+// }
+export type LoadedFunctions = {
+    nativeFunctions: NativeFunctions,
+    functions: PlainObject, //All YAML workflows and native functions combined
+    success: boolean
+}
+export default async function loadFunctions(datasources: PlainObject, pathString: string): Promise<LoadedFunctions> {
+
+    // framework defined js/ts functions
+    let frameworkFunctions = await loadModules(path.resolve(__dirname, '../functions'));
+
+    // project defined yaml worlflows
+    let yamlWorkflows = await loadYaml(pathString);
+
+    // project defined js/ts functions
+    let nativeMicroserviceFunctions = await loadModules(pathString);
+
+    let loadFnStatus: LoadedFunctions;
+    const childLogger = logger.child({section: 'loading_functions'});
+    childLogger.debug('JS/TS functions found in src/functions %s', Object.keys(nativeMicroserviceFunctions));
+    childLogger.debug('Yaml Workflows found in src/functions %s', Object.keys(yamlWorkflows));
+    // logger.debug('Framework defined  functions %s', Object.keys(frameworkFunctions));
+    childLogger.debug('Datasources found in src/datasources %o', Object.keys(datasources));
+
+    let _datasourceFunctions = Object
+        .keys(datasources)
+        .reduce((acc: { [key: string]: Function }, dsName) => {
+            // dsName, eg., httpbin, mongo, prostgres, salesforce
+            acc[`datasource.${dsName}`] = async (ctx: GSContext, args: PlainObject) => {
+                return datasources[dsName].execute(ctx, args);
+            };
+            return acc;
+        }, {});
+
+    const nativeFunctions = { ...frameworkFunctions, ..._datasourceFunctions, ...nativeMicroserviceFunctions };
+
+    childLogger.debug('Creating workflows: %s', Object.keys(yamlWorkflows));
+
+    for (let f in yamlWorkflows) {
+        if (!yamlWorkflows[f]) {
+            childLogger.fatal({fn: f}, `Found empty yaml workflow ${f}. Exiting.`);
+            process.exit(1);
+        }
+        //Since a yaml workflow loading recursively loads called workflows by calling createGSFunction on them,
+        //which in turn sets yaml key in them, when a workflow's turn in this for loop comes,
+        //it may already have been loaded before. 
+        //When a workflow is loaded, it has yaml key set in it
+        if (!yamlWorkflows[f].yaml?.tasks && !yamlWorkflows[f].tasks) {
+            childLogger.fatal({fn: f}, `Did not find tasks in yaml workflow ${f}. Exiting.`);
+            process.exit(1);
+        }
+        if (!(yamlWorkflows[f] instanceof GSFunction)) {
+            yamlWorkflows[f].workflow_name = f;
+            if (yamlWorkflows[f].on_error?.tasks) {
+                yamlWorkflows[f].on_error.tasks.workflow_name = f;
+                childLogger.debug({fn: f}, "Start to load on error tasks for YAML workflow %s", f);
+                try {
+                    const taskLocation = { workflow_name: f, task_id: yamlWorkflows[f].on_error.tasks.id , section: 'on_error.tasks'};
+                    yamlWorkflows[f].on_error.tasks = createGSFunction(yamlWorkflows[f].on_error.tasks, yamlWorkflows, nativeFunctions, null, taskLocation);
+                } catch (err) {
+                    logger.fatal("Error in loading on error tasks for YAML workflow %s %o", f, err);
+                    process.exit(1);
+                }
+                logger.debug("Loaded on error tasks for YAML workflow %s", f);
+
+            }
+            logger.debug("Starting to load YAML workflow %s", f);
+            try {
+                const taskLocation = { workflow_name: f, task_id: yamlWorkflows[f].id};
+                yamlWorkflows[f] = createGSFunction(yamlWorkflows[f], yamlWorkflows, nativeFunctions, yamlWorkflows[f].on_error, taskLocation);
+
+            } catch (err:any) {
+                logger.fatal("Error in loading YAML workflow %s %s %o", f, err.message, err);
+                process.exit(1);
+            }
+            logger.debug("Loaded YAML workflow %s", f);
+
+        }
+        // Need discussion whether to evaluate the fn script on load time and skipping evaluation on runtime in some cases we may evaluate the script on runtime
+        // const workflowYaml = yamlWorkflows[f].yaml ?? yamlWorkflows[f]
+        // const checkDS = checkDatasource(workflowYaml, datasources,{ workflow_name: f, task_id: yamlWorkflows[f].id});
+        // if (!checkDS.success) {
+        //     childLogger.fatal({fn: f}, `Error in loading datasource for function ${f} . Error message: ${checkDS.message}. Exiting.`);
+        //     process.exit(1);
+        // }
+
+    }
+
+    loadFnStatus = { success: true, nativeFunctions, functions: { ...yamlWorkflows, ...nativeMicroserviceFunctions } };
+    logger.debug('Loaded YAML workflows: %o', Object.keys(yamlWorkflows));
+    logger.info('Loaded all YAML workflows');
+
+    logger.info('Loaded JS workflows %o', Object.keys(nativeMicroserviceFunctions));
+    logger.info('Loaded JS/TS workflows');
+
+    return loadFnStatus;
+}
+
+---- Content from: interfaces.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import parseDuration from 'parse-duration';
+import opentelemetry from "@opentelemetry/api";
+
+import { CHANNEL_TYPE, ACTOR_TYPE, EVENT_TYPE, PlainObject } from './common';
+import { logger } from '../logger';
+import { compileScript, isPlainObject, setAtPath } from './utils';
+import evaluateScript from './scriptRuntime';
+import promClient from '@godspeedsystems/metrics';
+import config from 'config';
+import pino from 'pino';
+import { GSCachingDataSource } from './_interfaces/sources';
+import { fetchFromCache, setInCache, evaluateCachingInstAndInvalidates, checkCachingDs } from './caching';
+
+const tracer = opentelemetry.trace.getTracer(
+  'my-service-tracer'
+);
+
+export class GSFunction extends Function {
+  yaml: PlainObject;
+
+  id: string; // can be dot separated fqn
+
+  args?: any;
+
+  args_script?: Function;
+
+  fn?: Function;
+
+  onError?: PlainObject;
+
+  retry?: PlainObject;
+
+  isSubWorkflow?: boolean;
+
+  logs?: PlainObject;
+
+  metrics?: [PlainObject];
+
+  workflow_name?: string;
+
+  workflows: PlainObject;
+
+  nativeFunctions: PlainObject;
+
+  fnScript?: Function;
+
+  caching?: PlainObject;
+
+  constructor(yaml: PlainObject, workflows: PlainObject, nativeFunctions: PlainObject, _fn?: Function, args?: any, isSubWorkflow?: boolean, fnScript?: Function, location?: PlainObject) {
+    super('return arguments.callee._observability.apply(arguments.callee, arguments)');
+    this.yaml = yaml;
+    this.id = yaml.id || yaml.workflow_name;
+    this.fn = _fn;
+    this.workflow_name = yaml.workflow_name;
+    this.workflows = workflows;
+    this.nativeFunctions = nativeFunctions;
+    this.fnScript = fnScript;
+
+    this.args = args || {};
+    const str = JSON.stringify(this.args);
+
+    if ((str.match(/<(.*?)%/) && str.includes('%>')) || str.match(/(^|\/):([^/]+)/)) {
+      this.args_script = compileScript(this.args, location!);
+    }
+
+
+    this.onError = yaml.on_error;
+
+    if (this.onError && this.onError.response) {
+      if (!(this.onError.response instanceof Function)) {
+
+        this.onError!.response = compileScript(this.onError.response, {... location, section: "on_error"});
+      }
+    }
+
+    // if (this.yaml.authz) {
+    //   this.yaml.authz.args = compileScript(this.yaml.authz?.args);
+    // }
+
+    // retry
+    this.retry = yaml.retry;
+    if (this.retry) {
+      if (this.retry.interval) {
+        this.retry.interval = parseDuration(this.retry.interval.replace(/^PT/i, ''));
+      }
+      if (this.retry.min_interval) {
+        this.retry.min_interval = parseDuration(this.retry.min_interval.replace(/^PT/i, ''));
+      }
+      if (this.retry.max_interval) {
+        this.retry.max_interval = parseDuration(this.retry.max_interval.replace(/^PT/i, ''));
+      }
+    }
+
+    this.isSubWorkflow = isSubWorkflow;
+
+    if (this.yaml.logs) {
+      this.logs = this.yaml.logs;
+      if (this.logs?.before?.attributes) {
+        if (!(this.logs.before.attributes instanceof Function)) {
+          this.logs.before.attributes.task_id = this.id;
+          this.logs.before.attributes.workflow_name = this.workflow_name;
+          this.logs.before.attributes = compileScript(this.logs.before.attributes, { ...location, section: "logs.before.attributes" } );
+        }
+      }
+      if (this.logs?.after?.attributes) {
+        if (!(this.logs.after.attributes instanceof Function)) {
+          this.logs.after.attributes.task_id = this.id;
+          this.logs.after.attributes.workflow_name = this.workflow_name;
+          this.logs.after.attributes = compileScript(this.logs.after.attributes, { ...location, section: "logs.after.attributes" });
+        }
+      }
+    }
+
+    // metrics
+    if (this.yaml.metrics) {
+      this.metrics = this.yaml.metrics;
+      // @ts-ignore
+      for (let metric of this.metrics) {
+        metric.labels.task_id = this.id;
+        metric.labels.workflow_name = this.workflow_name;
+        switch (metric.type) {
+          case 'counter':
+            metric.obj = new promClient.Counter({
+              name: metric.name,
+              help: metric.help,
+              labelNames: Object.keys(metric.labels || {})
+            });
+            break;
+
+          case 'gauge':
+            metric.obj = new promClient.Gauge({
+              name: metric.name,
+              help: metric.help,
+              labelNames: Object.keys(metric.labels || {})
+            });
+            break;
+
+          case 'histogram':
+            metric.obj = new promClient.Histogram({
+              name: metric.name,
+              help: metric.help,
+              labelNames: Object.keys(metric.labels || {})
+            });
+            break;
+
+          case 'summary':
+            metric.obj = new promClient.Summary({
+              name: metric.name,
+              help: metric.help,
+              labelNames: Object.keys(metric.labels || {})
+            });
+            break;
+
+          default:
+            logger.error({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Invalid metric type %s, it should be one of counter,summary,histogram,gauge', metric.type);
+            process.exit(1);
+        }
+
+        for (let key of Object.keys(metric)) {
+          if (!['type', 'name', 'obj', 'timer', 'help'].includes(key)) {
+            metric[key] = compileScript(metric[key], { ...location, section: "metric" });
+          }
+        }
+      }
+    }
+
+    //caching
+    if (this.yaml.caching) {
+      this.caching = {};
+      let cachingLocation: PlainObject;
+      if (this.yaml.caching.before) {
+        cachingLocation = { ...location, section: "caching.before" };
+        checkCachingDs(this.yaml.caching.before, cachingLocation);
+        this.caching.before = compileScript(this.yaml.caching.before, cachingLocation);
+      }
+      if (this.yaml.caching.after) {
+        cachingLocation = { ...location, section: "caching.after" };
+        checkCachingDs(this.yaml.caching.after, cachingLocation);
+        this.caching.after = compileScript(this.yaml.caching.after, cachingLocation);
+      }
+    }
+  }
+
+  async _internalCall(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    if (this.logs?.before) {
+      const log = this.logs.before;
+      //@ts-ignore
+      ctx.childLogger[log.level || config.log?.level || 'info'](log.attributes ? await evaluateScript(ctx, log.attributes, taskValue) : null, `${log.message} %o`, log.params);
+    }
+
+    const timers = [];
+    if (this.metrics) {
+      for (let metric of this.metrics) {
+        if (metric.timer) {
+          //@ts-ignore
+          timers.push(metric.obj.startTimer());
+        }
+      }
+    }
+
+    const status = await this._call(ctx, taskValue);
+
+    if (this.metrics) {
+      for (let timer of timers) {
+        //@ts-ignore
+        timer();
+      }
+
+      for (let metric of this.metrics) {
+        let obj = metric.obj;
+        for (let key of Object.keys(metric)) {
+          if (!['type', 'name', 'obj', 'timer', 'help'].includes(key)) {
+            const val = await evaluateScript(ctx, metric[key], taskValue);
+            obj = obj[key](val);
+          }
+        }
+      }
+    }
+
+    if (this.logs?.after) {
+      const log = this.logs.after;
+      //@ts-ignore
+      ctx.childLogger[log.level || config.log?.level || 'info'](log.attributes ? await evaluateScript(ctx, log.attributes, taskValue) : null, `${log.message} %o`, log.params);
+    }
+
+    return status;
+  }
+
+  async _observability(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+
+    if (this.yaml.trace) {
+      let trace = this.yaml.trace;
+
+      return tracer.startActiveSpan(trace.name, async span => {
+        if (trace.attributes) {
+          trace.attributes.task_id = this.id;
+          trace.attributes.workflow_name = this.workflow_name;
+          for (let attr in trace.attributes) {
+            span.setAttribute(attr, trace.attributes[attr]);
+          }
+        }
+        const status = await this._internalCall(ctx, taskValue);
+
+        if (!status.success) {
+          span.setStatus({
+            //@ts-ignore
+            code: opentelemetry.SpanStatusCode.ERROR,
+            message: 'Error'
+          });
+        }
+        span.end();
+
+        return status;
+      });
+
+    } else {
+      return this._internalCall(ctx, taskValue);
+    }
+  }
+
+  async _executefn(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    // final status to return
+    let status: GSStatus;
+    let args = this.args;
+    try {
+      ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Executing task %s with args %o', this.id, this.args);
+      if (Array.isArray(this.args)) {
+        args = [...this.args];
+      } else if (isPlainObject(this.args)) {
+        args = { ...this.args };
+      }
+
+      // ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `Retry logic is %o`, this.retry);
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      if (String(this.yaml.fn).startsWith('datasource.')) {
+        // If datasource is a script then evaluate it else load ctx.datasources as it is.
+        const [, datasourceName, entityType, method] = this.yaml.fn.split('.');
+        // const datasource: any = ctx.datasources[datasourceName];
+
+        // so that prisma plugin get the entityName and method in plugin to execute respective method.
+        args.meta = {
+          fnNameInWorkflow: this.yaml.fn,
+          entityType,
+          method,
+          authzPerms: args.authzPerms
+        };
+        delete args.authzPerms;
+
+        // REMOVE: this is not required, because now all the datasources are functions
+
+        // if (datasource instanceof Function) {
+        //   args.datasource = await evaluateScript(ctx, datasource, taskValue);
+        //   ctx.childLogger.info({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'datasource evaluated');
+        // } else {
+        //   args.datasource = datasource;
+        //   ctx.childLogger.info({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'datasource %o', args.datasource);
+        // }
+
+
+
+        // copy datasource headers to args.config.headers [This is useful to define the headers at datasource level
+        // so that datasource headers are passed to all the workflows using this datasource]
+        //TODO check if this is fine
+        // let headers = datasource.config.headers;
+        // if (headers) {
+        //   args.headers = args.headers || {};
+        //   let tempObj: any = {};
+        //   Object.keys({ ...headers, ...args.headers }).map(key => {
+        //     tempObj[key] = args.headers[key] || headers[key];
+        //   });
+        //   Object.assign(args.headers, tempObj);
+        //   Object.keys(args.headers).forEach(key => args.headers[key] === undefined && delete args.headers[key]);
+        //   ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `settings datasource headers with args.headers: %o`, args.headers);
+        // }
+
+        // TODO: this will be moved to datasource plugin
+        // if (ds.authn && !datasource.authn_response) {
+        //   ctx.childLogger.info({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Executing datasource authn workflow');
+        //   datasource.authn_response = await authnWorkflow(ds, ctx);
+        // }
+
+        // TODO: this will be moved to datasource plugin
+        // if (ds.before_method_hook) {
+        //   await ds.before_method_hook(ctx);
+        // }
+      }
+
+      // TODO: look back
+      // if (args && ctx.inputs.metadata?.messagebus?.kafka) {  //com.gs.kafka will always have args
+      //   args.kafka = ctx.inputs.metadata?.messagebus.kafka;
+      // }
+
+      // Generally all methods with retry will have some args
+      if (args && this.retry) {
+        args.retry = this.retry;
+      }
+
+      let res;
+
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      if (Array.isArray(args)) {
+        res = await this.fn!(ctx, args);
+      } else {
+        res = await this.fn!(ctx, args);
+      }
+
+      if (res instanceof GSStatus) {
+        status = res;
+      } else {
+        if (typeof (res) == 'object') {       
+          //Some framework functions like HTTP return an object in following format. Check if that is the case.
+          //All framework functions are expected to set success as boolean variable. Can not be null.
+          if (res.success !== undefined || res.code !== undefined) {
+            let { success, code, data, message, headers, exitWithStatus } = res;
+            status = new GSStatus(success, code, message, data, headers);  
+            //Check if exitWithStatus is set in the res object. If it is set then return by setting ctx.exitWithStatus else continue.
+            if (exitWithStatus) {
+              ctx.exitWithStatus = status;
+            }
+          } else {
+            const {exitWithStatus, ...restObj} = res;  
+            status = new GSStatus(true, 200, undefined, restObj);  
+            //Check if exitWithStatus is set in the res object. If it is set then return by setting ctx.exitWithStatus else continue.
+            if (exitWithStatus) {
+              ctx.exitWithStatus = status;
+            }
+          }
+        } else {
+          //This function gives a non GSStatus compliant return, then create a new GSStatus and set in the output for this function
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `Result of task execution ${this.id} %o`, res);
+          status = new GSStatus(
+            true,
+            200, //Default code be 200 for now
+            undefined,
+            res
+            //message: skip
+            //code: skip
+          );
+        }
+      }
+      ctx.childLogger[!status.success ? 'error' : 'debug']({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `Result of task execution ${this.id} %o`, res);
+
+    } catch (err: any) {
+      ctx.childLogger.error({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Caught error from execution in task id: %s, error: %s', this.id, err);
+      status = new GSStatus(
+        false,
+        500,
+        err.message,
+        {
+          message: "Internal server error"
+        }
+      );
+    }
+
+    // TODO: move it to datasource
+    // if (args.datasource?.after_method_hook) {
+    //   ctx.outputs.current_output = status;
+    //   await args.datasource.after_method_hook(ctx);
+    // }
+    return status;
+  }
+
+  async handleError(ctx: GSContext, status: GSStatus, taskValue: any): Promise<GSStatus> {
+
+    if (!status.success) {
+      /**
+      * If the call had an error, set that in events so that we can send it to the telemetry backend.
+      */
+      ctx.addLogEvent(new GSLogEvent('ERROR', ctx.outputs));
+
+      if (this.onError) {
+        ctx.outputs[this.id] = status;
+        if (this.onError.response instanceof Function) {
+          //The script may need the output of the task so far, for the transformation logic.
+          //So set the status in outputs, against this task's id
+          const res = await evaluateScript(ctx, this.onError.response, taskValue);
+          if (typeof res === 'object' && !(res.success === undefined && res.code === undefined)) { //Meaning the script is returning GS Status compatible response
+            let { success, code, data, message, headers } = res;
+            status = new GSStatus(success, code, message, data, headers);
+          } else {
+            //This function gives a non GSStatus compliant return, then create a new GSStatus and set in the output for this function
+            status = new GSStatus(
+              true,
+              200, //Default code be 200 for now
+              undefined,
+              res
+            );
+          }
+
+        } else if (this.onError.response) {
+          status.data = this.onError.response;
+        } else if (this.onError.tasks) {
+          status = await this.onError.tasks(ctx);
+        }
+
+        if (this.onError.log?.attributes || this.onError.log_attributes) {
+          const error: PlainObject = {};
+          const logAttributes: PlainObject = this.onError.log?.attributes || this.onError.log_attributes;
+
+          for (let key in logAttributes) {
+            const script = compileScript(logAttributes[key], { section: "on_error.log.attributes" });
+            error[key] = await evaluateScript(ctx, script, taskValue);
+          }
+          ctx.childLogger.setBindings({ error });
+        }
+
+        const onErrorContinue = this.onError.continue ?? ctx.config?.defaults?.on_error?.continue ?? false;
+        if (onErrorContinue === false) {
+          ctx.childLogger.error({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'exiting on error %s', this.id);
+          ctx.exitWithStatus = status;
+        }
+      } else {
+        if (ctx.exitWithStatus) {
+          ctx.exitWithStatus = status;
+        }
+      }
+    }
+
+    ctx.outputs[this.id] = status;
+
+    return status;
+  }
+
+  /**
+   *
+   * @param instruction
+   * @param ctx
+   */
+  async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+
+    let status;
+    let cachingInstruction: PlainObject | null = null;
+    let cachingDs: GSCachingDataSource;
+
+    try {
+      // ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, '_call invoked with task value %s %o', this.id, taskValue);
+      let datastoreAuthzArgs;/*
+      This is when datasource needs to modify its SQL query or something
+      else to ensure that the current user gets or mutates only the data
+      which it has access to.
+    */
+
+      if (this.yaml.authz) {
+        ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+
+        ctx.childLogger.debug(`Invoking authz workflow`);
+        //let args = await evaluateScript(ctx, this.yaml.authz.args, taskValue);
+        ctx.forAuth = true;
+        //const newCtx = ctx.cloneWithNewData(args);
+        let authzRes: GSStatus = await this.yaml.authz(ctx);
+        ctx.forAuth = false;
+        if (authzRes.code === 403) {
+          //Authorization task executed successfully and returned user is not authorized
+          authzRes.success = false;
+          if (!authzRes.data?.message) {
+            setAtPath(authzRes, 'data.message', authzRes.message || 'Access Forbidden');
+          }
+          ctx.exitWithStatus = authzRes;
+          ctx.childLogger.debug('Authorization task failed at the task level with code 403');
+
+          //This task has failed and task must not be allowed to execute further
+          return authzRes;
+        } else if (authzRes.success !== true) {
+          //Ensure success = false for no ambiguity further
+          authzRes.success = false;
+          if (!authzRes.code || authzRes.code < 400 || authzRes.code > 599) {
+            authzRes.code = 403;
+          }
+          if (!authzRes.data?.message) {
+            setAtPath(authzRes, 'data.message', authzRes.message || 'Access Forbidden');
+          }
+          ctx.childLogger.debug(`Task level auth failed. Authorization task did not explicitly return success === true, hence failed with code ${authzRes.code}`);
+          ctx.exitWithStatus = authzRes;
+          return authzRes;
+        }
+        ctx.childLogger.debug('Authorization passed at the task level');
+
+        //Authorization successful. 
+        //Whatever is in the data of the authzRes is to be passed on to
+        //the datasource plugin's execute function as it is.
+        datastoreAuthzArgs = authzRes.data;
+      }
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      if (this.caching?.before) {
+        cachingInstruction = await evaluateCachingInstAndInvalidates(ctx, this.caching?.before, taskValue);
+
+        // check in cache and return
+        status = await fetchFromCache(cachingInstruction);
+        if (status) {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Loading result from cache');            
+          status = typeof status === 'string' && JSON.parse(status) || status;
+          ctx.outputs[this.id] = status;
+          return status;
+        }
+      }
+
+      let args = this.args;
+      if (this.args_script) {
+        args = await evaluateScript(ctx, this.args_script, taskValue);
+        if (ctx.exitWithStatus) {
+          //ctx.childLogger.error({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Caught error in evaluation of script %s in task id: %s', this.args_script, this.id);
+          throw ctx.exitWithStatus;
+        }
+      }
+      // ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'args after evaluation: %s %o', this.id, args);
+      if (this.fnScript) {
+        ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+        let s: string = await evaluateScript(ctx, this.fnScript, taskValue);
+        ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+        //First look in native functions
+        this.fn = this.nativeFunctions?.[s];
+        //Look in YAML workflow
+        if (!this.fn) {
+          this.fn = this.workflows?.[s];
+          if (this.fn) {
+            this.isSubWorkflow = true;
+          }
+        }
+        //Next, check if this is a datasource call
+        if (!this.fn && s.startsWith("datasource.")) {
+          const fnName = s.split('.').splice(0, 2).join('.');
+          this.fn = this.nativeFunctions?.[fnName];
+          if (this.fn) {
+            this.yaml.fn = s;
+          }
+        }
+        //If still is not found, the script evaluate to invalid function name
+        if (!this.fn) {
+          ctx.childLogger.error(`Did not find any function by the name ${s}`);
+          status = new GSStatus(false, 500, undefined, 'Internal Server Error');
+        } else {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `invoking dynamic fn: ${s}`);
+        }
+      }
+      if (datastoreAuthzArgs && this.yaml.fn?.startsWith("datasource.")) {
+        //args.data = _.merge(args.data, datastoreAuthzArgs);
+        //setup authzPerms for now. delete that key in the _execugteFn, after moving the same to `args.meta` key
+        args.authzPerms = datastoreAuthzArgs;
+        ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'merged args with authz args.data: %o', args);
+      }
+
+      ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+
+
+      if (this.fn instanceof GSFunction) {
+        if (this.isSubWorkflow) {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'isSubWorkflow, if subworkflow is creating new ctx, replacing inputs data with args data');
+
+          ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+          const newCtx = ctx.cloneWithNewData(args);
+          ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+          status = await this.fn(newCtx, taskValue);
+        } else {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'No isSubWorkflow, continuing in the same ctx');
+          status = await this.fn(ctx, taskValue);
+        }
+      }
+      else {
+        this.args = args;
+        status = await this._executefn(ctx, taskValue);
+      }
+
+      status = await this.handleError(ctx, status, taskValue);
+      if (ctx.forAuth) {
+        if (status.success !== true) {
+          ctx.exitWithStatus = status;
+        }
+      }
+  
+      if (this.caching?.after) {
+        cachingInstruction = await evaluateCachingInstAndInvalidates(ctx, this.caching?.after, taskValue);
+        await setInCache(ctx, cachingInstruction, status);
+      }    
+    } catch (err: any) {
+      ctx.childLogger.error({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'Caught error in evaluation in task id: %s', this.id);
+      ctx.childLogger.debug('error: %o', err)
+      status = new GSStatus(
+        false,
+        500,
+        err.message,
+        {
+          message: "Internal server error"
+        }
+      );
+    }
+
+    return status;
+  };
+}
+
+export class GSSeriesFunction extends GSFunction {
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `GSSeriesFunction. Executing tasks with ids: ${this.args.map((task: any) => task.id)}`);
+    let ret;
+
+    for (const child of this.args!) {
+      ret = await child(ctx, taskValue);
+      if (ctx.exitWithStatus) {
+        if (child.yaml.isEachParallel) {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'isEachParallel: %s, ret: %o', child.yaml.isEachParallel, ret);
+          ctx.outputs[this.id] = ret;
+          return ret;
+        }
+        if (child.yaml.isParallel) {
+          ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'isParallel: %s, ret: %o', child.yaml.isParallel, ret);
+          ctx.outputs[this.id] = ret;
+        }
+        else {
+          ctx.outputs[this.id] = ret;
+          return ret;
+        }
+
+      }
+    }
+    ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+    // ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'this.id: %s, output: %o', this.id, ret.data);
+    ctx.outputs[this.id] = ret;
+    return ret;
+  }
+}
+
+export class GSDynamicFunction extends GSFunction {
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `GSDynamicFunction. Executing tasks with ids: ${this.args.map((task: any) => task.id)}`);
+    let ret;
+
+    for (const child of this.args!) {
+      ret = await child(ctx, taskValue);
+      if (ctx.exitWithStatus) {
+        ctx.outputs[this.id] = ctx.exitWithStatus;
+        return ctx.exitWithStatus;
+      }
+    }
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'this.id: %s, output: %s', this.id, ret.data);
+
+    if (ret.success && typeof (ret.data) === 'string') {
+      ctx.outputs[this.id] = await this.workflows![ret.data](ctx, taskValue);
+    } else {
+      return this.handleError(ctx, ret, taskValue);
+    }
+    return ctx.outputs[this.id];
+  }
+}
+
+export class GSParallelFunction extends GSFunction {
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `GSParallelFunction. Executing tasks with ids: ${this.args.map((task: any) => task.id)}`);
+
+    const promises = [];
+
+    for (const child of this.args!) {
+      promises.push(child(ctx, taskValue));
+    }
+
+    await Promise.all(promises);
+
+    const outputs: any[] = [];
+    const status = new GSStatus(true, 200, '', outputs);
+    let output;
+
+    for (const child of this.args!) {
+
+      output = ctx.outputs[child.id];
+      outputs.push(output);
+    }
+
+    ctx.outputs[this.id] = status;
+    return status;
+  }
+}
+
+
+export class GSSwitchFunction extends GSFunction {
+  condition_script?: Function;
+
+  constructor(yaml: PlainObject, workflows: PlainObject, nativeFunctions: PlainObject, _fn?: Function, args?: any, isSubWorkflow?: boolean, location?: PlainObject) {
+    super(yaml, workflows, nativeFunctions, _fn, args, isSubWorkflow, undefined, location);
+    const [condition, cases] = this.args!;
+    if (typeof (condition) == 'string' && condition.match(/<(.*?)%/) && condition.includes('%>')) {
+      this.condition_script = compileScript(condition, location!);
+    }
+  }
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'inside switch executor: %o', this.args);
+    // tasks incase of series, parallel and condition, cases should be converted to args
+    let [value, cases] = this.args!;
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'condition: %s', value);
+    if (this.condition_script) {
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      value = await evaluateScript(ctx, this.condition_script, taskValue);
+      ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+    }
+    if (cases[value]) {
+      await cases[value](ctx, taskValue);
+      ctx.outputs[this.id] = ctx.outputs[cases[value].id];
+    } else {
+      //check for default otherwise error
+      if (cases.default) {
+        await cases.default(ctx, taskValue);
+        ctx.outputs[this.id] = ctx.outputs[cases.default.id];
+      } else {
+        //error
+        ctx.outputs[this.id] = new GSStatus(false, undefined, `case ${value} is missing and no default found in switch`);
+      }
+    }
+
+    return ctx.outputs[this.id];
+  }
+}
+
+export class GSIFFunction extends GSFunction {
+  condition_script?: Function;
+
+  task?: GSFunction;
+
+  else_fn?: GSFunction;
+
+  constructor(yaml: PlainObject, workflows: PlainObject, nativeFunctions: PlainObject, _fn?: Function, args?: any, isSubWorkflow?: boolean, location?: PlainObject) {
+    super(yaml, workflows, nativeFunctions, _fn, args, isSubWorkflow, undefined, location);
+    const [condition, task, else_fn] = this.args!;
+    if (typeof (condition) == 'string' && condition.match(/<(.*?)%/) && condition.includes('%>')) {
+      this.condition_script = compileScript(condition, location!);
+    }
+
+    this.task = task;
+    this.else_fn = else_fn;
+  }
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'inside GSIFFunction executor: %o', this.args);
+    // tasks incase of series, parallel and condition, cases should be converted to args
+    let [value, task] = this.args!;
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'condition: %s', value);
+    if (this.condition_script) {
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      value = await evaluateScript(ctx, this.condition_script, taskValue);
+      ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+    }
+
+    if (value) {
+      ctx.outputs[this.id] = await this.task!(ctx, taskValue);
+    } else {
+      if (this.else_fn) {
+        ctx.outputs[this.id] = await this.else_fn(ctx, taskValue);
+      } else {
+        ctx.outputs[this.id] = new GSStatus(false, undefined, `condition not matching and no else present`);
+      }
+    }
+
+    return ctx.outputs[this.id];
+  }
+}
+
+export class GSEachParallelFunction extends GSFunction {
+  value_script?: Function;
+
+  constructor(yaml: PlainObject, workflows: PlainObject, nativeFunctions: PlainObject, _fn?: Function, args?: any, isSubWorkflow?: boolean, location?: PlainObject) {
+    super(yaml, workflows, nativeFunctions, _fn, args, isSubWorkflow, undefined, location);
+    const [value, cases] = this.args!;
+    if (typeof (value) == 'string' && value.match(/<(.*?)%/) && value.includes('%>')) {
+      this.value_script = compileScript(value, location!);
+    }
+  }
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `GSEachParallelFunction. Executing tasks with ids: ${this.args.map((task: any) => task.id)}`);
+
+    let [value, task] = this.args!;
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'value: %o', value);
+    if (this.value_script) {
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      value = await evaluateScript(ctx, this.value_script, taskValue);
+      ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+    }
+
+    let i = 0;
+    if (!Array.isArray(value)) {
+      ctx.outputs[this.id] = new GSStatus(false, undefined, `GSEachParallel value is not an array`);
+      return ctx.outputs[this.id];
+    }
+
+    const promises = [];
+    let outputs: any[] = [];
+    let status: GSStatus;
+    let failedTasksCount = 0;
+
+    for (const val of value) {
+      promises.push(task(ctx, val));
+    }
+    outputs = await Promise.all(promises);
+    status = new GSStatus(true, 200, '', outputs);
+
+    for (const output of outputs) {
+      if (!output.success) {
+        failedTasksCount++;
+      }
+    }
+
+    delete ctx.exitWithStatus;
+    ctx.outputs[this.id] = status;
+
+    // if the all the tasks get failed then check on_error at each_parallel loop level
+    if (failedTasksCount == value.length && value.length > 0) {
+      status.success = false;
+      status.code = 500;
+      return this.handleError(ctx, status, taskValue);
+    }
+
+    return status;
+  }
+}
+
+export class GSEachSeriesFunction extends GSFunction {
+  value_script?: Function;
+
+  constructor(yaml: PlainObject, workflows: PlainObject, nativeFunctions: PlainObject, _fn?: Function, args?: any, isSubWorkflow?: boolean, location?: PlainObject) {
+    super(yaml, workflows, nativeFunctions, _fn, args, isSubWorkflow, undefined, location);
+    const [value, cases] = this.args!;
+    if (typeof (value) == 'string' && value.match(/<(.*?)%/) && value.includes('%>')) {
+      this.value_script = compileScript(value, location!);
+    }
+  }
+
+  override async _call(ctx: GSContext, taskValue: any): Promise<GSStatus> {
+    let [value, task] = this.args!;
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, 'value: %o', value);
+    if (this.value_script) {
+      ctx.childLogger.setBindings({ 'workflow_name': this.workflow_name, 'task_id': this.id });
+      value = await evaluateScript(ctx, this.value_script, taskValue);
+      ctx.childLogger.setBindings({ 'workflow_name': '', 'task_id': '' });
+    }
+
+    if (!Array.isArray(value)) {
+      ctx.outputs[this.id] = new GSStatus(false, undefined, `GsEachSeries is value is not an array`);
+      return ctx.outputs[this.id];
+    }
+
+    ctx.childLogger.debug({ 'workflow_name': this.workflow_name, 'task_id': this.id }, `GSEachSeriesFunction. Executing tasks with ids: ${this.args.map((task: any) => task.id)}`);
+
+    const outputs: any[] = [];
+    const status = new GSStatus(true, 200, '', outputs);
+    let taskRes: any;
+    let failedTasksCount = 0;
+
+    for (const val of value) {
+      taskRes = await task(ctx, val);
+
+      if (!taskRes.success) {
+        failedTasksCount++;
+      }
+
+      if (ctx.exitWithStatus) {
+        ctx.outputs[this.id] = ctx.exitWithStatus;
+        outputs.push(ctx.outputs[this.id]);
+        break;  // break from for loop when continue is false for any task_value in each_sequential.
+      }
+      outputs.push(taskRes);
+    }
+
+    delete ctx.exitWithStatus; // exitWithStatus is removed from ctx so that other tasks (outside each_sequential loop) can be continued.
+    ctx.outputs[this.id] = status;
+
+    // if the all the tasks get failed then check on_error at each_sequential loop level
+    if (failedTasksCount == value.length && value.length > 0) {
+      status.success = false;
+      status.code = 500;
+      return this.handleError(ctx, status, taskValue);
+    }
+
+    return ctx.outputs[this.id];
+  }
+}
+
+/**
+ * Final outcome of GSFunction execution.
+ */
+export class GSStatus {
+  success: boolean;
+
+  code?: number;
+
+  message?: string;
+
+  data?: any;
+
+  headers?: { [key: string]: any; };
+
+  exitWithStatus?: boolean;
+
+  constructor(success: boolean = true, code?: number, message?: string, data?: any, headers?: { [key: string]: any; }) {
+    this.message = message;
+    this.code = code;
+    this.success = success;
+    this.headers = headers;
+    this.data = data;
+  }
+}
+
+export class GSCloudEvent {
+  //Cloud event format common fields
+  id: string; //This should be the request id of distributed context
+
+  time: Date;
+
+  specversion: string;
+
+  type: string; //URI of this event
+
+  source: string;
+
+  channel: CHANNEL_TYPE;
+
+  actor: GSActor;
+
+  //JSON schema: This data will be validated in the function definition in YAML. In __args.schema
+  data: PlainObject; //{user, body, params, query, headers}, flattened and merged into a single object
+
+  metadata?: {
+    telemetry?: object //all the otel info captured in the incoming event headers/metadata
+  };
+
+  constructor(id: string, type: string, time: Date, source: string, specversion: string, data: object, channel: CHANNEL_TYPE, actor: GSActor, metadata: any) {
+    this.id = id;
+    this.type = type;
+    this.channel = channel;
+    this.actor = actor;
+    this.time = time;
+    this.metadata = metadata;
+    this.source = source;
+    this.data = data;
+    this.specversion = specversion;
+  }
+
+  public cloneWithNewData(data: PlainObject): GSCloudEvent {
+    return new GSCloudEvent(
+      this.id,
+      this.type,
+      this.time,
+      this.source,
+      this.specversion,
+      JSON.parse(JSON.stringify(data)),
+      this.channel,
+      this.actor,
+      this.metadata
+    );
+  }
+}
+/**
+* Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
+ */
+export class GSContext { //span executions
+  inputs: GSCloudEvent; //The very original event for which this workflow context was created
+
+  outputs: { [key: string]: GSStatus; }; //DAG result. This context has a trace history and responses of all instructions in the DAG, which are are stored in this object against task ids
+
+  log_events: GSLogEvent[] = [];
+
+  config: PlainObject; //The config folder with env vars, default, and other config files. We use node-config module for Nodejs for the same.  
+
+  datasources: PlainObject; //All the datasource exported clients
+
+  mappings: PlainObject; // The static mappings of your project under /mappings
+
+  functions: PlainObject; //All the functions you have written in /functions + all the Godspeed's YAML DSL functions
+  //like com.gs.each_parallel
+
+  plugins: PlainObject; // The utility functions to be used in scripts. Not be confused with eventsource or datasource as plugin.
+
+  exitWithStatus?: GSStatus; // Useful when a YAML workflow is being executed. If this is set to non null value containing a GSStatus, the workflow will exit with this status. This will apply to only the immediate yaml workflow. But not its caller workflow. 
+
+  logger: pino.Logger; // For logging using pino for Nodejs. This has multiple useful features incudign biding some key values with the logs that are produced.  
+
+  childLogger: pino.Logger; // Additinal contextual bindings per event for the childLoggers
+
+  forAuth?: boolean = false; //Whether this native or yaml workflow is being run as parth of the authz tasks
+
+  constructor(config: PlainObject, datasources: PlainObject, event: GSCloudEvent, mappings: any, functions: PlainObject, plugins: PlainObject, logger: pino.Logger, childLogger: pino.Logger) {//_function?: GSFunction
+
+    this.inputs = event;
+    this.config = config;
+    this.outputs = {};
+    this.datasources = datasources;
+    this.mappings = mappings;
+    this.functions = functions;
+    this.plugins = plugins;
+    this.logger = logger;
+    this.childLogger = childLogger;
+    // childLogger.debug('inputs for context %o', event.data);
+  }
+
+  public cloneWithNewData(data: PlainObject): GSContext {
+    return new GSContext(
+      this.config,
+      this.datasources,
+      this.inputs?.cloneWithNewData(data),
+      this.mappings,
+      this.functions,
+      this.plugins,
+      this.logger,
+      this.childLogger
+    );
+  }
+
+  public addLogEvent(event: GSLogEvent): void {
+    this.log_events?.push(event);
+    //also push to the logging backend
+  }
+}
+
+/**
+ *
+ * Basic event information.this
+ */
+export class GSLogEvent {
+  type: EVENT_TYPE;
+
+  data: any;
+
+  timestamp: Date;
+
+  attributes: object;
+
+  constructor(type: EVENT_TYPE, data: any, attributes: object = {}, timestamp: Date = new Date()) {
+    this.type = type;
+    this.data = data;
+    this.attributes = attributes;
+    this.timestamp = timestamp;
+  }
+}
+
+export class GSActor {
+  type: ACTOR_TYPE;
+
+  tenant_id?: string;
+
+  name?: string; // Fully qualified name
+
+  id?: string; // id of the actor
+
+  data?: PlainObject; //Other information in key value pairs. For example IP address
+
+  constructor(type: ACTOR_TYPE, tenant_id?: string, name?: string, id?: string, data?: PlainObject) {
+    this.type = type;
+    this.tenant_id = tenant_id;
+    this.name = name;
+    this.id = id;
+    this.data = data;
+  }
+}
+
+/**
+ *
+ * Final ResponseStructure
+ */
+export interface GSResponse {
+  apiVersion?: string;
+  context?: string;
+  id?: string;
+  method?: string;
+  data?: {
+    kind?: string;
+    fields?: string;
+    etag?: string;
+    id?: string;
+    lang?: string;
+    updated?: string;
+    deleted?: boolean;
+    currentItemCount?: number;
+    itemsPerPage?: number;
+    startIndex?: number;
+    totalItems?: number;
+    pageIndex?: number;
+    totalPages?: number;
+    pageLinkTemplate?: number;
+    next?: PlainObject;
+    nextLink?: string;
+    previous?: PlainObject;
+    previousLink?: string;
+    self?: PlainObject;
+    selfLink?: string;
+    edit?: PlainObject;
+    editLink?: string;
+    items?: PlainObject[];
+  };
+  error?: {
+    code?: number;
+    message?: string;
+    errors?: {
+      domain?: string;
+      reason?: string;
+      message?: string;
+      location?: string;
+      locationType?: string;
+      extendedHelp?: string;
+      sendReport?: string;
+    }[];
+  };
+
+
+}
+
+---- Content from: jsonSchemaValidation.ts ----
+
+/*
+ * You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+ * © 2022 Mindgrep Technologies Pvt Ltd
+ */
+
+import { GSStatus } from './interfaces';
+import { PlainObject } from './common';
+import { logger } from '../logger';
+import ajvInstance, { isValidEvent } from './validation';
+
+export function loadJsonSchemaForEvents(allEventsConfigs: PlainObject) {
+  logger.debug('Loading JSON Schema for events %s', Object.keys(allEventsConfigs));
+  // logger.debug('eventObj: %o', eventObj);
+
+  return new Promise((resolve, reject) => {
+    Object.keys(allEventsConfigs).forEach(function (route) {
+      // Add body schema in ajv for each content_type per topic
+      /* TODO: Right now, we are assuming that there is going to be one content_type only i.e. application/json
+                  This needs to be enhanced in fututre when multiple content_type will be supported
+          */
+      const eventConfig = allEventsConfigs[route];
+      if (isValidEvent(eventConfig, route)) {
+        //Set the key in the event config. This will be needed later for ajv validation of incoming requests
+        // the ajv validators for each event are stored against these keys (routes)
+        eventConfig.key = route;
+        //Object.keys(eventObjTopic).forEach(function(topic) {
+        const body_content =
+          eventConfig?.body?.content || //just like OpenAPI Spec but with body instead of requestBody
+          eventConfig?.data?.schema?.body?.content; //Legacy
+        if (body_content) {
+          Object.keys(body_content).forEach(function (k) {
+            const content_schema = body_content[k].schema;
+            if (content_schema) {
+              logger.debug('adding body schema for %s', route);
+              // logger.debug('content_schema %o', content_schema);
+              if (!ajvInstance.getSchema(route)) {
+                ajvInstance.addSchema(content_schema, route);
+              }
+            }
+          });
+        }
+
+        // Add params schema in ajv for each param per topic
+        const params = eventConfig?.parameters || eventConfig?.params || eventConfig?.data?.schema?.params;
+        let paramSchema: PlainObject = {};
+
+        if (params) {
+          for (let param of params) {
+            if (param.schema) {
+              if (!paramSchema[param.in]) {
+                paramSchema[param.in] = {
+                  type: 'object',
+                  required: [],
+                  properties: {},
+                };
+              }
+
+              if (param.required) {
+                paramSchema[param.in].required.push(param.name);
+              }
+
+              let schema = param.schema;
+              if (param.allow_empty_value) {
+                param.schema.nullable = true;
+              }
+
+              paramSchema[param.in].properties[param.name] = schema;
+            }
+          }
+        }
+
+        for (let schema in paramSchema) {
+          // logger.debug('adding param schema for %s', topic);
+          // logger.debug('param schema: %o', paramSchema[schema]);
+
+          const topic_param = route + ':' + schema;
+          if (!ajvInstance.getSchema(topic_param)) {
+            try {
+              ajvInstance.addSchema(paramSchema[schema], topic_param);
+            } catch(err) {
+              logger.fatal('error in adding schema %o', err);
+              process.exit(1);
+            }
+          }
+        }
+
+        // Add responses schema in ajv for each response per topic
+        const responsesSchema = eventConfig?.responses;
+        if (responsesSchema) {
+          Object.keys(responsesSchema).forEach(function (k) {
+            const response_s =
+              responsesSchema[k]?.content?.['application/json']?.schema || //Exactly as OpenApi spec
+              responsesSchema[k]?.schema?.data?.content?.['application/json']?.schema; //Legacy implementation
+            if (response_s) {
+              const response_schema = response_s;
+              const _topic = route.replace(/{(.*?)}/g, ':$1'); //removing curly braces in topic (event key)
+              const endpoint = _topic.split('.').pop(); //extracting endpoint from eventkey
+              const topic_response = endpoint + ':responses:' + k;
+              if (!ajvInstance.getSchema(topic_response)) {
+                ajvInstance.addSchema(response_schema, topic_response);
+              }
+            }
+          });
+        }
+      } else {
+        logger.error(`Event config validation failed during load time for ${route} in ${allEventsConfigs}`);
+        process.exit(1);
+      }
+    });
+    resolve(1);
+  });
+}
+
+/* Function to validate GSCloudEvent */
+export function validateRequestSchema(
+  topic: string,
+  event: any,
+  eventSpec: PlainObject
+): GSStatus {
+  let status: GSStatus;
+
+  // Validate event.data.body
+  const hasSchema: any = eventSpec?.body || eventSpec?.data?.schema?.body;
+  if (event.data.body && hasSchema) {
+    // childLogger.info('event body and eventSpec exist');
+    // childLogger.debug('event.data.body: %o', event.data.body);
+    // if (!eventSpec.key) {
+
+    // }
+    const ajv_validate = ajvInstance.getSchema(eventSpec.key);
+    if (ajv_validate) {
+      // childLogger.debug('ajv_validate for body');
+      if (!ajv_validate(event.data.body)) {
+        logger.error({event: eventSpec.key}, 'event.data.body validation failed %o \n Request body %o', ajv_validate.errors, event.data.body);
+        status = {
+          success: false,
+          code: 400,
+          message: ajv_validate.errors![0].message,
+          data: {message: "The API cannot be executed due to a failure in request body schema validation.", error: ajv_validate.errors, eventBody: event.data.body}
+        };
+        return status;
+      } else {
+        // childLogger.info('ajv_validate success for body');
+        status = { success: true };
+      }
+    } else {
+      status = { success: true };
+    }
+  } else if (!event.data.body && hasSchema) {
+    status = {
+      success: false,
+      code: 400,
+      message: 'Body not found in request but specified in the event schema',
+    };
+    return status;
+  }
+  // } else if ( Object.keys(event.data.body).length && !eventSpec?.data?.schema?.body ) {
+  //     status = { success: false, code: 400, message: "Body found in request but not specified in the event schema"}
+  //     return status
+  // }
+  else {
+    //Body is not present in request and not specified in the event schema
+    status = { success: true };
+  }
+
+  const params = eventSpec?.parameters ||
+    eventSpec?.params || //structure like open api spec
+    eventSpec?.data?.schema?.params; //Legacy
+
+  // Validate event.data['params']
+  let MAP: PlainObject = {
+    path: 'params',
+    header: 'headers',
+    query: 'query',
+    cookie: 'cookie',
+  };
+
+  // childLogger.debug('ajv_validate for params');
+
+  if (params) {
+    for (let param in MAP) {
+      const topic_param = eventSpec.key + ':' + param;
+      const ajv_validate = ajvInstance.getSchema(topic_param);
+
+      // childLogger.debug('topic_param: %s', topic_param);
+      if (ajv_validate) {
+        if (!ajv_validate(event.data[MAP[param]])) {
+          logger.debug({event: eventSpec.key}, `Event param validation failed ${event.data[MAP[param]]} %s`, topic_param);
+          ajv_validate.errors![0].message += ' in ' + param;
+          status = {
+            success: false,
+            code: 400,
+            message: ajv_validate.errors![0].message,
+            data: {message: "The API cannot be executed due to a failure in request params schema validation.", error: ajv_validate.errors![0]}
+          };
+          return status;
+        } else {
+          // childLogger.info('ajv_validate success for params');
+          status = { success: true };
+        }
+      }
+    }
+  }
+  return status;
+}
+
+/* Function to validate GSStatus */
+export function validateResponseSchema(
+  topic: string,
+  gsStatus: GSStatus
+): GSStatus {
+  let status: any;
+  
+  if (gsStatus) {
+    const topicResponse = topic + ':responses:' + gsStatus.code;
+    const ajvValidate = ajvInstance.getSchema(topicResponse);
+    if (ajvValidate) {
+      if (!ajvValidate(gsStatus.data)) {
+        logger.error({event: topic, response_code: gsStatus.code}, 'ajv_validation of the response data failed %o',gsStatus.data);
+        let message: string ;
+        if (gsStatus.success) {
+          message = `The API execution was successful. But, there was a failure in validating the response body as per the API schema for response with status code ${gsStatus.code}.`;
+      } else {
+          message = `The API execution was unsuccessful. Further on top of that, there was a failure in validating the API's response body as per the API schema for response with status code ${gsStatus.code}.`;
+      }
+      return new GSStatus(false, 500, undefined, {
+          message: message,
+          errors: ajvValidate.errors,
+          originalResponseBody: gsStatus.data,
+          originalResponseCode: gsStatus.code 
+      });
+      } else {
+        // childLogger.debug('ajv_validate success');
+        status = { success: true };
+      }
+    } else {
+      status = { success: true };
+    }
+  } else {
+    status = { success: true };
+  }
+  return status;
+}
+
+
+---- Content from: loader.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import iterate_yaml_directories from './configLoader';
+import { PlainObject } from './common';
+import { logger } from '../logger';
+
+let config: PlainObject = {};
+
+(function loadSources() {
+  config.app = iterate_yaml_directories(__dirname + '/..')['..'];
+  logger.info('Loaded yaml configuration');
+})();
+
+export { config };
+
+
+---- Content from: mappingLoader.ts ----
+
+/*
+ * You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+ * © 2022 Mindgrep Technologies Pvt Ltd
+ */
+
+import path from 'path';
+import { PlainObject } from './common';
+import iterate_yaml_directories from './configLoader';
+import { compileScript } from './utils';
+import config from 'config';
+import { logger } from '../logger';
+import fs from 'fs';
+
+
+let mappings: PlainObject;
+
+export default function loadMappings(mappingFolderPath?: string) {
+  if (typeof mappings === 'undefined' && mappingFolderPath) {
+    if (!fs.existsSync(mappingFolderPath)) {
+      return {};
+    }
+    /*
+      iterate_yaml_directories return the object after recussively iterating the directory, and keeping it's content
+      inside the [directory name] key
+      so we are taking the key, on the base path of mappingFolderPath, that's the actual mapping object
+    */
+    let _mappings = iterate_yaml_directories(mappingFolderPath)[path.basename(mappingFolderPath)];
+    // logger.debug('Unevaluated mappings: %o', _mappings);
+    const taskLocation = { mappingPath: mappingFolderPath };
+    const mappingScript: Function = compileScript(_mappings, taskLocation);
+    const evaluatedMappings = mappingScript(config, {}, {}, _mappings, {});
+    logger.debug('Loaded mappings: %o', Object.keys(evaluatedMappings));
+    mappings = evaluatedMappings;
+    return mappings;
+  } else {
+    return mappings;
+  }
+};
+
+
+
+// export default function loadMappings(mappingFolderPath: string) {
+//   let mappings = iterate_yaml_directories(mappingFolderPath);
+//   console.log('Loaded mappings: %o', mappings);
+//   const mappingScript: Function = compileScript(mappings);
+//   const evaluatedMappings = mappingScript(config, {}, {}, mappings, {});
+//   console.log('evaluatedMappings: %o', evaluatedMappings);
+//   return evaluatedMappings;
+// }
+
+---- Content from: scriptRuntime.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+/**
+ * Import all packages available in scripts of workflow
+ */
+import _ from 'lodash';
+
+import { GSContext, GSStatus } from "./interfaces"; // eslint-disable-line
+import { logger } from '../logger';
+
+export function importAll(sourceScope: any, targetScope: any) {
+    for (let name in sourceScope) {
+        targetScope[name] = sourceScope[name];
+    }
+}
+
+/**
+ * Can be called for gsFunction.args, gsFunction.on_error.transform and switch.condition
+ * Input an be scalar or object
+ */
+export default async function evaluateScript(ctx: GSContext, script: Function, taskValue?: any) {
+    // childLogger.debug('before evaluateScript %s', script);
+    if (!script) {
+        return;
+    }
+
+    try {
+        return script(ctx.config, ctx.inputs.data, ctx.outputs, ctx.mappings, taskValue);
+    } catch (err: any) {
+        logger.error('Error in evaluating script: %s', err);
+        logger.debug('%s', err.stack);
+        ctx.exitWithStatus = new GSStatus(
+            false,
+            undefined,
+            err.message,
+            err.stack
+        );
+        //return 'Error in parsing script';
+    }
+}
+
+---- Content from: utils.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import { PlainObject } from "./common";
+import { GSStatus } from './interfaces'; // eslint-disable-line
+import { dirname } from 'path';
+
+import CoffeeScript from 'coffeescript';
+import config from "config";
+import expandVariable from './expandVariables'
+
+import * as fs from 'fs';
+import * as assert from 'assert';
+import * as buffer from 'buffer';
+import * as child_process from 'child_process';
+import * as cluster from 'cluster';
+import * as dgram from 'dgram';
+import * as dns from 'dns';
+import * as events from 'events';
+import * as http from 'http';
+import * as https from 'https';
+import * as net from 'net';
+import * as os from 'os';
+import * as path from 'path';
+import * as querystring from 'querystring';
+import * as readline from 'readline';
+import * as stream from 'stream';
+import * as string_decoder from 'string_decoder';
+import * as timers from 'timers';
+import * as tls from 'tls';
+import * as url from 'url';
+import * as util from 'util';
+import * as zlib from 'zlib';
+
+import { logger } from "../logger";
+
+export const isPlainObject = (value: any) => value?.constructor === Object;
+
+//like Lodash _.get method
+export function getAtPath(obj: PlainObject, path: string) {
+  const keys = path.split('.');
+  for (const key of keys) {
+    if (key in obj) { //obj[key]
+      obj = obj[key];
+    } else {
+      return undefined;
+    }
+  }
+  return obj;
+}
+
+//like Lodash _.set method
+export function setAtPath(o: PlainObject, path: string, value: any) {
+  const keys = path.split('.');
+  let obj = o;
+  //prepare the array to ensure that there is nested PlainObject till the last key
+  //Ensure there is an PlainObject as value till the second last key
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i];
+    if (obj[key] !== undefined && obj[key] !== null) { //obj[key] has a non null value
+      obj = obj[key];
+    } else {
+      obj = (obj[key] = {});
+    }
+  }
+  const lastKey = keys[keys.length - 1];
+  obj[lastKey] = value;
+}
+
+export function checkDatasource(workflowJson: PlainObject, datasources: PlainObject,location: PlainObject): GSStatus {
+  for (let task of workflowJson.tasks) {
+    if (task.tasks) {
+      //sub-workflow
+      const status: GSStatus = checkDatasource(task, datasources, location);
+      if (!status.success) {
+        return status;
+      }
+    } else {
+      if (task.fn.includes('datasource.')) {
+        /*
+          for eg., in workflow tasks,
+          any task can point to datasource as below
+          ...
+            fn: datasource.mongo.Post.findMany
+            or
+            fn: datasource.redis.get
+          ...
+
+          So, the `mongo`or `redis` in the previous example, is the name actual datasource, whereas `datasource`is just the namespace
+          to differentiate from com.gs functions.
+          While loading the workflows, we only check for the available datasource name, in loaded datasource
+          and rest is handled by the actual datasource implementation.
+        */
+          let dsName;
+          if (task.fn?.match(/<(.*?)%/) && task.fn?.includes('%>')) {
+           
+            const extractDynamicDatasource = task.fn.match(/<%[^%>]+%>/);
+            if (extractDynamicDatasource) {
+              const script = expandVariable(extractDynamicDatasource[0],location);
+              dsName = script;
+            }
+          } else {
+            dsName = task.fn.split('.')[1];
+          }
+
+        if (!(dsName in datasources)) {
+          logger.error('datasource %s is not present in datasources', dsName);
+          const message = `datasource ${dsName} is not present in datasources`;
+          return new GSStatus(false, 500, message);
+        }
+      }
+    }
+  }
+  return new GSStatus(true, undefined);
+}
+
+export function prepareScript(str: string, location: PlainObject): Function {
+  //@ts-ignore
+  global.fs = fs;
+  //@ts-ignore
+  global.assert = assert;
+  //@ts-ignore
+  global.buffer = buffer;
+  //@ts-ignore
+  global.child_process = child_process;
+  //@ts-ignore
+  global.cluster = cluster;
+  //@ts-ignore
+  global.dgram = dgram;
+  //@ts-ignore
+  global.dns = dns;
+  //@ts-ignore
+  global.events = events;
+  //@ts-ignore
+  global.http = http;
+  //@ts-ignore
+  global.https = https;
+  //@ts-ignore
+  global.net = net;
+  //@ts-ignore
+  global.os = os;
+  //@ts-ignore
+  global.path = path;
+  //@ts-ignore
+  global.querystring = querystring;
+  //@ts-ignore
+  global.readline = readline;
+  //@ts-ignore
+  global.stream = stream;
+  //@ts-ignore
+  global.string_decoder = string_decoder;
+  //@ts-ignore
+  global.timers = timers;
+  //@ts-ignore
+  global.tls = tls;
+  //@ts-ignore
+  global.url = url;
+  //@ts-ignore
+  global.util = util;
+  //@ts-ignore
+  global.zlib = zlib;
+
+
+
+
+  let langs = (/<(.*?)%/).exec(str);
+
+  //@ts-ignore
+  const lang = langs[1] || config.defaults?.lang || config.lang || 'js';
+
+  str = str.trim();
+  if (str.match(/^<(.*?)%/) && str.match(/%>$/)) {
+    let temp = str.replace(/^<(.*?)%/, '').replace(/%>$/, '');
+    if (!temp.includes('%>')) {
+      str = temp;
+    }
+  }
+
+  if (str.match(/<(.*?)%/) && str.match(/%>/)) {
+    str = "'" + str.replace(/<(.*?)%/g, "' + ").replace(/%>/g, " + '") + "'";
+  }
+
+  // logger.debug('lang: %s', lang);
+  // logger.debug('script: %s', str);
+
+  str = str.trim();
+  const initialStr = str;
+
+  if (!/\breturn\b/.test(str)) {
+    str = 'return ' + str;
+  }
+
+  if (lang === 'coffee') {
+    try {
+      str = CoffeeScript.compile(str, { bare: true });
+    } catch(err:any) {
+      logger.fatal(location, "Error in compiling coffee script %s. Error message %s\n error %o %o", str, err.message,  err, new Error().stack);
+      process.exit(1);
+    }
+  }
+
+  let prepareScriptFunction: any;
+  try {
+    prepareScriptFunction = Function('config', 'inputs', 'outputs', 'mappings', 'task_value', str);
+  } catch (err: any) {
+    logger.fatal(location, 'Caught exception in javascript compilation, script: %s compiled script %s. Error message %s\n error %o %o', initialStr, str, err.message, err, err.stack);
+    process.exit(1);
+  }
+
+  return prepareScriptFunction;
+}
+
+export function compileScript(args: any, location: PlainObject) {
+  if (!args) {
+    return () => args;
+  }
+
+  if (typeof (args) == 'object') {
+    if (isPlainObject(args)) {
+      let out: PlainObject = {};
+      for (let k in args) {
+        location.argsName = k;
+        out[k] = compileScript(args[k], location);
+      }
+      return function (config: any, inputs: any, outputs: any, mappings: any, task_value: any) {
+        let returnObj: any = {};
+        for (let k in out) {
+          if (out[k] instanceof Function) {
+            returnObj[k] = out[k](config, inputs, outputs, mappings, task_value);
+          }
+        }
+        return returnObj;
+      };
+    } else if (Array.isArray(args)) {
+      let out: [any] = <any>[];
+      for (let k in <[any]>args) {
+        location.index = k;
+        out[k] = compileScript(args[k], location);
+      }
+      return function (config: any, inputs: any, outputs: any, mappings: any, task_value: any) {
+        let returnObj: any = [];
+        for (let k in out) {
+          if (out[k] instanceof Function) {
+            returnObj.push(out[k](config, inputs, outputs, mappings, task_value));
+          } else {
+            returnObj.push(out[k]);
+          }
+        }
+        return returnObj;
+      };
+    } else {
+      return () => args;
+    }
+  } else if (typeof (args) == 'string') {
+
+    if (args.match(/(^|\/):([^/]+)/)) {
+      logger.debug('before replacing path params %s', args);
+      args = args.replace(/(^|\/):([^/]+)/g, '$1<%inputs.params.$2%>');
+      logger.debug('after replacing path params %s', args);
+    }
+
+    if (args.match(/<(.*?)%/) && args.includes('%>')) {
+      return prepareScript(args, location);
+    }
+  }
+
+  return () => args;
+}
+
+export function checkFunctionExists(events: PlainObject, functions: PlainObject): GSStatus {
+  for (let event in events) {
+    if (!(events[event].fn in functions)) {
+      logger.error('function %s of event %s is not present in functions', events[event].fn, event);
+      const msg = `function ${events[event].fn} of event ${event} is not present in functions`;
+      return new GSStatus(false, 500, msg);
+    }
+  }
+  return new GSStatus(true, undefined);
+}
+
+export function removeNulls(obj: PlainObject) {
+  const isArray = Array.isArray(obj);
+  for (const k of Object.keys(obj)) {
+    if (obj[k] === null) {
+      if (isArray) {
+        //@ts-ignore
+        obj.splice(k, 1);
+      } else {
+        delete obj[k];
+      }
+    } else if (typeof obj[k] === "object") {
+      removeNulls(obj[k]);
+    }
+    //@ts-ignore
+    if (isArray && obj.length === k) {
+      removeNulls(obj);
+    }
+  }
+  return obj;
+}
+
+---- Content from: yamlLoader.ts ----
+
+/*
+ * You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+ * © 2022 Mindgrep Technologies Pvt Ltd
+ */
+import glob from 'glob';
+import yaml from 'yaml';
+import path from 'path';
+
+import { readFileSync } from 'fs';
+
+import { PlainObject } from './common';
+import { logger } from '../logger';
+
+export default function loadYaml(
+  pathString: string,
+  global: boolean = false
+): PlainObject {
+  let basePath = path.basename(pathString);
+  let api: PlainObject = {};
+  const yamlFilesLocation = path.join(pathString, '**', '*.?(yaml|yml)').replace(/\\/g, '/');
+  let files;
+  try {
+    files = glob.sync(yamlFilesLocation);
+  } catch (err) {
+    logger.fatal('Error in reading YAML files from dir %s %o', yamlFilesLocation, err);
+    process.exit(1);
+  }
+
+  files.map((file: string) => {
+    let module: PlainObject;
+    try {
+      module = yaml.parse(readFileSync(file, { encoding: 'utf-8' }));
+    } catch (err) {
+      logger.fatal('Error in parsing YAML file %s %o', file, err);
+      process.exit(1);
+    }
+
+    const eventFileId = file
+      .replace(new RegExp(`.*?\/${basePath}\/`), '')
+      .replace(/\//g, '.')
+      .replace(/\.(yaml|yml)/i, '')
+      .replace(/\.index$/, '');
+    
+    if (basePath === 'events') {
+      for (let eventKey of Object.keys(module)) {
+        module[eventKey].tags = module[eventKey].tags || [eventFileId];
+      }
+    }
+    if (global) {
+      api = {
+        ...api,
+        ...module,
+      };
+    } else {
+      if (eventFileId == 'index') {
+        api = module;
+      } else {
+        api[eventFileId] = module;
+      }
+    }
+
+  });
+
+  return api;
+}
+
+if (require.main === module) {
+  (async () => {
+    try {
+      await loadYaml('../../dist/events', true).then(console.log);
+    } catch (ex) {
+      logger.error('Caught exception %o', (ex as Error).stack);
+    }
+  })();
+}
+
+
+---- Content from: log.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+
+import Pino from 'pino';
+import { GSContext } from '../../../core/interfaces';
+
+export default function (ctx: GSContext, args: { level: Pino.Level, data: any }) {
+    const { childLogger } = ctx;
+    const level = args.level || ctx.config.log_level || 'info';
+    childLogger[args.level]({ "module": "com.gs.log" }, args.data);
+}
+
+
+---- Content from: return.ts ----
+
+import { GSContext } from "../../../godspeed";
+import { PlainObject } from "../../../types";
+import transform from './transform';
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+export default function (ctx: GSContext, args: PlainObject) {
+  // We support deprecated v1 way of com.gs.return which was different in behavior with com.gs.transform
+  // So check if we have to support deprecated logic of return or the v2 logic of return
+  const v2Logic = !ctx.config.defaults?.returnV1Compatible;
+
+  if (v2Logic) { //whether for authz or not
+    const transformRes = transform(ctx, args);
+    transformRes.exitWithStatus = true;
+    return transformRes;
+  } else {
+    return { success: true, code: 200, data: args, exitWithStatus: true };
+  }
+}
+
+
+---- Content from: transform.ts ----
+
+import { GSContext, GSStatus } from "../../../core/interfaces";
+import { logger } from "../../../godspeed";
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+
+export default function (ctx: GSContext, args: any): GSStatus {
+
+  if (!ctx.forAuth) {
+    return nonAuthzFlow(args);
+  } else {
+    return authzFlow(args);
+  }
+}
+
+function nonAuthzFlow (args: any) {
+  //args is a non-object type
+  if (typeof args !== 'object') {
+    return {success: true, code: 200, data: args};
+  }
+  //args is an object. 
+  //Now there will be two cases. Whether args is GSStatus, or just a plain object
+  const argsHasSuccess = args.hasOwnProperty('success');
+  const argsHasCode = args.hasOwnProperty('code');
+
+  const code = args.code || 200; //code is always a number and 0 is not a valid code. when code is falsy value, default is 200.
+
+  //For success boolean, handle success key is there but value is falsy, i.e. undefined or null or 0
+  let success: boolean;
+  if (args.success === undefined || args.success === null) {
+    success = (code >= 200 && code < 400);  
+  } else {
+    success = !!args.success;
+  }
+
+  //Now handle cases where args is GSStatus or plain object
+  if (argsHasSuccess || argsHasCode) { 
+    // args is GSStatus
+    return { success, code, data: args.data, message: args.message, headers: args.headers };
+  } else { 
+    // args is a plainObject. Put the whole args object inside data key
+    return { success, code, data: args };
+
+  }
+}
+
+function authzFlow(args: any) {
+  if (args === true) {
+    return {success: true};
+  }
+  if (!args) {
+    return {
+      success: false,
+      code: 403
+    };
+  }
+
+  return {success: (args.success && true ) || false, code: args.code || (!args.success && 403) || 200, message: args.message, headers: args.headers, data: args.data};
+}
+
+
+---- Content from: index.ts ----
+
+// import pino from 'pino';
+import { logger } from './logger';
+
+// let childLogger: pino.Logger;
+
+// const initializeChildLogger = (options: pino.LoggerOptions) => {
+//   if (childLogger) {
+//     return childLogger;
+//   }
+
+//   childLogger = logger.child(options);
+//   return childLogger;
+// };
+
+export {
+  logger
+};
+
+
+---- Content from: logger.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+import Pino from 'pino';
+import config from 'config';
+import { getAtPath } from '../core/utils';
+const conf = config as any;
+
+const configRedact = conf.redact || conf.log?.redact || [];
+let redactAttrs: Array<string> = [];
+for (const redactAttr of configRedact) {
+  if (redactAttr.match(/^\*\*/)) {
+    const fieldName = redactAttr.replace(/^\*\*\./, '');
+    redactAttrs.push(`${fieldName}`,
+      `*.${fieldName}`,
+      `*.*.${fieldName}`,
+      `*.*.*.${fieldName}`,
+      `*.*.*.*.${fieldName}`,
+      `*.*.*.*.*.${fieldName}`,
+      `*.*.*.*.*.*.${fieldName}`,
+      `*.*.*.*.*.*.*.${fieldName}`,
+      `*.*.*.*.*.*.*.*.${fieldName}`,
+      `*.*.*.*.*.*.*.*.*.${fieldName}`
+    );
+  } else {
+    redactAttrs.push(redactAttr);
+  }
+}
+
+let logTarget: string;
+if (process.env.OTEL_ENABLED == 'true' && process.env.NODE_ENV != 'dev') {
+  logTarget = "../pino/pino-opentelemetry-transport.js";
+} else {
+  logTarget = "pino-pretty";
+}
+let timestampSetting;
+if (conf.log?.timestamp) {
+  timestampSetting = getAtPath(Pino, conf.log.timestamp);
+}
+let logger: Pino.Logger = Pino({
+  level: conf.log?.level || conf.log_level || 'info',
+  //@ts-ignore
+  timestamp: timestampSetting,
+  formatters: {
+    bindings: (bindings) => {
+      if (!conf.log?.bindings?.pid) {
+        delete bindings.pid;
+      }
+      if (!conf.log?.bindings?.hostname) {
+        delete bindings.hostname;
+      }
+      return bindings;
+    }
+  },
+  transport: {
+    target: logTarget,
+    options: {
+      destination: 1,
+      sync: conf.log?.sync,
+      Resource: {
+        'service.name': process.env.OTEL_SERVICE_NAME || 'unknown_service:node',
+        env: process.env.NODE_ENV
+      },
+      include: 'level,time,hostname,pid'
+    }
+  },
+  redact: {
+    paths: redactAttrs,
+    censor: '*****'
+  }
+});
+
+function loggerFn(logger: any) {
+  ['info', 'debug', 'error', 'fatal'].forEach((val) => {
+    const method = logger[val];
+    // const bound = method.bind(logger);
+    logger[val] = function () {
+      try {
+        method.bind(logger)(...arguments);
+        
+      } catch (e: any) {
+        console.log(`Pino: error executing ${val} {${e.message}}`);
+        console.log(`Printing original error log arguments: %o`, ...arguments);
+      }
+    };
+  });
+  return logger;
+}
+
+logger = loggerFn(logger);
+
+var childFn = logger.child.bind(logger);
+
+logger.child = function (bindings, options) {
+  return loggerFn(childFn(bindings, options));
+};
+
+// process.on('exit', () => {console.log('hesdfasfasfasfasdfasdfasfasdfasdfasdf')});  //logger.flushSync()})
+export { logger };
+
+
+---- Content from: pino-opentelemetry-transport.js ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+'use strict';
+
+const build = require('pino-abstract-transport');
+const { SonicBoom } = require('sonic-boom');
+const { once } = require('events');
+
+const DEFAULT_MESSAGE_KEY = 'msg';
+
+const ZEROS_FROM_MILLI_TO_NANO = '0'.repeat(6);
+
+/**
+ * @typedef {Object} CommonBindings
+ * @property {string=} msg
+ * @property {number=} level
+ * @property {number=} time
+ * @property {string=} hostname
+ * @property {number=} pid
+ *
+ * @typedef {Record<string, string | number | Object> & CommonBindings} Bindings
+ *
+ */
+
+/**
+ * Pino OpenTelemetry transport
+ *
+ * Maps Pino log entries to OpenTelemetry Data model
+ *
+ * @typedef {Object} Options
+ * @property {string | number} destination
+ * @property {string} [messageKey="msg"]
+ *
+ * @param {Options} opts
+ */
+module.exports = async function (opts) {
+  const destination = new SonicBoom({ dest: opts.destination, sync: false });
+  const mapperOptions = {
+    messageKey: opts.messageKey || DEFAULT_MESSAGE_KEY
+  };
+  const resourceOptions = {
+    ...opts.Resource
+  };
+
+  return build(async function (/** @type { AsyncIterable<Bindings> } */ source) {
+    for await (const obj of source) {
+      const line = toOpenTelemetry(obj, mapperOptions, resourceOptions);
+      let updatedLine;
+
+      if (process.env.NODE_ENV != 'dev') {
+        updatedLine = JSON.stringify(line) + '\n';
+      } else {
+        let timestamp = parseInt(line.Timestamp.replace(ZEROS_FROM_MILLI_TO_NANO, ''));
+        let date = new Date(timestamp);
+
+        let dateString = new Intl.DateTimeFormat('en-IN', { dateStyle: 'short', timeStyle: 'medium',timeZone: 'Asia/Kolkata' }).format(date);
+        updatedLine = `${dateString} [${line.SeverityText}] ${line.TraceId ?? ''} ${line.SpanId ?? ''} ${JSON.stringify(line.Attributes)} ${line.Body}\n`;
+      }
+
+      const writeResult = destination.write(updatedLine);
+      const toDrain = !writeResult;
+      // This block will handle backpressure
+      if (toDrain) {
+        await once(destination, 'drain');
+      }
+    }
+  }, {
+    async close () {
+      destination.end();
+      await once(destination, 'close');
+    }
+  });
+};
+
+const FATAL_SEVERITY_NUMBER = 21;
+/**
+ * If the source format has only a single severity that matches the meaning of the range
+ * then it is recommended to assign that severity the smallest value of the range.
+ * https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md#mapping-of-severitynumber
+ */
+const SEVERITY_NUMBER_MAP = {
+  10: 1,
+  20: 5,
+  30: 9,
+  40: 13,
+  50: 17,
+  60: FATAL_SEVERITY_NUMBER
+};
+
+// https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md#displaying-severity
+const SEVERITY_NAME_MAP = {
+  1: 'TRACE',
+  2: 'TRACE2',
+  3: 'TRACE3',
+  4: 'TRACE4',
+  5: 'DEBUG',
+  6: 'DEBUG2',
+  7: 'DEBUG3',
+  8: 'DEBUG4',
+  9: 'INFO',
+  10: 'INFO2',
+  11: 'INFO3',
+  12: 'INFO4',
+  13: 'WARN',
+  14: 'WARN2',
+  15: 'WARN3',
+  16: 'WARN4',
+  17: 'ERROR',
+  18: 'ERROR2',
+  19: 'ERROR3',
+  20: 'ERROR4',
+  21: 'FATAL',
+  22: 'FATAL2',
+  23: 'FATAL3',
+  24: 'FATAL4'
+};
+
+/**
+ * Converts a pino log object to an OpenTelemetry log object.
+ *
+ * @typedef {Object} OpenTelemetryLogData
+ * @property {string=} SeverityText
+ * @property {string=} SeverityNumber
+ * @property {string} Timestamp
+ * @property {string} Body
+ * @property {{ 'host.hostname': string, 'process.pid': number }} Resource
+ * @property {Record<string, any>} Attributes
+ *
+ * @typedef {Object} MapperOptions
+ * @property {string} messageKey
+ *
+ * @param {Bindings} sourceObject
+ * @param {MapperOptions} mapperOptions
+ * @returns {OpenTelemetryLogData}
+ */
+ function toOpenTelemetry (sourceObject, { messageKey }, resourceOptions) {
+  const { time, level, hostname, pid, trace_id, span_id, trace_flags, [messageKey]: msg, ...attributes } = sourceObject;
+
+  const severityNumber = SEVERITY_NUMBER_MAP[sourceObject.level];
+  const severityText = SEVERITY_NAME_MAP[severityNumber];
+
+  return {
+    Body: msg,
+    Timestamp: time + ZEROS_FROM_MILLI_TO_NANO,
+    SeverityNumber: severityNumber,
+    SeverityText: severityText,
+    TraceId: trace_id,
+    SpanId: span_id,
+    TraceFlags: trace_flags,
+    Resource: {
+      ...resourceOptions,
+      'host.hostname': hostname,
+      'process.pid': pid
+    },
+    Attributes: attributes
+  };
+}
+
+
+---- Content from: index.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+
+export function randomString(length: number, characters: string) {
+    let result = '';
+
+    if (!characters) {
+        characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    }
+
+    let charactersLength = characters.length;
+    for(let i = 0; i < length; i++ ) {
+        let c = characters.charAt(Math.floor(Math.random() * charactersLength));
+        if (!result && c == '0') {
+            continue;
+        }
+
+        result += c;
+    }
+    return result;
+}
+
+export function randomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+---- Content from: index.ts ----
+
+// import bodyParser from 'body-parser';
+// import express from 'express';
+// import { pinoHttp } from 'pino-http';
+// import fileUpload from 'express-fileupload';
+// import promMid from '@mindgrep/express-prometheus-middleware';
+// import Prometheus from 'prom-client';
+// import swaggerUI from 'swagger-ui-express';
+// import config from 'config';
+
+// import { logger } from '../logger';
+// import { PlainObject } from '../types';
+// import { promClient } from '../telemetry/monitoring';
+// import { generateSwaggerJSON } from './swagger';
+
+
+// // here we are going to configure all the routes of the application
+// // like, /api-docs, /metrics
+
+// const prepareRouter = async (app: express.Application, datasources: PlainObject, events: PlainObject, definitions: PlainObject) => {
+
+//   const loggerExpress = pinoHttp({
+//     logger: logger,
+//     autoLogging: true,
+//   });
+
+//   // @ts-ignore
+//   const request_body_limit = config.request_body_limit || 50 * 1024 * 1024;
+
+//   // @ts-ignore
+//   const file_size_limit = config.file_size_limit || 50 * 1024 * 1024;
+
+//   app.use(bodyParser.urlencoded({ extended: true, limit: request_body_limit }));
+//   app.use(bodyParser.json({ limit: request_body_limit }));
+//   app.use(loggerExpress);
+
+//   // file upload
+//   app.use(
+//     fileUpload({
+//       useTempFiles: true,
+//       //@ts-ignore
+//       limits: { fileSize: file_size_limit },
+//     })
+//   );
+
+//   // prometheus middleware
+//   app.use(
+//     promMid({
+//       collectDefaultMetrics: true,
+//       requestDurationBuckets: Prometheus.exponentialBuckets(0.2, 3, 6),
+//       requestLengthBuckets: Prometheus.exponentialBuckets(512, 2, 10),
+//       responseLengthBuckets: Prometheus.exponentialBuckets(512, 2, 10),
+//     })
+//   );
+
+//   // expose metrics route
+//   app.get('/metrics', async (req: express.Request, res: express.Response) => {
+//     let prismaMetrics: string = '';
+//     for (let ds in datasources) {
+//       if (datasources[ds].type === 'datastore') {
+//         const prismaClient = datasources[ds].client;
+//         prismaMetrics += await prismaClient.$metrics.prometheus({
+//           globalLabels: { server: process.env.HOSTNAME, datasource: `${ds}` },
+//         });
+//       }
+//     }
+//     let appMetrics = await promClient.register.metrics();
+//     res.end(appMetrics + prismaMetrics);
+//   });
+
+//   // expose SwaggerUI
+//   const swaggerJson = generateSwaggerJSON(events, definitions);
+
+//   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
+// };
+
+// export { prepareRouter };
+
+---- Content from: metrics.ts ----
+
+const exposePrismaMetrics = () => {
+  // set the filesize, request body limit
+};
+
+---- Content from: swagger.ts ----
+
+import { logger } from "../logger";
+import { PlainObject } from "../types";
+
+// Define the type of eventSourceConfig
+type EventSourceConfig = {
+  port: number;
+  jwt?: PlainObject //For v1 compatibility
+  authn?: {
+    jwt?: PlainObject //V2 has all authentication configs in authn
+  }
+  docs?: {
+    info: any; // Adjust the type as needed
+    servers: any[]; // Adjust the type as needed
+  };
+};
+
+export const generateSwaggerJSON = (events: PlainObject, definitions: PlainObject, eventSourceConfig: EventSourceConfig) => {
+
+  const finalSpecs: { [key: string]: any } = { openapi: "3.0.0", paths: {} };
+
+  const { port, docs } = eventSourceConfig;
+  const info = docs?.info;
+  const servers = docs?.servers;
+  const jwt = eventSourceConfig.authn?.jwt || eventSourceConfig.jwt;
+  const eventObjStr = JSON.stringify(events);
+  const modifiedStr = eventObjStr.replace(/https:\/\/godspeed\.systems\/definitions\.json/g, '');
+  const eventObj = JSON.parse(modifiedStr);
+
+  Object.keys(eventObj).forEach(event => {
+    let apiEndPoint = event.split('.')[2];
+    apiEndPoint = apiEndPoint.replace(/:([^\/]+)/g, '{$1}'); //We take :path_param. OAS3 takes {path_param}
+    const method = event.split('.')[1];
+    const eventSchema = eventObj[event];
+    const eventAuthn = jwt && eventSchema.authn !== false;
+    //Initialize the schema for this method, for given event
+    let methodSpec: PlainObject = {
+      summary: eventSchema.summary,
+      description: eventSchema.description,
+      tags: eventSchema.tags,
+      operationId: eventSchema.operationId || eventSchema.id || eventSchema.summary?.replace(' ', '_') || `${method}_${apiEndPoint}`.replace(/\//g, '_'),
+      requestBody: eventSchema.body,
+      parameters: eventSchema.params,
+      responses: eventSchema.responses,
+      ...(eventAuthn && {
+        security: [{
+          bearerAuth: []
+        },]
+      })
+    };
+
+    //Set it in the overall schema
+    // @ts-ignore
+
+    finalSpecs.paths[apiEndPoint] = {
+      // @ts-ignore
+      ...finalSpecs.paths[apiEndPoint],
+      [method]: methodSpec,
+    };
+  });
+
+  if (servers && Array.isArray(servers)) {
+    finalSpecs.servers = servers;
+  } else {
+    finalSpecs.servers = [{
+      "url": `http://localhost:${port}`
+    }];
+  }
+
+  finalSpecs.info = info;
+
+  setDefinitions(finalSpecs, definitions);
+  
+  if (jwt) {
+    finalSpecs.components.securitySchemes = {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      }
+    };
+  }
+
+
+  return finalSpecs;
+};
+
+function setDefinitions(finalSpecs: PlainObject, definitions: PlainObject) {
+  definitions = JSON.parse(JSON.stringify(definitions));
+  //Flatten the definitions object to store as component schema as per swagger format
+  const removedKeys: string[] = [];
+  Object.keys(definitions).forEach((key) => {
+    if (!definitions[key]?.type) {
+      const innerObj = definitions[key];
+      delete definitions[key];
+      
+      const updatedInnerObj: { [key: string]: any } = {};
+      Object.keys(innerObj).forEach(subKey => {
+        removedKeys.push(`${key}/${subKey}`);
+        updatedInnerObj[`${key}_${subKey}`] = innerObj[subKey];
+      });
+      definitions = { ...definitions, ...updatedInnerObj };
+    }
+  });
+  //finalSpecs.definitions = definitions;
+  finalSpecs.components = {
+    schemas: definitions
+  };
+
+  for (let key of removedKeys) {
+    replaceStringInJSON(finalSpecs, `#/definitions/${key}`, `#/components/schemas/${key.replace("/", "_")}`);
+  }
+}
+
+function replaceStringInJSON(jsonObj: PlainObject, stringToMatch: string, replacementString: string) {
+  if (jsonObj === null) {
+    return;
+  }
+
+  // If jsonObj is an array, iterate through its elements
+  if (Array.isArray(jsonObj)) {
+    for (let i = 0; i < jsonObj.length; i++) {
+      jsonObj[i] = replaceStringInJSON(jsonObj[i], stringToMatch, replacementString);
+    }
+  } else if (typeof jsonObj === 'object') {
+    // Iterate through the object keys
+    for (let key in jsonObj) {
+      if (jsonObj.hasOwnProperty(key)) {
+        // Recursively call the function for nested objects or arrays
+        jsonObj[key] = replaceStringInJSON(jsonObj[key], stringToMatch, replacementString);
+      }
+    }
+  } else if (typeof jsonObj === 'string') {
+    // If jsonObj is a leaf string value and contains the string to match, replace it
+    if ((jsonObj as string).includes(stringToMatch)) {
+      return (jsonObj as string).replace(new RegExp(stringToMatch, 'g'), replacementString);
+    }
+  }
+
+
+
+  return jsonObj;
+}
+
+
+---- Content from: godspeed.ts ----
+
+/* eslint-disable import/first */
+import 'dotenv/config';
+import fs from 'fs';
+import { logger } from './logger';
+var config = require('config');
+
+import { join } from 'path';
+import { cwd } from 'process';
+import _ from 'lodash';
+import swaggerUI from 'swagger-ui-express';
+import promClient from '@godspeedsystems/metrics';
+
+// loaders
+import loadAndRegisterDefinitions from './core/definitionsLoader';
+import loadDatasources from './core/datasourceLoader';
+import loadEventsources from './core/eventsourceLoader';
+import loadFunctions, { LoadedFunctions as LoadedFunctionsStatus, NativeFunctions } from './core/functionLoader';
+import loadEvents from './core/eventLoader';
+import loadMappings from './core/mappingLoader';
+
+// interfaces
+import {
+  GSActor,
+  GSCloudEvent,
+  GSContext,
+  GSSeriesFunction,
+  GSStatus,
+  GSResponse,
+  GSFunction
+} from './core/interfaces';
+
+import {
+  GSDataSource,
+  GSCachingDataSource,
+  GSEventSource,
+  GSDataSourceAsEventSource,
+  EventSources,
+  RedisOptions
+} from './core/_interfaces/sources';
+import { PlainObject } from './types';
+
+// validators
+import {
+  validateRequestSchema,
+  validateResponseSchema,
+} from './core/jsonSchemaValidation';
+
+import { generateSwaggerJSON } from './router/swagger';
+import { setAtPath } from './core/utils';
+import loadModules from './core/codeLoader';
+import { importAll } from './core/scriptRuntime';
+import yamlLoader from './core/yamlLoader';
+
+export interface GodspeedParams {
+  eventsFolderPath?: string;
+  workflowsFolderPath: string;
+  definitionsFolderPath?: string;
+  datasourcesFolderPath?: string;
+  configFolderPath: string;
+  eventsourcesFolderPath?: string;
+  mappingsFolderPath?: string;
+  pluginsFolderPath?: String;
+}
+
+class Godspeed {
+  public datasources: { [key: string]: GSDataSource } = {};
+
+  public eventsources: EventSources = {};
+
+  public withoutEventSource: boolean = false;
+
+  public plugins: PlainObject = {};
+
+  public workflows: { [key: string]: Function } = {};
+
+  public nativeFunctions: NativeFunctions = {};
+
+  public events: PlainObject = {};
+
+  public definitions: PlainObject = {};
+
+  public config: PlainObject = {};
+
+  public mappings: PlainObject = {};
+
+  public isProd: boolean = true; //process.env.NODE_ENV === 'production';
+
+  public folderPaths: {
+    events: string;
+    workflows: string;
+    definitions: string;
+    config: string;
+    datasources: string;
+    eventsources: string;
+    mappings: string;
+    plugins: string;
+  };
+
+  constructor(params = {} as GodspeedParams, withoutEventSource: boolean = false) {
+    // config
+    this.config = config;
+    // let's assume we a re getting the current directory, where module is imported
+    const currentDir = cwd();
+
+    // destruct GodspeedParams, if not supplied, assign the default value
+    let {
+      eventsFolderPath,
+      workflowsFolderPath,
+      definitionsFolderPath,
+      configFolderPath,
+      datasourcesFolderPath,
+      eventsourcesFolderPath,
+      mappingsFolderPath,
+      pluginsFolderPath
+    } = params;
+
+    eventsFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.eventsFolderPath || '/dist/events'
+        : params.eventsFolderPath || '/src/events'
+    );
+    workflowsFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.workflowsFolderPath || '/dist/functions'
+        : params.workflowsFolderPath || '/src/functions'
+    );
+    definitionsFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.definitionsFolderPath || '/dist/definitions'
+        : params.definitionsFolderPath || '/src/definitions'
+    );
+    configFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.configFolderPath || '/config'
+        : params.configFolderPath || '/config'
+    );
+    datasourcesFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.datasourcesFolderPath || '/dist/datasources'
+        : params.datasourcesFolderPath || '/src/datasources'
+    );
+    eventsourcesFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.eventsourcesFolderPath || '/dist/eventsources'
+        : params.eventsourcesFolderPath || '/src/eventsources'
+    );
+
+    mappingsFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.mappingsFolderPath || '/dist/mappings'
+        : params.mappingsFolderPath || '/src/mappings'
+    );
+
+    pluginsFolderPath = join(
+      currentDir,
+      this.isProd
+        ? params.mappingsFolderPath || '/dist/plugins'
+        : params.mappingsFolderPath || '/src/plugins'
+    );
+
+    this.folderPaths = {
+      events: eventsFolderPath as string,
+      workflows: workflowsFolderPath as string,
+      config: configFolderPath as string,
+      definitions: definitionsFolderPath as string,
+      datasources: datasourcesFolderPath as string,
+      eventsources: eventsourcesFolderPath as string,
+      mappings: mappingsFolderPath as string,
+      plugins: pluginsFolderPath as string
+    };
+    this.withoutEventSource = withoutEventSource;
+    Object.freeze(this.folderPaths);
+  }
+
+  public async initialize() {
+    await this._loadDefinitions()
+      .then(async (definitions) => {
+        this.definitions = definitions;
+        this.mappings = await this._loadMappings();
+        //@ts-ignore
+        global.mappings = this.mappings;
+        let datasources = await this._loadDatasources();
+        this.datasources = datasources;
+        //@ts-ignore
+        global.datasources = datasources;
+
+        this.plugins = await this._loadPlugins();
+        //@ts-ignore
+        global.plugins = this.plugins;
+        let fnLoadResponse: LoadedFunctionsStatus = await this._loadFunctions();
+        this.workflows = fnLoadResponse.functions;
+        //@ts-ignore
+        global.workflows = this.workflows;
+        //@ts-ignore
+        global.functions = this.workflows;
+        this.nativeFunctions = fnLoadResponse.nativeFunctions;
+        if (!this.withoutEventSource) {
+          let eventsources = await this._loadEventsources();
+          this.eventsources = eventsources;
+          //@ts-ignore
+          global.eventsources = eventsources;
+          let events = await this._loadEvents();
+          this.events = events;
+
+
+          await this.subscribeToEvents();
+
+          let status = Object.keys(eventsources)
+            .map((esName: string) => {
+              let es: { client: PlainObject; config: PlainObject } =
+                eventsources[esName];
+              return `${es.config.type}: ${es.config.port}`;
+            })
+            .join(' ');
+
+          logger.info(
+            `[${this.isProd ? 'Production' : 'Dev'} Server][Running] ('${status.split(' ')[0]
+            }' event source, '${status.split(' ')[1]}' port).`
+          );
+        }
+
+      })
+      .catch((error) => {
+        logger.error('pm_logger %o %s %o', error, error.message, error.stack);
+      });
+  }
+
+  public async _loadMappings(): Promise<PlainObject> {
+    logger.info('[START] Load mappings from %s', this.folderPaths.mappings);
+    let mappings = loadMappings(this.folderPaths.mappings);
+    // logger.debug('Mappings %o', mappings);
+    logger.info('[END] Load mappings');
+    return mappings;
+  };
+
+  private async _loadEvents(): Promise<PlainObject> {
+    logger.info('[START] Load events from %s', this.folderPaths.events);
+    let events = await loadEvents(this.workflows, this.nativeFunctions, this.folderPaths.events, this.eventsources);
+    // logger.debug('Events %o', events);
+    // logger.debug('[END] Loaded events %o', Object.keys(events));
+    logger.debug('[END] Loaded all events');
+
+    return events;
+  }
+
+  private async _loadDefinitions(): Promise<PlainObject> {
+    logger.info(
+      '[START] Load definitions from %s',
+      this.folderPaths.definitions
+    );
+    const definitions = await loadAndRegisterDefinitions(
+      this.folderPaths.definitions
+    );
+    // logger.debug('Definitions %o', definitions);
+    logger.info('[END] Load definitions');
+    return definitions;
+  }
+
+  private async _loadFunctions(): Promise<LoadedFunctionsStatus> {
+    logger.info('[START] Load functions from %s', this.folderPaths.workflows);
+    try {
+      const loadFnStatus: LoadedFunctionsStatus = await loadFunctions(
+        this.datasources,
+        this.folderPaths.workflows
+      );
+      if (loadFnStatus.success) {
+        logger.info('[END] Load functions');
+        return loadFnStatus;
+      } else {
+        logger.fatal('Error in loading project functions %o', loadFnStatus);
+        process.exit(1);
+
+      }
+    } catch (err: any) {
+
+      logger.fatal('Error in loading project functions %s %o', err.message, err.stack);
+      process.exit(1);
+
+    }
+    // logger.debug('Functions %o', Object.keys(loadFnStatus.functions));
+
+
+  }
+
+  private async _loadPlugins(): Promise<PlainObject> {
+    logger.info('[START] Load plugins from %s', this.folderPaths.plugins);
+    const modules: PlainObject = await loadModules(this.folderPaths.plugins);
+    importAll(modules, global);
+    logger.debug('Plugins loaded %o', Object.keys(modules));
+    return modules;
+  }
+
+  private async _loadDatasources(): Promise<PlainObject> {
+    logger.info(
+      '[START] Load data sources from %s',
+      this.folderPaths.datasources
+    );
+    let datasources = await loadDatasources(this.folderPaths.datasources);
+    //logger.debug('data sources %o', datasources);
+    logger.info('[END] Load data sources');
+    return datasources;
+  }
+
+  private async _loadEventsources(): Promise<PlainObject> {
+    logger.info(
+      '[START] Load event sources from %s',
+      this.folderPaths.eventsources
+    );
+
+    let eventsources = await loadEventsources(
+      this.folderPaths.eventsources,
+      this.datasources
+    );
+    logger.debug('event sources loaded %o', Object.keys(eventsources));
+    logger.info('[END] event sources.');
+    return eventsources;
+  }
+
+  private async subscribeToEvents(): Promise<void> {
+    const httpEvents: { [key: string]: any } = {};
+
+    for await (let route of Object.keys(this.events)) {
+      let eventKey = route;
+      let eventSourceName = route.split('.')[0];
+      const eventSource = this.eventsources[eventSourceName];
+
+      // for swagger UI
+      if (eventSourceName === 'http') {
+        httpEvents[eventKey] = { ...this.events[eventKey] };
+      }
+
+      const processEventHandler = await this.processEvent(this, route);
+
+      await eventSource.subscribeToEvent(
+        route,
+        this.events[eventKey],
+        processEventHandler,
+        { ...this.events[route] }
+      );
+
+
+    }
+
+    const httpEventSource = this.eventsources['http']; // eslint-disable-line
+    if (httpEventSource?.config?.docs) {
+      //@ts-ignore
+      const httpEventsSwagger = generateSwaggerJSON(httpEvents, this.definitions, httpEventSource.config);
+      // @ts-ignore
+      httpEventSource.client.use(httpEventSource.config.docs.endpoint || '/api-docs', swaggerUI.serve, swaggerUI.setup(httpEventsSwagger));
+      this.saveHttpEventsSwaggerJson(httpEventsSwagger);
+    }
+
+    if (process.env.OTEL_ENABLED == 'true') {
+      // @ts-ignore
+      httpEventSource.client.get('/metrics', async (req, res) => {
+        let prismaMetrics: string = '';
+        for (let ds in this.datasources) {
+          if (this.datasources[ds].client?._previewFeatures?.includes("metrics")) {
+            // @ts-ignore
+            prismaMetrics += await this.datasources[ds].client.$metrics.prometheus({
+              globalLabels: { server: process.env.HOSTNAME, datasource: `${ds}` },
+            });
+          }
+        }
+        let appMetrics = await promClient.register.metrics();
+
+        res.end(appMetrics + prismaMetrics);
+      });
+    }
+  }
+
+  private saveHttpEventsSwaggerJson(swaggerJson: PlainObject) {
+    const swaggerDir = process.cwd() + '/docs/';
+    fs.mkdirSync(swaggerDir, { recursive: true });
+    const swaggerFileName = (swaggerJson.info?.title || 'http');
+    fs.writeFileSync(swaggerDir + swaggerFileName + '-swagger.json', JSON.stringify(swaggerJson), 'utf-8');
+  }
+
+  /**
+   * For executing a workflow directly without an eventsource from a Nodejs project
+   */
+  public async executeWorkflow(name: string, args: PlainObject): Promise<GSStatus> {
+    const event: GSCloudEvent = new GSCloudEvent(
+      'id',
+      "",
+      new Date(),
+      'http',
+      '1.0',
+      args,
+      'REST',
+      new GSActor('user'),
+      {}
+    );
+    const childLogger: typeof logger = logger.child(this.getCommonAttrs(event));
+
+    const ctx: GSContext = new GSContext(
+      this.config, this.datasources, event, this.mappings, this.nativeFunctions, this.plugins, logger, childLogger);
+    const workflow = this.workflows[name];
+
+    if (!workflow) {
+      childLogger.error('workflow not found %s', name);
+    }
+    const res = await workflow(ctx, args);
+    return res;
+  }
+
+  private async processEvent(
+    local: Godspeed,
+    route: string
+  ): Promise<
+    (event: GSCloudEvent, eventConfig: PlainObject) => Promise<GSStatus>
+  > {
+    const { workflows, datasources, mappings } = local;
+    const eventSourceName = route.split('.')[0];
+    return async (
+      event: GSCloudEvent,
+      eventConfig: PlainObject
+    ): Promise<GSStatus> => {
+      
+      const childLogger: typeof logger = logger.child(this.getLogAttributes(event, eventConfig, eventSourceName));
+      // TODO: lot's of logging related steps
+      childLogger.debug('processing event %s', event.type);
+      // TODO: Once the config loader is sorted, fetch the apiVersion from config
+
+
+      let eventHandlerWorkflow: GSSeriesFunction;
+      let validateStatus: GSStatus;
+      try {
+        validateStatus = validateRequestSchema(
+          event.type,
+          event,
+          eventConfig
+        );
+      } catch (err: any) {
+        const { headers, body, query, params } = event.data;
+        const eventInput = { headers, query, body, params };
+        childLogger.error('Validation of event request data had an unexpected error. Perhaps something wrong with your schema def? \n Event route %s \n event input %o \n error message %s error stack', route, eventInput, err.message);
+        return new GSStatus(
+          false,
+          500,
+          undefined,
+          //`Error in validating request for the event ${event.type} and request data is \n %o`, eventInput,
+          {
+            error: {
+              message: err.message
+            }
+          }
+        );
+      }
+
+      let eventSpec = eventConfig;
+
+      if (validateStatus.success === false) {
+
+        // If `on_request_validation_error` is defined in the event, let's execute that
+        // Else return with validation error
+        if (eventSpec.on_request_validation_error) {
+          const validationError = {
+            success: false,
+            code: validateStatus.code,
+            message: 'request validation failed.',
+            error: validateStatus.message,
+            data: validateStatus.data
+          };
+
+          childLogger.error('Validation of event request failed %s. Will run validation error handler', JSON.stringify(validationError));
+
+          // event.data = { event: event.data, validationError };
+          event.data.validation_error = validationError;
+          // A workflow is always a series execution of its tasks. ie., a GSSeriesFunction
+          eventHandlerWorkflow = <GSFunction>(eventSpec.on_request_validation_error);
+        } else {
+          childLogger.error('Validation of event request failed %s. Returning.', JSON.stringify(validateStatus));
+
+          return validateStatus;
+        }
+      } else {
+
+        childLogger.debug('Request JSON Schema validated successfully. Route %s', route);
+
+        eventHandlerWorkflow = <GSSeriesFunction>workflows[eventSpec.fn];
+      }
+
+      const ctx = new GSContext(
+        config,
+        datasources,
+        event,
+        mappings,
+        workflows,
+        {},
+        logger,
+        childLogger
+      );
+      //Now check authorization, provided request validation has succeeded
+      if (eventConfig.authz && validateStatus.success) {
+        //If authorization workflow fails, we return with its status right away.
+        ctx.forAuth = true;
+        const authzStatus: GSStatus = await eventConfig.authz(ctx);
+        ctx.forAuth = false;
+        if (authzStatus.code === 403 || authzStatus.success !== true) {
+          //Authorization task executed successfully and returned user is not authorized
+
+          authzStatus.success = false;
+          // If status code is not set or is not in the range of 400-600 then set the code to 403
+          //error status codes in http should be between 400-599
+          if (!authzStatus.code || authzStatus.code < 400 || authzStatus.code > 599) {
+            authzStatus.code = 403;
+          }
+
+          childLogger.debug(`Authorization task failed at the event level with code ${authzStatus.code}`);
+
+          if (!authzStatus.data?.message) {
+            setAtPath(authzStatus, 'data.message', authzStatus.message || 'Access Forbidden');
+          }
+          return authzStatus;
+        } else {
+          //since authz was successful
+          //in case com.gs.return was used, the exitWithStatus would be there
+          //because com.gs.return sets exitWithStatus: true for every call
+          //Remove exitWithStatus otherwise it will be taken as error in 
+          //interfaces.ts when the event handler will be called
+          delete ctx.exitWithStatus;
+        }
+        //Autorization is passed. Proceeding.
+        // childLogger.debug('Authorization passed at the event level');
+      }
+      let eventHandlerStatus: GSStatus;
+
+      try {
+        const eventHandlerResponse = await eventHandlerWorkflow(ctx);
+        // The final status of the handler workflow is calculated from the last task of the handler workflow (series function)
+        eventHandlerStatus = eventHandlerResponse;//ctx.outputs[eventHandlerWorkflow.id] || eventHandlerResponse;
+
+        if (typeof eventHandlerStatus !== 'object' || !('success' in eventHandlerStatus)) {
+          //Assume workflow has returned just the data and has executed sucessfully
+          eventHandlerStatus = new GSStatus(true, 200, undefined, eventHandlerResponse);
+        }
+        if (!eventHandlerStatus.success) {
+          childLogger.error('Event handler for %s returned \n with status %o \n for inputs \n params %o \n query %o \n body %o \n headers %o', route, eventHandlerStatus, ctx.inputs.data.params, ctx.inputs.data.query, ctx.inputs.data.body, ctx.inputs.data.headers);
+        } else {
+          childLogger.debug('Event handler for %s returned with status %o', route, eventHandlerStatus);
+        }
+        // event workflow executed successfully
+        // lets validate the response schema
+        let validateResponseStatus = validateResponseSchema(
+          event.type,
+          eventHandlerStatus
+        );
+        if (validateResponseStatus.success) {
+          return eventHandlerStatus;
+        } else {
+          if (!eventSpec.on_response_validation_error) {
+            childLogger.error('Validation of event response failed %o', validateResponseStatus.data);
+            return new GSStatus(false, 500, 'response validation error', validateResponseStatus.data);
+          } else {
+            const validationError = {
+              success: false,
+              code: validateResponseStatus.code,
+              message: 'response validation failed.',
+              error: validateResponseStatus.message,
+              data: validateResponseStatus.data
+            };
+
+            childLogger.error('Validation of event response failed %s', JSON.stringify(validationError));
+
+            // event.data = { event: event.data, validationError };
+            event.data.validation_error = validationError;
+
+            // A workflow is always a series execution of its tasks. ie., a GSSeriesFunction
+            return await (eventSpec.on_response_validation_error)(ctx);
+          }
+        }
+
+
+
+      } catch (error: any) {
+        childLogger.error(`Error occured in event handler execution for event ${eventConfig.key}. Error: ${error}`);
+        return new GSStatus(
+          false,
+          500,
+          `Error in executing handler ${eventSpec.fn} for the event ${event.type} `,
+          { error, message: error.message }
+        );
+      }
+    };
+  }
+
+  /**
+   * 
+   * @param event 
+   * @param eventConfig 
+   * @returns All the log attributes specific to this event
+   */
+
+  private getLogAttributes(event: GSCloudEvent, eventConfig: PlainObject, eventSourceName: string): PlainObject {
+    const attrs: PlainObject = this.getCommonAttrs(event);
+    attrs.event = event.type;
+    attrs.workflow_name = eventConfig.fn;
+
+    // Now override common log.attributes/log_attributes with event source level attributes
+    const eventSrcAttrs = this.eventsources[eventSourceName].config?.log?.attributes;
+    for (const key in eventSrcAttrs) {
+      const value = eventSrcAttrs[key].replace(/"?<(.*?)%\s*(.*?)\s*%>"?/, '$2');
+      if (typeof value === "string" && value.match(/^(?:body\?.\.?|body\.|query\?.\.?|query\.|params\?.\.?|params\.|headers\?.\.?|headers\.|user\?.\.?|user\.)/)) {
+        // eslint-disable-next-line no-template-curly-in-string
+        const obj = Function('event', 'filter', 'return eval(`event.data.${filter}`)')(event, value);
+        attrs[key] = obj;
+      } else {
+        attrs[key] = value;
+      }
+    }
+
+    // Now override common log.attributes/log_attributes with event level attributes
+    const eventAttrs = eventConfig.log?.attributes || eventConfig.log_attributes;
+    if (!eventAttrs) {
+      return attrs;
+    }
+    for (const key in eventAttrs) {
+      const value = eventAttrs[key].replace(/"?<(.*?)%\s*(.*?)\s*%>"?/, '$2');
+      if (typeof value === "string" && value.match(/^(?:body\?.\.?|body\.|query\?.\.?|query\.|params\?.\.?|params\.|headers\?.\.?|headers\.|user\?.\.?|user\.)/)) {
+        // eslint-disable-next-line no-template-curly-in-string
+        const obj = Function('event', 'filter', 'return eval(`event.data.${filter}`)')(event, value);
+        attrs[key] = obj;
+      } else {
+        attrs[key] = value;
+      }
+    }
+    return attrs;
+  }
+
+  /**
+   * 
+   * @param event 
+   * @returns Attributes common to all events, based on `log.attributes` spec in config
+   */
+
+  private getCommonAttrs(event: GSCloudEvent): PlainObject {
+    const attrs: PlainObject = {};
+    
+    //Common log attributes
+    const commonAttrs = (this.config as any).log?.attributes || (this.config as any).log_attributes || [];
+
+    for (const key in commonAttrs) {
+      const value = commonAttrs[key].replace(/"?<(.*?)%\s*(.*?)\s*%>"?/, '$2');
+      if (typeof value === "string" && value.match(/^(?:body\?.\.?|body\.|query\?.\.?|query\.|params\?.\.?|params\.|headers\?.\.?|headers\.|user\?.\.?|user\.)/)) {
+        // eslint-disable-next-line no-template-curly-in-string
+        const obj = Function('event', 'filter', 'return eval(`event.data.${filter}`)')(event, value);
+        attrs[key] = obj;
+      } else {
+        attrs[key] = value;
+      }
+      
+    }
+    return attrs;
+  }
+}
+
+export {
+  GSActor,
+  GSCloudEvent,
+  GSStatus,
+  PlainObject,
+  GSContext,
+  GSResponse,
+  GSDataSourceAsEventSource, // kafk, it share the client with datasource
+  GSEventSource, // express. it has own mechanisim for initClient
+  GSDataSource,
+  GSCachingDataSource,
+  yamlLoader,
+  logger,
+  RedisOptions,
+  generateSwaggerJSON
+};
+
+export default Godspeed;
+
+
+---- Content from: index.d.ts ----
+
+
+declare module 'pino-debug';
+declare module '@mindgrep/express-prometheus-middleware';
+
+---- Content from: types.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+export type CHANNEL_TYPE = 'messagebus' | 'REST' | 'gRpc' | 'socket' | 'cron';
+export type ACTOR_TYPE = 'user' | 'service'; // One who initializes a distributed request.
+export type EVENT_TYPE = 'INFO' | 'DEBUG' | 'WARN' | 'ERROR' | 'TRACE' | 'FATAL';
+
+export interface PlainObject {
+  [key: string]: any
+}
+
+---- Content from: index.d.ts ----
+
+/*
+* You are allowed to study this software for learning and local * development purposes only. Any other use without explicit permission by Mindgrep, is prohibited.
+* © 2022 Mindgrep Technologies Pvt Ltd
+*/
+
+declare module 'pino-debug';
+declare module '@mindgrep/express-prometheus-middleware';

@@ -1,0 +1,180 @@
+#  Event types
+Based on how processing is handled ,events can be classified into two types: synchronous (sync) and asynchronous (async) events, each suited for various protocols. 
+
+
+<img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1703849187/Sushil_edited_bbfzl1.jpg" alt="event types" />
+
+
+**Synchronous events** are typically associated with 
+- `HTTP/REST protocol:` Express can also handle asynchronous operations, the basic request-response cycle is synchronous.
+- `gRPC:`  gRPC is a framework for building remote procedure call (RPC) systems. If you're using the typical request-response pattern, it can be thought of as synchronous.
+- `GraphQL:` Most commonly, GraphQL is used for synchronous communication, but it can handle asynchronous operations when needed.
+
+**Asynchronous events**, on the other hand, are exemplified by
+- `Cron jobs:` Cron jobs are asynchronous because they don't execute immediately when you create or schedule them.
+- `Kafka:` Apache Kafka is an event streaming platform. It's designed for asynchronous, real-time data streaming.
+- `RabbitMQ:` RabbitMQ is a message broker that allows asynchronous communication between distributed systems.
+- `WebSocket communication:` WebSockets provide full-duplex communication channels over a single TCP connection. They are inherently asynchronous, allowing real-time bidirectional communication between clients and servers.
+
+You can also create **custom events** like 
+- `Salesforce:` Salesforce UI or synchronous API calls provide immediate feedback, many of the underlying processes that handle data processing and automation are performed `asynchronously` for scalability and efficiency.
+:::note
+You can refer [Salesforce plugin](https://docs.godspeed.systems/v1/microservices/events#624-salesforce-event) which we have in V1.
+We have [bounty](https://forum.godspeed.systems/t/1-million-developer-bounty-program-build-earn-with-godspeed/128) on implementing [plugins for V2](https://github.com/godspeedsystems/gs-plugins#list-of-plugins).
+:::
+- `S3:` Amazon S3 provides real-time access to stored objects and can be used for synchronous operations like serving web content, its internal processes and features are optimized for `asynchronous`.
+- `Google Pub/Sub:` Google Cloud Pub/Sub enables real-time messaging with synchronous operations for immediate communication. Its architecture also supports `asynchronous` messaging, ensuring scalability and efficiency. You can use Google pub/sub to access events like new email on gmail.
+- `Amazon SQS:` :Amazon SQS is a fully managed message queuing service designed for both synchronous and asynchronous operations. It offers immediate message processing while optimizing for scalability through `asynchronous` handling.
+
+
+**To learn more about Schema Driven Development and Events in Godspeed, please watch the video provided below…**
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/dVt6GPSgY7A" frameborder="0" allowfullscreen></iframe>
+</div>
+
+# Introduction To Events
+Events are the core of creating responsive, real-time applications in godspeed. An event serves as a trigger that initiates specific actions or workflows based on defined conditions or inputs. Whether it’s an API call, a scheduled job, or a message arriving from a queue, events provide a structured way to handle incoming requests and data changes.
+<!-- In the realm of microservices architecture, events serve as the lifeblood of communication and coordination. Microservices can be configured to consume events from various sources, such as HTTP endpoints and messaging systems like Kafka. These events are meticulously defined, following the OpenAPI specification, and encapsulate critical information, including event names, sources, and workflow details. -->
+
+## What are Events in Godspeed?
+In the meta-framework world, we call all types of sync events (apis) and async events (ex. Kafka, Socket, Cron) as **Events**. Events are entry points into your Godspeed application, determining how the system should respond to various types of inputs. Each event can be configured with a unique set of properties that define:
+
+- **The Source of the Event:** For example, HTTP requests, Kafka messages, Cron schedules, or custom-defined sources.
+- **The Triggering Conditions:** Conditions or methods (like GET, POST, PUT for HTTP events) that specify when an event should activate.
+- **The Actions or Workflows:** Functions or workflows that are executed when an event is triggered, containing the logic for handling the request or data.
+
+- To start using events, explore the different [Event Source Plugins](/docs/microservices-framework/event-sources/event-source-plugins/Overview) available in Godspeed and choose the ones that suit your application’s needs.
+
+## Defining an Event: Writing an Event Schema
+To define an event in Godspeed, you need to write an [Event Schema](/docs/microservices-framework/event-sources/event-schema). This schema is a structured YAML configuration that follows the OpenAPI specification, allowing you to define every detail of how the event should behave. 
+
+
+## Types of Events
+For more details on configuring each type of event, check out the dedicated sections on all supported Event types:
+
+**1. Sync Events**
+ - [HTTP](/docs/microservices-framework/event-sources/event-types/http-events)
+ - [Apollo Graphql](/docs/microservices-framework/event-sources/event-types/graphql-events)
+
+**2. Async Events**
+- [Cron](/docs/microservices-framework/event-sources/event-types/cron-events)
+- [Kafka](/docs/microservices-framework/event-sources/event-types/kafka-events)
+
+
+# Event Schema
+
+To define an event in Godspeed, you need to write an Event Schema. This schema is a structured YAML configuration that follows the OpenAPI specification, allowing you to define every detail of how the event should behave. All events adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.
+
+## Writing an event schema 
+
+It involves specifying:
+
+- The name/topic/URL of the event
+- The event handler Workflow (fn)
+- Input and Output schema
+- [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
+- [Authorization checks](/docs/microservices-framework/authorization/overview.md)
+
+By writing an event schema, you provide a blueprint that defines how an incoming request or message should be handled, making your API endpoints easy to manage and highly configurable.
+
+
+## The generic Event Schema
+Godspeed follows [Schema Driven Development & Single Source of Truth](../introduction/guard-rails.md#1schema-driven-development), [Configure Over Code](../introduction/guard-rails.md#2configure-over-code) and [Modular Architecture](../introduction/guard-rails.md#4-decoupled-architecture) approach in 
+- Listening to events from various sources and acting upon them.
+- Generating API documentation (Swagger) and other schemas like Graphql
+
+The meta-framework follows a generic schema for defining events - their inputs, outputs, swagger specs, with validations, authentication, authorization etc.  
+
+```yaml
+http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
+  fn: function_greet #Required. The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters. 
+  
+  #optional configurations
+  #Swagger components
+  body: #same as requestBody in Swagger world
+  params: #same as swagger `parameters` schema
+  responses: #same as swagger `responses` schema
+  id: # swagger. if not provided, when generating swagger, this is generated from the URI of the event by default
+  operationId: # swagger if not provided, check if `id` is set. If that is also not set, use the summary to generate the operationId
+  summary:
+  tags: # swagger if you give `tags` array in schema of event, framework uses that to add tags to your generated spec. Else it uses the path and name of the file containing the event as tags. For ex. <folder_name>_<file_name> 
+  
+  #Other non-swagger components (optional)
+  authn: #custom authentication. Currently plugins support JWT. Can be customized
+  authz: #your custom authz workflow
+  on_request_validation_error: #when validation fails
+  on_response_validation_error: #when validation fails
+  log: #Open Telemetry compliant log attributes which help debug and search through logs better
+    attributes:
+```
+Lets understand the first line from the above snippet `http.get./greet`.
+
+`http`: Protocol http eventsource (can be any)
+
+`get` : method (depends on the eventsource used. Can be topic for Kafka)
+
+`/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
+
+We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
+
+## Key Differences between a Sync and Async Event Schema
+
+When switching between eventsources, the event schema undergoes significant changes.
+- The first line is changed for each protocol:
+
+ In the case of sync events or HTTP events, the start line includes the eventsource name, method, and path. 
+
+ However, for async events, the start line combines the source name, topic and group ID (for Kafka), or schedule (for Cron).
+
+- Async events like Kafka do not have responses, authentication and authorization fields in schema.
+
+- Cron events do not have any input.
+
+:::tip Note
+You can apply multiple compatible eventsource instances in a URI for ex. `graphql & http.get./greeting`
+:::
+
+<details>
+<summary> Example HTTP Schema  </summary>
+
+```yaml
+http.get./greet: #The initial line depicts a fusion of the event, the employed method, and the path associated with the event.
+  fn: function_greet #The 'fn' key receives the function name located in 'src/functions' and forwards the accompanying parameters.
+  on_request_validation_error: on_request_validation
+  params: #It is also possible to define inputs such as 'params,' 'body,' 'headers,' and 'query parameters.'
+    - name: greet_message
+      in: query
+      required: true
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name: 
+              type: string
+  responses:
+    500:
+      content:
+        application/json: 
+          schema:
+            type: object
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
+```
+</details>
+
+**To get a quick understanding of Event scehma, please watch the video provided below…**
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/WsNwInEaWFw?si=2uEG_Tp5x36v9vAB" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<!-- <div style={{ margin: '20px auto', textAlign: 'center' }}>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/cp1qgIz1PNw?si=4Qngtu-WXoC-LQeY" frameBorder="0" allowFullScreen></iframe>
+</div> -->
+
