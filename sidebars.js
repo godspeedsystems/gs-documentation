@@ -474,7 +474,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "12. Configs and Mappings",
+          label: "12. Config and Mappings",
           items: [
             {
               type: "doc",
@@ -483,7 +483,12 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "12.2. Mappings",
+              label: "12.2. Env",
+              id: "microservices-framework/config-and-mappings/env",
+            },
+            {
+              type: "doc",
+              label: "12.3. Mappings",
               id: "microservices-framework/config-and-mappings/mappings",
             },
           ],

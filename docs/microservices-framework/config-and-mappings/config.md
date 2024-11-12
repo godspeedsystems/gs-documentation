@@ -1,12 +1,15 @@
 # Config
-## Config structure
 
-The configuration variables, along with their respective values, are specified within YAML files located in the `config/` directory. These variables are easily customizable to align with specific business use cases. The default directory structure is outlined as follows
+The configuration variables, along with their respective values, are specified within YAML files located in the `config/` directory. These variables are easily customizable to align with specific business use cases. 
+### Config structure
+The default directory structure is outlined as follows
 
 ```
 ├── config
 │   ├── custom-environment-variables.yaml
 │   ├── default.yaml
+├
+├── .env
 ```
 
 ### File naming and Load order
@@ -15,29 +18,24 @@ The configuration files under `config/` directory can have specific naming conve
 
 ## Environment variables
 
-**Configuration of enviroment variables can be done in two ways**
+Environment variables in Godspeed are essential for securely managing configuration details like API keys, database URLs, and other sensitive information. Godspeed allows two primary ways to configure and access these variables.
 
-1. The environment variables are defined in yaml files under `config/custom-environment-variables.yaml` file. The default directory structure is given as below:
+> **Note**: For sensitive information such as secrets or passwords, it is recommended to use environment variables in this way to avoid hardcoding values directly in your configuration files.
 
+### Configuration Setup for Environment Variables
 
-```
-├── config
-│   ├── custom-environment-variables.yaml
-```
+Environment variables can be set up using: 
+1. **Define variables** in `config/custom-environment-variables.yaml`.
+2. **Set values** in `.env` or use `export` in the terminal.
+3. **Access variables** using `<% config.variable_path %>` in yaml and `ctx.config` in typeScript workflows.
 
-2. We can also add database connection string and Urls in .env  file is under root folder `/.env`
+### Step 1: Define Environment Variables in YAML Configuration
 
-```
-├── .env
-```
+In the `config/custom-environment-variables.yaml` file, specify the environment variables you want to use across your project. This YAML file **maps environment variables** to meaningful keys, which you’ll use in your code.
 
-:::note
-Any configuration which includes secrets or passwords is recommended to be defined using environment variables only.
-:::
+**Example `custom-environment-variables.yaml`:**
 
-### custom-environment-variables.yaml
-This is a sample for custom environment variables where these variables gets values from environment variables set in the environment. 
-```
+```yaml
 my_datasource:
   base_url: MY_DATASOURCE_BASE_URL
   api_key: MY_DATASOURCE_API_KEY
@@ -57,18 +55,82 @@ jwt:
 prisma_secret: PRISMA_SECRET
 ```
 
-For example, `MY_DATASOURCE_BASE_URL` is defined as an environment variable. To specify its value, you need to export this variable in the environment.Enter as given below in the terminal:
+### Step 2: Set Environment Variable Values
 
-```
-$ export MY_DATASOURCE_BASE_URL=https://httpbin.org/
-```
+After defining environment variable keys in `custom-environment-variables.yaml`, you can provide actual values in two ways:
 
-After exporting the environment variable, you can access this variable in your project by using scripting 
-`<% config.my_datasource.base_url %>`
+1. **Define in `.env` file**:
+   - Open `.env` file and assign values to each variable specified in `custom-environment-variables.yaml`.
+
+     **Example `.env` file:**
+     ```plaintext
+     MY_DATASOURCE_BASE_URL=https://httpbin.org/
+     MY_DATASOURCE_API_KEY=your_api_key_here
+     MY_DATASOURCE_API_TOKEN=your_api_token_here
+     
+     KAFKA_BROKERS=["localhost:9092"]
+     KAFKA_CLIENT_ID=my-kafka-client
+     
+     JWT_ISS=https://your-issuer.com
+     JWT_AUD=https://your-audience.com
+     JWT_SECRET=your_jwt_secret
+     
+     PRISMA_SECRET=your_prisma_secret
+     ```
+
+2. **Set values directly in the environment**:
+    You can export these variables temporarily to environment by following the below syntax, based on the environment you are using:
+    - **For shell/git bash**, use `export` command as:
+      ```bash
+      $ export MY_DATASOURCE_BASE_URL=https://httpbin.org
+      $ export JWT_SECRET=mysecret
+      $ export JWT_ISS= mycompany
+      ```
+    - **For windows powershell**
+      ```
+        $env:JWT_SECRET="mysecret"
+        $env:JWT_ISS="mycompany"
+      ```
 
 :::info To reflect the updated values of the .env variables, you need to export them again after making changes. This ensures that the updated values are accessible and used in your application.
 :::
 
+
+### Step 3: Access Environment Variables in Your Project
+
+Once environment variables are set up, they can be accessed in Godspeed Project as:
+
+- **In Yaml Files**: Use the templating syntax `<% config.variable_path %>` to access the variable.
+  
+  **Example**:
+  ```yaml
+  datasource:
+    base_url: <% config.my_datasource.base_url %>
+  ```
+
+- **In TypeScript/JavaScript files**:
+  Use `ctx.config` to access values within your TypeScript workflows.
+
+  **Example TypeScript Workflow**:
+  ```typescript
+  import { GSContext, GSStatus } from "@godspeedsystems/core";
+
+  export default async function myWorkflow(ctx: GSContext, args: any) {
+      const apiKey = ctx.config.my_datasource.api_key;
+      const apiUrl = ctx.config.my_datasource.base_url;
+
+      if (!apiKey || !apiUrl) {
+          throw new GSStatus(false, 500, undefined, "Missing configuration variables");
+      }
+
+      // Use apiKey and apiUrl in your logic
+      console.log("API Key:", apiKey);
+      console.log("API URL:", apiUrl);
+
+      return new GSStatus(true, 200, undefined, { message: "Environment variables accessed successfully" });
+  }
+  ```
+  This setup provides a secure, centralized way to manage sensitive configuration data, making it easy to change values without modifying the source code.
 
 
 ## Static variables
