@@ -35,7 +35,44 @@ If the file name is index.yaml then its content is available directly at global 
 However, for other file names you need to mention the file name while accessing the mappings object like `mappings.generate.genId`
 :::
 
-Sample workflow accessing mappings object:
+### Sample Datasource Configuration using Mappings
+  ```yaml
+   # /src/datasources/aws.yaml
+   type: aws
+   default_client_config:
+     region: <% mappings.aws_region %>
+   services:
+     s3:
+       type: s3
+       config:
+         bucket: <% mappings.aws_s3_bucket %>
+     dynamodb:
+       type: dynamodb
+       config:
+         tableName: <% mappings.aws_table_name %>
+   ```
+   **Explanation**:
+   - `aws_region`, `aws_s3_bucket`, and `aws_table_name` are defined in `mappings`.
+   - This configuration dynamically injects these values into the datasource.
+
+---
+
+### Sample Event Source Configuration using Mappings **:
+  ```yaml
+   # /src/eventsources/cron.yaml
+   type: cron
+   events:
+     cron.0 0 * * *.UTC:
+       description: Daily task at midnight UTC
+       fn: daily_update
+       args:
+         reportPath: <% mappings.report_path %>
+  ```
+   **Explanation**:
+   - The `report_path` mapping is used to dynamically define the report path for the workflow triggered by the event.
+
+---
+### Sample Workflow accessing mappings
 ```
   - id: httpbinCof_step1
     description: Hit http bin with some dummy data. It will send back same as response
@@ -48,7 +85,7 @@ Sample workflow accessing mappings object:
         id:  <% mappings.generate.genId %>
 ```
 
-## Use mappings constants in other mapping files
+## Using mapping constants in other mapping files
 You can use mapping constants in other mapping files using coffee/js scripting.
 
 For example, you have mapping files `index.yaml`, `relations.json` and `reference.yaml`. Use the mappings from first two files as reference in the third file as follows:   
