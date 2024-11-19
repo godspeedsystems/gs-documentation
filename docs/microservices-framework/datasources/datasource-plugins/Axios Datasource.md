@@ -35,10 +35,44 @@ import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
 export default DataSource;
 ```
 
+### Sample config file for Axios
+
+The sample config can be modified as per the usecase of your application.
+
 ```yaml title=src/datasources/api.yaml
-type: axios
-base_url: http://localhost:4000
+  type: axios
+  base_url: https://httpbin.org
+
+  # print all api calls in curl format
+  curlifiedLogs: true 
+
+  # Authentication of API calls with token refresh logic
+  authn: 
+    fn: my_bank.authn
+    refreshOn:
+      statusCode: [401]
+
+  # Common headers to be set in all API calls
+  headers:
+    Content-Type: application/json
+    Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+
+  # Retry logic for failed API calls for ex on Internal server errors or request timeouts
+  retry:
+      when: #the condition
+        status: [500, 503] # an array or single value of codes (optional). Default 500
+        message: my custom expected message for retry #And (optionally) when response has this message
+      max_attempts: 5
+      type: constant # or random, exponential
+      interval: PT15s
+      # type: exponential
+      # min_interval: PT5s
+      # max_internal: PT15s
+      # type: random
+      # min_interval: PT5s
+      # max_internal: PT15s
 ```
+Retry interval values will be based on [ISO Temporal Duration standard](https://tc39.es/proposal-temporal/docs/duration.html)
 
 ### Sample axios datasource yaml workflow
 ```yaml title=src/functions/sample.yaml
@@ -163,42 +197,7 @@ tasks:
       min_interval: PT5s
       max_internal: PT15s
 ```
-The sample config can be modified as per the usecase of your application. For example,
 
-```yaml title=src/datasources/api.yaml
-type: axios
-base_url: https://httpbin.org
-
-# print all api calls in curl format
-curlifiedLogs: true 
-
-# Authentication of API calls with token refresh logic
-authn: 
-  fn: my_bank.authn
-  refreshOn:
-    statusCode: [401]
-
-# Common headers to be set in all API calls
-headers:
-  Content-Type: application/json
-  Cookie: <%mappings.my_bank.auth_workflow_cookie%>
-
-# Retry logic for failed API calls for ex on Internal server errors or request timeouts
-retry:
-    when: #the condition
-      status: [500, 503] # an array or single value of codes (optional). Default 500
-      message: my custom expected message for retry #And (optionally) when response has this message
-    max_attempts: 5
-    type: constant # or random, exponential
-    interval: PT15s
-    # type: exponential
-    # min_interval: PT5s
-    # max_internal: PT15s
-    # type: random
-    # min_interval: PT5s
-    # max_internal: PT15s
-```
-Retry interval values will be based on [ISO Temporal Duration standard](https://tc39.es/proposal-temporal/docs/duration.html)
 ### 4. Authentication of API calls with token refresh logic
 
 HTTP requests sometimes need authentication, means they are validated against a token which is passed in the headers

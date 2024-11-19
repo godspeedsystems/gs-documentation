@@ -20,8 +20,6 @@ The configuration files under `config/` directory can have specific naming conve
 
 Environment variables in Godspeed are essential for securely managing configuration details like API keys, database URLs, and other sensitive information. Godspeed allows two primary ways to configure and access these variables.
 
-> **Note**: For sensitive information such as secrets or passwords, it is recommended to use environment variables in this way to avoid hardcoding values directly in your configuration files.
-
 ### Configuration Setup for Environment Variables
 
 Environment variables can be set up using: 
