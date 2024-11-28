@@ -33,24 +33,24 @@ const config = {
   },
 
   plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        indexDocs: true,
-        indexDocSidebarParentCategories: 0,
+    // [
+    //   require.resolve("@cmfcmf/docusaurus-search-local"),
+    //   {
+    //     indexDocs: true,
+    //     indexDocSidebarParentCategories: 0,
 
-        // whether to index blog pages
-        indexBlog: false,
+    //     // whether to index blog pages
+    //     indexBlog: false,
       
-        // whether to index static pages
-        // /404.html is never indexed
-        indexPages: true,
+    //     // whether to index static pages
+    //     // /404.html is never indexed
+    //     indexPages: true,
       
-        // language of your documentation, see next section
-        language: "en",
-        // Options here
-      },
-    ],
+    //     // language of your documentation, see next section
+    //     language: "en",
+    //     // Options here
+    //   },
+    // ],
   ],
     // ... Your other plugins.
     // [
