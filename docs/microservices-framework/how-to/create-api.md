@@ -21,23 +21,21 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
   Define the HTTP Event to handle POST requests at the /greet endpoint and expect a name in the request body and returns a greeting.
 
   ```yaml
-  http.post./greet:     #  http.<method>./<endpoint_url>:
-  fn: greet-user-workflow   # path of the Workflow to handle the request
+http.post./greet:
+  fn: greet-user
   summary: Greet a user
-  description: Accepts a name in the request body and returns a greeting
-  authn: false  # to disable authentication for this event
-  body:         # http request body, follows the same syntax as swagger spec
+  description: Accepts a name in req body and returns a greeting
+  authn: false
+  body:
     content:
       application/json:
         schema:
           type: object
           properties:
-            name:       # request body property name 
-              type: string  # request body property type 
+            name:
+              type: string
               description: Name of the user to greet
-          required:
-            - name
-  responses:  # JSON-Schema of API responses set as per Swagger's standard responses syntax
+  responses: # JSON-Schema of API responses set as per Swagger's standard responses syntax
     200:
       description: Greeting message
       content:
@@ -57,7 +55,8 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
             properties:
               error:
                 type: string
-                example: Invalid request. 'name' is required.       
+                example: Invalid request. 'name' is required.
+      
   ```
 
 ### Step 3: Set Up the Workflow
