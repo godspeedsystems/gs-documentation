@@ -21,42 +21,42 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
   Define the HTTP Event to handle POST requests at the /greet endpoint and expect a name in the request body and returns a greeting.
 
   ```yaml
-http.post./greet:
-  fn: greet-user
-  summary: Greet a user
-  description: Accepts a name in req body and returns a greeting
-  authn: false
-  body:
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Name of the user to greet
-  responses: # JSON-Schema of API responses set as per Swagger's standard responses syntax
-    200:
-      description: Greeting message
+  http.post./greet:
+    fn: greet-user
+    summary: Greet a user
+    description: Accepts a name in req body and returns a greeting
+    authn: false
+    body:
       content:
         application/json:
           schema:
             type: object
             properties:
-              message:
+              name:
                 type: string
-                example: 'Hello, John!'
-    400:
-      description: Bad request if name is missing
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Invalid request. 'name' is required.
-      
+                description: Name of the user to greet
+    responses: # JSON-Schema of API responses set as per Swagger's standard responses syntax
+      200:
+        description: Greeting message
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Hello, John!'
+      400:
+        description: Bad request if name is missing
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: Invalid request. 'name' is required.
+        
   ```
 
 ### Step 3: Set Up the Workflow

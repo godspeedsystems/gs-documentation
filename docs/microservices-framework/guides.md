@@ -64,6 +64,6 @@ In Godspeed, datasource can mean any place where you send or retrieve data from.
 
 - **[How to update and run the project after renaming any file?](/docs/microservices-framework/how-to/short-faqs#how-to-update-and-run-the-project-after-renaming-any-file)**
 
-- **[How to handle secrets, api keys, connection_urls etc.?](/docs/microservices-framework/how-to/short-faqs#how-to-handle-secrets-api-keys-connection_urls-etc)**
+- **[How to handle secrets, api keys, connection_urls etc.?](/docs/microservices-framework/config-and-mappings/config#step-1-define-environment-variables-in-yaml-configuration)**
 
-- **[How to update CRUD APIs after change in db model?](/docs/microservices-framework/how-to/short-faqs#how-to-update-crud-apis-after-change-in-db-model)**
+- **[How to export a variable in environment ?](/docs/microservices-framework/config-and-mappings/config#step-2-set-environment-variable-values)**
