@@ -65,6 +65,7 @@ After defining environment variable keys in `custom-environment-variables.yaml`,
      MY_DATASOURCE_BASE_URL=https://httpbin.org/
      MY_DATASOURCE_API_KEY=your_api_key_here
      MY_DATASOURCE_API_TOKEN=your_api_token_here
+     MY_ACCESS_TOKEN=yor_access_token
      
      KAFKA_BROKERS=["localhost:9092"]
      KAFKA_CLIENT_ID=my-kafka-client
@@ -86,8 +87,8 @@ After defining environment variable keys in `custom-environment-variables.yaml`,
       ```
     - **For windows powershell**
       ```
-        $env:JWT_SECRET="mysecret"
-        $env:JWT_ISS="mycompany"
+      $env:JWT_SECRET="mysecret"
+      $env:JWT_ISS="mycompany"
       ```
 
 :::info To reflect the updated values of the .env variables, you need to export them again after making changes. This ensures that the updated values are accessible and used in your application.
@@ -105,7 +106,14 @@ Once environment variables are set up, they can be accessed in Godspeed Project 
   datasource:
     base_url: <% config.my_datasource.base_url %>
   ```
-
+- For cases where the variable needs to be embedded as part of a string, you can use JavaScript template string syntax within the Godspeed configuration, as shown below:
+  
+  ```yaml
+  headers: 
+    Content-Type: application/json
+    Authorization: <% `Bearer ${config.buildPiper.accessToken}` %>    # to use Bearer + token 
+  ```
+  
 - **In TypeScript/JavaScript files**:
   Use `ctx.config` to access values within your TypeScript workflows.
 

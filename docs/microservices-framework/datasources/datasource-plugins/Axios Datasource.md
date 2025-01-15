@@ -3,7 +3,7 @@ Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly i
 <!-- The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs. -->
 
 ## How to Use
-**a. ** Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the `@godspeedsystems/plugins-axios-as-datasource` to integrate the plugin.
+**a. ** Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the `axios-as-datasource` to integrate the plugin.
 
 ```
 godspeed plugin add   
@@ -26,7 +26,7 @@ godspeed plugin add
 
 ```
 
-**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/axios-as-datasource` command
+**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-axios-as-datasource` command
 
 **c. ** You will find the files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
 
@@ -80,11 +80,15 @@ id: sample
 tasks:
   - id: first_task
     fn: datasource.api.get./api/items
+  # axios request configuration options, such as headers, params, data and timeout can be directly passed as arguments (args).
     args:
       headers:
+        'X-Requested-With': 'XMLHttpRequest'
+      params:
+        ID: 12345
       data:
-      timeout:
-      params: 
+        firstName: 'Fred'
+      timeout: 1000
 ```
 
 ### Sample axios datasource js/ts workflow
@@ -92,7 +96,7 @@ tasks:
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
 
 export default async function (ctx: GSContext, args: {loan_offer: PlainObject, pan_number: string}) {
-    const client: GSDataSource = ctx.datasources.lms;
+    const client: GSDataSource = ctx.datasources.api;
 
     const res =  await client.execute(ctx, {
         meta: {
@@ -104,18 +108,7 @@ export default async function (ctx: GSContext, args: {loan_offer: PlainObject, p
     return res;
 };
 ```
-The axios request configuration options, such as headers, params, data, and timeout, can be directly passed as arguments (args).
 
-```yaml
-args:
-  headers:
-    'X-Requested-With': 'XMLHttpRequest'
-  params:
-    ID: 12345
-  data:
-    firstName: 'Fred'
-  timeout: 1000
-```
  To get more clarity checkout about [Axios configuration]( https://axios-http.com/docs/req_config)
 
 
@@ -180,7 +173,7 @@ id: some_workflow
 tasks:
   - id: post-anything
     # Fetching loan offers from rule engine for the given bank and pan card
-    fn: datasource.api_datasource.post./anything
+    fn: datasource.api.post./anything
     args:
       data:
         data: <%inputs.body.data%>
@@ -255,7 +248,7 @@ id: some_workflow
 tasks:
   - id: post-anything
     # Fetching loan offers from rule engine for the given bank and pan card
-    fn: datasource.api_datasource.post./anything
+    fn: datasource.api.post./anything
     args:
       skipAuth: true
 ```
