@@ -37,9 +37,13 @@ In Godspeed, the words Workflows and Functions mean one and the same thing, i.e.
 
 - **[How to write yaml workflows in godspeed?](/docs/microservices-framework/workflows/yaml-workflows/workflow-dsl)**
 
+- **[How to use inline scripting in Godspeed YAML configurations and workflows?](/docs/microservices-framework/inline-scripting/overview#scripting-in-workflows)**
+
+
+
 <!-- - **[When to prefer writing typescript workflows over yaml? And vice versa?]() -->
 
-### Accessing other APIs, databases and other datastores from workflows
+### Accessing other APIs, databases and datastores from workflows
 In Godspeed, datasource can mean any place where you send or retrieve data from. It could mean:
 - External APIs
 - Datastores
@@ -67,3 +71,4 @@ In Godspeed, datasource can mean any place where you send or retrieve data from.
 - **[How to handle secrets, api keys, connection_urls etc.?](/docs/microservices-framework/config-and-mappings/config#step-1-define-environment-variables-in-yaml-configuration)**
 
 - **[How to export a variable in environment ?](/docs/microservices-framework/config-and-mappings/config#step-2-set-environment-variable-values)**
+

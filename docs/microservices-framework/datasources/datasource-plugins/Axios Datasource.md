@@ -55,7 +55,8 @@ The sample config can be modified as per the usecase of your application.
   # Common headers to be set in all API calls
   headers:
     Content-Type: application/json
-    Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+    Cookie: <% mappings.my_bank.auth_workflow_cookie %>
+    Authorization: <% `Bearer ${config.my_bank.apiToken}` %>    # to use Bearer token 
 
   # Retry logic for failed API calls for ex on Internal server errors or request timeouts
   retry:
