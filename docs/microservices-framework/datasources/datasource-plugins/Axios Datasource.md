@@ -1,34 +1,16 @@
-Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 🌐✨
+Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 
 
 <!-- The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs. -->
 
 ## How to Use
-**a. ** Create a godspeed project from the CLI and by default the axios plugin is integrated into your project if not, add the plugin from the CLI and select the `axios-as-datasource` to integrate the plugin.
+
+**a. ** When you create a godspeed project from the CLI, by default the axios plugin is integrated into your project if not, add the plugin from the CLI
 
 ```
-godspeed plugin add   
-
-
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬───────────────────────────────────┬──────────────────────────────────────────────────────────────────┐
-│      │ Name                              │ Description                                                      │
-├──────┼───────────────────────────────────┼──────────────────────────────────────────────────────────────────┤
-│  ◯   │ kafka-as-datasource-as-eventsource│ kafka as datasource-as-eventsource plugin for Godspeed Framework │
-├──────┼───────────────────────────────────┼──────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ axios-as-datasource               │ Axios as datasource plugin for Godspeed Framework                │
-└──────┴───────────────────────────────────┴──────────────────────────────────────────────────────────────────┘
-
+godspeed plugin add @godspeedsystems/plugins-axios-as-datasource
 ```
 
-**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-axios-as-datasource` command
-
-**c. ** You will find the files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
+**b. ** You will find two files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
 
 ```typescript title=src/datasources/types/axios.ts
 import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
@@ -75,7 +57,7 @@ The sample config can be modified as per the usecase of your application.
 ```
 Retry interval values will be based on [ISO Temporal Duration standard](https://tc39.es/proposal-temporal/docs/duration.html)
 
-### Sample axios datasource yaml workflow
+### Sample yaml workflow
 ```yaml title=src/functions/sample.yaml
 id: sample
 tasks:
@@ -92,7 +74,7 @@ tasks:
       timeout: 1000
 ```
 
-### Sample axios datasource js/ts workflow
+### Sample js/ts workflow
 ```js
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
 
@@ -152,7 +134,7 @@ The plugin consists of the following key components:
 
 
 ### 3. Axios retry
-###  **a. ** Set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
+**a. ** Set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
 
 ```yaml
 type: axios
@@ -167,7 +149,7 @@ retry:
 ```
 the above config works on two conditions if status from the api is 500,501 or 502 and message value is as mentioned in the config. When condition is optional and if retry is without when condition, the retry will be made on failures of the API.
 
-### **b. ** Override retry logic at task level within args object of the axios method call.
+**b. ** Override retry logic at task level within args object of the axios method call.
 
 ```yaml
 id: some_workflow

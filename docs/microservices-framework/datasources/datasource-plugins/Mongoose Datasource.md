@@ -1,22 +1,13 @@
 Mongoose as a datasource: It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
-## How to Use
-**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-mongoose-as-datastore` to integrate the plugin.
+### How to Add 
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
+
 ```
-> godspeed plugin add
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
-│      │ Name                               │ Description                                                        │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ mongoose-as-datastore                │ Mongoose as a datasource plugin for Godspeed Framework.              │
-└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource 
 ```
-**- ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-mongoose-as-datastore` command.   
-**- ** You will find two files in your project related to the Prisma plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+
+**- ** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
 import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datastore';

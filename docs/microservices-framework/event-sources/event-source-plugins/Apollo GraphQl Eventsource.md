@@ -7,37 +7,15 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
 
 ### Setting up Graphql
 
-1. Add the GraphQL plugin to Godspeed-CLI with the `godspeed plugin add` command.
+### 1. Add the GraphQL plugin
 
-2. Tailor the configuration file according to your needs in `eventsource/graphql.yaml`.
+```
+  godspeed plugin add @godspeedsystems/plugins-graphql-as-eventsource
+```
 
-  - Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-graphql-as-eventsource` to integrate the plugin.
+### 2. Tailor the configuration file according to your needs.
 
-  ```
-  > godspeed plugin add
-        ,_,   ╔════════════════════════════════════╗
-        (o,o)  ║        Welcome to Godspeed         ║
-      ({___}) ║    World's First Meta Framework    ║
-        " "   ╚════════════════════════════════════╝
-  ? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-  ┌────┬───────────────────────────────────┬─────────────────────────────────────────────────────────────────┐
-  │    │ Name                              │ Description                                                     │
-  ├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-  │ ❯◯ │ graphql-as-eventsource            │ graphql as eventsource plugin for Godspeed Framework            │
-  ├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-  │  ◯ │ aws-as-datasource                 │ aws as datasource plugin for Godspeed Framework                 │
-  ├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-  │  ◯ │ mailer-as-datasource              │ mailer as datasource plugin for Godspeed Framework              │
-  ├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-  │  ◯ │ excel-as-datasource               │ excel as datasource plugin for Godspeed Framework               │
-  ├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-  │  ◯ │ kafka-as-datasource-as-eventsource│ kafka as datasource-as-eventsource plugin for Godspeed Framework│
-  └────┴───────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
-  ```
-
-  #### A GraphQL instance configuration 
-
-  File: (src/eventsources/Apollo.yaml)
+ File: (src/eventsources/grahpql.yaml)
 
   This configuration is same as Express or Fastify configuration, except that currently file upload is not supported and so is not swagger (since Swagger is not relevant for Graphql). 
 
@@ -69,16 +47,16 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
       args: <%inputs%>
   ```
 
-3. #### Setup Graphql events & event handlers 
+### 3. Setup Graphql event & event handlers 
 
-  Ensure the event key prefix aligns with the name of the configuration YAML file. In this example, the prefix for the Event key is `Apollo`. The event schema follows REST standards, resembling HTTP events.
+  Ensure the event key prefix aligns with the name of the configuration YAML file. In this example, the prefix for the Event key is `graphql`. The event schema follows REST standards, resembling HTTP events.
 
   #### GraphQL Event 
   Its same as http event format. When creating Graphql schema, all `get` events are created as queries and rest are mutations.
   File: (src/events/create_category.yaml)
 
   ```yaml
-  Apollo.post./mongo/category: #this will become a mutation
+  graphql.post./mongo/category: #this will become a mutation
     summary: Create a new Category
     description: Create Category from the database
     fn: create
@@ -127,11 +105,14 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
         - {} # Options: the third argument
   ```
 
-4. Use `godspeed gen-graphql-schema` to auto generate graphql schema.
+### 4. Auto generate graphql schema
+```
+ `godspeed gen-graphql-schema`
+```
 
-5. Use `godspeed serve `to start server. 
+### 5. Start Server
 
-6. Open `https://studio.apollographql.com/sandbox/explorer` on your browser and connect with the correct port on which you are running Apollo service.
+Run `godspeed serve` and open `https://studio.apollographql.com/sandbox/explorer` on your browser and connect with the correct port on which you are running Apollo service.
 
 This configuration emphasizes the simplicity of implementing GraphQL within the Godspeed framework, promoting efficiency and clarity in API development.
 

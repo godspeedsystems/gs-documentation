@@ -133,14 +133,18 @@ For detailed documentation visit https://godspeed.systems
 
 ```
 ---
-#### Plugin Add: To install godspeed plugin
+### Plugin Add: To install godspeed plugin
 ---
-The `godspeed plugin add` command allows the user to select a plugin from the list of available plugins and add them to the project.
+The `godspeed plugin add` command allows you to install plugins into your Godspeed project. You can use it in two ways:
 
+#### Interactive Mode (Default)
+This opens a CLI prompt to select from available plugins:
 ```bash
-$  godspeed plugin add
+$ godspeed plugin add
 ```
-```bash
+You’ll see a list of officially supported plugins like `prisma-as-datastore`, `axios-as-datasource`, `aws-as-datasource`, etc., and you can choose the ones you want using the arrow keys and spacebar.
+
+```
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
@@ -162,22 +166,35 @@ $  godspeed plugin add
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 ---
-#### plugin remove
+### Direct Plugin Installation by Name
+---
+You can also directly install a plugin by specifying its NPM package name:
 
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-<plugin-name>
+```
+This is useful when scripting setups or when you already know the exact plugin you need.
+
+#### Example:
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-express-as-http
+```
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
+```
+---
+#### plugin remove
+---
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.
 
 ```bash
 $  godspeed plugin remove
-
 ```
 ```
-
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 ? Please select godspeed plugin to uninstall: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
@@ -190,7 +207,6 @@ $  godspeed plugin remove
 │  ◯   │ axios-as-datasource                    │ Axios as datasource plugin for Godspeed Framework                              │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 #### plugin update
 
 The `godspeed plugin update` command allows the user to select a plugin from the list of available plugins and update them.
@@ -199,14 +215,10 @@ The `godspeed plugin update` command allows the user to select a plugin from the
 $  godspeed plugin update
 ```
 ```bash
-
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
-
 ? Please select godspeed plugin to update: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
 │      │ Name                                   │ Description                                                                    │

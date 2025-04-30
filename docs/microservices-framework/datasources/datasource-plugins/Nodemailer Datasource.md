@@ -11,13 +11,20 @@ Sending emails in your Node.js application has never been smoother. The Godspeed
 
 Whether you're sending transactional emails, newsletters, or notifications, this plugin empowers you to deliver messages with Godspeed. Let's elevate your email game together!
 
-## Example usage
+### How to Add 
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
+
+```
+godspeed plugin add @godspeedsystems/plugins-mailer-as-datasource
+```
+
+### Example usage
 
 ### Config
-```yaml title=src/datasources/mail.yaml
-type: mail
+```yaml title=src/datasources/mailer.yaml
+type: mailer
 user: 'godspeed@gmail.com'
-pass: 'rmeb bjak xcam xkub'
+pass: 'rmeb bjak xcam xkub'           # app specific password
 ```
 
 ### Event for Producer

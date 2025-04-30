@@ -1,5 +1,4 @@
 ---
-# Display h2 to h5 headings
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
@@ -14,35 +13,18 @@ Prisma-as-datasource plugin provides functionality to access most popular databa
 
 Prisma is a modern and open-source database toolkit that simplifies database access for developers. It offers a strongly typed query builder, schema migrations, support for various databases, real-time data synchronization, and enhanced security, making it a powerful tool for efficient and secure database interactions in web applications.
 
-## How to add plugin
-### Add plugin
-Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-prisma-as-datastore` to integrate the plugin.
+### How to Add plugin
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
 
 ```
-> godspeed plugin add
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
-│      │ Name                               │ Description                                                        │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ excel-as-datasource                │ excel as datasource plugin for Godspeed Framework                  │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ mailer-as-datasource               │ mailer as datasource plugin for Godspeed Framework                 │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ kafka-as-datasource-as-eventsource │ kafka as datasource-as-eventsource plugin for Godspeed Framework   │
-└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
 ```
 
 ### Related files
 You will find a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
+
 ```typescript title=prisma.ts
+
 import { DataSource } from '@godspeedsystems/plugins-prisma-as-datastore';
 export default DataSource;
 ```

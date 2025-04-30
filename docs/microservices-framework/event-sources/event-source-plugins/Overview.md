@@ -7,13 +7,10 @@ To integrate these plugins into your project, simply use the command:
 $  godspeed plugin add
 ```
 ```bash
-
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 ? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
@@ -32,8 +29,19 @@ $  godspeed plugin add
 
 ```
 
-you can specify plugin name to add directly to your project
+You can directly install a plugin by specifying its NPM package name:
 
-```sh
-godspeed plugin add <plugin-name>
+```bash
+godspeed plugin add <plugin-package-name>
 ```
+Example:
+
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-express-as-http
+```
+
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
+```
+
+To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](/docs/microservices-framework/event-sources/event-source-plugins.md).

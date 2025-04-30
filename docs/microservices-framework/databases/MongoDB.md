@@ -7,22 +7,19 @@ MongoDB is a popular NoSQL database. In Godspeed, you can connect to MongoDB in 
 This plugin provides seamless integration with MongoDB through the Mongoose library. With this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
 ### How to Use
-**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select 'mongoose-as-datasource' to integrate the plugin.
+**- ** Open the godspeed project in vscode and then install the plugin by specifying its name:
+
+1. **Using Godspeed CLI**
 ```
-> godspeed plugin add
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
-│      │ Name                               │ Description                                                        │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ mongoose-as-datasource            │ Mongoose as a datasource plugin for Godspeed Framework             │
-└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+  godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource
+
 ```
-**- ** The plugin can also be directly installed by running `npm i @godspeedsystems/plugins-mongoose-as-datasource` command.   
-**- ** You will find two files in your project related to the Prisma plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+2. **Using npm**
+```
+npm i @godspeedsystems/plugins-mongoose-as-datasource
+```
+
+**- ** After having installed using godspeed cli, you will find two files in your project at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
 import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datasource';

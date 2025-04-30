@@ -7,7 +7,7 @@ title: Eventsources
   
   The eventsources listen on the incoming events. They process incoming event as per the middleware set by you, including [authentication](../authentication/overview.md). Finally, they transform it to Godspeed's standard `GSCloudEvent` object, which is then made available to the event handlers and subsequent child workflows. 
   
-  To have a look at supported eventsources and understanding their implementation, refer [Godspeed's gs-plugins mono-repo](https://github.com/godspeedsystems/gs-plugins). For ex. [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
+  To have a look at supported eventsources and understanding their implementation, refer [Godspeed's gs-plugins mono-repo](https://github.com/godspeedsystems/gs-plugins). For ex. **[Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
 
 
 ## Types of eventsources 
@@ -24,19 +24,16 @@ Based on functionality and the nature of the information they provide to the sys
 
 ## How to use an eventsource in Godspeed project?
 
-  You can use Godspeed CLI to browse and install plugins which are published and maintained by Godspeed.
+You can use Godspeed CLI to browse and install plugins which are published and maintained by Godspeed.
 ```bash
     godspeed plugin add
 ```
 
 ```bash
-
-
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
        " "   ╚════════════════════════════════════╝
-
 
 ? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
 ┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
@@ -52,7 +49,23 @@ Based on functionality and the nature of the information they provide to the sys
 ├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
 │  ◯   │ kafka-as-datasource-as-eventsource     │ kafka as datasource-as-eventsource plugin for Godspeed Framework               │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+```
 
+### You can directly install a plugin by specifying its NPM package name:
+
+
+```bash
+godspeed plugin add <plugin-package-name>
+```
+
+Example:
+
+```
+$ godspeed plugin add @godspeedsystems/plugins-express-as-http
+```
+
+```
+$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
 ```
 
 To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](/docs/microservices-framework/event-sources/event-source-plugins.md).

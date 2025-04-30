@@ -2,25 +2,12 @@ AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Serv
 
 ## Steps to use aws plug-in in godspeed framework:
 
-### How to install
-**a. ** Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-aws-as-datasource` to integrate the plugin.
+### How to install 
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
 
 ```
-> godspeed plugin add
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
-│      │ Name                               │ Description                                                        │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
-└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+godspeed plugin add @godspeedsystems/plugins-aws-as-datasource 
 ```
-**b. ** The plugin can also be directly installed by running `npm i @godspeedsystems/aws-as-datasource` command
 
 ### Configuration
 

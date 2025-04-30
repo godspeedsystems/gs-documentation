@@ -4,38 +4,14 @@ The Godspeed Redis Plugin provides integration with Redis, allowing developers t
 
 You can use redis datasource in caching also. Check [caching](../caching.md) for more information.
 
-## How to add Redis plugin in your project   
-
-**a. ** Create a godspeed project from the CLI and add the Redis plugin the plugin from the CLI and select the `@godspeedsystems/plugins-redis-as-datasource` to integrate the plugin.   
-
-```
-macbookpro@MacbookPros-MBP gs-test-project % godspeed plugin add   
-
-
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌────┬───────────────────────────────────┬─────────────────────────────────────────────────────────────────┐
-│    │ Name                              │ Description                                                     │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ kafka-as-datasource-as-eventsource│ kafka as datasource-as-eventsource plugin for Godspeed Framework│
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ cron-as-eventsource               │ Cron as eventsource plugin for Godspeed Framework               │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ ❯◯ │ redis-as-datasource               │ redis as datasource plugin for Godspeed Framework               │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ elasticgraph-as-datasource        │ elasticgraph as datasource plugin for Godspeed Framework        │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ axios-as-datasource               │ Axios as datasource plugin for Godspeed Framework               │
-└────┴───────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
+### How to Add plugin
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
 
 ```
+godspeed plugin add @godspeedsystems/plugins-redis-as-datasource
+```
 
-**b. ** You will find the files in your project related to the Redis plugin at `src/datasources/types/redis.ts` and `src/datasources/redis.yaml`.
+You will find the files in your project related to the Redis plugin at `src/datasources/types/redis.ts` and `src/datasources/redis.yaml`.
 
 
 ### 1. redis config

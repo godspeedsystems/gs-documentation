@@ -3,48 +3,39 @@
 The Godspeed Fastify Plugin is an essential component of the Godspeed framework, designed to streamline the integration of event-driven and serverless functionalities into your projects. This plugin harnesses the power of Fastify, a fast and low overhead web framework for Node.js, to handle HTTP events. It simplifies the process of defining event subscriptions and processing incoming events, providing a robust foundation for building responsive and scalable applications.
 
 ## How to Use
-When creating a Godspeed project using the CLI, you can add the plugin from the CLI and select `@godspeedsystems/plugins-fastify-as-http` to seamlessly integrate it into your project.
+
+### Add the Plugin
+When creating a Godspeed project using the CLI, you can add the plugin using following command.
 ```bash
-godspeed plugin add
-
-
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
-│      │ Name                                   │ Description                                                                    │
-├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ fastify-as-http                        │ Godspeed event source plugin for fastify as http server                        │
-├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
-│  ◯   │ aws-as-datasource                      │ aws as datasource plugin for Godspeed Framework                                │
-├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
-│  ◯   │ excel-as-datasource                    │ excel as datasource plugin for Godspeed Framework                              │
-├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
-│  ◯   │ mailer-as-datasource                   │ mailer as datasource plugin for Godspeed Framework                             │
-├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
-│  ◯   │ elasticgraph-as-datasource             │ elasticgraph as datasource plugin for Godspeed Framework                       │
-└──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+godspeed plugin add @godspeedsystems/plugins-fastify-as-http
 ```
-- You will find the files in your project related to the Fastify plugin at `src/eventsources/types/fastify.ts` and `src/eventsources/http.yaml`.
+### Related Files
+- You will find two files in your project related to the Fastify plugin at `src/eventsources/types/fastify.ts` and `src/eventsources/http.yaml`.
 
-### fastify.ts
+#### fastify.ts
 
 ```typescript
 import { FastifyEventSource } from '@godspeedsystems/plugins-fastify-as-http';
 export default FastifyEventSource;
 ```
 
-### Fastify config (src/eventsources/http.yaml)
+#### Fastify config (src/eventsources/fastify.yaml)
 
 ```yaml
 type: fastify
 port: 3000
 ```
-### fastify event (src/events/sample.yaml)
+
+#### Fastify event 
+```yaml
+# Event Schema Structure
+http.<method>./<endpoint_url>:
+    fn: <function_yaml>
+    body:
+    params:
+    responses:
+```
+(src/events/sample.yaml)
 ```yaml
 http.post./sample_api:
     fn: sample      #redirects to src/functions/sample.yaml
@@ -71,17 +62,11 @@ http.post./sample_api:
             schema:
               type: string
 ```
-```yaml
-http.<method>./<endpoint_url>:
-    fn: <function_yaml>
-    body:
-    params:
-    responses:
-```
+
 - The event YAML defines properties for handling specific HTTP requests within the Fastify app. In the YAML, `<method>` should be replaced with actual HTTP methods such as `GET, POST, PUT, or DELETE`, specifying how the app handles those requests. The `<endpoint_url>` field should contain the API URL for the respective HTTP route.
 - A function will be triggered on sending a request to the respective url. The functions are created under `src/functions/`.
 
-### Function to be called (src/functions/sample.yaml)
+#### Function to be called (src/functions/sample.yaml)
 ```yaml
 summary:
 description:

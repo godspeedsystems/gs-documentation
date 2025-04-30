@@ -2,51 +2,29 @@ Kafka is a versatile messaging system designed to securely transfer data between
 
 A brief description of how to use Kafka plug-in in our godspeed framework as Data Source as Event Source. 
 
-## Steps to use kafka plug-in in godspeed framework:
-
-## How to Use
-- Create a godspeed project from the CLI , open the created project in vscode and then add the plugin from the CLI of vscode, select the `@godspeedsystems/plugins-kafka-as-datasource-as-eventsource` to integrate the plugin.
-
+### How to Add
+- Open a godspeed project and add the plugin using cli:
 ```
-> godspeed plugin add
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌──────┬────────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
-│      │ Name                               │ Description                                                        │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ prisma-as-datastore                │ Prisma as a datasource plugin for Godspeed Framework.              │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ aws-as-datasource                  │ aws as datasource plugin for Godspeed Framework                    │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ excel-as-datasource                │ excel as datasource plugin for Godspeed Framework                  │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│  ◯   │ mailer-as-datasource               │ mailer as datasource plugin for Godspeed Framework                 │
-├──────┼────────────────────────────────────┼────────────────────────────────────────────────────────────────────┤
-│ ❯◯   │ kafka-as-datasource-as-eventsource │ kafka as datasource-as-eventsource plugin for Godspeed Framework   │
-└──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
+  godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource
 ```
 
 ### Example usage Datasource (Producer):
 
-1. Update configuration file based on your requirements in `Datasource/kafka.yaml`.
-#### kafka config ( src/datasources/kafka.yaml )
+#### Update configuration file based on your requirements in `src/datasources/kafka.yaml`
+
+kafka config ( src/datasources/kafka.yaml )
 ```yaml
 type: kafka
 clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 ```
 
-
-
-#### kafka event for Producer ( src/events/kafka_pub.yaml )
+#### Define kafka event for Producer ( src/events/kafka_pub.yaml )
 In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
 ```yaml
-# event for Publish
+# event to Publish
 
-'http.post./kafka-pub':
+http.post./kafka-pub:
   fn: kafka-publish
   body:
     content:
@@ -76,15 +54,15 @@ tasks:
 
 ### Example usage EventSource (Consumer):
 
-1. Update configuration file based on your requirements in `Eventsources/kafka.yaml`.
+Update configuration file based on your requirements in `Eventsources/kafka.yaml`.
+
 #### kafka config ( kafka.yaml )
 ```yaml
 type: kafka
 groupId: "kafka_proj"
-
 ```
 
-#### kafka event for consumer ( src/events/kafka_pub.yaml )
+#### kafka event for consumer (src/events/kafka_pub.yaml)
 
 To use Consumer we need to follow the below event key format.
 
@@ -95,8 +73,8 @@ The consumer event is triggered whenever a new message arrives on the specified 
 
 ``` yaml
 # event to consume data from Topic
-kafka.publish-producer1.kafka_proj: // event key
-  id: kafka__consumer
+kafka.publish-producer1.kafka_proj:   # event key
+  id: kafka_consumer
   fn: kafka_consume
   body:
     description: The body of the query
@@ -107,7 +85,7 @@ kafka.publish-producer1.kafka_proj: // event key
 ```
 #### kafka workflow for Consumer ( src/functions/kafka_consume.yaml )
 ```yaml
-# function for consume data
+# function to consume data
 id: kafka-consumer
 summary: consumer
 tasks:

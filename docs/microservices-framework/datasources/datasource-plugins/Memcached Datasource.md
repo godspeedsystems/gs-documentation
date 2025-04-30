@@ -1,35 +1,14 @@
 The Godspeed mem-cache plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
 
 ## How to add mem-cache plugin in your project
-**- ** Create a godspeed project from the CLI and add the mem-cache plugin from the CLI and select the `@godspeedsystems/plugins-mem-cache-as-datasource` to integrate the plugin.
+
+- **Create a godspeed project from the CLI and add the mem-cache plugin **
 
 ```
-macbookpro@MacbookPros-MBP gs-test-project % godspeed plugin add   
-
-
-       ,_,   ╔════════════════════════════════════╗
-      (o,o)  ║        Welcome to Godspeed         ║
-     ({___}) ║    World's First Meta Framework    ║
-       " "   ╚════════════════════════════════════╝
-
-
-? Please select godspeed plugin to install: (Press <space> to select, <Up and Down> to move rows)
-┌────┬───────────────────────────────────┬─────────────────────────────────────────────────────────────────┐
-│    │ Name                              │ Description                                                     │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ kafka-as-datasource-as-eventsource│ kafka as datasource-as-eventsource plugin for Godspeed Framework│
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ cron-as-eventsource               │ Cron as eventsource plugin for Godspeed Framework               │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ ❯◯ │ mem-cache-as-datasource           │ mem-cache as datasource plugin for Godspeed Framework           │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ elasticgraph-as-datasource        │ elasticgraph as datasource plugin for Godspeed Framework        │
-├────┼───────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│  ◯ │ axios-as-datasource               │ Axios as datasource plugin for Godspeed Framework               │
-└────┴───────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
-
+godspeed plugin add @godspeedsystems/plugins-mem-cache-as-datasource
 ```
-**- ** You will find the files in your project related to the plugin at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
+- **You will find the files in your project related to the plugin**
+ at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
 ```yaml title=src/datasources/mem-cache.yaml
 type: mem-cache
 ```
