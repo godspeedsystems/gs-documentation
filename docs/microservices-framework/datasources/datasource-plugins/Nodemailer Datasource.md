@@ -1,4 +1,4 @@
-Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream? 📧✨
+Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream?
 
 Sending emails in your Node.js application has never been smoother. The Godspeed Nodemailer Plugin provides seamless integration between the robust Godspeed framework and Nodemailer, the go-to solution for email delivery in Node.js.
 
@@ -23,42 +23,95 @@ godspeed plugin add @godspeedsystems/plugins-mailer-as-datasource
 ### Config
 ```yaml title=src/datasources/mailer.yaml
 type: mailer
-user: 'godspeed@gmail.com'
-pass: 'rmeb bjak xcam xkub'           # app specific password
+user: godspeed@gmail.com
+pass: rmeb bjak xcam xkub    # app specific password
 ```
 
 ### Event for Producer
 ```yaml title=src/events/mail_send_event.yaml
-http.post./mail:
-  summary: sending_mail
-  description: sending_mail
-  fn: mail_send
+http.post./email:
+  summary: Send email to user
+  description: Sends an email to a user using the mailer datasource
+  fn: send_email
+  authn: false
   body:
-      type: object
-      properties:
-        name:
-          type: string
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            recipient:
+              type: string
+            subject:
+              type: string
+            body:
+              type: string
+          required:
+            - recipient
+            - subject
+            - body
   responses:
-    200:
+    '200':
+      description: Email sent successfully
       content:
         application/json:
           schema:
             type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object # Or a more specific schema if the mailer returns structured data
+    '400':
+      description: Failed to send email
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              error:
+                type: string
+```
+### Typescript Workflow to send mail
+```typescript title=src/functions/send_email.ts
 
+import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
+export default async function (ctx: GSContext) {
+  const { body} = ctx.inputs.data;
+  const mailerClient: GSDataSource = ctx.datasources.mailer;
+
+  try {
+    const response = await mailerClient.execute(ctx, {
+      meta: {
+        method: 'post',
+        url: '/send',
+        fnNameInWorkflow: 'mailer.execute.send'
+      },
+      to: body.recipient,
+      subject: body.subject,
+      text: body.body
+    });
+    return new GSStatus(true, 200, "Email Sent successfully", response, undefined);
+  } catch (error: any) {
+      const errorData = error.stack || error;
+      return new GSStatus(false, 400, "Failed to send email", errorData, undefined);
+  }
+}
 ```
 
-### Workflow to send mail
-```yaml title=src/functions/mail_send.yaml
-summary: send
+### Yaml Workflow to send mail
+```yaml title=src/functions/send_email.yaml
+summary: send email
 tasks:
-  - id: send_mail
-    fn: datasource.mail.send
+  - id: send_email
+    fn: datasource.mailer.send
     args: 
-      from: 'sender@gmail.com'
-      to: 'receiver@gmail.com'
-      subject: 'Hello from Godspeed'
-      text: 'Have a Nice day'
-  
+      to: receiver@gmail.com
+      subject: Hello from Godspeed
+      text: Have a Nice day
 ```
 
 ## Reference links
