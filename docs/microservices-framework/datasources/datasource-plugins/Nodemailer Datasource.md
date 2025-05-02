@@ -23,6 +23,7 @@ godspeed plugin add @godspeedsystems/plugins-mailer-as-datasource
 ### Config
 ```yaml title=src/datasources/mailer.yaml
 type: mailer
+service: gmail       
 user: godspeed@gmail.com
 pass: rmeb bjak xcam xkub    # app specific password
 ```
@@ -85,11 +86,6 @@ export default async function (ctx: GSContext) {
 
   try {
     const response = await mailerClient.execute(ctx, {
-      meta: {
-        method: 'post',
-        url: '/send',
-        fnNameInWorkflow: 'mailer.execute.send'
-      },
       to: body.recipient,
       subject: body.subject,
       text: body.body

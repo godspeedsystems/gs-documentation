@@ -53,6 +53,8 @@ In Godspeed, datasource can mean any place where you send or retrieve data from.
   - Vector stores (specially useful for AI and recommendation engines)
   - File system or files
   - Memory
+  
+- **[How to Send Emails with Nodemailer in Godspeed?](/docs/microservices-framework/datasources/datasource-plugins/Nodemailer%20Datasource.md)**
 
 - **[How to access databases using Prisma?](/docs/microservices-framework/databases/Overview)**
 

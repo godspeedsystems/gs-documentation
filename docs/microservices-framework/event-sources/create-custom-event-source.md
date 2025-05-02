@@ -1,13 +1,64 @@
-# Create a Custom Eventsource
+# Create a New Eventsource
 
 ## About Eventsources
 
 An eventsource is any entity or technology responsible for capturing events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Eventsources can include Sync and Async event sources like Message brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
 
-### Any Eventsource
-#### Steps to create custom eventsource :
+### Steps to create any new eventsource :
 
-:::tip **To customize any event source, go through the respective plugin's ts file and customize. Use this [repo](https://github.com/godspeedsystems/gs-plugins.git) for better understanding**
+1. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
+
+```
+    ├── src
+        ├── datasources
+        ├── events
+        |
+        ├── eventsources
+        │   ├── types
+        │   |    └── custom_eventsource.ts
+        |   |
+        │   └── custom_eventsource.yaml
+        |
+        └── functions
+```
+2. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
+
+3. Afterward, you can access the methods provided by `GSEventSource`. Initialize your client by calling the `initClient()` function.
+
+4. Once your client is initialized, you can execute its subscription using the `subscribeToEvent` function.
+
+Eventsource typescript file appears as follows:
+
+```typescript
+  import { PlainObject, GSActor, GSCloudEvent, GSStatus, GSEventSource, GSDataSource, GSContext } from "@godspeedsystems/core";
+
+  class EventSource extends GSEventSource {
+    protected initClient(): Promise<PlainObject> {
+        // initialize your client
+    }
+    async subscribeToEvent(eventRoute: string, eventConfig: PlainObject, processEvent: (event: GSCloudEvent, eventConfig: PlainObject) => Promise<GSStatus>): Promise<void> {
+      try {
+        //  subscribeToEvent    
+      } catch (error) {
+        throw error;
+      }
+    }
+  }
+  const SourceType = 'ES';
+  const Type = "new_es_name"; // this is the loader file of the plugin, So the final loader file will be `types/${Type.js}`
+  const CONFIG_FILE_NAME = "new_es_name"; // in case of event source, this also works as event identifier, and in case of datasource works as datasource name
+  const DEFAULT_CONFIG = {};
+
+  export {
+    EventSource,
+    SourceType,
+    Type,
+    CONFIG_FILE_NAME,
+    DEFAULT_CONFIG
+  }
+  ```
+
+:::tip **To customize any existing event source, go through the respective plugin's ts file and customize. Use this [repo](https://github.com/godspeedsystems/gs-plugins.git) for better understanding**
 :::
 
 <details>
@@ -255,12 +306,12 @@ tasks:
             └── every_minute.yaml
 ```
 
-#### cron config ( src/eventsources/cron.yaml )
+#### Cron config ( src/eventsources/cron.yaml )
 ```yaml
 type: cron
 ```
 
-#### initializing client and execution ( src/eventsources/types/cron.ts ) :
+#### Initializing client and execution ( src/eventsources/types/cron.ts ) :
 
 ```javascript
 import {GSEventSource, GSCloudEvent,PlainObject, GSStatus, GSActor } from "@godspeedsystems/core";
@@ -313,8 +364,6 @@ subscribeToEvent(
 };
 ```
 
-
-
 #### cron event  ( src/events/every_minute_task.yaml )
 
 ```yaml
@@ -341,49 +390,13 @@ tasks:
 
 </details>
 
-
-1. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
-
-```
-    ├── src
-        ├── datasources
-        │
-        ├── events
-        |   |
-        │   └── helloworld.yaml
-        |
-        ├── eventsources
-        │   ├── types
-        │   |    └── custom_eventsource.ts
-        |   |
-        │   └── custom_eventsource.yaml
-        |
-        └── functions
-            |
-            └── helloworld.yaml
-
-
-```
-
-2. In your TypeScript file, use an import statement to bring in `GSEventSource` from the `@godspeedsystems/core` package. Then, create a class that inherits from `GSEventSource`.
-
-3. Afterward, you can access the methods provided by `GSEventSource`. Initialize your client by calling the `initClient()` function.
-
-4. Once your client is initialized, you can execute its subscription using the `subscribeToEvent` function.
-
 ### Datasource as eventsource 
 
 There are special cases when datasource can also act as an eventsource.
 For eg: Kafka can be used both datasource as well as eventsource. When we are publishing message to kafka, it can work as a datasouce .But when we are listening to events on kafka, then it is event source also, then the same client can serve as both.
 
-
-#### Steps to create custom datasource as eventsource :
-
-:::tip **To customize any event source, go through the respective plugin's ts file and customize. Use this [repo](https://github.com/godspeedsystems/gs-plugins.git) for better understanding**
-:::
-
 <details>
-  <summary>let's use kafka as an example of an eventsource :</summary>
+  <summary>Let's use kafka as an example of an eventsource as datasource:</summary>
 
 #### Project structure
 
@@ -414,7 +427,6 @@ For eg: Kafka can be used both datasource as well as eventsource. When we are pu
             └── kafka-consume.yaml
 ```
 
-
 #### Kafka config ( src/eventsources/kafka.yaml )
 ```yaml
 type: kafka
@@ -425,7 +437,6 @@ groupId: "kafka_proj"
 
 ```javascript
 import { GSCloudEvent, GSStatus, GSActor, GSDataSourceAsEventSource, PlainObject} from "@godspeedsystems/core";
-
 
 export default class EventSource extends GSDataSourceAsEventSource {
   async subscribeToEvent(
@@ -527,8 +538,6 @@ tasks:
       args: <% inputs %>
 
 ```
-
-
 </details>
 
 

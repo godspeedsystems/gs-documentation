@@ -108,7 +108,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.2. Create custom event source",
+              label: "6.2. Create new event source",
               id: "microservices-framework/event-sources/create-custom-event-source",
             },
 
@@ -337,7 +337,7 @@ const sidebars = {
 
             {
               type: "doc",
-              label: "9.3. Create Custom DataSource",
+              label: "9.3. Create New DataSource",
               id: "microservices-framework/datasources/create-custom-datasource",
             },
           
