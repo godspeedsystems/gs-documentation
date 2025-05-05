@@ -1,4 +1,12 @@
-Nodemailer as a datasource: Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities. Ready to send your data soaring through the digital mail stream?
+---
+title: Nodemailer Plugin for Godspeed Framework
+description: A powerful email integration plugin that enables seamless email delivery in Godspeed applications using Nodemailer. Features include dynamic templating, error resilience, secure delivery, and support for various email services like Gmail and SMTP.
+keywords: [nodemailer, email delivery, smtp, email templates, transactional email, godspeed plugin, email service, messaging, email notifications, email integration]
+---
+
+# Nodemailer Plugin for Godspeed
+
+Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities.
 
 Sending emails in your Node.js application has never been smoother. The Godspeed Nodemailer Plugin provides seamless integration between the robust Godspeed framework and Nodemailer, the go-to solution for email delivery in Node.js.
 

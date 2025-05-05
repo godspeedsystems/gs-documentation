@@ -1,8 +1,14 @@
+---
+title: Database Support Overview in Godspeed Framework
+description: A comprehensive guide to database integration in Godspeed using schema-driven development. Features support for multiple SQL and NoSQL databases through Prisma, automatic CRUD generation, and built-in authorization policies.
+keywords: [database integration, prisma orm, schema driven development, postgresql, mysql, mongodb, sqlite, sql server, cockroachdb, mariadb, planetscale, crud operations, database schema, database authorization]
+---
 
- The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL datasbases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself. 
+# Database Support Overview
 
+The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL databases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself.
 
- The framework provides functionality to access almost all popular databases through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
+The framework provides functionality to access almost all popular databases through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
  
 ### List of currently supported Databases 
 

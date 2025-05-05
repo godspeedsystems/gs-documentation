@@ -1,10 +1,11 @@
 ---
 sidebar_position: 1
 title: Guides and FAQs
+description: A collection of guides and frequently asked questions about using the Godspeed Meta-Framework, covering topics such as setting up APIs, writing workflows and functions, and accessing datasources.
+keywords: [Godspeed, guides, FAQs, API setup, workflows, functions, datasources, REST API, CRUD API, Swagger UI, Postman, authentication, JWT, OAuth2, callbacks, webhooks, TypeScript, YAML, inline scripting, databases, datastores, plugins, environment variables, secrets]
 ---
 
-This section will give answers to your most pressing questions about using the godspeed meta-framework. 
-It is designed to be easy to follow and understand, with step-by-step instructions to help illustrate each process.
+This section provides answers to common questions and step-by-step guides for using the Godspeed Meta-Framework. It covers essential topics including setting up and securing APIs (REST, CRUD, Swagger, Postman, JWT, OAuth2), writing business logic using workflows and functions (TypeScript and YAML), and accessing various datasources like databases, APIs, and caches.
 
 ### Setting up the APIs of your service
 

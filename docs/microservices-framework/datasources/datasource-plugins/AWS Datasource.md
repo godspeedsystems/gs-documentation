@@ -1,4 +1,12 @@
-AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application. 🚀 
+---
+title: AWS Plugin for Godspeed Framework
+description: A comprehensive AWS integration plugin that enables seamless access to Amazon Web Services in Godspeed applications. Features include S3 storage, DynamoDB, Lambda functions, SQS messaging, and SSM parameter management with configurable service clients.
+keywords: [aws, amazon web services, cloud integration, s3, dynamodb, lambda, sqs, ssm, godspeed plugin, cloud storage, serverless, cloud services]
+---
+
+# AWS Plugin for Godspeed
+
+Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application.
 
 ## Steps to use aws plug-in in godspeed framework:
 
@@ -8,6 +16,9 @@ Create a godspeed project from the CLI, open the created project in vscode and t
 ```
 godspeed plugin add @godspeedsystems/plugins-aws-as-datasource 
 ```
+
+### Related files
+After installation, you will find two auto-generated files in your project related to the plugin at `src/datasources/types/aws.ts` and `src/datasources/aws.yaml`.
 
 ### Configuration
 

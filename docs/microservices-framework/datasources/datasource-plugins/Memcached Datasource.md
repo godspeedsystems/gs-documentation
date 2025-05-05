@@ -1,3 +1,11 @@
+---
+title: Memcached Plugin for Godspeed Framework
+description: A high-performance in-memory caching plugin that enables seamless data caching and retrieval in Godspeed applications. Features include key-value storage, cache invalidation, and configurable caching strategies for optimized application performance.
+keywords: [memcached, in-memory cache, caching, key-value store, godspeed plugin, performance optimization, cache invalidation, data caching, memory cache, cache management]
+---
+
+# Memcached Plugin for Godspeed
+
 The Godspeed mem-cache plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
 
 ## How to add mem-cache plugin in your project
@@ -7,26 +15,30 @@ The Godspeed mem-cache plugin provides caching interfaces, allowing developers t
 ```
 godspeed plugin add @godspeedsystems/plugins-mem-cache-as-datasource
 ```
-- **You will find the files in your project related to the plugin**
- at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
+
+You will find two files in your project related to the plugin at `src/datasources/types/mem-cache.ts` and `src/datasources/mem-cache.yaml`.
+
 ```yaml title=src/datasources/mem-cache.yaml
 type: mem-cache
 ```
 
-### Sample usage
-Create two events and two function handlers for each event by the name helloworld2 and helloworld3 respectively.
-```yaml
-# Events
-"http.get./helloworld2":
-  fn: helloworld2
-"http.get./helloworld3":
-  fn: helloworld3
+### Sample Usage
+Create two events and two event handler workflows for each event, by the name helloworld2 and helloworld3 respectively.
 
-# Functions (Helloworld2 workflow)
+### Events
+```yaml
+http.get./helloworld2:
+ fn: helloworld2
+
+http.get./helloworld3:
+ fn: helloworld3
+```
+### Functions (Helloworld2 workflow)
+
+```
 id: helloworld2_workflow
 tasks:
   - id: helloworld2_workflow_first_task
- 
     fn: com.gs.transform
     args:
       name: helloworld2
@@ -35,9 +47,9 @@ tasks:
       # datasource: memcache #This field should be definitely set if config/default.caching is not set. Else is optional
       # noRead: true #if this is set get(key) method will not be called for this task
       # noWrite: true #the result of this task will not be written, even if cache_on_failure is set to true. i.e. set() method will not be called
-    
-
-# Functions (Helloworld3 workflow)
+```  
+### Functions (Helloworld3 workflow)
+```
 id: helloworld3_workflow
 tasks:
   - id: helloworld3_workflow_first_task

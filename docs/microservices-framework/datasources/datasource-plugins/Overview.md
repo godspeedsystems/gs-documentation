@@ -1,3 +1,11 @@
+---
+title: Datasource Plugins Overview for Godspeed Framework
+description: A comprehensive guide to Godspeed's pluggable datasource system. Learn about available plugins, installation process, and how to integrate various data sources into your Godspeed applications with ease.
+keywords: [godspeed plugins, datasource plugins, plugin management, data integration, plugin installation, framework plugins, data sources, plugin system, plugin architecture]
+---
+
+# Datasource Plugins Overview
+
 Godspeed framework adopts a pluggable approach that empowers you to define data sources effortlessly. Our framework graciously provides an interface that caters to diverse data source needs. Here's a glimpse into the exceptional datasource plugins crafted by our core framework team.
 
 To seamlessly integrate these plugins into your project, simply run the command:

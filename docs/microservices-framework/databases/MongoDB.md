@@ -1,3 +1,11 @@
+---
+title: MongoDB Integration with Godspeed Framework
+description: A comprehensive guide to integrating MongoDB in Godspeed applications using both Mongoose and Prisma plugins. Features include data modeling, schema management, CRUD operations, and seamless database interactions through multiple integration approaches.
+keywords: [mongodb, nosql database, mongoose, prisma, database integration, data modeling, crud operations with mongodb, godspeed mongodb plugin, database connectivity, orm, odm]
+---
+
+# MongoDB Integration
+
 MongoDB is a popular NoSQL database. In Godspeed, you can connect to MongoDB in two ways:
 #### 1. [Using Mongoose-as-datasource Plugin](#mongoose-as-datasource-plugin) [(Plugin Repository)](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datastore)
 #### 2. [Using Prisma-as-datastore Plugin](#prisma-as-datastore-plugin) [(Plugin Repository)](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datasource)
@@ -19,7 +27,7 @@ This plugin provides seamless integration with MongoDB through the Mongoose libr
 npm i @godspeedsystems/plugins-mongoose-as-datasource
 ```
 
-**- ** After having installed using godspeed cli, you will find two files in your project at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+**- ** After installing the plugin using godspeed plugin add command, you will find two auto generated files in your project at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
 import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datasource';

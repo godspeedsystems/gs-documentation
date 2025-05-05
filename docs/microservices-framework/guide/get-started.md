@@ -1,111 +1,106 @@
-# Getting Starting with Godspeed
-**This guide will walk you through:**
-- Installing the Godspeed Meta-Framework on your system.
-- Creating your first project and running it locally.
+---
+title: Getting Started with Godspeed
+description: A comprehensive guide to installing the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
+keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
+---
 
-:::tip Need Help?
-**[Ask Godspeed GPT First!](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma)**
+This guide provides a step-by-step introduction to the Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project using the CLI, run the development server, access the automatically generated Swagger UI, and test a basic helloworld API. The guide also includes troubleshooting tips for common errors and a walkthrough of the project's scaffolding structure.
 
-Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in our guide](/docs/microservices-framework/guides)
-:::
+Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in the Guides section](/docs/microservices-framework/guides)
 
-### Watch this One-Click Installation & Step-by-Step Tutorial Guide
 
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+### Watch this One-Click Installation Guide
+
+<div style={{ position: 'relative', paddingBottom: '50.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div>
 
-### Pre-requisites:
-1. Nodejs v18 (or higher) or Bunjs 
-2. Npm
-3. Git
-4. VS Code or any code editor
+## Installing Godspeed
 
-### Step 1: Install Godspeed
-:::tip
-To install prerequisites and Godspeed through our Easy Installation Script, Download it from the link provided below:
-:::
+### Quick Installation
 
-- [setup.bat](../../../static/setup.bat) (for Windows)
+### Windows Users
 
-- [setup.sh](../../../static/setup.sh) (for Ubuntu)
-
-It simplifies the installation process by checking all required tools in one go.
-
-<details>
-<summary> See How to execute this script in Windows </summary>
-
-1. Run Command Prompt as Administrator.
-
-2. Use cd command to change the directory to where you downloaded the setup.bat file.
-
-3. Execute the script by writing its name.
+1. Download the [setup.bat](../../../static/setup.bat) file
+2. Open Command Prompt as Administrator
+3. Navigate to the download location
+4. Run:
+```bash
+setup.bat
 ```
-  setup.bat
+
+### Linux/Ubuntu Users
+
+1. Download the [setup.sh](../../../static/setup.sh) file
+2. Open terminal
+3. Run:
+```bash
+sudo bash setup.sh
 ```
-</details>
 
-<details>
-<summary> See How to execute this script in Ubuntu </summary>
+## Manual Installation
 
-After downloading setup.sh file, Just execute it from shell as:
+### Prerequisites
 
+Before installing Godspeed manualy, ensure you have:
+
+1. **Node.js** (v18 or higher)
+2. **npm** (Node Package Manager)
+3. **Git**
+4. **VS Code** or any preferred code editor
+
+### 1. Verify Prerequisites
+
+Check if required tools are installed:
+
+```bash
+# Check Node.js version (should be v18 or higher)
+node -v
+
+# Check npm version
+npm -v
+
+# Check Git version
+git -v
 ```
-  sudo bash setup.sh
+
+If any command returns an error, install the missing tool:
+- [Download Node.js](https://nodejs.org/)
+- [Download Git](https://git-scm.com/)
+
+### 2. Install Godspeed command
+
+Install the Godspeed framework globally:
+
+```bash
+npm install -g @godspeedsystems/godspeed
 ```
-</details>
 
+### 3. Verify Installation
 
-Once the script finishes, you are ready to **[Create Your First Project](/docs/microservices-framework/guide/get-started#step-2-create-your-first-project)**
+Confirm successful installation:
 
-### To Install godspeed framework manually follow the steps given below:
-1. **Ensure Node.js, Npm and Git is installed**:
-   - Verify versions by running the following commands from terminal:
-     ```bash
-     node -v
-     npm -v
-     git -v
-     ```
-   - You should see something like `v18.x.x` for Node.js and `8.x.x` or higher for npm if installed.
-   - It will show error in case any of above pre-reqisites is not installed, so download and install it first.
-2. **Install Godspeed globally**:
-   - Run this command to install the Godspeed meta-framework:
-     ```bash
-     npm install -g @godspeedsystems/godspeed
-     ```
-3. **Verify installation**:
-   - Run the following command to ensure Godspeed is installed:
-     ```bash
-     godspeed --version
-     ```
----     
-### Step 2: Create Your First Project
+```bash
+godspeed --version
+```
 
-1. **Create a new Godspeed project**:
-   - Use the `create` command to set up a new project:
-     ```bash
-     godspeed create my_new_project
-     ```
-   - Replace `my_new_project` with the name of your project.
-   - This step may take some time as it installs required npm plugins and creates the project structure. Be patient!
+## Creating Your First Project
 
-2. **Navigate to your project folder**:
-   ```bash
-   cd my_new_project
-   ```
-3. **Start the server**:
-  ```
-     godspeed serve
-  ```
-Check the logs. They should indicate that the **Express server** is running on **port 3000**
+1. Create a new project:
+```bash
+godspeed create my-project
+```
 
-Example log:
-  ```bash
-  INFO:[Production Server Running]('express:' eventsource, '3000' port) Try it out at: http://localhost:3000/api-docs
-  ```
----
+2. Navigate to project directory:
+```bash
+cd my-project
+```
 
-### Step 3: Access Swagger UI
+3. Start the development server:
+```bash
+godspeed serve
+```
+4. Access Swagger UI
 
   In Godspeed, the **Swagger UI** is typically accessed at the `/api-docs` endpoint, appended to the `base URL` and `port` where the server is running. Here’s the general format for accessing Swagger UI:
    ```plaintext
@@ -120,7 +115,7 @@ Example log:
    ```
   ![img](../../../static/img/swagger_helloworld.png)
 
-### Step 4: Test the Helloworld API
+5. Test the Helloworld API
 
 - In the Swagger UI, locate the `/helloworld` endpoint.
 
@@ -129,44 +124,33 @@ Example log:
     Hello `John`      
   ```
 
+## Troubleshooting
 
-To understand working of this API [Lets Walkthrough your first Godspeed Project](https://godspeed.systems/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
+### Common Issues
 
-### Troubleshooting Common Errors
+1. **Git Not Found Error**
+   ```
+   Error: Not Able to reach Template repository
+   ```
+   Solution: Install Git and try again
 
-**Error: Not Able to reach Template repository or hello-world is not a valid example**
-
-![git-not-installed](../../../static/img/git-error.jpeg)
-
-While creating a new godspeed project, if you face above error, it means **Git is not installed** on your system. 
-The framework needs Git to clone the template for your new project.
-
-**Solution**:
-1. **Install Git**:
-   - After installation, verify by running:
-       ```bash
-       git --version
-       ```
-2. **Re-run the Godspeed create command**:
-   - Once Git is installed, rerun the command:
-     ```bash
-     godspeed create my_new_project
-     ```
----
-**Error: Running scripts is disabled on this system (Windows)**
-
-This error occurs because of Windows PowerShell's execution policy, which restricts running scripts by default.
-![running_scripts](../../../static/img/scripts-error1.jpeg)
-**Solution:**
-1. Open PowerShell **as Administrator**.
-2. Run the following command to allow script execution:
-   ```bash
+2. **Windows Script Execution Error**
+   ```
+   Running scripts is disabled on this system
+   ```
+   Solution: Run PowerShell as Administrator and execute:
+   ```powershell
    Set-ExecutionPolicy RemoteSigned
    ```
-3. Press **Y** to confirm.
-4. Close PowerShell and rerun your `godspeed serve` command.
 
-**Note**: This change allows local scripts to run, but blocks downloaded scripts unless they're signed by a trusted publisher.
+3. **Port Already in Use**
+   ```
+   Error: Port 3000 is already in use
+   ```
+   Solution: Stop other services using port 3000 or modify port in `src/eventsources/http.yaml`
+  
+
+To understand working of this API [Lets Walkthrough your first Godspeed Project](https://godspeed.systems/docs/microservices-framework/guide/get-started#walking-through-your-first-godspeed-project)
 
 
 ## Walking through your first Godspeed project

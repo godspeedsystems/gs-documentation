@@ -1,15 +1,17 @@
 ---
 sidebar_position: 1
 title: Godspeed CLI
+description: A comprehensive reference for the Godspeed Command Line Interface (CLI), covering installation, core commands for project creation, development, building, and deployment, managing plugins, interacting with Prisma, enabling observability, and troubleshooting common issues.
+keywords: [Godspeed, CLI, command line interface, installation, create, serve, build, clean, preview, gen-crud-api, plugin, prisma, otel, observability, troubleshooting, guide, documentation]
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
-CLI to create and manage Godspeed projects.
 
 ### About
-Godspeed CLI is the primary way to interact with your Godspeed project from the command line. It provides a bunch of useful functionalities during the project development lifecycle.
 
-### How to install
+This document provides a detailed guide to the Godspeed Command Line Interface (CLI), the primary tool for interacting with Godspeed projects. It covers how to install the CLI and explains the usage and functionality of its various commands, including those for project creation, running the development server, building and previewing projects, generating CRUD APIs, managing plugins, working with Prisma, and enabling Open Telemetry. Troubleshooting steps for common CLI errors are also included.
+
+### How to install Godspeed
 
 ```bash
 npm install -g @godspeedsystems/godspeed
@@ -124,6 +126,8 @@ Options:
   -h, --help           display help for command
 
 Commands:
+  add                  Gives a list of all plugins and ask you to select 
+  remove               Gives a list of all plugins and ask you to select 
   add [pluginName]     Add an eventsource/datasource plugin.
   remove [pluginName]  Remove an eventsource/datasource plugin.
   update               Update an eventsource/datasource plugin.

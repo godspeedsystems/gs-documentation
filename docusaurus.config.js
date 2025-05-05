@@ -87,13 +87,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'docs/microservices-framework/introduction/overview',
           routeBasePath: '/',
-          lastVersion: 'current',
-          versions: {
-            current: {
-              label: 'v2.0',
-            },
-            
-          },          
+          disableVersioning: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
@@ -135,11 +129,6 @@ const config = {
             position: 'left',
             label: 'Documentation'
           },
-          {
-            type: 'docsVersionDropdown',
-            position: 'right',
-            dropdownActiveClassDisabled: true,
-          },          
         ],
       },
       footer: {

@@ -1,10 +1,12 @@
 ---
+title: Prisma Plugin for Godspeed Framework
+description: A powerful database ORM plugin that enables seamless integration with multiple databases in Godspeed applications. Features include type-safe queries, schema migrations, CRUD API generation, data encryption, and row/column level authorization.
+keywords: [prisma, orm, database integration, postgresql, mysql, mongodb, database migration, crud operations, godspeed plugin, type safety]
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
-**- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
-     
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+
+# Prisma Plugin for Godspeed
 
 ## Overview
 Prisma-as-datasource plugin provides functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through [Prisma ORM](https://www.prisma.io/docs).

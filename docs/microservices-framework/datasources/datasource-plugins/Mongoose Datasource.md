@@ -1,4 +1,12 @@
-Mongoose as a datasource: It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
+---
+title: Mongoose Plugin for Godspeed Framework
+description: A powerful MongoDB integration plugin that enables seamless database operations through Mongoose ODM in Godspeed applications. Features include data modeling, CRUD operations and efficient query handling with MongoDB.
+keywords: [mongoose, prisma with mongodb, nosql database, godspeed plugin, database integration]
+---
+
+# Mongoose Plugin for Godspeed
+
+It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
 ### How to Add 
 Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
@@ -37,15 +45,20 @@ This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.h
 
 ![Alt text](../../../../static/img/mongoose_folder_structure.png)
 
-**Example Mongoose model file**   
-These files are stored in `datasources/<datasource_name>/models` folder Your TS or JS file should export as following
+ 
+These files are stored in `datasources/<datasource_name>/models` folder.
+
+### Export Syntax :
+Your TS or JS file should export as following:
+
 ```typescript
 module.exports = {
     type: 'SomeModel', //The name by which you will access methods of this collection/model
     model: SomeModel //The Mongoose Model
 };
 ```
-An example Mongoose model file
+### An example Mongoose model file
+
 ```typescript
 const { model, Schema, Document } =require('mongoose');
 
@@ -89,10 +102,10 @@ module.exports = {
 ```
 
 ### Sample workflow
-When calling any api function it will be called as `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
-`ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
-The arguments to any `Function_Name` are to be passed in two ways:
 
+When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
+The arguments to any `Function_Name` are to be passed in two ways:
+<!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
     id: mongoose_workflow
@@ -111,14 +124,13 @@ The arguments to any `Function_Name` are to be passed in two ways:
           - name: mastersilv3r #search clause: First argument
           - 'name age' #The projection: second argument
           - {} # Options: the third argument
-  ```
-**3. ** Calling from a TS/JS workflow works same as any other datasource
+  ``` -->
+### Option 1: 
+Calling function on Mongoose model directly and sending data with status code
+
 ```typescript
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
-// Option 1: 
-// Calling function on Mongoose model directly and sending data with status code
-// Here you handle errors/try/catch yourself
 export default async function (ctx: GSContext, args: any) {
     const ds: GSDataSource = ctx.datasources.mongoose;
     // If this function is called by another function (yaml or JS), the caller may have passed args object. In case not, then initialize args yourself.
@@ -141,8 +153,14 @@ export default async function (ctx: GSContext, args: any) {
       }
     }
 }
+```
 
-//Option 2: Handles response codes, errors creation of GSStatus directly
+### Option 2: 
+Handles response codes, errors creation of GSStatus directly
+
+```ts
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
+
 export default async function (ctx: GSContext, args: any) {
     const ds: GSDataSource = ctx.datasources.mongoose;
     args = args || [{name: 'mastersilv3r'}, 'name age', {}];
@@ -168,6 +186,7 @@ When a call has an error the datasource returns following `GSStatus`.
 ### Run the service
 - Set an environment variable `MONGO_URL` as your connection string to running mongodb instance.
   For example, setting via a unix shell.
+  
   ```shell
     export MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
   ```

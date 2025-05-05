@@ -1,16 +1,24 @@
-Axios as a datasource: Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. Fetch, post, and interact with APIs effortlessly. Ready to make data requests a breeze? 
+---
+title: Axios Datasource Plugin for Godspeed Framework
+description: A powerful HTTP client plugin that enables seamless API integration, efficient data fetching, and robust error handling in Godspeed applications. Features include authentication, retry mechanisms, and unified datasource API.
+keywords: [axios, http client, api integration, godspeed plugin, data fetching, rest api, http requests, authentication, retry mechanism, api client]
+---
 
-<!-- The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs. -->
+# Axios Datasource Plugin
 
-## How to Use
+Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs.
 
-**a. ** When you create a godspeed project from the CLI, by default the axios plugin is integrated into your project if not, add the plugin from the CLI
+## How to Install Axios Plugin
+
+When you create a godspeed project from the CLI, by default the axios plugin is integrated into your project if not, add the plugin from the CLI
 
 ```
 godspeed plugin add @godspeedsystems/plugins-axios-as-datasource
 ```
 
-**b. ** You will find two files in your project related to the axios plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
+### Related files
+
+After installation, you will find two auto-generated files in your project related to the plugin at `src/datasources/types/axios.ts` and `src/datasources/api.yaml`.
 
 ```typescript title=src/datasources/types/axios.ts
 import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
@@ -57,8 +65,7 @@ The sample config can be modified as per the usecase of your application.
 ```
 Retry interval values will be based on [ISO Temporal Duration standard](https://tc39.es/proposal-temporal/docs/duration.html)
 
-### Sample yaml workflow
-```yaml title=src/functions/sample.yaml
+<!-- ```yaml title=src/functions/sample.yaml
 id: sample
 tasks:
   - id: first_task
@@ -72,9 +79,12 @@ tasks:
       data:
         firstName: 'Fred'
       timeout: 1000
-```
+``` -->
+## How to Use:
 
-### Sample js/ts workflow
+Create an event and its handler workflow to call an api
+
+### Sample typescript workflow
 ```js
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
 
@@ -92,7 +102,7 @@ export default async function (ctx: GSContext, args: {loan_offer: PlainObject, p
 };
 ```
 
- To get more clarity checkout about [Axios configuration]( https://axios-http.com/docs/req_config)
+To get more clarity checkout about [Axios configuration]( https://axios-http.com/docs/req_config)
 
 
 ## How It Helps

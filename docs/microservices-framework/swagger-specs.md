@@ -1,6 +1,10 @@
-# Swagger Specs
+---
+title: Swagger Specs
+description: Learn how to configure and generate Swagger specifications and Swagger UI for your Godspeed project's HTTP events, including setting custom information and server URLs.
+keywords: [Godspeed, Swagger, OpenAPI, API documentation, HTTP events, configuration, http.yaml, Swagger UI, swagger-specs, guide, documentation]
+---
 
-## Steps to add Swagger specs in project. 
+This document explains how to configure and utilize Swagger (OpenAPI) specifications and the interactive Swagger UI within your Godspeed project. It covers enabling Swagger for HTTP events, customizing the endpoint, adding custom information and server URLs to the specs, and how tags and operationIds are generated.
 
 Framework will give you below folder structure.
 

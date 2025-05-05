@@ -1,6 +1,14 @@
-Redis as a datasource: Elevate your data game with the speed and efficiency of Redis. Use it as a powerhouse for caching, real-time analytics, and lightning-fast data retrieval. Embrace the key-value magic to supercharge your application's performance. Ready to Rediscover efficiency? 🚀
+---
+title: Redis Plugin for Godspeed Framework
+description: A high-performance Redis integration plugin that enables fast caching, real-time data operations, and key-value storage in Godspeed applications. Features include seamless Redis operations, error handling, and support for common Redis commands.
+keywords: [redis, key-value store, caching, real-time data, in-memory database, godspeed plugin, data storage, performance optimization, redis operations, data retrieval]
+---
 
-The Godspeed Redis Plugin provides integration with Redis, allowing developers to seamlessly interact with Redis databases within the Godspeed framework. This plugin simplifies the process of working with Redis data, providing a standardized way to perform common Redis operations.   
+# Redis Plugin for Godspeed
+
+Elevate your data game with the speed and efficiency of Redis. Use it as a powerhouse for caching, real-time analytics, and lightning-fast data retrieval. Embrace the key-value magic to supercharge your application's performance.
+
+The Godspeed Redis Plugin provides integration with Redis, allowing developers to seamlessly interact with Redis databases within the Godspeed framework. This plugin simplifies the process of working with Redis data, providing a standardized way to perform common Redis operations.
 
 You can use redis datasource in caching also. Check [caching](../caching.md) for more information.
 

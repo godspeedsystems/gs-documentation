@@ -1,26 +1,34 @@
-<!-- Kafka is your dynamic data stream and event maestro! As a data source, it floods your systems with real-time insights, turning data into decision-making gold. And when it comes to event sourcing, Kafka orchestrates a symphony of real-time events that power your applications and spark innovation. Experience the future of data and event handling with Kafka.  -->
+---
+title: Kafka Plugin for Godspeed Framework - Datasource and Eventsource
+description: A powerful messaging system plugin that enables real-time event streaming, secure data transfer, and distributed messaging in Godspeed applications. Features include producer/consumer functionality, configurable topics, and seamless event handling.
+keywords: [kafka, event streaming, messaging system, producer consumer, godspeed plugin, real-time events, distributed messaging, event sourcing, message queue, data streaming]
+---
+
+# Kafka Plugin for Godspeed
 
 Kafka is a versatile messaging system designed to securely transfer data between various systems. Its functionality can be tailored through configuration, allowing it to serve as a reliable conduit for real-time event tracking or even function as a replicated distributed database. While it's often colloquially labeled as a queue, it's more precisely described as a hybrid system that combines characteristics and trade-offs from both queue and database systems.
 
-A brief description of how to use Kafka plug-in in our godspeed framework as Data Source as Event Source. 
-
 ## Steps to use kafka plugin in godspeed
 
-## Install
-**a. ** Create a godspeed project from the CLI , open the created project in vscode and then add the plugin.
+### Install Kafka Plugin
 ```
 godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource
 ```
+### Related files
+
+After installation, you will find auto-generated files in your project related to the plugin at `src/datasources/types/kafka.ts` and `src/datasources/kafka.yaml`and `src/eventsources/types/kafka.ts` and `src/datasources/kafka.yaml`.
 
 ### Use as Datasource (Producer)
-**1. ** Update configuration file based on your requirements in `src/datasource/kafka.yaml` file.
+
+**1.** Update configuration file based on your requirements in `src/datasources/kafka.yaml` file.
+
 ```yaml title=src/datasources/kafka.yaml
 type: kafka 
 clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 ```
 
-**2. ** In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
+**2.** In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
 ```yaml title=src/events/kafka_pub.yaml
 # event for Publish
 'http.post./kafka-pub':
