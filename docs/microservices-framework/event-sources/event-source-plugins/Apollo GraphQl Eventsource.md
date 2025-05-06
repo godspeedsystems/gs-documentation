@@ -1,3 +1,11 @@
+---
+title: Apollo GraphQL Plugin for Godspeed Framework
+description: An event source plugin that enables seamless integration of GraphQL APIs using Apollo Server in Godspeed applications. Simplifies schema generation and integration with diverse data sources for scalable and high-performance GraphQL applications.
+keywords: [graphql, apollo server, event source, api development, godspeed plugin, query language, schema generation, data integration, scalable applications, high performance]
+---
+
+# Apollo GraphQL Plugin
+
 GraphQL is a query language and runtime for APIs that enables clients to request precisely the data they need. It allows developers to describe the structure of the data they require, providing a more efficient and flexible alternative to traditional REST APIs. GraphQL empowers front-end developers to shape their API requests, minimizing over-fetching and under-fetching of data.
 
 
@@ -5,7 +13,7 @@ GraphQL is a query language and runtime for APIs that enables clients to request
 
 This guide offers a concise overview of integrating the GraphQL plugin into the Godspeed framework as an Event Source.
 
-### Setting up Graphql
+### Setting up GraphQL
 
 ### 1. Add the GraphQL plugin
 
@@ -20,6 +28,7 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
   This configuration is same as Express or Fastify configuration, except that currently file upload is not supported and so is not swagger (since Swagger is not relevant for Graphql). 
 
   Everything else like authn, authz, port, log attributes is same. 
+
   ```yaml
   type: graphql
   port: 4000
@@ -102,7 +111,6 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
         - 'name age' #The projection: second argument
         - {} # Options: the third argument
 ``` -->
-
 
 ### 4. Auto generate graphql schema
 ```

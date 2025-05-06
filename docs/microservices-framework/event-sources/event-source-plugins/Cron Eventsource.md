@@ -1,3 +1,11 @@
+---
+title: Cron Plugin for Godspeed Framework
+description: An event source plugin that enables scheduling tasks using Cron jobs in Godspeed applications. Simplifies the creation of scheduled events with Cron expressions for automated task execution.
+keywords: [cron jobs, task scheduling, event source, scheduled tasks, godspeed plugin, cron expressions, automated tasks, background service, crontab, task automation]
+---
+
+# Cron Plugin
+
 Cron jobs are a standard method of scheduling tasks to run on your server. Cron is a service running in the background that will execute commands (jobs) at a specified time, or at a regular interval. Jobs and their schedules are defined in a configuration file called a crontab.
 
 ### How to Add

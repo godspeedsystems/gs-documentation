@@ -1,3 +1,9 @@
+---
+title: Express.js Plugin for Godspeed Framework
+description: An event source plugin that enables seamless integration of Express.js for handling HTTP events in Godspeed applications. Provides schema-driven development, input/output validation, authentication, and Swagger/GraphQL spec generation for building robust server-side applications.
+keywords: [express.js, http events, event source, middleware, api development, godspeed plugin, node.js, server-side, schema driven, input validation, output validation, authentication, swagger, graphql]
+---
+
 # Godspeed Express Plugin
 
 The Godspeed Express Plugin is a core component of the Godspeed framework, integrating with the popular Express.js framework to handle HTTP events. This plugin provides seamless, schema-driven development for HTTP-based event handling, offering features like input/output validation, authentication, and Swagger/GraphQL spec generation. This flexible tool allows developers to build robust, modular, and configurable server-side applications in Node.js.
