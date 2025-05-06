@@ -4,7 +4,7 @@ description: A comprehensive guide to installing the Godspeed Meta-Framework, cr
 keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
 ---
 
-This guide provides a step-by-step introduction to the Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project using the CLI, run the development server, access the automatically generated Swagger UI, and test a basic helloworld API. The guide also includes troubleshooting tips for common errors and a walkthrough of the project's scaffolding structure.
+This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service, run the development server, access the automatically generated Swagger UI, and test a basic helloworld API. The guide also includes troubleshooting tips for common errors and a walkthrough of the project's scaffolding structure.
 
 Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in the Guides section](/docs/microservices-framework/guides)
 
