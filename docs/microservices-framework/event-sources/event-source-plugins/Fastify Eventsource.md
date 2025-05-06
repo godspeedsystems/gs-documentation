@@ -66,8 +66,26 @@ http.post./sample_api:
 - The event YAML defines properties for handling specific HTTP requests within the Fastify app. In the YAML, `<method>` should be replaced with actual HTTP methods such as `GET, POST, PUT, or DELETE`, specifying how the app handles those requests. The `<endpoint_url>` field should contain the API URL for the respective HTTP route.
 - A function will be triggered on sending a request to the respective url. The functions are created under `src/functions/`.
 
-#### Function to be called (src/functions/sample.yaml)
-```yaml
+#### Function to be called (src/functions/sample.ts)
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+
+ // Returns a personalized message using query and body input
+
+export default function (ctx: GSContext, args: PlainObject): GSStatus {
+  const { inputs } = ctx;
+  const { query, body } = inputs.data;
+
+  const user = query?.user || "Guest";
+  const message = body?.message || "No message provided";
+
+  const response = `Hello ${user}. This is a message from body ${message}`;
+
+  return new GSStatus(true, 200, "message received", response, undefined);
+}
+```
+
+<!-- ```yaml
 summary:
 description:
 tasks:
@@ -75,7 +93,7 @@ tasks:
       fn: com.gs.return #its an inbuilt function
       args: |
         <%"Hello "+inputs.query.user+". This is a message from body "+inputs.body.message%>
-```
+``` -->
 
 ## How It Helps
 

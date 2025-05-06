@@ -44,10 +44,27 @@ cron.* * * * *.Asia/Kolkata:    #this eventkey prefix should be the `type` menti
 ```
 Know more about cron expressions   `https://crontab.cronhub.io/`
 
-#### 2. Cron workflow to schedule ( src/functions/every_minute.yaml )
+#### 2. Cron workflow to schedule ( src/functions/every_minute.ts )
 
+```ts
+import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
 
-```yaml
+/**
+ * Prints a message every minute via cron
+ */
+export default function (ctx: GSContext, args: PlainObject) {
+  const { logger, childLogger } = ctx;
+
+  // Log using both loggers
+  logger.info("HELLO from CRON");
+  childLogger.info("HELLO from CRON");
+
+  // Return the data
+  return new GSStatus(true, 200, "message", "HELLO from CRON", undefined);
+}
+
+```
+<!-- ```yaml
 summary: this workflow will be running every minute
 tasks:
   - id: print
@@ -55,7 +72,7 @@ tasks:
     fn: com.gs.return
     args:
       data: HELLO from CRON
-```
+``` -->
 
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource)   

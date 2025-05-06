@@ -63,11 +63,9 @@ If you have jwt authentication like strategy implemented, then
 
 - **body can be accessed as**: `<%inputs.body.key%>` Present for all events except for http events which don't have a body. For ex. http.get
 
-- **files can be accessed as**: `<%input.files%>` Any files uploaded via HTTP event. Not present in other kind of events
+- **files can be accessed as**: `<%inputs.files%>` Any files uploaded via HTTP event. Not present in other kind of events
 
 ### Swagger Specs
-
-#### Steps to add Swagger specs in project.
 
 Framework will give you below folder structure.
 
@@ -95,7 +93,7 @@ Framework will give you below folder structure.
             └── helloworld.yaml
 ```
 
-1. To enable swagger ui add `docs` in **"./src/eventsources/http.yaml"**
+1. Swagger ui is enabled automatically through adding `docs` in **"./src/eventsources/http.yaml"**
 
 2. `/` is the default endpoint,if you want to provide your custom swagger endpoint, you can modify the endpoint from **"./src/eventsources/http.yaml"**
 

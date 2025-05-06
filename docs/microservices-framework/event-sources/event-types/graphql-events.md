@@ -37,9 +37,20 @@ apollo.post./mongo/category:      // event key having prefix apollo
           type: object
 ```
 
-### GraphQL Workflow 
+### Graphql Workflow
 
-(src/functions/create.yaml)
+  ```ts
+  export default function (ctx: GSContext, args: PlainObject) {
+    const ds = ctx.datasources.mongoose;
+    const response = ds.Category.create(ctx.inputs.data.body);
+    return {
+      code: 201,
+      data: response
+    }
+  }
+  ```
+
+<!-- (src/functions/create.yaml)
 ```yaml
 summary: Create Category
 tasks:
@@ -48,7 +59,7 @@ tasks:
     args:
       data: <% inputs.body %>
 
-```
+``` -->
 
 :::tip note
 - use godspeed gen-graphql-schema to auto generate graphql schema.

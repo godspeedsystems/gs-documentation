@@ -22,15 +22,30 @@ Kafka.publish-producer1.kafka_proj:   # event key
  ```
 
 #### Example workflow consuming a Kafka event
-  ```yaml
-   # function for consume data
+
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+/**
+ * Kafka consumer function - returns the consumed Kafka message
+ */
+export default function (ctx: GSContext, args: PlainObject): GSStatus {
+  const { inputs } = ctx;
+
+  return new GSStatus(true, 200, undefined, inputs.data);
+}
+```
+
+<!-- 
+```
+# function for consume data
 id: kafka_consumer
 summary: consumer
 tasks:
     - id: set_consume
       fn: com.gs.return
       args: <% inputs.body %>
-  ```
+``` 
+-->
 
 - To know about validation_error, refer [this](/docs/microservices-framework/event-sources/validations/validation-error.md)
 
@@ -38,7 +53,8 @@ tasks:
 - Response_validation_error, authz, authn are not applicable to this protocol since there is no response (thus no error handling for the same). Similarly, Kafka consumers don't require authentication or authorization, and hence, they are not specified here.
 :::
 
-<!-- #### On validation error handler
+<!-- 
+On validation error handler
   ```yaml
   summary: Handle json scehma validation error
   id: error_handler

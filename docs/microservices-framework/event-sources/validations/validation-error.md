@@ -18,7 +18,7 @@
 ### Example
 
 ```yaml
-"http.get./validation":
+http.get./validation:
   fn: test_validation
   on_request_validation_error: on_request_validation #can be fn path, or a series of tasks
   params:
@@ -42,8 +42,8 @@
       
 ```
 
-functions/on_request_validation.yaml
-```yaml 
+
+```yaml title=functions/on_request_validation.yaml
 summary: customizing req_response_error
 tasks:
   - id: customized_request_error
@@ -58,8 +58,8 @@ tasks:
      #  message: <% inputs.validation_error.data.errors[0] %>
      
 ```
-functions/test_validation.yaml
-```yaml
+
+```yaml title=functions/test_validation.yaml
 summary: This is test function
 tasks:
   - id: test_function

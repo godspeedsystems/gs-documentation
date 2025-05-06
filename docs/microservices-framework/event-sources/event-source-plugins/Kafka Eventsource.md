@@ -37,7 +37,7 @@ http.post./kafka-pub:
           required: ['message']
 
 ```
-#### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
+<!-- #### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
 
 In workflow we need to mension `datasource.kafka.producer` as function (fn) to produce data.
 
@@ -50,8 +50,43 @@ tasks:
       args:
         topic: "publish-producer1"
         message: <% inputs.body.message %>
-```
+``` -->
+#### kafka workflow for Producer ( src/functions/kafka-publish.ts )
 
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+ /**
+  * Kafka producer function - publishes message from request body to a Kafka topic
+ */
+export default async function (ctx: GSContext, args: PlainObject): Promise<GSStatus> {
+  const { datasources, inputs, logger } = ctx;
+  const { message } = inputs.data.body;
+
+  if (!message) {
+    return new GSStatus(false, 400, undefined, undefined, "Message is required");
+  }
+
+  const kafkaProducer = datasources.kafka?.producer;
+
+  if (typeof kafkaProducer !== "function") {
+    return new GSStatus(false, 500, undefined, undefined, "Kafka producer function not found");
+  }
+
+  try {
+    const result = await kafkaProducer({
+      topic: "publish-producer1",
+      message
+    });
+
+    logger.info("Kafka message published successfully: %o", result);
+
+    return new GSStatus(true, 200, undefined, "Message published to Kafka");
+  } catch (err) {
+    logger.error("Kafka publish failed: %o", err);
+    return new GSStatus(false, 500, undefined, undefined, "Failed to publish to Kafka");
+  }
+}
+```
 ### Example usage EventSource (Consumer):
 
 Update configuration file based on your requirements in `Eventsources/kafka.yaml`.
@@ -83,7 +118,19 @@ kafka.publish-producer1.kafka_proj:   # event key
         schema:
           type: string
 ```
-#### kafka workflow for Consumer ( src/functions/kafka_consume.yaml )
+#### kafka workflow for Consumer ( src/functions/kafka_consume.ts )
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+/**
+ * Kafka consumer function - returns the consumed Kafka message
+ */
+export default function (ctx: GSContext, args: PlainObject): GSStatus {
+  const { inputs } = ctx;
+
+  return new GSStatus(true, 200, undefined, inputs.data);
+}
+```
+<!-- ####  yaml workflow for Consumer ( src/functions/kafka_consume.yaml )
 ```yaml
 # function to consume data
 id: kafka-consumer
@@ -92,7 +139,7 @@ tasks:
     - id: set_consumer
       fn: com.gs.return
       args: <% inputs %>
-```
+``` -->
 
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   

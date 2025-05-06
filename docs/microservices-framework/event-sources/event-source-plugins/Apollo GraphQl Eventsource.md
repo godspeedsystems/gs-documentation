@@ -80,21 +80,19 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
   Every Graphql event has a `body`, `headers` and `user`. You can access the same in your Typescript, Javascript or YAML functions. Below is an example of a TS and YAML workflow.
 
   #### src/functions/create.ts
-  ```typescript
+
+  ```ts
   export default function (ctx: GSContext, args: PlainObject) {
-      const ds = ctx.datasources.mongoose;
-      //@ts-ignore
-      const response = ds.Category.create(ctx.inputs.data.body);
-      return {
-        code: 201,
-        data: response
-      }
+    const ds = ctx.datasources.mongoose;
+    const response = ds.Category.create(ctx.inputs.data.body);
+    return {
+      code: 201,
+      data: response
+    }
   }
   ```
 
-  #### src/functions/create.yaml
-
-  ```yaml
+<!-- ``` 
   summary: Find one via Mongoose from Mongodb
   tasks:
     - id: mongo_category_create
@@ -103,7 +101,8 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
         - name: mastersilv3r #search clause: First argument
         - 'name age' #The projection: second argument
         - {} # Options: the third argument
-  ```
+``` -->
+
 
 ### 4. Auto generate graphql schema
 ```

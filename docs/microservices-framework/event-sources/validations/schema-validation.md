@@ -68,10 +68,7 @@ http.post./helloworld:
               type: string
               format: date
               pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}" # setting patern in schema
-
 ```
-
-
 
 ### Response schema validation
 
@@ -137,8 +134,6 @@ http.post./helloworld:
           properties:
             name:
               type: string
-
-
   responses:
     200:
       content:
@@ -149,5 +144,4 @@ http.post./helloworld:
             properties:
               name:
                 type: string
-
 ```
