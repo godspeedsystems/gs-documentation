@@ -374,17 +374,6 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
 
 ```
 
-#### Example YAML workflow
-
-In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function (fn) to perform operations in this case `datasource.aws.s3.listObjects`.
-
-```yaml
-id: aws_workflow
-tasks:
-  - id: aws_list
-    fn: datasource.aws.s3.listObjects
-    args: <% inputs.body %>
-```
 #### Example TS workflow
 ```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
@@ -482,49 +471,85 @@ Sending emails in your Node.js application has never been smoother. The Godspeed
 
 Whether you're sending transactional emails, newsletters, or notifications, this plugin empowers you to deliver messages with Godspeed. Let's elevate your email game together!
 
-## example usage:
+## Example usage:
 
-#### mailer config ( src/datasources/mail.yaml )
+### Mailer config ( src/datasources/mail.yaml )
 ```yaml
 type: mail
 user: 'godspeed@gmail.com'
 pass: 'rmeb bjak xcam xkub'
 ```
 
-#### mailer event for Producer ( src/events/mail_send_event.yaml )
+### Mailer Event for Producer ( src/events/mail_send_event.yaml )
 
-```yaml
-http.post./mail:
-  summary: sending_mail
-  description: sending_mail
-  fn: mail_send
+```yaml title=src/events/mail_send_event.yaml
+http.post./email:
+  summary: Send email to user
+  description: Sends an email to a user using the mailer datasource
+  fn: send_email
+  authn: false
   body:
-      type: object
-      properties:
-        name:
-          type: string
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            recipient:
+              type: string
+            subject:
+              type: string
+            body:
+              type: string
+          required:
+            - recipient
+            - subject
+            - body
   responses:
-    200:
+    '200':
+      description: Email sent successfully
       content:
         application/json:
           schema:
             type: object
-
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object # Or a more specific schema if the mailer returns structured data
+    '400':
+      description: Failed to send email
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              error:
+                type: string
 ```
 
-#### mailer workflow for send mail ( src/functions/mail_send.yaml )
+### Typescript Workflow to send mail
+```typescript title=src/functions/send_email.ts
 
-```yaml
-summary: send
-tasks:
-  - id: send_mail
-    fn: datasource.mail.send
-    args: 
-      from: 'sender@gmail.com'
-      to: 'receiver@gmail.com'
-      subject: 'Hello from Godspeed'
-      text: 'Have a Nice day'
-  
+import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
+export default async function (ctx: GSContext) {
+  const { body} = ctx.inputs.data;
+  const mailerClient: GSDataSource = ctx.datasources.mailer;
+
+  try {
+    const response = await mailerClient.execute(ctx, {
+      to: body.recipient,
+      subject: body.subject,
+      text: body.body
+    });
+    return new GSStatus(true, 200, "Email Sent successfully", response, undefined);
+  } catch (error: any) {
+      const errorData = error.stack || error;
+      return new GSStatus(false, 400, "Failed to send email", errorData, undefined);
+  }
+}
 ```
 
 ### 6. [redis-as-datasource](https://www.npmjs.com/package/@godspeedsystems/plugins-redis-as-datasource)

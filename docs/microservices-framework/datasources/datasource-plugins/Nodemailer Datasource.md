@@ -106,17 +106,7 @@ export default async function (ctx: GSContext) {
 }
 ```
 
-### Yaml Workflow to send mail
-```yaml title=src/functions/send_email.yaml
-summary: send email
-tasks:
-  - id: send_email
-    fn: datasource.mailer.send
-    args: 
-      to: receiver@gmail.com
-      subject: Hello from Godspeed
-      text: Have a Nice day
-```
+
 
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)   

@@ -233,7 +233,7 @@ export default function (ctx: GSContext, args: PlainObject) {
     }
 }
 ```
-
+<!-- 
 ### Event Handlers: YAML based
 Same response in a yaml workflow.
 
@@ -247,7 +247,7 @@ tasks:
       headers:
         custom_response_header: something
       # code: 200 Default value from com.gs.return is success and code is 200
-```
+``` -->
 
 ## Setting Base Url
 The base url is set in datasources/api.yaml

@@ -92,7 +92,7 @@ kafka.publish-producer1.kafka_proj: // event key
           type: string
 ```
 **3. ** kafka workflow for consumer
-```yaml title=src/functions/kafka_consume.yaml
+``` title=src/functions/kafka_consume.yaml
 # function for consume data
 id: kafka-consumer
 summary: consumer

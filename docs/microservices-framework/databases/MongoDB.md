@@ -109,36 +109,19 @@ module.exports = {
 ```
 
 ### Sample workflow
-When calling any api function it will be called as `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
-`ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
+When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
 The arguments to any `Function_Name` are to be passed in two ways:
 
-**1. ** Only the first arg of the function as accepted by the API.
-  ```yaml
-    id: mongoose_workflow
-    tasks:
-      - id: first_task
-        fn: datasource.mongoose.SomeModel.findOne
-        args: {"name": "mastersilv3r"} #Fun fact: YAML acceptes JSON as well. 
-  ```
-**2. ** Most Mongoose functions accept multiple args. To pass all args to an API call, send an array of the acceptable args. This array is spread and passed to the API call
-  ```yaml
-    id: helloworld2_workflow
-    tasks:
-      - id: helloworld2_workflow_first_task
-        fn: datasource.mongoose.SomeModel.findOne
-        args: #as an array
-          - name: mastersilv3r #search clause: First argument
-          - 'name age' #The projection: second argument
-          - {} # Options: the third argument
-  ```
-**3. ** Calling from a TS/JS workflow works same as any other datasource
+### Calling from a TS/JS workflow works same as any other datasource
+
+#### Option 1:
+Calling function on Mongoose model directly and sending data with status code
+
 ```typescript
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
-// Option 1: 
-// Calling function on Mongoose model directly and sending data with status code
-// Here you handle errors/try/catch yourself
+// Here you can handle errors try/catch yourself
+
 export default async function (ctx: GSContext, args: any) {
     const ds: GSDataSource = ctx.datasources.mongoose;
     // If this function is called by another function (yaml or JS), the caller may have passed args object. In case not, then initialize args yourself.
@@ -161,8 +144,14 @@ export default async function (ctx: GSContext, args: any) {
       }
     }
 }
+```
 
-//Option 2: Handles response codes, errors creation of GSStatus directly
+#### Option 2:
+Handles response codes, errors creation of GSStatus directly
+
+```typescript
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
+
 export default async function (ctx: GSContext, args: any) {
     const ds: GSDataSource = ctx.datasources.mongoose;
     args = args || [{name: 'mastersilv3r'}, 'name age', {}];
@@ -305,7 +294,7 @@ godspeed gen-crud-api
 ### Sample API
 Here is a sample event and workflow for mongodb, which is fetching data from the database.
 
-```yaml title=src/events/mongo.yaml
+```yaml title=src/events/getPost.yaml
 http.get./mongo/post/{id}:
   summary: Fetch Post
   description: Fetch Post from database

@@ -16,7 +16,6 @@ Hello developers Thank You for using Godspeed Microservice Framework.
 2. Godspeed Framework Version V2
 
 
-
 ### Steps for Using the Language Tool Extension.
 
 - Open your [VS Code](https://code.visualstudio.com/) app.
@@ -36,7 +35,7 @@ Hello developers Thank You for using Godspeed Microservice Framework.
 
 - In the Event Snippets contains the event string , authn , summary, description, fn, on_validation_error, sample params, sample body, responses. After creating an Event you can configure the code with your requirements For Ex. Changing the body, params , responses. You can change the values by pressing up and down arrow and tab or Enter to move next.
 
-- sample of eventsnippet
+- Sample of eventsnippet
 
 ![preview](/img/video-gif/eventsnippet.gif "Godspeed Event Sample")
 

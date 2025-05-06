@@ -31,7 +31,7 @@ Framework will give you below folder structure.
         |
         └── functions
             |
-            └── helloworld.yaml
+            └── helloworld.ts
 ```
 
 When a service boots up, framework store the swagger docs for http events in `src/docs/`

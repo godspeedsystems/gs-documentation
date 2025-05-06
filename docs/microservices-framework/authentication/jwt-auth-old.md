@@ -7,12 +7,11 @@ The plugins follow zero trust policy as a first principle, so if you have setup 
 
 ### Disabling authentication on an endpoint
 ```yaml
-http.post./v1/loan-application/:lender_loan_application_id/kyc/ckyc/initiate: 
-  authn: false # explicitly disable jwt authentication on this endpoint
+http.post./loan-application: 
   fn: com.biz.kyc.ckyc.ckyc_initiate
-  ...
+  authn: false # explicitly disable jwt authentication on this endpoint
+ 
 ```
-
 
 ## For plugin creators
 For handling JWT , it is recommended that each event source plugin adheres to a standardized JWT handling configuration. In the case of JWT, the configuration typically includes details such as the `issuer`, `audience`, and `secretOrkey`.
@@ -47,7 +46,7 @@ Additionally, if you specify an `issuer` or `audience` value in the configuratio
 ## Access JWT payload in event handlers or workflows
 You can access the complete JWT payload in `<% inputs.user %>` in YAML workflows inline scripts, and as `ctx.inputs.data.user` when writing JS/TS functions
 
-### Example access from inline scripting with YAML
+<!-- ### Example access from inline scripting with YAML
 This is applicable in `functions` and in `authz` workflows in event source or event definitions.
 ```yaml
 summary: Call an API and transform the 
@@ -58,7 +57,7 @@ tasks:
       args:
         data: <% inputs.body %>
           jwt_payload: <% inputs.user %>
-```
+``` -->
 
 ### Example JS/TS workflow
 ```typescript
