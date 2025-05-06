@@ -523,11 +523,9 @@ kafka.publish-producer1.kafka_proj:
       application/json:
         schema:
           type: string
-
 ```
 
 #### Example workflow for consumer ( src/functions/kafka-consume.yaml ) :
-
 
 ```yaml
 id: kafka-conumer

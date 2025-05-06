@@ -1,3 +1,9 @@
+---
+title: Fastify Plugin for Godspeed Framework
+description: An event source plugin that enables seamless integration of Fastify, a fast and low overhead web framework, for handling HTTP events in Godspeed applications. Simplifies event subscriptions and processing for building responsive and scalable applications.
+keywords: [fastify, event source, http events, serverless, godspeed plugin, node.js, web framework, event subscription, scalable applications, event processing]
+---
+
 ## Introduction
 
 The Godspeed Fastify Plugin is an essential component of the Godspeed framework, designed to streamline the integration of event-driven and serverless functionalities into your projects. This plugin harnesses the power of Fastify, a fast and low overhead web framework for Node.js, to handle HTTP events. It simplifies the process of defining event subscriptions and processing incoming events, providing a robust foundation for building responsive and scalable applications.
@@ -66,8 +72,26 @@ http.post./sample_api:
 - The event YAML defines properties for handling specific HTTP requests within the Fastify app. In the YAML, `<method>` should be replaced with actual HTTP methods such as `GET, POST, PUT, or DELETE`, specifying how the app handles those requests. The `<endpoint_url>` field should contain the API URL for the respective HTTP route.
 - A function will be triggered on sending a request to the respective url. The functions are created under `src/functions/`.
 
-#### Function to be called (src/functions/sample.yaml)
-```yaml
+#### Function to be called (src/functions/sample.ts)
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+
+ // Returns a personalized message using query and body input
+
+export default function (ctx: GSContext, args: PlainObject): GSStatus {
+  const { inputs } = ctx;
+  const { query, body } = inputs.data;
+
+  const user = query?.user || "Guest";
+  const message = body?.message || "No message provided";
+
+  const response = `Hello ${user}. This is a message from body ${message}`;
+
+  return new GSStatus(true, 200, "message received", response, undefined);
+}
+```
+
+<!-- ```yaml
 summary:
 description:
 tasks:
@@ -75,7 +99,7 @@ tasks:
       fn: com.gs.return #its an inbuilt function
       args: |
         <%"Hello "+inputs.query.user+". This is a message from body "+inputs.body.message%>
-```
+``` -->
 
 ## How It Helps
 

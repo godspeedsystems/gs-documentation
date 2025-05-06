@@ -27,7 +27,6 @@ Learn how to generate CRUD APIs in Godspeed:
 ## Prerequisites
 
 Before generating CRUD APIs, ensure you have:
-- Node.js installed
 - Godspeed CLI installed
 - Access to a supported database
 - Basic understanding of Prisma schema
@@ -36,9 +35,8 @@ Before generating CRUD APIs, ensure you have:
 
 ### 1. Project Setup
 
-Create a new Godspeed project:
+Create a new Godspeed project or skip if already created.
 ```bash
-# Create new project
 godspeed create my-crud-app
 
 # Navigate to project directory
@@ -84,8 +82,7 @@ For database-specific connection formats, see:
 
 Create a Prisma schema file in `src/datasources/`:
 
-```prisma
-// src/datasources/schema.prisma
+```prisma title=src/datasources/schema.prisma
 
 datasource db {
   provider = "postgresql"  // or mysql, sqlite, sqlserver
@@ -162,7 +159,7 @@ http://localhost:3000/api-docs
 The generator creates:
 1. Event definitions
 2. API routes
-3. YAML functions
+3. Functions in yaml
 4. Swagger documentation
 
 ![Generated CRUD Components](../../static/img/generated_crud_api.png)
@@ -185,31 +182,5 @@ The generator creates:
    - Confirm Prisma client generation
    - Check for schema validation errors
    - Verify event source configuration
-
-## Technical Metadata
-
-### Integration Points
-- Database Systems
-- ORM Layer (Prisma)
-- HTTP Server (Express.js)
-- API Documentation (Swagger)
-
-### Performance Considerations
-- Database connection pooling
-- Query optimization
-- Response caching options
-
-### Security Notes
-- Authentication integration
-- Authorization configuration
-- Data validation
-
-### Related Topics
-- Database Integration
-- API Development
-- ORM Configuration
-- Schema Design
-- API Testing
-- Documentation Generation
 
 Remember to regularly update generated APIs as your data models evolve, and maintain proper version control of your schema files.

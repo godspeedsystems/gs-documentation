@@ -85,7 +85,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'docs/microservices-framework/introduction/overview',
+          editUrl: 'docs/microservices-framework/guide/get-started',
           routeBasePath: '/',
           disableVersioning: true,
           // Please change this to your repo.

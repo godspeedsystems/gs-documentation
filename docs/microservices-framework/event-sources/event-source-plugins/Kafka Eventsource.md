@@ -8,9 +8,13 @@ A brief description of how to use Kafka plug-in in our godspeed framework as Dat
   godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource
 ```
 
-### Example usage Datasource (Producer):
+### Related files
 
-#### Update configuration file based on your requirements in `src/datasources/kafka.yaml`
+After installation, you will find auto-generated files in your project related to the plugin at `src/datasources/types/kafka.ts` and `src/datasources/kafka.yaml`and `src/eventsources/types/kafka.ts` and `src/datasources/kafka.yaml`.
+
+
+### Update configuration file based on your requirements in 
+`src/eventsources/kafka.yaml`
 
 kafka config ( src/datasources/kafka.yaml )
 ```yaml
@@ -19,7 +23,8 @@ clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 ```
 
-#### Define kafka event for Producer ( src/events/kafka_pub.yaml )
+### Define kafka event for Producer ( src/events/kafka_pub.yaml )
+
 In the event, we establish an HTTP endpoint that accepts parameters such as the topic name and message content. When this endpoint is invoked, it triggers the `datasource.kafka.producer` function. This function, in turn, takes the provided topic name and message as input arguments and performs the task of publishing the message to the specified Kafka topic.
 ```yaml
 # event to Publish
@@ -37,7 +42,7 @@ http.post./kafka-pub:
           required: ['message']
 
 ```
-#### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
+<!-- #### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
 
 In workflow we need to mension `datasource.kafka.producer` as function (fn) to produce data.
 
@@ -50,19 +55,54 @@ tasks:
       args:
         topic: "publish-producer1"
         message: <% inputs.body.message %>
-```
+``` -->
+### kafka workflow for Producer ( src/functions/kafka-publish.ts )
 
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+ /**
+  * Kafka producer function - publishes message from request body to a Kafka topic
+ */
+export default async function (ctx: GSContext, args: PlainObject): Promise<GSStatus> {
+  const { datasources, inputs, logger } = ctx;
+  const { message } = inputs.data.body;
+
+  if (!message) {
+    return new GSStatus(false, 400, undefined, undefined, "Message is required");
+  }
+
+  const kafkaProducer = datasources.kafka?.producer;
+
+  if (typeof kafkaProducer !== "function") {
+    return new GSStatus(false, 500, undefined, undefined, "Kafka producer function not found");
+  }
+
+  try {
+    const result = await kafkaProducer({
+      topic: "publish-producer1",
+      message
+    });
+
+    logger.info("Kafka message published successfully: %o", result);
+
+    return new GSStatus(true, 200, undefined, "Message published to Kafka");
+  } catch (err) {
+    logger.error("Kafka publish failed: %o", err);
+    return new GSStatus(false, 500, undefined, undefined, "Failed to publish to Kafka");
+  }
+}
+```
 ### Example usage EventSource (Consumer):
 
 Update configuration file based on your requirements in `Eventsources/kafka.yaml`.
 
-#### kafka config ( kafka.yaml )
+### kafka config ( kafka.yaml )
 ```yaml
 type: kafka
 groupId: "kafka_proj"
 ```
 
-#### kafka event for consumer (src/events/kafka_pub.yaml)
+### kafka event for consumer (src/events/kafka_pub.yaml)
 
 To use Consumer we need to follow the below event key format.
 
@@ -83,7 +123,20 @@ kafka.publish-producer1.kafka_proj:   # event key
         schema:
           type: string
 ```
-#### kafka workflow for Consumer ( src/functions/kafka_consume.yaml )
+### kafka workflow for Consumer 
+(src/functions/kafka_consume.ts)
+```ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+/**
+ * Kafka consumer function - returns the consumed Kafka message
+ */
+export default function (ctx: GSContext, args: PlainObject): GSStatus {
+  const { inputs } = ctx;
+
+  return new GSStatus(true, 200, undefined, inputs.data);
+}
+```
+<!-- ####  yaml workflow for Consumer ( src/functions/kafka_consume.yaml )
 ```yaml
 # function to consume data
 id: kafka-consumer
@@ -92,7 +145,7 @@ tasks:
     - id: set_consumer
       fn: com.gs.return
       args: <% inputs %>
-```
+``` -->
 
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   

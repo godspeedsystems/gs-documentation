@@ -79,13 +79,6 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
          application/json:
 ```
 
-```yaml title=workflow
-id: aws_workflow
-tasks:
-  - id: aws_list
-    fn: datasource.aws.s3.listObjects
-    args: <% inputs.body %>
-```
 In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function `fn` to perform operations in this case `datasource.aws.s3.listObjects`.
 
 ```ts title='TS workflow'

@@ -270,19 +270,6 @@ export default async function (ctx: GSContext, args: any) {
 }
 ```
 
-Or you can create workflow in yaml also :
-
-Example YAML Workflow (prompt.yaml)
-
-```yaml
-summary: "Get AI-driven response from ChatGPT with configurations from YAML file"
-tasks:
-  - id: request_chatgpt
-    fn: datasource.chatgpt.chat
-    args:
-      prompt: <% inputs.body.prompt %>
-```
-
 ## Step 5: Access and Test the Custom Datasource
 
 1. **Start Your Godspeed Server**:

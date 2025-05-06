@@ -1,3 +1,9 @@
+---
+title: Express.js Plugin for Godspeed Framework
+description: An event source plugin that enables seamless integration of Express.js for handling HTTP events in Godspeed applications. Provides schema-driven development, input/output validation, authentication, and Swagger/GraphQL spec generation for building robust server-side applications.
+keywords: [express.js, http events, event source, middleware, api development, godspeed plugin, node.js, server-side, schema driven, input validation, output validation, authentication, swagger, graphql]
+---
+
 # Godspeed Express Plugin
 
 The Godspeed Express Plugin is a core component of the Godspeed framework, integrating with the popular Express.js framework to handle HTTP events. This plugin provides seamless, schema-driven development for HTTP-based event handling, offering features like input/output validation, authentication, and Swagger/GraphQL spec generation. This flexible tool allows developers to build robust, modular, and configurable server-side applications in Node.js.
@@ -7,14 +13,15 @@ Explore the **[Plugin Source Code here](https://github.com/godspeedsystems/gs-pl
 ### Plugin Features
 Read More about the Features of Express Plugin [here](/docs/microservices-framework/event-sources/event-source-plugins/express-plugin.md)
 
-## How to Use
+## How to Add Plugin
 - Create a godspeed project from the CLI and by default the Express plugin is integrated into your project, if not then install the plugin from CLI as:
 
 ```bash
 $ godspeed plugin add @godspeedsystems/plugins-express-as-http
 ```
-      
-- You will find two files added in your project related to the Express plugin at `src/eventsources/types/express.ts` - the type file and `src/eventsources/http.yaml` - the instance file.
+### Related Files 
+
+After installation, you will find two auto generated files in your project related to the Express plugin at `src/eventsources/types/express.ts` - the type file and `src/eventsources/http.yaml` - the instance file.
 
 ### Type File
 
@@ -91,6 +98,10 @@ on_response_validation_error:
 ```
 </details>
 
+## Get Started by writing an event and workflow for Express 
+
+You can store one or more events in each YAML file stored in the `src/events/` folder. The files can be organized and stored in any folder structure. The functions are created under `src/functions/`.
+
 ### HTTP Event Schema Format
 
 All types of events in Godspeed follow a standard format, with only the first line of the event definition changing as per the eventsource type. In case of http, the following structure represents the applicable composition of an event.
@@ -120,17 +131,11 @@ Specifying the event schema here, not only validates your input and response, ha
       attributes:
 ```
 - The event YAML defines properties for handling specific HTTP requests within the Express app. In the YAML, `<method>` should be replaced with actual HTTP methods such as `GET, POST, PUT, or DELETE`, specifying how the app handles those requests. The `<endpoint_url>` field should contain the API URL for the respective HTTP route.
-- A function (event handler) will be triggered on sending a request to the respective url. The functions are created under `src/functions/`.
+- A function (event handler) will be triggered on sending a request to the respective url. 
 
-## Get Started by writing an event and workflow for Express 
+### Sample Event 
 
-You can store one or more events in each YAML file stored in the `events` folder. The files can be organized and stored in any folder structure. 
-
-`src/events/sample.yaml`
-<details>
-<summary> Sample Event </summary>
-
-```yaml
+```yaml title=src/events/sample.yaml
   http.get./sample_api:
     fn: sample      #redirects to src/functions/sample.yaml
     authn: false #to disable global default setting of JWT authn, say authn: false.
@@ -169,9 +174,8 @@ You can store one or more events in each YAML file stored in the `events` folder
     # on_request_validation_error:
     # on_response_validation_error:
 ```
-</details>
 
-### Event Handler or Workflow: (TS/JS based)
+### Event Handler or Workflow: (TS/JS)
 
 The meta-framework supports pure functions. This means they take JSON as input and return JSON as output, irrespective of the eventsource from where the event is captured and response returned.
 Hereby sharing a typescript function which shows all that you get in your event handler workflow
@@ -233,7 +237,7 @@ export default function (ctx: GSContext, args: PlainObject) {
     }
 }
 ```
-
+<!-- 
 ### Event Handlers: YAML based
 Same response in a yaml workflow.
 
@@ -247,7 +251,7 @@ tasks:
       headers:
         custom_response_header: something
       # code: 200 Default value from com.gs.return is success and code is 200
-```
+``` -->
 
 ## Setting Base Url
 The base url is set in datasources/api.yaml
@@ -269,8 +273,6 @@ authn:
     audience: <% config.audience %> # must be equal to the key aud in your jwt token
     secretOrKey: <% config.secret %>
 ```
-> Note: In order to add OAUTH2 you will need to customize the Express event source as it is not currently supported in the default implementation. Your PR Is welcome!
-
 
 ## Configuring OAuth2
 
@@ -281,10 +283,10 @@ You can configure OAUth2 settings within the eventsources/http.yaml. [Here's an 
 
 The Express plugin allows you to upload your files
 
-The default file size accepted is 50MB. If you wish to specify a custom file size, you can modify the value in `"./src/eventsources/http.yaml`".
+The default file size accepted is 50MB. If you wish to specify a custom file size, you can modify the value in `./src/eventsources/http.yaml`.
 
-<details>
-<summary> Example- Event to Upload file </summary>
+### Example- Event to Upload file
+
 ```yaml
 http.post./helloworld:
   fn: helloworld
@@ -304,11 +306,9 @@ http.post./helloworld:
           schema:
             type: object
 ```
-</details>
 
 
-<details>
-<summary> Example Workflow to handle the uploaded files </summary>
+### Example Workflow to handle the uploaded files 
 
 ```typescript
   export default function (ctx: GSContext) {
@@ -323,7 +323,6 @@ http.post./helloworld:
     }
   }
 ```
-</details>
 
 ### Example success response
 
