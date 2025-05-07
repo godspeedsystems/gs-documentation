@@ -64,12 +64,6 @@ In this file, you can set the base URL and any custom headers or authentication 
 http.get./fetch-data:
   fn: fetchDataWorkflow
   authn: false
-  params:
-    - name: test_input
-      in: query
-      required: true
-      schema:
-        type: string
   responses:
     200:
       content:
@@ -85,9 +79,25 @@ http.get./fetch-data:
 
 ### Step 3: Set Up Workflow to Use the Axios Datasource
 
- Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.yaml`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
+ Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
 
-```yaml
+```ts
+import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext) {
+    const client: GSDataSource = ctx.datasources.api;
+
+    const res =  await client.execute(ctx, {
+        meta: {
+            method: 'get',
+            url: '/api/items',
+        },
+    });
+    return res;
+};
+```
+
+<!-- 
   summary: Calls the third-party API using Axios
   tasks:
   - id: fetchDataWorkflow
@@ -97,7 +107,7 @@ http.get./fetch-data:
         <% inputs.query.id %>
     on_error:
       continue: false
-```
+-->
 
   ### Explanation:
 

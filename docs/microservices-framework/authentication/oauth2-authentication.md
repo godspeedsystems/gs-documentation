@@ -50,7 +50,7 @@
   Let's See an example event and workflow of above provided success_redirect_url 
   
   Event src/events/helloUser.yaml
-  ```
+  ```yaml
   http.get./verify/user:
     fn: helloUser
     authn: false
@@ -63,7 +63,7 @@
   ```
  
   Workflow  (src/functions/helloUser.ts)
-  ```
+  ```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
   export default function (ctx: GSContext, args: PlainObject) {
       const {

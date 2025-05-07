@@ -25,7 +25,7 @@ import { DataSource } from '@godspeedsystems/plugins-axios-as-datasource';
 export default DataSource;
 ```
 
-### Sample config file for Axios
+### Config file for Axios
 
 The sample config can be modified as per the usecase of your application.
 
@@ -80,15 +80,40 @@ tasks:
         firstName: 'Fred'
       timeout: 1000
 ``` -->
+
 ## How to Use:
 
-Create an event and its handler workflow to call an api
 
-### Sample typescript workflow
-```js
+### Set Up an Event
+
+1. **Create an Event to Trigger the Workflow**: Define an HTTP event to trigger the workflow and call the third-party API.
+ Example `fetchData.yaml`:
+
+```yaml
+http.get./fetch-data:
+  fn: fetchDataWorkflow
+  authn: false
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
+```
+  ### Explanation:
+   - **http.get./fetch-data:**: The first line of any http event defines the (protocol.Method./end-point)
+   Here, /fetch-data is the end point which will send a get request to third party API by calling a workflow.
+   - **fn**: fn defines the workflow function to be called. here it is, fetchDataWorkflow.
+
+
+### Set Up Workflow to Use the Axios Datasource
+
+ Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
+
+```ts
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
 
-export default async function (ctx: GSContext, args: {loan_offer: PlainObject, pan_number: string}) {
+export default async function (ctx: GSContext) {
     const client: GSDataSource = ctx.datasources.api;
 
     const res =  await client.execute(ctx, {
@@ -96,7 +121,6 @@ export default async function (ctx: GSContext, args: {loan_offer: PlainObject, p
             method: 'get',
             url: '/api/items',
         },
-        data: args
     });
     return res;
 };
@@ -235,7 +259,7 @@ module.exports = async function (ctx: any) {
 
 In an axios datasource call, if `skipAuth` is set in `args` then auth flow will be ignored. This is useful when generating token from the same api.
 
-example workflow:
+<!-- example workflow:
 ```yaml
 id: some_workflow
 tasks:
@@ -244,7 +268,7 @@ tasks:
     fn: datasource.api.post./anything
     args:
       skipAuth: true
-```
+``` -->
 ## Conclusion
 
 The Godspeed Axios Plugin is a valuable addition to the Godspeed framework, providing a standardized way to make HTTP requests using the Axios library. With this plugin, you can easily integrate with external APIs, handle responses, and streamline data retrieval within your applications.

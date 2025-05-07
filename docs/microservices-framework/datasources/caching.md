@@ -64,6 +64,7 @@ caching: <redis or mem-cache>
 ```
 
 ### How to use caching in your tasks
+
 #### Using caching in Typescript/Javascript tasks
 :::note
 Currently caching support is not provided when you call a datasource or function/workflow from typescript code. Check this [github issue](https://github.com/godspeedsystems/gs-node-service/issues/1008) for more information.
@@ -92,7 +93,7 @@ export default async function (ctx: GSContext, args: any) {
 }
 ```
 
-#### Using caching in YAML tasks
+<!-- #### Using caching in YAML tasks
 ##### Caching instruction
 Caching instruction has the following specifications.
 ```yaml
@@ -159,7 +160,7 @@ tasks:
     fn: com.gs.transform
     args:
       name: helloworld3
-```
+``` -->
 
 ### How to write your own cache plugin
 You need to implement abstract class `GSCacheAsDatasource` interface to write your own cache plugin.
@@ -207,7 +208,7 @@ type: mem-cache
 ```
 
 #### initializing client and execution ( src/datasources/types/mem-cache.ts ):
-```javascript
+```ts
 import { GSContext, GSCachingDataSource, PlainObject, logger } from "@godspeedsystems/core";
 
 export default class DataSource extends GSCachingDataSource {

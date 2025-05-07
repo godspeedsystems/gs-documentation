@@ -222,7 +222,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "8.2. Native language workflows",
+              label: "8.2. Typescript and Javascript workflows",
               id: "microservices-framework/workflows/native-language-functions",
             },
             // {
@@ -451,11 +451,11 @@ const sidebars = {
               label: "11.1.Overview",
               id: "microservices-framework/authorization/overview",
             },
-            {
-              type: "doc",
-              label: "11.2.Authz Usecases",
-              id: "microservices-framework/authorization/authz-usecases",
-            },
+            // {
+            //   type: "doc",
+            //   label: "11.2.Authz Usecases",
+            //   id: "microservices-framework/authorization/authz-usecases",
+            // },
           ],
         },
         {
