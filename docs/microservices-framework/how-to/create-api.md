@@ -145,9 +145,9 @@ This workflow will take the name from the request and return a personalized gree
   }
 
 ```
-
+<!-- 
 #### Example workflow in yaml:
-  ```yaml
+
     summary: Workflow to greet the user by name
     id: greet_user
     description: Workflow to greet the user by name
@@ -156,7 +156,7 @@ This workflow will take the name from the request and return a personalized gree
         fn: com.gs.return
         args:
           name: <% inputs.body.name %>
-  ```
+-->
 ### Step 5: Test the API
 
 - **Start the Godspeed Server:**

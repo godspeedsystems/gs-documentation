@@ -49,17 +49,6 @@ const sidebars = {
             },
           ],
         },
-
-        // {
-        //   type: "doc",
-        //   label: "1. Introduction",
-        //   id: "microservices-framework/introduction",
-        // },
-        // {
-        //   type: "doc",
-        //   label: "2. Tenets and Design Principles",
-        //   id: "microservices-framework/tenets-and-design-principles",
-        // },
         {
           type: "category",
           label: "2. Getting Started",
@@ -86,7 +75,6 @@ const sidebars = {
           label: "3. Guides",
           id: "microservices-framework/guides",
         },
-
         {
           type: "doc",
           label: "4. CLI",
@@ -184,8 +172,7 @@ const sidebars = {
             type: "doc",
             label: "7.3. Event Types",
             id: "microservices-framework/event-sources/event-types/overview",
-          },        
-               
+          },                
           {
             type: "doc",
             label: "7.4. Http Events",
@@ -222,9 +209,9 @@ const sidebars = {
               },
             ],
           },
-        ],
-      },
-      {
+          ],
+        },
+        {
           type: "category",
           label: "8. Workflows",
           items: [
@@ -235,7 +222,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "8.2. Native language workflows",
+              label: "8.2. Typescript and Javascript workflows",
               id: "microservices-framework/workflows/native-language-functions",
             },
             // {
@@ -428,7 +415,6 @@ const sidebars = {
             },
           ],
         },
-
         {
           type: "category",
           label: "10. Authentication",
@@ -465,11 +451,11 @@ const sidebars = {
               label: "11.1.Overview",
               id: "microservices-framework/authorization/overview",
             },
-            {
-              type: "doc",
-              label: "11.2.Authz Usecases",
-              id: "microservices-framework/authorization/authz-usecases",
-            },
+            // {
+            //   type: "doc",
+            //   label: "11.2.Authz Usecases",
+            //   id: "microservices-framework/authorization/authz-usecases",
+            // },
           ],
         },
         {
@@ -494,17 +480,22 @@ const sidebars = {
           ],
         },
         {
+          type: "doc",
+          label: "13. Definitions",
+          id: "microservices-framework/definitions",
+        },
+        {
           type: "category",
-          label: "13. Inline scripting",
+          label: "14. Inline scripting",
           items: [
             {
               type: "doc",
-              label: "13.1. Overview",
+              label: "14.1. Overview",
               id: "microservices-framework/inline-scripting/overview",
             },
             {
               type: "doc",
-              label: "13.2. Script Plugins",
+              label: "14.2. Script Plugins",
               id: "microservices-framework/inline-scripting/script-plugins",
             },
           ],
@@ -516,42 +507,42 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "14. Telemetry",
+          label: "15. Telemetry",
           items: [
             {
               type: "doc",
-              label: "14.1. Overview",
+              label: "15.1. Overview",
               id: "microservices-framework/telemetry/overview",
             },
             {
               type: "category",
-              label: "14.2. Configuration",
+              label: "15.2. Configuration",
               items: [
                 {
                   type: "doc",
-                  label: "14.2.1. Generic",
+                  label: "15.2.1. Generic",
                   id: "microservices-framework/telemetry/configuration",
                 },
                 {
                   type: "doc",
-                  label: "14.2.2. Traces",
+                  label: "15.2.2. Traces",
                   id: "microservices-framework/telemetry/tracing",
                 },
                 {
                   type: "doc",
-                  label: "14.2.3. Metrics",
+                  label: "15.2.3. Metrics",
                   id: "microservices-framework/telemetry/metrics",
                 },
                 {
                   type: "doc",
-                  label: "14.2.4. Logs",
+                  label: "15.2.4. Logs",
                   id: "microservices-framework/telemetry/logging",
                 },
               ]
             },
             {
               type: "doc",
-              label: "14.3. Custom traces, logs and metrics (BPM)",
+              label: "16.3. Custom traces, logs and metrics (BPM)",
               id: "microservices-framework/telemetry/custom-metrics-logs-traces"
             },
           ],

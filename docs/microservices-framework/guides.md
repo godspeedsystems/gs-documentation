@@ -5,7 +5,7 @@ description: A collection of guides and frequently asked questions about using t
 keywords: [Godspeed, guides, FAQs, API setup, workflows, functions, datasources, REST API, CRUD API, Swagger UI, Postman, authentication, JWT, OAuth2, callbacks, webhooks, TypeScript, inline scripting, databases, datastores, plugins, environment variables, secrets]
 ---
 
-This section provides answers to common questions and step-by-step guides for using the Godspeed Meta-Framework. It covers essential topics including setting up and securing APIs (REST, CRUD, Swagger, Postman, JWT, OAuth2), writing business logic using workflows and functions (TypeScript and YAML), and accessing various datasources like databases, APIs, and caches.
+This section provides answers to common questions and step-by-step guides for using the Godspeed Meta-Framework. It covers essential topics including setting up and securing APIs (REST, CRUD, Swagger, Postman, JWT, OAuth2), writing business logic using workflows and functions (TypeScript and Javascript), and accessing various datasources like databases, APIs, and caches.
 
 ### Setting up the APIs of your service
 
@@ -36,8 +36,6 @@ In Godspeed, the words Workflows and Functions mean one and the same thing, i.e.
 
 - **[How to write typescript workflows in godspeed?](/docs/microservices-framework/workflows/native-language-functions)**
 
-- **[How to write yaml workflows in godspeed?](/docs/microservices-framework/workflows/yaml-workflows/workflow-dsl)**
-
 - **[How to use inline scripting in Godspeed YAML configurations and workflows?](/docs/microservices-framework/inline-scripting/overview#scripting-in-workflows)**
 
 
@@ -64,8 +62,6 @@ In Godspeed, datasource can mean any place where you send or retrieve data from.
 - **[How to access any datastore by creating a custom datasource?](/docs/microservices-framework/datasources/create-custom-datasource)**
 
 - **[How to invoke datasource clients from typescript workflows?](/docs/microservices-framework/how-to/call-datasource)**
-
-- **[How to invoke datasource clients from yaml workflows?](/docs/microservices-framework/how-to/call-datasource)**
 
 - **[How to access the environment variables from the typescript workflows?](/docs/microservices-framework/how-to/short-faqs)**
 

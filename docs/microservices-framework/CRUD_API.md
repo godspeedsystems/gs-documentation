@@ -159,7 +159,7 @@ http://localhost:3000/api-docs
 The generator creates:
 1. Event definitions
 2. API routes
-3. Functions in yaml
+3. Functions
 4. Swagger documentation
 
 ![Generated CRUD Components](../../static/img/generated_crud_api.png)

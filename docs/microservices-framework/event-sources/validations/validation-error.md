@@ -43,31 +43,50 @@ http.get./validation:
 ```
 
 
-```yaml title=functions/on_request_validation.yaml
-summary: customizing req_response_error
-tasks:
-  - id: customized_request_error
-    fn: com.gs.transform 
-    args: 
-      success: false 
-      code: 400
-      data:    
-        message: <% inputs.validation_error.data.message %>
-     #  inputs.validation_error returns the default framework error
-     #  or you can give 
-     #  message: <% inputs.validation_error.data.errors[0] %>
-     
+```ts title=functions/on_request_validation.ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+
+export default function (ctx: GSContext, args: PlainObject) {
+  const {
+    inputs: {
+      validation_error
+    }
+  } = ctx;
+
+  // Extracting message from validation_error input
+  const message = validation_error?.data?.message || "Unknown validation error";
+
+  return new GSStatus(false, 400, undefined, { message });
+}
+ 
 ```
 
-```yaml title=functions/test_validation.yaml
+<!-- yaml
 summary: This is test function
 tasks:
   - id: test_function
     fn: com.gs.return
     args: 
-      data: <% "This is number two " + inputs.query.num_2 %>
+      data: <% "This is number two " + inputs.query.num_2 %> -->
+
+```ts title=functions/test_validation.ts
+import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
+
+export default function (ctx: GSContext, args: PlainObject) {
+  const {
+    inputs: {
+      data: {
+        query
+      }
+    }
+  } = ctx;
+
+  const responseMessage = `This is number two ${query?.num_2 ?? ''}`;
+  return new GSStatus(true, 200, undefined, responseMessage);
+}
 ```
 Response
+
 - A: Default Error Format
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705958247/Screenshot_from_2024-01-23_02-44-24_xcb02y.png" alt="response_error" />
 

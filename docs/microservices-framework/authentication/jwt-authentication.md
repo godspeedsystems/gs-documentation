@@ -140,7 +140,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
             example: 'Invalid username or password'
 ```
 **Workflow (verifyLogin.ts)**
-```
+```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
   import jwt from 'jsonwebtoken';
   export default function (ctx: GSContext, args: PlainObject) {
@@ -174,7 +174,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
 
 Example access from TS workflow
-```
+```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
 export default function (ctx: GSContext, args: PlainObject) {
     const {

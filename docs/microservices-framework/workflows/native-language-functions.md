@@ -1,4 +1,4 @@
-# Native Language Workflows
+# Writing Workflows in Godspeed
 
 Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
 
@@ -78,7 +78,7 @@ GSContext carries the loaded components of this project and as well the inputs o
 #### args
 The second parameter of the function call is args. This parameter is useful when this function is called from a YAML workflow in Godspeed. The `args` passed in the yaml task of the caller YAML workflow is passed as `args` here. It can be of any native type like object, array, string, number, boolean.
 
-##### Caller YAML function
+<!-- ##### Caller YAML function
 ```yaml
   summary: some workflow
   tasks:
@@ -86,8 +86,27 @@ The second parameter of the function call is args. This parameter is useful when
       fn: some_function
       args:
         name: mastersilv3r
+``` -->
+##### Caller function
+
+```ts 
+import { GSContext, PlainObject } from "@godspeedsystems/core";
+
+export default function (ctx: GSContext, args: PlainObject) {
+  const { logger } = ctx;
+  // Accessing the argument passed from the YAML task
+  const name = args.name;
+  // Logging and returning a response
+  logger.info(`Received name: ${name}`);
+  return {
+    success: true,
+    code: 200,
+    data: `Hello, ${name}!`
+  };
+}
 ```
-##### Callee Typescript function
+
+##### Callee function
 ```typescript
   export default function (ctx: GSContext, args: PlainObject) {
     ctx.logger.info(args.name);  //Prints 'mastersilv3r'
