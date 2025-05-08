@@ -30,16 +30,20 @@ DATABASE_URL="mysql://root:password@localhost:3306/yourdb"
 ```
 And then this environment variable is provided in the url field of the datasource block in your prisma schema.
 src/datasources/mysql.prisma
+
 ```
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL") 
+  provider = "MySQL"        // database provider name which you are using
+  url      = env("DATABASE_URL")   // DATABASE_URL is the name of env variable
+}
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/mysql"    // dbName should be same as prisma schema file name
+  previewFeatures = ["metrics"]
 }
 ```
 
 ### Sample prisma schema for MySQL
-<details>
-<summary> Sample prisma schema for MySQL </summary>
 
 ```
 datasource db {
@@ -68,7 +72,6 @@ model Post {
   authorId  Int
 }
 ```
-</details>
 
 ### Generate prisma client
 ```bash

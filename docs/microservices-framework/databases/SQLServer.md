@@ -31,8 +31,6 @@ datasource db {
 }
 ```
 ### Sample prisma schema for Sql Server
-<details>
-<summary> Sample prisma schema for Sql Server database  </summary>
 
 ```
 datasource db {
@@ -61,7 +59,7 @@ model Post {
   authorId  Int
 }
 ```
-</details>
+
 
 ### Generate prisma client
 

@@ -1,7 +1,7 @@
 ---
 title: Prisma Plugin for Godspeed Framework
 description: A powerful database ORM plugin that enables seamless integration with multiple databases in Godspeed applications. Features include type-safe queries, schema migrations, CRUD API generation, data encryption, and row/column level authorization.
-keywords: [prisma, orm, database integration, postgresql, mysql, mongodb, database migration, crud operations, godspeed plugin, type safety]
+keywords: [prisma, orm, database integration, generate crud apis, postgresql, mysql, mongodb, sqllite, database migration, crud operations, godspeed plugin, type safety]
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
@@ -45,6 +45,11 @@ export default DataSource;
     provider = "mysql"      // name of database provider
     url      = env("DB_URL")  // DB_URL string will be added in .env file
     }
+    generator client {
+      provider = "prisma-client-js"
+      output = "./prisma-clients/dbName"
+      previewFeatures = ["metrics"]
+    }
   ```
   Set provider to the type of database you are using. In this case it’s mysql. The url property will take the value of the connection url which is defined in the .env file.
 
@@ -78,6 +83,7 @@ If the command has run successfully Prisma will generate models from your databa
 #### 3.2 If you don't have an existing database,
 
 Then add the data models to your Prisma schema in datasources/schema.prisma as:
+
 ### Sample prisma schema
 
 ```
@@ -87,7 +93,7 @@ datasource db {
 }
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/dbName"
+  output = "./prisma-clients/schema"    // dbName should be same as prisma schema file name
   previewFeatures = ["metrics"]
 }
 
@@ -132,8 +138,10 @@ You can generate the CRUD API'S by entering the below command:
 * You can now view events and workflows generated under events and functions folder. They follow a structure similar to the APIs below.
 
 ### Sample API
-If your schema name is mysql.prisma and model name if 'post', then your event and workflow to fetch data from the database, will look like :
+If your schema name is mysql.prisma and model name is 'post', then your event and workflow to fetch data from the database, will look like :
+
 ```yaml title = src/events/post.yaml
+
 http.get./mysql/post/{id}:
   summary: Fetch Post
   description: Fetch Post from database
@@ -150,8 +158,24 @@ http.get./mysql/post/{id}:
         schema:
           type: object
 ```
+```ts title = src/functions/com/biz/mysql/post/one.ts
 
-```yaml title= src/functions/com/biz/post/one.yaml
+import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
+import { PrismaClient } from "@prisma/client";
+
+module.exports = async (ctx: GSContext, args: PlainObject) => {
+  const { inputs: { data: { params } }, logger, datasources } = ctx;
+
+  const client: PrismaClient = datasources.mysql.client;
+
+  const response = await client.post.findUnique({
+                         where: { id: params.id }
+                  });
+  return new GSStatus(true, 200, "Post fetched", response, undefined );
+}
+```
+
+<!-- ```yaml title= src/functions/com/biz/post/one.yaml
 summary: Fetch Post
 tasks:
   - id: mysql_post_one
@@ -159,7 +183,7 @@ tasks:
     args:
       where:
         id: <% inputs.params.id %>
-```
+``` -->
 
 ### Database Encryption
 Godspeed provides AES-256 GCM both way deterministic hashing encryption in Prisma plugin. You can apply encryption only on `String` type fields.
@@ -210,7 +234,7 @@ enum Role {
 
 #### Add secret
 You can specify secret in `prisma_secret` variable in [config environment variables](../../config-and-mappings/config.md/#custom-environment-variablesyaml).
-
+<!-- 
 ### Database Authorization
 The plugin provides rows and columns level authorization access as explained in [Authorization](../../authorization/authz-usecases.md#d-restricting-datastore-access). If you are not allowed to access something, then empty data is returned.   
 **- **empty rows (e.g. in case where query trespasses access boundaries)   
@@ -310,7 +334,7 @@ summary: authz workflow
         where:
           tenant: <% inputs.headers.client_id %>
 ```
-</details>
+</details> -->
 
 ## Reference links
 **- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   

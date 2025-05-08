@@ -230,8 +230,7 @@ MONGO_TEST_URL=mongodb+srv://atlas_username:pswd@cluster0.w3bbqrp.mongodb.net/pr
 
 Now, you can create your [prisma schema](https://www.prisma.io/docs/orm/prisma-schema) in `src/datasources` directory. 
 
-<details>
-<summary>Sample prisma schema for mongo database</summary>
+### Sample prisma schema for mongo db
 
 ```prisma title=src/datasources/mongo.prisma
 datasource db {
@@ -241,7 +240,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output = "./prisma-clients/mongo"
+  output = "./prisma-clients/mongo"  // mongo is the name of prisma schema file
 }
 
 model User {
@@ -271,9 +270,6 @@ enum Role {
 
 </details>
 
-### Support for multiple prisma schema
-By default, only single prisma schema can be created in a project that can use only one database as given in the above example.   
-To support multiple prisma schemas for different databases, you need to add `output` key in `generator client` block as given in the above sample prisma schema:
 
 ### Generate prisma client
 This command will generate the prisma client and will sync the database with prisma schema

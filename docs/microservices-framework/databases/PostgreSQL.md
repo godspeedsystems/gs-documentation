@@ -30,14 +30,17 @@ In the above examples, DATABASE_URL is just a variable name given to connection 
 
 ```
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") 
+  provider = "PostgreSQL"
+  url      = env("DATABASE_URL")
+}
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/Postgres"
+  previewFeatures = ["metrics"]
 }
 
 ```
 ### Sample prisma schema for PostgreSQl
-<details>
-<summary> Sample prisma schema </summary>
 
 ```src/datasources/Postgres.prisma
 
@@ -67,7 +70,6 @@ model Post {
   authorId  Int
 }
 ```
-</details>
 
 ### Generate prisma client
 ```bash

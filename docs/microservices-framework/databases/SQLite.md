@@ -51,12 +51,15 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma-clients/sqlite"
+  previewFeatures = ["metrics"]
+}
 ```
 This approach allows you to easily switch between different database files at runtime if necessary.
 
 ### Sample prisma schema for SqLite
-<details>
-<summary> Sample prisma schema for SqLite </summary>
 
 ```
 datasource db {
@@ -85,7 +88,6 @@ model Post {
   authorId  Int
 }
 ```
-</details>
 
 ### Generate prisma client
 After having saved your schema under datasources directory, you can run the command:

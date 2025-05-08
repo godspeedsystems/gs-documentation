@@ -29,8 +29,6 @@ datasource db {
 ```
 
 ### Sample prisma schema for PlanetScale 
-<details>
-<summary> Sample prisma schema for PlanetScale </summary>
 
 ```
 datasource db {
@@ -59,7 +57,6 @@ model Post {
   authorId  Int
 }
 ```
-</details>
 
 ### Generate prisma client
 ```bash
