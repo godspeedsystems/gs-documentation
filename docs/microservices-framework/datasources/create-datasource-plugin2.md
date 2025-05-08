@@ -38,7 +38,7 @@ To create a custom data source in Godspeed, follow these steps:
        return client;
      }
 
-     async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+     async execute(ctx: GSContext): Promise<any> {
        if (!this.client) {
          this.client = await this.initClient();
        }

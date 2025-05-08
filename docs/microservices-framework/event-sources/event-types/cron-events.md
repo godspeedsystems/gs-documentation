@@ -45,7 +45,7 @@ import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
 /**
  * Prints a message every minute via cron
  */
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
   const { logger, childLogger } = ctx;
 
   // Log using both loggers

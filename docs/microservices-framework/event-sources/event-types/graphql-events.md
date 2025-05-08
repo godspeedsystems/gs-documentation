@@ -40,7 +40,7 @@ apollo.post./mongo/category:      // event key having prefix apollo
 ### Graphql Workflow
 
   ```ts
-  export default function (ctx: GSContext, args: PlainObject) {
+  export default function (ctx: GSContext) {
     const ds = ctx.datasources.mongoose;
     const response = ds.Category.create(ctx.inputs.data.body);
     return {

@@ -74,7 +74,7 @@ In this section, let us understand how a developer can contribute a plugin to go
         }
     }
 
-    async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+    async execute(ctx: GSContext): Promise<any> {
         
         try {
           // execute methods
@@ -113,7 +113,7 @@ In this section, let us understand how a developer can contribute a plugin to go
 
       }
 
-      async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+      async execute(ctx: GSContext): Promise<any> {
         try {
           // execute methods
           

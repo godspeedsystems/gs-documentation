@@ -91,7 +91,7 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
   #### src/functions/create.ts
 
   ```ts
-  export default function (ctx: GSContext, args: PlainObject) {
+  export default function (ctx: GSContext) {
     const ds = ctx.datasources.mongoose;
     const response = ds.Category.create(ctx.inputs.data.body);
     return {

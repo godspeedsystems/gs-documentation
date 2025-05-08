@@ -230,7 +230,7 @@ export default class DataSource extends GSCachingDataSource {
     delete this.client[key];
   }
 
-  execute(ctx: GSContext, args: PlainObject): Promise<any> {
+  execute(ctx: GSContext): Promise<any> {
     throw new Error("Method not implemented.");
   }
 }

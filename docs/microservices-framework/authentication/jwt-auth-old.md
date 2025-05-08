@@ -61,7 +61,7 @@ tasks:
 
 ### Example JS/TS workflow
 ```typescript
-export default async function (ctx: GSContext, args: any) {
+export default async function (ctx: GSContext) {
     
     //Ctx object has the basics you need to write any business logic in TS/JS
     const {

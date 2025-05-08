@@ -63,7 +63,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
  /**
   * Kafka producer function - publishes message from request body to a Kafka topic
  */
-export default async function (ctx: GSContext, args: PlainObject): Promise<GSStatus> {
+export default async function (ctx: GSContext): Promise<GSStatus> {
   const { datasources, inputs, logger } = ctx;
   const { message } = inputs.data.body;
 
@@ -130,7 +130,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 /**
  * Kafka consumer function - returns the consumed Kafka message
  */
-export default function (ctx: GSContext, args: PlainObject): GSStatus {
+export default function (ctx: GSContext): GSStatus {
   const { inputs } = ctx;
 
   return new GSStatus(true, 200, undefined, inputs.data);

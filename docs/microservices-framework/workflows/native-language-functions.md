@@ -41,7 +41,6 @@ export default function (ctx: GSContext, args: any) {
     // Will print with workflow_name and task_id attributes. 
     childLogger.info('Server is running healthy');
     // Will print without workflow_name and task_id attributes
-    logger.info('Arguments passed %o', args);
     logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
     logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
     logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
@@ -74,11 +73,22 @@ For seeing how framework handles data returned from a function, including calcul
 
 #### GSContext
 GSContext carries the loaded components of this project and as well the inputs of the current event.
+:::tip note
+ Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
+:::
+### More about GSContext
 
+Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+
+It includes all the context specific information like tracing information, actor, environment, headers, payload etc.
+
+Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
+
+<!-- 
 #### args
 The second parameter of the function call is args. This parameter is useful when this function is called from a YAML workflow in Godspeed. The `args` passed in the yaml task of the caller YAML workflow is passed as `args` here. It can be of any native type like object, array, string, number, boolean.
 
-<!-- ##### Caller YAML function
+##### Caller YAML function
 ```yaml
   summary: some workflow
   tasks:
@@ -86,13 +96,13 @@ The second parameter of the function call is args. This parameter is useful when
       fn: some_function
       args:
         name: mastersilv3r
-``` -->
+``` 
 ##### Caller function
 
 ```ts 
 import { GSContext, PlainObject } from "@godspeedsystems/core";
 
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
   const { logger } = ctx;
   // Accessing the argument passed from the YAML task
   const name = args.name;
@@ -108,20 +118,12 @@ export default function (ctx: GSContext, args: PlainObject) {
 
 ##### Callee function
 ```typescript
-  export default function (ctx: GSContext, args: PlainObject) {
+  export default function (ctx: GSContext) {
     ctx.logger.info(args.name);  //Prints 'mastersilv3r'
   }
 ```
-### More about GSContext
-:::tip note
- Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
-:::
+-->
 
-Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
-
-It includes all the context specific information like tracing information, actor, environment, headers, payload etc.
-
-Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
 <!-- 
 ```typescript
@@ -188,7 +190,6 @@ To access outputs of tasks executed before the current task, developer can destr
 With [datasources](../datasources/overview.md) we can access all datasources, their clients and methods.
 
 ```javascript
-
 const { datasources} = ctx;
 const responseData = await datasources.mongo.client.Restaurant.create({
     data: inputs.body
@@ -200,7 +201,6 @@ const responseData = await datasources.mongo.client.Restaurant.create({
 With childLogger you have accessibility to Pino logger instance with context information set - for example the `log.attributes` set in eventsource or event level.
 
 ```javascript
-
     const { childLogger} = ctx;
     childLogger.info('inputs: %o', inputs.body);
 

@@ -83,7 +83,7 @@ You can use the following template to start writing your custom datasource logic
       throw error;
       }
   }
-  async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+  async execute(ctx: GSContext): Promise<any> {
       try {
 
         // execute methods
@@ -123,7 +123,7 @@ protected async initClient(): Promise<object> {
   return client;
 }
 
-async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+async execute(ctx: GSContext): Promise<any> {
   const client = this.client as OpenAI;
   const { prompt, meta: { fnNameInWorkflow } } = args;
   // Parse method from fnNameInWorkflow
@@ -192,7 +192,7 @@ export {
        return kafka;
      }
 
-     async execute(ctx: GSContext, args: PlainObject): Promise<any> {
+     async execute(ctx: GSContext): Promise<any> {
        const { topic, message, meta: { fnNameInWorkflow } } = args;
        let method = fnNameInWorkflow.split(".")[2];
 

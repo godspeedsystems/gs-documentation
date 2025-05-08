@@ -143,7 +143,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 ```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
   import jwt from 'jsonwebtoken';
-  export default function (ctx: GSContext, args: PlainObject) {
+  export default function (ctx: GSContext) {
       const {
           inputs: {
               data: {
@@ -176,7 +176,7 @@ You can access the complete JWT payload in <% inputs.user %> in YAML workflows, 
 Example access from TS workflow
 ```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
     const {
         inputs: {
             data: {

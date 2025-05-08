@@ -184,7 +184,7 @@ when an event is captured by _any event source_. The generic input structure is 
 ```typescript
 import { GSContext, PlainObject } from "@godspeedsystems/core";
 
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
     //@ts-ignore
     const {
         inputs: {

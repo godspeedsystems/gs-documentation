@@ -78,7 +78,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 
  // Returns a personalized message using query and body input
 
-export default function (ctx: GSContext, args: PlainObject): GSStatus {
+export default function (ctx: GSContext): GSStatus {
   const { inputs } = ctx;
   const { query, body } = inputs.data;
 

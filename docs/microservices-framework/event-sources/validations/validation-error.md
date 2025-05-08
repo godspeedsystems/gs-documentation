@@ -46,7 +46,7 @@ http.get./validation:
 ```ts title=functions/on_request_validation.ts
 import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
   const {
     inputs: {
       validation_error
@@ -72,7 +72,7 @@ tasks:
 ```ts title=functions/test_validation.ts
 import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 
-export default function (ctx: GSContext, args: PlainObject) {
+export default function (ctx: GSContext) {
   const {
     inputs: {
       data: {

@@ -133,7 +133,7 @@ This workflow will take the name from the request and return a personalized gree
 `greet-user-workflow.ts`
 ```typescript
   import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
-  export default function (ctx: GSContext, args: PlainObject) {
+  export default function (ctx: GSContext) {
       const {
         inputs: {
               data: {

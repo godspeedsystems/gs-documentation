@@ -28,7 +28,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 /**
  * Kafka consumer function - returns the consumed Kafka message
  */
-export default function (ctx: GSContext, args: PlainObject): GSStatus {
+export default function (ctx: GSContext): GSStatus {
   const { inputs } = ctx;
 
   return new GSStatus(true, 200, undefined, inputs.data);
