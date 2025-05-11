@@ -66,7 +66,8 @@ module.exports = {
 };
 ```
 An example Mongoose model file
-```typescript
+
+```typescript title=SomeModel.ts
 const { model, Schema, Document } =require('mongoose');
 
 const SomeModelSchema = new Schema(
@@ -109,59 +110,24 @@ module.exports = {
 ```
 
 ### Sample workflow
-When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
-The arguments to any `Function_Name` are to be passed in two ways:
+When calling any api function it will be called as `ctx.datasources.mongoose.<Model_Name>.<Function_Name>` from TS/JS files.
 
-### Calling from a TS/JS workflow works same as any other datasource
-
-#### Option 1:
-Calling function on Mongoose model directly and sending data with status code
-
-```typescript
+```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
-// Here you can handle errors try/catch yourself
+export default async function (ctx: GSContext) {
 
-export default async function (ctx: GSContext, args: any) {
-    const ds: GSDataSource = ctx.datasources.mongoose;
-    // If this function is called by another function (yaml or JS), the caller may have passed args object. In case not, then initialize args yourself.
-    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
-    try {
-      const response = ds.SomeModel.findOne(...args);
-      return {
-        code: 200,
-        data: response
-      }
-      //return response; Framework will automatically add code: 200 in case of HTTP
-    } catch (err: any) {
-      ctx.childLogger.error(`Found error in Mongoose query ${err}`);
-      return {
-        code: 500,
-        data: {
-          error: err,
-          message: err.message
-        }
-      }
-    }
-}
-```
-
-#### Option 2:
-Handles response codes, errors creation of GSStatus directly
-
-```typescript
-import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
-
-export default async function (ctx: GSContext, args: any) {
-    const ds: GSDataSource = ctx.datasources.mongoose;
-    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
-    //Will need to set a meta object in the args to pass entitType and method
-    args.meta = {entityType: 'SomeModel', method: 'findOne'};
-    const response = await ds.execute(ctx, args);
-    // response.code will be 500 in case of error, and 200 otherwise
-    // In case or error, response.data will have message and error keys, like we saw 
-    // in the above TS example
-    return response;
+  const mongoClient: GSDataSource = ctx.datasources.mongoose;
+  const body =ctx.inputs.data.body ;
+  const data = { 
+    meta: {
+      entityType: 'SomeModel', 
+      method: 'create'
+    },
+    ...body
+  };
+  const response = await mongoClient.execute(ctx, data);
+  return response;
 }
 ```
 
@@ -174,16 +140,19 @@ When a call has an error the datasource returns following `GSStatus`.
         message: Internal Server Error
 ```
 
-### Run the service
-- Set an environment variable `MONGO_URL` as your connection string to running mongodb instance.
-  For example, setting via a unix shell.
+### Set Mongo URL
+
+Set an environment variable `MONGO_URL` as your connection string.
   ```shell
     export MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
   ```
-- From your command line run your service in the auto-watch mode
+### Run the service
+
+From your command line run your service in the auto-watch mode
   ```bash
   godspeed serve
   ```
+
 ## Prisma as Datastore Plugin
 
 Prisma has experimental support for MongoDB, although this support may not be as mature as for relational databases. 
@@ -261,14 +230,11 @@ model Post {
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  String   @db.ObjectId
 }
-
 enum Role {
   USER
   ADMIN
 }
 ```
-
-</details>
 
 
 ### Generate prisma client
