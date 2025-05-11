@@ -1,7 +1,7 @@
 ---
 title: Prisma Plugin for Godspeed Framework
 description: A powerful database ORM plugin that enables seamless integration with multiple databases in Godspeed applications. Features include type-safe queries, schema migrations, CRUD API generation, data encryption, and row/column level authorization.
-keywords: [prisma, orm, database integration, generate crud apis, postgresql, mysql, mongodb, sqllite, database migration, crud operations, godspeed plugin, type safety]
+keywords: [prisma, orm, database integration, datasource, generate crud apis, postgresql, mysql, mongodb, mongoose, sqllite, database migration, crud operations, godspeed prisma plugin, type safety, mongodb with prisma]
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---

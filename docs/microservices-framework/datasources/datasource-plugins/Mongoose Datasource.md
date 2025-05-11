@@ -1,7 +1,7 @@
 ---
 title: Mongoose Plugin for Godspeed Framework
 description: A powerful MongoDB integration plugin that enables seamless database operations through Mongoose ODM in Godspeed applications. Features include data modeling, CRUD operations and efficient query handling with MongoDB.
-keywords: [mongoose, prisma with mongodb, nosql database, godspeed plugin, database integration]
+keywords: [mongoose plugin, prisma with mongodb, nosql database, godspeed datasource plugin, mongoose integration]
 ---
 
 # Mongoose Plugin for Godspeed
@@ -51,15 +51,16 @@ These files are stored in `datasources/<datasource_name>/models` folder.
 ### Export Syntax :
 Your TS or JS file should export as following:
 
-```typescript
+```typescript title=datasources/<datasource_name>/models/SomeModel.ts
+
 module.exports = {
     type: 'SomeModel', //The name by which you will access methods of this collection/model
-    model: SomeModel //The Mongoose Model
+    model: SomeModel   //The Mongoose Model
 };
 ```
 ### An example Mongoose model file
 
-```typescript
+```typescript title=datasources/<datasource_name>/models/SomeModel.ts
 const { model, Schema, Document } =require('mongoose');
 
 const SomeModelSchema = new Schema(
@@ -78,11 +79,9 @@ const SomeModelSchema = new Schema(
     },
     method: {
       type: String,
-      required: true,
     },
     api: {
       type: String,
-      required: true,
     },
     code: String,
     headers: Schema.Types.Mixed,
@@ -104,7 +103,6 @@ module.exports = {
 ### Sample workflow
 
 When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
-The arguments to any `Function_Name` are to be passed in two ways:
 <!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
@@ -125,54 +123,58 @@ The arguments to any `Function_Name` are to be passed in two ways:
           - 'name age' #The projection: second argument
           - {} # Options: the third argument
   ``` -->
-### Option 1: 
-Calling function on Mongoose model directly and sending data with status code
 
-```typescript
-import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
-
-export default async function (ctx: GSContext, args: any) {
-    const ds: GSDataSource = ctx.datasources.mongoose;
-    // If this function is called by another function (yaml or JS), the caller may have passed args object. In case not, then initialize args yourself.
-    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
-    try {
-      const response = ds.SomeModel.findOne(...args);
-      return {
-        code: 200,
-        data: response
-      }
-      //return response; Framework will automatically add code: 200 in case of HTTP
-    } catch (err: any) {
-      ctx.childLogger.error(`Found error in Mongoose query ${err}`);
-      return {
-        code: 500,
-        data: {
-          error: err,
-          message: err.message
-        }
-      }
-    }
-}
+```yaml title=events/createModel.yaml
+http.post./some-models:
+  fn: createUser1
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            partnerName:
+              type: string
+              description: Partner Name
+            productType:
+              type: string
+              description: Product Type
+            apiType:
+              type: string
+              description: API Type
+  responses:
+    201:
+      description: SomeModel created successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              someModel:
+                type: object
+                description: The created SomeModel object
 ```
-
-### Option 2: 
-Handles response codes, errors creation of GSStatus directly
 
 ```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
-export default async function (ctx: GSContext, args: any) {
-    const ds: GSDataSource = ctx.datasources.mongoose;
-    args = args || [{name: 'mastersilv3r'}, 'name age', {}];
-    //Will need to set a meta object in the args to pass entitType and method
-    args.meta = {entityType: 'SomeModel', method: 'findOne'};
-    const response = await ds.execute(ctx, args);
-    // response.code will be 500 in case of error, and 200 otherwise
-    // In case or error, response.data will have message and error keys, like we saw 
-    // in the above TS example
-    return response;
+export default async function (ctx: GSContext) {
+
+  const mongoClient: GSDataSource = ctx.datasources.mongoose;
+  const body =ctx.inputs.data.body ;
+  const data = { 
+    meta: {
+      entityType: 'SomeModel', 
+      method: 'create'
+    },
+    ...body
+  };
+  
+  const response = await mongoClient.execute(ctx, data);
+  return response;
 }
 ```
+
 
 ### Error response
 When a call has an error the datasource returns following `GSStatus`.

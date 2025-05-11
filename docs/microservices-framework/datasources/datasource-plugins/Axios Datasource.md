@@ -168,7 +168,7 @@ The plugin consists of the following key components:
 
 
 ### 3. Axios retry
-**a. ** Set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
+**a. ** YOu can set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
 
 ```yaml
 type: axios

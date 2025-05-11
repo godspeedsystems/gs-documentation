@@ -1,7 +1,7 @@
 ---
 title: AWS Plugin for Godspeed Framework
 description: A comprehensive AWS integration plugin that enables seamless access to Amazon Web Services in Godspeed applications. Features include S3 storage, DynamoDB, Lambda functions, SQS messaging, and SSM parameter management with configurable service clients.
-keywords: [aws, amazon web services, cloud integration, s3, dynamodb, lambda, sqs, ssm, godspeed plugin, cloud storage, serverless, cloud services]
+keywords: [aws plugin, amazon web services, cloud integration, s3, dynamodb, lambda, sqs, ssm, godspeed plugin, cloud storage, serverless, cloud services]
 ---
 
 # AWS Plugin for Godspeed
@@ -104,7 +104,7 @@ export default async function (ctx: GSContext, args: any) {
 ```yaml title=event
 # event for upload s3 file
 
-"http.post./aws":
+http.post./aws:
   fn: aws_upload
   body:
   content:

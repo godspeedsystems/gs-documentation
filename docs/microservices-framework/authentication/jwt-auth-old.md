@@ -54,8 +54,7 @@ tasks:
     - id: api_step1
       description: Hit with some dummy data. It will send back same as response
       fn: datasource.api.post./anything
-      args:
-        data: <% inputs.body %>
+      m
           jwt_payload: <% inputs.user %>
 ``` -->
 

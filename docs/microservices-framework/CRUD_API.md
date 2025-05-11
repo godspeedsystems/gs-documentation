@@ -1,7 +1,7 @@
 ---
 title: Generating CRUD API
 description: Learn how to automatically generate CRUD (Create, Read, Update, Delete) APIs in Godspeed using the gen-crud-api command and Prisma. This guide covers the steps from project creation and plugin installation to setting up your database connection, creating a Prisma schema, generating the client, and finally generating and testing the CRUD APIs.
-keywords: [Godspeed, CRUD API, generate API, gen-crud-api, Prisma, database, ORM, REST API, Express.js, guide, tutorial, documentation]
+keywords: [Godspeed, CRUD API, auto generate APIs, gen-crud-api, Prisma, database integration, ORM, REST API, crud api tutorial, mysql, postgresql, mongodb, sqlserver, sqllite]
 ---
 
 # Generating CRUD APIs with Godspeed
@@ -67,12 +67,7 @@ DATABASE_URL="postgresql://username:password@localhost:5432/dbname"
 DATABASE_URL="file:./database.db"
 ```
 
-#### Supported Databases
-- PostgreSQL
-- MySQL
-- SQLite
-- SQL Server
-- CockroachDB
+### Supported Databases
 
 For database-specific connection formats, see:
 - [Supported Databases List](/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases)
@@ -81,6 +76,8 @@ For database-specific connection formats, see:
 ### 4. Prisma Schema Configuration
 
 Create a Prisma schema file in `src/datasources/`:
+
+When configuring the Prisma client in your Godspeed project, ensure you add the output field in your Prisma schema's generator block. This field should point to this location 'src/datasources/prisma-clients/<prisma_schema_fileName>' where the generated Prisma client files will be stored.
 
 ```prisma title=src/datasources/schema.prisma
 
@@ -110,10 +107,11 @@ model User {
 3. Enable `metrics` in previewFeatures if needed for telemetry
 
 #### Existing Database Integration
-For existing databases:
-1. Use `prisma db pull` to introspect schema
-2. Copy generated schema to `src/datasources/`
-3. Customize schema as needed
+
+If you already have an existing database, you can introspect it and generate the Prisma model file using prisma db pull. This will generate your .prisma file.
+
+Copy the generated file to src/datasources folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.
+
 
 ### 5. Client Generation and Database Sync
 
