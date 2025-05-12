@@ -16,7 +16,7 @@ Whether you're having trouble with setup, configurations or understanding the fr
 </div>
 
 ## Installing Godspeed
-
+<!-- 
 ### Quick Installation
 
 ### Windows Users
@@ -38,7 +38,7 @@ setup.bat
 sudo bash setup.sh
 ```
 
-## Manual Installation
+## Manual Installation -->
 
 ### Prerequisites
 

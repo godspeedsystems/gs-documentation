@@ -273,8 +273,23 @@ http.get./mongo/post/{id}:
         schema:
           type: object
 ```
+```ts title = src/functions/com/biz/mongo/post/one.ts
 
-```yaml title=com/biz/mongo/post/one.yaml
+import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
+import { PrismaClient } from "@prisma/client";
+
+module.exports = async (ctx: GSContext, args: PlainObject) => {
+  const { inputs: { data: { params } }, logger, datasources } = ctx;
+
+  const client: PrismaClient = datasources.mongo.client;
+
+  const response = await client.Post.findUnique({
+                         where: { id: params.id }
+                  });
+  return new GSStatus(true, 200, "Post fetched", response, undefined );
+}
+```
+<!-- ```yaml title=com/biz/mongo/post/one.yaml
 summary: Fetch Post
 tasks:
   - id: mongo_post_one
@@ -282,7 +297,7 @@ tasks:
     args:
       where:
         id: <% inputs.params.id %>
-```
+``` -->
  
 ## Reference links
 **- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
