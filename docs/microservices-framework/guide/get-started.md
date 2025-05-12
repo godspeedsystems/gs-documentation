@@ -16,6 +16,8 @@ Whether you're having trouble with setup, configurations or understanding the fr
 </div>
 
 ## Installing Godspeed
+
+
 <!-- 
 ### Quick Installation
 
@@ -37,6 +39,7 @@ setup.bat
 ```bash
 sudo bash setup.sh
 ```
+Here is the **Godspeed Installation Guide **
 
 ## Manual Installation -->
 
@@ -44,31 +47,59 @@ sudo bash setup.sh
 
 Before installing Godspeed manualy, ensure you have:
 
-1. **Node.js** (v18 or higher)
-2. **npm** (Node Package Manager)
+1. **Node.js installed via nvm** (v18 or higher)
+2. **nvm** (Node Package Manager)
 3. **Git**
-4. **VS Code** or any preferred code editor
+4. **Corepack and pnpm**
 
-### 1. Verify Prerequisites
+### 1. Install  Prerequisites
 
-Check if required tools are installed:
+###  Uninstall Existing Node.js (If Not Installed via NVM)
+
+If you previously installed Node.js manually or via the Node.js installer, you must uninstall it before using `nvm-windows`.
+
+1. Go to **Control Panel → Programs → Programs and Features**
+2. Find **Node.js** in the list.
+3. Right-click and select **Uninstall**
+4. Also delete these folders (if they exist):
+   ```
+   C:\Program Files\nodejs
+   C:\Users\<YourUsername>\AppData\Roaming\npm
+   C:\Users\<YourUsername>\AppData\Roaming\npm-cache
+   ```
+---
+
+### Now Install NVM for Windows
+
+* Download the latest `nvm-setup.exe` from:
+  👉 [https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases)
+
+* Run the installer and follow prompts.
+---
+
+### Install & Use a Compatible Node.js Version
 
 ```bash
-# Check Node.js version (should be v18 or higher)
-node -v
-
-# Check npm version
-npm -v
-
-# Check Git version
-git -v
+nvm ls-remote                   # Check available Node versions
+nvm install 22.15.0            # Install latest supported version
+nvm use 22.15.0                # Use it
 ```
 
-If any command returns an error, install the missing tool:
-- [Download Node.js](https://nodejs.org/)
-- [Download Git](https://git-scm.com/)
+### Verify:
 
-### 2. Install Godspeed command
+```bash
+node -v
+npm -v
+```
+---
+### Enable Corepack and Activate PNPM
+
+```bash
+corepack enable
+corepack prepare pnpm@latest --activate
+```
+
+### 2. Install Godspeed
 
 Install the Godspeed framework globally:
 

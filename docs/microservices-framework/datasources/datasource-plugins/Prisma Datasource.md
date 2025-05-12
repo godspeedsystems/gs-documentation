@@ -158,6 +158,7 @@ http.get./mysql/post/{id}:
         schema:
           type: object
 ```
+
 ```ts title = src/functions/com/biz/mysql/post/one.ts
 
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
@@ -174,6 +175,9 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
   return new GSStatus(true, 200, "Post fetched", response, undefined );
 }
 ```
+### More Examples
+
+[Check more typescript function examples to interact with prisma datasource](/docs/microservices-framework/how-to/sample-ts-functions.md)
 
 <!-- ```yaml title= src/functions/com/biz/post/one.yaml
 summary: Fetch Post
