@@ -4,19 +4,24 @@ description: A comprehensive guide to installing the Godspeed Meta-Framework, cr
 keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
 ---
 
-This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service, run the development server, access the automatically generated Swagger UI, and test a basic helloworld API. The guide also includes troubleshooting tips for common errors and a walkthrough of the project's scaffolding structure.
+This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service and run the development server.
 
-Whether you're having trouble with setup, configurations or understanding the framework, try asking [Godspeed GPT](https://chatgpt.com/g/g-Zsh9qhlGw-vishwakarma) or you can [access the FAQs in the Guides section](/docs/microservices-framework/guides)
+### New to the Godspeed Framework? 
 
+✅ You can use **Promethea — our VS Code extension**. It acts as your AI teammate inside the editor, powered by Godspeed. Chat directly with it for quick, contextual help on your project.
 
+🛠️ And explore [Godspeed Studio](godspeed.zero8.dev)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
+
+📚 Additionally, you can access the [FAQs in Guides section](/docs/microservices-framework/guides)
+
+<!-- 
 ### Watch this One-Click Installation Guide
 
 <div style={{ position: 'relative', paddingBottom: '50.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
-</div>
+</div> -->
 
 ## Installing Godspeed
-
 
 <!-- 
 ### Quick Installation
