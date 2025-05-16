@@ -547,6 +547,11 @@ const sidebars = {
             },
           ],
         },
+         {
+          type: 'doc',
+          label: '16. Deployment',
+          id: 'deploy-on-render',
+        },
       ],
      }
   ]
