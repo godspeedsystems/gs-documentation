@@ -293,4 +293,13 @@ export default async function (ctx: GSContext, args: any) {
 3. **Verify the Response**:
 The API should respond with the ChatGPT-generated message in the format specified.
 
+### Error response
+When a call has an error the datasource returns following `GSStatus`.
+```yaml
+    code: 500
+    success: false
+    data: 
+        message: Internal Server Error
+```
+
 

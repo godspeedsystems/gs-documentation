@@ -40,6 +40,15 @@ calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workfl
 
 - You can override the default response codes for success cases for different methods by putting them in the datasource instance's yaml file
 
+### Provide Connection URL
+
+Set an environment variable named `MONGO_URL` as your connection string to running mongodb instance.
+You can save url in .env file as
+  
+  ```
+    MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
+  ```
+
 ### Setting up Mongoose models
 This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.html) from `datasources/<datasource_name>/models` folder.
 
@@ -48,61 +57,47 @@ This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.h
  
 These files are stored in `datasources/<datasource_name>/models` folder.
 
-### Export Syntax :
-Your TS or JS file should export as following:
+### Writing Mongoose Models in Godspeed
 
-```typescript title=datasources/<datasource_name>/models/SomeModel.ts
+Godspeed framework uses **CommonJS** module syntax. When defining Mongoose models, ensure you follow the below format:
 
+**Import Mongoose:** Use the require syntax to import Mongoose:
+```ts
+const { model, Schema, Document } = require('mongoose');
+```
+
+**Export the Model:**
+ Export the model using the module.exports syntax. The export should include a type property (used for accessing the model) and the Mongoose model instance itself.
+```ts
 module.exports = {
-    type: 'SomeModel', //The name by which you will access methods of this collection/model
-    model: SomeModel   //The Mongoose Model
+    type: 'SomeModel', // The name by which you will access methods of this collection/model
+    model: SomeModel   // The Mongoose Model
 };
 ```
+
 ### An example Mongoose model file
 
-```typescript title=datasources/<datasource_name>/models/SomeModel.ts
-const { model, Schema, Document } =require('mongoose');
+```typescript title=datasources/<datasource_name>/models/Participant.ts
 
-const SomeModelSchema = new Schema(
-  {
-    partnerName: {
-      type: String,
-      required: true,
-    },
-    productType: {
-      type: String,
-      required: true,
-    },
-    apiType: {
-      type: String,
-      required: true,
-    },
-    method: {
-      type: String,
-    },
-    api: {
-      type: String,
-    },
-    code: String,
-    headers: Schema.Types.Mixed,
-    payload: Schema.Types.Mixed,
-    response: Schema.Types.Mixed,
-    isDynamicUrl: Boolean,
-    expectedResponseStatusCode: Number,
-  },
-  { timestamps: true }
-);
+const { model, Schema } =require('mongoose');
 
-const SomeModel = model('some-model', SomeModelSchema, 'some-model');
+const participantSchema = new Schema({
+  participant_id: { type: Number, required: true, unique: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  region: { type: String, required: true },
+  city: { type: String, required: true }
+});
+
+const Participant = model('Participant', participantSchema);
 module.exports = {
-    type: 'SomeModel', //The name by which you will access methods of this collection/model
-    model: SomeModel
+    type: 'Participant',              // The name by which you will access methods of this collection/model
+    model: Participant                // The Mongoose Model
 };
+
 ```
 
-### Sample workflow
-
-When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
+### Sample Event and workflow
 <!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
@@ -123,28 +118,29 @@ When calling any api function it will be called as `ctx.datasources.mongoose1.<M
           - 'name age' #The projection: second argument
           - {} # Options: the third argument
   ``` -->
-
-```yaml title=events/createModel.yaml
-http.post./some-models:
-  fn: createUser1
+### Event
+```yaml title=events/createParticipant.yaml
+http.post./participant:
+  fn: createParticipant
   body:
     content:
       application/json:
         schema:
           type: object
           properties:
-            partnerName:
+            participant_id:
+              type: number
+            name:
               type: string
-              description: Partner Name
-            productType:
+              description: Name
+            email:
               type: string
-              description: Product Type
-            apiType:
+              description: Email id
+            region:
               type: string
-              description: API Type
   responses:
     201:
-      description: SomeModel created successfully
+      description: Participant created successfully
       content:
         application/json:
           schema:
@@ -152,19 +148,22 @@ http.post./some-models:
             properties:
               someModel:
                 type: object
-                description: The created SomeModel object
+                description: The created Participant object
 ```
+### Workflow
+When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
 
-```ts
+### Create
+```ts title=createParticipant.ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
 export default async function (ctx: GSContext) {
 
   const mongoClient: GSDataSource = ctx.datasources.mongoose;
-  const body =ctx.inputs.data.body ;
+  const { body }= ctx.inputs.data ;
   const data = { 
     meta: {
-      entityType: 'SomeModel', 
+      entityType: 'Participant', 
       method: 'create'
     },
     ...body
@@ -175,6 +174,32 @@ export default async function (ctx: GSContext) {
 }
 ```
 
+### Find
+```ts title=getParticipant.ts
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext){
+  const { query } = ctx.inputs.data; // for GET request, query params are here
+  const { email } = query;
+
+  const mongoClient: GSDataSource = ctx.datasources.mongoose;
+
+  try {
+    const result = await mongoClient.execute(ctx, {
+      meta: {
+        entityType: 'Participant',
+        method: 'findOne'
+      },
+      email:  email 
+    });
+
+    return result;
+  } catch (error: any) {
+    ctx.childLogger.error("Failed to fetch user by email: %o", error);
+    return new GSStatus(false, 500, "Internal Server Error", error);
+  }
+}
+```
 
 ### Error response
 When a call has an error the datasource returns following `GSStatus`.
@@ -186,12 +211,6 @@ When a call has an error the datasource returns following `GSStatus`.
 ```
 
 ### Run the service
-- Set an environment variable `MONGO_URL` as your connection string to running mongodb instance.
-  For example, setting via a unix shell.
-  
-  ```shell
-    export MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
-  ```
 - From your command line run your service in the auto-watch mode
   ```bash
   godspeed serve

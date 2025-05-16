@@ -14,23 +14,17 @@ MongoDB is a popular NoSQL database. In Godspeed, you can connect to MongoDB in 
 
 This plugin provides seamless integration with MongoDB through the Mongoose library. With this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
-### How to Use
-**- ** Open the godspeed project in vscode and then install the plugin by specifying its name:
-
-1. **Using Godspeed CLI**
-```
-  godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource
+### How to Add 
+Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
 
 ```
-2. **Using npm**
-```
-npm i @godspeedsystems/plugins-mongoose-as-datasource
+godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource 
 ```
 
-**- ** After installing the plugin using godspeed plugin add command, you will find two auto generated files in your project at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+**- ** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
-import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datasource';
+import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datastore';
 export default DataSource;
 ```
 
@@ -44,7 +38,7 @@ successResponseCodes: #default response codes for success responses
   findOneAndUpdate: 201
   findOneAndDelete: 202
 ```
- ![Alt text](../../../static/img/mongoose_folder_structure.png)
+  ![Alt text](../../../../static/img/mongoose_folder_structure.png)
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
 the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
 calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
@@ -55,63 +49,106 @@ calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workfl
 ### Setting up Mongoose models
 This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.html) from `datasources/<datasource_name>/models` folder.
 
-![Alt text](../../../static/img/mongoose_folder_structure.png)
+![Alt text](../../../../static/img/mongoose_folder_structure.png)
 
-**Example Mongoose model file**   
-These files are stored in `datasources/<datasource_name>/models` folder Your TS or JS file should export as following
-```typescript
-module.exports = {
-    type: 'SomeModel', //The name by which you will access methods of this collection/model
-    model: SomeModel //The Mongoose Model
-};
+ 
+These files are stored in `datasources/<datasource_name>/models` folder.
+
+### Writing Mongoose Models in Godspeed
+
+Godspeed framework uses **CommonJS** module syntax. When defining Mongoose models, ensure you follow the below format:
+
+**Import Mongoose:** Use the require syntax to import Mongoose:
+```ts
+const { model, Schema, Document } = require('mongoose');
 ```
-An example Mongoose model file
 
-```typescript title=SomeModel.ts
-const { model, Schema, Document } =require('mongoose');
-
-const SomeModelSchema = new Schema(
-  {
-    partnerName: {
-      type: String,
-      required: true,
-    },
-    productType: {
-      type: String,
-      required: true,
-    },
-    apiType: {
-      type: String,
-      required: true,
-    },
-    method: {
-      type: String,
-      required: true,
-    },
-    api: {
-      type: String,
-      required: true,
-    },
-    code: String,
-    headers: Schema.Types.Mixed,
-    payload: Schema.Types.Mixed,
-    response: Schema.Types.Mixed,
-    isDynamicUrl: Boolean,
-    expectedResponseStatusCode: Number,
-  },
-  { timestamps: true }
-);
-
-const SomeModel = model('some-model', SomeModelSchema, 'some-model');
+**Export the Model:**
+ Export the model using the module.exports syntax. The export should include a type property (used for accessing the model) and the Mongoose model instance itself.
+```ts
 module.exports = {
-    type: 'SomeModel', //The name by which you will access methods of this collection/model
-    model: SomeModel
+    type: 'SomeModel', // The name by which you will access methods of this collection/model
+    model: SomeModel   // The Mongoose Model
 };
 ```
 
-### Sample workflow
-When calling any api function it will be called as `ctx.datasources.mongoose.<Model_Name>.<Function_Name>` from TS/JS files.
+### An example Mongoose model file
 
+```typescript title=datasources/<datasource_name>/models/Participant.ts
+
+const { model, Schema } =require('mongoose');
+
+const participantSchema = new Schema({
+  participant_id: { type: Number, required: true, unique: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  region: { type: String, required: true },
+  city: { type: String, required: true }
+});
+
+const Participant = model('Participant', participantSchema);
+module.exports = {
+    type: 'Participant',              // The name by which you will access methods of this collection/model
+    model: Participant                // The Mongoose Model
+};
+
+```
+
+### Sample Event and workflow
+<!-- 
+**1. ** Only the first arg of the function as accepted by the API.
+  ```yaml
+    id: mongoose_workflow
+    tasks:
+      - id: first_task
+        fn: datasource.mongoose.SomeModel.findOne
+        args: {"name": "mastersilv3r"} #Fun fact: YAML acceptes JSON as well. 
+  ```
+**2. ** Most Mongoose functions accept multiple args. To pass all args to an API call, send an array of the acceptable args. This array is spread and passed to the API call
+  ```yaml
+    id: helloworld2_workflow
+    tasks:
+      - id: helloworld2_workflow_first_task
+        fn: datasource.mongoose.SomeModel.findOne
+        args: #as an array
+          - name: mastersilv3r #search clause: First argument
+          - 'name age' #The projection: second argument
+          - {} # Options: the third argument
+  ``` -->
+### Event
+```yaml title=events/createParticipant.yaml
+http.post./participant:
+  fn: createUser1
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            participant_id:
+              type: number
+            name:
+              type: string
+              description: Name
+            email:
+              type: string
+              description: Email id
+            region:
+              type: string
+  responses:
+    201:
+      description: Participant created successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              someModel:
+                type: object
+                description: The created Participant object
+```
+### Workflow
+When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
 ```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
@@ -121,11 +158,12 @@ export default async function (ctx: GSContext) {
   const body =ctx.inputs.data.body ;
   const data = { 
     meta: {
-      entityType: 'SomeModel', 
+      entityType: 'Participant', 
       method: 'create'
     },
     ...body
   };
+  
   const response = await mongoClient.execute(ctx, data);
   return response;
 }
@@ -140,15 +178,14 @@ When a call has an error the datasource returns following `GSStatus`.
         message: Internal Server Error
 ```
 
-### Set Mongo URL
-
-Set an environment variable `MONGO_URL` as your connection string.
+### Run the service
+- Set an environment variable `MONGO_URL` as your connection string to running mongodb instance.
+  For example, setting via a unix shell.
+  
   ```shell
     export MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
   ```
-### Run the service
-
-From your command line run your service in the auto-watch mode
+- From your command line run your service in the auto-watch mode
   ```bash
   godspeed serve
   ```
