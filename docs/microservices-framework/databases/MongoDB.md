@@ -38,18 +38,26 @@ successResponseCodes: #default response codes for success responses
   findOneAndUpdate: 201
   findOneAndDelete: 202
 ```
-  ![Alt text](../../../../static/img/mongoose_folder_structure.png)
-- You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
-the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
-calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
+- You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
+calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files. Also you will need to create a folder `datasources/mongoose1/models` and keep your models there as detailed below.
 
 - You can override the default response codes for success cases for different methods by putting them in the datasource instance's yaml file
 
+
+### Provide Connection URL
+
+Set an environment variable named `MONGO_URL` as your connection string to running mongodb instance.
+You can save url in .env file as
+  
+  ```
+    MONGO_URL='mongodb+srv://<user_name>:<password>@cluster0.xyzabc.mongodb.net/?retryWrites=true&w=majority'
+  ```
+
 ### Setting up Mongoose models
 This datasource loads the [Mongoose models](https://mongoosejs.com/docs/models.html) from `datasources/<datasource_name>/models` folder.
 
-![Alt text](../../../../static/img/mongoose_folder_structure.png)
+![Alt text](../../../static/img/mongoose_folder_structure.png)
 
  
 These files are stored in `datasources/<datasource_name>/models` folder.
@@ -93,8 +101,8 @@ module.exports = {
 };
 
 ```
-
 ### Sample Event and workflow
+
 <!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
@@ -312,7 +320,7 @@ http.get./mongo/post/{id}:
 ```
 ```ts title = src/functions/com/biz/mongo/post/one.ts
 
-import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
+import { GSContext, GSDataSource, GSStatus, PlainObject } from "@godspeedsystems/core";
 import { PrismaClient } from "@prisma/client";
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
@@ -340,8 +348,3 @@ tasks:
 **- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
 **- ** [Mongoose Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
 **- ** [npm package for Prisma](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
-
- 
-
-
-
