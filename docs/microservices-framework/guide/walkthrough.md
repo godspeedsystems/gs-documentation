@@ -114,10 +114,9 @@ export default function (ctx: GSContext) {
 
 We are importing [GSContext](/docs/microservices-framework/workflows/native-language-functions#what-is-gscontext-) & [GSStatus](/docs/microservices-framework/workflows/native-language-functions#gsstatus) from core package of meta-framework. Go to their respective section to more about them.
 
-
+<!-- 
 **Sample YAML function**
-
-The meta-framework gives you the option to write your logic in its [custom YAML DSL](../workflows/yaml-workflows/overview.md) as well. This DSL helps you reduce your lines of code and avoid boilerplate and is an alternative to writing logic in Typescript or Javascript functions. Its downside is that YAML does not have type checking and currently Godspeed does not support autocompletion of YAML workflows like you can have in Typescript within VSCode or another IDE.
+This DSL helps you reduce your lines of code and avoid boilerplate and is an alternative to writing logic in Typescript or Javascript functions. Its downside is that YAML does not have type checking and currently Godspeed does not support autocompletion of YAML workflows like you can have in Typescript within VSCode or another IDE.
 
 ```yaml
 id: helloworld
@@ -132,7 +131,7 @@ tasks:
         custom_response_header: 'something'
 ```
 
-The helloworld event is calling the above function written in YAML, which is executing a task with id `first_task`. This task is calling [`fn: com.gs.return`](../workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn) function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview).
+The helloworld event is calling the above function written in YAML, which is executing a task with id `first_task`. This task is calling `fn: com.gs.return` function that takes argument name in an [inline script](/docs/microservices-framework/inline-scripting/overview). -->
 
 
 So far we have seen how can we use Express plugin and also we created an endpoint which returns a response with some code and headers. 

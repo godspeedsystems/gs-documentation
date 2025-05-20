@@ -1,7 +1,9 @@
 ---
+id: get-started
 title: Getting Started with Godspeed
 description: A comprehensive guide to installing the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
 keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
+slug: /
 ---
 
 This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service and run the development server.
@@ -21,98 +23,57 @@ This guide provides a step-by-step guide to install and get started with Godspee
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div> -->
 
-## Installing Godspeed
+## Install Godspeed
 
-<!-- 
-### Quick Installation
+The following setup script installs all required prerequisites and the Godspeed runtime components automatically. This simplifies the onboarding process for new users by avoiding manual setup of individual dependencies.
 
 ### Windows Users
 
-1. Download the [setup.bat](../../../static/setup.bat) file
-2. Open Command Prompt as Administrator
-3. Navigate to the download location
-4. Run:
+Open Powershell as Administrator and run
 ```bash
-setup.bat
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon/main/CompleteInstall.ps1" -OutFile "install.ps1"; Start-Process powershell -ArgumentList "-File .\install.ps1" -Verb RunAs
 ```
 
-### Linux/Ubuntu Users
+### Mac/Linux Users
 
-1. Download the [setup.sh](../../../static/setup.sh) file
-2. Open terminal
-3. Run:
 ```bash
-sudo bash setup.sh
+curl -fsSL https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon/main/CompleteInstall.sh | bash
 ```
-Here is the **Godspeed Installation Guide **
 
-## Manual Installation -->
+### ✅ The Script Will Install:
 
-### Prerequisites
-
-Before installing Godspeed manualy, ensure you have:
-
-1. **Node.js installed via nvm** (v18 or higher)
-2. **nvm** (Node Package Manager)
-3. **Git**
-4. **Corepack and pnpm**
-
-### 1. Install  Prerequisites
-
-###  Uninstall Existing Node.js (If Not Installed via NVM)
-
-If you previously installed Node.js manually or via the Node.js installer, you must uninstall it before using `nvm-windows`.
-
-1. Go to **Control Panel → Programs → Programs and Features**
-2. Find **Node.js** in the list.
-3. Right-click and select **Uninstall**
-4. Also delete these folders (if they exist):
-   ```
-   C:\Program Files\nodejs
-   C:\Users\<YourUsername>\AppData\Roaming\npm
-   C:\Users\<YourUsername>\AppData\Roaming\npm-cache
-   ```
+| Component         | Purpose                                                      |
+| ----------------- | ------------------------------------------------------------ |
+| `nvm`             | Node Version Manager - helps switch between Node.js versions |
+| `node`            | JavaScript runtime (installed via nvm)                       |
+| `npm`             | Node package manager (comes with Node.js)                    |
+| `pnpm`            | Efficient alternative to npm/yarn for managing dependencies  |
+| `corepack`        | Node’s built-in tool for package manager handling            |
+| `git`             | Version control system - required to clone repositories      |
+| `godspeed` CLI    | Command-line interface to scaffold, run and manage services  |
+| `godspeed-daemon` | Core Godspeed runtime engine that executes workflows         |
 ---
 
-### Now Install NVM for Windows
+## Manual Installation
 
-* Download the latest `nvm-setup.exe` from:
-  👉 [https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases)
+  If you prefer manual setup, follow the steps below:
 
-* Run the installer and follow prompts.
----
+  **1. Ensure the Prerequisites are installed:**
 
-### Install & Use a Compatible Node.js Version
+  - nvm (Node Version Manager)
+  - node.js (v18 or higher, installed via nvm)
+  - git
+  - corepack (comes with Node.js)
+  - pnpm (can be enabled via corepack: corepack enable pnpm)
+  
 
-```bash
-nvm ls-remote                   # Check available Node versions
-nvm install 22.15.0            # Install latest supported version
-nvm use 22.15.0                # Use it
-```
+  **2. Install the Godspeed framework globally:**
 
-### Verify:
+  ```bash
+  npm install -g @godspeedsystems/godspeed
+  ```
 
-```bash
-node -v
-npm -v
-```
----
-### Enable Corepack and Activate PNPM
-
-```bash
-corepack enable
-corepack prepare pnpm@latest --activate
-```
-
-### 2. Install Godspeed
-
-Install the Godspeed framework globally:
-
-```bash
-npm install -g @godspeedsystems/godspeed
-```
-
-### 3. Verify Installation
+## Verify Installation
 
 Confirm successful installation:
 
@@ -164,17 +125,9 @@ godspeed serve
 
 ### Common Issues
 
-1. **Git Not Found Error**
-   ```
-   Error: Not Able to reach Template repository
-   ```
-   Solution: Install Git and try again
-
-2. **Windows Script Execution Error**
-   ```
-   Running scripts is disabled on this system
-   ```
+1. **Running scripts is disabled on this system**
    Solution: Run PowerShell as Administrator and execute:
+
    ```powershell
    Set-ExecutionPolicy RemoteSigned
    ```

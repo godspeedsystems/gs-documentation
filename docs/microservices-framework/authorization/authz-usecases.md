@@ -25,7 +25,7 @@ We need the user, resource, context and action information. This information can
 <!-- <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" /> -->
 
 ## Authz workflows
-The framework allows you to specify [yaml taks](../workflows/yaml-workflows/overview.md) to run authorization workflows, at three places - event source, event or yaml task.
+The framework allows you to specify yaml taks to run authorization workflows, at three places - event source, event or yaml task.
 
 **i. ** The approach for handling JWT or similar keys is to implement a task within the authorization (authz) workflow.    
 **ii. ** The authz workflow can include a task specifically designed to process and enrich the user object with information obtained from the JWT or other keys.   
@@ -46,7 +46,7 @@ authz: com.biz.custom_authz_workflow
 
 #### Authorization tasks DSL
 
-**- ** Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's [workflows](../workflows/yaml-workflows/overview.md).   
+**- ** Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows  
 **- ** This approach allows for a declarative definition of tasks within the authz workflow.
 
 ```yaml

@@ -173,4 +173,4 @@ httpbin: # sample api datasource url
 
 Here, `defaults` key has the variables which are used by the framework for default values in workflow DSL.    
 **1. lang** - By default, the framework sets it to `js`. Check [default language](../inline-scripting/overview.md/#default-language-at-global-level) for more information.   
-**2. on_error.continue** - By default, the framework sets it to `false`. Check [on_error](../workflows/yaml-workflows/workflow-dsl.md/#error-handling) for more information.
+**2. on_error.continue** - By default, the framework sets it to `false`.
