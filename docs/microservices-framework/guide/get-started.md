@@ -12,7 +12,7 @@ This guide provides a step-by-step guide to install and get started with Godspee
 
 ✅ Use **Saarthi — our multi-agent team for VS Code**. Install the extension and experience seamless coding, powered by Godspeed. No more stuck moments. Just prompt… and watch it code for you.
 
-🛠️ And explore [Godspeed Studio](godspeed.zero8.dev)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
+🛠️ And explore [Godspeed Studio](https://godspeed.zero8.dev)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
 
 📚 Additionally, you can access the [FAQs in Guides section](/docs/microservices-framework/guides)
 
