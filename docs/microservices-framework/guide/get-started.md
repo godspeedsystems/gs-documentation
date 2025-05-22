@@ -10,7 +10,7 @@ This guide provides a step-by-step guide to install and get started with Godspee
 
 ### New to the Godspeed Framework? 
 
-✅ You can use **Promethea — our VS Code extension**. It acts as your AI teammate inside the editor, powered by Godspeed. Chat directly with it for quick, contextual help on your project.
+✅ Use **Saarthi — our multi-agent team for VS Code**. Install the extension and experience seamless coding, powered by Godspeed. No more stuck moments. Just prompt… and watch it code for you.
 
 🛠️ And explore [Godspeed Studio](godspeed.zero8.dev)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
 
