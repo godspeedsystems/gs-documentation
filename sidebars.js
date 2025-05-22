@@ -429,14 +429,14 @@ const sidebars = {
               label: "10.2.JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication",
             },
+            // {
+            //   type: "doc",
+            //   label: "10.3. Custom Authentication",
+            //   id: "microservices-framework/authentication/custom-authentication",
+            // },
             {
               type: "doc",
-              label: "10.3. Custom Authentication",
-              id: "microservices-framework/authentication/custom-authentication",
-            },
-            {
-              type: "doc",
-              label: "10.4. OAuth2 Authentication",
+              label: "10.3. OAuth2 Authentication",
               id: "microservices-framework/authentication/oauth2-authentication",
             },
             
