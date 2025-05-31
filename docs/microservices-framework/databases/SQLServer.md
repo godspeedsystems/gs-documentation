@@ -23,6 +23,7 @@ DATABASE_URL="sqlserver://HOST[:PORT];database=DATABASE;user=USER;password=PASSW
 ```
 And then this environment variable is provided in the url field of the datasource block in your prisma schema.
 
+```
 src/datasources/sqlserver.prisma
 ```
 datasource db {

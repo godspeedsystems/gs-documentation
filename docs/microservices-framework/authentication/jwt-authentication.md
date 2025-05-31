@@ -171,7 +171,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 
 
 ### How to access JWT payload
-You can access the complete JWT payload in <% inputs.user %> in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
+You can access the complete JWT payload in `<% inputs.user %>` in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
 
 Example access from TS workflow
 ```ts
@@ -192,5 +192,5 @@ return new GSStatus(true, 200, undefined, {'Payload user': user}, undefined);
 
 ### Standardized JWT Configuration (For Plugin Creators)
 
-For consistency across plugins, it's recommended to use a standardized configuration format for JWT settings (issuer, audience, secret key) in eventsources/<plugin_name>.yaml.
+For consistency across plugins, it's recommended to use a standardized configuration format for JWT settings (issuer, audience, secret key) in eventsources/<plugin_name/>.yaml.
 

@@ -312,7 +312,7 @@ AWS as a datasource plugin: Turbocharge your app by tapping into Amazon Web Serv
 
 ### Configuration
 
-In your <aws_ds_name>.yaml file, you will need to configure
+In your <aws_ds_name/>.yaml file, you will need to configure
 - type: aws (type of the datasource)
 - default_client_config (optional) for initializing your clients, as per the aws config specs
 - Client type to client name mappings via the `types` key
@@ -588,7 +588,7 @@ Mongoose as a datasource: It provides seamless integration with MongoDB through 
     export default DataSource;
     ```
 
-### <mongoose_ds_name>.yaml file
+### <mongoose_ds_name/>.yaml file
   ![Alt text](../../../static/img/mongoose_folder_structure.png)
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
 the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean

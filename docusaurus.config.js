@@ -206,6 +206,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        appId: 'ET2RBN67EI',
+        apiKey: 'ecc9a9331b5b1d5acae966b3b2adfb00',
+        indexName: 'godspeed',
+        insights: true, // Optional, enables Algolia insights
+      },
     }),
 };
 

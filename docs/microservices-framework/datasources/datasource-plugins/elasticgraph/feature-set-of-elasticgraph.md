@@ -317,7 +317,7 @@ Two ways to specify read time joins:
 
 *  **Approach A:** Create a file in joins folder, and send the name of the file in the JSON query.
 	> Settings folder: configFolder/joins
-	* For read time joins, you specify name of a join configuration file stored in configFolder/joins. You can specify different joins for same entity in different contexts like read, search etc. The particular view can be referred by the ${filename} in your code.
+	* For read time joins, you specify name of a join configuration file stored in configFolder/joins. You can specify different joins for same entity in different contexts like read, search etc. The particular view can be referred by the `${filename}` in your code.
 	* Ex. read.txt or search.txt. You can create multiple such files and refer them
 	* Sample configuration in text file (Same as denormalization settings in joins/index.txt)
 	```
@@ -578,7 +578,10 @@ search = 30
 *Each type of query is collected in a batch till any one of the batchSize threshold or the timeout threshold is reached.*
 
 The supported es methods are get, mget, search, msearch, bulk and index.
-For ex. es.get.collect({_id:..,_type:..}).then()
+For ex. 
+```
+es.get.collect({_id:..,_type:..}).then()
+```
 
 
 *The deep functions and esql scripts of EG internally use this feature.* This feature is available as part of the npm module.

@@ -143,7 +143,7 @@ authz:
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1705002160/Screenshot_from_2024-01-12_01-12-14_itk2sc.png" alt="rule3_op" />
 
 
-**4. If GSStatus.message is set and GSStatus.data is set, but 'GSStatus.data.message' is not set, then {...data,message} is returned in the response body**
+**4. If GSStatus.message is set and GSStatus.data is set, but 'GSStatus.data.message' is not set, then `{...data,message}` is returned in the response body**
 
 
 ##### Sample authz task
@@ -368,7 +368,7 @@ module.exports = {
 ### D. Restricting datastore access
 
 **1. ** Plugins can access user data through `args.meta.authzPerms` in the `GSDatasource.execute()` method. The structure of this data is defined by the plugin, following the format supported by the specific datasource plugin.    
-**2. ** For example, it could include fields like {can_access, no_access, where}. 
+**2. ** For example, it could include fields like `{can_access, no_access, where}`. 
 ```json title='Sample output of authz workflow authz_wf.yaml'
 data: [ 
         //Your access policies for further finegrained datastore access, 
