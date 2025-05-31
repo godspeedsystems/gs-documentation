@@ -77,7 +77,7 @@ For database-specific connection formats, see:
 
 Create a Prisma schema file in `src/datasources/`:
 
-When configuring the Prisma client in your Godspeed project, ensure you add the output field in your Prisma schema's generator block. This field should point to this location 'src/datasources/prisma-clients/<prisma_schema_fileName>' where the generated Prisma client files will be stored.
+When configuring the Prisma client in your Godspeed project, ensure you add the output field in your Prisma schema's generator block. This field should point to this location 'src/datasources/prisma-clients/<prisma_schema_fileName/>' where the generated Prisma client files will be stored.
 
 ```prisma title=src/datasources/schema.prisma
 

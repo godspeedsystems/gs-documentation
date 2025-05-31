@@ -181,7 +181,7 @@ To understand more about the scaffolding structure of the project , Check [here]
 - **name: name:** This line specifies that the query parameter is called name.
 - **in: query:** This tells Swagger and the Godspeed server that the name parameter should be included in the query string of the URL (e.g., /helloworld?name=John).
 - **required: true:** The name parameter is mandatory. This means the API will not work unless this parameter is provided by the user.
-- **schema: { type: string }:** The name parameter must be a string, which further validates that the input should be text.
+- **schema: `{ type: string }`:** The name parameter must be a string, which further validates that the input should be text.
 
 :::tip
 In the Godspeed meta-framework each API whether REST or Graphql API is called an `event`. All events, whether API calls or websocket messages, trigger workflows/functions which can be thought of as event handlers (see `fn:` instruction in the yaml above). 
