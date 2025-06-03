@@ -37,12 +37,12 @@ You can integrate any of the above databases into your project by following a fe
 To connect with the database, give your db_connection_url in .env file. You can check the format and example of Connection_url for all the supported databases in the [next section](MySQL#connection-url)
 
 **Step 3: Schema specification**
-The framework extends Prisma specification to define the schema for any database. You can create your prisma schema in the src/datasources folder as a file {database_name}.prisma.
+The framework extends Prisma specification to define the schema for any database. You can create your prisma schema in the src/datasources folder as a file `{database_name}`.prisma.
 
 **Check [Sample Prisma Schema](../datasources/datasource-plugins/Prisma%20Datasource.md#sample-prisma-schema)**
 
 **Step 4: Prisma Database and Models Setup**
-The framework has inbuilt feature of setting up database automatically whenever a new schema {database_name}.prisma file is created in the src/datasources folder. Just type this command in CLI
+The framework has inbuilt feature of setting up database automatically whenever a new schema `{database_name}`.prisma file is created in the src/datasources folder. Just type this command in CLI
 ```
  'godspeed prisma prepare'
 ```
