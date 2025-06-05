@@ -104,7 +104,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 ```
 </details>
 
-**To get a quick understanding of Event scehma, please watch the video provided below…**
+**To get a quick understanding of Event schema, please watch the video provided below…**
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/WsNwInEaWFw?si=2uEG_Tp5x36v9vAB" frameborder="0" allowfullscreen></iframe>

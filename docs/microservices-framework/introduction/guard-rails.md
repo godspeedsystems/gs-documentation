@@ -29,8 +29,6 @@ Ready to unravel the magic of configure over code? Take a closer look in the vid
 
 
 
-
-
 ### 3.Security:
 
 At Godspeed, security is non-negotiable. We've fortified our software with robust security standards and practices, including secure coding, strong authentication, and proactive vulnerability mitigation. 

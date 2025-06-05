@@ -4,10 +4,31 @@ Godspeed is more than just a meta-framework—it’s a philosophy for building m
 
 ## Core Benefits
 
-### Single Source of Truth
+## Single Source of Truth
+Godspeed follows a Single Source of Truth architecture, where the database schema becomes the authoritative source for generating every other aspect of the application’s behavior—API structure, validations, documentation, and workflow code.
 
-* API schemas are directly and automatically derived from the **Prisma-based DB schema**.
-* One-to-one mapping ensures that changing the database (e.g., Postgres → MySQL) doesn’t require changing the API or workflow code.
+### One-to-One Mapping Between DB Schema and API
+All API definitions and types are automatically generated from the Prisma-based DB schema.
+
+This ensures a direct and consistent mapping—any update to the DB schema is instantly reflected across APIs, validations, and documentation, with no manual sync effort.
+
+### Database Agnostic, Yet Workflow Stable
+Workflows use Prisma ORM, which supports multiple databases (Postgres, MySQL, SQLite, MongoDB, etc.) using the same schema and query syntax.
+
+This means you can switch your database without rewriting your APIs or workflows.
+
+### Auto-Generated Validations
+Request and response validations are derived from the schema automatically.
+
+No need to handwrite Joi/Zod/JSON Schema logic—validation is enforced from the single source of truth.
+
+### Universal Schema for All Consumers
+The same API schema is used to generate:
+- Swagger/OpenAPI specs
+- Postman collections
+- GraphQL schemas
+
+This guarantees that all API consumers (UI, QA, external integrations) share a consistent and up-to-date contract.
 
 ### Schema-Driven Development
 

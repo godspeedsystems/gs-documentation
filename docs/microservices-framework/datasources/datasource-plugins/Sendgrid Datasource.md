@@ -1,4 +1,3 @@
-## Sendgrid as Datasource Plugin
 
 This plugin helps you automate email sending and track email metrics using SendGrid, with status logging to Google Sheets.
 
@@ -15,12 +14,12 @@ This plugin helps you automate email sending and track email metrics using SendG
 - A SendGrid account
 - A Google Cloud account
 
-### How to install SendGrid Plugin:
+### Install SendGrid Plugin:
 
 Create a godspeed project from the CLI, open the created project in vscode and then add the plugin:
 
 ```
-godspeed plugin add @godspeedsystems/plugins-SendGrid-as-datasource
+godspeed plugin add @godspeedsystems/plugins-sendgrid-as-datasource
 ```
 
 ### SendGrid Configuration:

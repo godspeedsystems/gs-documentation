@@ -61,18 +61,18 @@ const sidebars = {
             {
               type: "doc",
               label: "2.2. My First Project",
-              id: "microservices-framework/guide/walkthrough",
+              id: "microservices-framework/guide/first-project",
             },
             {
               type: "doc",
-              label: "2.3. Project Scaffolding",
+              label: "2.3. Detailed Walthrough",
               id: "microservices-framework/guide/walkthrough",
             },
-            {
-              type: "doc",
-              label: "2.4. Environment Configuration",
-              id: "microservices-framework/config-and-mappings/config",
-            },
+            // {
+            //   type: "doc",
+            //   label: "2.4. Environment Configuration",
+            //   id: "microservices-framework/config-and-mappings/config",
+            // },
           ],
         },
         {
@@ -80,55 +80,60 @@ const sidebars = {
           label: "3. FAQs & Guides",
           id: "microservices-framework/guides",
         },
+        // {
+        //   type: "category",
+        //   label: "4. CLI Tools",
+        //   items: [
+        //     {
+        //       type: "doc",
+        //       label: "4.1. Overview",
+        //       id: "microservices-framework/CLI/#overview",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.2. Create Project",
+        //       id: "microservices-framework/CLI/#create-to-create-a-new-project",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.3. Build & Run",
+        //       id: "microservices-framework/CLI#serve-to-run-the-service-for-local-development",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.4. Add and Manage Plugins",
+        //       id: "microservices-framework/CLI#plugin-install-manage-plugins",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.5. Prisma Db Setup",
+        //       id: "microservices-framework/CLI#prisma-prepare-for-prisma-db-setup",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.6. Generate CRUD API",
+        //       id: "microservices-framework/CRUD_API#6-crud-api-generation",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.7. Generate GraphQL Schema",
+        //       id: "microservices-framework/CLI#auto-generate-graphql-schema",
+        //     },
+        //     {
+        //       type: "doc",
+        //       label: "4.8. Monitoring & Observability",
+        //       id: "microservices-framework/CLI#otel-enabling-and-disabling-open-telemetry",
+        //     },
+        //   ],
+        // },
         {
-          type: "category",
+          type: "doc",
           label: "4. CLI Tools",
-          items: [
-            {
-              type: "doc",
-              label: "4.1. Overview",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.2. Create Project",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.3. Build & Run",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.4. Add Plugins",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.5. Prisma Db Setup",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.6. Generate CRUD API",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.7. Generate GraphQL Schema",
-              id: "microservices-framework/CLI",
-            },
-            {
-              type: "doc",
-              label: "4.8. Monitoring",
-              id: "microservices-framework/CLI",
-            },
-          ],
+          id: "microservices-framework/CLI",
         },
         {
           type: "doc",
-          label: "5. Generate CRUD API",
+          label: "5. Generate CRUD APIs",
           id: "microservices-framework/CRUD_API",
         },
         {
@@ -155,64 +160,43 @@ const sidebars = {
         },         
         {
           type: "category",
-          label: "7. Events",
+          label: "7. API & Events",
           items: [
             {
-                type: "doc",
-                label: "7.1. Overview",
-                id: "microservices-framework/event-sources/events-overview",
-            },  
-            {
-                type: "doc",
-                label: "7.2. Event Schema",
-                id: "microservices-framework/event-sources/event-schema",
-            },  
+              type: "doc",
+              label: "7.1. Overview",
+              id: "microservices-framework/event-sources/events-overview",
+            },    
             {
               type: "doc",
-              label: "7.3. Event Types",
+              label: "7.2. Event Types",
               id: "microservices-framework/event-sources/event-types/overview",
-            },                
+            },   
             {
               type: "doc",
-              label: "7.4. Http Events",
-              id: "microservices-framework/event-sources/event-types/http-events",
+              label: "7.3. Writing APIs",
+              id: "microservices-framework/event-sources/write-apis",
+            },    
+            {
+              type: "doc",
+              label: "7.4. Reusing Definitions with $ref",
+              id: "microservices-framework/definitions",
+            },         
+            {
+              type: "doc",
+              label: "7.5. Schema Validation",
+              id: "microservices-framework/event-sources/validations/schema-validation",
             },
             {
               type: "doc",
-              label: "7.5. Cron Events",
-              id: "microservices-framework/event-sources/event-types/cron-events",
-            },
-            {
-              type: "doc",
-              label: "7.6. Kafka Events",
-              id: "microservices-framework/event-sources/event-types/kafka-events",
-            },
-            {
-              type: "doc",
-              label: "7.7. Apollo Graphql Events",
-              id: "microservices-framework/event-sources/event-types/graphql-events",
-            },
-            {
-              type: "category",
-              label: "7.8. Validations",
-              items: [
-                {
-                  type: "doc",
-                  label: "7.8.1. Schema Validation",
-                  id: "microservices-framework/event-sources/validations/schema-validation",
-                },
-                {
-                  type: "doc",
-                  label: "7.8.2. Validation Error",
-                  id: "microservices-framework/event-sources/validations/validation-error",
-                },
-              ],
+              label: "7.6. Handle Validation Errors",
+              id: "microservices-framework/event-sources/validations/validation-error",
             },
           ],
         },
         {
           type: "category",
-          label: "8. Workflows",
+          label: "8. Event Handler Functions",
           items: [
             {
               type: "doc",
@@ -221,7 +205,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "8.2. Typescript and Javascript workflows",
+              label: "8.2. Typescript and Javascript functions",
               id: "microservices-framework/workflows/native-language-functions",
             },
             // {
@@ -510,22 +494,17 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
-          label: "15. Definitions",
-          id: "microservices-framework/definitions",
-        },
-        {
           type: "category",
-          label: "16. Inline scripting",
+          label: "15. Inline scripting",
           items: [
             {
               type: "doc",
-              label: "16.1. Overview",
+              label: "15.1. Overview",
               id: "microservices-framework/inline-scripting/overview",
             },
             {
               type: "doc",
-              label: "16.2. Script Plugins",
+              label: "15.2. Script Plugins",
               id: "microservices-framework/inline-scripting/script-plugins",
             },
           ],
@@ -537,49 +516,49 @@ const sidebars = {
         // },
         {
           type: "category",
-          label: "17. Observability & Monitoring",
+          label: "16. Observability & Monitoring",
           items: [
             {
               type: "doc",
-              label: "17.1. Overview",
+              label: "16.1. Overview",
               id: "microservices-framework/telemetry/overview",
             },
             {
               type: "category",
-              label: "17.2. Configuration",
+              label: "16.2. Configuration",
               items: [
                 {
                   type: "doc",
-                  label: "17.2.1. Generic",
+                  label: "16.2.1. Generic",
                   id: "microservices-framework/telemetry/configuration",
                 },
                 {
                   type: "doc",
-                  label: "17.2.2. Traces",
+                  label: "16.2.2. Traces",
                   id: "microservices-framework/telemetry/tracing",
                 },
                 {
                   type: "doc",
-                  label: "17.2.3. Metrics",
+                  label: "16.2.3. Metrics",
                   id: "microservices-framework/telemetry/metrics",
                 },
                 {
                   type: "doc",
-                  label: "17.2.4. Logs",
+                  label: "16.2.4. Logs",
                   id: "microservices-framework/telemetry/logging",
                 },
               ]
             },
             {
               type: "doc",
-              label: "17.3. Custom traces, logs and metrics (BPM)",
+              label: "16.3. Custom traces, logs and metrics (BPM)",
               id: "microservices-framework/telemetry/custom-metrics-logs-traces"
             },
           ],
         },
          {
           type: 'doc',
-          label: '18. Deployment',
+          label: '17. Deployment',
           id: 'deploy-on-render',
         },
       ],
@@ -587,4 +566,3 @@ const sidebars = {
   ]
 };
 module.exports = sidebars;
-   

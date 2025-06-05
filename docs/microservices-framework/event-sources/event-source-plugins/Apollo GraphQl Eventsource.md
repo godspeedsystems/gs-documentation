@@ -114,7 +114,7 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
 
 ### 4. Auto generate graphql schema
 ```
- `godspeed gen-graphql-schema`
+  godspeed gen-graphql-schema
 ```
 
 ### 5. Start Server
