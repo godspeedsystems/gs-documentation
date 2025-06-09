@@ -112,7 +112,7 @@ export default function (ctx: GSContext) {
 }
 ```
 
-We are importing [GSContext](/docs/microservices-framework/workflows/native-language-functions#what-is-gscontext-) & [GSStatus](/docs/microservices-framework/workflows/native-language-functions#gsstatus) from core package of meta-framework. Go to their respective section to more about them.
+We are importing [GSContext](/docs/microservices-framework/workflows/native-language-functions#gscontext) & [GSStatus](/docs/microservices-framework/workflows/native-language-functions#gsstatus) from core package of meta-framework. Go to their respective section to more about them.
 
 <!-- 
 **Sample YAML function**

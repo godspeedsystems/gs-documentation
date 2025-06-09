@@ -151,7 +151,7 @@ Here are solutions to some common issues you might encounter:
     godspeed --help
     ```
 
-    Refer to [the full CLI spec](/docs/microservices-framework/CLI.md) for more detailed information, including [how to add plugins for eventsources and datasources](/docs/microservices-framework/CLI#install--manage-plugins).
+    Refer to [the full CLI spec](/docs/microservices-framework/CLI.md) for more detailed information, including [how to add plugins for eventsources and datasources](/docs/microservices-framework/CLI#plugin-add-to-install-godspeed-plugin)
 
 
 

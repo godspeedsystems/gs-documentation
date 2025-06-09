@@ -56,7 +56,7 @@ Now you can generate CRUD API using following command
 
 #### [Database Encryption](../datasources/datasource-plugins/Prisma%20Datasource.md#database-encryption)
 
-#### [Database Authorization](../datasources/datasource-plugins/Prisma%20Datasource.md#database-authorization)
+<!-- #### [Database Authorization](../datasources/datasource-plugins/Prisma%20Datasource.md#database-authorization) -->
 
 
 ## Reference links

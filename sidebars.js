@@ -365,7 +365,7 @@ const sidebars = {
             {
               type: "doc",
               label: "9.16. Plugin- ChatGPT",
-              id: "microservices-framework/datasources/datasource-plugins/ChatGPT Datasource",
+              id: "microservices-framework/datasources/datasource-plugins/ChatGPT datasource",
             },
             {
               type: "category",
@@ -491,7 +491,7 @@ const sidebars = {
               {
                 type: 'doc',
                 label: 'Deploy on Render',
-                id: 'deploy-on-render',
+                id: 'microservices-framework/deploy-on-render',
               },
             // {
             //   type: 'doc',

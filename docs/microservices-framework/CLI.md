@@ -241,7 +241,7 @@ godspeed prisma prepare
 ```
 This command:
 
-- Compiles the Prisma schema from src/datasources/<your_schema>.prisma
+- Compiles the Prisma schema from src/datasources/`<your_schema>`.prisma
 - Generates Prisma client
 - Syncs database schema
 - Creates client in `src/datasources/prisma-clients/`

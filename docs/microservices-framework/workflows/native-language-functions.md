@@ -68,7 +68,7 @@ export default function (ctx: GSContext, args: any) {
 ```
 
 :::tip
-For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions.md#invoking-functions-from-jsts-functions) at the bottom of the page. 
+For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions.md#invoking-functions-and-datasource-clients-from-jsts-functions) at the bottom of the page. 
 :::
 
 #### GSContext

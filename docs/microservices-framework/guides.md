@@ -36,7 +36,7 @@ In Godspeed, the words Workflows and Functions mean one and the same thing, i.e.
 
 - **[How to write typescript workflows in godspeed?](/docs/microservices-framework/workflows/native-language-functions)**
 
-- **[How to use inline scripting in Godspeed YAML configurations and workflows?](/docs/microservices-framework/inline-scripting/overview#scripting-in-workflows)**
+- **[How to use inline scripting in Godspeed YAML configurations and workflows?](/docs/microservices-framework/inline-scripting/overview)**
 
 
 
