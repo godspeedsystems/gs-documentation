@@ -4,7 +4,7 @@ Godspeed is more than just a meta-framework—it’s a philosophy for building m
 
 ## Core Benefits
 
-## Single Source of Truth
+### Single Source of Truth
 Godspeed follows a Single Source of Truth architecture, where the database schema becomes the authoritative source for generating every other aspect of the application’s behavior—API structure, validations, documentation, and workflow code.
 
 ### One-to-One Mapping Between DB Schema and API

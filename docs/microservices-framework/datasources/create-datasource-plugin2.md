@@ -1,3 +1,8 @@
+---
+title: Create a Custom Datasource
+description: To create a custom data source in Godspeed, follow these steps.
+keywords: [custom data source, GSDataSource, initClient, execute, OpenAI API]
+---
 To create a custom data source in Godspeed, follow these steps:
 
 1. **Install the Godspeed Plugin Generator**:

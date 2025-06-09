@@ -1,3 +1,8 @@
+---
+title: PlanetScale
+description: Learn how to use PlanetScale with Prisma plugin.
+keywords: [PlanetScale, Prisma, database, connection URL, schema]
+---
 
 PlanetScale is also a relational database management system which can be connected using the Prisma-as-datasource plugin.
 

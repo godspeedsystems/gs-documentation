@@ -1,3 +1,8 @@
+---
+title: Authorization in the framework
+description: Learn about authorization workflows in the framework, including setting up authorization at the eventsource, event, and task levels.
+keywords: [authorization, workflows, eventsource, event, task, user, resource, context, action]
+---
 # Authorization in the framework
 
 The authorization workflows in the framework can be setup at    

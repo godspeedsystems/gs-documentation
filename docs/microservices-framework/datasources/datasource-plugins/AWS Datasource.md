@@ -1,10 +1,10 @@
 ---
-title: AWS Plugin for Godspeed Framework
+title: AWS Datasource Plugin
 description: A comprehensive AWS integration plugin that enables seamless access to Amazon Web Services in Godspeed applications. Features include S3 storage, DynamoDB, Lambda functions, SQS messaging, and SSM parameter management with configurable service clients.
 keywords: [aws plugin, amazon web services, cloud integration, s3, dynamodb, lambda, sqs, ssm, godspeed plugin, cloud storage, serverless, cloud services]
 ---
 
-# AWS Plugin for Godspeed
+**- ** [Plugin Soucre Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource) 
 
 Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application.
 

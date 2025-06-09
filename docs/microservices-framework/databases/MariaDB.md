@@ -1,3 +1,8 @@
+---
+title: MariaDB
+description: Learn how to use MariaDB with Prisma plugin.
+keywords: [MariaDB, Prisma, database, connection URL, schema]
+---
 MariaDB is a fork of MySQL, created to maintain MySQL’s features while ensuring open-source development. It can be connected using the same way as MySql with Prisma plugin.
 
 ### Pre-requisites

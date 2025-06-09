@@ -1,6 +1,8 @@
 ---
-sidebar_position: 3
 title: Mappings
+description: Learn about mappings, a global object available in your microservice for defining key/value pairs, arrays, etc.
+keywords: [mappings, global object, microservice, key/value pair, YAML]
+sidebar_position: 3
 ---
 
 # Mappings

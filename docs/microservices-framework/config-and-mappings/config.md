@@ -1,3 +1,8 @@
+---
+title: Config
+description: Learn about configuration variables, environment variables, and static variables in Godspeed.
+keywords: [configuration, environment variables, static variables, YAML, config directory]
+---
 # Config
 
 The configuration variables, along with their respective values, are specified within YAML files located in the `config/` directory. These variables are easily customizable to align with specific business use cases. 

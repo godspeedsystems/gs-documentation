@@ -1,3 +1,8 @@
+---
+title: Web-UI Starter Kit
+description: Godspeed Web-UI Starter Kit simplifies the generation of a foundational front-end from OpenAPI/Swagger API specs. An AI agent creates the template with pre-established API connections.
+keywords: [Godspeed, Web-UI, Starter Kit, OpenAPI, Swagger, React]
+---
 # Web-UI Starter Kit
 ## Introduction
 

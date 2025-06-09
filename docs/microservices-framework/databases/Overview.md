@@ -1,5 +1,5 @@
 ---
-title: Database Support Overview in Godspeed Framework
+title: Database Support Overview
 description: A comprehensive guide to database integration in Godspeed using schema-driven development. Features support for multiple SQL and NoSQL databases through Prisma, automatic CRUD generation, and built-in authorization policies.
 keywords: [database integration, prisma orm, schema driven development, postgresql, mysql, mongodb, sqlite, sql server, cockroachdb, mariadb, planetscale, crud operations, database schema, database authorization]
 ---

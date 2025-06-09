@@ -1,3 +1,8 @@
+---
+title: What is JWT?
+description: Learn about JWT (JSON Web Token), its structure, authentication process, and example payload.
+keywords: [JWT, JSON Web Token, authentication, payload, header, signature]
+---
 ### What is JWT?  
 A JWT consists of three parts:
 1. **Header**: Contains the signing algorithm and token type (e.g., `HS256`, `JWT`).

@@ -1,3 +1,8 @@
+---
+title: OAuth2 Authentication
+description: Learn about OAuth2 authentication in Godspeed, including configuration, setup, and implementation.
+keywords: [Godspeed, OAuth2, authentication, authorization, Google, GitHub, LinkedIn]
+---
 # OAuth2 Authentication
 
 ## Introduction

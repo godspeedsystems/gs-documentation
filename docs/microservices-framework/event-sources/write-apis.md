@@ -1,4 +1,4 @@
-# Writing APIs in Godspeed
+# Writing APIs & Events
 
 In Godspeed, **every API is defined as an event**, and handled by a corresponding function. This unified event-driven structure works for both REST and non-REST event sources (HTTP, WebSocket, Kafka, etc.).
 

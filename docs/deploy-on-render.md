@@ -1,3 +1,8 @@
+---
+title: Deploying Godspeed Service on Render
+description: A guide to deploying Godspeed applications on Render, covering project configuration, build commands, start commands, and Render dashboard setup.
+keywords: [godspeed, render, deployment, cloud platform, node.js]
+---
 # Deploying Godspeed Service on Render
 
 Render is a modern cloud platform that makes it easy to deploy and scale Godspeed applications. This guide will walk you through the steps to get your Godspeed project up and running on Render.

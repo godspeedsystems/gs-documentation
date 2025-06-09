@@ -1,3 +1,8 @@
+---
+title: API & Event
+description: In Godspeed, every API is defined as an event and handled by a corresponding function, with a unified event-driven structure for both REST and non-REST event sources.
+keywords: [Godspeed, API, event, REST, event-driven, event schema, JWT, OAuth2, authorization]
+---
 In Godspeed, every API is defined as an event, and handled by a corresponding function. This unified event-driven structure works for both REST and non-REST event sources (HTTP, WebSocket, Kafka, etc.).
 
 This guide explains how to write new APIs in three clear steps:

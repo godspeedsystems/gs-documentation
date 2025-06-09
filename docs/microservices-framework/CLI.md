@@ -11,15 +11,8 @@ toc_max_heading_level: 4
 
 This document provides a detailed guide to the Godspeed Command Line Interface (CLI), the primary tool for interacting with Godspeed projects. It covers how to install the CLI and explains the usage and functionality of its various commands, including those for project creation, running the development server, building and previewing projects, generating CRUD APIs, managing plugins, working with Prisma, and enabling Open Telemetry. Troubleshooting steps for common CLI errors are also included.
 
-### How to install Godspeed
+### Godspeed Commands
 
-```bash
-npm install -g @godspeedsystems/godspeed
-```
-or
-```bash
-yarn global add @godspeedsystems/godspeed
-```
 Once Godspeed CLI is installed, the `godspeed` command can be called from command line. When called without arguments, it displays its help and command usage.
 ```
 $  godspeed
@@ -50,8 +43,6 @@ Commands:
                                   commands to handle prisma datasources.
   help [command]                  display help for command
 ```
-
-### Godspeed Commands
 
 ### Create: To create a new project
 ---
@@ -189,8 +180,9 @@ This is useful when scripting setups or when you already know the exact plugin y
 ```bash
 $ godspeed plugin add @godspeedsystems/plugins-express-as-http
 ```
+
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
 ```
 ---
 ### Plugin Remove

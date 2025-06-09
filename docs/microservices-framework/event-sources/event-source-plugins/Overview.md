@@ -37,19 +37,17 @@ $  godspeed plugin add
 
 ```
 
-You can directly install a plugin by specifying its NPM package name:
+You can directly install a plugin by specifying package name:
 
-```bash
-godspeed plugin add <plugin-package-name>
-```
+c
 Example:
 
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-express-as-http
+$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
 ```
 
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
 ```
 
 To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](/docs/microservices-framework/event-sources/event-source-plugins.md).

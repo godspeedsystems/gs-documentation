@@ -1,4 +1,15 @@
-# JWT Authentication
+---
+id: jwt-authentication
+title: JWT Authentication
+description: Learn how to configure JWT authentication in Godspeed for Express, Apollo, and Fastify event sources.
+keywords:
+  - jwt
+  - authentication
+  - godspeed jwt authentication
+  - express jwt auth
+  - GraphQL jwt
+  - Authentication in fastify
+---
 
 **JWT (JSON Web Token)** is a standard method for securely transmitting information between two parties as a JSON object. It’s commonly used for authentication and authorization in web applications.
 In Godspeed, you can easily implement JWT authentication to protect routes, control access to resources and ensure secure API communication.

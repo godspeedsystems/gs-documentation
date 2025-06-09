@@ -1,1 +1,6 @@
+---
+title: Coming soon...
+description: This page is coming soon.
+keywords: [coming soon]
+---
 # Coming soon...

@@ -47,7 +47,7 @@ type: axios
 base_url: <js% config.api.base_url %>
 port: <coffee% config.port %>
 ```
-
+<!-- 
 ## Scripting in workflows
 We use scripting in workflows/functions for dynamic evaluation of variables in `<% %>` tags.
 
@@ -145,7 +145,7 @@ tasks:
 ```
 
 :::info Compile-time configuration data and mappings are present, however at runtime, the context (`ctx`) becomes available. 
-:::
+::: -->
 
 ## Scripting in datasources
 Within datasources, [config or mappings](../config-and-mappings/config.md), can be accessed at loadtime.

@@ -1,10 +1,10 @@
 ---
-title: Redis Plugin for Godspeed Framework
+title: Redis Datasource Plugin
 description: A high-performance Redis integration plugin that enables fast caching, real-time data operations, and key-value storage in Godspeed applications. Features include seamless Redis operations, error handling, and support for common Redis commands.
 keywords: [redis, key-value store, caching, real-time data, in-memory database, godspeed plugin, data storage, performance optimization, redis operations, data retrieval]
 ---
 
-# Redis Plugin for Godspeed
+**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/redis-as-datasource) 
 
 Elevate your data game with the speed and efficiency of Redis. Use it as a powerhouse for caching, real-time analytics, and lightning-fast data retrieval. Embrace the key-value magic to supercharge your application's performance.
 

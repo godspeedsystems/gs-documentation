@@ -1,3 +1,8 @@
+---
+title: SQLServer
+description: Learn how to use SQLServer with Prisma plugin.
+keywords: [SQLServer, Prisma, database, connection URL, schema]
+---
 Microsoft SQL Server database can be connected using Prisma-as-datasource plugin.
 
 ### Pre-requisites

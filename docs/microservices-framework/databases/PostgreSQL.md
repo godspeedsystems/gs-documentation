@@ -1,3 +1,8 @@
+---
+title: PostgreSQL
+description: Learn how to use PostgreSQL with Prisma plugin.
+keywords: [PostgreSQL, Prisma, database, connection URL, schema]
+---
 PostgreSQL can also be connected using the Prisma-as-datastore plugin.
 
 ### Pre-requisites
