@@ -43,7 +43,7 @@ godspeed create my-crud-app
 cd my-crud-app
 ```
 
-For detailed project creation steps, see the [Getting Started Guide](./guide/get-started.md#step-2:-create-a-project-and-start-the-server).
+For detailed project creation steps, see the [Getting Started Guide](./guide/get-started#creating-and-running-your-first-project)
 
 ### 2. Prisma Plugin Installation
 

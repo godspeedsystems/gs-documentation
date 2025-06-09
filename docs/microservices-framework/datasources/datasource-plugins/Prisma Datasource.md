@@ -127,7 +127,8 @@ It will also setup the provided schema on database. This is achieved internally 
   ```bash
     $ godspeed prisma prepare
   ```
-Once you [generated prisma client](#generate-prisma-client), multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
+  
+Once you have generated prisma client, multiple clients get generated in `src/datasources/prisma-clients` directory. Godspeed automatically loads all the clients present in this directory.
 
 ### Generate CRUD APIs
 You can generate the CRUD API'S by entering the below command:
