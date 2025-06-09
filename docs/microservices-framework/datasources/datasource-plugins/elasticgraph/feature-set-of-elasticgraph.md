@@ -70,7 +70,7 @@ type = 'date'
 multiLingual = false
 ```
 :::info
-If you want to use `type = Float` then you need to specify in [custom-mappings.yaml](/docs/elasticgraph-orm/elasticgraph.md#custom-elasticsearch-mapping)
+If you want to use `type = Float` then you need to specify in [custom-mappings.yaml](elasticgraph.md#custom-elasticsearch-mapping)
 
 :::
 
