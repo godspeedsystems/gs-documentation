@@ -49,10 +49,10 @@ For detailed project creation steps, see the [Getting Started Guide](./guide/get
 
 Install the Prisma datasource plugin:
 ```bash
-godspeed plugin add prisma-as-datastore
+godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
 ```
 
-For plugin configuration details, refer to the [Prisma Plugin Documentation](./datasources/datasource-plugins/Prisma%20Datasource.md#add-plugin).
+For plugin configuration details, refer to the [Prisma Plugin Documentation](./datasources/datasource-plugins/Prisma%20Datasource.md#how-to-add-plugin)
 
 ### 3. Database Configuration
 

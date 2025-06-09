@@ -143,7 +143,7 @@ module.exports = async (ctx: GSContext) => {
 
         const res = await datasources.aws.client.s3.putObject(params);
 
-        resolve(new GSStatus(true, 200, 'successfully uploaded document', res, undefined))
+        resolve(new GSStatus(true, 200, 'successfully uploaded document', res))
 
       })
     });

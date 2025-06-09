@@ -74,6 +74,6 @@ export default async function (ctx: GSContext) {
     //Accessing deserialized inputs from the event source
     const {user, body, params, query, headers} = inputs.data;
     return {'user': inputs.data.user};
-    //return new GSStatus(true, 200, undefined, {'user': inputs.data.user});
+    //return new GSStatus(true, 200, 'OK', {'user': inputs.data.user});
 }
 ```

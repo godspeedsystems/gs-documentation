@@ -91,7 +91,7 @@ export default async function (ctx: GSContext, args: any) {
       return JSON.parse(cached_value);
     } 
   } catch(ex) {
-    return new GSStatus(false, 500, undefined, {message: "Internal Server Error", info: ex.message});
+    return new GSStatus(false, 500, 'Failed', {message: "Internal Server Error", info: ex.message});
   }
 
   return res;

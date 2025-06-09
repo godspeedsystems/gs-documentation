@@ -131,14 +131,14 @@ Once environment variables are set up, they can be accessed in Godspeed Project 
       const apiUrl = ctx.config.my_datasource.base_url;
 
       if (!apiKey || !apiUrl) {
-          throw new GSStatus(false, 500, undefined, "Missing configuration variables");
+          throw new GSStatus(false, 500, 'Failed', "Missing configuration variables");
       }
 
       // Use apiKey and apiUrl in your logic
       console.log("API Key:", apiKey);
       console.log("API URL:", apiUrl);
 
-      return new GSStatus(true, 200, undefined, { message: "Environment variables accessed successfully" });
+      return new GSStatus(true, 200, 'OK', { message: "Environment variables accessed successfully" });
   }
   ```
   This setup provides a secure, centralized way to manage sensitive configuration data, making it easy to change values without modifying the source code.

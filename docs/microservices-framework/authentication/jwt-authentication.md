@@ -173,9 +173,9 @@ http.post./login:   # defines the POST request that will be triggered when a cli
         { expiresIn: '1h', issuer: ctx.config.issuer, audience: ctx.config.audience }  // jwt Options
       );
       logger.info("Token generated %s", token);
-      return new GSStatus(true, 200, 'Login Successful',{JWT: token}, undefined);  
+      return new GSStatus(true, 200, 'Login Successful',{JWT: token}, {});  
     } else {
-      return new GSStatus(true, 401, undefined, 'Invalid Credentials',  undefined); 
+      return new GSStatus(true, 401, 'Failed', 'Invalid Credentials',  {}); 
     }
   }
 ```
@@ -196,7 +196,7 @@ export default function (ctx: GSContext) {
         }, 
     }= ctx;
 
-return new GSStatus(true, 200, undefined, {'Payload user': user}, undefined);  
+return new GSStatus(true, 200, 'OK', {'Payload user': user}, {});  
 }
 
 ```

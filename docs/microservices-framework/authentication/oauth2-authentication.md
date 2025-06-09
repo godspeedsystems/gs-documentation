@@ -80,7 +80,7 @@ keywords: [Godspeed, OAuth2, authentication, authorization, Google, GitHub, Link
       
       }= ctx;
       const name = user.username|| user.displayName ;
-      return new GSStatus(true, 200, undefined, 'Hello ' + name, undefined);  
+      return new GSStatus(true, 200, 'OK', 'Hello ' + name, {});  
   }
   ```
   If your auth_route = '/auth/github', hit localhost:4000/auth/github, it will take you to your chosen provider's authorization page i.e. Github in this case. 

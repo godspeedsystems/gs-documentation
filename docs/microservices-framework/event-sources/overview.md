@@ -55,7 +55,7 @@ You can use Godspeed CLI to browse and install plugins which are published and m
 
 
 ```bash
-godspeed plugin add <plugin-package-name>
+godspeed plugin add @godspeedsystems/plugins<plugin-name>
 ```
 
 Example:

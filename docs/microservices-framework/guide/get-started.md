@@ -12,7 +12,7 @@ This guide provides a step-by-step guide to install and get started with Godspee
 
 ✅ Meet **Saarthi — our multi-agent dev team with framework-based approach**. [Install the extension](https://marketplace.visualstudio.com/items?itemName=godspeed-systems.saarthi) and experience seamless coding, powered by Godspeed. Unlike generic AI tools, Saarthi is context-aware, built with deterministic automation, and seamlessly integrated with Godspeed’s 4th-gen developer tools — bringing order, security, and standardization to your entire SDLC.
 
-🛠️ And explore [Godspeed Studio](https://studio.godspeed.systems)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
+✅ Explore [Godspeed Studio](https://studio.godspeed.systems)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
 
 📚 Additionally, you can access the [FAQs in Guides section](/docs/microservices-framework/guides)
 

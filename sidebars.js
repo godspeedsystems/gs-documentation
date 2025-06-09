@@ -158,27 +158,27 @@ const sidebars = {
             },   
             {
               type: "doc",
-              label: "7.3. Writing APIs & Events",
+              label: "7.3. Writing API & Event",
               id: "microservices-framework/event-sources/write-apis",
             },  
             {
               type: "doc",
-              label: "7.4. HTTP APIs",
+              label: "7.4. HTTP API",
               id: "microservices-framework/event-sources/event-types/http-events",
             },
             {
               type: "doc",
-              label: "7.5. Cron Events",
+              label: "7.5. Cron Event",
               id: "microservices-framework/event-sources/event-types/cron-events",
             },
             {
               type: "doc",
-              label: "7.6. Kafka Events",
+              label: "7.6. Kafka Event",
               id: "microservices-framework/event-sources/event-types/kafka-events",
             },
             {
               type: "doc",
-              label: "7.7. Graphql APIs",
+              label: "7.7. Graphql API",
               id: "microservices-framework/event-sources/event-types/graphql-events",
             },  
             {

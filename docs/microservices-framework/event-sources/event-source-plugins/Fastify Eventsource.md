@@ -87,7 +87,7 @@ export default function (ctx: GSContext): GSStatus {
 
   const response = `Hello ${user}. This is a message from body ${message}`;
 
-  return new GSStatus(true, 200, "message received", response, undefined);
+  return new GSStatus(true, 200, "message received", response);
 }
 ```
 

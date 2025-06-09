@@ -56,7 +56,7 @@ export default function (ctx: GSContext) {
   // Extracting message from validation_error input
   const message = validation_error?.data?.message || "Unknown validation error";
 
-  return new GSStatus(false, 400, undefined, { message });
+  return new GSStatus(false, 400, 'Failed', { message });
 }
  
 ```
@@ -82,7 +82,7 @@ export default function (ctx: GSContext) {
   } = ctx;
 
   const responseMessage = `This is number two ${query?.num_2 ?? ''}`;
-  return new GSStatus(true, 200, undefined, responseMessage);
+  return new GSStatus(true, 200, 'OK', responseMessage);
 }
 ```
 Response

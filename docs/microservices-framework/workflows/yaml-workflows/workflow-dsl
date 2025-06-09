@@ -82,7 +82,7 @@ The output of every task and function can be expected in the following format wi
 Developers can easily transmit data by sending a JSON object containing the following components.
 
 ```js
-response = new GSStatus(true, 200, undefined, responseData, undefined);
+response = new GSStatus(true, 200, 'OK', responseData, {});
 ```
 Upon the completion of each function execution, whether successful or not, the GSStatus class is invoked with certain properties and then returned.
 

@@ -173,7 +173,7 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
   const response = await client.Post.findUnique({
                          where: { id: params.id }
                   });
-  return new GSStatus(true, 200, "Post fetched", response, undefined );
+  return new GSStatus(true, 200, "Post fetched", response );
 }
 ```
 ### More Examples

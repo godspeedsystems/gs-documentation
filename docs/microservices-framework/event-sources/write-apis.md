@@ -181,7 +181,7 @@ export default function (ctx: GSContext, args: PlainObject) {
         }, 
     }= ctx;
   
-    return new GSStatus(true, 200, undefined, 'Hello ' + query.name, undefined);  
+    return new GSStatus(true, 200, 'OK', 'Hello ' + query.name);  
 }
 ```
 

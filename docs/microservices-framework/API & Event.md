@@ -19,9 +19,9 @@ An event schema specifies:
 - The event handler Workflow (fn)
 - Input and Output schema
 - [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
-- [Authorization checks](/docs/microservices-framework/authorization/overview.md)
+<!-- - [Authorization checks](/docs/microservices-framework/authorization/overview.md) -->
 
-Godspeed follows [Schema Driven Development & Single Source of Truth](../introduction/guard-rails.md#1schema-driven-development), [Configure Over Code](../introduction/guard-rails.md#2configure-over-code) and [Modular Architecture](../introduction/guard-rails.md#4-decoupled-architecture).
+Godspeed follows [Schema Driven Development & Single Source of Truth](../microservices-framework/introduction/guard-rails.md#1schema-driven-development), [Configure Over Code](../microservices-framework/introduction/guard-rails.md#2configure-over-code) and [Modular Architecture](../microservices-framework/introduction/guard-rails.md#4-decoupled-architecture).
 
 The meta-framework follows a generic schema for defining events - their inputs, outputs, swagger specs, with validations, authentication, authorization etc.
 
@@ -261,9 +261,9 @@ export default function (ctx: GSContext) {
       { expiresIn: '1h', issuer: ctx.config.issuer, audience: ctx.config.audience }  // jwt Options
     );
     logger.info("Token generated %s", token);
-    return new GSStatus(true, 200, 'Login Successful',{JWT: token}, undefined);
+    return new GSStatus(true, 200, 'Login Successful', {JWT: token}, {});
   } else {
-    return new GSStatus(true, 401, undefined, 'Invalid Credentials',  undefined);
+    return new GSStatus(true, 401, 'Failed', 'Invalid Credentials',  {});
   }
 }
 ```
@@ -283,7 +283,7 @@ export default function (ctx: GSContext) {
         },
     }= ctx;
 
-return new GSStatus(true, 200, undefined, {'Payload user': user}, undefined);
+return new GSStatus(true, 200, 'Ok', {'Payload user': user}, {});
 }
 
 ```
@@ -369,7 +369,7 @@ For consistency across plugins, it's recommended to use a standardized configura
 
       }= ctx;
       const name = user.username|| user.displayName ;
-      return new GSStatus(true, 200, undefined, 'Hello ' + name, undefined);
+      return new GSStatus(true, 200, 'OK', 'Hello ' + name, {});
   }
   ```
   If your auth_route = '/auth/github', hit localhost:4000/auth/github, it will take you to your chosen provider's authorization page i.e. Github in this case.

@@ -53,7 +53,7 @@ export default function (ctx: GSContext) {
   childLogger.info("HELLO from CRON");
 
   // Return the data
-  return new GSStatus(true, 200, "message", "HELLO from CRON", undefined);
+  return new GSStatus(true, 200, "message", "HELLO from CRON");
 }
 ```
 

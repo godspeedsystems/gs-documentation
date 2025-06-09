@@ -70,13 +70,13 @@ export default async function (ctx: GSContext): Promise<GSStatus> {
   const { message } = inputs.data.body;
 
   if (!message) {
-    return new GSStatus(false, 400, undefined, undefined, "Message is required");
+    return new GSStatus(false, 400, 'Failed', "Message is required");
   }
 
   const kafkaProducer = datasources.kafka?.producer;
 
   if (typeof kafkaProducer !== "function") {
-    return new GSStatus(false, 500, undefined, undefined, "Kafka producer function not found");
+    return new GSStatus(false, 500, 'Failed', "Kafka producer function not found");
   }
 
   try {
@@ -87,10 +87,10 @@ export default async function (ctx: GSContext): Promise<GSStatus> {
 
     logger.info("Kafka message published successfully: %o", result);
 
-    return new GSStatus(true, 200, undefined, "Message published to Kafka");
+    return new GSStatus(true, 200, 'OK', "Message published to Kafka");
   } catch (err) {
     logger.error("Kafka publish failed: %o", err);
-    return new GSStatus(false, 500, undefined, undefined, "Failed to publish to Kafka");
+    return new GSStatus(false, 500, 'Failed', "Failed to publish to Kafka");
   }
 }
 ```
@@ -135,7 +135,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 export default function (ctx: GSContext): GSStatus {
   const { inputs } = ctx;
 
-  return new GSStatus(true, 200, undefined, inputs.data);
+  return new GSStatus(true, 200, 'OK', inputs.data);
 }
 ```
 <!-- ####  yaml workflow for Consumer ( src/functions/kafka_consume.yaml )

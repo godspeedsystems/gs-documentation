@@ -105,7 +105,7 @@ export default async function(ctx: GSContext, args: any) {
             if (!error.message) {
                 error.message = mappings.error_codes.codes[error.code];
             }
-        return new GSStatus(false, 400, undefined, error.message, undefined);
+        return new GSStatus(false, 400, 'Failed', error.message);
       }
 
 ```
