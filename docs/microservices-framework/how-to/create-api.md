@@ -115,7 +115,8 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
           data: 'Its working! ' + body.name,
           code: 200,
           // success: true,
-          // headers: undefined
+          // headers: undefined // or u can set response headers as key: value pairs, 
+          //for example headers:{custom-header1:"xyz" }
       }
       //SAME AS
       return {
@@ -141,7 +142,7 @@ This workflow will take the name from the request and return a personalized gree
               }
           }, 
       }= ctx;
-      return new GSStatus(true, 200, undefined, 'Hello ' + body.name, undefined);  
+      return new GSStatus(true, 200, 'OK', 'Hello ' + body.name, {});  
   }
 
 ```

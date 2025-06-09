@@ -1,4 +1,4 @@
-# HTTP events
+# HTTP events or Sync APIs
 
 In Godspeed, sync APIs are created as HTTP events. Each API endpoint is essentially an event configured to listen for HTTP requests and respond accordingly. HTTP events accept inputs such as body, headers, path parameters, and query parameters. 
 

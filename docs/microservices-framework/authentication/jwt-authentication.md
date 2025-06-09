@@ -1,4 +1,15 @@
-# JWT Authentication
+---
+id: jwt-authentication
+title: JWT Authentication
+description: Learn how to configure JWT authentication in Godspeed for Express, Apollo, and Fastify event sources.
+keywords:
+  - jwt
+  - authentication
+  - godspeed jwt authentication
+  - express jwt auth
+  - GraphQL jwt
+  - Authentication in fastify
+---
 
 **JWT (JSON Web Token)** is a standard method for securely transmitting information between two parties as a JSON object. It’s commonly used for authentication and authorization in web applications.
 In Godspeed, you can easily implement JWT authentication to protect routes, control access to resources and ensure secure API communication.
@@ -162,9 +173,9 @@ http.post./login:   # defines the POST request that will be triggered when a cli
         { expiresIn: '1h', issuer: ctx.config.issuer, audience: ctx.config.audience }  // jwt Options
       );
       logger.info("Token generated %s", token);
-      return new GSStatus(true, 200, 'Login Successful',{JWT: token}, undefined);  
+      return new GSStatus(true, 200, 'Login Successful',{JWT: token}, {});  
     } else {
-      return new GSStatus(true, 401, undefined, 'Invalid Credentials',  undefined); 
+      return new GSStatus(true, 401, 'Failed', 'Invalid Credentials',  {}); 
     }
   }
 ```
@@ -185,7 +196,7 @@ export default function (ctx: GSContext) {
         }, 
     }= ctx;
 
-return new GSStatus(true, 200, undefined, {'Payload user': user}, undefined);  
+return new GSStatus(true, 200, 'OK', {'Payload user': user}, {});  
 }
 
 ```

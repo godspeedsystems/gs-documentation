@@ -60,7 +60,7 @@ export default async function (ctx: GSContext, args: any) {
 
     // Handling response and status checks
     if (!s3Res.success) {
-        return new GSStatus(false, s3Res.code || 500, undefined, {
+        return new GSStatus(false, s3Res.code || 500, 'FAiled', {
             message: "Internal Server Error",
             info: s3Res.message
         });

@@ -1,10 +1,10 @@
 ---
-title: Nodemailer Plugin for Godspeed Framework
+title: Nodemailer Datasource Plugin
 description: A powerful email integration plugin that enables seamless email delivery in Godspeed applications using Nodemailer. Features include dynamic templating, error resilience, secure delivery, and support for various email services like Gmail and SMTP.
 keywords: [nodemailer, email delivery, smtp, email templates, transactional email, godspeed plugin, email service, messaging, email notifications, email integration]
 ---
 
-# Nodemailer Plugin for Godspeed
+**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource) 
 
 Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities.
 
@@ -98,10 +98,10 @@ export default async function (ctx: GSContext) {
       subject: body.subject,
       text: body.body
     });
-    return new GSStatus(true, 200, "Email Sent successfully", response, undefined);
+    return new GSStatus(true, 200, "Email Sent successfully", response);
   } catch (error: any) {
       const errorData = error.stack || error;
-      return new GSStatus(false, 400, "Failed to send email", errorData, undefined);
+      return new GSStatus(false, 400, "Failed to send email", errorData);
   }
 }
 ```
@@ -109,6 +109,5 @@ export default async function (ctx: GSContext) {
 
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)     
 **- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)

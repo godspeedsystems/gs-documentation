@@ -439,7 +439,7 @@ module.exports = async (ctx: GSContext) => {
 
         const res = await datasources.aws.client.s3.putObject(params);
 
-        resolve(new GSStatus(true, 200, 'successfully uploaded document', res, undefined))
+        resolve(new GSStatus(true, 200, 'successfully uploaded document', res, {}))
 
       })
     });
@@ -544,10 +544,10 @@ export default async function (ctx: GSContext) {
       subject: body.subject,
       text: body.body
     });
-    return new GSStatus(true, 200, "Email Sent successfully", response, undefined);
+    return new GSStatus(true, 200, "Email Sent successfully", response);
   } catch (error: any) {
       const errorData = error.stack || error;
-      return new GSStatus(false, 400, "Failed to send email", errorData, undefined);
+      return new GSStatus(false, 400, "Failed to send email", errorData);
   }
 }
 ```

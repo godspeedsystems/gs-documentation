@@ -1,3 +1,8 @@
+---
+title: Environment Variables
+description: Learn how to set up and use environment variables in a Godspeed project using the .env file.
+keywords: [environment variables, .env file, security, configuration, API keys, secrets]
+---
 # Environment Variables
 
 In a Godspeed project, the .env file is a standard way to define environment-specific variables. 

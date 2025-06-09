@@ -7,19 +7,12 @@ toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
 
-### About
+### Overview
 
 This document provides a detailed guide to the Godspeed Command Line Interface (CLI), the primary tool for interacting with Godspeed projects. It covers how to install the CLI and explains the usage and functionality of its various commands, including those for project creation, running the development server, building and previewing projects, generating CRUD APIs, managing plugins, working with Prisma, and enabling Open Telemetry. Troubleshooting steps for common CLI errors are also included.
 
-### How to install Godspeed
+### Godspeed Commands
 
-```bash
-npm install -g @godspeedsystems/godspeed
-```
-or
-```bash
-yarn global add @godspeedsystems/godspeed
-```
 Once Godspeed CLI is installed, the `godspeed` command can be called from command line. When called without arguments, it displays its help and command usage.
 ```
 $  godspeed
@@ -50,8 +43,6 @@ Commands:
                                   commands to handle prisma datasources.
   help [command]                  display help for command
 ```
-
-### Godspeed Commands
 
 ### Create: To create a new project
 ---
@@ -106,7 +97,13 @@ You can run your Godspeed project using `godspeed preview` command. This will re
 ```bash
  godspeed preview
 ```
-### Help plugin: To get help in Plugin commands
+### Clean: to remove the dist/ directory
+```
+godspeed clean
+```
+Removes the dist/ directory and resets prior build artifacts.
+
+### Plugin: Install & Manage Plugins
 ---
 Godspeed plugins are the way to extend the core Meta Framework. Currently we support adding eventsource and datasource as plugin.
 ```bash
@@ -170,7 +167,7 @@ You’ll see a list of officially supported plugins like `prisma-as-datastore`, 
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 ---
-### Direct Plugin Installation by Name
+### Direct Plugin Installation by Package gName
 ---
 You can also directly install a plugin by specifying its NPM package name:
 
@@ -183,11 +180,12 @@ This is useful when scripting setups or when you already know the exact plugin y
 ```bash
 $ godspeed plugin add @godspeedsystems/plugins-express-as-http
 ```
+
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
 ```
 ---
-#### plugin remove
+### Plugin Remove
 ---
 The `godspeed plugin remove` command allows the user to select a plugin from the list of available plugins and remove them from the project.
 
@@ -211,7 +209,7 @@ $  godspeed plugin remove
 │  ◯   │ axios-as-datasource                    │ Axios as datasource plugin for Godspeed Framework                              │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
-#### plugin update
+### Plugin Update
 
 The `godspeed plugin update` command allows the user to select a plugin from the list of available plugins and update them.
 
@@ -234,8 +232,24 @@ $  godspeed plugin update
 │  ◯   │ axios-as-datasource                    │ Axios as datasource plugin for Godspeed Framework                              │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
+### prisma prepare: for Prisma DB Setup
 
-### Enabling and disabling Open Telemetry
+Godspeed wraps Prisma CLI with additional support.
+
+```bash
+godspeed prisma prepare
+```
+This command:
+
+- Compiles the Prisma schema from src/datasources/<your_schema>.prisma
+- Generates Prisma client
+- Syncs database schema
+- Creates client in `src/datasources/prisma-clients/`
+
+Use this after editing your *.prisma schema or modifying your .env DB credentials.
+
+
+### Otel: Enabling and disabling Open Telemetry
 CLI provides `otel` command to enable/disable observability in Godspeed.
 ```bash
 $ godspeed help otel
@@ -303,3 +317,11 @@ The above command performs these two functions:
 ##### A. Uninstalls `@godspeedsystems/tracing` package from your service.
 ##### B. Sets OTEL_ENABLED env variable to false
 Setting `OTEL_ENABLED` to false stops all the actions performed in [otel enable](#b-sets-otel_enabled-env-variable-to-true) command   
+
+### Auto Generate GraphQL schema
+
+```
+godspeed gen-graphql-schema
+```
+
+Generates a GraphQL schema automatically from your existing Godspeed events and workflows.

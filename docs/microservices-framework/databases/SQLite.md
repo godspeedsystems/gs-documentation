@@ -1,3 +1,8 @@
+---
+title: SQLite
+description: Learn how to use SQLite with Prisma plugin.
+keywords: [SQLite, Prisma, database, connection URL, schema]
+---
 SQLite is a lightweight, serverless database engine that operates in-memory by default. This means it doesn't require a separate database server process or a network connection to access data.
 When you use SQLite with Prisma ORM, the database is created and managed entirely within your application's memory space.
 

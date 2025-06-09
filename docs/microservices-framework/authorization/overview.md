@@ -1,3 +1,8 @@
+---
+title: About Authorization
+description: Overview of authorization, including RBAC, ABAC, key agents, and workflow DSL.
+keywords: [authorization, RBAC, ABAC, user, resource, action, context, workflow DSL]
+---
 
 # About Authorization
 Authorization is a crucial component of access control, determining who can access what resources and perform specific actions. 

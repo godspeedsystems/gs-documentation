@@ -1,3 +1,8 @@
+---
+title: Guiding Principles Of Documentation
+description: Essential guiding principles for creating effective documentation, including clarity, consistency, accuracy, relevance, and organization.
+keywords: [documentation, principles, clarity, consistency, accuracy, relevance, organization]
+---
 # Guiding Principles Of Documentation:
 
 Creating effective documentation is essential for clear communication and knowledge transfer. Here are some guiding principles for documentation:

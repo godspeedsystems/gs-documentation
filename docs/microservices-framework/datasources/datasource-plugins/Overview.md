@@ -44,5 +44,14 @@ $  godspeed plugin add
 you can specify plugin name to add directly to your project
 
 ```sh
-godspeed plugin add <plugin-name>
+godspeed plugin add @godspeedsystems/plugins-<plugin-name>
+```
+
+### Examples
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
+```
+
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
 ```

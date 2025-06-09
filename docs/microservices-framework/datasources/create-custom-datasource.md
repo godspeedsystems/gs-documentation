@@ -1,3 +1,8 @@
+---
+title: Create a Custom Datasource
+description: Learn how to create and interact with custom data sources in Godspeed.
+keywords: [custom datasource, API, SQL, NoSQL, RDBMS, mongodb, postgresql, key value stores, document stores]
+---
 # Create a Custom Datasource
 
 **A datasource** in Godspeed is any entity that provides a read/write mechanism for data. For example, an API, a SQL or NoSQL datastore which includes RDBMS or mongodb,postgresql, key value stores, document stores etc. The congfiguration for each datasource lies in src/datasources directory.

@@ -1,4 +1,9 @@
-# Create Datasource plugins
+---
+title: Create npm plugin for your custom datasource
+description: Learn how to create an npm plugin for your custom datasource.
+keywords: [npm plugin, custom datasource, CLI, plugin repo]
+---
+# Create npm plugin for your custom datasource
 
 Godspeed has a [plugin based](https://github.com/godspeedsystems/gs-plugins.git) ecosystem and you can install the plugins using [CLI](/docs/microservices-framework/CLI.md).Now let us understand  <a href="https://github.com/godspeedsystems/gs-plugins/blob/main/README.md">how can you contribute a plugin</a>.
 

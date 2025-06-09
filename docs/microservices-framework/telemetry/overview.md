@@ -41,21 +41,9 @@ Numerous open source and commercial softwares for Observability support OpenTele
 
 Collect, correlate and debug signals across logs (events), traces and metrics, based on the request id and the attributes defined for the organization. For example, app version, function, DB query, K8s pod, domain, microservice etc.
 
-## Architecture
-The below architecture diagram explains the implementation of observability in Godspeed.   
+### Enable/disable observability
+You can [enable/disable OTEL](../CLI.md/#otel-enabling-and-disabling-open-telemetry) in Godspeed.
+s
 
-![arch](/img/opentelemetry.jpg)
-
-**a) ** Traces are sent to OTEL Collector directly by the application (push based mechanism) using OTLP/gRPC [protocol](https://opentelemetry.io/docs/specs/otlp/). [Tempo](https://grafana.com/docs/tempo/latest/) is used as tracing backend for traces.   
-**b) ** Metrics are scraped by the OTEL Collector from the application's `/metrics` endpoint (pull based mechanism). [Prometheus](https://prometheus.io/docs/introduction/overview/) is used as a monitoring tool for metrics with Mimir as its backend.     
-**c) ** Logs are collected by a fluent bit service. Then it sends the logs to [Loki](https://grafana.com/docs/loki/latest/).   
-**d) ** [Grafana Open Source](https://grafana.com/docs/grafana/latest/fundamentals/#grafana-open-source) is used for the visualization of all the telemetry data.
-
-## Features
-Godspeed provides the following features to implement observability:
-
-### 1. Enable/disable observability
-You can [enable/disable OTel](../CLI.md/#otel) in Godspeed.
-
-### 2. Custom traces, logs and metrics in the workflows
-You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows.
+<!-- ### Custom traces, logs and metrics in the workflows
+You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows. -->

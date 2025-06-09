@@ -1,10 +1,10 @@
-# Create Eventsource plugins 
+# Create npm plugin for your custom eventsource
 
-Godspeed has a [plugin based](https://github.com/godspeedsystems/gs-plugins.git) ecosystem and you can install the plugins using [CLI](/docs/microservices-framework/CLI.md). Now let us understand  <a href="https://github.com/godspeedsystems/gs-plugins/blob/main/README.md">how can you contribute a plugin</a>.
+Godspeed has a [plugin based](https://github.com/godspeedsystems/gs-plugins.git) ecosystem and you can install the plugins using [CLI](/docs/microservices-framework/CLI.md).
 
-In this section, let us understand how a developer can contribute a plugin to godspeed [plugin repo](https://github.com/godspeedsystems/gs-plugins.git) or for internal use. Follow these step-by-step guidelines to receive detailed instructions on contributing your plugin. 
+In this section, let us understand how a developer can contribute a plugin to godspeed [plugin repo](https://github.com/godspeedsystems/gs-plugins.git) or for internal use. 
 
-### Steps to create new plug-in in our godspeed framework:
+### Steps to create new plug-in:
 
 1. Begin by installing the `godspeed-plugin-generator` globally using the following commands:
 

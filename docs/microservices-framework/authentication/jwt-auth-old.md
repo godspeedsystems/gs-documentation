@@ -1,3 +1,8 @@
+---
+title: JWT Authentication
+description: Learn about JWT authentication in Godspeed, including enabling JWT, disabling authentication on endpoints, and accessing JWT payload in event handlers or workflows.
+keywords: [Godspeed, JWT, authentication, event source, plugin, payload]
+---
 # JWT Authentication
 All currently available _sync_ event sources support JWT authentication mechanism out of the box. For ex. Apollo Graphql, Express, Fastify.
 
@@ -69,6 +74,6 @@ export default async function (ctx: GSContext) {
     //Accessing deserialized inputs from the event source
     const {user, body, params, query, headers} = inputs.data;
     return {'user': inputs.data.user};
-    //return new GSStatus(true, 200, undefined, {'user': inputs.data.user});
+    //return new GSStatus(true, 200, 'OK', {'user': inputs.data.user});
 }
 ```

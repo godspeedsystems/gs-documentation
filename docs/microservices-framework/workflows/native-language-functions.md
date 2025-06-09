@@ -292,14 +292,14 @@ Check [event handler response](#handling-event-handler-return) to know how frame
         // meta can contain {entityType, method}
     });
     if (!res.success) {
-        return new GSStatus(false, res.code || 500, undefined, {message: "Internal Server Error", info: res.message})
+        return new GSStatus(false, res.code || 500, 'my response message', {message: "Internal Server Error", info: res.message})
     }
   //If a developer only returns data without setting keys like "success" or "code" in the response,
   // the framework assumes it is just the data. 
   //In such cases, the response code defaults to 200, and success is assumed to be true.
     
     return res
-    // works same as return new GSStatus(true, 200, undefined, res );
+    // works same as return new GSStatus(true, 200, 'OK', res );
 }
 
  ```

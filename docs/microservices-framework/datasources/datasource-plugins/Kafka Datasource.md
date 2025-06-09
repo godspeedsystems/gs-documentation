@@ -1,10 +1,10 @@
 ---
-title: Kafka Plugin for Godspeed Framework - Datasource and Eventsource
+title: Kafka Plugin - Datasource and Eventsource
 description: A powerful messaging system plugin that enables real-time event streaming, secure data transfer, and distributed messaging in Godspeed applications. Features include producer/consumer functionality, configurable topics, and seamless event handling.
 keywords: [kafka, event streaming, messaging system, producer consumer, godspeed plugin, real-time events, distributed messaging, event sourcing, message queue, data streaming]
 ---
 
-# Kafka Plugin for Godspeed
+**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)  
 
 Kafka is a versatile messaging system designed to securely transfer data between various systems. Its functionality can be tailored through configuration, allowing it to serve as a reliable conduit for real-time event tracking or even function as a replicated distributed database. While it's often colloquially labeled as a queue, it's more precisely described as a hybrid system that combines characteristics and trade-offs from both queue and database systems.
 

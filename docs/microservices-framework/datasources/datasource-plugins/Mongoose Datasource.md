@@ -1,10 +1,11 @@
 ---
-title: Mongoose Plugin for Godspeed Framework
+title: Mongoose Datasource Plugin
 description: A powerful MongoDB integration plugin that enables seamless database operations through Mongoose ODM in Godspeed applications. Features include data modeling, CRUD operations and efficient query handling with MongoDB.
 keywords: [mongoose plugin, prisma with mongodb, nosql database, godspeed datasource plugin, mongoose integration]
 ---
 
-# Mongoose Plugin for Godspeed
+## Reference links
+**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
 
 It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 

@@ -12,7 +12,7 @@ Godspeed starts exposing [Prometheus](https://prometheus.io/docs/introduction/ov
 Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/issues/1016) to know how prometheus based metrics can be exposed for the other custom [eventsource](../event-sources/event-source-plugins/) and [datasource](../datasources/datasource-plugins/Overview.md) plugins.
 :::
 
-## Collector configuration
+<!-- ## Collector configuration
 :::tipTo be coming soon
 Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/issues/1018) for more updates.
-:::
+::: -->

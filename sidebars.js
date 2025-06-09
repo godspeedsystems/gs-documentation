@@ -1,12 +1,12 @@
 /**
  * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
+ * - create an ordered group of docs
+ * - render a sidebar for each doc of that group
+ * - provide next/previous navigation
+ *
+ * The sidebars can be generated from the filesystem, or explicitly defined here.
+ *
+ * Create as many sidebars as you want.
  */
 
 // @ts-check
@@ -34,8 +34,8 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "1.2. Tenets",
-              id: "microservices-framework/introduction/tenets",
+              label: "1.2. Why Godspeed?",
+              id: "microservices-framework/introduction/benefits",
             },
             {
               type: "doc",
@@ -55,26 +55,31 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "2.1. Quick Start",
+              label: "2.1. Installation",
               id: "microservices-framework/guide/get-started",
             },
             {
               type: "doc",
-              label: "2.2. Detailed Walkthrough",
+              label: "2.2. My First Project",
+              id: "microservices-framework/guide/first-project",
+            },
+            {
+              type: "doc",
+              label: "2.3. Detailed Walthrough",
               id: "microservices-framework/guide/walkthrough",
             },
             // {
             //   type: "doc",
-            //   label: "2.3. Advance Guide",
-            //   id: "microservices-framework/getting-started/advance-guide",
+            //   label: "2.4. Environment Configuration",
+            //   id: "microservices-framework/config-and-mappings/config",
             // },
           ],
         },
         {
           type: "doc",
-          label: "3. Guides",
+          label: "3. FAQs & Guides",
           id: "microservices-framework/guides",
-        },
+        },    
         {
           type: "doc",
           label: "4. CLI",
@@ -82,7 +87,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "5. Generate CRUD API",
+          label: "5. Generate CRUD APIs",
           id: "microservices-framework/CRUD_API",
         },
         {
@@ -96,124 +101,106 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "6.2. Create new event source",
+              label: "6.2. Custom event source",
               id: "microservices-framework/event-sources/create-custom-event-source",
             },
 
             {
               type: "doc",
-              label: "6.3. Create event source plugin",
+              label: "6.3. Create npm plugin",
               id: "microservices-framework/event-sources/create-eventsource-plugin",
             },
             {
-              type: "category",
+              type: "doc",
               label: "6.4. Eventsource Plugins",
-              // id: "microservices-framework/event-sources/event-source-plugins",
-              items: [
-                {
-                  type: "doc",
-                  label: "6.4.1. Overview",
-                  id: "microservices-framework/event-sources/event-source-plugins/Overview",
-                },
-                {
-                  type: "doc",
-                  label: "6.4.2. Express - Http Eventsource",
-                  id: "microservices-framework/event-sources/event-source-plugins/Express Http Eventsource",
-                },
-                {
-                  type: "doc",
-                  label: "6.4.3. Cron Eventsource",
-                  id: "microservices-framework/event-sources/event-source-plugins/Cron Eventsource",
-                },
-                {
-                  type: "doc",
-                  label: "6.4.4. Kafka Eventsource",
-                  id: "microservices-framework/event-sources/event-source-plugins/Kafka Eventsource",
-                },
-                {
-                  type: "doc",
-                  label: "6.4.5. GraphQl Eventsource",
-                  id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
-                },
-                {
-                  type: "doc",
-                  label: "6.4.6. Fastify Eventsource",
-                  id: "microservices-framework/event-sources/event-source-plugins/Fastify Eventsource",
-                },
-              ],
+              id: "microservices-framework/event-sources/event-source-plugins/Overview",
             },
-            // {
-            //   type: "doc",
-            //   label: "4.8. Validation Error",
-            //   id: "microservices-framework/event-sources/on-validation-error"
-            // },
-            // {
-            //   type: "doc",
-            //   label: "4.7. Swagger Specs",
-            //   id: "microservices-framework/event-sources/swagger-specs"
-            // },
+            {
+              type: "doc",
+              label: "6.5. Plugin- Express for HTTP",
+              id: "microservices-framework/event-sources/event-source-plugins/Express Http Eventsource",
+            },
+                        {
+              type: "doc",
+              label: "6.6. Plugin- Fastify for HTTP",
+              id: "microservices-framework/event-sources/event-source-plugins/Fastify Eventsource",
+            }, 
+            {
+              type: "doc",
+              label: "6.7. Plugin- Cron",
+              id: "microservices-framework/event-sources/event-source-plugins/Cron Eventsource",
+            },
+            {
+              type: "doc",
+              label: "6.8. Plugin- Kafka",
+              id: "microservices-framework/event-sources/event-source-plugins/Kafka Eventsource",
+            },
+            {
+              type: "doc",
+              label: "6.9. Plugin- GraphQl",
+              id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
+            },         
           ],
-        },
+        },         
         {
           type: "category",
-          label: "7. Events",
+          label: "7. API & Event",
           items: [
-          {
+            {
               type: "doc",
               label: "7.1. Overview",
               id: "microservices-framework/event-sources/events-overview",
-          },  
-          {
+            },    
+            {
               type: "doc",
-              label: "7.2. Event Schema",
-              id: "microservices-framework/event-sources/event-schema",
-          },  
-          {
-            type: "doc",
-            label: "7.3. Event Types",
-            id: "microservices-framework/event-sources/event-types/overview",
-          },                
-          {
-            type: "doc",
-            label: "7.4. Http Events",
-            id: "microservices-framework/event-sources/event-types/http-events",
-          },
-          {
-            type: "doc",
-            label: "7.5. Cron Events",
-            id: "microservices-framework/event-sources/event-types/cron-events",
-          },
-          {
-            type: "doc",
-            label: "7.6. Kafka Events",
-            id: "microservices-framework/event-sources/event-types/kafka-events",
-          },
-          {
-            type: "doc",
-            label: "7.7. Apollo Graphql Events",
-            id: "microservices-framework/event-sources/event-types/graphql-events",
-          },
-          {
-            type: "category",
-            label: "7.8. Validations",
-            items: [
-              {
-                type: "doc",
-                label: "7.8.1. Schema Validation",
-                id: "microservices-framework/event-sources/validations/schema-validation",
-              },
-              {
-                type: "doc",
-                label: "7.8.2. Validation Error",
-                id: "microservices-framework/event-sources/validations/validation-error",
-              },
-            ],
-          },
+              label: "7.2. Event Types",
+              id: "microservices-framework/event-sources/event-types/overview",
+            },   
+            {
+              type: "doc",
+              label: "7.3. Writing API & Event",
+              id: "microservices-framework/event-sources/write-apis",
+            },  
+            {
+              type: "doc",
+              label: "7.4. HTTP API",
+              id: "microservices-framework/event-sources/event-types/http-events",
+            },
+            {
+              type: "doc",
+              label: "7.5. Cron Event",
+              id: "microservices-framework/event-sources/event-types/cron-events",
+            },
+            {
+              type: "doc",
+              label: "7.6. Kafka Event",
+              id: "microservices-framework/event-sources/event-types/kafka-events",
+            },
+            {
+              type: "doc",
+              label: "7.7. Graphql API",
+              id: "microservices-framework/event-sources/event-types/graphql-events",
+            },  
+            {
+              type: "doc",
+              label: "7.8. Reusing Definitions with $ref",
+              id: "microservices-framework/definitions",
+            },         
+            {
+              type: "doc",
+              label: "7.9. Schema Validation",
+              id: "microservices-framework/event-sources/validations/schema-validation",
+            },
+            {
+              type: "doc",
+              label: "7.10. Handle Validation Errors",
+              id: "microservices-framework/event-sources/validations/validation-error",
+            },
           ],
         },
         {
           type: "category",
-          label: "8. Workflows",
+          label: "8. Event Handler Functions",
           items: [
             {
               type: "doc",
@@ -222,7 +209,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "8.2. Typescript and Javascript workflows",
+              label: "8.2. Typescript and Javascript functions",
               id: "microservices-framework/workflows/native-language-functions",
             },
             // {
@@ -247,17 +234,6 @@ const sidebars = {
             //     },
             //   ],
             // },
-            // {
-            //   type: "doc",
-            //   label: "5.3. Custom workflows",
-            //   id: "workflows/custom_workflows"
-            // },
-
-            // {
-            //   type: "doc",
-            //   label: "5.4. Retry",
-            //   id: "workflows/retry"
-            // },
           ],
         },
         {
@@ -275,7 +251,7 @@ const sidebars = {
               items: [
                 {
                   type: "doc",
-                  label: "9.2.1. Overview",
+                  label: "9.2.1. Database Support",
                   id: "microservices-framework/databases/Overview",
                 },
                 {
@@ -321,97 +297,96 @@ const sidebars = {
               },
               ],
             },
-
             {
               type: "doc",
-              label: "9.3. Create New DataSource",
+              label: "9.3. Custom DataSource",
               id: "microservices-framework/datasources/create-custom-datasource",
             },
-          
             {
               type: "doc",
-              label: "9.4. Create DataSource Plugin",
+              label: "9.4. Create npm Plugin",
               id: "microservices-framework/datasources/create-datasource-plugin",
             },
             {
+              type: "doc",
+              label: "9.5. Caching",
+              id: "microservices-framework/datasources/caching",
+            },
+            {
+              type: "doc",
+              label: "9.6. Datasource Plugins",
+              id: "microservices-framework/datasources/datasource-plugins/Overview",
+            },
+            {
+              type: "doc",
+              label: "9.7. Plugin- Prisma",
+              id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.8. Plugin- Axios",
+              id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
+            },         
+            {
+              type: "doc",
+              label: "9.9. Plugin- AWS",
+              id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.10. Plugin- Mailer",
+              id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.11. Plugin- Redis",
+              id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.12. Plugin- Mongoose",
+              id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.13. Plugin- Kafka",
+              id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.14. Plugin- Text-to-SQL",
+              id: "microservices-framework/datasources/datasource-plugins/Text to Sql Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.15. Plugin- SendGrid",
+              id: "microservices-framework/datasources/datasource-plugins/Sendgrid Datasource",
+            },
+            {
+              type: "doc",
+              label: "9.16. Plugin- ChatGPT",
+              id: "microservices-framework/datasources/datasource-plugins/ChatGPT Datasource",
+            },
+            {
               type: "category",
-              label: "9.5. Datasource Plugins",
+              label: "9.17. Plugin- ElasticGraph",
               items: [
                 {
                   type: "doc",
-                  label: "9.5.1. Overview",
-                  id: "microservices-framework/datasources/datasource-plugins/Overview",
+                  label: "9.17.1. Elasticgraph",
+                  id: "microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph",
                 },
                 {
                   type: "doc",
-                  label: "9.5.2. Prisma Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Prisma Datasource",
-                 },
-                 {
-                  type: "category",
-                  label: "9.5.3 API Datasource",
-                  items: [
-                  {
-                    type: "doc",
-                    label: "9.5.3.1 HTTP (Axios)",
-                    id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-                  },
-                 ]
-                },               
-                {
-                  type: "doc",
-                  label: "9.5.4. AWS Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/AWS Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "9.5.5. Nodemailer Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Nodemailer Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "9.5.6. Redis Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Redis Datasource",
-                },
-                {
-                  type: "doc",
-                  label: "9.5.7. Mongoose Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Mongoose Datasource",
-                },
-
-                {
-                  type: "doc",
-                  label: "9.5.8. Kafka Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Kafka Datasource",
-                },
-                
-                {
-                  type: "category",
-                  label: "9.5.9 ElasticGraph",
-                  items: [
-                    {
-                      type: "doc",
-                      label: "9.5.9.1 Elasticgraph as Datasource",
-                      id: "microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph",
-                    },
-                    {
-                      type: "doc",
-                      label: "9.5.9.2 Feature Set of Elasticgraph",
-                      id: "microservices-framework/datasources/datasource-plugins/elasticgraph/feature-set-of-elasticgraph",
-                    },
-                  ],
-                },
-                {
-                  type: "doc",
-                  label: "9.5.10. Memcached Datasource",
-                  id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
+                  label: "9.17.2. Feature Set of Elasticgraph",
+                  id: "microservices-framework/datasources/datasource-plugins/elasticgraph/feature-set-of-elasticgraph",
                 },
               ],
             },
             {
               type: "doc",
-              label: "9.6. Caching",
-              id: "microservices-framework/datasources/caching",
+              label: "9.18. Plugin- Memcache",
+              id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",
             },
           ],
         },
@@ -421,19 +396,14 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              label: "10.1.Overview",
+              label: "10.1. Overview",
               id: "microservices-framework/authentication/overview",
             },
             {
               type: "doc",
-              label: "10.2.JWT Authentication",
+              label: "10.2. JWT Authentication",
               id: "microservices-framework/authentication/jwt-authentication",
             },
-            // {
-            //   type: "doc",
-            //   label: "10.3. Custom Authentication",
-            //   id: "microservices-framework/authentication/custom-authentication",
-            // },
             {
               type: "doc",
               label: "10.3. OAuth2 Authentication",
@@ -443,50 +413,23 @@ const sidebars = {
           ],
         },
         {
-          type: "category",
-          label: "11. Authorization",
-          items: [
-            {
-              type: "doc",
-              label: "11.1.Overview",
-              id: "microservices-framework/authorization/overview",
-            },
-            // {
-            //   type: "doc",
-            //   label: "11.2.Authz Usecases",
-            //   id: "microservices-framework/authorization/authz-usecases",
-            // },
-          ],
-        },
-        {
-          type: "category",
-          label: "12. Config and Mappings",
-          items: [
-            {
-              type: "doc",
-              label: "12.1. Config",
-              id: "microservices-framework/config-and-mappings/config",
-            },
-            {
-              type: "doc",
-              label: "12.2. Env",
-              id: "microservices-framework/config-and-mappings/env",
-            },
-            {
-              type: "doc",
-              label: "12.3. Mappings",
-              id: "microservices-framework/config-and-mappings/mappings",
-            },
-          ],
+          type: "doc",
+          label: "11. Config",
+          id: "microservices-framework/config-and-mappings/config",
         },
         {
           type: "doc",
-          label: "13. Definitions",
-          id: "microservices-framework/definitions",
+          label: "12. Env",
+          id: "microservices-framework/config-and-mappings/env",
+        },
+        {
+          type: "doc",
+          label: "13. Mappings",
+          id: "microservices-framework/config-and-mappings/mappings",
         },
         {
           type: "category",
-          label: "14. Inline scripting",
+          label: "14. Inline scripting for YAML configs",
           items: [
             {
               type: "doc",
@@ -500,14 +443,9 @@ const sidebars = {
             },
           ],
         },
-        // {
-        //   type: "doc",
-        //   label: "11. VScode extention",
-        //   id: "microservices-framework/vscode-extension/language-tools",
-        // },
         {
           type: "category",
-          label: "15. Telemetry",
+          label: "15. Observability & Monitoring",
           items: [
             {
               type: "doc",
@@ -515,258 +453,57 @@ const sidebars = {
               id: "microservices-framework/telemetry/overview",
             },
             {
-              type: "category",
-              label: "15.2. Configuration",
-              items: [
-                {
-                  type: "doc",
-                  label: "15.2.1. Generic",
-                  id: "microservices-framework/telemetry/configuration",
-                },
-                {
-                  type: "doc",
-                  label: "15.2.2. Traces",
-                  id: "microservices-framework/telemetry/tracing",
-                },
-                {
-                  type: "doc",
-                  label: "15.2.3. Metrics",
-                  id: "microservices-framework/telemetry/metrics",
-                },
-                {
-                  type: "doc",
-                  label: "15.2.4. Logs",
-                  id: "microservices-framework/telemetry/logging",
-                },
-              ]
+              type: "doc",
+              label: "15.2. Architecture",
+              id: "microservices-framework/telemetry/architecture",
             },
             {
               type: "doc",
-              label: "16.3. Custom traces, logs and metrics (BPM)",
-              id: "microservices-framework/telemetry/custom-metrics-logs-traces"
+              label: "15.3. Enable OpenTelemetry",
+              id: "microservices-framework/telemetry/configuration",
             },
+            {
+              type: "doc",
+              label: "15.4. Traces",
+              id: "microservices-framework/telemetry/tracing",
+            },
+            {
+              type: "doc",
+              label: "15.5. Metrics",
+              id: "microservices-framework/telemetry/metrics",
+            },
+            {
+              type: "doc",
+              label: "15.6. Logs",
+              id: "microservices-framework/telemetry/logging",
+            }
+            // {
+            //   type: "doc",
+            //   label: "16.3. Custom traces, logs and metrics (BPM)",
+            //   id: "microservices-framework/telemetry/custom-metrics-logs-traces"
+            // },
           ],
         },
-         {
-          type: 'doc',
-          label: '16. Deployment',
-          id: 'deploy-on-render',
-        },
+        {
+            type: "category",
+            label: "16. Deployment",
+            items: [
+              {
+                type: 'doc',
+                label: 'Deploy on Render',
+                id: 'deploy-on-render',
+              },
+            // {
+            //   type: 'doc',
+            //   label: '16.2 Deploy using Docker',
+            //   id: 'deploy-using-docker',
+        //   },
+            ]
+          },
       ],
-     }
-  ]
-};
-module.exports = sidebars;
-    
-      // {
-      //   type: "doc",
-      //   label: "1. Introduction",
-      //   id: "introduction",
-      // },
-      // {
-      //   type: "doc",
-      //   label: "2. Design Principles",
-      //   id: "design_principles",
-      // },
-      // {
-      //   type: "category",
-      //   label: "3. Getting started",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "3.1. Overview",
-      //       id: "getting-started/overview"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "3.2. Sample project",
-      //       id: "getting-started/create-hello-world"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "3.3. Blog project",
-      //       id: "getting-started/create-blog-project"
-      //     },
-      //     // {
-      //     //   type: "doc",
-      //     //   label: "3.4. Godspeed on Existing project",
-      //     //   id: "getting-started/gs_on_existing_proj"
-      //     // }
-      //   ]
-      // },
-      // {
-      //   type: "category",
-      //   label: "4. Event Sources",
-      //   items: [
-      //     {
-      //       type: "category",
-      //       label: "4.1. Events",
-      //       items: [
-      //         {
-      //           type: "doc",
-      //           label: "4.1.1. Overview",
-      //           id: "events/overview"
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "4.2. Overview",
-      //       id: "event-sources/overview"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "4.3. Event Source Plugins",
-      //       id: "event-sources/event_source_plugins"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "4.4. Create Your Event Source",
-      //       id: "event-sources/create-your-event-source"
-      //     },
-      //   ],
-      // },
-      // {
-      //   type: "category",
-      //   label: "5. Workflows/Functions",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "5.1. Overview",
-      //       id: "workflows/overview"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "5.2. Custom workflows",
-      //       id: "workflows/custom_workflows"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "5.3. Inbuilt workflows",
-      //       id: "workflows/inbuilt_workflows"
-      //     },
-      //     // {
-      //     //   type: "doc",
-      //     //   label: "5.4. Retry",
-      //     //   id: "workflows/retry"
-      //     // },
-      //   ],
-      // },
-      // {
-      //   type: "category",
-      //   label: "6. Data Sources",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "6.1. Overview",
-      //       id: "data_sources/overview"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "6.2. Data source plugins",
-      //       id: "data_sources/datasource_plugins"
-      //     },
-      //     {
-      //       type: "doc",
-      //       label: "6.3. Create Your data source",
-      //       id: "data_sources/create_your_data_source"
-      //     },
-      //   ],
-      // },
-      // // {
-      // //   type: "category",
-      // //   label: "7. Authentication",
-      // //   items: [
-      // //     {
-      // //       type: "doc",
-      // //       label: "7.1. Overview",
-      // //       id: "authentication/Overview"
-      // //     },
-      // //     {
-      // //       type: "doc",
-      // //       label: "7.2. Configuration",
-      // //       id: "authentication/configuration"
-      // //     },
-      // //   ],
-      // // },
-      // {
-      //   type: "category",
-      //   label: "7. Authorization",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "7.1. Overview",
-      //       id: "authorization/overview"
-      //     },
-      //   ],
-      // },
-      // {
-      //   type: "category",
-      //   label: "8. Config",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "8.1. Overview",
-      //       id: "config/overview"
-      //     },
-      //   ],
-      // },
-      // {
-      //   type: "category",
-      //   label: "9. Caching",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "9.1. Overview",
-      //       id: "caching/overview"
-      //     },
-      //   ],
-      // },
-      // {
-      //   type: "doc",
-      //   label: "10. CLI",
-      //   id: "CLI"
-      // },
-      // {
-      //   type: "doc",
-      //   label: "11. Language Tools",
-      //   id: "language_tools"
-      // },
-      // {
-      //   type: "category",
-      //   label: "12. Telemetry",
-      //   items: [
-      //     {
-      //       type: "doc",
-      //       label: "12.1. Overview",
-      //       id: "telemetry/overview"
-      //     },
-      //   ],
-      // },
-    
-      // {
-    //   type: "doc",
-    //   label: " FAQs",
-    //   id: "microservices-framework/faqs"
-    // },
-    
-    // {
-    //   type: "category",
-    //   label: "3. Web-UI Starter Kit",
-    //   items: [
-    //     {
-    //       type: "doc",
-    //       label: "3.1. React App",
-    //       id: "ai-modules/react-app",
-    //     },
-    //   ],
-    // },
-// As discussed in the previous blog of the series, we have discussed about four main issues of FOSS community
-// 1.unethical uses
-// 2. lack of contribution by community.
-// 3. lack of sustainability of open core model
-//   - difficult to sustain
-//   - inherant conflict
-// 4. open core model - limited version - only used for marketing - no practical use
+    },
+  ],
 
-// In this blog  ,let us review what could be an alternative approach for the community which is fair for everybody
+};
+
+module.exports = sidebars;

@@ -49,10 +49,10 @@ For detailed project creation steps, see the [Getting Started Guide](./guide/get
 
 Install the Prisma datasource plugin:
 ```bash
-godspeed plugin add prisma-as-datastore
+godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
 ```
 
-For plugin configuration details, refer to the [Prisma Plugin Documentation](./datasources/datasource-plugins/Prisma%20Datasource.md#add-plugin).
+For plugin configuration details, refer to the [Prisma Plugin Documentation](./datasources/datasource-plugins/Prisma%20Datasource.md#how-to-add-plugin)
 
 ### 3. Database Configuration
 
@@ -76,8 +76,9 @@ For database-specific connection formats, see:
 ### 4. Prisma Schema Configuration
 
 Create a Prisma schema file in `src/datasources/`:
-
-When configuring the Prisma client in your Godspeed project, ensure you add the output field in your Prisma schema's generator block. This field should point to this location 'src/datasources/prisma-clients/<prisma_schema_fileName/>' where the generated Prisma client files will be stored.
+:::tip
+When configuring the Prisma client in your Godspeed project, ensure you add the `output field` in your Prisma schema's generator block. This field should point to this location `src/datasources/prisma-clients/<prisma_schema_fileName/>` where the generated prisma client files will be stored.
+:::
 
 ```prisma title=src/datasources/schema.prisma
 
@@ -88,7 +89,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  output          = "./prisma-clients/schema"
+  output          = "./prisma-clients/schema"    //here schema is the name of prisma schema file
   previewFeatures = ["metrics"]
 }
 

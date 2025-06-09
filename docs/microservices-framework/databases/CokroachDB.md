@@ -1,3 +1,8 @@
+---
+title: CokroachDB
+description: Learn how to use CoackrochDB with Prisma plugin.
+keywords: [CoackrochDB, Prisma, database, connection URL, schema]
+---
 Coackroch, a distributed database that is designed for scalability and high availability, is largely compatible with PostgreSQL, and can be used with Prisma plugin in the same way.
 
 ### Pre-requisites

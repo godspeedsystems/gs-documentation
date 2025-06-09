@@ -31,7 +31,7 @@ import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
 export default function (ctx: GSContext): GSStatus {
   const { inputs } = ctx;
 
-  return new GSStatus(true, 200, undefined, inputs.data);
+  return new GSStatus(true, 200, 'OK', inputs.data);
 }
 ```
 

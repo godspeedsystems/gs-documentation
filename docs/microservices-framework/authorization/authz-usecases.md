@@ -1,3 +1,8 @@
+---
+title: Authorization in the framework
+description: Learn about authorization workflows in the framework, including setting up authorization at the eventsource, event, and task levels.
+keywords: [authorization, workflows, eventsource, event, task, user, resource, context, action]
+---
 # Authorization in the framework
 
 The authorization workflows in the framework can be setup at    
@@ -404,16 +409,16 @@ data: [
         const client = this.client;
         if (entityType && !client[entityType]) {
           logger.error('Invalid entityType %s in %s', entityType, fnNameInWorkflow);
-          return new GSStatus(false, 400, undefined, { error: `Invalid entityType ${entityType} in ${fnNameInWorkflow}`});
+          return new GSStatus(false, 400, 'Invalid entityType', { error: `Invalid entityType ${entityType} in ${fnNameInWorkflow}`});
         }
         prismaMethod = client[entityType][method];
         if (method && !prismaMethod) {
           logger.error('Invalid CRUD method %s in %s', method, fnNameInWorkflow);
-          return new GSStatus(false, 500, undefined, { error: 'Internal Server Error'});
+          return new GSStatus(false, 500, 'Internal Server Error', { error: 'Internal Server Error'});
         }
 
         const prismaResponse = await prismaMethod.bind(client)(rest);
-        return new GSStatus(true, responseCode(method), undefined, prismaResponse);
+        return new GSStatus(true, responseCode(method), prismaResponse, prismaResponse);
     } catch (error: any) {
       logger.error('Error in executing Prisma query for args %o \n Error: %o', args, error);
       return new GSStatus(false, 400, error.message, JSON.stringify(error.message));

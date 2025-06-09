@@ -18,11 +18,11 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
             where: { id: userId } });
             if(getUser)
             {
-                return new GSStatus(true, 200, undefined, getUser, undefined );
+                return new GSStatus(true, 200, 'OK', getUser );
             }
             else
             {
-                return new GSStatus(true, 200, undefined, {}, undefined );
+                return new GSStatus(true, 200, 'OK', {} );
             }
     }
     catch (error: any) {
@@ -47,11 +47,11 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
                         data: { email: updatedUser.email,                        
                                 userId: user.userId } });
  
-        return new GSStatus(true, 200, undefined, updatedUser, undefined);
+        return new GSStatus(true, 200, 'OK', updatedUser, {});
         }
         catch (error: any) {
                 const errorData = error.stack || error;
-                return new GSStatus(false, 400, undefined, errorData, undefined);
+                return new GSStatus(false, 400, 'Failed', errorData, {});
             }
         };
 ```
@@ -70,11 +70,11 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
             where: { id: userId } });
             if(getUser)
             {
-                return new GSStatus(true, 200, undefined, getUser, undefined );
+                return new GSStatus(true, 200, 'OK', getUser, );
             }
             else
             {
-                return new GSStatus(true, 200, undefined, {}, undefined );
+                return new GSStatus(true, 200, 'OK', {}, );
             }
     }
     catch (error: any) {

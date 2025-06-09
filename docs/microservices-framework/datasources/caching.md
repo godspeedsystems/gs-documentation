@@ -1,3 +1,8 @@
+---
+title: Caching
+description: Learn about caching tasks using Redis/Mem-cache or any other custom cache.
+keywords: [caching, Redis, Mem-cache, GSCacheAsDatasource, plugin]
+---
 # Caching
 Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the workflows.   
 Godspeed provides two pre-defined types of cache i.e. [redis](./datasource-plugins/Redis%20Datasource.md) and in-memory. It allows using multiple caches in a single service with a default cache. Cache datasource should implement abstract class `GSCacheAsDatasource` [code is below](#how-to-write-your-own-cache-plugin). You can make multiple caches using this abstract class.
@@ -86,7 +91,7 @@ export default async function (ctx: GSContext, args: any) {
       return JSON.parse(cached_value);
     } 
   } catch(ex) {
-    return new GSStatus(false, 500, undefined, {message: "Internal Server Error", info: ex.message});
+    return new GSStatus(false, 500, 'Failed', {message: "Internal Server Error", info: ex.message});
   }
 
   return res;

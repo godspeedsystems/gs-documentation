@@ -1,3 +1,8 @@
+---
+title: MySQL
+description: Learn how to use MySQL with Prisma plugin.
+keywords: [MySQL, Prisma, database, connection URL, schema]
+---
 MySQL, a widely used open-source relational database management system can be connected easily using the Prisma-as-datasource plugin.
 
 ### Pre-requisites

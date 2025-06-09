@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Elasticgraph as datasource
+title: Elasticgraph Datasource Plugin
 ---
 
 # Introduction
