@@ -4,8 +4,7 @@ description: A powerful MongoDB integration plugin that enables seamless databas
 keywords: [mongoose plugin, prisma with mongodb, nosql database, godspeed datasource plugin, mongoose integration]
 ---
 
-## Reference links
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)**  
 
 It provides seamless integration with MongoDB through the Mongoose library. MongoDB is a popular NoSQL database, and with this plugin, you can harness the power of Mongoose to model your data, perform queries, and interact with MongoDB in a structured and efficient manner.
 
@@ -16,7 +15,7 @@ Create a godspeed project from the CLI, open the created project in vscode and t
 godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource 
 ```
 
-**- ** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+**-** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
 import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datastore';
@@ -218,7 +217,7 @@ When a call has an error the datasource returns following `GSStatus`.
   ```
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mongoose-as-datasource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mongoose-as-datasource)
 

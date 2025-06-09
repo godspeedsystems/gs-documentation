@@ -124,6 +124,6 @@ Run `godspeed serve` and open `https://studio.apollographql.com/sandbox/explorer
 This configuration emphasizes the simplicity of implementing GraphQL within the Godspeed framework, promoting efficiency and clarity in API development.
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/graphql-as-eventsource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-graphql-as-eventsource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/graphql-as-eventsource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-graphql-as-eventsource)

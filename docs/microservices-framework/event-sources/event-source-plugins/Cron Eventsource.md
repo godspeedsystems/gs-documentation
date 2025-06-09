@@ -85,6 +85,6 @@ tasks:
 ``` -->
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/cron-as-eventsource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-cron-as-eventsource)

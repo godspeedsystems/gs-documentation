@@ -51,8 +51,8 @@ authz: com.biz.custom_authz_workflow
 
 #### Authorization tasks DSL
 
-**- ** Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows  
-**- ** This approach allows for a declarative definition of tasks within the authz workflow.
+**-** Developers can define the authorization workflow by providing a set of tasks using the DSL provided by the core framework's workflows  
+**-** This approach allows for a declarative definition of tasks within the authz workflow.
 
 ```yaml
 # example 
@@ -74,9 +74,9 @@ authz:
   - fn: com.gs.evaluate_gre
 ```
 
-**- ** Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus or true.   
-**- ** These instructions may enrich the context and user data, or load and run authorization checks, or do both.   
-**- ** When one task fails, the whole workflow is considered to be failed.   
+**-** Think of authz instruction as a workflow. It will accept an array of task or a single task, each of which should return GSStatus or true.   
+**-** These instructions may enrich the context and user data, or load and run authorization checks, or do both.   
+**-** When one task fails, the whole workflow is considered to be failed.   
 
 :::tip Note
 - Following Zero trust policy, when a task does not return `true` or `{success: true}` (explicitly), or in the case when `GSStatus.code === 403`, the authorization will be considered as failed. 

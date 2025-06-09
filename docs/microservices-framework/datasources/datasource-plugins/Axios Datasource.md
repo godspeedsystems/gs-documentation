@@ -4,7 +4,7 @@ description: A powerful HTTP client plugin that enables seamless API integration
 keywords: [axios, http client, api integration, godspeed plugin, data fetching, rest api, http requests, authentication, retry mechanism, api client]
 ---
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)   
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)**
 
 Level up your data-fetching game with Axios. Seamlessly integrate this powerful HTTP client into your app for smooth and efficient data transactions. The Godspeed Axios Plugin provides seamless integration with the Axios library for making HTTP requests within the Godspeed framework. It simplifies the process of defining and executing HTTP requests, making it easy to interact with external APIs.
 
@@ -168,7 +168,8 @@ The plugin consists of the following key components:
 
 
 ### 3. Axios retry
-**a. ** YOu can set Defaults retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
+
+You can set default retry at datasource level within datasource config yaml file.(src/datasources/api.yaml)
 
 ```yaml
 type: axios
@@ -183,7 +184,7 @@ retry:
 ```
 the above config works on two conditions if status from the api is 500,501 or 502 and message value is as mentioned in the config. When condition is optional and if retry is without when condition, the retry will be made on failures of the API.
 
-**b. ** Override retry logic at task level within args object of the axios method call.
+<!-- **b.** Override retry logic at task level within args object of the axios method call.
 
 ```yaml
 id: some_workflow
@@ -206,7 +207,7 @@ tasks:
       type: exponential
       min_interval: PT5s
       max_internal: PT15s
-```
+``` -->
 
 ### 4. Authentication of API calls with token refresh logic
 
@@ -274,7 +275,7 @@ tasks:
 The Godspeed Axios Plugin is a valuable addition to the Godspeed framework, providing a standardized way to make HTTP requests using the Axios library. With this plugin, you can easily integrate with external APIs, handle responses, and streamline data retrieval within your applications.
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/axios-as-datasource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-axios-as-datasource)
 

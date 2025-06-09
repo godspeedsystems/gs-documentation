@@ -21,7 +21,7 @@ Create a godspeed project from the CLI, open the created project in vscode and t
 godspeed plugin add @godspeedsystems/plugins-mongoose-as-datasource 
 ```
 
-**- ** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
+**-** You will find two files in your project related to the mongoose plugin at `src/datasources/types/mongoose.ts` and `src/datasources/mongoose.yaml`
 
 ```typescript title=src/datasources/types/mongoose.ts
 import { DataSource } from '@godspeedsystems/plugins-mongoose-as-datastore';
@@ -204,10 +204,10 @@ Prisma has experimental support for MongoDB, although this support may not be as
 Make sure you have access to a MongoDB 4.2+ server with a replica set deployment. As, MongoDB database connector uses transactions to support nested writes, which require a replica set deployment. The easiest way to deploy a replica set is with Atlas.
 
 ### How to Use
-**- ** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the 'prisma-as-datastore' to integrate the plugin.
+**-** Open the godspeed project in vscode and then add the plugin from the CLI of vscode, select the 'prisma-as-datastore' to integrate the plugin.
 
 ```
-> godspeed plugin add
+> godspeed plugin add 
        ,_,   ╔════════════════════════════════════╗
       (o,o)  ║        Welcome to Godspeed         ║
      ({___}) ║    World's First Meta Framework    ║
@@ -228,13 +228,20 @@ Make sure you have access to a MongoDB 4.2+ server with a replica set deployment
 └──────┴────────────────────────────────────┴────────────────────────────────────────────────────────────────────┘
 ```
 
+or directly install the Prisma plugin as:
+
+```bash
+godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
+```
+
 ### Related files
-You will find a file in your project related to the Prisma plugin at `src/datasources/types/prisma.ts`.
+You will find an auto genrated file in your project `src/datasources/types/prisma.ts`.
 
 ```typescript title=prisma.ts
 import { DataSource } from '@godspeedsystems/plugins-prisma-as-datastore';
 export default DataSource;
 ```
+
 ### Set your connection url in .env file, See example
 
 ```
@@ -345,6 +352,6 @@ tasks:
 ``` -->
  
 ## Reference links
-**- ** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
-**- ** [Mongoose Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
-**- ** [npm package for Prisma](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)
+**-** [Prisma Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)   
+**-** [Mongoose Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mongoose-as-datasource)  
+**-** [npm package for Prisma](https://www.npmjs.com/package/@godspeedsystems/plugins-prisma-as-datastore)

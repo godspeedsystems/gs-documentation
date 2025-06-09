@@ -4,7 +4,7 @@ description: A powerful email integration plugin that enables seamless email del
 keywords: [nodemailer, email delivery, smtp, email templates, transactional email, godspeed plugin, email service, messaging, email notifications, email integration]
 ---
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource) 
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)**
 
 Amp up your communication game by using a mailer as a powerful data source. Connect seamlessly to send information through emails. Transform your app into a messaging maestro, unlocking a world of possibilities.
 
@@ -109,5 +109,5 @@ export default async function (ctx: GSContext) {
 
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)     
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mailer-as-datasource)     
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mailer-as-datasource)

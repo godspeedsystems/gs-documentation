@@ -9,17 +9,17 @@ Follow these steps to set up and launch your new Godspeed project:
 
 1.  **Create a new project:**
     ```bash
-    godspeed create my-project
+      godspeed create my-project
     ```
 
 2.  **Navigate to the project directory:**
     ```bash
-   cd my-project
+      cd my-project
     ```
 
 3.  **Start the development server:**
     ```bash
-    godspeed serve
+      godspeed serve
     ```
 
 ### Accessing and Testing Your API with Swagger UI
@@ -67,7 +67,7 @@ Godspeed generates a well-organized project structure:
       * Swagger specifications for your HTTP endpoints are configured in `src/eventsources/http.yaml`.
 
 :::tip
-For a deeper understanding of the project's scaffolding structure, refer to the [Walkthrough section](/docs/microservices-framework/guide/walkthrough%23moving-forward).
+For a deeper understanding of the project's scaffolding structure, refer to the [Walkthrough section](/docs/microservices-framework/guide/walkthrough#moving-forward)
 :::
 
 #### Why the `/helloworld` API Requires a Name

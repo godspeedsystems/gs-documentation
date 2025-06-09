@@ -4,7 +4,7 @@ description: A powerful messaging system plugin that enables real-time event str
 keywords: [kafka, event streaming, messaging system, producer consumer, godspeed plugin, real-time events, distributed messaging, event sourcing, message queue, data streaming]
 ---
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)  
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)**
 
 Kafka is a versatile messaging system designed to securely transfer data between various systems. Its functionality can be tailored through configuration, allowing it to serve as a reliable conduit for real-time event tracking or even function as a replicated distributed database. While it's often colloquially labeled as a queue, it's more precisely described as a hybrid system that combines characteristics and trade-offs from both queue and database systems.
 
@@ -124,6 +124,6 @@ After implementing Kafka plugin, your project structure will look like this:
 ```
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-kafka-as-datasource-as-eventsource)

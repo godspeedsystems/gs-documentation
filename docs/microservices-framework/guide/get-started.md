@@ -91,7 +91,7 @@ Follow these steps to set up and launch your new Godspeed project:
 
 2.  **Navigate to the project directory:**
     ```bash
-   cd my-project
+    cd my-project
     ```
 
 3.  **Start the development server:**

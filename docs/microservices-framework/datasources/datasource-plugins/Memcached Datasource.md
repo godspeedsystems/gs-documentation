@@ -4,14 +4,13 @@ description: A high-performance in-memory caching plugin that enables seamless d
 keywords: [memcached, in-memory cache, caching, key-value store, godspeed plugin, performance optimization, cache invalidation, data caching, memory cache, cache management]
 ---
 
-# Memcached Plugin for Godspeed
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mem-cache-as-datasource) 
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mem-cache-as-datasource)**
 
 The Godspeed mem-cache plugin provides caching interfaces, allowing developers to seamlessly use in-memory cache within the Godspeed framework.
 
 ## How to add mem-cache plugin in your project
 
-- **Create a godspeed project from the CLI and add the mem-cache plugin **
+- **Create a godspeed project from the CLI and add the mem-cache plugin**
 
 ```
 godspeed plugin add @godspeedsystems/plugins-mem-cache-as-datasource
@@ -98,6 +97,6 @@ We value your feedback and contributions. If you have any questions, suggestions
 We're excited to see how you leverage the Godspeed mem-cache Plugin in your projects and look forward to collaborating with you to make your applications even more powerful. Happy coding!
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mem-cache-as-datasource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mem-cache-as-datasource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/mem-cache-as-datasource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-mem-cache-as-datasource)

@@ -7,7 +7,7 @@ toc_max_heading_level: 4
 ---
 
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) 
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore)**
 
 ## Overview
 Prisma-as-datasource plugin provides functionality to access most popular databases like, PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, CockroachDB, Planetscale and MariaDB through [Prisma ORM](https://www.prisma.io/docs).
@@ -43,16 +43,19 @@ export default DataSource;
   src/datasources/schema.prisma
   ```
     datasource db { 
-    provider = "mysql"      // name of database provider
-    url      = env("DB_URL")  // DB_URL string will be added in .env file
+      provider = "mysql"      // name of database provider
+      url      = env("DB_URL")  // DB_URL string will be added in .env file
     }
     generator client {
       provider = "prisma-client-js"
-      output = "./prisma-clients/dbName"
+      output = "./prisma-clients/schema"  //schema is the name of your prisma schema file
       previewFeatures = ["metrics"]
     }
   ```
   Set provider to the type of database you are using. In this case it’s mysql. The url property will take the value of the connection url which is defined in the .env file.
+  :::tip
+  Ensure you add the `output field` in your Prisma schema's generator block. This field should point to this location `src/datasources/prisma-clients/<prisma_schema_fileName/>` where the generated prisma client files will be stored.
+  :::
 
 ### 2. Set your Database Connection URL
 
@@ -243,8 +246,8 @@ You can specify secret in `prisma_secret` variable in [config environment variab
 <!-- 
 ### Database Authorization
 The plugin provides rows and columns level authorization access as explained in [Authorization](../../authorization/authz-usecases.md#d-restricting-datastore-access). If you are not allowed to access something, then empty data is returned.   
-**- **empty rows (e.g. in case where query trespasses access boundaries)   
-**- **empty fields (e.g. in case all the fields in the query are not allowed to access)    
+**-**empty rows (e.g. in case where query trespasses access boundaries)   
+**-**empty fields (e.g. in case all the fields in the query are not allowed to access)    
 
 
 :::info

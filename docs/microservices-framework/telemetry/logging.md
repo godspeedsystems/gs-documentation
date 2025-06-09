@@ -209,11 +209,11 @@ log:
 ```
 
 **2. ** location of the identifier in the request payload. As specified in the above example,     
-**- ** if mobileNumber is present in query params then specify `query.mobileNumber`.   
-**- ** if id is present in path params then specify `params.id`.   
-**- ** if lan is present in data field inside body then specify `body.data.lan`.   
-**- ** if name is present in headers then specify `headers.name`.   
-**- ** if gender is present in data field inside mappings then specify `<% mappings.Gender %>`.   
+**-** if mobileNumber is present in query params then specify `query.mobileNumber`.   
+**-** if id is present in path params then specify `params.id`.   
+**-** if lan is present in data field inside body then specify `body.data.lan`.   
+**-** if name is present in headers then specify `headers.name`.   
+**-** if gender is present in data field inside mappings then specify `<% mappings.Gender %>`.   
 
 ##### Sample Logs 
 ```json

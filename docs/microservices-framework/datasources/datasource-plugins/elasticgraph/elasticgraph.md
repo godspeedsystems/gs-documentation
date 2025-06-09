@@ -3,7 +3,8 @@ sidebar_position: 3
 title: Elasticgraph Datasource Plugin
 ---
 
-# Introduction
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/elasticgraph-as-datasource)**
+
 The framework supports Elasticgraph as a datasource. It supports elasticsearch as datastore. In addition, you can use various features of Elasticgraph like deep graph search algorithms, de-normalization, joins, aggregations, multi-lingual support.
 
 ### Folder Structure

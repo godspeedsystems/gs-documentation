@@ -35,15 +35,17 @@ Before generating CRUD APIs, ensure you have:
 
 ### 1. Project Setup
 
-Create a new Godspeed project or skip if already created.
-```bash
-godspeed create my-crud-app
+**Create a new project or skip if already created.:**
+    ```bash
+    godspeed create my-project
+    ```
 
-# Navigate to project directory
-cd my-crud-app
-```
+**Navigate to the project directory:**
+    ```bash
+    cd my-project
+    ```
 
-For detailed project creation steps, see the [Getting Started Guide](./guide/get-started#creating-and-running-your-first-project)
+For installation and getting started, visit the [Getting Started Guide](./guide/get-started)
 
 ### 2. Prisma Plugin Installation
 
@@ -73,7 +75,7 @@ For database-specific connection formats, see:
 - [Supported Databases List](/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases)
 - [Connection URL Formats](/docs/microservices-framework/databases/MySQL#connection-url)
 
-### 4. Prisma Schema Configuration
+### 4. Prisma Schema
 
 Create a Prisma schema file in `src/datasources/`:
 :::tip

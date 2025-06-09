@@ -4,7 +4,7 @@ description: A comprehensive AWS integration plugin that enables seamless access
 keywords: [aws plugin, amazon web services, cloud integration, s3, dynamodb, lambda, sqs, ssm, godspeed plugin, cloud storage, serverless, cloud services]
 ---
 
-**- ** [Plugin Soucre Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource) 
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource)**
 
 Turbocharge your app by tapping into Amazon Web Services. Unleash the power of cloud-based data, storage, and more to supercharge your application.
 
@@ -157,6 +157,6 @@ module.exports = async (ctx: GSContext) => {
 ```
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/aws-as-datasource)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-aws-as-datasource)

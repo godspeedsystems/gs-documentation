@@ -1,6 +1,6 @@
 # Text-to-SQL Datasource Plugin
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/text-to-sql-as-datasource)   
+**[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/text-to-sql-as-datasource)**   
 
 ## Overview
 

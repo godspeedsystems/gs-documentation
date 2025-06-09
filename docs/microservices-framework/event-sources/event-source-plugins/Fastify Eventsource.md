@@ -4,7 +4,7 @@ description: An event source plugin that enables seamless integration of Fastify
 keywords: [fastify, event source, http events, serverless, godspeed plugin, node.js, web framework, event subscription, scalable applications, event processing]
 ---
 
-**- ** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)
+**-** [Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)
 
 The Godspeed Fastify Plugin is an essential component of the Godspeed framework, designed to streamline the integration of event-driven and serverless functionalities into your projects. This plugin harnesses the power of Fastify, a fast and low overhead web framework for Node.js, to handle HTTP events. It simplifies the process of defining event subscriptions and processing incoming events, providing a robust foundation for building responsive and scalable applications.
 
@@ -151,6 +151,6 @@ We welcome your feedback and contributions. If you have questions, suggestions, 
 We are excited to see the innovative projects you will create with the Fastify plugin, and we look forward to collaborating with you to make your projects even more successful. Happy coding!
 
 ## Reference links
-**- ** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)   
-**- ** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
-**- ** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-fastify-as-http)
+**-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/fastify-as-http)   
+**-** [Issue Tracker](https://github.com/godspeedsystems/gs-plugins/issues)      
+**-** [npm package](https://www.npmjs.com/package/@godspeedsystems/plugins-fastify-as-http)
