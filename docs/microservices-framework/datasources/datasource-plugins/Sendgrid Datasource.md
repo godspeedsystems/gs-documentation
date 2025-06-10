@@ -53,18 +53,18 @@ godspeed plugin add @godspeedsystems/plugins-sendgrid-as-datasource
 
 ### Project Setup:
 
-#### A. Configuration file
+### Related files
+After installing the plugin, you will get two auto generated files at `src/datasources/types/sendgrid.ts` and `src/datasources/sendgrid.yaml`
 
-1. Create a file `sendgrid.yaml` inside datasources folder.
-2. Copy this inside that file:
+### Configuration file
 
-```
+```yaml title=sendgrid.yaml
 type: sendgrid
 apiKey: <%process.env.SENDGRID_API_KEY%>
 defaultSender: <%process.env.SENDGRID_DEFAULT_SENDER%>
 ```
 
-#### B. Event trigger
+### Write API or event schema
 
 1. Create a file `sendgrid.yaml` inside events folder.
 2. Copy this inside that file:
@@ -132,12 +132,12 @@ http.post./send-mail:
                 example: 'Failed to send email.'
 ```
 
-#### C. Workflow Function
+### Write Workflow/Function
 
-1. Create a file `sendMail.ts` inside the functions folder.
+1. Create a file `sendMail.ts` inside the src/functions folder.
 2. Copy this inside that file:
 
-```
+```ts
 import { GSContext, GSDataSource, GSStatus } from '@godspeedsystems/core';
 
 export default async function (ctx: GSContext, args: any) {
@@ -171,7 +171,6 @@ export default async function (ctx: GSContext, args: any) {
         `Missing required fields: ${missingFields}`,
       );
     }
-
     // Execute the send function in SendGrid
     const response = await ds.execute(ctx, {
       to,
@@ -189,7 +188,6 @@ export default async function (ctx: GSContext, args: any) {
       ctx.childLogger.error(`Failed to send email: ${error.message}`);
       return new GSStatus(false, 500, 'Failed to send email', error.message);
     }
-
     // Handle non-standard errors
     ctx.childLogger.error(`An unknown error occurred: ${error}`);
     return new GSStatus(false, 500, 'Failed to send email', `${error}`);
@@ -197,7 +195,7 @@ export default async function (ctx: GSContext, args: any) {
 }
 ```
 
-#### That's it, now you can start the project using `godspeed serve`. To test it out, go to `/api-docs` endpoint to access the swagger UI. Then try to send a mail using `/send-mail` endpoint. Remember, only verified email addresses with SendGrid can be used in the `from` field.
+**That's it, now you can start the project using `godspeed serve`. To test it out, go to `/api-docs` endpoint to access the swagger UI. Then try to send a mail using `/send-mail` endpoint. Remember, only verified email addresses with SendGrid can be used in the `from` field.**
 
 ---
 
@@ -274,9 +272,10 @@ GOOGLE_SHEET_ID=sheet_id
 
 - Install googleapis npm package: `npm i googleapis`
 
-#### 1. We will make a custom datasource. Create a `track.ts` file inside the `datasources/types` folder and copy this code there:
+#### 1. We will make a custom datasource.
+Create a `track.ts` file inside the `datasources/types` folder and copy this code there:
 
-```
+```ts
 import {
   GSContext,
   GSDataSource,
@@ -426,7 +425,6 @@ export default class DataSource extends GSDataSource {
     }
   }
 }
-
 const SourceType = 'DS';
 const Type = 'track'; // this is the loader file of the plugin, So the final loader file will be `types/${Type.js}`
 const CONFIG_FILE_NAME = 'track'; // in case of event source, this also works as event identifier, and in case of datasource works as datasource name
@@ -591,7 +589,7 @@ Common issues and solutions:
    - Verify service account email is correctly shared
    - Check `google-key.json` permissions
 
-3. **Emails not sending**
+3. **Not able to send Emails**
 
 - Check spam folder
 - Verify sender email is authenticated

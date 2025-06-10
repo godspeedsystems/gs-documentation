@@ -1,10 +1,15 @@
-# Create a New Eventsource
+---
+title: Create a custom Eventsource
+description: A comprehensive guide to Godspeed's pluggable event source system. Learn about creating your own custom event source, how to integrate a new event source into your Godspeed service or project.
+keywords: [custom event sources, new event source, custom plugin, event-driven, godspeed plugin, plugin management, event integration, event source plugins]
+---
+# Create a custom Eventsource
 
 ## About Eventsources
 
 An eventsource is any entity or technology responsible for capturing events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Eventsources can include Sync and Async event sources like Message brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
 
-### Steps to create any new eventsource :
+### Steps to create your custom eventsource :
 
 1. Inside the `eventsources` directory, create a `YAML` file with a specific name. In this YAML file, ensure you specify a `type` field, and there must be a corresponding `TypeScript` file in the `types` directory that shares the same name as the `type` you defined.
 
@@ -27,7 +32,7 @@ An eventsource is any entity or technology responsible for capturing events or n
 
 4. Once your client is initialized, you can execute its subscription using the `subscribeToEvent` function.
 
-Eventsource typescript file appears as follows:
+### Sample ts file of a custom event source in Godspeed:
 
 ```typescript
   import { PlainObject, GSActor, GSCloudEvent, GSStatus, GSEventSource, GSDataSource, GSContext } from "@godspeedsystems/core";
@@ -58,7 +63,8 @@ Eventsource typescript file appears as follows:
   }
   ```
 
-:::tip **To customize any existing event source, go through the respective plugin's ts file and customize. Use this [repo](https://github.com/godspeedsystems/gs-plugins.git) for better understanding**
+:::tip 
+**To customize any existing event source, go through the respective plugin's ts file and customize. Use this [repo](https://github.com/godspeedsystems/gs-plugins.git) for better understanding**
 :::
 
 <details>
@@ -239,7 +245,7 @@ export  {
 
 ```
 http.get./sample_api:
-    fn: sample      #redirects to src/functions/sample.yaml
+    fn: sample      # will invoke sample.ts function located at src/functions/
     body: 
       content:
         application/json:
@@ -264,19 +270,29 @@ http.get./sample_api:
               type: string
 ```
 
-#### Function to be called (src/functions/sample.yaml)
+#### Function to be called (src/functions/sample.ts)
 
-
-```yaml
-summary: example
-description: this function is called to return
-tasks:
-    - id: example
-      fn: com.gs.return #its an inbuilt function
-      args: |
-        <%"Hello "+inputs.query.user+". This is a message from body "+inputs.body.message%>
 ```
+import { GSContext, GSStatus } from "@godspeedsystems/core";
 
+export default function (ctx: GSContext): GSStatus {
+  const {
+    inputs: {
+      data: { query, body }
+    },
+    logger,
+  } = ctx;
+
+  const user = query.user || "Guest";
+  const message = body.message || "No message provided";
+
+  const result = `Hello ${user}. This is a message from body ${message}`;
+
+  logger.info("Returning message: %s", result);
+
+  return new GSStatus(true, 200, 'OK', result);
+}
+```
 </details>
 
 
@@ -313,7 +329,7 @@ type: cron
 
 #### Initializing client and execution ( src/eventsources/types/cron.ts ) :
 
-```javascript
+```ts
 import {GSEventSource, GSCloudEvent,PlainObject, GSStatus, GSActor } from "@godspeedsystems/core";
 import cron from "node-cron";
 
@@ -367,8 +383,7 @@ subscribeToEvent(
 #### cron event  ( src/events/every_minute_task.yaml )
 
 ```yaml
-# event for Shedule a task for evrey minute.
-
+# event for Shedule a task for every minute.
 cron.* * * * *.Asia/Kolkata:
   fn: every_minute
 
@@ -377,15 +392,14 @@ For  cron expressions   `https://crontab.cronhub.io/`
 
 #### cron workflow to schedule ( src/functions/every_minute.yaml )
 
+```
+import { GSContext, GSStatus } from "@godspeedsystems/core";
 
-```yaml
-summary: this workflow will be running every minute
-tasks:
-  - id: print
-    description: print for every minute
-    fn: com.gs.return
-    args:
-      data: HELLO from CRON
+export default function (ctx: GSContext): GSStatus {
+  const message = "HELLO from CRON";
+  ctx.childLogger.info("Cron message: %s", message);
+  return new GSStatus(true, 200, undefined, message);
+}
 ```
 
 </details>
@@ -396,7 +410,7 @@ There are special cases when datasource can also act as an eventsource.
 For eg: Kafka can be used both datasource as well as eventsource. When we are publishing message to kafka, it can work as a datasouce .But when we are listening to events on kafka, then it is event source also, then the same client can serve as both.
 
 <details>
-  <summary>Let's use kafka as an example of an eventsource as datasource:</summary>
+  <summary>Let's use kafka as an example of a datasource as an eventsource:</summary>
 
 #### Project structure
 
@@ -527,14 +541,18 @@ kafka.publish-producer1.kafka_proj:
 
 #### Example workflow for consumer ( src/functions/kafka-consume.yaml ) :
 
-```yaml
-id: kafka-conumer
-summary: consumer
-tasks:
-    - id: set_con
-      fn: com.gs.return
-      args: <% inputs %>
+```ts
+import { GSContext, GSStatus } from "@godspeedsystems/core";
 
+export default function (ctx: GSContext): GSStatus {
+  const {
+    inputs: {
+        data: 
+          { body }
+        },
+    } = ctx;
+  return new GSStatus(true, 200, 'OK', body);
+}
 ```
 </details>
 

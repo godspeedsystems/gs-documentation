@@ -23,14 +23,19 @@ Godspeed adds some attributes (extra key/value pairs) to the logs to enhance log
 **`workflow_name`**: which represents the current workflow.   
 **`task_id`**: which represents the current task.   
 
-## Application configuration
-### Log format
-There are two types of log formats in Godspeed.   
+### Log formats
 
-#### pino pretty format
-[pino pretty format](https://www.npmjs.com/package/pino-pretty) is more readable and user friendly. It is mostly used in development environments on user's local machine. Logs are dumped in this format when any of the below conditions is satisfied:   
-**a) ** observability is [disabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is not set to true.   
-**b) ** NODE_ENV is set to 'dev'.
+There are two types of log formats in Godspeed:
+1. **[For Development environment - pino pretty format](#pino-pretty-format)**
+
+2. **[For Production environment - OTel format](#otel-format)**
+
+### pino pretty format
+
+[pino pretty format](https://www.npmjs.com/package/pino-pretty) is more readable and user friendly. It is mostly used in development environments on user's local machine. Logs are dumped in this format when any of the below conditions is satisfied: 
+
+**(a)** observability is [disabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is not set to true.   
+**(b)** NODE_ENV is set to 'dev'.
   
 Sample Logs:
 ```
@@ -49,14 +54,15 @@ Sample Logs:
     task_id: "helloworld"
 ```
 
-#### OTEL format
-[OTEL Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) is used in Production/UAT and other environments where the user needs to enable observability.    
+### OTel format
+[OTel Logging format](https://opentelemetry.io/docs/reference/specification/logs/data-model/) is used in Production/UAT and other environments where the user needs to enable observability.    
 :::tip 
-  OTEL Logging format provides co-relation between logs and traces by specifying tracing information (like TraceId, SpanId or TraceFlags) in the logs. With this co-relation information, one can navigate from logs to trace to get more information about any scenario. 
+  OTel Logging format provides co-relation between logs and traces by specifying tracing information (like TraceId, SpanId or TraceFlags) in the logs. With this co-relation information, one can navigate from logs to trace to get more information about any scenario. 
 :::
+
 Logs are dumped in this format when all of the below conditions are satisfied:   
-**a) ** observability is [enabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to true.   
-**b) ** NODE_ENV is not set to 'dev'.
+**(a)** observability is [enabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to true.   
+**(b)** NODE_ENV is not set to 'dev'.
 
 ```json
 {"Body":"[START] Load definitions from /home/gurjot/data/cli-test/v2_test2/dist/definitions","Timestamp":"2024-04-10T09:40:45.122Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","env":"production","host.hostname":"ThinkPadT480s"},"Attributes":{}}
@@ -73,6 +79,7 @@ Logs are dumped in this format when all of the below conditions are satisfied:
 
 ### Log level
 The minimum level set to log above this level. Please refer [Pino log levels](https://github.com/pinojs/pino/blob/master/docs/api.md#options) for more information. Set `log.level` in [config](/docs/microservices-framework/config-and-mappings/config.md#static-variables).
+
 ```yaml title=config/default.yaml
 log:
   redact: # ['a.b.c', 'a.b.*', 'req.headers', 'mobileNumber'] #pino redact rules. Default null.

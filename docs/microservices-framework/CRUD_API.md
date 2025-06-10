@@ -17,7 +17,7 @@ The Godspeed framework provides powerful CRUD API generation capabilities throug
 - Swagger documentation generation
 - Database schema synchronization
 
-### Video Tutorial
+### Tutorial
 Learn how to generate CRUD APIs in Godspeed:
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>

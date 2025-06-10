@@ -1,5 +1,5 @@
 ---
-title: Workflows or Functions in Meta Framework
+title: Functions (Event Handler Workflows)
 ---
 
 The Meta Framework allows you to write business logic in [Typescript and Javascript functions](/docs/microservices-framework/workflows/native-language-functions.md)
@@ -16,7 +16,8 @@ You may use any language depending on your choice. We suggest to prefer Typescri
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/E33GqpTr4iw?si=Er9oRp9L6YzH8EJt" frameborder="0" allowfullscreen></iframe>
 </div>
 
-### Writing event handler functions
+### Writing functions
+
 #### Typescript
 ```typescript
 module.exports = function greet(GSContext: ctx){

@@ -167,7 +167,7 @@ You’ll see a list of officially supported plugins like `prisma-as-datastore`, 
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
 ```
 ---
-### Direct Plugin Installation by Package gName
+### Direct Plugin Installation by package name
 ---
 You can also directly install a plugin by specifying its NPM package name:
 
@@ -182,7 +182,7 @@ $ godspeed plugin add @godspeedsystems/plugins-express-as-http
 ```
 
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource
 ```
 ---
 ### Plugin Remove
@@ -285,23 +285,30 @@ Observability has been enabled
 ```
 
 The above command performs these two functions:
+
 ##### A. Installs `@godspeedsystems/tracing` package
 This package includes auto-instrumentation of the following plugins to collect traces:   
-**1. ** [http](https://nodejs.org/api/http.html) and [https](https://nodejs.org/api/https.html) requests.   
-**2. ** [Prisma datasource plugin](../microservices-framework/datasources/datasource-plugins/Prisma%20Datasource.md).
+
+**1.** [http](https://nodejs.org/api/http.html) and [https](https://nodejs.org/api/https.html) requests.   
+**2.** [Prisma datasource plugin](../microservices-framework/datasources/datasource-plugins/Prisma%20Datasource.md).
 
 ##### B. Sets OTEL_ENABLED env variable to true
-By setting `OTEL_ENABLED` to true, the following actions are performed:   
+
+By setting `OTEL_ENABLED` to true, the following actions are performed:  
+
 **1. Traces**: starts the auto-instrumentation of traces present in the `@godspeedsystems/tracing` package.   
 **2. Metrics**: starts exposing application metrics at `/metrics` endpoint of the service. Currently, the framework exposes HTTP and [Prisma datasource](../microservices-framework/datasources/datasource-plugins/Prisma%20Datasource.md) metrics.    
 **3. Logs**: starts dumping the service logs in [OTEL log format](./telemetry/logging.md/#log-format) in console provided NODE_ENV is not equal to 'dev'
 
-:::infoTelemetry data for custom plugins
+:::info
+Telemetry data for custom plugins
+
 Follow this [Github issue](https://github.com/godspeedsystems/gs-tracing/issues/2) to know how auto-instrumentation can be enabled for the other custom [eventsource](../event-sources/event-source-plugins/) and [datasource](../microservices-framework/datasources/datasource-plugins/Overview.md) plugins.   
 Follow this [Github issue](https://github.com/godspeedsystems/gs-node-service/issues/1016) to know how prometheus based metrics can be exposed for the other custom [eventsource](../event-sources/event-source-plugins/) and [datasource](../microservices-framework/datasources/datasource-plugins/Overview.md) plugins.
 :::
 
 #### otel disable
+
 The `godspeed otel disable` command allows the user to disable [observability](./telemetry/overview.md) in Godspeed.    
 ```bash
 $ godspeed otel disable

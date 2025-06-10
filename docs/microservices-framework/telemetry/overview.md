@@ -22,7 +22,10 @@ Godspeed supports Application Performance Monitoring(APM) and Business Performan
 
 > Not even a single request must go untracked!
 
-:::tipCheck out the video talks on observability with Godspeed
+:::tip
+
+Check out the video talks on observability with Godspeed
+
 1. [TEMPLE](https://www.youtube.com/watch?v=2BtCi72LPlM)
 2. [Grafana and OTEL based observability](https://www.youtube.com/watch?v=hOKwwYdofcA)
 :::
@@ -43,7 +46,6 @@ Collect, correlate and debug signals across logs (events), traces and metrics, b
 
 ### Enable/disable observability
 You can [enable/disable OTEL](../CLI.md/#otel-enabling-and-disabling-open-telemetry) in Godspeed.
-s
 
 <!-- ### Custom traces, logs and metrics in the workflows
 You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows. -->

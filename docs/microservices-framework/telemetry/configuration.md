@@ -1,14 +1,14 @@
 ---
 sidebar_position: 1
-title: Generic OTEL Configuration
+title: Generic OTel Configuration
 toc_min_heading_level: 2
 toc_max_heading_level: 3
 ---
 
-The generic configuration is applicable for all traces, logs and metrics. It must be applied to use observability in Godspeed. It includes setting up various [OTEL environment variables](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#general-sdk-configuration) and the framework environment variables.
+The generic configuration is applicable for all traces, logs and metrics. It must be applied to use observability in Godspeed. It includes setting up various [OTel environment variables](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#general-sdk-configuration) and the framework environment variables.
 
-### Enable OTEL
-[Enable OTEL](../CLI.md/#otel) in your service using [Godspeed CLI](../CLI.md) by setting `OTEL_ENABLED` to true. You can alternatively set it in the `.env` file of your service. 
+### Enable OTel
+[Enable OTel](../CLI.md/#otel) in your service using [Godspeed CLI](../CLI.md) by setting `OTEL_ENABLED` to true. You can alternatively set it in the `.env` file of your service. 
 ```
 export OTEL_ENABLED=true
 ```

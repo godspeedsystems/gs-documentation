@@ -22,7 +22,7 @@ After installation, you will find two auto-generated files in your project relat
 
 ### Configuration
 
-In your `<aws_ds_name>.yaml` file, you will need to configure   
+Configure this `aws.yaml` file as per your requirement :
 
 ```yaml
 type: aws

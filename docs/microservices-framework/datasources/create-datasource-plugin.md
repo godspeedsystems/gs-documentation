@@ -166,9 +166,7 @@ Here is a video which helps you create a plugin using the godspeed. Do watch for
 </div>
 
 
-### 2.Create and use plugins using godspeed
-
-Watch here the video where we demonstrate how to create and use plugins using godspeed.
+### 2. How to get started with a godspeed datasource plugin - installed from npm
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
     <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/YzvYjYujBMk" frameborder="0" allowfullscreen></iframe>

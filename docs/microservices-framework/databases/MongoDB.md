@@ -309,6 +309,7 @@ godspeed gen-crud-api
 Here is a sample event and workflow for mongodb, which is fetching data from the database.
 
 ```yaml title=src/events/getPost.yaml
+
 http.get./mongo/post/{id}:
   summary: Fetch Post
   description: Fetch Post from database
@@ -327,15 +328,12 @@ http.get./mongo/post/{id}:
 ```
 ```ts title = src/functions/com/biz/mongo/post/one.ts
 
-import { GSContext, GSDataSource, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "@prisma/client";
+import { GSContext, GSStatus } from "@godspeedsystems/core";
 
-module.exports = async (ctx: GSContext, args: PlainObject) => {
+module.exports = async (ctx: GSContext) => {
   const { inputs: { data: { params } }, logger, datasources } = ctx;
 
-  const client: PrismaClient = datasources.mongo.client;
-
-  const response = await client.Post.findUnique({
+  const response = await datasources.mongo.Post.findUnique({
                          where: { id: params.id }
                   });
   return new GSStatus(true, 200, "Post fetched", response );

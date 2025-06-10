@@ -1,17 +1,17 @@
-# Writing Workflows in Godspeed
+# Writing functions in Godspeed
 
 Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
 
 :::tip
-In Godspeed, your function gets input in a standard JSON format and returns output in a standard JSON format, independent of the eventsource through which this function is triggered. Eventsource could be Express, Fastify, Apollo Graphql or event message bus like Kafka, RabbitMQ or socket message. This means Godspeed has a unified way to deal with all eventsources, giving you modular architecture and re-uasability of your functions.
+In Godspeed, your function gets input in a standard JSON format and returns output in a standard JSON format, independent of the eventsource through which this function is triggered. Eventsource could be Express, Fastify, Apollo Graphql or event message bus like Kafka, RabbitMQ or socket message. This means Godspeed has a unified way to deal with all eventsources, providing a modular architecture and re-uasability of your functions.
 :::
 
 ### Example Typescript function
 ```typescript
-import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
+import { GSCloudEvent, GSContext } from "@godspeedsystems/core";
 import Pino from 'pino';
 
-export default function (ctx: GSContext, args: any) {
+export default function (ctx: GSContext) {
     const {
         inputs: {
             data: {
@@ -68,21 +68,23 @@ export default function (ctx: GSContext, args: any) {
 ```
 
 :::tip
+
 For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions.md#invoking-functions-and-datasource-clients-from-jsts-functions) at the bottom of the page. 
 :::
 
-#### GSContext
-GSContext carries the loaded components of this project and as well the inputs of the current event.
+### GSContext
+
+GSContext carries the loaded components of this project and as well the inputs of the current event. Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
+
 :::tip note
  Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
 :::
+
 ### More about GSContext
 
 Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
-
 It includes all the context specific information like tracing information, actor, environment, headers, payload etc.
 
-Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
 <!-- 
 #### args
@@ -185,13 +187,13 @@ To access outputs of tasks executed before the current task, developer can destr
   const firstTaskOutput = outputs[firstTaskId]
 ```
 
-#### Accessing Datasource Clients
+### Accessing Datasource Clients
     
-With [datasources](../datasources/overview.md) we can access all datasources, their clients and methods.
+With `datasources` we can access all [datasources](../datasources/overview.md), their clients and methods.
 
 ```javascript
 const { datasources} = ctx;
-const responseData = await datasources.mongo.client.Restaurant.create({
+const responseData = await datasources.prismaSchema.client.User.create({
     data: inputs.body
 })
 
@@ -208,9 +210,11 @@ With childLogger you have accessibility to Pino logger instance with context inf
 
 ### Returning from a function
 
-#### GSStatus
+### GSStatus
+
 Developers can return pure JSON object in response, or return GSStatus if they use Typescript.
 The GSStatus is a built-in class in Godspeed. We invoke it when we're prepared to define an API response manually and dispatch it.
+
 GSStatus has the below properties.
 ```yaml
     success: boolean;
@@ -223,10 +227,12 @@ GSStatus has the below properties.
 ```
 
 We return with GSStatus as below
+
 ```typescript
  return new GSStatus(true, 200, 'OK', responseData, headers);
 ```
-#### Different ways to return from a event handler
+
+#### Different ways to return from a function
 ```typescript
     // Returning only data
     return 'Its working! ' + body.name;
@@ -259,43 +265,63 @@ We return with GSStatus as below
     return new GSStatus(true, 200, 'OK', 'Its working! ' + body.name, headers);  
 ```
 
-:::tip Note
+:::tip
 Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
 :::
 
-### Invoking functions and datasource clients from JS/TS functions
-
-<!-- - When invoking functions from a JS/TS function in Godspeed, the framework ensures that calling functions will not lead to error propagation.
-- They will instead return a GSStatus with {success: boolean, code: number, message: string, data: any}.  Why? Because the framework has a top level catch for all functions invoked through it.  -->
+### Invoking other functions
 - All functions within a Godspeed project, including those written in YAML, JavaScript (JS), or TypeScript (TS), are accessible through the `ctx.functions` object.
 - Ofcourse you can also `import` them in the standard Typescript or Javascript way
-- Similarly, all datasource clients initialised in a Godspeed project are conveniently available under the `ctx.datasources` object.
 
  ```ts
- export default async function (ctx: GSContext, args: any) {
+ export default async function (ctx: GSContext) {
 
-    //Calling functions (yaml, js, ts) from within a ts/js function, in a meta framework's project's functions folder, all project functions are available under ctx.functions. 
-    const res = await ctx.functions['com.gs.helloworld2'](ctx, args);
+    //Calling functions (yaml, js, ts) from within a ts/js function, 
+    // all functions written inside src/functions folder are available under ctx.functions.
+    const res = await ctx.functions['com.gs.helloworld2'](ctx);
     //Same As
-    const res = await require('com/gs/helloworld2')(ctx, args);
-    // Calling datasource functions. All datasources are available under ctx.datasources hood.
-    // OPTION 1
-    // Every datasource exposes a client key. The client may be a single instance like in case of Axios, or multiple datasource client instances like in case of AWS, or database models like in case of Mongoose (depending on the plugin used).
+    const res = await require('com/gs/helloworld2')(ctx);
+    return res
+    // works same as return new GSStatus(true, 200, 'OK', res );
+}
+
+ ```
+
+### Invoking datasource clients from functions
+Similarly, all datasource clients initialised in a Godspeed project are conveniently available under the `ctx.datasources` object.
+
+There are two options for invoking datasource clients from functions:
+
+**Option 1: Using the client key**
+
+Every datasource exposes a client key. The client may be a single instance like in the case of Axios, or multiple datasource client instances like in the case of AWS, or database models like in the case of Mongoose (depending on the plugin being used).
+
+**Option 2: Using the execute method**
+
+All datasources have an execute method. This may be preferable in case you want to utilise the full capabilities of the plugin wrapped over the native clients, like error handling checks and response codes, retries, caching etc.
+
+```ts
+ export default async function (ctx: GSContext, args: any) {
+    // Calling datasource functions from ctx.datasources
+
+    // OPTION 1 Using the client key
     const res = await ctx.datasources.aws.client.s3.listBuckets(args);
-    // OPTION 2
-    // All datasources have an execute method. This may be preferable in case you want to utlise the full capabilities of the plugin wrapped over the native clients, like error handling checks and response codes, retries, caching etc. 
+
+    // OPTION 2 Using the execute method
     const res = await ctx.datasources.aws.execute(ctx, {
-         //Pass exactly same args as this aws service's method takes
-        ...args,
-        meta: {entityType: 's3', method: 'listBuckets'}
-        //Along with args, pass meta object
-        // meta can contain {entityType, method}
+    
+    //Pass exactly same args as this aws service's method takes
+        ...args,                 //Along with args, pass meta object
+        meta: {                  // meta can contain {entityType, method}
+          entityType: 's3', 
+          method: 'listBuckets'
+        }
     });
     if (!res.success) {
         return new GSStatus(false, res.code || 500, 'my response message', {message: "Internal Server Error", info: res.message})
     }
   //If a developer only returns data without setting keys like "success" or "code" in the response,
-  // the framework assumes it is just the data. 
+  // the framework assumes it is just the data.
   //In such cases, the response code defaults to 200, and success is assumed to be true.
     
     return res
@@ -303,20 +329,21 @@ Check [event handler response](#handling-event-handler-return) to know how frame
 }
 
  ```
-### Handling event handler return
+### Handling return from godspeed functions
+
 By default, all the framework defined functions or developer written functions, have to return either [GSStatus](#gsstatus) or data.   
 Now lets see how the framework qualifies your return as GSStatus or simple data.
 The framework sees that your returned data has one of `code` or `success` meta-keys.    
+  
+**i.** If both are present, it looks for the other GSStatus keys and set them.  
+**ii.** If only code is present and lies between 200-399, then success is assumed to be true else false. It looks for the other GSStatus keys and set them.   
+**iii.** If only success is present, then code is assumed to be 200. It looks for the other GSStatus keys and set them.   
+**iv.** If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.   
 
-** [Non Authz (normal) workflows](../workflows/overview.md) **    
-**i. ** If both are present, it looks for the other GSStatus keys and set them.  
-**ii. ** If only code is present and lies between 200-399, then success is assumed to be true else false. It looks for the other GSStatus keys and set them.   
-**iii. ** If only success is present, then code is assumed to be 200. It looks for the other GSStatus keys and set them.   
-**iv. ** If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.   
+<!-- **[Authz workflows](../authorization/authz-usecases.md/#authz-workflows)**
 
-** [Authz workflows](../authorization/authz-usecases.md/#authz-workflows) **   
-Check [reponse handling](../authorization/authz-usecases.md/#response-code-message-and-data-from-authorization-failure) in case of authorization workflows.
+Check [reponse handling](../authorization/authz-usecases.md/#response-code-message-and-data-from-authorization-failure) in case of authorization workflows. -->
 
 :::info
-You can study the code [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/functions/com/gs/transform.ts) to understand both of the above scenarios better.
+You can study the code [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/functions/com/gs/transform.ts) to understand the above scenario better.
 :::

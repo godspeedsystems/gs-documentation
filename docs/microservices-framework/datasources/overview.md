@@ -24,7 +24,7 @@ Datasources can be divided into two types, "Datastore as datasource" and "API as
 
 Example 1: Datastore as Datasource [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
 
-```yaml
+<!-- ```yaml
 id: workflow_1
 description: This workflow will fetch the user with userId from the mongo database
 tasks:
@@ -33,31 +33,42 @@ tasks:
     args:
       where:
         userId: <% inputs.params.userId %>
-```
+``` -->
+```ts
+import { GSContext, GSStatus } from "@godspeedsystems/core";
 
+module.exports = async (ctx: GSContext) => {
+  const { inputs: { data: { params } }, logger, datasources } = ctx;
+
+  const response = await datasources.mongo.client.Post.findUnique({
+                         where: { id: params.id }
+                  });
+  return new GSStatus(true, 200, "Post fetched", response );
+}
+```
 
 In this example:
 
-`datasource.mongo.User.findOne` is the datasource function, which can be described as below:
+`datasources.mongo.client.Post.findUnique` is the datasource function, which can be described as below:
 
-  - `datasource`: fixed namespace for all data sources
-  - `mongo`: name of data source,this can be any data base that you select can checkout [database list](/docs/getting-started/advance-guide#prisma-supports-wide-range-of-databases)
-  - `User`: entity name
-  - `findOne`: method to be invoked in entity name
+  - `datasources`: fixed namespace for all data sources for typescript functions
+  - `mongo`: name of datasource (name of prisma schema in case of prisma datasource), you can use any database provider, checkout [supported databases list](/docs/getting-started/advance-guide#prisma-supports-wide-range-of-databases)
+  - `Post`: entity name
+  - `findUnique`: method to be invoked in entity name
 
-the workflow is consuming the datasource `mongo` and finding one document from User entity.
+the workflow is consuming the datasource `mongo` and finding one document from Post entity.
 
-:::tip **Godspeed has a "Prisma as datastore plugin" as well, which provides a uniformed access to all prisma based datasources**
+:::tip **Godspeed has "Prisma as datastore plugin", which provides a uniform access to all databases**
 :::
 
 To enable this seamless interaction with datasources, the Godspeed Framework allows you to configure data sources within your project. For instance, the example mentions the use of the "prisma-as-datastore" plugin to define the "mongo" data source. This configuration step ensures that the framework can establish connections and communicate effectively with the specified data source.
 
-In the above example there is a `mongo` datasource defined in the project, you are free to name your datasource as you like. A default config of your datasource is present in `src/datasources` folder. To use datasources advance features you configure your datasource.yaml file, to get more details about your specific datasource checkout their respective docs.
+In the above example there is a `mongo` datasource defined in the project, you are free to name your datasource as you like. A default config of your datasource is present in `src/datasources` folder.
 
 
 Example 2: API Datasource  [axios-as-datasource](/docs/microservices-framework/datasources/list-of-plugins#2-axios-as-datasource)
 
-```yaml
+<!-- ```yaml
 id: post_api_send_anthing
 tasks:
   - id: send_anything
@@ -66,14 +77,23 @@ tasks:
     args:
       data:
         message: <%inputs.body.message%>
+``` -->
+```ts
+import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext) {
+    const res =  await ctx.datasources.api.execute(ctx, {
+        meta: {
+            method: 'get',
+            url: '/anything',
+        },
+    });
+    return res;
+};
 ```
-
 In the above example:
-
-`datasource.api_datasource.post./anything` is the datasource function, which can be described as below:
-
-  - `datasource`: fixed namespace for all data sources
-  - `api_datasource`: name of data source,
-  - `post`: API method
+  - `datasources`: fixed namespace for all data sources
+  - `api`: name of data source,
+  - `get`: API method
   - `./anything`: API endpoint
 

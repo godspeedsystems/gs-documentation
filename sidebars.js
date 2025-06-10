@@ -139,7 +139,12 @@ const sidebars = {
               type: "doc",
               label: "6.9. Plugin- GraphQl",
               id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
-            },         
+            },    
+            // {
+            //   type: "doc",
+            //   label: "6.10. Setup Middleware",
+            //   id: "microservices-framework/event-sources/event-source-plugins/Setup Middleware",
+            // },      
           ],
         },         
         {

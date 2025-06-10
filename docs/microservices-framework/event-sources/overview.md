@@ -24,9 +24,14 @@ Based on functionality and the nature of the information they provide to the sys
 
 ## How to use an eventsource in Godspeed project?
 
-You can use Godspeed CLI to browse and install plugins which are published and maintained by Godspeed.
+Godspeed framework adopts a pluggable approach that empowers you to define eventsources effortlessly. Our framework provides an interface that caters to diverse eventsource needs. Here's a glimpse into the exceptional eventsource plugins crafted by our core framework team.
+
+
+## How to add plugin in your project?
+You can use `godspeed plugin add` command to browse and install plugins which are published and maintained by Godspeed.
+
 ```bash
-    godspeed plugin add
+$  godspeed plugin add
 ```
 
 ```bash
@@ -49,27 +54,20 @@ You can use Godspeed CLI to browse and install plugins which are published and m
 ├──────┼────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
 │  ◯   │ kafka-as-datasource-as-eventsource     │ kafka as datasource-as-eventsource plugin for Godspeed Framework               │
 └──────┴────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+
 ```
 
-### You can directly install a plugin by specifying its NPM package name:
-
-
-```bash
-godspeed plugin add @godspeedsystems/plugins<plugin-name>
-```
+You can directly install a plugin by specifying its package name:
 
 Example:
 
-```
-$ godspeed plugin add @godspeedsystems/plugins-express-as-http
-```
-
-```
+```bash
 $ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
 ```
 
-To understand the actions taken when selecting the pre-defined plugins and their respective functionalities, please refer [this document](/docs/microservices-framework/event-sources/event-source-plugins.md).
-
+```bash
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+```
 
 **To learn more about Event sources in Godspeed, please watch the video provided below…**
 
