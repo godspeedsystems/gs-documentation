@@ -1,5 +1,5 @@
 ---
-title: ChatGPT Datasource Plugin for Godspeed
+title: ChatGPT Datasource Plugin
 ---
 **[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/chatgpt-as-datasource)**
 

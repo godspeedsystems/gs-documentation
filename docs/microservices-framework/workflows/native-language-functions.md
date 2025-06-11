@@ -69,7 +69,7 @@ export default function (ctx: GSContext) {
 
 :::tip
 
-For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions.md#invoking-functions-and-datasource-clients-from-jsts-functions) at the bottom of the page. 
+For seeing how framework handles data returned from a function, including calculation of `code`, `success` and `data`, [read this section](./native-language-functions#handling-return-from-godspeed-functions) at the bottom of the page. 
 :::
 
 ### GSContext
@@ -266,7 +266,7 @@ We return with GSStatus as below
 ```
 
 :::tip
-Check [event handler response](#handling-event-handler-return) to know how framework handles GSStatus.
+Check [event handler response](#handling-return-from-godspeed-functions) to know how framework handles GSStatus.
 :::
 
 ### Invoking other functions

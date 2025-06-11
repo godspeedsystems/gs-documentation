@@ -1,5 +1,7 @@
-title: Sendgrid Datasource Plugin for Godspeed
 ---
+title: Sendgrid Datasource Pluginc
+---
+
 **[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/sendgrid-as-datasource)**
 
 This plugin helps you automate email sending and track email metrics using SendGrid, with status logging to Google Sheets.

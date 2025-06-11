@@ -4,7 +4,7 @@ description: Use `Definitions/` to create reusable YAML-based schema parts. Refe
 keywords: [API schema definitions]
 ---
 
-## Understanding `Definitions` in Godspeed
+#s Reuse `Definitions` using $ref
 
 In **Godspeed**, when defining your HTTP events and their payload schemas, you often come across syntax like this:
 

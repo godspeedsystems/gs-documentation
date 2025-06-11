@@ -8,7 +8,6 @@ In Godspeed, every API is defined as an event, and handled by a corresponding fu
 This guide explains how to write new APIs in three clear steps:
 
 
-
 ## Define API Schema (give all event examples)
 
 To write an api in Godspeed, first you need to write an Event Schema. This schema is a structured YAML configuration that follows the OpenAPI specification, allowing you to define every detail of how the event should behave. All events adhere to a standard structure, which is one of the core design principles of Godspeed, regardless of their source or protocol.

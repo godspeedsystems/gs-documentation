@@ -1,6 +1,6 @@
-# Apollo Graphql Event
+# Graphql API
 
-The GraphQL event configuration in Godspeed allows seamless integration of GraphQL APIs, emphasizing simplicity and efficiency in API development. The configuration file (Apollo.yaml) specifies the GraphQL type and port, ensuring alignment with the event key prefix.
+The GraphQL API configuration in Godspeed allows seamless integration of GraphQL APIs, emphasizing simplicity and efficiency in API development. The configuration file (Apollo.yaml) specifies the GraphQL type and port, ensuring alignment with the event key prefix.
 
 ### GraphQL Configuration 
 The Apollo Graphql plugin is currently configured exactly the same as Express and Fastify eventsources. Except that it doesn't have swagger config and doesn't support file upload as of now.

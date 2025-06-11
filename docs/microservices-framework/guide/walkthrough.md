@@ -161,7 +161,7 @@ Check out the [Apollo Graphql plugin documentation](../event-sources/event-sourc
 [Datasources](../datasources/overview.md) are any locations which allow to send or retrieve data. These could be another API service, message bus, file system, database, text search engine etc. 
 
 ### Using Datasource and Eventsource Plugins
-You can import any datasource or eventsource in your project without writing code, with the available plugins for [eventsources](../event-sources/event-source-plugins.md) and [datasources](../datasources/list-of-plugins.md). 
+You can import any datasource or eventsource in your project without writing code, with the available plugins for [eventsources](../event-sources/event-source-plugins/Overview.md) and [datasources](../datasources/list-of-plugins.md). 
 
 #### **Eventsource Plugins**
 

@@ -34,7 +34,7 @@ There are two types of log formats in Godspeed:
 
 [pino pretty format](https://www.npmjs.com/package/pino-pretty) is more readable and user friendly. It is mostly used in development environments on user's local machine. Logs are dumped in this format when any of the below conditions is satisfied: 
 
-**(a)** observability is [disabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is not set to true.   
+**(a)** observability is [disabled](/docs/microservices-framework/CLI#otel-disable) i.e. OTEL_ENABLED env variable is not set to true.   
 **(b)** NODE_ENV is set to 'dev'.
   
 Sample Logs:
@@ -117,8 +117,9 @@ By specifying the above redaction paths, the objects which have these properties
 Please refer [Pino redaction paths](https://github.com/pinojs/pino/blob/master/docs/redaction.md#paths) for more information.
 :::
 
-** Generic convention **   
+**Generic convention**   
 If you want to mask any field in the objects in all deep nesting levels then you can use `**.<field_name>` convention instead of specifying each path explicitly.
+
 For example, 
 ```yaml title="config/default.yaml"
 log:
@@ -197,12 +198,13 @@ Sample Logs:
 ```
 
 ### Custom log attributes
-#### 1. For all events
+
+### For all events
 You can add any custom attribute in the logs whenever any event is triggered on your service. The value for the custom identifier can be picked up from event body, params, query, or headers.   
 
-** To enable this feature for common logging attributes across all events ,you need to specify two things: **
+**To enable this feature for common logging attributes across all events,you need to specify two things:**
 
-**1. ** `log.attributes` variable as in [config](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
+**i** `log.attributes` variable as in [config](/docs/microservices-framework/config-and-mappings/config.md#static-variables) which contains custom identifiers.
 
 For example, this is the sample static configuration:
 ```yaml
@@ -215,21 +217,21 @@ log:
     gender: <% mappings.Gender %>
 ```
 
-**2. ** location of the identifier in the request payload. As specified in the above example,     
+**ii** location of the identifier in the request payload. As specified in the above example,     
 **-** if mobileNumber is present in query params then specify `query.mobileNumber`.   
 **-** if id is present in path params then specify `params.id`.   
 **-** if lan is present in data field inside body then specify `body.data.lan`.   
 **-** if name is present in headers then specify `headers.name`.   
 **-** if gender is present in data field inside mappings then specify `<% mappings.Gender %>`.   
 
-##### Sample Logs 
+#### Sample Logs 
 ```json
 {"Body":"Processing event /test/:id.http.post","Timestamp":"2024-04-10T09:40:45.191Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 {"Body":"event inputs {\"baseUrl\":\"\",\"body\":{\"data\":{\"lan\":\"12345\"}},\"fresh\":false,\"hostname\":\"localhost\",\"ip\":\"::ffff:172.22.0.1\",\"ips\":[],\"method\":\"POST\",\"originalUrl\":\"/test/12?mobileNumber=9878987898\",\"params\":{\"id\":\"12\"},\"path\":\"/test/12\",\"protocol\":\"http\",\"query\":{\"mobileNumber\":\"9878987898\"},\"route\":{\"path\":\"/test/:id\",\"stack\":[{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"},{\"name\":\"<anonymous>\",\"keys\":[],\"regexp\":{\"fast_star\":false,\"fast_slash\":false},\"method\":\"post\"}],\"methods\":{\"post\":true}},\"secure\":false,\"stale\":true,\"subdomains\":[],\"xhr\":false,\"headers\":{\"content-type\":\"application/json\",\"user-agent\":\"PostmanRuntime/7.29.2\",\"accept\":\"*/*\",\"postman-token\":\"9e57df7d-0a75-48b6-bc52-921bd5c045b7\",\"host\":\"localhost:4000\",\"accept-encoding\":\"gzip, deflate, br\",\"connection\":\"keep-alive\",\"content-length\":\"46\"},\"files\":[]}","Timestamp":"2024-04-10T09:40:45.196Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 {"Body":"event body and eventSpec exist","Timestamp":"2024-04-10T09:40:45.197Z000000","SeverityNumber":9,"SeverityText":"INFO","TraceId":"3b66e6f8ec6624f6467af1226503a39e","SpanId":"eb6e7d89ac381e9f","TraceFlags":"01","Resource":{"service.name":"sample_app","host.hostname":"5252603e08be","process.pid":828},"Attributes":{"event":"/test/:id.http.post","workflow_name":"com.jfs.test","mobileNumber":"9878987898","id":"12","lan":"12345"}}
 ```
 
-#### 2. At eventsource level
+### 2. At eventsource level
 
 You can override log attributes at eventsource level also. You can specify customized log attributes for specific eventsource. This will override default custom attributes as defined in the [previous section](../telemetry/logging.md/#1-for-all-events).
 
@@ -270,7 +272,7 @@ log:
     }}
 ```
 
-#### 3. At event level
+### 3. At event level
 
 You can override log attributes at event level also. You can specify customized log attributes for specific event. This will override default custom attributes as defined in the [previous section](../telemetry/logging.md/#2-at-eventsource-level).
 
@@ -323,7 +325,7 @@ To enable this feature ,you need to specify `log.attributes` on event level whic
       "task_id": ""
     }}
 ```
-#### 4. Custom on_error logging in workflow/tasks
+### 4. Custom on_error logging in workflow/tasks
 
 In case you want to log specific attributes when an error happens in a task, set those values in `on_error.log_attributes` of that task.
 
