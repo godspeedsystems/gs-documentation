@@ -56,6 +56,10 @@ For direct access to specific models from their original providers, with full ac
 
 <!-- <img src="../../../static/img/connecting-api-provider/connecting-api-provider-6.png" alt="OpenAI API keys page" width="600" /> -->
 
+![productivity](/img/productivity.png)
+![Alt text](../../../static/img/mongoose_folder_structure.png)
+
+
 *OpenAI platform with "Create new secret key" button. Name your key and copy it immediately after creation.*
 
 ## Configuring Saarthi in VS Code
