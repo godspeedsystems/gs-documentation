@@ -1,6 +1,8 @@
 ---
 sidebar_label: OpenRouter
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using OpenRouter With Saarthi
 

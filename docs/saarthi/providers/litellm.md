@@ -2,6 +2,8 @@
 sidebar_label: LiteLLM
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using LiteLLM With Saarthi
 
 LiteLLM is a versatile tool that provides a unified interface to over 100 Large Language Models (LLMs) by offering an OpenAI-compatible API. This allows you to run a local server that can proxy requests to various model providers or serve local models, all accessible through a consistent API endpoint.
@@ -44,7 +46,7 @@ Once your LiteLLM server is running:
     *   Use the refresh button to update the model list if you've added new models to your LiteLLM server.
     *   If no model is selected, Saarthi defaults to `anthropic/claude-3-7-sonnet-20250219` (this is `litellmDefaultModelId`). Ensure this model (or your desired default) is configured and available on your LiteLLM server.
 
-<img src="/img/litellm/litellm.png" alt="Saarthi LiteLLM Provider Settings" width="600" />
+<img src="../../static/img/litellm/litellm.png" alt="Saarthi LiteLLM Provider Settings" width="600" />
 
 ## How Saarthi Fetches and Interprets Model Information
 

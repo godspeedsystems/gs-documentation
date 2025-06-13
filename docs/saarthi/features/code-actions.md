@@ -1,3 +1,5 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Code Actions
 
 Code Actions are a powerful feature of VS Code that provide quick fixes, refactorings, and other code-related suggestions directly within the editor. Saarthi integrates with this system to offer AI-powered assistance for common coding tasks.
@@ -16,7 +18,7 @@ Clicking the lightbulb, right-clicking and selecting "Saarthi", or using the key
 
 Saarthi provides the following Code Actions:
 
-*   **Add to Context:** Quickly adds the selected code to your chat with Roo, including the filename and line numbers so Roo knows exactly where the code is from. It's listed first in the menu for easy access.
+*   **Add to Context:** Quickly adds the selected code to your chat with Saarthi, including the filename and line numbers so Saarthi knows exactly where the code is from. It's listed first in the menu for easy access.
 *   **Explain Code:** Asks Saarthi to explain the selected code.
 *   **Improve Code:** Asks Saarthi to suggest improvements to the selected code.
 
@@ -24,7 +26,7 @@ Saarthi provides the following Code Actions:
 
 The **Add to Context** action is listed first in the Code Actions menu so you can quickly add code snippets to your conversation. When you use it, Saarthi includes the filename and line numbers along with the code.
 
-This helps Roo understand the exact context of your code within the project, allowing it to provide more relevant and accurate assistance.
+This helps Saarthi understand the exact context of your code within the project, allowing it to provide more relevant and accurate assistance.
 
 **Example Chat Input:**
 

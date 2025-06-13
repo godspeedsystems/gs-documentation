@@ -1,6 +1,8 @@
 ---
 sidebar_label: DeepSeek
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using DeepSeek With Saarthi
 

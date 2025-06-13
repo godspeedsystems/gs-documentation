@@ -1,28 +1,13 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Customizing Modes
 
-Saarthi allows you to create **custom modes** to tailor Roo's behavior to specific tasks or workflows. Custom modes can be either **global** (available across all projects) or **project-specific** (defined within a single project).
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-  <iframe
-    src="https://www.youtube.com/embed/qgqceCuhlRA"
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    }}
-    frameBorder="0"
-    allow="autoplay; encrypted-media"
-    allowFullScreen
-    title="Custom Modes Overview Video"
-  ></iframe>
-</div>
+Saarthi allows you to create **custom modes** to tailor Saarthi's behavior to specific tasks or workflows. Custom modes can be either **global** (available across all projects) or **project-specific** (defined within a single project).
 
 <br />
 
 :::tip Sticky Models for Efficient Workflow
-Each mode—including custom ones—features **Sticky Models**. This means Saarthi automatically remembers and selects the last model you used with a particular mode. This lets you assign different preferred models to different tasks without constant reconfiguration, as Roo switches between models when you change modes.
+Each mode—including custom ones—features **Sticky Models**. This means Saarthi automatically remembers and selects the last model you used with a particular mode. This lets you assign different preferred models to different tasks without constant reconfiguration, as Saarthi switches between models when you change modes.
 :::
 
 ## Why Use Custom Modes?
@@ -32,34 +17,34 @@ Each mode—including custom ones—features **Sticky Models**. This means Saart
 *   **Experimentation:** Safely experiment with different prompts and configurations without affecting other modes.
 *   **Team Collaboration:** Share custom modes with your team to standardize workflows.
 
-<img src="/img/custom-modes/custom-modes-3.png" alt="Overview of custom modes interface" width="500" />
+<img src="/static/img/custom-modes/custom-modes-3.png" alt="Overview of custom modes interface" width="500" />
 
     *Saarthi's interface for creating and managing custom modes.*
 
 ## What's Included in a Custom Mode?
 
-Custom modes are defined by several key properties. Understanding these concepts will help you tailor Roo's behavior effectively.
+Custom modes are defined by several key properties. Understanding these concepts will help you tailor Saarthi's behavior effectively.
 
 | UI Field / YAML Property                 | Conceptual Description                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Slug (`slug`)                            | A **unique internal identifier** for the mode. It's used by Saarthi to reference the mode, especially for associating [mode-specific instruction files](#mode-specific-instructions-via-filesdirectories).                                                                                                                                                                                                   |
 | Name (`name`)                            | The **display name** for the mode as it appears in the Saarthi user interface. This should be human-readable and descriptive.                                                                                                                                                                                                                                                                               |
-| Role Definition (`roleDefinition`)       | Defines the **core identity and expertise** of the mode. This text is placed at the beginning of the system prompt.<br />- Its primary function is to define Roo's personality and behavior when this mode is active.<br />- The **first sentence** (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. <br />- **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode switching. In such cases, the first sentence of `roleDefinition` is less critical for this specific summarization task, though the entire `roleDefinition` is still used when the mode is active to guide its overall behavior. |
-| Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Roo to set them up, as detailed in the [Property Details for `groups`](#groups). |
-| When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Roo to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
-| Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
+| Role Definition (`roleDefinition`)       | Defines the **core identity and expertise** of the mode. This text is placed at the beginning of the system prompt.<br />- Its primary function is to define Saarthi's personality and behavior when this mode is active.<br />- The **first sentence** (up to the first period `.`) serves as a default concise summary for Saarthi to understand the mode's general purpose. <br />- **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode switching. In such cases, the first sentence of `roleDefinition` is less critical for this specific summarization task, though the entire `roleDefinition` is still used when the mode is active to guide its overall behavior. |
+| Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Saarthi to set them up, as detailed in the [Property Details for `groups`](#groups). |
+| When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Saarthi to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Saarthi, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Saarthi decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Saarthi to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
+| Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Saarthi's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
 
 ## Methods for Creating and Configuring Custom Modes
 
 You can create and configure custom modes in several ways:
 
-### 1. Ask Roo! (Recommended)
+### 1. Ask Saarthi! (Recommended)
 
 You can quickly create a basic custom mode by asking Saarthi to do it for you. For example:
 ```
 Create a new mode called "Documentation Writer". It should only be able to read files and write Markdown files.
 ```
-Saarthi will guide you through the process, prompting for necessary information for the properties described in the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table. Roo will create the mode using the preferred YAML format. For fine-tuning or making specific adjustments later, you can use the Prompts tab or manual configuration.
+Saarthi will guide you through the process, prompting for necessary information for the properties described in the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table. Saarthi will create the mode using the preferred YAML format. For fine-tuning or making specific adjustments later, you can use the Prompts tab or manual configuration.
 
 ### 2. Using the Prompts Tab
 
@@ -67,24 +52,24 @@ Saarthi will guide you through the process, prompting for necessary information 
 2.  **Create New Mode:** Click the <Codicon name="add" /> button to the right of the Modes heading.
 3.  **Fill in Fields:**
 
-<img src="/img/custom-modes/custom-modes-4.png" alt="Custom mode creation interface in the Prompts tab" width="600" />
+<img src="/static/img/custom-modes/custom-modes-4.png" alt="Custom mode creation interface in the Prompts tab" width="600" />
 
     *The custom mode creation interface showing fields for name, slug, save location, role definition, available tools, custom instructions.*
 
     The interface provides fields for `Name`, `Slug`, `Save Location`, `Role Definition`, `When to Use (optional)`, `Available Tools`, and `Custom Instructions`. After filling these, click the "Create Mode" button. Saarthi will save the new mode in YAML format.
 
-*Refer to the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table for conceptual explanations of each property. File type restrictions for the "edit" tool group can be added by asking Roo or through manual YAML/JSON configuration.*
+*Refer to the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table for conceptual explanations of each property. File type restrictions for the "edit" tool group can be added by asking Saarthi or through manual YAML/JSON configuration.*
 
 ### 3. Manual Configuration (YAML & JSON)
 
 You can directly edit the configuration files to create or modify custom modes. This method offers the most control over all properties. Saarthi now supports both YAML (preferred) and JSON formats.
 
 *   **Global Modes:** Edit the `custom_modes.yaml` (preferred) or `custom_modes.json` file. Access it via **Prompts Tab** > <Codicon name="settings-gear" /> (Settings Menu icon next to "Global Prompts") > "Edit Global Modes".
-*   **Project Modes:** Edit the `.roomodes` file (which can be YAML or JSON) in your project root. Access it via **Prompts Tab** > <Codicon name="settings-gear" /> (Settings Menu icon next to "Project Prompts") > "Edit Project Modes".
+*   **Project Modes:** Edit the `.saarthimodes` file (which can be YAML or JSON) in your project root. Access it via **Prompts Tab** > <Codicon name="settings-gear" /> (Settings Menu icon next to "Project Prompts") > "Edit Project Modes".
 
 These files define an array/list of custom modes.
 
-**YAML Example (`custom_modes.yaml` or `.roomodes`):**
+**YAML Example (`custom_modes.yaml` or `.saarthimodes`):**
 ```yaml
 customModes:
   - slug: docs-writer
@@ -103,7 +88,7 @@ customModes:
     # ... other properties
 ```
 
-**JSON Alternative (`custom_modes.json` or `.roomodes`):**
+**JSON Alternative (`custom_modes.json` or `.saarthimodes`):**
 ```json
 {
   "customModes": [
@@ -146,7 +131,7 @@ customModes:
 ##### `roleDefinition`
 *   **Purpose:** Detailed description of the mode's role, expertise, and personality.
 *   **Placement:** This text is placed at the beginning of the system prompt when the mode is active.
-*   **Important First Sentence:** The first sentence (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode selection.
+*   **Important First Sentence:** The first sentence (up to the first period `.`) serves as a default concise summary for Saarthi to understand the mode's general purpose. **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode selection.
 *   *YAML Example (multi-line):*
     ```yaml
     roleDefinition: >-
@@ -185,9 +170,9 @@ customModes:
     ```
 
 ##### `whenToUse`
-*   **Purpose:** (Optional) Provides guidance for Roo to understand what this mode does. Used by the Orchestrator mode and for mode switching.
+*   **Purpose:** (Optional) Provides guidance for Saarthi to understand what this mode does. Used by the Orchestrator mode and for mode switching.
 *   **Format:** A string describing ideal scenarios or task types for this mode.
-*   **Usage:** If populated, Roo uses this description. Otherwise, the first sentence of `roleDefinition` is used.
+*   **Usage:** If populated, Saarthi uses this description. Otherwise, the first sentence of `roleDefinition` is used.
 *   *YAML Example:* `whenToUse: This mode is best for refactoring Python code.`
 *   *JSON Example:* `"whenToUse": "This mode is best for refactoring Python code."`
 
@@ -244,7 +229,7 @@ YAML is now the preferred format for defining custom modes due to several advant
 *   **Less Punctuation:** YAML generally requires less punctuation (like commas and braces) compared to JSON, reducing syntax errors.
 *   **Editor Support:** Most modern code editors provide excellent syntax highlighting and validation for YAML files, further enhancing readability and reducing errors.
 
-While JSON is still fully supported, new modes created via the UI or by asking Roo will default to YAML.
+While JSON is still fully supported, new modes created via the UI or by asking Saarthi will default to YAML.
 
 #### Tips for Working with YAML
 
@@ -263,18 +248,18 @@ When editing YAML manually, keep these points in mind:
     3.  No `custom_modes.yaml` file exists yet.
     The migration process reads the existing JSON file, converts it to YAML format, creates a new `custom_modes.yaml` file, and preserves the original JSON file (e.g., by renaming it) for rollback purposes. If `custom_modes.yaml` already exists, it will be used, and no automatic migration of `custom_modes.json` will occur.
 
-*   **Project Modes (`.roomodes`):**
-    *   **No automatic startup migration:** Unlike global modes, project-specific `.roomodes` files are not automatically converted from JSON to YAML simply when Saarthi starts.
-    *   **Format Detection:** Saarthi can read `.roomodes` files in either YAML or JSON format.
-    *   **Conversion on UI Edit:** If you edit a project-specific mode through the Saarthi UI (e.g., via the Prompts Tab), and the existing `.roomodes` file is in JSON format, Saarthi will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
-    *   **Manual Conversion:** If you want to convert an existing `.roomodes` JSON file to YAML without making UI edits, you'll need to do this manually. You can:
-        1.  Open your existing JSON `.roomodes` file.
-        2.  Convert its content to YAML (you can ask Roo to help with this, or use an online converter).
-        3.  Replace the content of your `.roomodes` file with the new YAML content, or rename the old file (e.g., `.roomodes.json.bak`) and save the new content into a file named `.roomodes`.
+*   **Project Modes (`.saarthimodes`):**
+    *   **No automatic startup migration:** Unlike global modes, project-specific `.saarthimodes` files are not automatically converted from JSON to YAML simply when Saarthi starts.
+    *   **Format Detection:** Saarthi can read `.saarthimodes` files in either YAML or JSON format.
+    *   **Conversion on UI Edit:** If you edit a project-specific mode through the Saarthi UI (e.g., via the Prompts Tab), and the existing `.saarthimodes` file is in JSON format, Saarthi will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
+    *   **Manual Conversion:** If you want to convert an existing `.saarthimodes` JSON file to YAML without making UI edits, you'll need to do this manually. You can:
+        1.  Open your existing JSON `.saarthimodes` file.
+        2.  Convert its content to YAML (you can ask Saarthi to help with this, or use an online converter).
+        3.  Replace the content of your `.saarthimodes` file with the new YAML content, or rename the old file (e.g., `.saarthimodes.json.bak`) and save the new content into a file named `.saarthimodes`.
         Ensure the resulting YAML is valid.
 
 :::tip
-For manual conversions of `.roomodes` files, you can use online JSON to YAML converters or ask Roo to help reformat a specific mode configuration from JSON to YAML. Always validate your YAML before saving.
+For manual conversions of `.saarthimodes` files, you can use online JSON to YAML converters or ask Saarthi to help reformat a specific mode configuration from JSON to YAML. Always validate your YAML before saving.
 :::
 ## Mode-Specific Instructions via Files/Directories
 
@@ -291,10 +276,10 @@ You can provide instructions for custom modes using dedicated files or directori
 └── ... (other project files)
 ```
 
-**Fallback Method: Single File (`.roorules-{mode-slug}`)**
+**Fallback Method: Single File (`.saarthirules-{mode-slug}`)**
 ```
 .
-├── .roorules-docs-writer  # Example for mode slug "docs-writer"
+├── .saarthirules-docs-writer  # Example for mode slug "docs-writer"
 └── ... (other project files)
 ```
 The directory method takes precedence if it exists and contains files.
@@ -314,14 +299,14 @@ There are two ways Saarthi loads these instructions, with a clear preference for
 *   **Content:** Place one or more files (e.g., `.md`, `.txt`) containing your instructions inside this directory. You can organize instructions further using subdirectories; Saarthi reads files recursively, appending their content to the system prompt in **alphabetical order** based on filename.
 *   **Loading:** All instruction files found within this directory structure will be loaded and applied to the specified mode.
 
-**2. Fallback (Backward Compatibility): File-Based Instructions (`.roorules-{mode-slug}`)**
+**2. Fallback (Backward Compatibility): File-Based Instructions (`.saarthirules-{mode-slug}`)**
 
-*   **Structure:** If the `.saarthi/rules-{mode-slug}/` directory **does not exist or is empty**, Saarthi will look for a single file named `.roorules-{mode-slug}` in your workspace root (e.g., `.roorules-docs-writer`).
+*   **Structure:** If the `.saarthi/rules-{mode-slug}/` directory **does not exist or is empty**, Saarthi will look for a single file named `.saarthirules-{mode-slug}` in your workspace root (e.g., `.saarthirules-docs-writer`).
 *   **Loading:** If found, the content of this single file will be loaded as instructions for the mode.
 
 **Precedence:**
 
-*   The **directory-based method (`.saarthi/rules-{mode-slug}/`) takes precedence**. If this directory exists and contains files, any corresponding root-level `.roorules-{mode-slug}` file will be **ignored** for that mode.
+*   The **directory-based method (`.saarthi/rules-{mode-slug}/`) takes precedence**. If this directory exists and contains files, any corresponding root-level `.saarthirules-{mode-slug}` file will be **ignored** for that mode.
 *   This ensures that projects migrated to the new directory structure behave predictably, while older projects using the single-file method remain compatible.
 
 **Combining with `customInstructions`:**
@@ -333,13 +318,13 @@ There are two ways Saarthi loads these instructions, with a clear preference for
 
 Mode configurations are applied in this order:
 
-1. Project-level mode configurations (from `.roomodes` - YAML or JSON)
+1. Project-level mode configurations (from `.saarthimodes` - YAML or JSON)
 2. Global mode configurations (from `custom_modes.yaml`, then `custom_modes.json` if YAML not found)
 3. Default mode configurations
 
 This means that project-specific configurations will override global configurations, which in turn override default configurations. You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
 
-*   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.saarthi/rules-{mode-slug}/` takes precedence over the single file `.roorules-{mode-slug}` found in the workspace root.
+*   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.saarthi/rules-{mode-slug}/` takes precedence over the single file `.saarthirules-{mode-slug}` found in the workspace root.
 
 ## Overriding Default Modes
 
@@ -393,7 +378,7 @@ To override a default mode for just one project:
 
 1. **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon.
 2. **Access Settings Menu:** Click the <Codicon name="settings-gear" /> icon next to "Project Prompts".
-3. **Edit Project Modes:** Select "Edit Project Modes" to edit the `.roomodes` file (YAML or JSON).
+3. **Edit Project Modes:** Select "Edit Project Modes" to edit the `.saarthimodes` file (YAML or JSON).
 4. **Add Your Override:**
 
 **YAML Example:**
@@ -446,13 +431,13 @@ When overriding default modes, test carefully. Consider backing up configuration
 Regular expressions (`fileRegex`) offer fine-grained control over file editing permissions.
 
 :::tip
-**Let Roo Build Your Regex Patterns**
+**Let Saarthi Build Your Regex Patterns**
 
-Instead of writing complex regex manually, ask Roo:
+Instead of writing complex regex manually, ask Saarthi:
 ```
 Create a regex pattern that matches JavaScript files but excludes test files
 ```
-Roo will generate the pattern. Remember to adapt it for YAML (usually single backslashes) or JSON (double backslashes).
+Saarthi will generate the pattern. Remember to adapt it for YAML (usually single backslashes) or JSON (double backslashes).
 :::
 
 When you specify `fileRegex`, you're creating a pattern that file paths must match.

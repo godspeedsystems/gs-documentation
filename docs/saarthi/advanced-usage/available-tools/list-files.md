@@ -1,6 +1,6 @@
 # list_files
 
-The `list_files` tool displays the files and directories within a specified location. It helps Roo understand your project structure and navigate your codebase effectively.
+The `list_files` tool displays the files and directories within a specified location. It helps Saarthi understand your project structure and navigate your codebase effectively.
 
 ## Parameters
 
@@ -15,11 +15,11 @@ This tool lists all files and directories in a specified location, providing a c
 
 ## When is it used?
 
-- When Roo needs to understand your project structure
-- When Roo explores what files are available before reading specific ones
-- When Roo maps a codebase to better understand its organization
+- When Saarthi needs to understand your project structure
+- When Saarthi explores what files are available before reading specific ones
+- When Saarthi maps a codebase to better understand its organization
 - Before using more targeted tools like `read_file` or `search_files`
-- When Roo needs to check for specific file types (like configuration files) across a project
+- When Saarthi needs to check for specific file types (like configuration files) across a project
 
 ## Key Features
 
@@ -101,10 +101,10 @@ src/index.ts
 
 ## Examples When Used
 
-- When starting a new task, Roo may list the project files to understand its structure before diving into specific code.
-- When asked to find specific types of files (like all JavaScript files), Roo first lists directories to know where to look.
-- When providing recommendations for code organization, Roo examines the current project structure first.
-- When setting up a new feature, Roo lists related directories to understand the project conventions.
+- When starting a new task, Saarthi may list the project files to understand its structure before diving into specific code.
+- When asked to find specific types of files (like all JavaScript files), Saarthi first lists directories to know where to look.
+- When providing recommendations for code organization, Saarthi examines the current project structure first.
+- When setting up a new feature, Saarthi lists related directories to understand the project conventions.
 
 ## Usage Examples
 

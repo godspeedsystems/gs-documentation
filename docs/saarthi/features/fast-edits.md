@@ -1,3 +1,5 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Diff/Fast Edits
 
 :::info Default Setting
@@ -16,22 +18,22 @@ Open the Saarthi pane settings by clicking the gear icon <Codicon name="gear" />
 
 When **Enable editing through diffs** is checked:
 
-    <img src="/img/fast-edits/fast-edits-2.png" alt="Saarthi settings showing Enable editing through diffs" width="500" />
-1.  **Faster File Editing**: Roo modifies files more quickly by applying only the necessary changes.
+    <img src="/static/img/fast-edits/fast-edits-2.png" alt="Saarthi settings showing Enable editing through diffs" width="500" />
+1.  **Faster File Editing**: Saarthi modifies files more quickly by applying only the necessary changes.
 2.  **Prevents Truncated Writes**: The system automatically detects and rejects attempts by the AI to write incomplete file content, which can happen with large files or complex instructions. This helps prevent corrupted files.
 
 :::note Disabling Fast Edits
-If you uncheck **Enable editing through diffs**, Roo will revert to writing the entire file content for every edit using the [`write_to_file`](/advanced-usage/available-tools/write-to-file) tool, instead of applying targeted changes with [`apply_diff`](/advanced-usage/available-tools/apply-diff). This full-write approach is generally slower for modifying existing files and leads to higher token usage.
+If you uncheck **Enable editing through diffs**, Saarthi will revert to writing the entire file content for every edit using the [`write_to_file`](/advanced-usage/available-tools/write-to-file) tool, instead of applying targeted changes with [`apply_diff`](/advanced-usage/available-tools/apply-diff). This full-write approach is generally slower for modifying existing files and leads to higher token usage.
 :::
 
 ## Match Precision
 
 This slider controls how closely the code sections identified by the AI must match the actual code in your file before a change is applied.
 
-    <img src="/img/fast-edits/fast-edits-4.png" alt="Saarthi settings showing Enable editing through diffs checkbox and Match precision slider" width="500" />
+    <img src="/static/img/fast-edits/fast-edits-4.png" alt="Saarthi settings showing Enable editing through diffs checkbox and Match precision slider" width="500" />
 
 *   **100% (Default)**: Requires an exact match. This is the safest option, minimizing the risk of incorrect changes.
-*   **Lower Values (80%-99%)**: Allows for "fuzzy" matching. Roo can apply changes even if the code section has minor differences from what the AI expected. This can be useful if the file has been slightly modified, but **increases the risk** of applying changes in the wrong place.
+*   **Lower Values (80%-99%)**: Allows for "fuzzy" matching. Saarthi can apply changes even if the code section has minor differences from what the AI expected. This can be useful if the file has been slightly modified, but **increases the risk** of applying changes in the wrong place.
 
 **Use values below 100% with extreme caution.** Lower precision might be necessary occasionally, but always review the proposed changes carefully.
 

@@ -1,6 +1,8 @@
 ---
 sidebar_label: OpenAI Compatible
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using OpenAI Compatible Providers With Saarthi
 

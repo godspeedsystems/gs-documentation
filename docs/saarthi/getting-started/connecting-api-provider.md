@@ -1,7 +1,7 @@
 ---
 sidebar_label: Connecting To AI Provider
 ---
-import SaarthiIcon from '@site/src/components/SaarthiIcon';
+<!-- import SaarthiIcon from '@site/src/components/SaarthiIcon'; -->
 
 # Connecting Your First AI Provider
 
@@ -54,7 +54,7 @@ For direct access to specific models from their original providers, with full ac
 3. Navigate to the [API keys section](https://platform.openai.com/api-keys) and create a new key
 4. **Important:** Copy your API key immediately as it won't be displayed again
 
-<!-- <img src="/img/connecting-api-provider/connecting-api-provider-6.png" alt="OpenAI API keys page" width="600" /> -->
+<!-- <img src="../../../static/img/connecting-api-provider/connecting-api-provider-6.png" alt="OpenAI API keys page" width="600" /> -->
 
 *OpenAI platform with "Create new secret key" button. Name your key and copy it immediately after creation.*
 
@@ -62,7 +62,7 @@ For direct access to specific models from their original providers, with full ac
 
 Once you have your API key:
 
-1. Open the Saarthi sidebar by clicking the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar
+1. Open the Saarthi sidebar by clicking the Saarthi icon in the VS Code Activity Bar
 2. In the welcome screen, select your API provider from the dropdown
 3. Paste your API key into the appropriate field
 4. Select your model:

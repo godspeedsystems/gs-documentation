@@ -44,6 +44,6 @@ MCP provides a standardized way for AI systems to interact with external tools a
 Ready to dig deeper? Check out these guides:
 
 - [MCP Overview](/saarthi/features/mcp/overview) - A quick glance at the MCP documentation structure
-- [Using MCP in Saarthi](/saarthi/features/mcp/using-mcp-in-saarthi) - Get started with MCP in Roo, including creating simple servers
+- [Using MCP in Saarthi](/saarthi/features/mcp/using-mcp-in-saarthi) - Get started with MCP in Saarthi, including creating simple servers
 - [MCP vs API](/saarthi/features/mcp/mcp-vs-api) - Technical advantages compared to traditional APIs
 - [STDIO & Streamable HTTP & SSE Transports](/saarthi/features/mcp/server-transports) - Local vs. hosted deployment models

@@ -1,10 +1,10 @@
 
 # read_file
 
-The `read_file` tool examines the contents of files in a project. It allows Roo to understand code, configuration files, and documentation to provide better assistance.
+The `read_file` tool examines the contents of files in a project. It allows Saarthi to understand code, configuration files, and documentation to provide better assistance.
 
 :::info Multi-File Support
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
+When the [Concurrent File Reads](../../features/experimental/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
 :::
 
 ## Parameters
@@ -19,7 +19,7 @@ The tool accepts parameters in two formats depending on your configuration:
 
 ### Enhanced Format (Multi-File - Experimental)
 
-When [Concurrent File Reads](/features/experimental/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
+When [Concurrent File Reads](../../features/experimental/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
 
 - `args` (required): Container for multiple file specifications
   - `file` (required): Individual file specification
@@ -32,10 +32,10 @@ This tool reads the content of a specified file and returns it with line numbers
 
 ## When is it used?
 
-- When Roo needs to understand existing code structure
-- When Roo needs to analyze configuration files
-- When Roo needs to extract information from text files
-- When Roo needs to see code before suggesting changes
+- When Saarthi needs to understand existing code structure
+- When Saarthi needs to analyze configuration files
+- When Saarthi needs to extract information from text files
+- When Saarthi needs to see code before suggesting changes
 - When specific line numbers need to be referenced in discussions
 
 ## Key Features
@@ -51,7 +51,7 @@ This tool reads the content of a specified file and returns it with line numbers
 
 ## Multi-File Capabilities (Experimental)
 
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
+When the [Concurrent File Reads](../../features/experimental/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
 
 ### Batch Processing
 - Read up to 100 files in a single request (configurable, default 15)
@@ -115,9 +115,9 @@ The tool uses a clear decision hierarchy to determine how to read a file:
 
 ## Examples When Used
 
-- When asked to explain or improve code, Roo first reads the relevant files to understand the current implementation.
-- When troubleshooting configuration issues, Roo reads config files to identify potential problems.
-- When working with documentation, Roo reads existing docs to understand the current content before suggesting improvements.
+- When asked to explain or improve code, Saarthi first reads the relevant files to understand the current implementation.
+- When troubleshooting configuration issues, Saarthi reads config files to identify potential problems.
+- When working with documentation, Saarthi reads existing docs to understand the current content before suggesting improvements.
 
 ## Usage Examples
 
@@ -219,7 +219,7 @@ Error: Access denied to file '.env' due to .saarthiignore rules.
 
 ## Multi-File Examples (Experimental)
 
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
+When the [Concurrent File Reads](../../features/experimental/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
 
 ### Reading Multiple Complete Files
 
@@ -374,7 +374,7 @@ When requesting multiple files, you'll see a batch approval interface that allow
 - **Individual Control**: Override decisions for specific files
 - **File Preview**: Click file headers to open them in your editor
 
-The interface displays each file path clearly, making it easy to understand what Roo wants to access before granting permission.
+The interface displays each file path clearly, making it easy to understand what Saarthi wants to access before granting permission.
 
 ## Backward Compatibility
 

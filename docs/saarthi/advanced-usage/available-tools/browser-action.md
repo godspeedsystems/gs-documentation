@@ -1,6 +1,6 @@
 # browser_action
 
-The `browser_action` tool enables web automation and interaction via a Puppeteer-controlled browser. It allows Roo to launch browsers, navigate to websites, click elements, type text, and scroll pages with visual feedback through screenshots.
+The `browser_action` tool enables web automation and interaction via a Puppeteer-controlled browser. It allows Saarthi to launch browsers, navigate to websites, click elements, type text, and scroll pages with visual feedback through screenshots.
 
 ## Parameters
 
@@ -19,11 +19,11 @@ The tool accepts these parameters:
 
 ## What It Does
 
-This tool creates an automated browser session that Roo can control to navigate websites, interact with elements, and perform tasks that require browser automation. Each action provides a screenshot of the current state, enabling visual verification of the process.
+This tool creates an automated browser session that Saarthi can control to navigate websites, interact with elements, and perform tasks that require browser automation. Each action provides a screenshot of the current state, enabling visual verification of the process.
 
 ## When is it used?
 
-- When Roo needs to interact with web applications or websites
+- When Saarthi needs to interact with web applications or websites
 - When testing user interfaces or web functionality
 - When capturing screenshots of web pages
 - When demonstrating web workflows visually
@@ -66,7 +66,7 @@ The tool operates in two distinct modes:
 - Browser sessions must be explicitly closed before using other tools
 - Browser window has configurable dimensions (default 900x600)
 - Cannot directly interact with browser DevTools
-- Browser sessions are temporary and not persistent across Roo restarts
+- Browser sessions are temporary and not persistent across Saarthi restarts
 - Works only with Chrome/Chromium browsers, not Firefox or Safari
 - Local mode has no access to existing cookies; remote mode requires Chrome with debugging enabled
 
@@ -106,10 +106,10 @@ Browser interactions must follow this specific sequence:
 
 ## Examples When Used
 
-- When creating a web form submission process, Roo launches a browser, navigates to the form, fills out fields with the `type` action, and clicks submit.
-- When testing a responsive website, Roo navigates to the site and uses scroll actions to examine different sections.
-- When capturing screenshots of a web application, Roo navigates through different pages and takes screenshots at each step.
-- When demonstrating an e-commerce checkout flow, Roo simulates the entire process from product selection to payment confirmation.
+- When creating a web form submission process, Saarthi launches a browser, navigates to the form, fills out fields with the `type` action, and clicks submit.
+- When testing a responsive website, Saarthi navigates to the site and uses scroll actions to examine different sections.
+- When capturing screenshots of a web application, Saarthi navigates through different pages and takes screenshots at each step.
+- When demonstrating an e-commerce checkout flow, Saarthi simulates the entire process from product selection to payment confirmation.
 
 ## Usage Examples
 

@@ -1,5 +1,6 @@
 import React from 'react';
-// import '@vscode/codicons/dist/codicon.css';
+import { JSX } from 'react';
+import '@vscode/codicons/dist/codicon.css';
 
 interface CodiconProps {
   name: string;

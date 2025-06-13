@@ -2,6 +2,8 @@
 sidebar_label: OpenAI
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using OpenAI With Saarthi
 
 Saarthi supports accessing models directly through the official OpenAI API.

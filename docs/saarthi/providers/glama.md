@@ -2,6 +2,8 @@
 sidebar_label: Glama
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using Glama With Saarthi
 
 Glama provides access to a variety of language models through a unified API, including models from Anthropic, OpenAI, and others.  It offers features like prompt caching and cost tracking.

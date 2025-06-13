@@ -2,6 +2,8 @@
 sidebar_label: Mistral AI
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using Mistral AI With Saarthi
 
 Saarthi supports accessing models through the Mistral AI API, including both standard Mistral models and the code-specialized Codestral model.

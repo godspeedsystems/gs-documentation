@@ -1,3 +1,5 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Checkpoints
 
 Checkpoints automatically version your workspace files during Saarthi tasks, enabling non-destructive exploration of AI suggestions and easy recovery from unwanted changes.
@@ -8,23 +10,6 @@ Checkpoints let you:
 - Compare different implementation approaches
 - Revert to previous project states without losing work
 
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-  <iframe title="Checkpoints Tutorial Video"
-    src="https://www.youtube.com/embed/Ho30nyY332E"
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    }}
-    frameBorder="0"
-    allow="autoplay; encrypted-media"
-    allowFullScreen
-  ></iframe>
-</div>
-
-<div style={{ marginTop: '20px' }}></div>
 
 :::info Important Notes
 - **Checkpoints are enabled by default.**
@@ -41,7 +26,7 @@ Access checkpoint settings in Saarthi settings under the "Checkpoints" section:
 1. Open Settings by clicking the gear icon <Codicon name="gear" /> → Checkpoints
 2. Check or uncheck the "Enable automatic checkpoints" checkbox
 
-   <img src="/img/checkpoints/checkpoints.png" alt="Checkpoint settings in Saarthi configuration" width="500" />
+   <img src="/static/img/checkpoints/checkpoints.png" alt="Checkpoint settings in Saarthi configuration" width="500" />
 
 ## How Checkpoints Work
 
@@ -62,10 +47,10 @@ Checkpoints are integrated directly into your workflow through the chat interfac
 Checkpoints appear directly in your chat history in two forms:
 
 - **Initial checkpoint** marks your starting project state
-   <img src="/img/checkpoints/checkpoints-1.png" alt="Initial checkpoint indicator in chat" width="500" />
+   <img src="/static/img/checkpoints/checkpoints-1.png" alt="Initial checkpoint indicator in chat" width="500" />
 
 - **Regular checkpoints** appear after file modifications or command execution
-   <img src="/img/checkpoints/checkpoints-2.png" alt="Regular checkpoint indicator in chat" width="500" />
+   <img src="/static/img/checkpoints/checkpoints-2.png" alt="Regular checkpoint indicator in chat" width="500" />
 
 Each checkpoint provides two primary functions:
 
@@ -76,7 +61,7 @@ To compare your current workspace with a previous checkpoint:
 1. Locate the checkpoint in your chat history
 2. Click the checkpoint's `View Differences` button
 
-   <img src="/img/checkpoints/checkpoints-6.png" alt="View Differences button interface" width="100" />
+   <img src="/static/img/checkpoints/checkpoints-6.png" alt="View Differences button interface" width="100" />
 
 3. Review the differences in the comparison view:
    - Added lines are highlighted in green
@@ -85,7 +70,7 @@ To compare your current workspace with a previous checkpoint:
    - Renamed and moved files are tracked with their path changes
    - New or deleted files are clearly marked
 
-<img src="/img/checkpoints/checkpoints-3.png" alt="View differences option for checkpoints" width="800" />
+<img src="/static/img/checkpoints/checkpoints-3.png" alt="View differences option for checkpoints" width="800" />
 
 ### Restoring Checkpoints
 
@@ -93,16 +78,16 @@ To restore a project to a previous checkpoint state:
 
 1. Locate the checkpoint in your chat history
 2. Click the checkpoint's `Restore Checkpoint` button
-   <img src="/img/checkpoints/checkpoints-7.png" alt="Restore checkpoint button interface" width="100" />
+   <img src="/static/img/checkpoints/checkpoints-7.png" alt="Restore checkpoint button interface" width="100" />
 3. Choose one of these restoration options:
    
-   <img src="/img/checkpoints/checkpoints-4.png" alt="Restore checkpoint option" width="300" />
+   <img src="/static/img/checkpoints/checkpoints-4.png" alt="Restore checkpoint option" width="300" />
 
    - **Restore Files Only** - Reverts only workspace files to checkpoint state without modifying conversation history. Ideal for comparing alternative implementations while maintaining chat context, allowing you to seamlessly switch between different project states. This option does not require confirmation and lets you quickly switch between different implementations.
    
    - **Restore Files & Task** - Reverts both workspace files AND removes all subsequent conversation messages. Use when you want to completely reset both your code and conversation back to the checkpoint's point in time. This option requires confirmation in a dialog as it cannot be undone.
 
-      <img src="/img/checkpoints/checkpoints-9.png" alt="Confirmation dialog for restoring checkpoint with files & task" width="300" />
+      <img src="/static/img/checkpoints/checkpoints-9.png" alt="Confirmation dialog for restoring checkpoint with files & task" width="300" />
 
 ### Limitations and Considerations
 
@@ -169,13 +154,13 @@ The checkpoint system respects `.gitignore` patterns in your workspace:
 - Excluded files won't appear in checkpoint diffs
 - Standard Git ignore rules apply when staging file changes
 
-#### .rooignore Behavior
+#### .saarthiignore Behavior
 
-The `.rooignore` file (which controls AI access to files) is separate from checkpoint tracking:
-- Files excluded by `.rooignore` but not by `.gitignore` will still be checkpointed
+The `.saarthiignore` file (which controls AI access to files) is separate from checkpoint tracking:
+- Files excluded by `.saarthiignore` but not by `.gitignore` will still be checkpointed
 - Changes to AI-inaccessible files can still be restored through checkpoints
 
-This separation is intentional, as `.rooignore` limits which files the AI can access, not which files should be tracked for version history.
+This separation is intentional, as `.saarthiignore` limits which files the AI can access, not which files should be tracked for version history.
 
 #### Nested Git Repositories
 

@@ -1,6 +1,8 @@
 ---
 sidebar_label: Google Gemini
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using Google Gemini With Saarthi
 

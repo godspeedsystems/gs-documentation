@@ -1,10 +1,11 @@
-import SaarthiIcon from '@site/src/components/SaarthiIcon';
+<!-- import SaarthiIcon from '@site/src/components/SaarthiIcon'; -->
+import Codicon from '@site/src/components/Codicon';
 
 # Model Temperature
 
 Temperature controls the randomness of AI model outputs. Adjusting this setting optimizes results for different tasks - from precise code generation to creative brainstorming. Temperature is one of the most powerful parameters for controlling AI behavior. A well-tuned temperature setting can dramatically improve the quality and appropriateness of responses for specific tasks.
 
-<img src="/img/model-temperature/model-temperature.gif" alt="Animation showing temperature slider adjustment" width="100%" />
+<img src="/static/img/model-temperature/model-temperature.gif" alt="Animation showing temperature slider adjustment" width="100%" />
 
 ## What is Temperature?
 
@@ -42,13 +43,13 @@ These are starting points – it's important to [experiment with different setti
 
 ## How to Adjust Temperature
 
-1.  **Open the Saarthi Panel:** Click the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar
+1.  **Open the Saarthi Panel:** Click the Saarthi icon in the VS Code Activity Bar
 2.  **Open Settings:** Click the <Codicon name="gear" /> icon in the top right corner
 3.  **Find Temperature Control:** Navigate to the Providers section
 4.  **Enable Custom Temperature:** Check the "Use custom temperature" box
 5.  **Set Your Value:** Adjust the slider to your preferred value
 
-    <img src="/img/model-temperature/model-temperature.png" alt="Temperature setting in Saarthi settings panel" width="550" />
+    <img src="/static/img/model-temperature/model-temperature.png" alt="Temperature setting in Saarthi settings panel" width="550" />
     *Temperature slider in Saarthi settings panel*
 
 ## Using API Configuration Profiles for Temperature

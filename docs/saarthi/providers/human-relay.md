@@ -1,3 +1,6 @@
+import Codicon from '@site/src/components/Codicon';
+
+
 # Human Relay Provider
 
 The Human Relay provider allows you to use Saarthi with web-based AI models like ChatGPT or Claude without needing an API key. Instead, it relies on you to manually relay messages between Saarthi and the AI's web interface.

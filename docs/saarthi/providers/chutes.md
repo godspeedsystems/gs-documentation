@@ -2,6 +2,8 @@
 sidebar_label: Chutes AI
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using Chutes AI With Saarthi
 
 Chutes.ai offers free API access to several large language models (LLMs), allowing developers to integrate and experiment with these models without immediate financial commitment. They provide access to a curated set of open-source and proprietary language models, often with a focus on specific capabilities or regional language support.

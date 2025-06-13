@@ -1,6 +1,7 @@
 ---
 sidebar_label: AWS Bedrock
 ---
+import Codicon from '@site/src/components/Codicon';
 
 # Using AWS Bedrock With Saarthi
 

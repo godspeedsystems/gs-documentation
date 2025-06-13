@@ -1,6 +1,8 @@
 ---
 sidebar_label: GCP Vertex AI
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using GCP Vertex AI With Saarthi
 

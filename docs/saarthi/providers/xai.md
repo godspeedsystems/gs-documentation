@@ -2,6 +2,8 @@
 sidebar_label: xAI (Grok)
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using xAI (Grok) With Saarthi
 
 xAI is the company behind Grok, a large language model known for its conversational abilities and large context window. Grok models are designed to provide helpful, informative, and contextually relevant responses.

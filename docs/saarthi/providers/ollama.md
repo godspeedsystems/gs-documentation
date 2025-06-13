@@ -1,7 +1,8 @@
 ---
 sidebar_label: Ollama
 ---
-import SaarthiIcon from '@site/src/components/SaarthiIcon';
+<!-- import SaarthiIcon from '@site/src/components/SaarthiIcon'; -->
+import Codicon from '@site/src/components/Codicon'; 
 
 # Using Ollama With Saarthi
 
@@ -60,7 +61,8 @@ Saarthi supports running models locally using Ollama. This provides privacy, off
     ```
 
 4.  **Configure Saarthi:**
-    *   Open the Saarthi sidebar (<SaarthiIcon /> icon).
+    *   Open the Saarthi sidebar icon.
+    <!-- (<SaarthiIcon /> ) -->
     *   Click the settings gear icon (<Codicon name="gear" />).
     *   Select "ollama" as the API Provider.
     *   Enter the Model name from the previous step (e.g., `your_model_name`).

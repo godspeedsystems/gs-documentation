@@ -16,8 +16,8 @@ This tool writes content to a specified file, either creating a new file if it d
 
 ## When is it used?
 
-- When Roo needs to create a new file from scratch
-- When Roo needs to completely rewrite an existing file
+- When Saarthi needs to create a new file from scratch
+- When Saarthi needs to completely rewrite an existing file
 - When creating multiple files for a new project
 - When generating configuration files, documentation, or source code
 - When you need to review changes before they're applied
@@ -86,10 +86,10 @@ When the `write_to_file` tool is invoked, it follows this process:
 
 ## Examples When Used
 
-- When creating a new project, Roo generates multiple files but lets you review each before committing changes.
-- When setting up configuration files, Roo shows the proposed configuration in a diff view for approval.
-- When generating documentation, Roo creates markdown files but lets you make final adjustments in the diff view.
-- When developing a prototype, Roo shows complete source files in a diff view where you can fine-tune before saving.
+- When creating a new project, Saarthi generates multiple files but lets you review each before committing changes.
+- When setting up configuration files, Saarthi shows the proposed configuration in a diff view for approval.
+- When generating documentation, Saarthi creates markdown files but lets you make final adjustments in the diff view.
+- When developing a prototype, Saarthi shows complete source files in a diff view where you can fine-tune before saving.
 
 ## Usage Examples
 

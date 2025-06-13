@@ -13,7 +13,7 @@ Saarthi offers keyboard commands to enhance your workflow. This page focuses on 
 | Command | Description | Default Shortcut |
 |---------|-------------|-----------------|
 | `saarthi.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
-| `saarthi.focus` | Focus the Roo input box | None (configurable) |
+| `saarthi.focus` | Focus the Saarthi input box | None (configurable) |
 
 ### Key Benefits of Keyboard Commands
 
@@ -40,7 +40,7 @@ The `saarthi.acceptInput` command is a general-purpose input submission command.
 1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)
 2. Type "Preferences: Open Keyboard Shortcuts"
 3. In the search box, type "saarthi.acceptInput"
-4. Locate "Roo: Accept Input/Suggestion" in the results
+4. Locate "Saarthi: Accept Input/Suggestion" in the results
 5. Click the + icon to the left of the command
 6. Press your desired key combination (e.g., `Ctrl+Enter` or `Alt+Enter`)
 7. Press Enter to confirm
@@ -56,7 +56,7 @@ The `saarthi.acceptInput` command is a general-purpose input submission command.
 {
   "key": "ctrl+enter",  // or your preferred key combination
   "command": "saarthi.acceptInput",
-  "when": "rooViewFocused"  // This is a context condition that ensures the command only works when Roo is focused
+  "when": "rooViewFocused"  // This is a context condition that ensures the command only works when Saarthi is focused
 }
 ```
 
@@ -82,7 +82,7 @@ Choose a key combination that doesn't conflict with existing VS Code shortcuts:
 
 #### Quick Development Workflows
 
-- **Text Submission**: Send messages to Roo without moving your hands from the keyboard
+- **Text Submission**: Send messages to Saarthi without moving your hands from the keyboard
 - **Action Confirmations**: Accept operations like saving files, running commands, or applying diffs
 - **Multi-Step Processes**: Move quickly through steps that require confirmation or input
 - **Consecutive Tasks**: Chain multiple tasks together with minimal interruption
@@ -91,7 +91,7 @@ Choose a key combination that doesn't conflict with existing VS Code shortcuts:
 
 - **Vim/Neovim Workflows**: If you're coming from a Vim/Neovim background, maintain your keyboard-focused workflow
 - **IDE Integration**: Use alongside other VS Code keyboard shortcuts for a seamless experience
-- **Code Reviews**: Quickly accept suggestions when reviewing code with Roo
+- **Code Reviews**: Quickly accept suggestions when reviewing code with Saarthi
 - **Documentation Writing**: Submit text and accept formatting suggestions when generating documentation
 
 #### Accessibility Use Cases
@@ -112,30 +112,30 @@ The `saarthi.acceptInput` command was designed with accessibility in mind:
 
 ### Keyboard-Centric Workflows
 
-Here are some complete workflow examples showing how to effectively use keyboard shortcuts with Roo:
+Here are some complete workflow examples showing how to effectively use keyboard shortcuts with Saarthi:
 
 #### Development Workflow Example
 
 1. Open VS Code and navigate to your project
-2. Open Roo via the sidebar
+2. Open Saarthi via the sidebar
 3. Type your request: "Create a REST API endpoint for user registration"
-4. When Roo asks for framework preferences, use your `saarthi.acceptInput` shortcut to select the first suggestion
+4. When Saarthi asks for framework preferences, use your `saarthi.acceptInput` shortcut to select the first suggestion
 5. Continue using the shortcut to accept code generation suggestions
-6. When Roo offers to save the file, use the shortcut again to confirm
+6. When Saarthi offers to save the file, use the shortcut again to confirm
 7. Use VS Code's built-in shortcuts to navigate through the created files
 
 #### Code Review Workflow
 
 1. Select code you want to review and use VS Code's "Copy" command
-2. Ask Roo to review it: "Review this code for security issues"
-3. As Roo asks clarifying questions about the code context, use your shortcut to accept suggestions
-4. When Roo provides improvement recommendations, use the shortcut again to accept implementation suggestions
+2. Ask Saarthi to review it: "Review this code for security issues"
+3. As Saarthi asks clarifying questions about the code context, use your shortcut to accept suggestions
+4. When Saarthi provides improvement recommendations, use the shortcut again to accept implementation suggestions
 
 ### Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| Shortcut doesn't work | Ensure Roo is focused (click in the Roo panel first) |
+| Shortcut doesn't work | Ensure Saarthi is focused (click in the Saarthi panel first) |
 | Wrong suggestion selected | The command always selects the first (primary) button; use mouse if you need a different option |
 | Conflicts with existing shortcuts | Try a different key combination in VS Code keyboard settings |
 | No visual feedback when used | This is normal - the command silently activates the function without visual confirmation |
@@ -145,8 +145,8 @@ Here are some complete workflow examples showing how to effectively use keyboard
 
 The `saarthi.acceptInput` command is implemented as follows:
 
-- Command registered as `saarthi.acceptInput` with display title "Roo: Accept Input/Suggestion" in the command palette
-- When triggered, it sends an "acceptInput" message to the active Roo webview
+- Command registered as `saarthi.acceptInput` with display title "Saarthi: Accept Input/Suggestion" in the command palette
+- When triggered, it sends an "acceptInput" message to the active Saarthi webview
 - The webview determines the appropriate action based on the current UI state:
   - Clicks the primary action button if action buttons are visible and enabled
   - Sends the message if the text area is enabled and contains text/images
@@ -154,6 +154,6 @@ The `saarthi.acceptInput` command is implemented as follows:
 
 ### Limitations
 
-- Works only when the Roo interface is active
+- Works only when the Saarthi interface is active
 - Has no effect if no inputs or suggestions are currently available
 - Prioritizes the primary (first) button when multiple options are shown

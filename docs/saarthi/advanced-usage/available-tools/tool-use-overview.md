@@ -30,20 +30,20 @@ Certain tools are accessible regardless of the current mode:
 ## Available Tools
 
 ### Read Tools
-These tools help Roo understand your code and project:
+These tools help Saarthi understand your code and project:
 
 - [read_file](/advanced-usage/available-tools/read-file) - Examines the contents of files
 - [list_files](/advanced-usage/available-tools/list-files) - Maps your project's file structure
 - [list_code_definition_names](/advanced-usage/available-tools/list-code-definition-names) - Creates a structural map of your code
 
 ### Search Tools
-These tools help Roo find patterns and functionality across your codebase:
+These tools help Saarthi find patterns and functionality across your codebase:
 
 - [search_files](/advanced-usage/available-tools/search-files) - Finds patterns across multiple files using regex
 - [codebase_search](/advanced-usage/available-tools/codebase-search) - Performs semantic searches across your indexed codebase
 
 ### Edit Tools
-These tools help Roo make changes to your code:
+These tools help Saarthi make changes to your code:
 
 - [apply_diff](/advanced-usage/available-tools/apply-diff) - Makes precise, surgical changes to your code
 - [insert_content](/advanced-usage/available-tools/insert-content) - Adds new lines of content without modifying existing lines
@@ -51,17 +51,17 @@ These tools help Roo make changes to your code:
 - [write_to_file](/advanced-usage/available-tools/write-to-file) - Creates new files or completely rewrites existing ones
 
 ### Browser Tools
-These tools help Roo interact with web applications:
+These tools help Saarthi interact with web applications:
 
 - [browser_action](/advanced-usage/available-tools/browser-action) - Automates browser interactions
 
 ### Command Tools
-These tools help Roo execute commands:
+These tools help Saarthi execute commands:
 
 - [execute_command](/advanced-usage/available-tools/execute-command) - Runs system commands and programs
 
 ### MCP Tools
-These tools help Roo connect with external services:
+These tools help Saarthi connect with external services:
 
 - [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool) - Uses specialized external tools
 - [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) - Accesses external data sources
@@ -78,18 +78,18 @@ These tools help manage the conversation and task flow:
 
 ### Handling Complex Tasks
 
-For certain complex operations that require multiple steps, Roo doesn't just figure them out on the fly. Instead, it follows predefined, internal plans to ensure consistency and accuracy.
+For certain complex operations that require multiple steps, Saarthi doesn't just figure them out on the fly. Instead, it follows predefined, internal plans to ensure consistency and accuracy.
 
-A prime example is creating a new MCP server, identified internally by `create_mcp_server`. **This identifier does not represent a tool you will see being called.** Rather, when you ask Roo to create a server, it triggers this known, multi-step workflow.
+A prime example is creating a new MCP server, identified internally by `create_mcp_server`. **This identifier does not represent a tool you will see being called.** Rather, when you ask Saarthi to create a server, it triggers this known, multi-step workflow.
 
-This specific workflow is initiated by Roo using its internal `fetch_instructions` tool (with the task `create_mcp_server`) to retrieve a detailed plan. This plan then guides Roo to make calls to several standard, documented tools in sequence, such as:
+This specific workflow is initiated by Saarthi using its internal `fetch_instructions` tool (with the task `create_mcp_server`) to retrieve a detailed plan. This plan then guides Saarthi to make calls to several standard, documented tools in sequence, such as:
 
 *   [`execute_command`](/advanced-usage/available-tools/execute-command) for running setup scripts (e.g., `npx @modelcontextprotocol/create-server`).
 *   [`write_to_file`](/advanced-usage/available-tools/write-to-file) or [`apply_diff`](/advanced-usage/available-tools/apply-diff) for creating or modifying server code and configuration files.
 *   [`ask_followup_question`](/advanced-usage/available-tools/ask-followup-question) to gather necessary information like API keys from you.
 *   Other standard tools as needed for steps like determining file locations or updating configuration entries.
 
-So, while the overall task (like `create_mcp_server`) is complex, it's ultimately accomplished by intelligently orchestrating the standard tools available in your environment. This approach allows Roo to reliably perform complex operations by leveraging the tools documented here.
+So, while the overall task (like `create_mcp_server`) is complex, it's ultimately accomplished by intelligently orchestrating the standard tools available in your environment. This approach allows Saarthi to reliably perform complex operations by leveraging the tools documented here.
 
 ### When Tools Are Called
 

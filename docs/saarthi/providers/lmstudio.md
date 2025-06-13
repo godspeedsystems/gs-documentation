@@ -1,6 +1,8 @@
 ---
 sidebar_label: LM Studio
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using LM Studio With Saarthi
 
@@ -15,7 +17,7 @@ Saarthi supports running models locally using LM Studio.  LM Studio provides a u
     *   CodeLlama models (e.g., `codellama:7b-code`, `codellama:13b-code`, `codellama:34b-code`)
     *   Mistral models (e.g., `mistralai/Mistral-7B-Instruct-v0.1`)
     *   DeepSeek Coder models (e.g., `deepseek-coder:6.7b-base`)
-    * Any other model that is supported by Roo, or for which you can set the context window.
+    * Any other model that is supported by Saarthi, or for which you can set the context window.
 
     Look for models in the GGUF format.  LM Studio provides a search interface to find and download models.
 3.  **Start the Local Server:**

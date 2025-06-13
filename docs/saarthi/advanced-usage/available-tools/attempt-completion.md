@@ -1,6 +1,6 @@
 # attempt_completion
 
-The `attempt_completion` tool signals that Roo believes a task is complete and presents results to the user. It provides a summary of what was accomplished, optionally includes a command to demonstrate the result, and supports continued refinement through user feedback.
+The `attempt_completion` tool signals that Saarthi believes a task is complete and presents results to the user. It provides a summary of what was accomplished, optionally includes a command to demonstrate the result, and supports continued refinement through user feedback.
 
 ## Parameters
 
@@ -15,7 +15,7 @@ This tool marks the end of a task by presenting a final summary of what was acco
 
 ## When is it used?
 
-- When Roo believes the user's task has been completed
+- When Saarthi believes the user's task has been completed
 - When summarizing what changes or improvements were made
 - When demonstrating the current result with a command execution
 - When providing a checkpoint for user feedback on the solution
@@ -23,7 +23,7 @@ This tool marks the end of a task by presenting a final summary of what was acco
 
 ## Key Features
 
-- Provides a clear signal that Roo believes the task is complete
+- Provides a clear signal that Saarthi believes the task is complete
 - Summarizes accomplishments in a concise message
 - Optionally demonstrates results through command execution
 - Enables user feedback for further refinements
@@ -112,7 +112,7 @@ The `attempt_completion` tool has a unique feedback mechanism:
 
 - Results appear in a special "completion_result" UI format distinct from regular messages
 - The system waits for user feedback after presenting the result
-- Feedback is processed and returned to Roo for further refinements
+- Feedback is processed and returned to Saarthi for further refinements
 - This creates an iterative improvement cycle rather than ending the conversation
 - The UI includes special elements for providing feedback
 - Results serve as clear checkpoints in the conversation flow
@@ -125,11 +125,11 @@ When used within subtasks:
 
 ## Examples When Used
 
-- When creating a website, Roo presents the solution and uses `open index.html` to show the result. The user provides feedback, and Roo refines the design.
-- When implementing a feature, Roo summarizes the changes and their impact. The user requests additional test coverage, and Roo continues the task.
-- When fixing bugs, Roo explains what was fixed and how the solution addresses the root cause. The user confirms the fix works.
-- When setting up a development environment, Roo confirms all components are installed. The user requests additional configuration, and Roo continues.
-- When creating a data processing script, Roo summarizes the functionality. The user suggests performance improvements, and Roo optimizes the code.
+- When creating a website, Saarthi presents the solution and uses `open index.html` to show the result. The user provides feedback, and Saarthi refines the design.
+- When implementing a feature, Saarthi summarizes the changes and their impact. The user requests additional test coverage, and Saarthi continues the task.
+- When fixing bugs, Saarthi explains what was fixed and how the solution addresses the root cause. The user confirms the fix works.
+- When setting up a development environment, Saarthi confirms all components are installed. The user requests additional configuration, and Saarthi continues.
+- When creating a data processing script, Saarthi summarizes the functionality. The user suggests performance improvements, and Saarthi optimizes the code.
 
 ## Usage Examples
 

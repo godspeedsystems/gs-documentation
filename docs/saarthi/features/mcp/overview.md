@@ -5,7 +5,7 @@ sidebar_label: MCP Overview
 
 # Model Context Protocol (MCP)
 
-The Model Context Protocol (MCP) is a standard for extending Saarthi's capabilities by connecting to external tools and services. MCP servers provide additional tools and resources that help Roo accomplish tasks beyond its built-in capabilities, such as accessing databases, custom APIs, and specialized functionality.
+The Model Context Protocol (MCP) is a standard for extending Saarthi's capabilities by connecting to external tools and services. MCP servers provide additional tools and resources that help Saarthi accomplish tasks beyond its built-in capabilities, such as accessing databases, custom APIs, and specialized functionality.
 
 ## MCP Documentation
 

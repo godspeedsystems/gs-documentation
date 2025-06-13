@@ -4,7 +4,7 @@ sidebar_label: Welcome
 
 # Saarthi Docs
 
-Saarthi (formerly Roo Code) is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
+Saarthi is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
 
 ## What Can Saarthi Do?
 
@@ -18,13 +18,13 @@ Saarthi (formerly Roo Code) is an AI-powered autonomous coding agent that lives 
 ## Quick Start
 
 1. [Install Saarthi](./getting-started/installing.mdx)
-2. [Connect Your AI Provider](./getting-started/connecting-api-provider)
-3. [Try Your First Task](./getting-started/your-first-task)
+2. [Connect Your AI Provider](./getting-started/connecting-api-provider.md)
+3. [Try Your First Task](./getting-started/your-first-task.md)
 
 ## Key Features
 
 ### Multiple Modes
-Saarthi adapts to your needs with specialized [modes](./basic-usage/using-modes)):
+Saarthi adapts to your needs with specialized [modes](./saarthi/basic-usage/using-modes):
 - **Code Mode:** For general-purpose coding tasks
 - **Architect Mode:** For planning and technical leadership
 - **Ask Mode:** For answering questions and providing information

@@ -2,6 +2,7 @@
 title: Recommended MCP Servers
 sidebar_label: Recommended MCP Servers
 ---
+import Codicon from '@site/src/components/Codicon';
 
 # Recommended MCP Servers
 
@@ -67,7 +68,7 @@ We'll cover both below.
 
 Also on **Windows (cmd)** you may need to invoke `npx` through `cmd.exe`:
 
-<img src="/img/recommended-mcp-servers/context7-global-setup-fixed.png" alt="Adding Context7 to the global MCP settings" width="600" />
+<img src="/static/img/recommended-mcp-servers/context7-global-setup-fixed.png" alt="Adding Context7 to the global MCP settings" width="600" />
 
 ### 2. Project-level configuration
 
@@ -98,7 +99,7 @@ If you prefer to commit the configuration to your repository, create a file call
 }
 ```
 
-<img src="/img/recommended-mcp-servers/context7-project-setup-fixed.png" alt="Adding Context7 to a project-level MCP file" width="600" />
+<img src="/static/img/recommended-mcp-servers/context7-project-setup-fixed.png" alt="Adding Context7 to a project-level MCP file" width="600" />
 
 > When both global and project files define a server with the same name, **the project configuration wins**.
 
@@ -110,7 +111,7 @@ If you prefer to commit the configuration to your repository, create a file call
 2. You should now see **Context7** listed. Click the <Codicon name="activate" /> toggle to start it if it isn't already running.
 3. Saarthi will prompt you the first time a Context7 tool is invoked. Approve the request to continue.
 
-<img src="/img/recommended-mcp-servers/context7-running-fixed.png" alt="Context7 running in Saarthi" width="400" />
+<img src="/static/img/recommended-mcp-servers/context7-running-fixed.png" alt="Context7 running in Saarthi" width="400" />
 
 ---
 

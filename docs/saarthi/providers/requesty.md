@@ -2,6 +2,8 @@
 sidebar_label: Requesty
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using Requesty With Saarthi
 
 Saarthi supports accessing models through the [Requesty](https://www.requesty.ai/) AI platform. Requesty provides an easy and optimized API for interacting with 150+ large language models (LLMs).
@@ -33,7 +35,3 @@ Requesty provides access to a wide range of models.  Saarthi will automatically 
 - **Fallback policies**: Keep your LLM working for you with fallback policies when providers are down.
 * **Prompt Caching:** Some providers support prompt caching. [Search models with caching](https://app.requesty.ai/router/list).
 
-## Relevant resources
-
-- [Requesty Youtube channel](https://www.youtube.com/@requestyAI):
-- [Requesty Discord](https://requesty.ai/discord)

@@ -4,6 +4,8 @@ sidebar_label: Import/Export/Reset Settings
 description: Manage your Saarthi settings by exporting, importing, or resetting them to defaults.
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Import, Export, and Reset Settings
 
 Saarthi allows you to manage your configuration settings effectively through export, import, and reset options. These features are useful for backing up your setup, sharing configurations with others, or restoring default settings if needed.

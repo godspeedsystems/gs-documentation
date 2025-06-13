@@ -17,7 +17,7 @@ This tool applies targeted changes to existing files using fuzzy matching guided
 
 ## When is it used?
 
-- When Roo needs to make precise changes to existing code without rewriting entire files.
+- When Saarthi needs to make precise changes to existing code without rewriting entire files.
 - When refactoring specific sections of code while maintaining surrounding context.
 - When fixing bugs in existing code with surgical precision.
 - When implementing feature enhancements that modify only certain parts of a file.

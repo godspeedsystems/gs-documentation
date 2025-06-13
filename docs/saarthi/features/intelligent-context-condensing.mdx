@@ -5,25 +5,6 @@ import Codicon from '@site/src/components/Codicon';
 
 # Intelligent Context Condensing
 
-The Intelligent Context Condensing feature helps manage long conversations by summarizing earlier parts of the dialogue. This prevents important information from being lost when the context window nears its limit. This feature is **enabled by default**.
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-  <iframe
-    src="https://www.youtube.com/embed/9k8OAXlszak"
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    }}
-    frameBorder="0"
-    allow="autoplay; encrypted-media"
-    allowFullScreen
-  ></iframe>
-</div>
-
-<br />
 ## How It Works
 
 As your conversation with Saarthi grows, it might approach the context window limit of the underlying AI model. When this happens, older messages would typically be removed to make space. Intelligent Context Condensing aims to prevent this abrupt loss by:
@@ -48,7 +29,7 @@ Intelligent Context Condensing is **enabled by default** and offers several conf
     - **API Configuration for Context Condensing**: Choose which API configuration to use for condensing operations (defaults to your current active configuration)
     - **Custom Context Condensing Prompt**: Customize the system prompt used for context condensing operations
 
-<img src="/img/intelligent-context-condensing/intelligent-context-condensing.png" alt="Settings for Intelligent Context Condensing" width="600" />
+<img src="/static/img/intelligent-context-condensing/intelligent-context-condensing.png" alt="Settings for Intelligent Context Condensing" width="600" />
 *Intelligent Context Condensing configuration options: automatic triggering toggle, threshold slider, API configuration selection, and custom prompt customization.*
 ## Controlling and Understanding Context Condensing
 
@@ -60,7 +41,7 @@ Saarthi provides several ways to control and understand the Intelligent Context 
 *   **Custom Prompts:** Modify the system prompt used for condensing to better suit your workflow or to emphasize certain aspects of conversation summarization.
 *   **Manual Trigger:** A **Condense Context** button is available at the top of the task, positioned to the right of the context bar. This allows you to initiate the context condensing process at any time.
 
-    <img src="/img/intelligent-context-condensing/intelligent-context-condensing-1.png" alt="Manual Condense Context button in expanded task view" width="600" />
+    <img src="/static/img/intelligent-context-condensing/intelligent-context-condensing-1.png" alt="Manual Condense Context button in expanded task view" width="600" />
     *The Manual Condense Context button (highlighted with a yellow arrow) is easily accessible for manual control.*
 
 ### Understanding Context Condensing Activity
@@ -69,13 +50,13 @@ Saarthi provides several ways to control and understand the Intelligent Context 
     *   The cost associated with the context condensing AI call.
     *   An expandable summary detailing what was condensed (this information is part of the `ContextCondenseRow` component visible in the chat history).
 
-<img src="/img/intelligent-context-condensing/intelligent-context-condensing-2.png" alt="Context condensed message in chat" width="600" />
+<img src="/static/img/intelligent-context-condensing/intelligent-context-condensing-2.png" alt="Context condensed message in chat" width="600" />
 *After context condensing, a message indicates the context has been condensed, showing token changes and cost.*
 
 *   **Visual Indicators:**
     *   A progress indicator ("Condensing context...") is shown in the chat interface while context condensing is active.
 
-<img src="/img/intelligent-context-condensation/intelligent-context-condensation-3.png" alt="Condensing context progress indicator in chat" width="600" />
+<img src="/static/img/intelligent-context-condensation/intelligent-context-condensation-3.png" alt="Condensing context progress indicator in chat" width="600" />
 *The "Condensing context..." indicator appears in the chat during the process.*
 
     *   The task header also displays the current context condensing status.

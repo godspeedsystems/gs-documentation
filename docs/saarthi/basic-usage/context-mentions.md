@@ -2,13 +2,13 @@
 
 Context mentions are a powerful way to provide Saarthi with specific information about your project, allowing it to perform tasks more accurately and efficiently. You can use mentions to refer to files, folders, problems, and Git commits. Context mentions start with the `@` symbol.
 
-<img src="/img/context-mentions/context-mentions.png" alt="Context Mentions Overview - showing the @ symbol dropdown menu in the chat interface" width="600" />
+<img src="/static/img/context-mentions/context-mentions.png" alt="Context Mentions Overview - showing the @ symbol dropdown menu in the chat interface" width="600" />
 
 *Context mentions overview showing the @ symbol dropdown menu in the chat interface.*
 
 ## Types of Mentions
 
-<img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
+<img src="/static/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
 
 *File mentions add actual code content into the conversation for direct reference and analysis.*
 
@@ -24,7 +24,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 
 ### File Mentions
 
-<img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
+<img src="/static/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
 
 *File mentions incorporate source code with line numbers for precise references.*
 | Capability | Details |
@@ -37,7 +37,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 
 ### Folder Mentions
 
-<img src="/img/context-mentions/context-mentions-2.png" alt="Folder mention example showing directory contents being referenced in the chat" width="600" />
+<img src="/static/img/context-mentions/context-mentions-2.png" alt="Folder mention example showing directory contents being referenced in the chat" width="600" />
 
 *Folder mentions include the content of all files within the specified directory.*
 | Capability | Details |
@@ -50,7 +50,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 
 ### Problems Mention
 
-<img src="/img/context-mentions/context-mentions-3.png" alt="Problems mention example showing VS Code problems panel being referenced with @problems" width="600" />
+<img src="/static/img/context-mentions/context-mentions-3.png" alt="Problems mention example showing VS Code problems panel being referenced with @problems" width="600" />
 
 *Problems mentions import diagnostics directly from VS Code's problems panel.*
 | Capability | Details |
@@ -62,7 +62,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 | **Best for** | Fixing errors without manual copying |
 
 ### Terminal Mention
-<img src="/img/context-mentions/context-mentions-4.png" alt="Terminal mention example showing terminal output being included in Roo's context" width="600" />
+<img src="/static/img/context-mentions/context-mentions-4.png" alt="Terminal mention example showing terminal output being included in Saarthi's context" width="600" />
 
 *Terminal mentions capture recent command output for debugging and analysis.*
 
@@ -76,7 +76,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 
 ### Git Mentions
 
-<img src="/img/context-mentions/context-mentions-5.png" alt="Git commit mention example showing commit details being analyzed by Roo" width="600" />
+<img src="/static/img/context-mentions/context-mentions-5.png" alt="Git commit mention example showing commit details being analyzed by Saarthi" width="600" />
 
 *Git mentions provide commit details and diffs for context-aware version analysis.*
 | Type | Format | Provides | Limitations |
@@ -85,7 +85,7 @@ Context mentions are a powerful way to provide Saarthi with specific information
 | **Working Changes** | `@git-changes` | `git status` output and diff of uncommitted changes | Only works in Git repositories |
 
 ### URL Mentions
-<img src="/img/context-mentions/context-mentions-6.png" alt="URL mention example showing website content being converted to Markdown in the chat" width="600" />
+<img src="/static/img/context-mentions/context-mentions-6.png" alt="URL mention example showing website content being converted to Markdown in the chat" width="600" />
 
 *URL mentions import external web content and convert it to readable Markdown format.*
 

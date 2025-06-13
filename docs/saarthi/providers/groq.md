@@ -2,6 +2,8 @@
 sidebar_label: Groq
 ---
 
+import Codicon from '@site/src/components/Codicon';
+
 # Using Groq With Saarthi
 
 Groq specializes in providing very high-speed inference for large language models, utilizing their custom-built Language Processing Units (LPUs). This can result in significantly faster response times for supported models.

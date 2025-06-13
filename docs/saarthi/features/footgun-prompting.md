@@ -1,12 +1,13 @@
 ---
 sidebar_label: 'Footgun Prompting'
 ---
+import Codicon from '@site/src/components/Codicon';
 
 # Footgun Prompting: Override System Prompts
 
 Footgun Prompting (System Prompt Override) lets you replace the default system prompt for a specific Saarthi mode. This offers granular control but bypasses built-in safeguards. Use with caution.
 
-<img src="/img/footgun-prompting/footgun-prompting-1.png" alt="Warning indicator for active system prompt override" width="600" />
+<img src="/static/img/footgun-prompting/footgun-prompting-1.png" alt="Warning indicator for active system prompt override" width="600" />
 **Warning Indicator:** When a system prompt override is active for the current mode, Saarthi will display a warning icon in the chat input area to remind you that the default behavior has been modified.
 
 
@@ -42,7 +43,7 @@ Find the option and instructions in the Saarthi UI:
 2.  Expand the **"Advanced: Override System Prompt"** section.
 3.  Clicking the file path link within the explanation will open or create the correct override file for the currently selected mode in VS Code.
 
-<img src="/img/footgun-prompting/footgun-prompting.png" alt="UI showing the Advanced: Override System Prompt section" width="500" />
+<img src="/static/img/footgun-prompting/footgun-prompting.png" alt="UI showing the Advanced: Override System Prompt section" width="500" />
 
 ## Using Context Variables
 

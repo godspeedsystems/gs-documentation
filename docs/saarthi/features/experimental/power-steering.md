@@ -14,7 +14,7 @@ When Power Steering is enabled, Saarthi constantly reinforces the LLM's understa
 This is achieved by explicitly including the `modeDetails.roleDefinition` and `modeDetails.customInstructions` within the information sent to the LLM with each interaction.
 
 **Goal:**
-The primary goal is to ensure the LLM adheres more strictly to its defined persona and follows user-specific instructions more consistently. If you find Roo deviating from its role or overlooking custom rules, Power Steering can help maintain its focus.
+The primary goal is to ensure the LLM adheres more strictly to its defined persona and follows user-specific instructions more consistently. If you find Saarthi deviating from its role or overlooking custom rules, Power Steering can help maintain its focus.
 
 **Trade-off:**
 These frequent reminders consume additional tokens in each message sent to the LLM. This means:
@@ -44,10 +44,10 @@ Power Steering is managed within the "Experimental Features" section of Saarthi'
 3.  Locate the "Experimental Features" area.
 4.  Toggle the "Power Steering" option.
 5.  Save your changes.
-<img src="/img/power-steering/power-steering.png" alt="Settings for Intelligent Context Condensation and Power Steering" width="600" />
+<img src="/static/img/power-steering/power-steering.png" alt="Settings for Intelligent Context Condensation and Power Steering" width="600" />
 
 For general information on experimental features, see [Experimental Features Overview](/features/experimental/experimental-features).
 
 ## Feedback
 
-Please report any issues or suggestions regarding this feature on the [Saarthi GitHub Issues page](https://github.com/RooCodeInc/Roo-Code/issues). Your feedback is crucial for improving Saarthi.
+Please report any issues or suggestions regarding this feature on the [Saarthi GitHub Issues page](https://github.com/godspeedsystems/Saarthi/issues). Your feedback is crucial for improving Saarthi.

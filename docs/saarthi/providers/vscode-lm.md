@@ -1,6 +1,8 @@
 ---
 sidebar_label: VS Code Language Model API
 ---
+import Codicon from '@site/src/components/Codicon';
+
 
 # Using VS Code Language Model API With Saarthi
 

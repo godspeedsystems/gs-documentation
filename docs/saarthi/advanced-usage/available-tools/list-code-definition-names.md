@@ -1,6 +1,6 @@
 # list_code_definition_names
 
-The `list_code_definition_names` tool provides a structural overview of your codebase by listing code definitions from source files at the top level of a specified directory. It helps Roo understand code architecture by displaying line numbers and definition snippets.
+The `list_code_definition_names` tool provides a structural overview of your codebase by listing code definitions from source files at the top level of a specified directory. It helps Saarthi understand code architecture by displaying line numbers and definition snippets.
 
 ## Parameters
 
@@ -14,8 +14,8 @@ This tool scans source code files at the top level of a specified directory and 
 
 ## When is it used?
 
-- When Roo needs to understand your codebase architecture quickly
-- When Roo needs to locate important code constructs across multiple files
+- When Saarthi needs to understand your codebase architecture quickly
+- When Saarthi needs to locate important code constructs across multiple files
 - When planning refactoring or extensions to existing code
 - Before diving into implementation details with other tools
 - When identifying relationships between different parts of your codebase
@@ -85,12 +85,12 @@ This output format helps you quickly see both where definitions are located in t
 
 ## Examples When Used
 
-- When starting a new task, Roo first lists key code definitions to understand the overall structure of your project.
-- When planning refactoring work, Roo uses this tool to identify classes and functions that might be affected.
-- When exploring unfamiliar codebases, Roo maps the important code constructs before diving into implementation details.
-- When adding new features, Roo identifies existing patterns and relevant code definitions to maintain consistency.
-- When troubleshooting bugs, Roo maps the codebase structure to locate potential sources of the issue.
-- When planning architecture changes, Roo identifies all affected components across files.
+- When starting a new task, Saarthi first lists key code definitions to understand the overall structure of your project.
+- When planning refactoring work, Saarthi uses this tool to identify classes and functions that might be affected.
+- When exploring unfamiliar codebases, Saarthi maps the important code constructs before diving into implementation details.
+- When adding new features, Saarthi identifies existing patterns and relevant code definitions to maintain consistency.
+- When troubleshooting bugs, Saarthi maps the codebase structure to locate potential sources of the issue.
+- When planning architecture changes, Saarthi identifies all affected components across files.
 
 ## Usage Examples
 

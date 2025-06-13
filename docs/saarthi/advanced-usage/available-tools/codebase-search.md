@@ -1,7 +1,7 @@
 # codebase_search
 
 :::warning Experimental Feature
-The `codebase_search` tool is part of the experimental [Codebase Indexing](/features/experimental/codebase-indexing) feature. This feature is under active development and may change significantly in future releases. It requires additional setup including an embedding provider and vector database.
+The `codebase_search` tool is part of the experimental [Codebase Indexing](/saarthi/features/experimental/codebase-indexing) feature. This feature is under active development and may change significantly in future releases. It requires additional setup including an embedding provider and vector database.
 :::
 
 The `codebase_search` tool performs semantic searches across your entire codebase using AI embeddings. Unlike traditional text-based search, it understands the meaning of your queries and finds relevant code even when exact keywords don't match.
@@ -19,7 +19,7 @@ This tool searches through your indexed codebase using semantic similarity rathe
 
 ## When is it used?
 
-- When Roo needs to find code related to specific functionality across your project
+- When Saarthi needs to find code related to specific functionality across your project
 - When looking for implementation patterns or similar code structures
 - When searching for error handling, authentication, or other conceptual code patterns
 - When exploring unfamiliar codebases to understand how features are implemented
@@ -176,10 +176,10 @@ Each search result includes:
 
 ## Examples When Used
 
-- When implementing a new feature, Roo searches for "authentication middleware" to understand existing patterns before writing new code.
-- When debugging an issue, Roo searches for "error handling in API calls" to find related error patterns across the codebase.
-- When refactoring code, Roo searches for "database transaction patterns" to ensure consistency across all database operations.
-- When onboarding to a new codebase, Roo searches for "configuration loading" to understand how the application bootstraps.
+- When implementing a new feature, Saarthi searches for "authentication middleware" to understand existing patterns before writing new code.
+- When debugging an issue, Saarthi searches for "error handling in API calls" to find related error patterns across the codebase.
+- When refactoring code, Saarthi searches for "database transaction patterns" to ensure consistency across all database operations.
+- When onboarding to a new codebase, Saarthi searches for "configuration loading" to understand how the application bootstraps.
 
 ## Usage Examples
 

@@ -1,6 +1,6 @@
 # access_mcp_resource
 
-The `access_mcp_resource` tool retrieves data from resources exposed by connected Model Context Protocol (MCP) servers. It allows Roo to access files, API responses, documentation, or system information that provides additional context for tasks.
+The `access_mcp_resource` tool retrieves data from resources exposed by connected Model Context Protocol (MCP) servers. It allows Saarthi to access files, API responses, documentation, or system information that provides additional context for tasks.
 
 ## Parameters
 
@@ -15,10 +15,10 @@ This tool connects to MCP servers and fetches data from their exposed resources.
 
 ## When is it used?
 
-- When Roo needs additional context from external systems
-- When Roo needs to access domain-specific data from specialized MCP servers
-- When Roo needs to retrieve reference documentation hosted by MCP servers
-- When Roo needs to integrate real-time data from external APIs via MCP
+- When Saarthi needs additional context from external systems
+- When Saarthi needs to access domain-specific data from specialized MCP servers
+- When Saarthi needs to retrieve reference documentation hosted by MCP servers
+- When Saarthi needs to integrate real-time data from external APIs via MCP
 
 ## Key Features
 
@@ -66,7 +66,7 @@ When the `access_mcp_resource` tool is invoked, it follows this process:
    - Receives a structured response with metadata and content arrays
    - Processes text content for display to the user
    - Handles image data specially for appropriate display
-   - Returns the processed resource data to Roo for use in the current task
+   - Returns the processed resource data to Saarthi for use in the current task
 
 ## Resource Types
 
@@ -86,10 +86,10 @@ MCP servers can provide two main types of resources:
 
 ## Examples When Used
 
-- When helping with API development, Roo retrieves endpoint specifications from MCP resources to ensure correct implementation.
-- When assisting with data visualization, Roo accesses current data samples from connected MCP servers.
-- When working in specialized domains, Roo retrieves technical documentation to provide accurate guidance.
-- When generating industry-specific code, Roo references compliance requirements from documentation resources.
+- When helping with API development, Saarthi retrieves endpoint specifications from MCP resources to ensure correct implementation.
+- When assisting with data visualization, Saarthi accesses current data samples from connected MCP servers.
+- When working in specialized domains, Saarthi retrieves technical documentation to provide accurate guidance.
+- When generating industry-specific code, Saarthi references compliance requirements from documentation resources.
 
 ## Usage Examples
 

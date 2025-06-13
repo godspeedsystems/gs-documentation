@@ -1,6 +1,8 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Custom Instructions
 
-Custom Instructions allow you to personalize how Roo behaves, providing specific guidance that shapes responses, coding style, and decision-making processes.
+Custom Instructions allow you to personalize how Saarthi behaves, providing specific guidance that shapes responses, coding style, and decision-making processes.
 
 :::info Instruction File Locations
 You can provide custom instructions using dedicated files or directories within your workspace. This allows for better organization and version control.
@@ -15,10 +17,10 @@ You can provide custom instructions using dedicated files or directories within 
     │       └── 02-coding-style.txt
     └── ... (other project files)
     ```
-*   **Fallback Method: Single File (`.roorules`)**
+*   **Fallback Method: Single File (`.saarthirules`)**
     ```
     .
-    ├── .roorules           # Workspace-wide rules (single file)
+    ├── .saarthirules           # Workspace-wide rules (single file)
     └── ... (other project files)
     ```
 
@@ -32,10 +34,10 @@ You can provide custom instructions using dedicated files or directories within 
     │       └── 02-ts-style.md
     └── ... (other project files)
     ```
-*   **Fallback Method: Single File (`.roorules-{modeSlug}`)**
+*   **Fallback Method: Single File (`.saarthirules-{modeSlug}`)**
     ```
     .
-    ├── .roorules-code      # Rules for "code" mode (single file)
+    ├── .saarthirules-code      # Rules for "code" mode (single file)
     └── ... (other project files)
     ```
 The directory methods take precedence if they exist and contain files. See [Workspace-Level Instructions](#workspace-level-instructions) and [Mode-Specific Instructions](#mode-specific-instructions) for details.
@@ -43,7 +45,7 @@ The directory methods take precedence if they exist and contain files. See [Work
 
 ## What Are Custom Instructions?
 
-Custom Instructions define specific behaviors, preferences, and constraints beyond Roo's basic role definition. Examples include coding style, documentation standards, testing requirements, and workflow guidelines.
+Custom Instructions define specific behaviors, preferences, and constraints beyond Saarthi's basic role definition. Examples include coding style, documentation standards, testing requirements, and workflow guidelines.
 
 ## Setting Custom Instructions
 
@@ -53,7 +55,7 @@ These instructions apply across all workspaces and maintain your preferences reg
 
 **How to set them:**
 
-<img src="/img/custom-instructions/custom-instructions.png" alt="Saarthi Prompts tab showing global custom instructions interface" width="600" />
+<img src="/static/img/custom-instructions/custom-instructions.png" alt="Saarthi Prompts tab showing global custom instructions interface" width="600" />
 1.  **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Saarthi top menu bar
 2.  **Find Section:** Find the "Custom Instructions for All Modes" section
 3.  **Enter Instructions:** Enter your instructions in the text area
@@ -71,8 +73,8 @@ Workspace-wide instructions apply to all modes within the current project and ca
     *   Create a directory named `.saarthi/rules/` in your workspace root.
     *   Place instruction files (e.g., `.md`, `.txt`) inside. Saarthi reads files recursively, appending their content to the system prompt in **alphabetical order** based on filename.
     *   This method takes precedence if the directory exists and contains files.
-*   **Fallback Method: File-Based (`.roorules`)**
-    *   If `.saarthi/rules/` doesn't exist or is empty, Saarthi looks for a single `.roorules` file in the workspace root.
+*   **Fallback Method: File-Based (`.saarthirules`)**
+    *   If `.saarthi/rules/` doesn't exist or is empty, Saarthi looks for a single `.saarthirules` file in the workspace root.
     *   If found, its content is loaded.
 
 #### Mode-Specific Instructions
@@ -81,7 +83,7 @@ Mode-specific instructions can be set in two independent ways that can be used s
 
 1.  **Using the Prompts Tab:**
 
-    <img src="/img/custom-instructions/custom-instructions-2.png" alt="Saarthi Prompts tab showing mode-specific custom instructions interface" width="600" />
+    <img src="/static/img/custom-instructions/custom-instructions-2.png" alt="Saarthi Prompts tab showing mode-specific custom instructions interface" width="600" />
     * **Open Tab:** Click the <Codicon name="notebook" /> icon in the Saarthi top menu bar
     * **Select Mode:** Under the Modes heading, click the button for the mode you want to customize
     * **Enter Instructions:** Enter your instructions in the text area under "Mode-specific Custom Instructions (optional)"
@@ -96,8 +98,8 @@ Mode-specific instructions can be set in two independent ways that can be used s
         *   Create a directory named `.saarthi/rules-{modeSlug}/` (e.g., `.saarthi/rules-docs-writer/`) in your workspace root.
         *   Place instruction files inside (recursive loading). Files are read and appended to the system prompt in **alphabetical order** by filename.
         *   This method takes precedence over the fallback file method for the specific mode if the directory exists and contains files.
-    *   **Fallback Method: File-Based (`.roorules-{modeSlug}`)**
-        *   If `.saarthi/rules-{modeSlug}/` doesn't exist or is empty, Saarthi looks for a single `.roorules-{modeSlug}` file (e.g., `.roorules-code`) in the workspace root.
+    *   **Fallback Method: File-Based (`.saarthirules-{modeSlug}`)**
+        *   If `.saarthi/rules-{modeSlug}/` doesn't exist or is empty, Saarthi looks for a single `.saarthirules-{modeSlug}` file (e.g., `.saarthirules-code`) in the workspace root.
         *   If found, its content is loaded for that mode.
 
 Instructions from the Prompts tab, the mode-specific directory/file, and the workspace-wide directory/file are all combined. See the section below for the exact order.
@@ -120,11 +122,11 @@ The following additional instructions are provided by the user, and should be fo
 
 Mode-Specific Instructions (from Files/Directories):
 [Contents of files in .saarthi/rules-{modeSlug}/ (if directory exists and is not empty)]
-[Contents of .roorules-{modeSlug} file (if .saarthi/rules-{modeSlug}/ does not exist or is empty, and file exists)]
+[Contents of .saarthirules-{modeSlug} file (if .saarthi/rules-{modeSlug}/ does not exist or is empty, and file exists)]
 
 Workspace-Wide Instructions (from Files/Directories):
 [Contents of files in .saarthi/rules/ (if directory exists and is not empty)]
-[Contents of .roorules file (if .saarthi/rules/ does not exist or is empty, and file exists)]
+[Contents of .saarthirules file (if .saarthi/rules/ does not exist or is empty, and file exists)]
 
 ====
 ```
@@ -133,7 +135,7 @@ Workspace-Wide Instructions (from Files/Directories):
 
 ## Rules about .rules files
 
-* **File Location:** The preferred method uses directories within `.saarthi/` (`.saarthi/rules/` and `.saarthi/rules-{modeSlug}/`). The fallback method uses single files (`.roorules` and `.roorules-{modeSlug}`) located directly in the workspace root.
+* **File Location:** The preferred method uses directories within `.saarthi/` (`.saarthi/rules/` and `.saarthi/rules-{modeSlug}/`). The fallback method uses single files (`.saarthirules` and `.saarthirules-{modeSlug}`) located directly in the workspace root.
 * **Empty Files:** Empty or missing rule files are silently skipped
 * **Source Headers:** Each rule file's contents are included with a header indicating its source
 * **Rule Interaction:** Mode-specific rules complement global rules rather than replacing them
@@ -149,9 +151,9 @@ Workspace-Wide Instructions (from Files/Directories):
 * "When adding new features to websites, ensure they are responsive and accessible"
 
 :::tip Pro Tip: File-Based Team Standards
-When working in team environments, using the `.saarthi/rules/` directory structure (and potentially `.saarthi/rules-{modeSlug}/` directories for specific modes) under version control is the recommended way to standardize Roo's behavior across your team. This allows for better organization of multiple instruction files and ensures consistent code style, documentation practices, and development workflows. The older `.roorules` file method can still be used but offers less flexibility.
+When working in team environments, using the `.saarthi/rules/` directory structure (and potentially `.saarthi/rules-{modeSlug}/` directories for specific modes) under version control is the recommended way to standardize Saarthi's behavior across your team. This allows for better organization of multiple instruction files and ensures consistent code style, documentation practices, and development workflows. The older `.saarthirules` file method can still be used but offers less flexibility.
 :::
 
 ## Combining with Custom Modes
 
-For advanced customization, combine with [Custom Modes](/features/custom-modes) to create specialized environments with specific tool access, file restrictions, and tailored instructions.
+For advanced customization, combine with [Custom Modes](custom-modes) to create specialized environments with specific tool access, file restrictions, and tailored instructions.

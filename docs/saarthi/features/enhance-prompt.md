@@ -1,3 +1,5 @@
+import Codicon from '@site/src/components/Codicon';
+
 # Enhance Prompt
 
 The "Enhance Prompt" feature in Saarthi helps you improve the quality and effectiveness of your prompts before sending them to the AI model.  By clicking the <Codicon name="sparkle" /> icon in the chat input, you can automatically refine your initial request, making it clearer, more specific, and more likely to produce the desired results.
@@ -8,7 +10,7 @@ The "Enhance Prompt" feature in Saarthi helps you improve the quality and effect
 *   **Added Context:**  The enhancement process can add relevant context to your prompt, such as the current file path or selected code.
 *   **Better Instructions:**  Saarthi can add instructions to guide the AI towards a more helpful response (e.g., requesting specific formatting or a particular level of detail).
 *   **Reduced Ambiguity:**  Enhance Prompt helps to eliminate ambiguity and ensure that Saarthi understands your intent.
-*   **Consistency**: Roo will consistently format prompts the same way to the AI.
+*   **Consistency**: Saarthi will consistently format prompts the same way to the AI.
 
 ## How to Use Enhance Prompt
 

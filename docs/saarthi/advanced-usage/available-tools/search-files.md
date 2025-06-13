@@ -1,7 +1,7 @@
 
 # search_files
 
-The `search_files` tool performs regex searches across multiple files in your project. It helps Roo locate specific code patterns, text, or other content throughout your codebase with contextual results.
+The `search_files` tool performs regex searches across multiple files in your project. It helps Saarthi locate specific code patterns, text, or other content throughout your codebase with contextual results.
 
 ## Parameters
 
@@ -17,10 +17,10 @@ This tool searches across files in a specified directory using regular expressio
 
 ## When is it used?
 
-- When Roo needs to find where specific functions or variables are used
-- When Roo helps with refactoring and needs to understand usage patterns
-- When Roo needs to locate all instances of a particular code pattern
-- When Roo searches for text across multiple files with filtering capabilities
+- When Saarthi needs to find where specific functions or variables are used
+- When Saarthi helps with refactoring and needs to understand usage patterns
+- When Saarthi needs to locate all instances of a particular code pattern
+- When Saarthi searches for text across multiple files with filtering capabilities
 
 ## Key Features
 
@@ -94,10 +94,10 @@ When matches occur close to each other, they're merged into a single block rathe
 
 ## Examples When Used
 
-- When asked to refactor a function, Roo first searches for all places the function is used to ensure comprehensive changes.
-- When investigating bugs, Roo searches for similar patterns to identify related issues across the codebase.
-- When addressing technical debt, Roo locates all TODO comments across the project.
-- When analyzing dependencies, Roo finds all imports of a particular module.
+- When asked to refactor a function, Saarthi first searches for all places the function is used to ensure comprehensive changes.
+- When investigating bugs, Saarthi searches for similar patterns to identify related issues across the codebase.
+- When addressing technical debt, Saarthi locates all TODO comments across the project.
+- When analyzing dependencies, Saarthi finds all imports of a particular module.
 
 ## Usage Examples
 

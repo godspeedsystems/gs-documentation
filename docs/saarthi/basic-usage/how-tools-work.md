@@ -25,7 +25,7 @@ Describe what you want to accomplish in natural language, and Saarthi will:
 
 Here's how a typical tool interaction works:
 
-<img src="/img/how-tools-work/how-tools-work.png" alt="Tool approval interface showing Save and Reject buttons along with Auto-approve checkbox" width="600" />
+<img src="/static/img/how-tools-work/how-tools-work.png" alt="Tool approval interface showing Save and Reject buttons along with Auto-approve checkbox" width="600" />
 
 *The tool approval interface shows Save/Reject buttons and Auto-approve options.*
 
@@ -53,7 +53,7 @@ greet('World');
 ## Tool Safety and Approval
 
 
-Every tool use requires your explicit approval. When Roo proposes a tool, you'll see:
+Every tool use requires your explicit approval. When Saarthi proposes a tool, you'll see:
 
 * A "Save" button to approve and execute the tool
 * A "Reject" button to decline the proposed tool
@@ -80,4 +80,4 @@ This safety mechanism ensures you maintain control over which files are modified
 
 ## Learn More About Tools
 
-For more detailed information about each tool, including complete parameter references and advanced usage patterns, see the [Tool Use Overview](/advanced-usage/available-tools/tool-use-overview) documentation.
+For more detailed information about each tool, including complete parameter references and advanced usage patterns, see the [Tool Use Overview](../advanced-usage/available-tools/tool-use-overview) documentation.
