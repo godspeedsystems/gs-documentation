@@ -28,10 +28,10 @@ Saarthi automatically calculates the estimated cost of each API request based on
 To further help manage API costs and prevent unexpected expenses, Saarthi includes a "Max Requests" setting for auto-approved actions. This allows you to define a specific limit on how many consecutive API calls Saarthi can make without requiring your explicit re-approval during a task.
 
 *   **How it works:** If you set a limit (e.g., 5 requests), Saarthi will perform up to 5 auto-approved API calls. Before making the 6th call, it will pause and prompt you to "Reset and Continue," as shown below.
-    <img src="/img/v3.18.0/v3.18.0-1.png" alt="Warning message indicating the auto-approved request limit has been reached." width="600" />
+![Warning message indicating the auto-approved request limit has been reached.](/img/v3.18.0/v3.18.0-1.png)
     *Notification when the auto-approved request limit is met.*
 *   **Configuration:** This limit is configured within the "Auto-approve actions" settings. You can set a specific number or choose "Unlimited." For detailed steps on configuring this and other auto-approval settings, see the [Auto-Approving Actions documentation](/features/auto-approving-actions).
-    <img src="/img/v3.18.0/v3.18.0.png" alt="Setting the Max Requests limit for auto-approved actions in Saarthi settings." width="600" />
+![Setting the Max Requests limit for auto-approved actions in Saarthi settings.](/img/v3.18.0/v3.18.0.png)
     *Setting the "Max Requests" for auto-approved actions.*
 
 This feature provides an additional safeguard, particularly for complex or long-running tasks where multiple API calls might be involved.

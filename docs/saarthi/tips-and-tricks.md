@@ -5,7 +5,7 @@ import Codicon from '@site/src/components/Codicon';
 A collection of quick tips to help you get the most out of Saarthi.
 
 - Drag Saarthi to the [Secondary Sidebar](https://code.visualstudio.com/api/ux-guidelines/sidebars#secondary-sidebar) so you can see the Explorer, Search, Source Control, etc.
-<img src="../../static/img/right-column-saarthi.gif" alt="Put saarthi on the Right Column" width="900" />
+
 - Once you have Saarthi in a separate sidebar from the file explorer, you can drag files from the explorer into the chat window (and even multiple at once). Just make sure to hold down the shift key after you start dragging the files.
 - If you're not using [MCP](./features/mcp/overview), turn it off in the <Codicon name="server" /> MCP Servers tab to significantly cut down the size of the system prompt.
 - To keep your [custom modes](./features/custom-modes) on track, limit the types of files that they're allowed to edit.

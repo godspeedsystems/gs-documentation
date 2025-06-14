@@ -12,6 +12,8 @@ Now that you've [configured your AI provider and model](connecting-api-provider.
 Click the Saarthi icon in the VS Code Activity Bar (vertical bar on the side of the window) to open the chat interface. If you don't see the icon, verify the extension is installed and enabled.
 
 <!-- <img src="/static/img/your-first-task/your-first-task.png" alt="Saarthi icon in VS Code Activity Bar" width="800" /> -->
+![Saarthi icon in VS Code Activity Bar](/img/your-first-task/your-first-task.png)
+
 
 *The Saarthi icon in the Activity Bar opens the chat interface.*
 
@@ -25,7 +27,7 @@ Type a clear, concise description of what you want Saarthi to do in the chat box
 
 No special commands or syntax needed—just use plain English.
 
-<!-- <img src="../../static/img/your-first-task/your-first-task-6.png" alt="Typing a task in the Saarthi chat interface" width="500" /> -->
+<!-- ![Typing a task in the Saarthi chat interface](/img/your-first-task/your-first-task-6.png) -->
 
 *Enter your task in natural language - no special syntax required.*
 
@@ -42,9 +44,6 @@ Saarthi analyzes your request and proposes specific actions. These may include:
 * **Executing commands:** Shows the exact command to run in your terminal
 * **Using the Browser:** Outlines browser actions (click, type, etc.)
 * **Asking questions:** Requests clarification when needed to proceed
-<!-- 
-<img src="../../static/img/your-first-task/your-first-task-7.png" alt="Reviewing a proposed file creation action" width="800" /> -->
-
 
 *Saarthi shows exactly what action it wants to perform and waits for your approval.*
 
@@ -57,7 +56,6 @@ Saarthi analyzes your request and proposes specific actions. These may include:
 
 Saarthi works iteratively. After each action, it waits for your feedback before proposing the next step. Continue this review-approve cycle until your task is complete.
 
-<!-- <img src="../../static/img/your-first-task/your-first-task-8.png" alt="Final result of a completed task showing the iteration process" width="500" /> -->
 *After completing the task, Saarthi shows the final result and awaits your next instruction.*
 
 ## Conclusion

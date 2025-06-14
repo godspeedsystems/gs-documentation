@@ -12,7 +12,7 @@ Saarthi allows you to manage your configuration settings effectively through exp
 
 You can find these options at the bottom of the Saarthi settings page, accessible via the gear icon (<i class="codicon codicon-gear"></i>) in the Saarthi chat view.
 
-<img src="/img/settings-management/settings-management.png" alt="Export, Import, and Reset buttons in Saarthi settings" width="400" />
+![Export, Import, and Reset buttons in Saarthi settings](/img/settings-management/settings-management.png)
 *Image: Export, Import, and Reset buttons.*
 
 ## Export Settings

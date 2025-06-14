@@ -68,7 +68,7 @@ We'll cover both below.
 
 Also on **Windows (cmd)** you may need to invoke `npx` through `cmd.exe`:
 
-<img src="/static/img/recommended-mcp-servers/context7-global-setup-fixed.png" alt="Adding Context7 to the global MCP settings" width="600" />
+![Adding Context7 to the global MCP settings](/img/recommended-mcp-servers/context7-global-setup-fixed.png)
 
 ### 2. Project-level configuration
 
@@ -99,7 +99,7 @@ If you prefer to commit the configuration to your repository, create a file call
 }
 ```
 
-<img src="/static/img/recommended-mcp-servers/context7-project-setup-fixed.png" alt="Adding Context7 to a project-level MCP file" width="600" />
+![Adding Context7 to a project-level MCP file](/img/recommended-mcp-servers/context7-project-setup-fixed.png)
 
 > When both global and project files define a server with the same name, **the project configuration wins**.
 
@@ -111,7 +111,7 @@ If you prefer to commit the configuration to your repository, create a file call
 2. You should now see **Context7** listed. Click the <Codicon name="activate" /> toggle to start it if it isn't already running.
 3. Saarthi will prompt you the first time a Context7 tool is invoked. Approve the request to continue.
 
-<img src="/static/img/recommended-mcp-servers/context7-running-fixed.png" alt="Context7 running in Saarthi" width="400" />
+![Context7 running in Saarthi](/img/recommended-mcp-servers/context7-running-fixed.png)
 
 ---
 
@@ -121,4 +121,4 @@ If you prefer to commit the configuration to your repository, create a file call
 * Configure **Always allow** for the tools you use most to streamline your workflow.
 * Want to expose your own APIs? Check out the [MCP server creation guide](/saarthi/features/mcp/using-mcp-in-saarthi#enabling-or-disabling-mcp-server-creation).
 
-Looking for other servers? Watch this page – we'll add more recommendations soon! 
+Looking for other servers? Watch this page – we'll add more recommendations soon!

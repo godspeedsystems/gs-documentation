@@ -1,4 +1,3 @@
-
 import Codicon from '@site/src/components/Codicon';
 
 # Terminal Shell Integration
@@ -17,7 +16,7 @@ Shell integration is automatically enabled in Saarthi and connects directly to y
 - React intelligently to terminal output without user intervention
 - Stop running commands directly from the chat interface using the stop button that appears next to the command execution message.
 
-<img src="../../static/img/v3.15/v3.15.png" alt="Stop Command Button in Chat UI" width="600" />
+![Stop Command Button in Chat UI](/img/v3.15/v3.15.png)
 
 When you ask Saarthi to perform tasks like installing dependencies, starting a development server, or analyzing build errors, shell integration works behind the scenes to make these interactions smooth and effective.
 
@@ -36,11 +35,11 @@ Saarthi has a fallback mechanism for executing commands. This is most relevant i
 
 - **How it works**: If Saarthi is configured to use VS Code's terminal integration but cannot connect or encounters issues, it may automatically attempt to execute the command directly using a background process. This is a fallback to ensure the command still attempts to run.
 - **Notification**: You might see a notification in the chat if this fallback is used, indicating that the command is running without the full features of either Saarthi's inline terminal or VS Code's shell integration (e.g., real-time output streaming or precise exit code detection might be limited).
-<img src="/static/img/v3.15.0/v3.15.0.png" alt="Command execution fallback notification example" width="600" />
+![Command execution fallback notification example](/img/v3.15.0/v3.15.0.png)
 
 - **Resolution**: If you encounter this fallback, it typically indicates an issue with your VS Code shell integration setup. Review the troubleshooting steps in this document or consider using Saarthi's recommended inline terminal by ensuring the [`Disable terminal shell integration`](#disable-terminal-shell-integration) setting is CHECKED.
 
-<img src="/static/img/shell-integration/shell-integration-12.png" alt="Saarthi's recommended inline terminal in action" width="600" />
+![Saarthi's recommended inline terminal in action](/img/shell-integration/shell-integration-12.png)
 *Example of Saarthi's recommended inline terminal.*
 
 
@@ -53,11 +52,11 @@ Saarthi provides settings to fine-tune how it interacts with terminals. To acces
 ### Basic Settings
 
 #### Terminal Output Limit
-<img src="/static/img/shell-integration/shell-integration.png" alt="Terminal output limit slider set to 500" width="600" />
+![Terminal output limit slider set to 500](/img/shell-integration/shell-integration.png)
 This setting controls how much output Saarthi captures from your commands. Consider lowering it if you're concerned about token usage or if Saarthi seems slow processing very long outputs (you'll still get the beginning and end). Consider increasing it if you frequently need more middle content from long commands directly in Saarthi's context, but be mindful of potential token costs. Default: 500 lines.
 
 #### Compress progress bar output
-<img src="/static/img/shell-integration/shell-integration-10.png" alt="Compress progress bar output checkbox" width="600" />
+![Compress progress bar output checkbox](/img/shell-integration/shell-integration-10.png)
 Keep this enabled (default) for cleaner output and token savings. It makes Saarthi process dynamic output like progress bars or spinners more like a real terminal, showing only the final state. Disable this only in rare cases where you specifically need to debug the intermediate, raw output of a progress bar or similar dynamic display.
 
 ### Advanced Settings
@@ -74,7 +73,7 @@ Always restart all open terminals after changing any of these settings.
 :::
 
 #### Inherit environment variables
-<img src="/static/img/shell-integration/shell-integration-11.png" alt="Inherit environment variables checkbox" width="600" />
+![Inherit environment variables checkbox](/img/shell-integration/shell-integration-11.png)
 This setting controls whether Saarthi's terminal sessions use the same environment variables (like `PATH`, API keys, etc.) as your main VSCode/Cursor environment. It directly mirrors the VSCode global setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Keep this enabled (default for VSCode) if you want Saarthi commands to operate with the same context and tools available in your regular VSCode terminal. Consider disabling it only if you need a completely clean, isolated environment for Saarthi's terminal tasks or are troubleshooting complex environment variable conflicts.
 
 ### Runtime Environment
@@ -83,11 +82,11 @@ If launched from the command line `vscode` command, VSCode and Saarthi will inhe
 If launched from the Finder, Dock, or Spotlight, environment exported from `.zshrc`, or `.zprofile` will likely be missing.  If you have environment variables set in one of those files, and find they are missing when running VSCode, move them to .zshenv, and log out and back in again, so the window manager will pick up the new environment settings.
 
 #### Disable terminal shell integration
-<img src="/static/img/shell-integration/shell-integration-9.png" alt="Disable terminal shell integration checkbox" width="600" />
+![Disable terminal shell integration checkbox](/img/shell-integration/shell-integration-9.png)
 This setting determines how Saarthi executes terminal commands.
 -   **Keep this checkbox CHECKED (recommended):** Saarthi will execute commands using its built-in inline terminal, displaying output directly within the chat interface. This method is generally robust, provides clear output, and is the preferred way for most users to interact with terminal commands through Saarthi. It ensures commands run in a consistent environment managed by Saarthi.
 
-    <img src="/static/img/shell-integration/shell-integration-12.png" alt="Saarthi's inline terminal with 'Disable terminal shell integration' CHECKED" width="600" />
+    ![Saarthi's inline terminal with 'Disable terminal shell integration' CHECKED](/img/shell-integration/shell-integration-12.png)
     *Saarthi's inline terminal, active when "Disable terminal shell integration" is CHECKED.*
 
 -   **UNCHECK this checkbox (to use VS Code's terminal integration):** Saarthi will attempt to run commands directly within your active VS Code terminal panel. This alternative method might be useful for specific edge cases where you explicitly need commands to run within your fully customized VS Code shell environment or require interaction with the VS Code terminal's specific features for a command. However, this can sometimes be less reliable depending on your shell setup and VS Code version.
@@ -95,293 +94,34 @@ This setting determines how Saarthi executes terminal commands.
 The following settings are advanced options that apply **only if you have UNCHECKED 'Disable terminal shell integration'** (choosing to use VS Code's terminal integration instead of Saarthi's recommended inline terminal):
 
 ##### Terminal shell integration timeout
-<img src="/static/img/shell-integration/shell-integration-1.png" alt="Terminal shell integration timeout slider set to 15s" width="600" />
+![Terminal shell integration timeout slider set to 15s](/img/shell-integration/shell-integration-1.png)
 If shell integration is enabled but you still see 'Shell Integration Unavailable,' especially with complex shell setups (e.g., Zsh with many plugins, or a slow-loading corporate environment), your shell might be taking too long to initialize. Increase this value to give your shell more time to signal its readiness to Saarthi. Try increments of 5-10 seconds. Default: 15s (as shown in UI).
 
 ##### Terminal command delay
-<img src="/static/img/shell-integration/shell-integration-2.png" alt="Terminal command delay slider set to 0ms" width="600" />
+![Terminal command delay slider set to 0ms](/img/shell-integration/shell-integration-2.png)
 If command output appears incomplete or Saarthi seems to miss the end of a command's output (even with shell integration enabled), a small delay might help. Introduce a small delay (e.g., 50ms or 100ms). This gives the terminal more time to flush all output before Saarthi considers the command complete. This is a workaround for potential timing issues in VSCode's terminal or certain shells (see VSCode bug [#237208](https://github.com/microsoft/vscode/issues/237208)). Default: 0ms.
 
 ##### Enable PowerShell counter workaround
-<img src="/static/img/shell-integration/shell-integration-3.png" alt="Enable PowerShell counter workaround checkbox" width="600" />
+![Enable PowerShell counter workaround checkbox](/img/shell-integration/shell-integration-3.png)
 Specific to PowerShell users. Enable this if you find Saarthi struggles to run the *exact same PowerShell command multiple times in a row*, or if output capture from PowerShell commands is unreliable. This adds a unique counter to commands to help PowerShell differentiate them.
 
 ##### Clear ZSH EOL mark
-<img src="/static/img/shell-integration/shell-integration-4.png" alt="Clear ZSH EOL mark checkbox" width="600" />
+![Clear ZSH EOL mark checkbox](/img/shell-integration/shell-integration-4.png)
 Specific to Zsh users. Zsh sometimes adds a special character (often `%`) at the end of a line if it doesn't end with a newline. Enable this if Saarthi seems to misinterpret or get confused by the output of Zsh commands, particularly if the last line of output appears to include an unexpected character. This attempts to remove that marker (`PROMPT_EOL_MARK=''`).
 
 ##### Enable Oh My Zsh integration
-<img src="/static/img/shell-integration/shell-integration-5.png" alt="Enable Oh My Zsh integration checkbox" width="600" />
+![Enable Oh My Zsh integration checkbox](/img/shell-integration/shell-integration-5.png)
 For users of the popular Oh My Zsh framework for Zsh. Enable this if you use Oh My Zsh and experience general issues with terminal command execution or output rendering that aren't solved by other settings. This helps Saarthi align with Oh My Zsh's specific shell integration mechanisms by setting `ITERM_SHELL_INTEGRATION_INSTALLED=Yes`. Restarting the IDE might be necessary.
 
 ##### Enable Powerlevel10k integration
-<img src="/static/img/shell-integration/shell-integration-6.png" alt="Enable Powerlevel10k integration checkbox" width="600" />
+![Enable Powerlevel10k integration checkbox](/img/shell-integration/shell-integration-6.png)
 For users of the Powerlevel10k theme for Zsh. Enable this if your Powerlevel10k prompt (which can be quite complex) seems to interfere with Saarthi's ability to correctly detect command boundaries, parse output, or track the current working directory. This sets `POWERLEVEL9K_TERM_SHELL_INTEGRATION=true`.
 
 ##### Enable ZDOTDIR handling
-<img src="/static/img/shell-integration/shell-integration-7.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
+![Enable ZDOTDIR handling checkbox](/img/shell-integration/shell-integration-7.png)
 An advanced option for Zsh users with customized Zsh startup file locations. Enable this if you use `ZDOTDIR` to specify a custom directory for your Zsh configuration files (like `.zshrc`). This setting helps Saarthi work correctly with such setups by creating an isolated, temporary `ZDOTDIR` for its own integration scripts, preventing conflicts with your personal Zsh environment.
 
-## How Shell Integration Works
-
-Shell integration connects Saarthi to your terminal's command execution process in real-time:
-
-1. **Connection**: When you open a terminal, VS Code establishes a special connection with your shell.
-
-2. **Command Tracking**: VS Code monitors your terminal activities by detecting:
-   - When a new prompt appears
-   - When you enter a command
-   - When the command starts running
-   - When the command finishes (and whether it succeeded or failed)
-   - What directory you're currently in
-
-3. **Different Shells, Same Result**: Each shell type (Bash, Zsh, PowerShell, Fish) implements this slightly differently behind the scenes, but they all provide the same functionality to Saarthi.
-
-4. **Information Gathering**: Saarthi can see what commands are running, where they're running, how long they take, whether they succeed, and their complete output - all without you having to copy and paste anything.
-
-## Troubleshooting Shell Integration
-
-### PowerShell Execution Policy (Windows)
-
-PowerShell restricts script execution by default. To configure:
-
-1. Open PowerShell as Administrator
-2. Check current policy: `Get-ExecutionPolicy`
-3. Set appropriate policy: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-
-Common policies:
-- `Restricted`: No scripts allowed (default)
-- `RemoteSigned`: Local scripts can run; downloaded scripts need signing
-- `Unrestricted`: All scripts run with warnings
-- `AllSigned`: All scripts must be signed
-
-### Manual Shell Integration Installation
-
-If automatic integration fails, add the appropriate line to your shell configuration:
-
-**Bash** (`~/.bashrc`):
-```bash
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
-```
-
-**Zsh** (`~/.zshrc`):
-```bash
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-```
-
-**PowerShell** (`$Profile`):
-```powershell
-if ($env:TERM_PROGRAM -eq "vscode") { . "$(code --locate-shell-integration-path pwsh)" }
-```
-
-**Fish** (`~/.config/fish/config.fish`):
-```fish
-string match -q "$TERM_PROGRAM" "vscode"; and . (code --locate-shell-integration-path fish)
-```
-
-### Terminal Customization Issues
-
-If you use terminal customization tools:
-
-**Powerlevel10k**:
-```bash
-# Add before sourcing powerlevel10k in ~/.zshrc
-typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
-```
-
-**Alternative**: Enable the Powerlevel10k Integration setting in Saarthi.
-
-### Verifying Shell Integration Status
-
-Confirm shell integration is active with these commands:
-
-**Bash**:
-```bash
-set | grep -i '[16]33;'
-echo "$PROMPT_COMMAND" | grep vsc
-trap -p DEBUG | grep vsc
-```
-
-**Zsh**:
-```zsh
-functions | grep -i vsc
-typeset -p precmd_functions preexec_functions
-```
-
-**PowerShell**:
-```powershell
-Get-Command -Name "*VSC*" -CommandType Function
-Get-Content Function:\Prompt | Select-String "VSCode"
-```
-
-**Fish**:
-```fish
-functions | grep -i vsc
-functions fish_prompt | grep -i vsc
-```
-
-Visual indicators of active shell integration:
-1. Shell integration indicator in terminal title bar
-2. Command detection highlighting
-3. Working directory updates in terminal title
-4. Command duration and exit code reporting
-
-## WSL Terminal Integration Methods
-
-When using Windows Subsystem for Linux (WSL), there are two distinct ways to use VSCode with WSL, each with different implications for shell integration:
-
-### Method 1: VSCode Windows with WSL Terminal
-
-In this setup:
-- VSCode runs natively in Windows
-- You use the WSL terminal integration feature in VSCode
-- Shell commands are executed through the WSL bridge
-- May experience additional latency due to Windows-WSL communication
-- Shell integration markers may be affected by the WSL-Windows boundary: you must make sure that `source "$(code --locate-shell-integration-path <shell>)"` is loaded for your shell within the WSL environment because it may not get automatically loaded; see above.
-
-### Method 2: VSCode Running Within WSL
-
-In this setup:
-- You launch VSCode directly from within WSL using `code .`
-- VSCode server runs natively in the Linux environment
-- Direct access to Linux filesystem and tools
-- Better performance and reliability for shell integration
-- Shell integration is loaded automatically since VSCode runs natively in the Linux environment
-- Recommended approach for WSL development
-
-For optimal shell integration with WSL, we recommend:
-1. Open your WSL distribution
-2. Navigate to your project directory
-3. Launch VSCode using `code .`
-4. Use the integrated terminal within VSCode
-
-## Known Issues and Workarounds
-
-### VS Code Shell Integration for Fish + Cygwin on Windows
-
-For fellow Windows users running Fish terminal within a Cygwin environment, here's how VS Code's shell integration works:
-
-1.  **(Optional) Locate the Shell Integration Script:**
-    Open your Fish terminal *within VS Code* and run the following command:
-    ```bash
-    code --locate-shell-integration-path fish
-    ```
-    This will output the path to the `shellIntegration.fish` script. Note down this path.
-
-2.  **Update Your Fish Configuration:**
-    Edit your `config.fish` file (usually located at `~/.config/fish/config.fish` within your Cygwin home directory). Add the following line, preferably within an `if status is-interactive` block or at the very end of the file:
-
-    ```fish
-    # Example config.fish structure
-    if status is-interactive
-        # Your other interactive shell configurations...
-        # automatic locate integration script:
-        string match -q "$TERM_PROGRAM" "vscode"; and . (code --locate-shell-integration-path fish)
-
-        # Or if the above fails for you:
-        # Source the VS Code shell integration script
-        # IMPORTANT: Replace the example path below with the actual path you found in Step 1.
-        # Make sure the path is in a format Cygwin can understand (e.g., using /cygdrive/c/...).
-        # source "/cygdrive/c/Users/YourUser/.vscode/extensions/..../shellIntegration.fish"
-    end
-    ```
-    *Remember to replace the example path with the actual path from Step 1, correctly formatted for Cygwin.*
-
-3.  **Configure VS Code Terminal Profile:**
-    Open your VS Code `settings.json` file (Ctrl+Shift+P -> "Preferences: Open User Settings (JSON)"). Update or add the Fish profile under `terminal.integrated.profiles.windows` like this:
-
-    ```json
-    {
-      // ... other settings ...
-
-      "terminal.integrated.profiles.windows": {
-        // ... other profiles ...
-
-        // Recommended: Use bash.exe to launch fish as a login shell
-        "fish": {
-          "path": "C:\\cygwin64\\bin\\bash.exe", // Or your Cygwin bash path
-          "args": [
-            "--login", // Ensures login scripts run (important for Cygwin environment)
-            "-i",      // Ensures bash runs interactively
-            "-c",
-            "exec fish" // Replace bash process with fish
-          ],
-          "icon": "terminal-bash" // Optional: Use a recognizable icon
-        }
-        // Alternative (if the above fails): Launch fish directly
-        "fish-direct": {
-          "path": "C:\\cygwin64\\bin\\fish.exe", // Ensure this is in your Windows PATH or provide full path
-          // Use 'options' here instead of 'args'; otherwise, you might encounter the error "terminal process terminated exit code 1".
-          "options": ["-l", "-c"], // Example: login and interactive flags.
-          "icon": "terminal-fish" // Optional: Use a fish icon
-        }
-      },
-
-      // Optional: Set fish as your default if desired
-      // "terminal.integrated.defaultProfile.windows": "fish", // or "fish-direct" depending what you use.
-
-      // ... other settings ...
-    }
-    ```
-    *Note: Using `bash.exe --login -i -c "exec fish"` is often more reliable in Cygwin environments for ensuring the correct environment setup before `fish` starts. However, if that approach doesn't work, try the `fish-direct` profile configuration.*
-
-4.  **Restart VS Code:**
-    Close and reopen Visual Studio Code completely to apply the changes.
-
-5.  **Verify:**
-    Open a new Fish terminal in VS Code. The shell integration features (like command decorations, better command history navigation, etc.) should now be active. You can test basic functionality by running simple commands like `echo "Hello from integrated Fish!"`. <img src="/static/img/shell-integration/shell-integration-8.png" alt="Fish Cygwin Integration Example" width="600" />
-
-This setup works reliably on Windows systems using Cygwin, Fish, and the Starship prompt, and should assist users with similar configurations.
-
-
-### Shell Integration Failures After VSCode 1.98
-
-**Issue**: After VSCode updates beyond version 1.98, shell integration may fail with the error "VSCE output start escape sequence (]633;C or ]133;C) not received".
-
-**Solutions**:
-1. **Set Terminal Command Delay**:
-   - Set the Terminal Command Delay to 50ms in Saarthi settings
-   - Restart all terminals after changing this setting
-   - This matches older default behavior and may resolve the issue, however some users have reported that a value of 0ms works better. This is a workaround for upstream VSCode problems.
-
-2. **Roll Back VSCode Version**:
-   - Download VSCode v1.98 from [VSCode Updates](https://code.visualstudio.com/updates/v1_98)
-   - Replace your current VSCode installation
-   - No backup of Saarthi settings needed
-
-3. **WSL-Specific Workaround**:
-   - If using WSL, ensure you launch VSCode from within WSL using `code .`
-
-4. **ZSH Users**:
-   - Try enabling some or all ZSH-related workarounds in Saarthi settings
-   - These settings can help regardless of your operating system
-
-## Known Issues and Workarounds
-
-### Ctrl+C Behavior
-
-**Issue**: If text is already typed in the terminal when Saarthi tries to run a command, Saarthi will press Ctrl+C first to clear the line, which can interrupt running processes.
-
-**Workaround**: Make sure your terminal prompt is empty (no partial commands typed) before asking Saarthi to execute terminal commands.
-
-### Multi-line Command Issues
-
-**Issue**: Commands that span multiple lines can confuse Saarthi and may show output from previous commands mixed in with current output.
-
-**Workaround**: Instead of multi-line commands, use command chaining with `&&` to keep everything on one line (e.g., `echo a && echo b` instead of typing each command on a separate line).
-
-### PowerShell-Specific Issues
-
-1. **Premature Completion**: PowerShell sometimes tells Saarthi a command is finished before all the output has been shown.
-2. **Repeated Commands**: PowerShell may refuse to run the same command twice in a row.
-
-**Workaround**: Enable the "PowerShell counter workaround" setting and set a terminal command delay of 150ms in the settings to give commands more time to complete.
-
-### Incomplete Terminal Output
-
-**Issue**: Sometimes VS Code doesn't show or capture all the output from a command.
-
-**Workaround**: If you notice missing output, try closing and reopening the terminal tab, then run the command again. This refreshes the terminal connection.
+![Fish Cygwin Integration Example](/img/shell-integration/shell-integration-8.png)
 
 ## Troubleshooting Resources
 

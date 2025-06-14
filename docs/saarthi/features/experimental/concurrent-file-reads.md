@@ -33,8 +33,6 @@ To enable this experimental feature:
 2. Navigate to **Advanced Settings** → **Experimental Features**
 3. Check **"Enable concurrent file reads"**
 
-<img src="/static/img/experimental/concurrent-file-reads-setting.png" alt="Concurrent file reads setting toggle" width="600" />
-
 Once enabled, you can configure the maximum number of concurrent files (2-100) using the slider that appears below the toggle.
 
 ## Configuration Options

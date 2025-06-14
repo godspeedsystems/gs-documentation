@@ -44,7 +44,7 @@ Power Steering is managed within the "Experimental Features" section of Saarthi'
 3.  Locate the "Experimental Features" area.
 4.  Toggle the "Power Steering" option.
 5.  Save your changes.
-<img src="/static/img/power-steering/power-steering.png" alt="Settings for Intelligent Context Condensation and Power Steering" width="600" />
+![Settings for Intelligent Context Condensation and Power Steering](/img/power-steering/power-steering.png)
 
 For general information on experimental features, see [Experimental Features Overview](/features/experimental/experimental-features).
 
