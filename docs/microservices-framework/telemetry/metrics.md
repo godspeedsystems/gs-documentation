@@ -37,24 +37,21 @@ You can customize metric collection in your HTTP event source (`http.yaml`) like
 type: express
 port: 3000
 metrics:
-  useDefaultMetricsPath: false           # Set to false if you plan to override /metrics manually
+  metricsPath: '/metrics'           # Set to false if you plan to override /metrics manually
   requestDurationBuckets: [0.2, 0.5, 1, 1.5, 2, 2.5] # Opttional: Custom latency buckets (in seconds)
   requestLengthBuckets: [128, 256, 512, 1024]   # Optional: Track incoming request sizes
   responseLengthBuckets: [256, 512, 1024, 2048] # Optional: Track outgoing response sizes
 ```
 
----
-
 ### Config Options Explained
 
 | Key                      | Description                                                                   |
 | ------------------------ | ----------------------------------------------------------------------------- |
-| `useDefaultMetricsPath`  | If `true` (default), Godspeed auto-registers `/metrics` with default data.    |
+| `metricsPath`            | to override default `/metrics` endpoint with your custom endpoint             |
 | `requestDurationBuckets` | Array of histogram bucket thresholds for HTTP request durations (in seconds). |
 | `requestLengthBuckets`   | Buckets for request payload size in bytes (optional).                         |
 | `responseLengthBuckets`  | Buckets for response payload size in bytes (optional).                        |
 
----
 
 ### Overriding `/metrics` Endpoint (Optional)
 
@@ -64,7 +61,7 @@ If you want full control (e.g., to combine multiple metrics like HTTP + multiple
 
 ```yaml
 metrics:
-  useDefaultMetricsPath: false
+  metricsPath: '/custom'
 ```
 
 #### 2. In your `express.ts` event source:
@@ -77,10 +74,6 @@ client.get('/metrics', async (req, res) => {
   res.end(`${expressMetrics}\n${prismaMetrics}`);
 });
 ```
-
-> ✅ This approach allows advanced customization (e.g., adding labels like `datasource`, `hostname`, etc.)
-
----
 
 ### What Metrics Are Available?
 
@@ -104,7 +97,6 @@ If you have registered prisma metrics manually by setting upa middleware, then, 
 * `prisma_client_queries_wait`
 * ...and more depending on your query workload
 
----
 
 ### Testing Metrics
 
