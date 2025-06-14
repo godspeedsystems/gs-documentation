@@ -1,6 +1,6 @@
 # Writing Custom Middleware in EventSource or DataSource
 
-Godspeed's plugin architecture allows you to extend behavior by injecting **custom middleware** into your **EventSource** (e.g., Express) or **DataSource** (e.g., Axios, Prisma) implementations.
+Godspeed's plugin architecture allows you to extend behavior by injecting **custom middleware** into your **EventSource** (e.g., Express) implementation.
 
 This is useful for adding:  Logging, Rate limiting, Authentication, Metrics, Request/response mutation, Any side-effect logic before or after processing an event.
 
@@ -10,7 +10,6 @@ This is useful for adding:  Logging, Rate limiting, Authentication, Metrics, Req
 Middleware can be added inside:
 
 * `src/eventsources/types/<eventsource>.ts`
-* `src/datasources/types/<datasource>.ts`
 
 You typically do this by **subclassing the base plugin** and injecting middleware in the `initClient()` method.
 
@@ -98,28 +97,9 @@ client.get('/admin', (req, res, next) => {
 }, handler);
 ```
 
----
-
-### Middleware in DataSources
-
-For data sources like **Axios**, you can inject middleware using interceptors:
-
-```ts
-client.interceptors.request.use((config) => {
-  config.headers['x-trace-id'] = generateTraceId();
-  return config;
-});
-```
-
-In Prisma, you can write your own `$use()` hooks inside the `PrismaClient` constructor if needed.
-
----
-
 ### ⚠️
 
 * If your middleware adds an endpoint like `/metrics`, ensure it **doesn't conflict with auto-registered routes** (disable via config).
 * Middleware runs **on every request** unless scoped to a specific route.
 * Always call `next()` in Express-style middleware unless you're sending a response directly.
-
-This gives you full flexibility to extend the behavior of any plugin using standard TypeScript logic.
 

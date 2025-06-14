@@ -37,7 +37,7 @@ You can customize metric collection in your HTTP event source (`http.yaml`) like
 type: express
 port: 3000
 metrics:
-  useDefaultMetricsPath: false           # Set to false if you plan to override /metrics manually
+  metricsPath: '/metrics'          
   requestDurationBuckets: [0.2, 0.5, 1, 1.5, 2, 2.5] # Opttional: Custom latency buckets (in seconds)
   requestLengthBuckets: [128, 256, 512, 1024]   # Optional: Track incoming request sizes
   responseLengthBuckets: [256, 512, 1024, 2048] # Optional: Track outgoing response sizes
