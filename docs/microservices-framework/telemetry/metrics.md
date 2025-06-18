@@ -37,21 +37,12 @@ You can customize metric collection in your HTTP event source (`http.yaml`) like
 type: express
 port: 3000
 metrics:
-  metricsPath: '/metrics'           # Set to false if you plan to override /metrics manually
+
+  metricsPath: '/metrics'          
   requestDurationBuckets: [0.2, 0.5, 1, 1.5, 2, 2.5] # Opttional: Custom latency buckets (in seconds)
   requestLengthBuckets: [128, 256, 512, 1024]   # Optional: Track incoming request sizes
   responseLengthBuckets: [256, 512, 1024, 2048] # Optional: Track outgoing response sizes
 ```
-
-### Config Options Explained
-
-| Key                      | Description                                                                   |
-| ------------------------ | ----------------------------------------------------------------------------- |
-| `metricsPath`            | to override default `/metrics` endpoint with your custom endpoint             |
-| `requestDurationBuckets` | Array of histogram bucket thresholds for HTTP request durations (in seconds). |
-| `requestLengthBuckets`   | Buckets for request payload size in bytes (optional).                         |
-| `responseLengthBuckets`  | Buckets for response payload size in bytes (optional).                        |
-
 
 ### Overriding `/metrics` Endpoint (Optional)
 
@@ -61,7 +52,8 @@ If you want full control (e.g., to combine multiple metrics like HTTP + multiple
 
 ```yaml
 metrics:
-  metricsPath: '/custom'
+  metricsPath: '/custom-metrics'
+
 ```
 
 #### 2. In your `express.ts` event source:

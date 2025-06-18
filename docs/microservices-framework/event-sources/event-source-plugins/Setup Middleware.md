@@ -102,3 +102,4 @@ client.get('/admin', (req, res, next) => {
 * If your middleware adds an endpoint like `/metrics`, ensure it **doesn't conflict with auto-registered routes** (disable via config).
 * Middleware runs **on every request** unless scoped to a specific route.
 * Always call `next()` in Express-style middleware unless you're sending a response directly.
+

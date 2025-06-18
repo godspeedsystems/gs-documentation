@@ -1,0 +1,103 @@
+import Codicon from '@site/src/components/Codicon';
+
+# API Configuration Profiles
+
+API Configuration Profiles allow you to create and switch between different sets of AI settings. Each profile can have different configurations for each mode, letting you optimize your experience based on the task at hand.
+
+:::info
+Having multiple configuration profiles lets you quickly switch between different AI providers, models, and settings without reconfiguring everything each time you want to change your setup.
+:::
+
+
+## How It Works
+
+Configuration profiles can have their own:
+- API providers (OpenAI, Anthropic, OpenRouter, Glama, etc.)
+- API keys and authentication details
+- Model selections (o3-mini-high, Claude 3.7 Sonnet, DeepSeek R1, etc.)
+- [Temperature settings](model-temperature) for controlling response randomness
+- Thinking budgets
+- Provider-specific settings
+- [Diff editing configuration](fast-edits)
+- Rate limit settings
+
+Note that available settings vary by provider and model. Each provider offers different configuration options, and even within the same provider, different models may support different parameter ranges or features.
+
+## Creating and Managing Profiles
+
+### Creating a Profile
+
+1. Open Settings by clicking the gear icon <Codicon name="gear" /> → Providers
+2. Click the "+" button next to the profile selector
+![Profile selector with plus button](/img/api-configuration-profiles/api-configuration-profiles-1.png)
+
+3. Enter a name for your new profile
+![Creating a new profile dialog](/img/api-configuration-profiles/api-configuration-profiles.png)
+
+4. Configure the profile settings:
+   - Select your API provider
+![Provider selection dropdown](/img/api-configuration-profiles/api-configuration-profiles-2.png)
+
+   - Enter API key
+![API key entry field](/img/api-configuration-profiles/api-configuration-profiles-3.png)
+   
+   - Choose a model
+![Model selection interface](/img/api-configuration-profiles/api-configuration-profiles-8.png)
+   
+   - Configure the **Rate Limit** for this profile:
+     - **Default is 0 (disabled), which is suitable for most users.** If needed, you can set a minimum time (in seconds) between API requests *for this profile* to help manage costs or avoid provider rate limits.
+     - A value of 0 disables rate limiting (default).
+     - Requests using other profiles follow their own rate limits.
+
+![Rate limit slider control within API profile settings](/img/api-configuration-profiles/api-configuration-profiles-12.png)
+   
+   - Adjust model parameters (like [temperature](model-temperature))
+   
+### Switching Profiles
+
+Switch profiles in two ways:
+1. From Settings panel: Select a different profile from the dropdown
+
+![Profile selection dropdown in Settings](/img/api-configuration-profiles/api-configuration-profiles-7.png)
+
+2. During chat: Access the API Configuration dropdown in the chat interface
+
+![API Configuration dropdown in chat interface](/img/api-configuration-profiles/api-configuration-profiles-6.png)
+
+### Pinning and Sorting Profiles
+
+The API configuration dropdown now supports pinning your favorite profiles for quicker access:
+
+1. Hover over any profile in the dropdown to reveal the pin icon
+2. Click the pin icon to add the profile to your pinned list
+3. Pinned profiles appear at the top of the dropdown, sorted alphabetically
+4. Unpinned profiles appear below a separator, also sorted alphabetically
+5. You can unpin a profile by clicking the same icon again
+
+![Pinning API configuration profiles](/img/api-configuration-profiles/api-configuration-profiles-4.png)
+
+This feature makes it easier to navigate between commonly used profiles, especially when you have many configurations.
+
+
+### Editing and Deleting Profiles
+
+![Profile editing interface](/img/api-configuration-profiles/api-configuration-profiles-10.png)
+
+- Select the profile in Settings to modify any settings
+- Click the pencil icon to rename a profile
+- Click the trash icon to delete a profile (you cannot delete the only remaining profile)
+
+## Linking Profiles to Modes
+In the <Codicon name="notebook" /> Prompts tab, you can explicitly associate a specific Configuration Profile with each Mode. The system also automatically remembers which profile you last used with each mode, making your workflow more efficient.
+
+## Security Note
+
+API keys are stored securely in VSCode's Secret Storage and are never exposed in plain text.
+
+## Related Features
+
+- Works with [custom modes](custom-modes) you create
+- Integrates with [local models](../advanced-usage/local-models) for offline work
+- Supports [temperature settings](model-temperature) per mode
+- Supports per-profile rate limits (configured here) and general [usage tracking/cost info](../advanced-usage/rate-limits-costs)
+- Supports [Diff/Fast Edits](fast-edits) for tailored code editing behavior.
