@@ -19,6 +19,8 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
+    'index',
+    
     {
       type: "category",
       label: "Microservices Framework",

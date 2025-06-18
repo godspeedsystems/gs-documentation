@@ -2,7 +2,7 @@
 
 Saarthi is designed to understand natural language.  You don't need to use any special commands or syntax to communicate with it.  Just type your request in plain English, as if you were talking to a human developer.
 
-<img src="/static/img/typing-your-requests/naturally.gif" alt="Example of typing a request in Saarthi" width="600" />
+![Example of typing a request in Saarthi](/img/typing-your-requests/naturally.gif)
 
 ## Effective Request Strategies
 

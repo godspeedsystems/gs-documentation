@@ -1,20 +1,12 @@
 ---
 id: get-started
 title: Getting Started with Godspeed
-description: A comprehensive guide to installing the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
+description: A comprehensive guide to install the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
 keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
-slug: /
+slug: /get-started
 ---
 
 This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service and run the development server.
-
-### New to Godspeed ? 
-
-✅ Meet **Saarthi — our multi-agent dev team with framework-based approach**. [Install the extension](https://marketplace.visualstudio.com/items?itemName=godspeed-systems.saarthi) and experience seamless coding, powered by Godspeed. Unlike generic AI tools, Saarthi is context-aware, built with deterministic automation, and seamlessly integrated with Godspeed’s 4th-gen developer tools — bringing order, security, and standardization to your entire SDLC.
-
-✅ Explore [Godspeed Studio](https://studio.godspeed.systems)— a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
-
-📚 Additionally, you can access the [FAQs in Guides section](/docs/microservices-framework/guides)
 
 <!-- 
 ### Watch this One-Click Installation Guide
