@@ -1,8 +1,8 @@
 # Writing Custom Middleware in EventSource or DataSource
 
-Godspeed's plugin architecture allows you to extend behavior by injecting **custom middleware** into your **EventSource** (e.g., Express) implementation.
+Godspeed's plugin architecture allows you to extend behavior by injecting **custom middleware** into your **EventSource** (e.g., Express).
 
-This is useful for adding:  Logging, Rate limiting, Authentication, Metrics, Request/response mutation, Any side-effect logic before or after processing an event.
+This is useful for adding:  Logging, Rate limiting, Authentication, Metrics, Request/response mutation, Any side-effect logic before or after processing an api or event.
 
 
 ### Where Can You Add Middleware?
@@ -60,7 +60,7 @@ export default MyEventSource;
 
 ### General Pattern
 
-1. **Subclass the plugin’s `EventSource` or `DataSource` class.**
+1. **Subclass the plugin’s `EventSource` class.**
 2. **Override `initClient()` to gain access to the underlying client (e.g., `express()` app, PrismaClient, Axios instance).**
 3. **Inject your middleware using standard APIs** (e.g., `app.use()`, `app.get()`, or interceptors for Axios).
 
