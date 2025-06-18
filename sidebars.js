@@ -541,7 +541,7 @@ const sidebars = {
           label: 'Features',
           items: [
             'saarthi/features/api-configuration-profiles',
-            // 'saarthi/features/auto-approving-actions',
+            'saarthi/features/auto-approving-actions',
             // 'saarthi/features/browser-use',
             // 'saarthi/features/checkpoints',
             // 'saarthi/features/code-actions',
