@@ -23,14 +23,19 @@ Saarthi is an AI-powered autonomous coding agent that lives in your editor. It h
 
 ## Key Features
 
-### Multiple Modes
-Saarthi adapts to your needs with specialized [modes](./saarthi/basic-usage/using-modes):
-- **Code Mode:** For general-purpose coding tasks
-- **Architect Mode:** For planning and technical leadership
-- **Ask Mode:** For answering questions and providing information
-- **Debug Mode:** For systematic problem diagnosis
-- **Orchestrator Mode:** For managing complex tasks and delegating work
-- **[Custom Modes](./features/custom-modes):** Create unlimited specialized personas for security auditing, performance optimization, documentation, or any other task
+### Multiple Agents
+Saarthi adapts to your needs with specialized [modes] or agents(./saarthi/basic-usage/using-modes):
+- **Code:** For general-purpose coding tasks
+- **Architect:** For planning and technical leadership
+- **Ask:** For answering questions and providing information
+- **Debug:** For systematic problem diagnosis
+- **Orchestrator:** For managing complex tasks and delegating work
+- **Godspeed:** For developing and managing Godspeed applications, microservices architecture, and enterprise-grade systems
+- **Code Reviewer:** Performing code reviews, identifying potential issues, and ensuring code quality
+- **Devops:** Streamlines deployment tasks for all types of projects.
+- **[Custom Modes](./features/custom-modes):** Create unlimited specialized agents for security auditing, performance optimization, documentation, or any other task
+
+**Coming Soon in Saarthi:** QA, Interviewer, Tech Documenter and Product Manager agents. 
 
 ### Smart Tools
 Saarthi comes with powerful [tools](./basic-usage/how-tools-work) that can:

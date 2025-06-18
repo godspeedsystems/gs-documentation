@@ -19,8 +19,7 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
-    'index',
-    
+    'welcome',
     {
       type: "category",
       label: "Microservices Framework",
@@ -519,6 +518,11 @@ const sidebars = {
           id: 'saarthi/index'
         },
         {
+          type: 'doc',
+          label: 'Agents',
+          id: 'saarthi/basic-usage/using-modes',
+        },
+        {
           type: 'category',
           label: 'Getting Started',
           items: [
@@ -529,7 +533,6 @@ const sidebars = {
             'saarthi/basic-usage/typing-your-requests',
             'saarthi/basic-usage/how-tools-work',
             'saarthi/basic-usage/context-mentions',
-            'saarthi/basic-usage/using-modes',
             'saarthi/tips-and-tricks',
           ],
         },
@@ -538,10 +541,10 @@ const sidebars = {
           label: 'Features',
           items: [
             'saarthi/features/api-configuration-profiles',
-            'saarthi/features/auto-approving-actions',
-            'saarthi/features/browser-use',
-            'saarthi/features/checkpoints',
-            'saarthi/features/code-actions',
+            // 'saarthi/features/auto-approving-actions',
+            // 'saarthi/features/browser-use',
+            // 'saarthi/features/checkpoints',
+            // 'saarthi/features/code-actions',
             'saarthi/features/custom-instructions',
             'saarthi/features/custom-modes',
             'saarthi/features/enhance-prompt',
@@ -549,11 +552,11 @@ const sidebars = {
             // 'saarthi/features/footgun-prompting',
             // 'saarthi/features/intelligent-context-condensing',
             'saarthi/features/keyboard-shortcuts',
-            'saarthi/features/model-temperature',
+            // 'saarthi/features/model-temperature',
             // 'saarthi/features/saarthiignore',
-            'saarthi/features/settings-management',
-            'saarthi/features/shell-integration',
-            'saarthi/features/suggested-responses',
+            // 'saarthi/features/settings-management',
+            // 'saarthi/features/shell-integration',
+            // 'saarthi/features/suggested-responses',
             {
               type: 'category',
               label: 'MCP',
@@ -620,32 +623,32 @@ const sidebars = {
         //     'saarthi/advanced-usage/rate-limits-costs',
         //   ],
         // },
-        {
-          type: 'category',
-          label: 'Model Providers',
-          items: [
-            'saarthi/providers/anthropic',
-            'saarthi/providers/bedrock',
-            'saarthi/providers/deepseek',
-            'saarthi/providers/chutes',
-            'saarthi/providers/gemini',
-            'saarthi/providers/glama',
-            'saarthi/providers/groq',
-            'saarthi/providers/human-relay',
-            'saarthi/providers/lmstudio',
-            'saarthi/providers/litellm',
-            'saarthi/providers/mistral',
-            'saarthi/providers/ollama',
-            'saarthi/providers/openai',
-            'saarthi/providers/openai-compatible',
-            'saarthi/providers/openrouter',
-            'saarthi/providers/requesty',
-            'saarthi/providers/unbound',
-            'saarthi/providers/vertex',
-            'saarthi/providers/vscode-lm',
-            'saarthi/providers/xai',
-          ]
-        },
+        // {
+        //   type: 'category',
+        //   label: 'Model Providers',
+        //   items: [
+        //     'saarthi/providers/anthropic',
+        //     'saarthi/providers/bedrock',
+        //     'saarthi/providers/deepseek',
+        //     'saarthi/providers/chutes',
+        //     'saarthi/providers/gemini',
+        //     'saarthi/providers/glama',
+        //     'saarthi/providers/groq',
+        //     'saarthi/providers/human-relay',
+        //     'saarthi/providers/lmstudio',
+        //     'saarthi/providers/litellm',
+        //     'saarthi/providers/mistral',
+        //     'saarthi/providers/ollama',
+        //     'saarthi/providers/openai',
+        //     'saarthi/providers/openai-compatible',
+        //     'saarthi/providers/openrouter',
+        //     'saarthi/providers/requesty',
+        //     'saarthi/providers/unbound',
+        //     'saarthi/providers/vertex',
+        //     'saarthi/providers/vscode-lm',
+        //     'saarthi/providers/xai',
+        //   ]
+        // },
         {
           type: 'category',
           label: 'FAQ',
