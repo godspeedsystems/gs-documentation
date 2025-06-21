@@ -2,17 +2,18 @@
 sidebar_label: Welcome
 ---
 
-# Saarthi Docs
+# Saarthi
 
 Saarthi is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
 
 ## What Can Saarthi Do?
 
-- 🚀 **Generate Code** from natural language descriptions
+- 🚀 **Generate framework-aligned code** using Godspeed mode with RAG
 - 🔧 **Refactor & Debug** existing code
 - 📝 **Write & Update** documentation
 - 🤔 **Answer Questions** about your codebase
-- 🔄 **Automate** repetitive tasks
+- 🔄 **Automate Devops** Generates Docker configs and deploys to Docker or Render
+- ✅ **Review code** Performs detailed reviews across six dimensions including compliance, completeness, and bugs.
 - 🏗️ **Create** new files and projects
 
 ## Quick Start
@@ -24,7 +25,7 @@ Saarthi is an AI-powered autonomous coding agent that lives in your editor. It h
 ## Key Features
 
 ### Multiple Agents
-Saarthi adapts to your needs with specialized [modes] or agents(./saarthi/basic-usage/using-modes):
+Saarthi adapts to your needs with specialized [agents anda modes](./basic-usage/using-modes):
 - **Code:** For general-purpose coding tasks
 - **Architect:** For planning and technical leadership
 - **Ask:** For answering questions and providing information

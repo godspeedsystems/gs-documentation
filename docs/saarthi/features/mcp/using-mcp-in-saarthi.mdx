@@ -72,7 +72,7 @@ Both files use a JSON format with a `mcpServers` object containing named server 
   * Simpler setup (no HTTP server needed)
   * Runs as a child process on your machine
 
-  For more in-depth information about how STDIO transport works, see [STDIO Transport](/features/mcp/server-transports#stdio-transport).
+  For more in-depth information about how STDIO transport works, see [STDIO Transport](./server-transports#stdio-transport).
 
   STDIO configuration parameters:
 
@@ -143,7 +143,7 @@ This is the **modern standard** for remote servers accessed over HTTP/HTTPS, off
 *   Requires network access
 *   Allows centralized deployment and management
 
-For more in-depth information about how Streamable HTTP transport works, see [Streamable HTTP Transport](/features/mcp/server-transports#streamable-http-transport).
+For more in-depth information about how Streamable HTTP transport works, see [Streamable HTTP Transport](./server-transports#streamable-http-transport).
 
 Streamable HTTP configuration parameters:
 
@@ -180,7 +180,7 @@ Streamable HTTP configuration example:
   * Requires network access
   * Allows centralized deployment and management
 
-  For more in-depth information about how legacy SSE transport works, see [SSE Transport (Legacy)](/features/mcp/server-transports#sse-transport-legacy).
+  For more in-depth information about how legacy SSE transport works, see [SSE Transport (Legacy)](./server-transports#sse-transport-legacy).
 
   SSE (Legacy) configuration parameters:
 
@@ -221,8 +221,6 @@ Disabling your MCP Server Creation here will just remove the instructions from y
 1. Click the <Codicon name="server" /> icon in the top navigation of the Saarthi pane
 2. Check/Uncheck `Enable MCP Server Creation`
 
-  ![Enable MCP Server Creation toggle](/img/using-mcp-in-saarthi/using-mcp-in-saarthi-3.png)
-
 ## How to Use Saarthi to Create an MCP Server
 
 If you need a specific tool or capability that isn't available through existing MCP servers, you can ask Saarthi to build a new one for you.
@@ -238,7 +236,7 @@ If you need a specific tool or capability that isn't available through existing 
 
 2.  **Saarthi's Process (Simplified):** Once you make the request (and the setting is enabled), Saarthi will:
     *   Fetch internal instructions for server creation.
-    *   Scaffold a basic server project (usually TypeScript) in the default MCP directory (e.g., `~/Documents/Cline/MCP` on macOS) unless you specify otherwise.
+    *   Scaffold a basic server project (usually TypeScript) in the default MCP directory (e.g., `~/Documents/Saarthi/MCP` on macOS) unless you specify otherwise.
     *   Write the code to implement the requested tool, including handling necessary API calls.
     *   **Handle Secrets:** If the tool requires API keys or other credentials, Saarthi will ask you for them using the [`ask_followup_question`](/advanced-usage/available-tools/ask-followup-question) tool to ensure they are configured securely as environment variables for the server.
     *   **Configure:** Automatically add the new server's configuration to your global `mcp_settings.json` or project `.Saarthi/mcp.json` file.

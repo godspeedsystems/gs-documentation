@@ -93,15 +93,64 @@ Four ways to switch modes:
 | **Ideal For** | Developing and managing Godspeed applications, microservices architecture, and enterprise-grade systems |
 | **Special Features** | Optimized for Godspeed framework development, providing access to Godspeed-specific tools and knowledge **Context-Aware Intelligence via RAG Integration**- fetches relevant information from vector databases, allowing precise answers contextualized to the user's codebase and documentation. |
 
+---
+
+### Activate Godspeed Mode
+
+**Godspeed Mode** enables **retrieval-augmented generation (RAG)** powered by your codebase, docs, and the **Godspeed Systems framework** — delivering **production-grade microservices with embedded best practices and architectural guardrails**.
+
+### Connect to the RAG-node MCP Server
+
+To use this mode:
+
+1. Open Saarthi’s ⚙️ **MCP Settings** (top-right of Saarthi pane).
+2. Scroll down and click:
+   * **Edit Global MCP** → Opens global `mcp_settings.json`.
+3. Add your **Gemini API key** under the `env` block of the RAG-node server config:
+
+```json
+"RAG-node": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+    "-y",
+    "rag-mcp"
+    ],
+    "disabled": false,
+    "cwd": "C:/Users/yourName",
+    "alwaysAllow": [
+    "*"
+    ],
+    "env": {
+    "GOOGLE_API_KEY": "XXXXXXXXXXXXXXXXXX"   // Add your Gemini API Key here
+    }
+}
+```
+🔗 [Get your Gemini API Key](https://makersuite.google.com/app/apikey)
+
+### What Happens Next?
+
+Once connected:
+
+* Saarthi uses `mcp.handle-query` to forward your queries to the **RAG-node**.
+* The node uses **FAISS vector search** + **Gemini embeddings** to:
+  * Retrieve precise, source-traceable information.
+  * Auto-generate config, functions, events, and workflows.
+  * Provide *real-time guidance* aligned with Godspeed's architecture.
+
+⚠️ *Currently supports only Google Gemini for embeddings.*
+
 ### Code Review
 
 | Aspect | Details |
 |--------|---------|
 | **Name** | `🕵️ Code Review` |
 | **Description** | An AI Code Review Assistant—an expert system specialized in comprehensive, context-aware code analysis |
-| **Tool Access** | Full access to all tool groups: `read`, `edit`, `browser`, `command`, `mcp` |
+| **Tool Access** | Full access to all tool groups: `read`, `edit`, `command`, `mcp` |
 | **Ideal For** | Performing code reviews, identifying potential issues, and ensuring code quality |
 | **Special Features** | Provides comprehensive code analysis, identifies potential issues, and suggests improvements |
+
+To get review of your `Godspeed projects`, [Connect to the RAG-node MCP Server](/docs/saarthi/basic-usage/using-modes#connect-to-the-rag-node-mcp-server) first.
 
 ### DevOps Mode
 
