@@ -114,7 +114,7 @@ To use this mode:
     "command": "npx",
     "args": [
     "-y",
-    "@godspeedsystems/rag-mcp"
+    "@godspeedsystems/rag-node"
     ],
     "disabled": false,
     "cwd": "/path/to/home/directory",
