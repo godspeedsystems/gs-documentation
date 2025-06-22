@@ -54,6 +54,8 @@ We recommend these options for accessing the powerful **Claude 3.7 Sonnet** mode
 - **Anthropic:** Direct access to Claude models. Requires API access approval and may have [rate limits depending on your tier](https://docs.anthropic.com/en/api/rate-limits#requirements-to-advance-tier). See [Anthropic's pricing page](https://www.anthropic.com/pricing#anthropic-api) for details.
 
 5. Click "Let's go!" to save your settings and start using Saarthi
+
+
 <!-- 
 ### Option 1: LLM Routers
 
