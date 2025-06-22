@@ -103,7 +103,7 @@ Four ways to switch modes:
 
 To use this mode:
 
-1. Open Saarthi’s ⚙️ **MCP Settings** (top-right of Saarthi pane).
+1. Open Saarthi’s **MCP Settings** (top-right of Saarthi pane).
 2. Scroll down and click:
    * **Edit Global MCP** → Opens global `mcp_settings.json`.
 3. Add your **Gemini API key** under the `env` block of the RAG-node server config:
@@ -114,15 +114,15 @@ To use this mode:
     "command": "npx",
     "args": [
     "-y",
-    "rag-mcp"
+    "@godspeedsystems/rag-node"
     ],
     "disabled": false,
-    "cwd": "C:/Users/yourName",
+    "cwd": "/path/to/home/directory",
     "alwaysAllow": [
     "*"
     ],
     "env": {
-    "GOOGLE_API_KEY": "XXXXXXXXXXXXXXXXXX"   // Add your Gemini API Key here
+    "GOOGLE_API_KEY": "AIXXXXXXXXXXXXXXXXXX"   // Add your Gemini API Key here
     }
 }
 ```
