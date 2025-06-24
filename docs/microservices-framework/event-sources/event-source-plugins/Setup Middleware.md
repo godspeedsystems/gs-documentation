@@ -28,34 +28,34 @@ Here’s how to add a middleware that:
 import { PlainObject } from "@godspeedsystems/core";
 import { EventSource } from "@godspeedsystems/plugins-express-as-http";
 import promClient from '@godspeedsystems/metrics';
-import { PrismaClient } from "../../datasources/prisma-clients/schema";
 
 class MyEventSource extends EventSource {
   async initClient(): Promise<PlainObject> {
     const client = await super.initClient();
 
-    // Add your custom middleware here
-    client.get('/metrics', async (req, res) => {
+    client.get('/metrics', async (req: any, res: any) => {
       try {
+        let prismaMetrics: string = '';
+        const prismaClient = this.datasources.schema.client;    //here schema is the name of my prisma schema file
+        prismaMetrics+= await prismaClient.$metrics.prometheus();
         const expressMetrics = await promClient.register.metrics();
-        const prismaMetrics = await new PrismaClient().$metrics.prometheus();
         res.set('Content-Type', promClient.register.contentType);
-        res.end(`${expressMetrics}\n${prismaMetrics}`);
+        res.end(expressMetrics + '\n' + prismaMetrics);
+
       } catch (err: any) {
-        res.status(500).send({ error: err.message });
+        const error_data = err.stack || err;
+        const error_code = error_data.code || 500;
+        const error_message = error_data.message || error_data;
+        res.status(error_code).send({ success: false, error: { code: error_code, message: error_message } });
       }
     });
 
     return client;
   }
-  // (Optional) override setupMetrics to disable default `/metrics` middleware
-  setupMetrics(app: any) {
-    promClient.collectDefaultMetrics(); // only collects, doesn't auto-bind endpoint
-  }
 }
 export default MyEventSource;
-```
 
+```
 ---
 
 ### General Pattern

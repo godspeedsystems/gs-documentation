@@ -60,10 +60,12 @@ metrics:
 
 ```ts
 client.get('/metrics', async (req, res) => {
-  const expressMetrics = await promClient.register.metrics();
-  const prismaMetrics = await prismaClient.$metrics.prometheus();
-  res.set('Content-Type', promClient.register.contentType);
-  res.end(`${expressMetrics}\n${prismaMetrics}`);
+        let prismaMetrics: string = '';
+        const prismaClient = this.datasources.schema.client;    //here schema is the name of my prisma schema file
+        prismaMetrics+= await prismaClient.$metrics.prometheus();
+        const expressMetrics = await promClient.register.metrics();
+        res.set('Content-Type', promClient.register.contentType);
+        res.end(expressMetrics + '\n' + prismaMetrics);
 });
 ```
 

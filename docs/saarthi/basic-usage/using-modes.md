@@ -19,7 +19,7 @@ Four ways to switch modes:
 
 1. **Dropdown menu:** Click the selector to the left of the chat input
    
-2. **Slash command:** Type `/architect`, `/ask`, `/debug`, `/code`, or `/orchestrator` in the chat input
+2. **Slash command:** Type `/<mode-name>` in the chat input
    
 3. **Toggle command/Keyboard shortcut:** Use the keyboard shortcut below, applicable to your operating system. Each press cycles through the available modes in sequence, wrapping back to the first mode after reaching the end.
        
@@ -33,6 +33,23 @@ Four ways to switch modes:
 
 ## Built-in Agents or Modes
 
+- [Ask](/docs/saarthi/modes/ask.md)
+
+- [Code-Generic](/docs/saarthi/modes/code.md)
+
+- [Godspeed](/docs/saarthi/modes/godspeed.md)
+
+- [Code-Review](/docs/saarthi/modes/code-review.md)
+
+- [Debug](/docs/saarthi/modes/debug.md)
+
+- [DevOps](/docs/saarthi/modes/devops.md)
+
+- [Architect](/docs/saarthi/modes/architect.md)
+
+- [Orchestrator](/docs/saarthi/modes/orchestrator.md)
+
+<!-- 
 ### Code (Default)
 
 | Aspect | Details |
@@ -73,21 +90,21 @@ Four ways to switch modes:
 | **Ideal For** | Tracking down bugs, diagnosing errors, and resolving complex issues |
 | **Special Features** | Uses a methodical approach of analyzing, narrowing possibilities, and fixing issues. Includes custom instructions to reflect, distill possibilities, add logs, and confirm before fixing. |
 
-### Orchestrator (aka Boomerang Mode)
+### Orchestrator
 
 | Aspect | Details |
 |--------|---------|
 | **Name** | `🪃 Orchestrator` |
-| **Description** | A strategic workflow orchestrator (aka Boomerang Mode) that breaks down complex tasks and delegates them to specialized modes. Learn more about [Boomerang Tasks](../features/boomerang-tasks). |
+| **Description** | A strategic workflow orchestrator that breaks down complex tasks and delegates them to specialized modes.
 | **Tool Access** | Access to `read`, `browser`, `command`, `mcp`, and restricted `edit` (mode configuration files only: `.saarthimodes`, `custom_modes.json`) |
 | **Ideal For** | Managing multi-step projects, coordinating work across different modes, and automating complex workflows |
 | **Special Features** | Uses the [`new_task`](../advanced-usage/available-tools/new-task) tool to delegate subtasks to other modes. |
 
-### Godspeed
+### Code-Godspeed
 
 | Aspect | Details |
 |--------|---------|
-| **Name** | `⚡ Godspeed` |
+| **Name** | `⚡ Code-Godspeed` |
 | **Description** | A Godspeed meta-framework expert with deep knowledge of microservices architecture, distributed scalable enterprise grade systems and industry wide best practices |
 | **Tool Access** | Full access to all tool groups: `read`, `edit`, `browser`, `command`, `mcp` |
 | **Ideal For** | Developing and managing Godspeed applications, microservices architecture, and enterprise-grade systems |
@@ -95,9 +112,9 @@ Four ways to switch modes:
 
 ---
 
-### Activate Godspeed Mode
+### Activate Code-Godspeed Mode
 
-**Godspeed Mode** enables **retrieval-augmented generation (RAG)** powered by your codebase, docs, and the **Godspeed Systems framework** — delivering **production-grade microservices with embedded best practices and architectural guardrails**.
+**Code-Godspeed Mode** enables **retrieval-augmented generation (RAG)** powered by your codebase, docs, and the **Godspeed Systems framework** — delivering **production-grade microservices with embedded best practices and architectural guardrails**.
 
 ### Connect to the RAG-node MCP Server
 
@@ -160,7 +177,7 @@ To get review of your `Godspeed projects`, [Connect to the RAG-node MCP Server](
 | **Description** | The ultimate DevOps Mastermind. Streamlines deployment tasks for all types of projects. |
 | **Tool Access** | Full access to all tool groups: `read`, `edit`, `browser`, `command`, `mcp` |
 | **Ideal For** | Automating deployments, managing infrastructure, and streamlining development workflows |
-| **Special Features** | Local Docker Deployment: Automatically generates Dockerfile, docker-compose.yml, and .dockerignore. It builds and runs the project locally in Docker with minimal prompts. Render Deployment: Uses a new Render MCP tool (added to global MCPs). Just provide your Git repo URL and Render account details, and Saarthi handles the full Render deployment pipeline. |
+| **Special Features** | Local Docker Deployment: Automatically generates Dockerfile, docker-compose.yml, and .dockerignore. It builds and runs the project locally in Docker with minimal prompts. Render Deployment: Uses a new Render MCP tool (added to global MCPs). Just provide your Git repo URL and Render account details, and Saarthi handles the full Render deployment pipeline. | -->
 
 ## Customizing Modes
 

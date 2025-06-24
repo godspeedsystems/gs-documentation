@@ -167,19 +167,24 @@ http.get./mysql/post/{id}:
 ```ts title = src/functions/com/biz/mysql/post/one.ts
 
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../../datasources/prisma-clients/mysql";
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
   const { inputs: { data: { params } }, logger, datasources } = ctx;
 
   const client: PrismaClient = datasources.mysql.client;
-
+  // above way of accessing prisma client provides explicit typing, 
+  // which helps with IDE autocomplete and static checks in typeScript.
+ 
+  // const client = ctx.datasources['mysql'].client;
+ 
   const response = await client.Post.findUnique({
                          where: { id: params.id }
                   });
   return new GSStatus(true, 200, "Post fetched", response );
 }
 ```
+
 ### More Examples
 
 [Check more typescript function examples to interact with prisma datasource](/docs/microservices-framework/how-to/sample-ts-functions.md)

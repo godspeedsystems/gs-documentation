@@ -25,7 +25,7 @@ Saarthi is an AI-powered autonomous coding agent that lives in your editor. It h
 ## Key Features
 
 ### Multiple Agents
-Saarthi adapts to your needs with specialized [agents anda modes](./basic-usage/using-modes):
+Saarthi adapts to your needs with specialized [agents and modes](./basic-usage/using-modes):
 - **Code:** For general-purpose coding tasks
 - **Architect:** For planning and technical leadership
 - **Ask:** For answering questions and providing information

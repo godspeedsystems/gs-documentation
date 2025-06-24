@@ -6,7 +6,7 @@ keywords: [Godspeed, prisma function, find, get, create, update, ts functions, d
 
 ```ts title=create.ts
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../../datasources/prisma-clients/schmaName";
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, inputs, params, headers } }, logger, datasources } = ctx;
@@ -35,11 +35,13 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
 
 ```ts title=update.ts
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../../datasources/prisma-clients/schmaName";
+
 module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, body } }, logger, datasources } = ctx;
     try {     
         const client: PrismaClient = datasources.schemaName.client;
+
         const updatedUser = await client.user.update({ 
                             where: { id: user.userId },
                              data: { ...body   } });   
@@ -58,7 +60,8 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
 
 ```ts title getOne.ts
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../../datasources/prisma-clients/schmaName";
+
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, inputs, params, headers } }, logger, datasources } = ctx;

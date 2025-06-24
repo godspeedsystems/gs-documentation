@@ -505,7 +505,7 @@ const sidebars = {
             //   id: 'deploy-using-docker',
         //   },
             ]
-          },
+        },
       ],
     },
     {
@@ -518,17 +518,69 @@ const sidebars = {
           id: 'saarthi/index'
         },
         {
-          type: 'doc',
-          label: 'Agents',
-          id: 'saarthi/basic-usage/using-modes',
-        },
-        {
           type: 'category',
           label: 'Getting Started',
           items: [
             'saarthi/getting-started/installing',
             'saarthi/getting-started/connecting-api-provider',
-            'saarthi/getting-started/your-first-task',
+            'saarthi/getting-started/your-first-task'
+          ]
+        },
+        {
+          type: "category",
+          label: "Agents",
+          items: [
+            {
+              type: 'doc',
+              label: 'Using Multiple Agents',
+              id: 'saarthi/basic-usage/using-modes',
+            },
+            {
+              type: 'doc',
+              label: 'Ask',
+              id: 'saarthi/modes/ask',
+            },
+            {
+              type: 'doc',
+              label: 'Code-Generic',
+              id: 'saarthi/modes/code',
+            },
+            {
+              type: 'doc',
+              label: 'Code-Godspeed',
+              id: 'saarthi/modes/godspeed',
+            },
+            {
+              type: 'doc',
+              label: 'Code Review',
+              id: 'saarthi/modes/code-review',
+            },
+            {
+              type: 'doc',
+              label: 'Debug',
+              id: 'saarthi/modes/debug',
+            },
+            {
+              type: 'doc',
+              label: 'Devops',
+              id: 'saarthi/modes/devops',
+            }, 
+            {
+              type: 'doc',
+              label: 'Architect',
+              id: 'saarthi/modes/architect',
+            },
+            {
+              type: 'doc',
+              label: 'Orchestrator',
+              id: 'saarthi/modes/orchestrator',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Basic Usage',
+          items: [
             'saarthi/basic-usage/the-chat-interface',
             'saarthi/basic-usage/typing-your-requests',
             'saarthi/basic-usage/how-tools-work',
@@ -649,13 +701,12 @@ const sidebars = {
             'saarthi/providers/xai',
           ]
         },
-        {
-          type: 'category',
-          label: 'FAQ',
-          items: [
-            'saarthi/faq',
-          ],
-        },
+        'saarthi/faq'
+        // {
+        //   type: 'doc',
+        //   label: 'FAQs',
+        //   id: 'saarthi/faq'
+        // },
       ]
     },
   ],  
