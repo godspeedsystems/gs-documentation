@@ -37,49 +37,9 @@ Godspeed combines three powerful innovations into one cohesive developer experie
 | **LLM-Powered Apps**                 | AI-integrated workflows and copilots                          |
 | **Internal Platforms & SaaS Tools**  | Dashboards, portals, automation platforms                     |
 | **DevOps Workflows & Infra-as-Code** | GitOps, CI/CD, Terraform-powered automation                   |
-
 ---
 
-## Why Teams Choose Godspeed
 
-| With Godspeed                         | Without Godspeed                          |
-|---------------------------------------|-------------------------------------------|
-| Less code, fewer bugs                 | Boilerplate and glue code overload        |
-| 10x faster delivery                   | Long MVP-to-scale cycles                  |
-| Greater control & visibility          | Ops overwhelm and fragmented workflows    |
-| No vendor lock-in                     | High dependency on specific tools         |
-| Built-in architecture & security      | Ad-hoc patterns, inconsistent practices   |
-
----
-
-## Key Benefits
-
-- **AI Agents for Full SDLC**
-- **Standardized Guardrails**
-- **Zero Boilerplate Setup**
-- **Smart Context & Token Management**
-- **Plug-and-Play with Your Stack**
-- **Battle-Tested by Builders at Scale**
-
-> With Godspeed Mode, reduce bugs and code clutter by 90%, and ship faster with confidence.
-
-<!-- ---
-
-## Get Started — Pick Your Track
-
-### For Startups & Founders
-- MVP, migration, or scale-ready paths
-- Optional Fractional CTO & Strategic Support
-
-### For Developers
-- Learn AI-enhanced workflows
-- Build real-world projects and portfolios
-
-### For Dev Agencies
-- Shorten delivery cycles
-- Empower junior developers with standardized tools
-
---- -->
 
 ## Free to Start
 
