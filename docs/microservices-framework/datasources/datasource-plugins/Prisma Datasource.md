@@ -142,6 +142,60 @@ You can generate the CRUD API'S by entering the below command:
 
 * You can now view events and workflows generated under events and functions folder. They follow a structure similar to the APIs below.
 
+Here is an additional subsection you can insert under the **“How to use”** section of your Prisma Datasource Plugin documentation. This integrates the `execute` method explanation and encourages its usage in TypeScript functions:
+
+---
+
+### Writing TypeScript Functions Using the `execute()` Method (Recommended)
+
+Instead of calling Prisma models directly via `client.Model.method()`, we recommend using the `execute()` method provided by the Godspeed `prisma-as-datastore` plugin.
+
+### Why use `execute()`?
+
+The `execute()` method adds several powerful features on top of Prisma’s native client:
+
+ <!-- **Authorization integration** using `authzPerms` for row/column-level filtering. -->
+*  **Validation** of `entityType` and `method`, preventing accidental misuse.
+*  **Automatic `BigInt` conversion** to avoid serialization issues.
+*  **Consistent response structure** using `GSStatus` with `code`, `success`, and `data`.
+
+### Example
+
+```ts title=src/functions/devreg/create.ts
+
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
+
+module.exports = async (ctx: GSContext): Promise<GSStatus> => {
+  const {
+    inputs: { data: { body, user } },
+    datasources,
+    logger
+  } = ctx;
+
+  const registrationData = {
+    name: body.name,
+    email: body.email,
+    createdBy: user.id,
+  };
+
+  const client: GSDataSource = datasources.godspeed;
+
+  const response = await client.execute(ctx, {
+    meta: {
+      entityType: 'DeveloperRegistration',  //Model Name
+      method: 'create'
+    },
+    ...registrationData                 // data to send
+  });
+
+  return response;
+};
+```
+
+> This method ensures your function respects permission rules and maintains consistency with the Godspeed framework's response model.
+
+---
+
 ### Sample API
 If your schema name is mysql.prisma and model name is 'post', then your event and workflow to fetch data from the database, will look like :
 
@@ -167,27 +221,25 @@ http.get./mysql/post/{id}:
 ```ts title = src/functions/com/biz/mysql/post/one.ts
 
 import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
-import { PrismaClient } from "../../../../../datasources/prisma-clients/mysql";
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
   const { inputs: { data: { params } }, logger, datasources } = ctx;
-
-  const client: PrismaClient = datasources.mysql.client;
-  // above way of accessing prisma client provides explicit typing, 
-  // which helps with IDE autocomplete and static checks in typeScript.
- 
-  // const client = ctx.datasources['mysql'].client;
- 
-  const response = await client.Post.findUnique({
-                         where: { id: params.id }
-                  });
+  const client: GSDataSource = datasources.mysql;
+  const response = await client.execute(ctx, {
+                    meta: {
+                      entityType: 'Post',  //Model Name
+                      method: 'findUnique'
+                    },
+                    where: {
+                      id: params.id
+                    } });
   return new GSStatus(true, 200, "Post fetched", response );
 }
 ```
-
+<!-- 
 ### More Examples
 
-[Check more typescript function examples to interact with prisma datasource](/docs/microservices-framework/how-to/sample-ts-functions.md)
+[Check more typescript function examples to interact with prisma datasource](/docs/microservices-framework/how-to/sample-ts-functions.md) -->
 
 <!-- ```yaml title= src/functions/com/biz/post/one.yaml
 summary: Fetch Post

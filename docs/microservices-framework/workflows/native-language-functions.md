@@ -187,17 +187,6 @@ To access outputs of tasks executed before the current task, developer can destr
   const firstTaskOutput = outputs[firstTaskId]
 ```
 
-### Accessing Datasource Clients
-    
-With `datasources` we can access all [datasources](../datasources/overview.md), their clients and methods.
-
-```javascript
-const { datasources} = ctx;
-const responseData = await datasources.prismaSchema.client.User.create({
-    data: inputs.body
-})
-
-```
 ### ChildLogger
 
 With childLogger you have accessibility to Pino logger instance with context information set - for example the `log.attributes` set in eventsource or event level.
@@ -292,13 +281,13 @@ Similarly, all datasource clients initialised in a Godspeed project are convenie
 
 There are two options for invoking datasource clients from functions:
 
-**Option 1: Using the client key**
+**Option 1: Using the client key (Not Recommended for Prisma)**
 
 Every datasource exposes a client key. The client may be a single instance like in the case of Axios, or multiple datasource client instances like in the case of AWS, or database models like in the case of Mongoose (depending on the plugin being used).
 
-**Option 2: Using the execute method**
+**Option 2: Using the execute method (Recommended)** 
 
-All datasources have an execute method. This may be preferable in case you want to utilise the full capabilities of the plugin wrapped over the native clients, like error handling checks and response codes, retries, caching etc.
+All datasource plugins in godspeed have an execute method. This is recommended to utilise the full capabilities of the plugin wrapped over the native clients, like error handling checks and response codes, retries, caching etc.
 
 ```ts
  export default async function (ctx: GSContext, args: any) {
