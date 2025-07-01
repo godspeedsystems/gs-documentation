@@ -1,6 +1,6 @@
 ---
 title: OpenAPI Code Generator
-description: description
+description: A code generator to scaffold Redux Toolkit API slices from OpenAPI/Swagger spec files, supporting filtered or full endpoint output for flexible frontend integration.
 ---
 
 # gs-codegen-openapi

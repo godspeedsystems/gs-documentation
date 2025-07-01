@@ -1,6 +1,10 @@
 ---
 title: UI Project Scaffolder
-description: description
+description:
+  gs-ui-init is a CLI tool in the Godspeed ecosystem used to scaffold frontend projects
+  in React or Next.js. It automates the setup process with built-in support for
+  TypeScript, TailwindCSS, linting, and routing. Depending on the chosen framework,
+  it triggers either `create-react-router` or `create-next-app`.
 ---
 
 # gs-ui-init

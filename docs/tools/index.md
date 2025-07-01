@@ -1,6 +1,6 @@
 ---
 title: GS Tool (Godspeed CLI Runner)
-description: description
+description: A CLI runner for executing and validating tools in the Godspeed ecosystem.
 ---
 
 ## What is GS Tool?
