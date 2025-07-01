@@ -726,6 +726,11 @@ const sidebars = {
               label: "gs-ui-init",
               id: "tools/tools/gs-ui-init",
             },
+            {
+              type: "doc",
+              label: "gs-codegen-openapi",
+              id: "tools/tools/gs-codegen-openapi",
+            },
           ],
         },
       ],
