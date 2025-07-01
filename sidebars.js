@@ -19,7 +19,7 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
-    'welcome',
+    "welcome",
     {
       type: "category",
       label: "Microservices Framework",
@@ -80,7 +80,7 @@ const sidebars = {
           type: "doc",
           label: "3. FAQs & Guides",
           id: "microservices-framework/guides",
-        },    
+        },
         {
           type: "doc",
           label: "4. CLI",
@@ -121,11 +121,11 @@ const sidebars = {
               label: "6.5. Plugin- Express for HTTP",
               id: "microservices-framework/event-sources/event-source-plugins/Express Http Eventsource",
             },
-                        {
+            {
               type: "doc",
               label: "6.6. Plugin- Fastify for HTTP",
               id: "microservices-framework/event-sources/event-source-plugins/Fastify Eventsource",
-            }, 
+            },
             {
               type: "doc",
               label: "6.7. Plugin- Cron",
@@ -140,14 +140,14 @@ const sidebars = {
               type: "doc",
               label: "6.9. Plugin- GraphQl",
               id: "microservices-framework/event-sources/event-source-plugins/Apollo GraphQl Eventsource",
-            },    
+            },
             {
               type: "doc",
               label: "6.10. Setup Middleware",
               id: "microservices-framework/event-sources/event-source-plugins/Setup Middleware",
-            },      
+            },
           ],
-        },         
+        },
         {
           type: "category",
           label: "7. API & Event",
@@ -156,17 +156,17 @@ const sidebars = {
               type: "doc",
               label: "7.1. Overview",
               id: "microservices-framework/event-sources/events-overview",
-            },    
+            },
             {
               type: "doc",
               label: "7.2. Event Types",
               id: "microservices-framework/event-sources/event-types/overview",
-            },   
+            },
             {
               type: "doc",
               label: "7.3. Writing API & Event",
               id: "microservices-framework/event-sources/write-apis",
-            },  
+            },
             {
               type: "doc",
               label: "7.4. HTTP API",
@@ -186,12 +186,12 @@ const sidebars = {
               type: "doc",
               label: "7.7. Graphql API",
               id: "microservices-framework/event-sources/event-types/graphql-events",
-            },  
+            },
             {
               type: "doc",
               label: "7.8. Reusing Definitions with $ref",
               id: "microservices-framework/definitions",
-            },         
+            },
             {
               type: "doc",
               label: "7.9. Schema Validation",
@@ -266,21 +266,21 @@ const sidebars = {
                   id: "microservices-framework/databases/MongoDB",
                 },
                 {
-                   type: "doc",
-                   label: "9.2.3. MySQL",
-                   id: "microservices-framework/databases/MySQL",
-                 },
-                 {
+                  type: "doc",
+                  label: "9.2.3. MySQL",
+                  id: "microservices-framework/databases/MySQL",
+                },
+                {
                   type: "doc",
                   label: "9.2.4. PostgreSQL",
                   id: "microservices-framework/databases/PostgreSQL",
-                 },
-               
-                 {
-                   type: "doc",
-                    label: "9.2.5 SQL Server",
-                    id: "microservices-framework/databases/SQLServer",
-                 },
+                },
+
+                {
+                  type: "doc",
+                  label: "9.2.5 SQL Server",
+                  id: "microservices-framework/databases/SQLServer",
+                },
                 {
                   type: "doc",
                   label: "9.2.6. SqLite",
@@ -290,17 +290,17 @@ const sidebars = {
                   type: "doc",
                   label: "9.2.7 CokroachDB",
                   id: "microservices-framework/databases/CokroachDB",
-               },
-               {
+                },
+                {
                   type: "doc",
                   label: "9.2.8 MariaDB",
                   id: "microservices-framework/databases/MariaDB",
-               },
-               {
-                type: "doc",
-                label: "9.2.9. PlanetScale",
-                id: "microservices-framework/databases/PlanetScale",
-              },
+                },
+                {
+                  type: "doc",
+                  label: "9.2.9. PlanetScale",
+                  id: "microservices-framework/databases/PlanetScale",
+                },
               ],
             },
             {
@@ -332,7 +332,7 @@ const sidebars = {
               type: "doc",
               label: "9.8. Plugin- Axios",
               id: "microservices-framework/datasources/datasource-plugins/Axios Datasource",
-            },         
+            },
             {
               type: "doc",
               label: "9.9. Plugin- AWS",
@@ -415,7 +415,6 @@ const sidebars = {
               label: "10.3. OAuth2 Authentication",
               id: "microservices-framework/authentication/oauth2-authentication",
             },
-            
           ],
         },
         {
@@ -482,7 +481,7 @@ const sidebars = {
               type: "doc",
               label: "15.6. Logs",
               id: "microservices-framework/telemetry/logging",
-            }
+            },
             // {
             //   type: "doc",
             //   label: "16.3. Custom traces, logs and metrics (BPM)",
@@ -491,20 +490,20 @@ const sidebars = {
           ],
         },
         {
-            type: "category",
-            label: "16. Deployment",
-            items: [
-              {
-                type: 'doc',
-                label: 'Deploy on Render',
-                id: 'microservices-framework/deploy-on-render',
-              },
+          type: "category",
+          label: "16. Deployment",
+          items: [
+            {
+              type: "doc",
+              label: "Deploy on Render",
+              id: "microservices-framework/deploy-on-render",
+            },
             // {
             //   type: 'doc',
             //   label: '16.2 Deploy using Docker',
             //   id: 'deploy-using-docker',
-        //   },
-            ]
+            //   },
+          ],
         },
       ],
     },
@@ -513,79 +512,79 @@ const sidebars = {
       label: "Saarthi",
       items: [
         {
-          type: 'doc',
-          label: 'Welcome',
-          id: 'saarthi/index'
+          type: "doc",
+          label: "Welcome",
+          id: "saarthi/index",
         },
         {
-          type: 'category',
-          label: 'Getting Started',
+          type: "category",
+          label: "Getting Started",
           items: [
-            'saarthi/getting-started/installing',
-            'saarthi/getting-started/connecting-api-provider',
-            'saarthi/getting-started/your-first-task'
-          ]
+            "saarthi/getting-started/installing",
+            "saarthi/getting-started/connecting-api-provider",
+            "saarthi/getting-started/your-first-task",
+          ],
         },
         {
           type: "category",
           label: "Agents",
           items: [
             {
-              type: 'doc',
-              label: 'Using Multiple Agents',
-              id: 'saarthi/basic-usage/using-modes',
+              type: "doc",
+              label: "Using Multiple Agents",
+              id: "saarthi/basic-usage/using-modes",
             },
             {
-              type: 'doc',
-              label: 'Ask',
-              id: 'saarthi/modes/ask',
+              type: "doc",
+              label: "Ask",
+              id: "saarthi/modes/ask",
             },
             {
-              type: 'doc',
-              label: 'Code-Generic',
-              id: 'saarthi/modes/code',
+              type: "doc",
+              label: "Code-Generic",
+              id: "saarthi/modes/code",
             },
             {
-              type: 'doc',
-              label: 'Code-Godspeed',
-              id: 'saarthi/modes/godspeed',
+              type: "doc",
+              label: "Code-Godspeed",
+              id: "saarthi/modes/godspeed",
             },
             {
-              type: 'doc',
-              label: 'Code Review',
-              id: 'saarthi/modes/code-review',
+              type: "doc",
+              label: "Code Review",
+              id: "saarthi/modes/code-review",
             },
             {
-              type: 'doc',
-              label: 'Debug',
-              id: 'saarthi/modes/debug',
+              type: "doc",
+              label: "Debug",
+              id: "saarthi/modes/debug",
             },
             {
-              type: 'doc',
-              label: 'Devops',
-              id: 'saarthi/modes/devops',
-            }, 
-            {
-              type: 'doc',
-              label: 'Architect',
-              id: 'saarthi/modes/architect',
+              type: "doc",
+              label: "Devops",
+              id: "saarthi/modes/devops",
             },
             {
-              type: 'doc',
-              label: 'Orchestrator',
-              id: 'saarthi/modes/orchestrator',
+              type: "doc",
+              label: "Architect",
+              id: "saarthi/modes/architect",
+            },
+            {
+              type: "doc",
+              label: "Orchestrator",
+              id: "saarthi/modes/orchestrator",
             },
           ],
         },
         {
-          type: 'category',
-          label: 'Basic Usage',
+          type: "category",
+          label: "Basic Usage",
           items: [
-            'saarthi/basic-usage/the-chat-interface',
-            'saarthi/basic-usage/typing-your-requests',
-            'saarthi/basic-usage/how-tools-work',
-            'saarthi/basic-usage/context-mentions',
-            'saarthi/tips-and-tricks',
+            "saarthi/basic-usage/the-chat-interface",
+            "saarthi/basic-usage/typing-your-requests",
+            "saarthi/basic-usage/how-tools-work",
+            "saarthi/basic-usage/context-mentions",
+            "saarthi/tips-and-tricks",
           ],
         },
         // {
@@ -676,40 +675,51 @@ const sidebars = {
         //   ],
         // },
         {
-          type: 'category',
-          label: 'Model Providers',
+          type: "category",
+          label: "Model Providers",
           items: [
-            'saarthi/providers/anthropic',
-            'saarthi/providers/bedrock',
-            'saarthi/providers/deepseek',
-            'saarthi/providers/chutes',
-            'saarthi/providers/gemini',
-            'saarthi/providers/glama',
-            'saarthi/providers/groq',
-            'saarthi/providers/human-relay',
-            'saarthi/providers/lmstudio',
-            'saarthi/providers/litellm',
-            'saarthi/providers/mistral',
-            'saarthi/providers/ollama',
-            'saarthi/providers/openai',
-            'saarthi/providers/openai-compatible',
-            'saarthi/providers/openrouter',
-            'saarthi/providers/requesty',
-            'saarthi/providers/unbound',
-            'saarthi/providers/vertex',
-            'saarthi/providers/vscode-lm',
-            'saarthi/providers/xai',
-          ]
+            "saarthi/providers/anthropic",
+            "saarthi/providers/bedrock",
+            "saarthi/providers/deepseek",
+            "saarthi/providers/chutes",
+            "saarthi/providers/gemini",
+            "saarthi/providers/glama",
+            "saarthi/providers/groq",
+            "saarthi/providers/human-relay",
+            "saarthi/providers/lmstudio",
+            "saarthi/providers/litellm",
+            "saarthi/providers/mistral",
+            "saarthi/providers/ollama",
+            "saarthi/providers/openai",
+            "saarthi/providers/openai-compatible",
+            "saarthi/providers/openrouter",
+            "saarthi/providers/requesty",
+            "saarthi/providers/unbound",
+            "saarthi/providers/vertex",
+            "saarthi/providers/vscode-lm",
+            "saarthi/providers/xai",
+          ],
         },
-        'saarthi/faq'
+        "saarthi/faq",
         // {
         //   type: 'doc',
         //   label: 'FAQs',
         //   id: 'saarthi/faq'
         // },
-      ]
+      ],
     },
-  ],  
+    {
+      type: "category",
+      label: "Tools",
+      items: [
+        {
+          type: "doc",
+          label: "Welcome",
+          id: "tools/index",
+        },
+      ],
+    },
+  ],
 };
 
 module.exports = sidebars;
