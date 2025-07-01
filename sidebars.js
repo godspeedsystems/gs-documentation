@@ -735,7 +735,22 @@ const sidebars = {
         },
       ],
     },
-  ],
+    {
+      type: "category",
+      label: "Release-Notes",
+      items: [
+        {
+          type: "doc",
+          label: "Framework",
+          id: "release-notes/framework-release"
+        },
+        {
+          type: "doc",
+          label: "Saarthi",
+          id: "release-notes/saarthi-release",
+        },
+      ],
+    },
+  ],  
 };
-
 module.exports = sidebars;

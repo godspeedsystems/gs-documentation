@@ -8,4 +8,4 @@
 | **Ideal For** | Performing code reviews, identifying potential issues, and ensuring code quality |
 | **Special Features** | Provides comprehensive code analysis, identifies potential issues, and suggests improvements |
 
-To get review of your `Godspeed projects`, [Connect to the RAG-node MCP Server](/docs/saarthi/basic-usage/using-modes#connect-to-the-rag-node-mcp-server) first.
+To get review of your `Godspeed projects`, [Connect to the RAG-node MCP Server](/docs/saarthi/modes/godspeed#connect-to-the-rag-node-mcp-server) first.
