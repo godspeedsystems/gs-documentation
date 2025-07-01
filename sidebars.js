@@ -717,6 +717,17 @@ const sidebars = {
           label: "Welcome",
           id: "tools/index",
         },
+        {
+          type: "category",
+          label: "Available Tools",
+          items: [
+            {
+              type: "doc",
+              label: "gs-ui-init",
+              id: "tools/tools/gs-ui-init",
+            },
+          ],
+        },
       ],
     },
   ],
