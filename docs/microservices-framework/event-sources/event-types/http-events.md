@@ -143,3 +143,49 @@ For example,
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1706042485/Screenshot_from_2024-01-24_02-11-15_frejtp.png" alt="swaggers"/>
 
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1706042039/Screenshot_from_2024-01-24_02-03-33_n1i8yw.png" alt="swagger"/>
+
+
+## Uploading files 
+
+The Express plugin allows you to upload files in API request body of http events.
+
+### Steps to use file upload feature
+
+Framework will give you below folder structure. The maximum file size accepted is 50MB by default. If you wish to specify a custom file size limit, you can modify the value in `"./src/eventsources/http.yaml`".
+
+```yaml
+type: express
+port: 3004
+
+request_body_limit: 300000
+file_size_limit : 300000   # Maximum size allowed to upload files (default is 50000 bytes that is 50 Mb)
+
+```
+- The file size may vary from the original size and could potentially increase in kilobytes(KB) after uploading. Please take this into consideration when setting your file size.
+
+### HTTP Event Schema having multipart/form-data 
+
+```yaml
+http.post./helloworld:
+  fn: helloworld
+  body:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            fileName:
+              type: string
+              format: binary
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
+
+```
+### Access files in your typescript function
+
+You can access files in your typescript function using `ctx.inputs.files.<name>`
+

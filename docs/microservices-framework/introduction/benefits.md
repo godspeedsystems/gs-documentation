@@ -82,6 +82,14 @@ This guarantees that all API consumers (UI, QA, external integrations) share a c
 * Project scaffolding, CLI tooling, and plugin integrations reduce time-to-production drastically.
 * Minimal boilerplate = faster onboarding, easier debugging, and fewer errors.
 
+### No Vendor Lock-in 
+
+* Godspeed is designed to be vendor-agnostic, allowing you to switch between different databases, cloud providers, and other third-party services with minimal friction.
+
+### Flexibility
+
+* The decoupled architecture ensures that your core business logic is not tied to any specific technology, giving you the flexibility to adapt and evolve your stack as needed.
+
 ## Guardrails: The Four Pillars of Godspeed
 
 1. **Schema-Driven Everything**
@@ -103,5 +111,3 @@ This guarantees that all API consumers (UI, QA, external integrations) share a c
 
    * Everything—from event sources to workflows—is **loosely coupled** and **interchangeable**.
    * Promotes clean separation of concerns and long-term maintainability.
-
-
