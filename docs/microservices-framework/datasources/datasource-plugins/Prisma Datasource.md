@@ -220,7 +220,7 @@ http.get./mysql/post/{id}:
 
 ```ts title = src/functions/com/biz/mysql/post/one.ts
 
-import { GSContext, GSStatus, PlainObject } from "@godspeedsystems/core";
+import { GSContext, GSStatus, GSDataSource, PlainObject } from "@godspeedsystems/core";
 
 module.exports = async (ctx: GSContext, args: PlainObject) => {
   const { inputs: { data: { params } }, logger, datasources } = ctx;

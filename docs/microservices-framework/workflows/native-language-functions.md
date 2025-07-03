@@ -276,7 +276,7 @@ Check [event handler response](#handling-return-from-godspeed-functions) to know
 
  ```
 
-### Invoking datasource clients from functions
+### Invoking Datasource Clients from functions
 Similarly, all datasource clients initialised in a Godspeed project are conveniently available under the `ctx.datasources` object.
 
 There are two options for invoking datasource clients from functions:
@@ -336,3 +336,4 @@ Check [reponse handling](../authorization/authz-usecases.md/#response-code-messa
 :::info
 You can study the code [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/functions/com/gs/transform.ts) to understand the above scenario better.
 :::
+
