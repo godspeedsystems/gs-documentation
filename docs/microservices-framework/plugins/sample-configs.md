@@ -2,7 +2,13 @@
 id: plugins-sample-config
 title: Configuring Godspeed Plugins
 description: Configuring Godspeed Plugins
-keywords: [Godspeed plugins, installation, yaml configs, configuring plugins in godspeed]
+keywords:
+  [
+    Godspeed plugins,
+    installation,
+    yaml configs,
+    configuring plugins in godspeed,
+  ]
 slug: /plugins
 ---
 
@@ -46,7 +52,7 @@ services:
 
 2. Axios
 
- ```yaml
+```yaml
 # can use inline scripting in datasource and eventsource yamls
 type: axios
 base_url: https://httpbin.org # the base url of the api client
@@ -58,7 +64,7 @@ authn: # how to authenticate to this datasource
 
 retry: #default retry logic on all API calls. Can be overriden at the task level when calling the API
   when:
-    status: [500,501] #default 500
+    status: [500, 501] #default 500
     message: my custom expected message for retry
   max_attempts: 3
   type: exponential # can be constant or random as well. Check documentation
@@ -66,27 +72,25 @@ retry: #default retry logic on all API calls. Can be overriden at the task level
   max_interval: PT15s
 
 headers: #these will be set in every API call to the datasource
-  Content-Type:    application/json
+  Content-Type: application/json
   #x-apikey:       <% config.my_bank_api.auth.x_apikey %>
   #Environment:    <% config.my_bank_api.auth.Environment %>
-
-# Any additional data you keep in the config will be available 
+# Any additional data you keep in the config will be available
 # in the respective datasource's GSDatasource implementation class inside `this.config`
 # data:
 #   clientId:       <% config.my_bank_api.auth.clientId %>
 #   clientSecret:   <% config.my_bank_api.auth.clientSecret %>
 #   grantType:      <% config.my_bank_api.auth.grantType %>
 # some_random_key: some_value
-
 ```
 
 3. CHatGPT
 
- ```yaml
-   type: chatgpt
-   model: gpt-4o
-   temperature: 1
-   max_tokens: 200
+```yaml
+type: chatgpt
+model: gpt-4o
+temperature: 1
+max_tokens: 200
 ```
 
 4. Cron
@@ -96,14 +100,15 @@ type: cron
 ```
 
 5. Dynamodb config ( src/datasources/dynamo.yaml )
+
 ```yaml
 type: dynamodb
 endpoint: <%config.endpoint%>
 region: <%config.region%>
 accessKeyId: <%config.accessKeyId%>
 secretAccessKey: <%config.secretAccessKey%>
-
 ```
+
 6. #### elasticgraph config ( src/datasources/elasticgraph.yaml )
 
 ```yaml
@@ -128,6 +133,7 @@ port: 3000
 ```
 
 ### GraphQL Plugin
+
 ```
   type: graphql
   port: 4000
@@ -136,7 +142,7 @@ port: 3000
       secretOrKey: ""
       audience: ""
       issuer: ""
-    
+
   authz:
     id: ""
     fn: ""
@@ -147,20 +153,21 @@ port: 3000
   log:
     attributes:
     eventsource_type: ""
-    
+
 ```
 
 ### Kafka as Datasource (Producer) in `src/datasource/kafka.yaml`
+
 ```yaml
 type: kafka
 clientId: "kafka_proj"
 brokers: ["kafka:9092"]
 # optional ssl config
-ssl: 
+ssl:
   reject: false # Set to true if you want to enforce certificate validation
-  key: <%config.kafka.ssl_key_path%>    # Path to the private key file
-  cert: <%config.kafka.ssl_cert_path%>  # Path to the certificate file
-  ca: <%config.kafka.ssl_ca_path%>   # Path to the CA certificate file (if required)
+  key: <%config.kafka.ssl_key_path%> # Path to the private key file
+  cert: <%config.kafka.ssl_cert_path%> # Path to the certificate file
+  ca: <%config.kafka.ssl_ca_path%> # Path to the CA certificate file (if required)
 ```
 
 ### Kafka EventSource (Consumer): `src/eventsources/kafka.yaml`.
@@ -169,14 +176,15 @@ ssl:
 type: kafka
 groupId: "kafka_proj"
 # optional ssl config
-ssl: 
+ssl:
   reject: false # Set to true if you want to enforce certificate validation
-  key: <%config.kafka.ssl_key_path%>    # Path to the private key file
-  cert: <%config.kafka.ssl_cert_path%>  # Path to the certificate file
-  ca: <%config.kafka.ssl_ca_path%>   # Path to the CA certificate file (if required)
+  key: <%config.kafka.ssl_key_path%> # Path to the private key file
+  cert: <%config.kafka.ssl_cert_path%> # Path to the certificate file
+  ca: <%config.kafka.ssl_ca_path%> # Path to the CA certificate file (if required)
 ```
 
 #### Mailer config (src/datasources/mail.yaml)
+
 ```
 type: mail
 user: 'godspeed@gmail.com'
@@ -184,14 +192,14 @@ pass: 'rmeb bjak xcam xkub'
 ```
 
 ### MCP Event Source
+
 Create or modify the `src/eventsources/mcp.yaml` file to define your MCP server's identity.
 
 ```yaml title="src/eventsources/mcp.yaml"
 type: mcp
-name: 'mcp-eventsource'          # A unique name for your capabilities
-version: '1.0.0'                 # The version of your toolset
+name: "mcp-eventsource" # A unique name for your capabilities
+version: "1.0.0" # The version of your toolset
 ```
-
 
 ```yaml
 type: mongoose
@@ -203,10 +211,13 @@ successResponseCodes: #default response codes for success responses
   findOneAndUpdate: 201
   findOneAndDelete: 202
 ```
-### Prisma 
+
+### Prisma
+
 Prisma doesn't have a yaml config, in stead it would have a .prisma file
 
 #### mongo.prisma
+
 ```prisma
 
 datasource db {
@@ -246,13 +257,14 @@ enum Role {
 ```
 
 ### Redis config (src/datasources/redis.yaml)
+
 ```yaml
 type: redis
 url: redis://alice:foobared@awesome.redis.server:6380
-
 ```
 
 ### Salesforce config ( salesforce.yaml )
+
 ```yaml
 type: salesforce
 loginUrl: <%config.salesforce.loginUrl%>
@@ -275,7 +287,7 @@ type: express  # Defines the type of event source (Express.js HTTP server)
 port: 3000     # The port on which the HTTP service runs
 
 # Base URL for the HTTP service (Uncomment to enable), All API endpoints will be prefixed with this URL
-# base_url: /api/v1 
+# base_url: /api/v1
 
 # Basic Swagger Setup
 docs:
@@ -335,7 +347,6 @@ on_response_validation_error:
 
 ### Text-to-SQL Plugin
 
-
 ```yaml
 type: text-to-sql
 config:
@@ -373,7 +384,7 @@ config:
     ttl: 3600
 ```
 
-### Mistral Plugin 
+### Mistral Plugin
 
 ```yaml
 type: mistral
@@ -389,4 +400,186 @@ methods:
     model: "mistral-large-latest"
   moderate:
     model: "mistral-moderation-latest"
+```
+
+## Actionable Plugin Usage & Authoring Examples
+
+### Authoring a Custom Datasource Plugin (TS)
+
+```typescript
+import { GSDatasource } from "@godspeedsystems/core";
+export default class MyDatasource extends GSDatasource {
+  async execute(ctx, args) {
+    // Custom logic here
+    return { data: "result" };
+  }
+}
+```
+
+### Using a Plugin in YAML
+
+```yaml
+type: my-custom-plugin
+config:
+  key: value
+```
+
+## Troubleshooting & FAQ
+
+- **Q: Plugin not loading?**
+  - Ensure it is installed and listed in `package.json`
+- **Q: Plugin config not applied?**
+  - Validate YAML structure and config keys
+- **Q: Plugin errors at runtime?**
+  - Check logs and ensure plugin matches Godspeed interfaces
+
+## LLM Guidance & Prompt Templates
+
+- **Prompt:** "Generate a Godspeed plugin YAML for a new eventsource."
+- **Prompt:** "Write a TypeScript class for a custom datasource plugin."
+- **Prompt:** "Show how to configure a plugin for S3 access."
+
+## Best Practices & Anti-Patterns
+
+**Best Practices:**
+
+- Follow Godspeed plugin interface contracts
+- Keep plugin configs modular and reusable
+- Document all plugin options
+- Use environment variables for secrets
+- Test plugins in isolation before production
+
+**Anti-Patterns:**
+
+- Hardcoding secrets in plugin code
+- Skipping documentation
+- Ignoring plugin errors in logs
+- Duplicating plugin logic
+
+## Cross-links
+
+- [Datasources](../datasources/overview.md)
+- [Event Sources](../event-sources/overview.md)
+- [API & Event](../API%20&%20Event.md)
+- [Workflows](../workflows/overview.md)
+
+## Plugin Lifecycle Diagram
+
+```mermaid
+graph TD
+  A[Install Plugin] --> B[Configure in YAML]
+  B --> C[Load at Startup]
+  C --> D[Plugin Executes Logic]
+  D --> E[Return Data/Result]
+```
+
+## Glossary
+
+- **Plugin:** Extension for datasources/eventsources
+- **GSDatasource:** Base class for datasource plugins
+- **Config:** Plugin configuration block
+- **Lifecycle:** Stages from install to execution
+
+# Plugin Development Guide
+
+## Step-by-Step Plugin Authoring
+
+1. **Scaffold a Plugin**
+
+   ```bash
+   npm install -g generator-godspeed-plugin yo
+   yo godspeed-plugin
+   ```
+
+   - Choose type: DataSource, EventSource, or both.
+   - Follows standard structure:
+     ```
+     plugins/
+       <plugin-name>/
+         src/
+           index.ts
+         package.json
+         README.md
+         tsconfig.json
+     ```
+
+2. **Implement Plugin Logic**
+
+   - Extend the appropriate abstract class:
+     - `GSDataSource` (for datasources)
+     - `GSEventSource` (for event sources)
+     - `GSDataSourceAsEventSource` (for both)
+   - Implement required methods:
+     - `initClient()`: Initialize client (DB, API, etc.)
+     - `execute(ctx, args)`: Main operation for datasources
+     - `subscribeToEvent(eventKey, eventConfig, processEvent, event?)`: For event sources
+
+3. **The processEvent Pattern**
+
+   - Used by eventsource plugins to handle incoming events/messages.
+   - Signature: `(event: GSCloudEvent, eventConfig: PlainObject) => Promise<GSStatus>`
+   - Example:
+     ```ts
+     // Inside a plugin's subscribeToEvent:
+     await processEvent(gsEvent, { key: eventRoute, ...eventConfig });
+     ```
+
+4. **Testing & Publishing**
+   - Write unit/integration tests for plugin logic.
+   - Use mock GSContext and event objects.
+   - Publish to npm with a clear README and versioning.
+
+## Table: Plugin Extensibility Points
+
+| Plugin Type             | Abstract Class            | Required Methods                      |
+| ----------------------- | ------------------------- | ------------------------------------- |
+| DataSource              | GSDataSource              | initClient, execute                   |
+| EventSource             | GSEventSource             | subscribeToEvent                      |
+| DataSourceAsEventSource | GSDataSourceAsEventSource | initClient, execute, subscribeToEvent |
+
+## Advanced Plugin Patterns
+
+- **Caching:** Extend `GSCachingDataSource` for cache support (e.g., Redis)
+- **Dual-role:** Use `GSDataSourceAsEventSource` for plugins like Kafka
+- **Custom Config:** Accept and validate custom YAML config for plugin options
+
+## Troubleshooting & FAQ
+
+- **Q: Plugin not loaded?**
+  - Check type in YAML and ensure npm package is installed
+- **Q: Method not called?**
+  - Ensure correct method names and signatures
+- **Q: processEvent errors?**
+  - Validate event and config objects, add error handling
+
+## Best Practices
+
+- Always extend the correct abstract class
+- Document all config options and usage
+- Write tests for all plugin logic
+- Use semantic versioning and changelogs
+- Publish with a clear README and usage examples
+
+## Cross-links
+
+- [Core Concepts](../workflows/overview.md)
+- [Extensibility](../API%20&%20Event.md)
+- [Lifecycle](../guide/advance-guide.md)
+
+## Glossary
+
+- **Abstract Class:** Base class to extend for plugin types
+- **processEvent:** Callback for event handling
+- **Extensibility Point:** Method or property to override/implement
+- **Dual-role Plugin:** Acts as both datasource and eventsource
+
+## Plugin Lifecycle & Extensibility Diagram
+
+```mermaid
+graph TD
+  A[Scaffold Plugin] --> B[Extend Abstract Class]
+  B --> C[Implement Required Methods]
+  C --> D[Load by Framework]
+  D --> E[Handle Events/Data]
+  E --> F[Test & Publish]
 ```

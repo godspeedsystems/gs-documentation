@@ -1,23 +1,29 @@
 ---
 title: Eventsources
 ---
+
 # About Eventsources
 
-  Eventsources in Godspeed framework captures event and allows you to define entry or trigger points of application. For ex. the `type: express` eventsource will allow you to expose your application through REST API or a `type: cron` eventsource will allow to schedule a recurring call to a workflow. 
-  
-  The eventsources listen on the incoming events. They process incoming event as per the middleware set by you, including [authentication](../authentication/overview.md). Finally, they transform it to Godspeed's standard `GSCloudEvent` object, which is then made available to the event handlers and subsequent child workflows. 
-  
-  To have a look at supported eventsources and understanding their implementation, refer [Godspeed's gs-plugins mono-repo](https://github.com/godspeedsystems/gs-plugins). For ex. **[Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
+Eventsources in Godspeed framework captures event and allows you to define entry or trigger points of application. For ex. the `type: express` eventsource will allow you to expose your application through REST API or a `type: cron` eventsource will allow to schedule a recurring call to a workflow.
 
+The eventsources listen on the incoming events. They process incoming event as per the middleware set by you, including [authentication](../authentication/overview.md). Finally, they transform it to Godspeed's standard `GSCloudEvent` object, which is then made available to the event handlers and subsequent child workflows.
 
-## Types of eventsources 
+To have a look at supported eventsources and understanding their implementation, refer [Godspeed's gs-plugins mono-repo](https://github.com/godspeedsystems/gs-plugins). For ex. **[Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource)**
+
+## Types of eventsources
+
 Based on functionality and the nature of the information they provide to the system, eventsources can be divided as below.
 
-  1. Eventsource
+1. Eventsource
+
+
     - It can act only as an eventsource
     - has its own client initialization
     - Eg,. Express
-  2. DataSource as an eventsource
+
+2. DataSource as an eventsource
+
+
     - It can act as eventsource as well as a datasource
     - shares the client with the corresponding datasource
     - eg., Kafka, RabbitMQ
@@ -26,8 +32,8 @@ Based on functionality and the nature of the information they provide to the sys
 
 Godspeed framework adopts a pluggable approach that empowers you to define eventsources effortlessly. Our framework provides an interface that caters to diverse eventsource needs. Here's a glimpse into the exceptional eventsource plugins crafted by our core framework team.
 
-
 ## How to add plugin in your project?
+
 You can use `godspeed plugin add` command to browse and install plugins which are published and maintained by Godspeed.
 
 ```bash
@@ -66,7 +72,7 @@ $ godspeed plugin add @godspeedsystems/plugins-cron-as-eventsource
 ```
 
 ```bash
-$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource 
+$ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsource
 ```
 
 **To learn more about Event sources in Godspeed, please watch the video provided below…**
@@ -78,3 +84,90 @@ $ godspeed plugin add @godspeedsystems/plugins-kafka-as-datasource-as-eventsourc
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/cp1qgIz1PNw?si=4Qngtu-WXoC-LQeY" frameborder="0" allowfullscreen></iframe>
 </div>
+
+## Actionable Eventsource Examples
+
+### HTTP Eventsource (Express)
+
+```yaml
+type: express
+port: 3000
+authn:
+  jwt:
+    secretOrKey: <% config.jwt.secret %>
+    audience: <% config.jwt.aud %>
+    issuer: <% config.jwt.iss %>
+```
+
+### Kafka Eventsource
+
+```yaml
+type: kafka
+groupId: my-group
+brokers:
+  - kafka:9092
+```
+
+### Cron Eventsource
+
+```yaml
+type: cron
+```
+
+## Troubleshooting & FAQ
+
+- **Q: Eventsource not triggering?**
+  - Check type, port, and plugin installation
+- **Q: Auth not working?**
+  - Validate `authn`/`authz` config and environment variables
+- **Q: Kafka not connecting?**
+  - Ensure brokers are reachable and groupId is set
+- **Q: Cron not firing?**
+  - Validate cron schedule and plugin config
+
+## LLM Guidance & Prompt Templates
+
+- **Prompt:** "Generate a Godspeed eventsource YAML for a Fastify HTTP server."
+- **Prompt:** "Show a Kafka eventsource config for group 'analytics'."
+- **Prompt:** "Write a cron eventsource that runs every hour."
+
+## Best Practices & Anti-Patterns
+
+**Best Practices:**
+
+- Use environment variables for all secrets/ports
+- Keep eventsource configs modular
+- Validate all eventsource plugins are installed
+- Use descriptive groupIds for Kafka
+- Document all eventsource configs
+
+**Anti-Patterns:**
+
+- Hardcoding secrets/ports
+- Duplicating eventsource configs
+- Skipping plugin installation
+- Using default groupIds in production
+
+## Cross-links
+
+- [API & Event](../API%20&%20Event.md)
+- [Workflows](../workflows/overview.md)
+- [Plugins](../plugins/sample-configs.md)
+- [Authentication](../authentication/overview.md)
+
+## Eventsource Trigger Flow Diagram
+
+```mermaid
+graph TD
+  A[External Trigger] --> B[Eventsource Plugin]
+  B --> C[Transform to GSCloudEvent]
+  C --> D[Dispatch to Event Handler]
+```
+
+## Glossary
+
+- **Eventsource:** Mechanism for receiving events (HTTP, Kafka, Cron, etc.)
+- **Plugin:** Extension for new eventsource types
+- **GroupId:** Kafka consumer group identifier
+- **GSCloudEvent:** Standardized event object in Godspeed
+- **Authn/Authz:** Authentication/Authorization config

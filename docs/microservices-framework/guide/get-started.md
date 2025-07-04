@@ -2,13 +2,27 @@
 id: get-started
 title: Getting Started with Godspeed
 description: A comprehensive guide to install the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
-keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
+keywords:
+  [
+    Godspeed,
+    Meta-Framework,
+    installation,
+    setup,
+    project (service) creation,
+    CLI,
+    running project (service) locally,
+    Swagger UI,
+    API testing,
+    helloworld,
+    guide,
+    tutorial,
+  ]
 slug: /get-started
 ---
 
 This guide provides a step-by-step guide to install and get started with Godspeed Meta-Framework. It covers the prerequisites and installation process, both manual and using easy installation scripts. You will learn how to create your first Godspeed project or service and run the development server.
 
-<!-- 
+<!--
 ### Watch this One-Click Installation Guide
 
 <div style={{ position: 'relative', paddingBottom: '50.25%', height: 0, overflow: 'hidden' }}>
@@ -22,6 +36,7 @@ The following setup script installs all required prerequisites and the Godspeed 
 ### Windows Users
 
 Open Powershell as Administrator and run
+
 ```bash
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon/main/CompleteInstall.ps1" -OutFile "install.ps1"; Start-Process powershell -ArgumentList "-File .\install.ps1" -Verb RunAs
 ```
@@ -40,30 +55,30 @@ curl -fsSL https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon
 | `node`            | JavaScript runtime (installed via nvm)                       |
 | `npm`             | Node package manager (comes with Node.js)                    |
 | `pnpm`            | Efficient alternative to npm/yarn for managing dependencies  |
-| `corepack`        | Node’s built-in tool for package manager handling            |
+| `corepack`        | Node's built-in tool for package manager handling            |
 | `git`             | Version control system - required to clone repositories      |
 | `godspeed` CLI    | Command-line interface to scaffold, run and manage services  |
 | `godspeed-daemon` | Core Godspeed runtime engine that executes workflows         |
+
 ---
 
 ## Manual Installation
 
-  If you prefer manual setup, follow the steps below:
+If you prefer manual setup, follow the steps below:
 
-  **1. Ensure the Prerequisites are installed:**
+**1. Ensure the Prerequisites are installed:**
 
-  - nvm (Node Version Manager)
-  - node.js (v18 or higher, installed via nvm)
-  - git
-  - corepack (comes with Node.js)
-  - pnpm (can be enabled via corepack: corepack enable pnpm)
-  
+- nvm (Node Version Manager)
+- node.js (v18 or higher, installed via nvm)
+- git
+- corepack (comes with Node.js)
+- pnpm (can be enabled via corepack: corepack enable pnpm)
 
-  **2. Install the Godspeed framework globally:**
+**2. Install the Godspeed framework globally:**
 
-  ```bash
-  npm install -g @godspeedsystems/godspeed
-  ```
+```bash
+npm install -g @godspeedsystems/godspeed
+```
 
 ## Verify Installation
 
@@ -74,14 +89,17 @@ godspeed --version
 ```
 
 ## Creating and Running Your First Project
+
 Follow these steps to set up and launch your new Godspeed project:
 
 1.  **Create a new project:**
+
     ```bash
     godspeed create my-project
     ```
 
 2.  **Navigate to the project directory:**
+
     ```bash
     cd my-project
     ```
@@ -97,10 +115,13 @@ Godspeed automatically generates interactive API documentation using Swagger UI.
 
 1.  **Access Swagger UI:**
     The Swagger UI is typically available at:
+
     ```plaintext
         http://<BASE_URL>:<PORT>/<http_docs_endpoint>`
     ```
+
     By default, this is:
+
     ```plaintext
     http://localhost:3000/api-docs
     ```
@@ -109,43 +130,139 @@ Godspeed automatically generates interactive API documentation using Swagger UI.
 
 2.  **Test the `/helloworld` API:**
 
-      * In the Swagger UI, locate the `/helloworld` endpoint.
-      * Click the **`Try it out`** button.
-      * You will be prompted to fill in a `name` parameter. Enter a name (e.g., "John") and send the request.
-      * The server will return the following response:
-        ```
-        Hello `John`
-        ```
+    - In the Swagger UI, locate the `/helloworld` endpoint.
+    - Click the **`Try it out`** button.
+    - You will be prompted to fill in a `name` parameter. Enter a name (e.g., "John") and send the request.
+    - The server will return the following response:
+      ```
+      Hello `John`
+      ```
+
 ### Troubleshooting Common Issues
 
 Here are solutions to some common issues you might encounter:
 
 1.  **"Running scripts is disabled on this system"**
 
-      * **Solution:** Run PowerShell as Administrator and execute:
-        ```powershell
-        Set-ExecutionPolicy RemoteSigned
-        ```
+    - **Solution:** Run PowerShell as Administrator and execute:
+      ```powershell
+      Set-ExecutionPolicy RemoteSigned
+      ```
 
 2.  **"Port Already in Use"**
-      * **Error:**
-        ```
-        Error: Port 3000 is already in use
-        ```
-      * **Solution:** Stop any other services using port `3000`, or modify the port in `src/eventsources/http.yaml`.
+    - **Error:**
+      ```
+      Error: Port 3000 is already in use
+      ```
+    - **Solution:** Stop any other services using port `3000`, or modify the port in `src/eventsources/http.yaml`.
 
 ### Additional Resources
 
-  * **Godspeed CLI Help:**
-    To see a list of available Godspeed commands, use:
+- **Godspeed CLI Help:**
+  To see a list of available Godspeed commands, use:
 
-    ```bash
-    godspeed --help
-    ```
+  ```bash
+  godspeed --help
+  ```
 
-    Refer to [the full CLI spec](/docs/microservices-framework/CLI.md) for more detailed information, including [how to add plugins for eventsources and datasources](/docs/microservices-framework/CLI#plugin-add-to-install-godspeed-plugin)
+  Refer to [the full CLI spec](/docs/microservices-framework/CLI.md) for more detailed information, including [how to add plugins for eventsources and datasources](/docs/microservices-framework/CLI#plugin-add-to-install-godspeed-plugin)
 
+## Actionable Getting Started Examples
 
+### Step-by-Step: First API
 
+1. Create a new project:
+   ```bash
+   godspeed create my-first-service
+   cd my-first-service
+   ```
+2. Add a plugin (e.g., Prisma):
+   ```bash
+   godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
+   ```
+3. Define an event in `src/events/hello.yaml`:
+   ```yaml
+   http.get./hello:
+     fn: hello
+     summary: Hello World endpoint
+     responses:
+       200:
+         description: Success
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 message:
+                   type: string
+   ```
+4. Create the handler in `src/functions/hello.ts`:
+   ```typescript
+   import { GSContext, GSStatus } from "@godspeedsystems/core";
+   export default function (ctx: GSContext) {
+     return new GSStatus(true, 200, "OK", { message: "Hello, world!" });
+   }
+   ```
+5. Run the project:
+   ```bash
+   godspeed serve
+   ```
+6. Test the API at `http://localhost:3000/api-docs`
 
+## Troubleshooting & FAQ
 
+- **Q: CLI not found?**
+  - Ensure Godspeed CLI is installed globally
+- **Q: Port already in use?**
+  - Change port in `src/eventsources/http.yaml` or stop other services
+- **Q: API not showing in Swagger?**
+  - Confirm event YAML is in `src/events/` and follows correct schema
+
+## LLM Guidance & Prompt Templates
+
+- **Prompt:** "Show a step-by-step guide to create a Godspeed project and first API."
+- **Prompt:** "Generate a YAML event and TypeScript handler for a /greet endpoint."
+- **Prompt:** "Write a troubleshooting checklist for Godspeed onboarding."
+
+## Best Practices & Anti-Patterns
+
+**Best Practices:**
+
+- Follow the CLI prompts and docs for each step
+- Use version control from the start
+- Validate all YAML and TypeScript files
+- Document your first API and handler
+
+**Anti-Patterns:**
+
+- Skipping plugin installation
+- Hardcoding secrets in event/config files
+- Ignoring CLI errors or warnings
+- Not testing APIs after setup
+
+## Cross-links
+
+- [CLI](../CLI.md)
+- [API & Event](../API%20&%20Event.md)
+- [Workflows](../workflows/overview.md)
+- [Plugins](../plugins/sample-configs.md)
+
+## Project Setup Flow Diagram
+
+```mermaid
+graph TD
+  A[Install CLI] --> B[Create Project]
+  B --> C[Add Plugins]
+  C --> D[Define Events]
+  D --> E[Write Handlers]
+  E --> F[Run Project]
+  F --> G[Test APIs]
+```
+
+## Glossary
+
+- **CLI:** Command Line Interface
+- **Event:** API endpoint definition
+- **Handler:** Function or workflow for event
+- **Plugin:** Extension for datasources/eventsources
+- **Swagger:** Auto-generated API docs

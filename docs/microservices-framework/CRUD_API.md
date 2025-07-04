@@ -1,7 +1,23 @@
 ---
 title: Generating CRUD API
 description: Learn how to automatically generate CRUD (Create, Read, Update, Delete) APIs in Godspeed using the gen-crud-api command and Prisma. This guide covers the steps from project creation and plugin installation to setting up your database connection, creating a Prisma schema, generating the client, and finally generating and testing the CRUD APIs.
-keywords: [Godspeed, CRUD API, auto generate APIs, gen-crud-api, Prisma, database integration, ORM, REST API, crud api tutorial, mysql, postgresql, mongodb, sqlserver, sqllite]
+keywords:
+  [
+    Godspeed,
+    CRUD API,
+    auto generate APIs,
+    gen-crud-api,
+    Prisma,
+    database integration,
+    ORM,
+    REST API,
+    crud api tutorial,
+    mysql,
+    postgresql,
+    mongodb,
+    sqlserver,
+    sqllite,
+  ]
 ---
 
 # Generating CRUD APIs with Godspeed
@@ -11,6 +27,7 @@ keywords: [Godspeed, CRUD API, auto generate APIs, gen-crud-api, Prisma, databas
 The Godspeed framework provides powerful CRUD API generation capabilities through the `gen-crud-api` command. This tool automatically creates standardized Create, Read, Update, and Delete (CRUD) endpoints based on your Prisma data models, significantly accelerating API development.
 
 ### Key Features
+
 - Automatic CRUD endpoint generation
 - Prisma ORM integration
 - Express.js-based HTTP endpoints
@@ -18,6 +35,7 @@ The Godspeed framework provides powerful CRUD API generation capabilities throug
 - Database schema synchronization
 
 ### Tutorial
+
 Learn how to generate CRUD APIs in Godspeed:
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
@@ -27,6 +45,7 @@ Learn how to generate CRUD APIs in Godspeed:
 ## Prerequisites
 
 Before generating CRUD APIs, ensure you have:
+
 - Godspeed CLI installed
 - Access to a supported database
 - Basic understanding of Prisma schema
@@ -36,20 +55,21 @@ Before generating CRUD APIs, ensure you have:
 ### 1. Project Setup
 
 **Create a new project or skip if already created.:**
-    ```bash
+`bash
     godspeed create my-project
-    ```
+    `
 
 **Navigate to the project directory:**
-    ```bash
+`bash
     cd my-project
-    ```
+    `
 
 For installation and getting started, visit the [Getting Started Guide](./guide/get-started)
 
 ### 2. Prisma Plugin Installation
 
 Install the Prisma datasource plugin:
+
 ```bash
 godspeed plugin add @godspeedsystems/plugins-prisma-as-datastore
 ```
@@ -59,6 +79,7 @@ For plugin configuration details, refer to the [Prisma Plugin Documentation](./d
 ### 3. Database Configuration
 
 #### Connection URL Setup
+
 Add your database connection URL to the `.env` file:
 
 ```env
@@ -72,6 +93,7 @@ DATABASE_URL="file:./database.db"
 ### Supported Databases
 
 For database-specific connection formats, see:
+
 - [Supported Databases List](/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases)
 - [Connection URL Formats](/docs/microservices-framework/databases/MySQL#connection-url)
 
@@ -105,6 +127,7 @@ model User {
 ```
 
 #### Important Configuration Notes
+
 1. Set the correct `provider` for your database
 2. Configure the `output` path for generated client
 3. Enable `metrics` in previewFeatures if needed for telemetry
@@ -115,15 +138,16 @@ If you already have an existing database, you can introspect it and generate the
 
 Copy the generated file to src/datasources folder and rename it as per the name of this datasource that you want to keep. If you don't have an existing database setup with a model, then create a prisma model file from scratch.
 
-
 ### 5. Client Generation and Database Sync
 
 Generate Prisma client and sync database:
+
 ```bash
 godspeed prisma prepare
 ```
 
 This command:
+
 - Generates Prisma client
 - Syncs database schema
 - Creates client in `src/datasources/prisma-clients/`
@@ -131,11 +155,13 @@ This command:
 ### 6. CRUD API Generation
 
 Generate CRUD endpoints:
+
 ```bash
 godspeed gen-crud-api
 ```
 
 Select your schema when prompted:
+
 ```
 Select datasource / schema to generate CRUD APIs
 (x) schema.prisma
@@ -146,11 +172,13 @@ Select datasource / schema to generate CRUD APIs
 ### 7. Testing Generated APIs
 
 Start the server and test APIs:
+
 ```bash
 godspeed serve
 ```
 
 Access Swagger documentation at:
+
 ```
 http://localhost:3000/api-docs
 ```
@@ -158,6 +186,7 @@ http://localhost:3000/api-docs
 ## Generated Components
 
 The generator creates:
+
 1. Event definitions
 2. API routes
 3. Functions
@@ -165,23 +194,106 @@ The generator creates:
 
 ![Generated CRUD Components](../../static/img/generated_crud_api.png)
 
-## Troubleshooting
+## Actionable CRUD Event & Workflow Examples
 
-### Common Issues
+### Example: User CRUD Event (YAML)
 
-1. Database Connection Errors
-   - Verify connection URL format
-   - Check database credentials
-   - Ensure database is running
+```yaml
+http.post./user:
+  fn: user_create
+  summary: Create a new user
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name: { type: string }
+            email: { type: string }
+  responses:
+    201:
+      description: User created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id: { type: string }
+              name: { type: string }
+              email: { type: string }
+```
 
-2. Schema Generation Issues
-   - Validate Prisma schema syntax
-   - Check output directory permissions
-   - Verify database provider support
+### Example: User Create Workflow (TS)
 
-3. API Generation Problems
-   - Confirm Prisma client generation
-   - Check for schema validation errors
-   - Verify event source configuration
+```typescript
+import { GSContext, GSStatus } from "@godspeedsystems/core";
+export default async function (ctx: GSContext) {
+  const { body } = ctx.inputs.data;
+  const user = await ctx.datasources.prisma.client.user.create({ data: body });
+  return new GSStatus(true, 201, "User created", user);
+}
+```
 
-Remember to regularly update generated APIs as your data models evolve, and maintain proper version control of your schema files.
+## Troubleshooting & FAQ
+
+- **Q: CRUD events not generated?**
+  - Ensure your Prisma schema is valid and in `src/datasources/`
+  - Run `godspeed prisma prepare` before `gen-crud-api`
+- **Q: Database connection errors?**
+  - Check `.env` for correct `DATABASE_URL`
+  - Ensure DB is running and accessible
+- **Q: API not showing in Swagger?**
+  - Confirm event YAML is in `src/events/` and follows correct schema
+- **Q: Prisma client errors?**
+  - Re-run `godspeed prisma prepare` after schema changes
+
+## LLM Guidance & Prompt Templates
+
+- **Prompt:** "Generate a Godspeed CRUD event and workflow for a Product entity with fields name, price, and stock."
+- **Prompt:** "Write a TypeScript workflow for updating a user in Godspeed CRUD API."
+- **Prompt:** "Show YAML for a DELETE /user/{id} endpoint with Prisma integration."
+
+## Best Practices & Anti-Patterns
+
+**Best Practices:**
+
+- Keep your Prisma schema and event YAML in sync
+- Use descriptive names for events and workflows
+- Validate all input/output schemas
+- Use environment variables for DB credentials
+- Regularly update generated APIs as models evolve
+
+**Anti-Patterns:**
+
+- Editing generated files directly (regenerate instead)
+- Hardcoding secrets in YAML or TS
+- Skipping schema validation
+- Ignoring Prisma warnings/errors
+
+## Cross-links
+
+- [API & Event](./API%20&%20Event.md)
+- [Workflows](./workflows/overview.md)
+- [Datasources](./datasources/overview.md)
+- [CLI](./CLI.md)
+
+## CRUD API Flow Diagram
+
+```mermaid
+graph TD
+  A[Prisma Schema] --> B[Run godspeed prisma prepare]
+  B --> C[Run godspeed gen-crud-api]
+  C --> D[CRUD Event YAML Generated]
+  D --> E[CRUD Workflows Generated]
+  E --> F[Serve Project]
+  F --> G[Test APIs via Swagger]
+```
+
+## Glossary
+
+- **CRUD:** Create, Read, Update, Delete
+- **Prisma:** ORM for database access
+- **gen-crud-api:** Godspeed CLI command to auto-generate CRUD endpoints
+- **Swagger:** Auto-generated API docs
+- **Datasource:** Database or API client
+- **Workflow:** Business logic handler for an event

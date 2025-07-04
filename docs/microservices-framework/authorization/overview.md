@@ -1,22 +1,28 @@
 ---
 title: About Authorization
 description: Overview of authorization, including RBAC, ABAC, key agents, and workflow DSL.
-keywords: [authorization, RBAC, ABAC, user, resource, action, context, workflow DSL]
+keywords:
+  [authorization, RBAC, ABAC, user, resource, action, context, workflow DSL]
 ---
 
 # About Authorization
-Authorization is a crucial component of access control, determining who can access what resources and perform specific actions. 
+
+Authorization is a crucial component of access control, determining who can access what resources and perform specific actions.
 
 <img src="https://res.cloudinary.com/dsvdiwazh/image/upload/v1704787940/authorization_fbj562.jpg" alt="event types" />
 
 ## Two types of Authorization
+
 ### Role-Based Access Control (RBAC)
+
 RBAC is a widely-used authorization model where access is granted based on predefined roles. Users are assigned roles, and these roles dictate the permissions associated with accessing resources and performing actions.
 
 ### Attribute-Based Access Control (ABAC)
+
 ABAC is a dynamic authorization model that considers various attributes associated with **users, resources, actions, and context**. Policies are defined based on these attributes, allowing for more granular control over access. **ABAC is a superset of RBAC**
 
 ### Key Agents in Authorization
+
 Authorization involves four key agents:
 
 a. **User**
@@ -31,181 +37,108 @@ Actions define the specific operations or activities that users may want to perf
 d. **Context**
 Context refers to the circumstances or conditions under which a user's request for access is evaluated. This includes factors such as time, location, or any other relevant contextual information.
 
-<!-- 
-## Datasources authentication
-At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
+## Actionable Authorization Examples
 
-Here is the sample spec:
-**Datasource**
+### RBAC Example (YAML)
+
 ```yaml
-type: api
-base_url: <% config.api.base_url %>
-authn: com.jfs.api_auth
-```
-Here, `com.jfs.api_auth` is the authentication workflow which gets called for the authentication of any request to this datasource.
-
-#### Sample workflow using the above datasource
-```yaml
-summary: Call an API and transform the 
-tasks:
-    - id: api_step1 # the response of this will be accessible within the parent step key, under the step1 sub key
-      description: Hit with some dummy data. It will send back same as response
-      fn: datasource.api.post./anything
-      args:
-        data: <% inputs.body %>
-```
-#### Sample authentication workflow com.jfs.api_auth
-```yaml
-summary: Auth workflow
-tasks:
-    - id: auth_step1
-      description: Hit the authn request
-      fn: datasource.authapi.post./authenticate
-      args:
-        data: <% inputs.query.username %>
-
-    - id: auth_step2
-      description: Transform the response received from authn api
-      fn: com.gs.transform
-      args:
-        headers:
-          Authorization: <% 'Bearer ' + outputs.auth_step1.auth.token %>
-        params:
-          queryid: <% outputs.auth_step1.params.queryid %>
-        statusCodes: <% outputs.auth_step1.status_code %>          
-```
-The authentication workflow should return response in this format:
-```yaml
-headers: 
-  header1: val1
-params:
-  param1: val1
-statusCodes: [401, 403, ....]
-```
-:::note
-The authentication workflow gets called when any request returns the specified `statusCodes`. 
-:::
-
-
-
-
-### Workflow DSL
-You can add authorization workflow at the task level in any workflow. The authorization workflow should return allow/deny or json output to the main worklfow.
-
-**Allow/Deny**  
-If authz workflow returns data as true/false, it means the task is allowed/denied to get executed.
-
-**JSON output**  
-If authz workflow returns JSON output then it is merged with args.data of the task for which authz is being executed.
-
-Here is the sample spec:  
-**Sample workflow calling the authz workflow**
-```yaml
-summary: Call an API
-tasks:
-    - id: api_step1
-      description: Hit with some dummy data. It will send back same as response
-      authz:
-        fn: com.jfs.authz
-        args: <% inputs %>
-      fn: datasource.api.post./anything
-      args:
-        data: <% inputs %>
+authz:
+  fn: check_role
+  args:
+    allowed_roles: ["admin", "editor"]
 ```
 
-**Sample authorization workflow `com.jfs.authz`**
+### ABAC Example (YAML)
+
 ```yaml
-summary: Authorization workflow
-tasks:
-  - id: authz_step1
-    description: return allow/deny based upon user
-    fn: datasource.authz.post./authorize
-    args: 
-      data: <% inputs.body.user %>
-  - id: authz_step2
-    description: transform response from authz api
-    fn: com.gs.transform
-    args: |
-        <coffee% if outputs.authz_step1.data.code == 200 then {
-            success: true
-            data: true
-        } else if outputs.authz_step1.data.code == 201 then {
-            success: true
-            data:
-              where:
-                role: 'USER'
-        } else {
-            success: false
-            data: false
-        } %>
+authz:
+  fn: abac_policy
+  args:
+    resource: "document"
+    action: "edit"
+    attributes:
+      department: <% inputs.user.department %>
 ```
 
-The authorization workflow should return response in this format to allow/deny:
+### Custom Authorization Workflow (YAML)
+
 ```yaml
-success: true/false
-data: true/false/JSON output
+authz:
+  fn: custom_authz_workflow
+  args: <% inputs %>
 ```
 
-> When data is returned as false i.e. deny then the framework will send `403 Unauthorized` response.
+### TypeScript Authorization Check
 
-
-### Sample DB query call authorization
-In DB query call, authz workflow can return JSON output with where clause, include clause etc. which will be merged with the args of the main workflow which is doing DB query.
-
-Here is the sample spec:  
-**Sample workflow calling the authz workflow**
-```yaml
-summary: datastore demo
-tasks:
-  - id: find_user
-    description: find users
-    authz:
-      fn: com.jfs.authz
-      args: <% inputs %>
-    fn: datasource.mongo.user.findMany
-    args:
-      data:
-        include: <% inputs.body.include %>
-        where: <% inputs.body.where %>
+```typescript
+import { GSContext } from "@godspeedsystems/core";
+export default function (ctx: GSContext) {
+  const user = ctx.inputs.data.user;
+  if (user.role !== "admin") {
+    throw new Error("Forbidden");
+  }
+}
 ```
 
-**Sample authorization workflow `com.jfs.authz`**
-```yaml
-summary: Authorization workflow
-tasks:
-  - id: authz_step1
-    description: return allow/deny based upon user
-    fn: datasource.authz.post./authorize
-    args: 
-      data: <% inputs.body.user %>
-      
-  - id: authz_step2
-    description: transform response from authz api
-    fn: com.gs.transform
-    args: |
-        <coffee% if outputs.authz_step1.data.code == 200 then {
-            success: true
-            data:
-              where:
-                role: 'USER'
-        } else {
-            success: false
-            data: false
-        } %>
+## Troubleshooting & FAQ
+
+- **Q: 403 Forbidden?**
+  - Check allowed roles/attributes in your authz workflow
+  - Ensure user info is present in context
+- **Q: Authz not applied?**
+  - Confirm `authz` is set at event or task level
+- **Q: Custom workflow not called?**
+  - Validate `fn` reference and workflow existence
+
+## LLM Guidance & Prompt Templates
+
+- **Prompt:** "Generate a Godspeed RBAC authorization config for an API event."
+- **Prompt:** "Show a YAML example for ABAC policy on a resource."
+- **Prompt:** "Write a TypeScript function that denies access if user is not in a list of roles."
+
+## Best Practices & Anti-Patterns
+
+**Best Practices:**
+
+- Use modular workflows for RBAC/ABAC logic
+- Validate all user/resource/action attributes
+- Document all authorization policies
+- Use centralized error handling for denials
+
+**Anti-Patterns:**
+
+- Hardcoding roles/attributes in multiple places
+- Skipping authorization checks
+- Ignoring errors from authz workflows
+- Duplicating policy logic
+
+## Cross-links
+
+- [Authentication](../authentication/overview.md)
+- [API & Event](../API%20&%20Event.md)
+- [Workflows](../workflows/overview.md)
+- [Config](../config-and-mappings/config.md)
+
+## Authorization Flow Diagram
+
+```mermaid
+graph TD
+  A[Event Handler] --> B[Check Authz Config]
+  B --> C{RBAC/ABAC/Custom?}
+  C -- RBAC --> D[Check User Role]
+  C -- ABAC --> E[Evaluate Attributes]
+  C -- Custom --> F[Run Custom Workflow]
+  D --> G{Allow?}
+  E --> G
+  F --> G
+  G -- Yes --> H[Continue]
+  G -- No --> I[Deny/Return 403]
 ```
 
-When authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.   
-For example, in the above authz workflow, `data` is returned as:
-```yaml
-data:
-  where:
-    role: 'USER'
-```
+## Glossary
 
-This data will be merged with the args.data of the main workflow i.e.
-```yaml
-args:
-  data:
-    include: <% inputs.body.include %>
-    where: <% inputs.body.where %> # where clause from authz workflow will be merged with this
-``` -->
+- **Authz:** Authorization (access control)
+- **RBAC:** Role-Based Access Control
+- **ABAC:** Attribute-Based Access Control
+- **Custom Workflow:** User-defined authorization logic
+- **Policy:** Set of rules for access
