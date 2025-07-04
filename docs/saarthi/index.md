@@ -16,6 +16,10 @@ Saarthi is an AI-powered autonomous coding agent that lives in your editor. It h
 - ✅ **Review code** Performs detailed reviews across six dimensions including compliance, completeness, and bugs.
 - 🏗️ **Create** new files and projects
 
+## Prerequisite:
+
+[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
+
 ## Quick Start
 
 1. [Install Saarthi](./getting-started/installing.mdx)
