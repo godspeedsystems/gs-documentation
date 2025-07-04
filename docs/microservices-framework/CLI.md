@@ -30,23 +30,25 @@ Options:
   -V, --version                   output the version number
   -h, --help                      display help for command
 Commands:
-  create [options] <projectName>  create a new godspeed project.
+  create <projectName>            create a new godspeed project.
   serve                           run the development server in watch mode.
   build                           build the godspeed project.
   clean                           clean the previous build.
-  preview                         run the build in a hosted environment like            production                      or development.
+  preview                         run the build in a hosted environment like production or development.
   gen-crud-api                    scans your prisma datasources and generate
                                   CRUD APIs events and workflows
-  plugin                          manage(add, remove, update) eventsource and
-                                  datasource plugins for godspeed.
-  prisma                          proxy to prisma commands with some add-on
-                                  commands to handle prisma datasources.
+  plugin add                      installs eventsource and datasource plugins for godspeed.           
+  plugin remove                   uninstalls eventsource and datasource plugins for godspeed.  
+  plugin update                   update  eventsource and datasource plugins  
+  prisma prepare                  runs prisma db push and prisma generate command
   help [command]                  display help for command
 ```
 
 ### Create: To create a new project
 ---
 The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
+
+> 📌 Prerequisite: Godspeed CLI must be installed (`npm install -g @godspeedsystems/godspeed`)
 
 ```bash
 $  godspeed create my-service
@@ -76,24 +78,27 @@ Happy building microservices with Godspeed! 🚀🎉
 ---
 You can run your Godspeed project using `godspeed serve` command. This will build and run your project in auto-watch mode.
 
+> 📌 Prerequisite: must be inside a godspeed project.
+
 ```bash
  godspeed serve
 ```
-
-:::tip
-In order to run a full stack application with Godspeed service as your backend, you can use Lerna. Check the example of full stack application in [gs-node-templates repository](https://github.com/godspeedsystems/gs-node-templates).
-:::
 ---
+
 ### Build: Building the service for hosted deployment
 ---
 You can build your Godspeed project using `godspeed build` command. This will build your project and copy the contents in `/dist` folder. 
+> 📌 Prerequisite: must be inside a godspeed project.
 
 ```bash
  godspeed build
 ```
 ---
 ### Preview: Running the service in hosted environment
-You can run your Godspeed project using `godspeed preview` command. This will require `godspeed build` to be run prior because preview renders the project from the `dist` folder. 
+You can run your Godspeed project using `godspeed preview` command. 
+
+> 📌 Prerequisite: `godspeed build` to be run prior because preview renders the project from the `dist` folder. 
+
 ```bash
  godspeed preview
 ```
@@ -106,6 +111,7 @@ Removes the dist/ directory and resets prior build artifacts.
 ### Plugin: Install & Manage Plugins
 ---
 Godspeed plugins are the way to extend the core Meta Framework. Currently we support adding eventsource and datasource as plugin.
+
 ```bash
 $  godspeed help plugin
 ```
@@ -129,14 +135,15 @@ Commands:
   remove [pluginName]  Remove an eventsource/datasource plugin.
   update               Update an eventsource/datasource plugin.
   help [command]       display help for command
-
-For detailed documentation visit https://godspeed.systems
-
 ```
 ---
 ### Plugin Add: To install godspeed plugin
 ---
-The `godspeed plugin add` command allows you to install plugins into your Godspeed project. You can use it in two ways:
+The `godspeed plugin add` command allows you to install plugins into your Godspeed project. 
+
+> 📌 Prerequisite: must be inside a godspeed project.
+
+You can use it in two ways:
 
 #### Interactive Mode (Default)
 This opens a CLI prompt to select from available plugins:
@@ -236,6 +243,8 @@ $  godspeed plugin update
 
 Godspeed wraps Prisma CLI with additional support.
 
+> 📌 Prerequisite: must have schema file saved inside src/datasource/ folder with .prisma extension.
+
 ```bash
 godspeed prisma prepare
 ```
@@ -246,7 +255,7 @@ This command:
 - Syncs database schema
 - Creates client in `src/datasources/prisma-clients/`
 
-Use this after editing your *.prisma schema or modifying your .env DB credentials.
+Run this each time, you make changes in your schema models or modify your .env DB connection_url.
 
 
 ### Otel: Enabling and disabling Open Telemetry
@@ -330,5 +339,6 @@ Setting `OTEL_ENABLED` to false stops all the actions performed in [otel enable]
 ```
 godspeed gen-graphql-schema
 ```
+> 📌 Prerequisite: must have installed graphQL plugin.
 
 Generates a GraphQL schema automatically from your existing Godspeed events and workflows.
