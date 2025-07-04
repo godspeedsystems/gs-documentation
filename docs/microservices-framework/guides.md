@@ -17,7 +17,7 @@ Godspeed is a **4th generation declarative microservice framework** for Node.js 
 
 Godspeed provides a CLI-based workflow to scaffold a new backend service in minutes. Follow these steps to spin up a project using the Godspeed CLI.
 
-Step 1: Install the Godspeed CLI
+Step 1: Verify Godspeed installation using `godspeed -V` command. If not found, then first install godspeed using [installation guide]((/docs/get-started#install-godspeed)).
 
 Step 2: Create a New Project using `godspeed create <project-name>`
 

@@ -12,7 +12,7 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, inputs, params, headers } }, logger, datasources } = ctx;
     const userId= user.userId ;
 
-    const client: PrismaClient = datasources.schmaName.client;
+    const client: PrismaClient = datasources.<schemaName>.client;
     try {
             const getUser = await client.User.findUnique({
             where: { id: userId } });
@@ -40,7 +40,7 @@ import { PrismaClient } from "../../../../../datasources/prisma-clients/schmaNam
 module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, body } }, logger, datasources } = ctx;
     try {     
-        const client: PrismaClient = datasources.schemaName.client;
+        const client: PrismaClient = datasources.<schemaName>.client;
 
         const updatedUser = await client.user.update({ 
                             where: { id: user.userId },
@@ -67,7 +67,7 @@ module.exports = async (ctx: GSContext, args: PlainObject) => {
     const { inputs: { data: { user, inputs, params, headers } }, logger, datasources } = ctx;
     const userId= user.userId ;
 
-    const client: PrismaClient = datasources.schemaName.client;
+    const client: PrismaClient = datasources.<schemaName>.client;
     try {
             const getUser = await client.User.findUnique({
             where: { id: userId } });

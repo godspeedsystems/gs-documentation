@@ -46,9 +46,7 @@ Commands:
 
 ### Create: To create a new project
 ---
-The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples.
-
-> 📌 Prerequisite: Godspeed CLI must be installed (`npm install -g @godspeedsystems/godspeed`)
+The `create` command creates project structure for your microservice. When called without arguments, it creates project structure with default examples
 
 ```bash
 $  godspeed create my-service
