@@ -10,6 +10,9 @@ export default function SaarthiIcon(props: React.SVGProps<SVGSVGElement>) {
       style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '0px' }}
       {...props}
     >
+  <style>
+    {`* { fill:#FFFFFF !important; stroke:#FFFFFF !important; }`}
+  </style>
       <defs>
         <linearGradient id="gradient_0" gradientUnits="userSpaceOnUse" x1="282.65289" y1="198.53058" x2="203.45897" y2="394.3891">
           <stop offset="0" stopColor="#01D655"/>
