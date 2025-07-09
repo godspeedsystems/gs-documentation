@@ -3,6 +3,7 @@
 ## Core Framework 
 This section contains notes about recent updates to Godspeed Framework, listed by version number.
 
+*   [2.5.6](/release-notes/framework/v2.5.6) (2025-07-07)
 *   [2.5.5](/release-notes/framework/v2.5.5) (2025-07-01)
 *   [2.5.4](/release-notes/framework/v2.5.4) (2025-04-23)
 *   [2.5.3](/release-notes/framework/v2.5.3) (2025-04-10)

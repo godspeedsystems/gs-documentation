@@ -241,7 +241,10 @@ $  godspeed plugin update
 
 Godspeed wraps Prisma CLI with additional support.
 
-> 📌 Prerequisite: must have schema file saved inside src/datasource/ folder with .prisma extension.
+> 📌 Prerequisite: 
+1. must have prisma plugin installed, 
+2. schema file saved inside src/datasource/ folder with .prisma extension.
+3. db connection url saved in .env
 
 ```bash
 godspeed prisma prepare

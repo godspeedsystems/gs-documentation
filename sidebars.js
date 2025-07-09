@@ -557,6 +557,21 @@ const sidebars = {
             },
             {
               type: 'doc',
+              label: 'Product Manager Lead',
+              id: 'saarthi/modes/pm-lead',
+            },
+            {
+              type: 'doc',
+              label: 'Product Manager Assistant',
+              id: 'saarthi/modes/product manager',
+            },
+            {
+              type: 'doc',
+              label: 'QA',
+              id: 'saarthi/modes/qa-modes',
+            },
+            {
+              type: 'doc',
               label: 'Debug',
               id: 'saarthi/modes/debug',
             },
