@@ -43,7 +43,6 @@ curl -fsSL https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon
 | `corepack`        | Node’s built-in tool for package manager handling            |
 | `git`             | Version control system - required to clone repositories      |
 | `godspeed` CLI    | Command-line interface to scaffold, run and manage services  |
-| `godspeed-daemon` | Core Godspeed runtime engine that executes workflows         |
 ---
 
 ## Manual Installation

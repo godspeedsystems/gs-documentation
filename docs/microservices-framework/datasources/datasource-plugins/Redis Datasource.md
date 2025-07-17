@@ -32,25 +32,47 @@ Configure your Redis data source with connection string.
 
 ### 2. Get a Value
 Workflow to get a value from redis.
-```yaml
-id: get_redis_value
-tasks:
-  - id: get_task
-    fn: datasource.redis.get
-    args:
-      key: 'example_key'
+
+```
+import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
+
+export default async function (ctx: GSContext, args: { key: string }) {
+  const ds: GSDataSource = ctx.datasources.redis;
+
+  const response = await ds.execute(ctx, {
+    ...args,
+    meta: {
+      fnNameInWorkflow: 'datasource.redis.get'
+    }
+  });
+
+  return response instanceof GSStatus ? response : new GSStatus(true, 200, 'Value retrieved', response);
+}
+
 ```
 
 ### 3. Set a Value
 Workflow to set a value in redis.
-```yaml
-id: set_redis_value
-tasks:
-  - id: set_task
-    fn: datasource.redis.set
-    args:
-      key: 'example_key'
-      value: 'example_value'
+
+```
+import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
+
+export default async function (
+  ctx: GSContext,
+  args: { key: string; value: string }
+) {
+  const ds: GSDataSource = ctx.datasources.redis;
+
+  const response = await ds.execute(ctx, {
+    ...args,
+    meta: {
+      fnNameInWorkflow: 'datasource.redis.set'
+    }
+  });
+
+  return response instanceof GSStatus ? response : new GSStatus(true, 200, 'Value set', response);
+}
+
 ```
 
 ## How it helps

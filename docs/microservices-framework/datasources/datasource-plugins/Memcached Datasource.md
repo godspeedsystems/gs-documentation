@@ -33,7 +33,7 @@ http.get./helloworld2:
 http.get./helloworld3:
  fn: helloworld3
 ```
-### Functions (Helloworld2 workflow)
+<!-- ### Functions (Helloworld2 workflow)
 
 ```
 id: helloworld2_workflow
@@ -62,7 +62,7 @@ tasks:
     fn: com.gs.transform
     args:
       name: helloworld3
-```
+``` -->
 
 ## Plugin Components
 
@@ -75,9 +75,7 @@ The plugin consists of the following key components:
 - It initializes a client which provides an object to use as in-memory cache.
 
 - The `set` method is used to set the key and value of the cache.
-
 - The `get` method is used to get value from the cache.
-
 - The `del` method is used to delete value from the cache.
 
 ### 2. Constants

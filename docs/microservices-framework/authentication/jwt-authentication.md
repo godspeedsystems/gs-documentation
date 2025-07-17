@@ -182,9 +182,9 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 
 
 ### How to access JWT payload
-You can access the complete JWT payload in `<% inputs.user %>` in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
+You can access the complete JWT payload using ctx.inputs.data.user when writing JS/TS workflows.
 
-Example access from TS workflow
+Example access from a workflow
 ```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
 export default function (ctx: GSContext) {

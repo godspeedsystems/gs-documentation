@@ -3,7 +3,7 @@
 
 Data sources play a central role in the Godspeed Framework, serving as the origins or locations from which data can be collected and stored. This documentation provides an overview of data sources within the framework, their usage, and how to invoke them from within workflow tasks.
 
-In the Godspeed Framework, data sources are fundamental components that enable users to access and manipulate data from various origins. Examples of data sources include databases,message bus, cache, file systems, and third-party APIs.
+In the Godspeed Framework, data sources are fundamental components that enable users to access and manipulate data from various origins. Examples of data sources include databases, message bus, cache, file systems, and third-party APIs.
 
 Data sources can be seamlessly integrated into your workflow tasks using a standardized syntax. The key element for invoking data sources is the fn attribute, which is namespaced under datasource. Here's an example of how data sources are used within a workflow task:
 
@@ -52,7 +52,7 @@ In this example:
 `datasources.mongo.client.Post.findUnique` is the datasource function, which can be described as below:
 
   - `datasources`: fixed namespace for all data sources for typescript functions
-  - `mongo`: name of datasource (name of prisma schema in case of prisma datasource), you can use any database provider, checkout [supported databases list](/docs/getting-started/advance-guide#prisma-supports-wide-range-of-databases)
+  - `mongo`: name of datasource (name of prisma schema in case of prisma datasource), you can use any database provider, checkout [supported databases list](/docs/microservices-framework/databases/Overview#list-of-currently-supported-databases)
   - `Post`: entity name
   - `findUnique`: method to be invoked in entity name
 

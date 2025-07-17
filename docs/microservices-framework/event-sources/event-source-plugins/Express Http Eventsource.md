@@ -138,7 +138,7 @@ Specifying the event schema here, not only validates your input and response, ha
   http.get./sample_api:
     fn: sample      #redirects to src/functions/sample.yaml
     authn: false #to disable global default setting of JWT authn, say authn: false.
-    # authz: overriden.custom.authz_fn #here you can add path to a JS/TS/YAML function file or put inline YAML workflow for custom authz
+    # authz: overriden.custom.authz_fn #here you can add path to a JS/TS/YAML function file
     id: # Swagger id. by default calculated from the event URI
     operationId: #Swagger if not set explicitly, the `id` is used. if `id` not set `summary` is used. If that is also not set, `${method}_${apiEndPoint}` with whitespace replaced by `_` is used
     tags: #swagger tags. by default, a tag is generated from the `folder_path+event_file_name`
@@ -236,21 +236,6 @@ export default function (ctx: GSContext) {
     }
 }
 ```
-<!-- 
-### Event Handlers: YAML based
-Same response in a yaml workflow.
-
-```yaml
-summary: Returning response
-tasks:
-  - id: first_task
-    fn: com.gs.return
-    args: 
-      data: <% 'Its working + inputs.body.name %>
-      headers:
-        custom_response_header: something
-      # code: 200 Default value from com.gs.return is success and code is 200
-``` -->
 
 ## Uploading files
 

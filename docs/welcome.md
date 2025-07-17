@@ -13,15 +13,13 @@ slug: /
 
 ## What is Godspeed?
 
-Godspeed combines three powerful innovations into one cohesive developer experience:
+Godspeed combines two powerful innovations into one cohesive developer experience:
 
 - **[Saarthi: Agentic SDLC Team](/docs/saarthi/index.md)**  
   AI teammates for product planning, development, testing, DevOps, and monitoring.
   
 - **[4th-Generation Framework Stack](/docs/microservices-framework/guide/get-started.md)**  
   Build full-stack, event-driven, distributed systems with fewer lines of code and [built-in best practices](/docs/microservices-framework/introduction/guard-rails.md)
-
-- **[Godspeed Studio](https://studio.godspeed.systems)** — a powerful visual editor for managing and building your Godspeed projects through an intuitive UI.
 
 > Even entry-level engineers — or LLMs — can ship production-grade software using Godspeed.
 
@@ -39,13 +37,60 @@ Godspeed combines three powerful innovations into one cohesive developer experie
 | **DevOps Workflows & Infra-as-Code** | GitOps, CI/CD, Terraform-powered automation                   |
 ---
 
+## Build Your First Microservice with AI-Powered Speed
 
+Godspeed is a 4th-gen microservices framework that brings the power of AI directly into your development workflow — with **zero boilerplate**, **multi-agent assistance**, and **context-aware code generation**.
 
-## Free to Start
+With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems is now just **one prompt away**.
 
-- No cost to begin
-- Team upskilling & pairing support
-- Architectural guidance & reviews
-- Partnering opportunities & referrals
+---
 
-[Start Building Now](/docs/microservices-framework/guide/get-started.md)
+## Prerequisite: 
+
+[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
+
+## Step 1: [Install Saarthi From VS Code Marketplace](/docs/saarthi/getting-started/installing.mdx)
+
+## Step 2: Open Saarthi & Select [Code-Godspeed Mode](/docs/saarthi/modes/godspeed.md)
+
+1. From VS Code sidebar, Open **Saarthi**
+3. Choose `⚡ Code-Godspeed` from the mode selector
+
+> Saarthi will now automatically connect to **Chaitanya**, the built-in RAG agent, for context-aware coding powered by Godspeed’s framework intelligence.
+
+---
+
+## Step 3: Create Your First Microservice — Just One Prompt
+
+In the Saarthi chat box, type:
+
+```
+Create a microservice for product catalog with CRUD operations and Postgres as datasource.
+```
+
+Saarthi will:
+
+* Scaffold your project structure
+* Add the right datasource and handler configs
+* Generate event handlers, validations, and workflows
+* Auto-document your API routes
+
+All with framework-aligned best practices and zero boilerplate.
+
+---
+
+##  Step 4: Run Your Service Locally
+
+```bash
+cd <project-name>
+godspeed serve
+```
+
+Test your endpoints instantly in Swagger UI.
+
+---
+
+## Meet Your Multi-Agent Team
+
+[Explore Saarthi Agent Modes →](/docs/saarthi/basic-usage/using-modes.md)
+

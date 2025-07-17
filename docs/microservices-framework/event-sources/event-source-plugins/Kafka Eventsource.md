@@ -138,16 +138,7 @@ export default function (ctx: GSContext): GSStatus {
   return new GSStatus(true, 200, 'OK', inputs.data);
 }
 ```
-<!-- ####  yaml workflow for Consumer ( src/functions/kafka_consume.yaml )
-```yaml
-# function to consume data
-id: kafka-consumer
-summary: consumer
-tasks:
-    - id: set_consumer
-      fn: com.gs.return
-      args: <% inputs %>
-``` -->
+
 
 ## Reference links
 **-** [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource)   

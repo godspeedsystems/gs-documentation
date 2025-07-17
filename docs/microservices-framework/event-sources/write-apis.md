@@ -105,7 +105,7 @@ Lets understand the first line from the above snippet `http.get./greet`.
 
 `/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
 
-We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory. 
+We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript and javascript workflows. In the above example the helloworld function exists in `src/functions` directory. 
 
 ### Key Differences between a Sync and Async Event Schema
 
@@ -226,7 +226,6 @@ Try the `/helloworld` endpoint. Provide a `name` in the query, and observe the J
 ### Extending Further
 
 * Use `datasources` (Axios, AWS, Prisma) in the handler via `ctx.datasources`
-* Chain multiple tasks using YAML workflows instead of writing code
 * Auto-generate CRUD APIs via `godspeed gen-crud-api`
 ---
 

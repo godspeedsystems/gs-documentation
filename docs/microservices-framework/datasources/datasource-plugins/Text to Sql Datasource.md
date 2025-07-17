@@ -311,7 +311,7 @@ Create a new file `src/events/query.yaml`:
 ### Query Execution Workflow
 Define your function `src/functions/execute-query.yaml`:
 
-```yaml
+<!-- ```yaml
 id: execute-query
 summary: Execute natural language query
 tasks:
@@ -320,8 +320,28 @@ tasks:
     args:
       query: <% inputs.body.query %>
       dbType: <% inputs.body.dbType || 'postgres' %>
-```
+``` -->
+```ts
+import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
+export default async function (
+  ctx: GSContext,
+  args: { query: string; dbType?: string }
+) {
+  const ds: GSDataSource = ctx.datasources["text-to-sql"];
+
+  const response = await ds.execute(ctx, {
+    query: args.query,
+    dbType: args.dbType || "postgres",
+    meta: {
+      fnNameInWorkflow: "datasource.text-to-sql.execute"
+    }
+  });
+
+  return new GSStatus(true, 200, "SQL executed successfully", response);
+}
+
+```
 ### Example Requests
 
 1. **Simple Query Request:**

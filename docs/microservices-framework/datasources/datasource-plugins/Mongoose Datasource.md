@@ -35,7 +35,7 @@ successResponseCodes: #default response codes for success responses
   ![Alt text](../../../../static/img/mongoose_folder_structure.png)
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
 the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
-calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
+calling
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files. Also you will need to create a folder `datasources/mongoose1/models` and keep your models there as detailed below.
 
 - You can override the default response codes for success cases for different methods by putting them in the datasource instance's yaml file

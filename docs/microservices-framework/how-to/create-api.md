@@ -84,7 +84,7 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
           }, 
           childLogger, // context specific logger. Read pino childLogger for more information
           logger, // Basic logger of the project, generally prefer childLogger for logging 
-          outputs, // outputs of previously executed tasks of yaml workflows (if any)
+          outputs, // outputs of previously executed tasks (if any)
           functions, // all loaded workflows/functions from the src/functions/ folder
           datasources, //all configured datasources from src/datasources
           mappings  //mappings from src/mappings folder. this is useful for loading key value configurations for business logic of your project

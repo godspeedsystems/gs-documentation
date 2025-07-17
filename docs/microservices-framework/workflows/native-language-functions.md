@@ -129,7 +129,7 @@ export default function (ctx: GSContext) {
 
 <!-- 
 ```typescript
-// Everything you need within a workflow, whether in native languages like JS/TS, or in yaml workflows and tasks.
+// Everything you need within a workflow, whether in native languages like JS/TS and tasks.
 
 export class GSContext { //span executions
     outputs: { [key: string]: GSStatus; }; //DAG result. This context has a trace history and responses of all instructions in the DAG, which are are stored in this object against task ids

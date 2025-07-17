@@ -25,6 +25,7 @@ base_url: <% config.api.base_url %>
 ```
 
 **Runtime evaluation** There are some variables/code which should be evaluated at runtime. For example, using [GSContext properties](../workflows/native-language-functions.md/#gscontext) in workflows as given below:
+                     
 ```yaml title=src/workflows/helloworld.yaml
 id: helloworld
 tasks:

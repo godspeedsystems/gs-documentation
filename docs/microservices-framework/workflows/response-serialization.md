@@ -1,4 +1,7 @@
-# Response Serialization & Sanitization (Framework-level)
+---
+title: Response Serialization
+---
+# Response Serialization (Framework-level)
 
 Godspeed automatically sanitizes the event handler's response (GSStatus) to ensure it can be safely serialized and returned in HTTP or cloud event responses. 
 This prevents errors such as:
@@ -10,16 +13,19 @@ TypeError: Do not know how to serialize a BigInt
 ### What Is Handled Automatically
 If your handler or datasource returns non-JSON-serializable types, Godspeed will:
 
-✅ Convert BigInt to string
-✅ Convert Date to ISO strings
-✅ Convert Function to [Function]
-✅ Convert Symbol to .toString()
-✅ Convert Error objects to { name, message, stack }
-✅ Deep sanitize nested arrays and objects
+- ✅ Convert BigInt to string
 
-This ensures the response can be safely sent via res.send() / res.json() without crashing the app or triggering CORS issues.
+- ✅ Convert Date to ISO strings
 
-Before:
+- ✅ Convert Function to [Function]
+
+- ✅ Convert Symbol to .toString()
+
+- ✅ Deep sanitize nested arrays and objects
+
+This ensures the response can be safely sent via `res.send() / res.json()` without crashing the app or triggering CORS issues.
+
+### Before:
 If you returned:
 
 ```
@@ -27,8 +33,7 @@ return new GSStatus(true, 200, undefined, { id: 123n });
 ```
 It would crash with a serialization error.
 
-
-Now:
+### Now:
 Godspeed automatically transforms it to:
 
 ```

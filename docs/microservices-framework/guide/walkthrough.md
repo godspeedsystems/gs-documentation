@@ -223,7 +223,7 @@ If authorization is enabled at eventsource level for all its events, but you wis
 ```
 
 **Customizing authorization at event level**
-If authorization is enabled at eventsource level for all its events, but you wish to customise authorization for any particular events, you can disable authorization at the event level, by setting an authorization function or inline yaml workflow there itself.
+If authorization is enabled at eventsource level for all its events, but you wish to customise authorization for any particular events, you can disable authorization at the event level, by setting an authorization function there itself.
 ```yaml
 "http.get./helloworld":
   fn: helloworld

@@ -218,28 +218,11 @@ const sidebars = {
               label: "8.2. Typescript and Javascript functions",
               id: "microservices-framework/workflows/native-language-functions",
             },
-            // {
-            //   type: "category",
-            //   label: "8.3. Yaml workflows",
-            //   // id: "microservices-framework/workflows/yaml-dsl-functions"
-            //   items: [
-            //     {
-            //       type: "doc",
-            //       label: "8.3.1. Overview",
-            //       id: "microservices-framework/workflows/yaml-workflows/overview",
-            //     },
-            //     {
-            //       type: "doc",
-            //       label: "8.3.2. Workflow DSL",
-            //       id: "microservices-framework/workflows/yaml-workflows/workflow-dsl",
-            //     },
-            //     {
-            //       type: "doc",
-            //       label: "8.3.3. Inbuilt workflows",
-            //       id: "microservices-framework/workflows/yaml-workflows/inbuilt-workflows",
-            //     },
-            //   ],
-            // },
+            {
+              type: "doc",
+              label: "8.3. Response Serialization",
+              id: "microservices-framework/workflows/response-serialization",
+            }
           ],
         },
         {

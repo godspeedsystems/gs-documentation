@@ -53,7 +53,8 @@ brokers: ["kafka:9092"]
                 type: string
 ```
 
-**3. ** In workflow we need to mension `datasource.kafka.producer` as function `fn` to produce data.
+**3.** In workflow we need to mension `datasource.kafka.producer` as function `fn` to produce data.
+
 ```yaml title=src/functions/kafka-publish.yaml
 id: kafka-publish
 summary: kafka publish message

@@ -22,14 +22,14 @@ Mappings are present in `src/mappings` directory. The default format is yaml and
 
 ## Sample mappings
 This is a sample mapping which is accessible in the workflows inside mappings object using `mappings.Gender` and `mappings.generate.genId`   
-```yaml title="index.yaml"
+```yaml title=index.yaml
 Gender:
   Male: M
   Female: F
   Others: O
 ```
 
-```yaml title="generate.yaml"
+```yaml title=generate.yaml
 genId: 12345
 ```
 :::tip Note
@@ -74,18 +74,6 @@ However, for other file names you need to mention the file name while accessing 
    - The `report_path` mapping is used to dynamically define the report path for the workflow triggered by the event.
 
 ---
-### Sample Yaml Workflow accessing mappings
-```
-  - id: httpbinCof_step1
-    description: Hit http bin with some dummy data. It will send back same as response
-    fn: datasource.api.post./anything
-    args:
-      params:
-      data:
-        personal_email_id: 'ala.eforwich@email.com'
-        gender: <% mappings.Gender[inputs.body.Gender] %>
-        id:  <% mappings.generate.genId %>
-```
 ### Sample typescript Workflow accessing mappings
 
 In this example, mappings is utilized to dynamically retrieve error messages based on an error code.
@@ -120,13 +108,13 @@ export default async function(ctx: GSContext, args: any) {
 `src/mappings/error_codes.yaml`
 ```yaml
   codes:
-  E001: Internal Server Error
-  E002: Missing mandatory field in the request body.
-  E003: Extra properties found in the request body.
-  E004: Wrong field type/format/pattern/length in the request body.
-  E005: Record already exists in the database.
-  E006: Record to update is not present in the database.
-  E007: Record to delete is not present in the database.
+    E001: Internal Server Error
+    E002: Missing mandatory field in the request body.
+    E003: Extra properties found in the request body.
+    E004: Wrong field type/format/pattern/length in the request body.
+    E005: Record already exists in the database.
+    E006: Record to update is not present in the database.
+    E007: Record to delete is not present in the database.
 ```
 This ensures that error messages are consistent and centralized. Instead of hardcoding messages in multiple places, they are stored in the mappings file.
 
@@ -136,14 +124,14 @@ You can use mapping constants in other mapping files using coffee/js scripting.
 
 For example, you have mapping files `index.yaml`, `relations.json` and `reference.yaml`. Use the mappings from first two files as reference in the third file as follows:   
  
-```yaml title="index.yaml"
+```yaml title=index.yaml
 Gender:
   Male: M
   Female: F
   Others: O
 ```
 
-```json title="relations.json"
+```json title=relations.json
 {
     "id": 1,
     "title": "Hello World",
@@ -152,7 +140,7 @@ Gender:
 }
 ```
 
-```yaml title="reference.yaml"
+```yaml title=reference.yaml
 NewGender: <% mappings.Gender.Others %>
 title:  <% mappings.relations.title %>
 ```

@@ -86,7 +86,7 @@ This guide offers a concise overview of integrating the GraphQL plugin into the 
 
   #### GraphQL event handler 
 
-  Every Graphql event has a `body`, `headers` and `user`. You can access the same in your Typescript, Javascript or YAML functions. Below is an example of a TS and YAML workflow.
+  Every Graphql event has a `body`, `headers` and `user`. You can access the same in your Typescript, Javascript or YAML functions. Below is an example of a TS workflow.
 
   #### src/functions/create.ts
 

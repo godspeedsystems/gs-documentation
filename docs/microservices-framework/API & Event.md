@@ -1,7 +1,7 @@
 ---
 title: API & Event
 description: In Godspeed, every API is defined as an event and handled by a corresponding function, with a unified event-driven structure for both REST and non-REST event sources.
-keywords: [Godspeed, API, event, REST, event-driven, event schema, JWT, OAuth2, authorization]
+keywords: [Godspeed, API, event, REST, event-driven, event schema, JWT, OAuth2]
 ---
 In Godspeed, every API is defined as an event, and handled by a corresponding function. This unified event-driven structure works for both REST and non-REST event sources (HTTP, WebSocket, Kafka, etc.).
 
@@ -53,7 +53,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 
 `/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
 
-We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript, javascript or  yaml workflows in Godspeed's DSL format. In the above example the helloworld function exists in `src/functions` directory.
+We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript or javascript. In the above example the helloworld function exists in `src/functions` directory.
 
 When switching between eventsources, the event schema undergoes significant changes.
 
@@ -268,7 +268,7 @@ export default function (ctx: GSContext) {
 ```
 
 ### How to access JWT payload
-You can access the complete JWT payload in `<% inputs.user %>` in YAML workflows, and as ctx.inputs.data.user when writing JS/TS workflows.
+You can access the complete JWT payload as ctx.inputs.data.user in JS/TS workflows.
 
 Example access from TS workflow
 ```ts
@@ -402,127 +402,9 @@ Actions define the specific operations or activities that users may want to perf
 d. **Context**
 Context refers to the circumstances or conditions under which a user's request for access is evaluated. This includes factors such as time, location, or any other relevant contextual information.
 
-### Workflow DSL
-You can add authorization workflow at the task level in any workflow. The authorization workflow should return allow/deny or json output to the main worklfow.
+Authz workflow returns JSON output then it is merged with args.data of the task for which authz is being executed.
 
-**Allow/Deny**
-If authz workflow returns data as true/false, it means the task is allowed/denied to get executed.
-
-**JSON output**
-If authz workflow returns JSON output then it is merged with args.data of the task for which authz is being executed.
-
-Here is the sample spec:
-**Sample workflow calling the authz workflow**
-```yaml
-summary: Call an API
-tasks:
-    - id: api_step1
-      description: Hit with some dummy data. It will send back same as response
-      authz:
-        fn: com.jfs.authz
-        args: <% inputs %>
-      fn: datasource.api.post./anything
-      args:
-        data: <% inputs %>
-```
-
-**Sample authorization workflow `com.jfs.authz`**
-```yaml
-summary: Authorization workflow
-tasks:
-  - id: authz_step1
-    description: return allow/deny based upon user
-    fn: datasource.authz.post./authorize
-    args:
-      data: <% inputs.body.user %>
-  - id: authz_step2
-    description: transform response from authz api
-    fn: com.gs.transform
-    args: |
-        <coffee% if outputs.authz_step1.data.code == 200 then {
-            success: true
-            data: true
-        } else if outputs.authz_step1.data.code == 201 then {
-            success: true
-            data:
-              where:
-                role: 'USER'
-        } else {
-            success: false
-            data: false
-        } %>
-```
-
-The authorization workflow should return response in this format to allow/deny:
-```yaml
-success: true/false
-data: true/false/JSON output
-```
-
-> When data is returned as false i.e. deny then the framework will send `403 Unauthorized` response.
-
-### Sample DB query call authorization
-In DB query call, authz workflow can return JSON output with where clause, include clause etc. which will be merged with the args of the main workflow which is doing DB query.
-
-Here is the sample spec:
-**Sample workflow calling the authz workflow**
-```yaml
-summary: datastore demo
-tasks:
-  - id: find_user
-    description: find users
-    authz:
-      fn: com.jfs.authz
-      args: <% inputs %>
-    fn: datasource.mongo.user.findMany
-    args:
-      data:
-        include: <% inputs.body.include %>
-        where: <% inputs.body.where %>
-```
-
-**Sample authorization workflow `com.jfs.authz`**
-```yaml
-summary: Authorization workflow
-tasks:
-  - id: authz_step1
-    description: return allow/deny based upon user
-    fn: datasource.authz.post./authorize
-    args:
-      data: <% inputs.body.user %>
-
-  - id: authz_step2
-    description: transform response from authz api
-    fn: com.gs.transform
-    args: |
-        <coffee% if outputs.authz_step1.data.code == 200 then {
-            success: true
-            data:
-              where:
-                role: 'USER'
-        } else {
-            success: false
-            data: false
-        } %>
-```
-
-When authorization workflow `com.jfs.authz` returns `success: true` then its `data` will be merged with the main workflow which is calling the authz workflow.
-For example, in the above authz workflow, `data` is returned as:
-```yaml
-data:
-  where:
-    role: 'USER'
-```
-
-This data will be merged with the args.data of the main workflow i.e.
-```yaml
-args:
-  data:
-    include: <% inputs.body.include %>
-    where: <% inputs.body.where %> # where clause from authz workflow will be merged with this
-```
-
-## Reusing Definitions
+<!-- ## Reusing Definitions
 
 ## Validations
 
@@ -531,5 +413,4 @@ args:
 ## Define Event Handler Functions (GSContext, GSCloudEvent, GSStatus, Returning from functions)
 
 ## Using Datasources inside functions
-
-## Using datasources with caching
+ -->

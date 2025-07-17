@@ -72,22 +72,4 @@ export default async function (ctx: GSContext, args: any) {
 ```
 ---
 
-<!-- 
-## Invoking Datasource Clients from Yaml Workflows
-
-In Godspeed, datasources can be accessed and invoked within YAML workflows using the datasource.<datasourceName>.<method> syntax. 
-
-This approach enables you to call methods on datasources directly from YAML, making it possible to perform complex API requests or database interactions without writing additional TypeScript or JavaScript code.
-
-### Example Yaml Workflow
-
-```yaml
-summary: "Get AI-driven response from ChatGPT"
-tasks:
-  - id: request_chatgpt
-    fn: datasource.chatgpt.chat # calling the chat method within chatgpt datasource.
-    args:           # arguments to be passed to the chat method in the datasource
-      prompt: <% inputs.body.prompt %>
-
-``` -->
 

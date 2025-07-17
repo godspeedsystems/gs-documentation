@@ -140,7 +140,7 @@ They are loaded dynamically via YAML configurations where you specify the `type`
 
 It asks to you select your prisma schema file and eventsource you are using, then it scans your **Prisma schema** and automatically generates:
 * API event definitions
-* Workflows for Create, Read, Update, Delete operations (currently in yaml)
+* Workflows for Create, Read, Update, Delete operations
 * That can be tested via Swagger UI immediately
 
 This command eliminates boilerplate and accelerates backend setup.
@@ -197,10 +197,6 @@ GSDataSource: Extend this for custom outbound plugins (e.g., HTTP, DBs).
 GSEventSource: Extend this for plugins that handle inbound events (e.g., HTTP, Cron).
 GSDataSourceAsEventSource: For dual-role plugins like Kafka.
 GSCachingDataSource: For caching-specific plugins (like Redis), with get, set, del.
-
-**Workflow Classes**
-GSFunction: Base class for all tasks.
-GSSeriesFunction, GSParallelFunction, GSEachParallelFunction, GSIFFunction, etc.: Manage execution flow in YAML workflows.
 
 **Other Core Types**
 GSActor: Represents the user or system initiating the event.
@@ -296,7 +292,7 @@ In Godspeed, the words Workflows and Functions mean one and the same thing, i.e.
 
 - **[How to write typescript workflows in godspeed?](/docs/microservices-framework/workflows/native-language-functions)**
 
-- **[How to use inline scripting in Godspeed YAML configurations and workflows?](/docs/microservices-framework/inline-scripting/overview)**
+- **[How to use inline scripting in Godspeed YAML configurations ?](/docs/microservices-framework/inline-scripting/overview)**
 
 
 

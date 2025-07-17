@@ -81,7 +81,7 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
 
 In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function `fn` to perform operations in this case `datasource.aws.s3.listObjects`.
 
-```ts title='TS workflow'
+```ts title=TS workflow
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
 export default async function (ctx: GSContext, args: any) {
@@ -92,8 +92,7 @@ export default async function (ctx: GSContext, args: any) {
         //Along with args, pass meta object
         // meta can contain {entityName, method}
         meta: {entityName: 's3', method: 'listBuckets'},
-        //Or meta can contain {fnNameInWorkflow} which is same as 
-        //the 'fn' that we write when invoking datasource from yaml workflow
+        //Or meta can contain {fnNameInWorkflow}
         //For example, this will also work
         //meta: {fnNameInWorkflow: 'datasource.aws.s3.listBuckets'}
     });

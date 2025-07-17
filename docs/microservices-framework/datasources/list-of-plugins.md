@@ -95,33 +95,6 @@ type: axios
 base_url: http://localhost:4000
 ```
 
-### Axios Workflow (src/functions/sample.yaml)
-```
-id: sample
-tasks:
-  - id: first_task
-    fn: datasource.api.get./api/items
-    args:
-      headers:
-      data:
-      timeout:
-      params:
-```
-The axios request configuration options, such as headers, params, data, and timeout, can be directly passed as arguments (args).
-
-```
-args:
-    headers:
-      'X-Requested-With': 'XMLHttpRequest'
-    params:
-      ID: 12345
-    data:
-      firstName: 'Fred'
-    timeout: 1000
-```
- To get more clarity checkout about [Axios configuration]( https://axios-http.com/docs/req_config)
-
-
 ## How It Helps
 
 The Godspeed Axios Plugin offers the following advantages:
@@ -174,7 +147,7 @@ retry:
 ```
 
 the above config works on two conditions if status from the api is 500,501 or 502 and message value is as mentioned in the config. When condition is optional and if retry is without when condition, the retry will be made on failures of the API.
-
+<!-- 
 - Override at task level within args object of the axios method call.
 
 ```yaml
@@ -196,7 +169,7 @@ tasks:
       type: exponential
       min_interval: PT5s
       max_internal: PT15s
-```
+``` -->
 
 
 
@@ -386,9 +359,8 @@ export default async function (ctx: GSContext, args: any) {
         //Along with args, pass meta object
         // meta can contain {entityName, method}
         meta: {entityName: 's3', method: 'listBuckets'},
-        //Or meta can contain {fnNameInWorkflow} which is same as 
-        //the 'fn' that we write when invoking datasource from yaml workflow
-        //For example, this will also work
+        //Or meta can contain {fnNameInWorkflow},
+        // this will also work
         //meta: {fnNameInWorkflow: 'datasource.aws.s3.listBuckets'}
     });
     return response;
@@ -592,7 +564,7 @@ Mongoose as a datasource: It provides seamless integration with MongoDB through 
   ![Alt text](../../../static/img/mongoose_folder_structure.png)
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke
 the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean
-calling `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
+calling 
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files. Also you will need to create a folder `datasources/mongoose1/models` and keep your models there as detailed below.
 
 - You can override the default response codes for success cases for different methods by putting them in the datasource instance's yaml file
@@ -674,29 +646,10 @@ module.exports = {
 ```
 
 ### Sample workflow for Mongoose API
-When calling any api function it will be called as `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and 
+
+When calling any mongoose function it will be called as
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
-The arguments to any `Function_Name` are to be passed in two ways
-- Only the first arg of the function as accepted by the API
-  ```yaml
-    id: mongoose_workflow
-    tasks:
-      - id: first_task
-        fn: datasource.mongoose.SomeModel.findOne
-        args: {"name": "mastersilv3r"} #Fun fact: YAML acceptes JSON as well. 
-  ```
-- Most Mongoose functions accept multiple args. To pass all args to an API call, send an array of the acceptable args. This array is spread and passed to the API call
-  ```yaml
-    id: helloworld2_workflow
-    tasks:
-      - id: helloworld2_workflow_first_task
-        fn: datasource.mongoose.SomeModel.findOne
-        args: #as an array
-          - name: mastersilv3r #search clause: First argument
-          - 'name age' #The projection: second argument
-          - {} # Options: the third argument
-  ```
-- Calling from a TS/JS workflow works same as any other datasource
+
 ```typescript
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
