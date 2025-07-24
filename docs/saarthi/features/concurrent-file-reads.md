@@ -4,7 +4,7 @@ import Codicon from '@site/src/components/Codicon';
 # Multi File Reads
 
 :::warning Experimental Feature
-Concurrent file reads is an experimental feature that allows Saarthi to read multiple files simultaneously in a single request. This feature is under active development and may change significantly in future releases.
+Multi File reads or Concurrent file reads is an experimental feature that allows Saarthi to read multiple files simultaneously in a single request. This feature is under active development and may change significantly in future releases.
 :::
 
 This feature dramatically improves your workflow by allowing Saarthi to gather context from multiple files in a single conversation turn, rather than asking to read files one by one. Instead of waiting through multiple back-and-forth exchanges, Saarthi can understand your entire project structure much faster.
@@ -61,7 +61,7 @@ When Saarthi requests to read multiple files, you'll see a new batch approval in
 
 ### Enhanced Tool Behavior
 
-The [`read_file`](/advanced-usage/available-tools/read-file) tool automatically adapts based on your settings:
+The [`read_file`](../advanced-usage/available-tools/read-file) tool automatically adapts based on your settings:
 
 - **Single-file mode** (disabled): Uses traditional one-file-at-a-time approach
 - **Multi-file mode** (enabled): Accepts multiple files in a single request using XML format
@@ -143,4 +143,4 @@ This experimental feature is actively being improved based on user feedback. We'
 
 Your experience matters - let us know how this feature works for your workflow!
 
-For more about experimental features, see [Experimental Features Overview](/features/experimental/experimental-features).
+For more about experimental features, see [Experimental Features Overview](./experimental/experimental-features).

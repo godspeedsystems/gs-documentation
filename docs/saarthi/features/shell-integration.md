@@ -24,7 +24,7 @@ When you ask Saarthi to perform tasks like installing dependencies, starting a d
 
 Shell integration is built into Saarthi and works automatically in most cases. If you see "Shell Integration Unavailable" messages or experience issues with command execution, try these solutions:
 
-1. **Update VSCode/Cursor** to the latest version (VSCode 1.93+ required)
+1. **Update VSCode** to the latest version (VSCode 1.93+ required)
 2. **Ensure a compatible shell is selected**: Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) → "Terminal: Select Default Profile" → Choose bash, zsh, PowerShell, or fish
 3. **Windows PowerShell users**: Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` then restart VSCode
 4. **WSL users**: Add `. "$(code --locate-shell-integration-path bash)"` to your `~/.bashrc`
@@ -35,7 +35,6 @@ Saarthi has a fallback mechanism for executing commands. This is most relevant i
 
 - **How it works**: If Saarthi is configured to use VS Code's terminal integration but cannot connect or encounters issues, it may automatically attempt to execute the command directly using a background process. This is a fallback to ensure the command still attempts to run.
 - **Notification**: You might see a notification in the chat if this fallback is used, indicating that the command is running without the full features of either Saarthi's inline terminal or VS Code's shell integration (e.g., real-time output streaming or precise exit code detection might be limited).
-![Command execution fallback notification example](/img/v3.15.0/v3.15.0.png)
 
 - **Resolution**: If you encounter this fallback, it typically indicates an issue with your VS Code shell integration setup. Review the troubleshooting steps in this document or consider using Saarthi's recommended inline terminal by ensuring the [`Disable terminal shell integration`](#disable-terminal-shell-integration) setting is CHECKED.
 
@@ -52,11 +51,15 @@ Saarthi provides settings to fine-tune how it interacts with terminals. To acces
 ### Basic Settings
 
 #### Terminal Output Limit
+
 ![Terminal output limit slider set to 500](/img/shell-integration/shell-integration.png)
+
+
 This setting controls how much output Saarthi captures from your commands. Consider lowering it if you're concerned about token usage or if Saarthi seems slow processing very long outputs (you'll still get the beginning and end). Consider increasing it if you frequently need more middle content from long commands directly in Saarthi's context, but be mindful of potential token costs. Default: 500 lines.
 
 #### Compress progress bar output
 ![Compress progress bar output checkbox](/img/shell-integration/shell-integration-10.png)
+
 Keep this enabled (default) for cleaner output and token savings. It makes Saarthi process dynamic output like progress bars or spinners more like a real terminal, showing only the final state. Disable this only in rare cases where you specifically need to debug the intermediate, raw output of a progress bar or similar dynamic display.
 
 ### Advanced Settings
@@ -74,7 +77,7 @@ Always restart all open terminals after changing any of these settings.
 
 #### Inherit environment variables
 ![Inherit environment variables checkbox](/img/shell-integration/shell-integration-11.png)
-This setting controls whether Saarthi's terminal sessions use the same environment variables (like `PATH`, API keys, etc.) as your main VSCode/Cursor environment. It directly mirrors the VSCode global setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Keep this enabled (default for VSCode) if you want Saarthi commands to operate with the same context and tools available in your regular VSCode terminal. Consider disabling it only if you need a completely clean, isolated environment for Saarthi's terminal tasks or are troubleshooting complex environment variable conflicts.
+This setting controls whether Saarthi's terminal sessions use the same environment variables (like `PATH`, API keys, etc.) as your main VSCode environment. It directly mirrors the VSCode global setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Keep this enabled (default for VSCode) if you want Saarthi commands to operate with the same context and tools available in your regular VSCode terminal. Consider disabling it only if you need a completely clean, isolated environment for Saarthi's terminal tasks or are troubleshooting complex environment variable conflicts.
 
 ### Runtime Environment
 On macOS (and possibly other operating systems) the environment provided to VSCode, and consequently Saarthi, can differ depending on how VSCode is launched.  

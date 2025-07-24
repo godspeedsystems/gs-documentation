@@ -49,14 +49,14 @@ With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems
 
 [Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
 
-## Step 1: [Install Saarthi From VS Code Marketplace](/docs/saarthi/getting-started/installing.mdx)
+## Step 1: [Install Saarthi in VS Code](/docs/saarthi/getting-started/installing.mdx)
 
-## Step 2: Open Saarthi & Select [Code-Godspeed Mode](/docs/saarthi/modes/godspeed.md)
+## Step 2: Open Saarthi & Select [Code Mode](/docs/saarthi/modes/code.md)
 
 1. From VS Code sidebar, Open **Saarthi**
-3. Choose `⚡ Code-Godspeed` from the mode selector
+3. Choose `💻 Code` from the mode selector
 
-> Saarthi will now automatically connect to **Chaitanya**, the built-in RAG agent, for context-aware coding powered by Godspeed’s framework intelligence.
+> Saarthi will now automatically connect to **RAG node MCP Server**, for context-aware coding with Godspeed framework.
 
 ---
 
@@ -65,7 +65,7 @@ With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems
 In the Saarthi chat box, type:
 
 ```
-Create a microservice for product catalog with CRUD operations and Postgres as datasource.
+Create a godspeed microservice for product catalog with CRUD operations using Postgres database.
 ```
 
 Saarthi will:

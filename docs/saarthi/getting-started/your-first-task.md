@@ -1,7 +1,7 @@
 ---
 sidebar_label: Your First Task
 ---
-<!--  import SaarthiIcon from '@site/src/components/SaarthiIcon'; -->
+import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
 # Starting Your First Task with Saarthi
 
@@ -9,7 +9,7 @@ Now that you've [configured your AI provider and model](connecting-api-provider.
 
 ## Step 1: Open the Saarthi Panel
 
-Click the Saarthi icon in the VS Code Activity Bar (vertical bar on the side of the window) to open the chat interface. If you don't see the icon, verify the extension is installed and enabled.
+Click the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar (vertical bar on the side of the window) to open the chat interface. If you don't see the icon, verify the extension is installed and enabled.
 
 *The Saarthi icon in the Activity Bar opens the chat interface.*
 

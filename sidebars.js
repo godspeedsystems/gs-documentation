@@ -69,11 +69,11 @@ const sidebars = {
               label: "2.3. Detailed Walthrough",
               id: "microservices-framework/guide/walkthrough",
             },
-            // {
-            //   type: "doc",
-            //   label: "2.4. Environment Configuration",
-            //   id: "microservices-framework/config-and-mappings/config",
-            // },
+            {
+              type: "doc",
+              label: "2.4. Environment Configuration",
+              id: "microservices-framework/config-and-mappings/config",
+            },
           ],
         },
         {
@@ -465,12 +465,12 @@ const sidebars = {
               type: "doc",
               label: "15.6. Logs",
               id: "microservices-framework/telemetry/logging",
-            }
-            // {
-            //   type: "doc",
-            //   label: "16.3. Custom traces, logs and metrics (BPM)",
-            //   id: "microservices-framework/telemetry/custom-metrics-logs-traces"
-            // },
+            },
+            {
+              type: "doc",
+              label: "16.3. Custom traces, logs and metrics (BPM)",
+              id: "microservices-framework/telemetry/custom-metrics-logs-traces"
+            },
           ],
         },
         {
@@ -525,28 +525,29 @@ const sidebars = {
             },
             {
               type: 'doc',
-              label: 'Code-Generic',
+              label: 'Code',
               id: 'saarthi/modes/code',
             },
             {
               type: 'doc',
-              label: 'Code-Godspeed',
-              id: 'saarthi/modes/godspeed',
+              label: 'Coach',
+              id: 'saarthi/modes/coach',
             },
-            {
+           {
               type: 'doc',
               label: 'Code Review',
               id: 'saarthi/modes/code-review',
             },
             {
               type: 'doc',
-              label: 'Product Manager Lead',
+              label: 'Product Manager',
               id: 'saarthi/modes/pm-lead',
             },
+     
             {
               type: 'doc',
-              label: 'Product Manager Assistant',
-              id: 'saarthi/modes/product manager',
+              label: 'Debug',
+              id: 'saarthi/modes/debug',
             },
             {
               type: 'doc',
@@ -555,14 +556,9 @@ const sidebars = {
             },
             {
               type: 'doc',
-              label: 'Debug',
-              id: 'saarthi/modes/debug',
-            },
-            {
-              type: 'doc',
               label: 'Devops',
               id: 'saarthi/modes/devops',
-            }, 
+            },
             {
               type: 'doc',
               label: 'Architect',
@@ -586,93 +582,93 @@ const sidebars = {
             'saarthi/tips-and-tricks',
           ],
         },
-        // {
-        //   type: 'category',
-        //   label: 'Features',
-        //   items: [
-        //     'saarthi/features/api-configuration-profiles',
-        //     'saarthi/features/auto-approving-actions',
-        //     // 'saarthi/features/browser-use',
-        //     // 'saarthi/features/checkpoints',
-        //     // 'saarthi/features/code-actions',
-        //     'saarthi/features/custom-instructions',
-        //     'saarthi/features/custom-modes',
-        //     'saarthi/features/enhance-prompt',
-        //     'saarthi/features/fast-edits',
-        //     // 'saarthi/features/footgun-prompting',
-        //     // 'saarthi/features/intelligent-context-condensing',
-        //     'saarthi/features/keyboard-shortcuts',
-        //     // 'saarthi/features/model-temperature',
-        //     // 'saarthi/features/saarthiignore',
-        //     // 'saarthi/features/settings-management',
-        //     // 'saarthi/features/shell-integration',
-        //     // 'saarthi/features/suggested-responses',
-        //     {
-        //       type: 'category',
-        //       label: 'MCP',
-        //       items: [
-        //         {
-        //           type: 'doc',
-        //           id: 'saarthi/features/mcp/overview',
-        //           label: 'MCP Overview'
-        //         },
-        //         'saarthi/features/mcp/using-mcp-in-saarthi',
-        //         'saarthi/features/mcp/what-is-mcp',
-        //         'saarthi/features/mcp/server-transports',
-        //         'saarthi/features/mcp/mcp-vs-api',
-        //         'saarthi/features/mcp/recommended-mcp-servers',
-        //       ],
-        //     },
-        //     // {
-        //     //   type: 'category',
-        //     //   label: 'Experimental',
-        //     //   items: [
-        //     //     'saarthi/features/experimental/experimental-features',
-        //     //     'saarthi/features/experimental/codebase-indexing',
-        //     //     'saarthi/features/experimental/concurrent-file-reads',
-        //     //     'saarthi/features/experimental/power-steering',
-        //     //   ],
-        //     // },
-        //     // 'saarthi/features/more-features',
-        //   ],
-        // },
-        // {
-        //   type: 'category',
-        //   label: 'Advanced Usage',
-        //   items: [
-        //     {
-        //       type: 'category',
-        //       label: 'Available Tools',
-        //       items: [
-        //         'saarthi/advanced-usage/available-tools/tool-use-overview',
-        //         'saarthi/advanced-usage/available-tools/access-mcp-resource',
-        //         'saarthi/advanced-usage/available-tools/apply-diff',
-        //         'saarthi/advanced-usage/available-tools/ask-followup-question',
-        //         'saarthi/advanced-usage/available-tools/attempt-completion',
-        //         'saarthi/advanced-usage/available-tools/browser-action',
-        //         'saarthi/advanced-usage/available-tools/codebase-search',
-        //         'saarthi/advanced-usage/available-tools/execute-command',
-        //         'saarthi/advanced-usage/available-tools/insert-content',
-        //         'saarthi/advanced-usage/available-tools/list-code-definition-names',
-        //         'saarthi/advanced-usage/available-tools/list-files',
-        //         'saarthi/advanced-usage/available-tools/new-task',
-        //         'saarthi/advanced-usage/available-tools/read-file',
-        //         'saarthi/advanced-usage/available-tools/search-files',
-        //         'saarthi/advanced-usage/available-tools/search-and-replace',
-        //         'saarthi/advanced-usage/available-tools/switch-mode',
-        //         'saarthi/advanced-usage/available-tools/use-mcp-tool',
-        //         'saarthi/advanced-usage/available-tools/write-to-file',
-        //       ],
-        //     },
-        //     'saarthi/advanced-usage/context-poisoning',
-        //     'saarthi/advanced-usage/large-projects',
-        //     'saarthi/advanced-usage/local-models',
-        //     'saarthi/advanced-usage/local-development-setup',
-        //     'saarthi/advanced-usage/prompt-engineering',
-        //     'saarthi/advanced-usage/prompt-structure',
-        //     'saarthi/advanced-usage/rate-limits-costs',
-        //   ],
-        // },
+        {
+          type: 'category',
+          label: 'Features',
+          items: [
+            'saarthi/features/api-configuration-profiles',
+            'saarthi/features/auto-approving-actions',
+            'saarthi/features/browser-use',
+            'saarthi/features/checkpoints',
+            'saarthi/features/code-actions',
+            'saarthi/features/custom-instructions',
+            'saarthi/features/custom-modes',
+            'saarthi/features/enhance-prompt',
+            'saarthi/features/fast-edits',
+            'saarthi/advanced-usage/footgun-prompting',
+            'saarthi/features/intelligent-context-condensing',
+            'saarthi/features/keyboard-shortcuts',
+            'saarthi/features/model-temperature',
+            'saarthi/features/saarthiignore',
+            'saarthi/features/settings-management',
+            'saarthi/features/shell-integration',
+            'saarthi/features/suggested-responses',
+            {
+              type: 'category',
+              label: 'MCP',
+              items: [
+                {
+                  type: 'doc',
+                  id: 'saarthi/features/mcp/overview',
+                  label: 'MCP Overview'
+                },
+                'saarthi/features/mcp/using-mcp-in-saarthi',
+                'saarthi/features/mcp/what-is-mcp',
+                'saarthi/features/mcp/server-transports',
+                'saarthi/features/mcp/mcp-vs-api',
+                'saarthi/features/mcp/recommended-mcp-servers',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Experimental',
+              items: [
+                'saarthi/features/experimental/experimental-features',
+                'saarthi/features/experimental/codebase-indexing',
+                'saarthi/features/experimental/concurrent-file-reads',
+                'saarthi/features/experimental/power-steering',
+              ],
+            },
+            'saarthi/features/more-features',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Advanced Usage',
+          items: [
+            {
+              type: 'category',
+              label: 'Available Tools',
+              items: [
+                'saarthi/advanced-usage/available-tools/tool-use-overview',
+                'saarthi/advanced-usage/available-tools/access-mcp-resource',
+                'saarthi/advanced-usage/available-tools/apply-diff',
+                'saarthi/advanced-usage/available-tools/ask-followup-question',
+                'saarthi/advanced-usage/available-tools/attempt-completion',
+                'saarthi/advanced-usage/available-tools/browser-action',
+                'saarthi/advanced-usage/available-tools/codebase-search',
+                'saarthi/advanced-usage/available-tools/execute-command',
+                'saarthi/advanced-usage/available-tools/insert-content',
+                'saarthi/advanced-usage/available-tools/list-code-definition-names',
+                'saarthi/advanced-usage/available-tools/list-files',
+                'saarthi/advanced-usage/available-tools/new-task',
+                'saarthi/advanced-usage/available-tools/read-file',
+                'saarthi/advanced-usage/available-tools/search-files',
+                'saarthi/advanced-usage/available-tools/search-and-replace',
+                'saarthi/advanced-usage/available-tools/switch-mode',
+                'saarthi/advanced-usage/available-tools/use-mcp-tool',
+                'saarthi/advanced-usage/available-tools/write-to-file',
+              ],
+            },
+            'saarthi/advanced-usage/context-poisoning',
+            'saarthi/advanced-usage/large-projects',
+            'saarthi/advanced-usage/local-models',
+            'saarthi/advanced-usage/local-development-setup',
+            'saarthi/advanced-usage/prompt-engineering',
+            'saarthi/advanced-usage/prompt-structure',
+            'saarthi/advanced-usage/rate-limits-costs',
+          ],
+        },
         {
           type: 'category',
           label: 'Model Providers',
@@ -700,11 +696,6 @@ const sidebars = {
           ]
         },
         'saarthi/faq'
-        // {
-        //   type: 'doc',
-        //   label: 'FAQs',
-        //   id: 'saarthi/faq'
-        // },
       ]
     },
     {

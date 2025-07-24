@@ -1,7 +1,7 @@
 ---
 sidebar_label: Connecting To AI Provider
 ---
-<!-- import SaarthiIcon from '@site/src/components/SaarthiIcon'; -->
+import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
 # Connecting Your First AI Provider
 
@@ -35,7 +35,7 @@ For direct access to specific models from their original providers, with full ac
 
 Once you have your API key:
 
-1. Open the Saarthi sidebar by clicking the Saarthi icon in the VS Code Activity Bar
+1. Open the Saarthi sidebar by clicking the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar
 2. In the welcome screen, select your API provider from the dropdown
 3. Paste your API key into the appropriate field
 4. Select your model:

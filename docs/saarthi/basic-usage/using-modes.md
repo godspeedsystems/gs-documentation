@@ -35,9 +35,7 @@ Four ways to switch modes:
 
 - [Ask](/docs/saarthi/modes/ask.md)
 
-- [Code-Generic](/docs/saarthi/modes/code.md)
-
-- [Godspeed](/docs/saarthi/modes/godspeed.md)
+- [Code](/docs/saarthi/modes/code.md)
 
 - [Code-Review](/docs/saarthi/modes/code-review.md)
 
@@ -48,6 +46,12 @@ Four ways to switch modes:
 - [Architect](/docs/saarthi/modes/architect.md)
 
 - [Orchestrator](/docs/saarthi/modes/orchestrator.md)
+
+- [QA Lead Engineer](./modes/qa-modes.md)
+
+- [Product Manager](./modes/pm-lead.md)
+
+- [Coach](./modes/coach.md)
 
 <!-- 
 ### Code (Default)
