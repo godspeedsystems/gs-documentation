@@ -1,204 +1,264 @@
-# QA
-Saarthi provides an AI-powered Quality Assurance (QA) assistant to help you automate and streamline testing in your project.
-
-## Mode Name
-🔍 QA Lead Engineer
+# 🔍 QA Lead Engineer
+Your AI-powered Quality Assurance (QA) assistant within Saarthi.
 
 ## Overview
+The QA Lead Engineer acts as your single point of contact for all QA-related tasks. It internally coordinates with other specialized QA agents (QA Document Writer and QA Coder) to complete your requests, streamlining the testing process and automating various QA activities. 
 
-It acts as your single point of contact and internally coordinates with other specialized QA agents to complete your requests. As a user, you will only interact with the **QA Lead Engineer** mode.
+> As a user, you will only interact with the **QA Lead Engineer** mode.
 
-You don't need to worry about how it works behind the scenes — just tell the QA Lead Engineer what you need, and it will handle the rest.
+## Primary Use Cases
+- Setting up the testing environment for new or existing projects.
+- Writing various types of test files (unit, functional, integration).
+- Generating detailed test coverage and status reports.
+- Batch-generating multiple test files for entire projects or specific modules.
 
----
+## Example Prompts
+```
+"Set up the testing environment for my project."
+"Write a functional test for the `/api/users` endpoint."
+"Generate an integration test report."
+"Create tests for all functional routes in my codebase."
+"I need a unit test for the `calculatePrice` function."
+```
 
-## Who You're Talking To
+## Internal Capabilities / Agents
 
-**`qa-lead-engineer`** is your AI QA partner. 
-It can:
+- **Test Environment Setup:** Detects framework, creates necessary test files and configurations, and integrates with Swagger specs.
+- **Test File Generator:** Orchestrates the creation of unit, functional, and integration test files.
+- **Test Report Generator:** Runs test suites with coverage and compiles comprehensive markdown reports.
+- **Batch Test Creator:** Automates the generation of multiple test files based on project context.
+- **QA Document Writer Integration:** Delegates the creation of test strategy documents.
+- **QA Coder Integration:** Delegates the writing of actual test files.
 
-* Set up the testing environment for your project.
-* Write test files (unit, functional, or integration).
-* Generate detailed test reports.
-* Batch-generate multiple test files for entire projects.
+## Model Behavior & Tool Access
+| Capability | Status |
+|---|---|
+| Read files | ✅ |
+| Write files | ✅ (test files, reports, config files) |
+| Execute commands | ✅ (within secure scope for testing) |
+| Evaluate code | ✅ |
+| Use external documentation | ✅ (via RAG MCP) |
+| Manage QA workflow | ✅ |
 
-You’ll never need to talk to or even know how `qa-document-writer` and `qa-coder` work. Everything is orchestrated for you.
+## Preferred Models:
 
----
+GPT-4.5 / Claude 3 Sonnet (Test strategy & report generation)
+Claude 3 Opus / Gemini 1.5 Pro (Test file generation & code evaluation)
 
-## Getting Started
+## Scope
+✅ In Scope
+- Automated test environment setup (Godspeed, Express, etc.)
+- Generation of unit, functional, and integration tests.
+- Comprehensive test reporting (coverage, status).
+- Bulk test file generation for large codebases.
+- Integration with PRD/TRD for test stub creation.
+- Guidance on best practices for testing.
 
-You can begin the conversation by simply saying "Hello". Once you start the conversation with the QA Lead Engineer, you’ll be asked:
+❌ Out of Scope
+- Manual testing execution or human QA simulation.
+- Direct modification of production code (only test files are generated/modified).
+- Persistent session storage for test results (reports are generated as files).
+- Live deployment or CI/CD pipeline management.
+- Deep-dive debugging of application logic (refer to Debug mode).
 
-> "What task do you want me to do?"
+## Embedded Behaviors
+- Initiates conversations by offering clear task options (Setup, Write Single, Generate Report, Write Multiple).
+- Guides users through necessary inputs (e.g., `.env` updates, PRD provision).
+- Automatically detects project framework for tailored test setup.
+- Updates `qa-context.json` to track testing progress.
+- Provides clear completion messages for each task.
 
-You’ll be shown these options:
-
-* ✅ **Setup Testing Environment**
-* 🧪 **Write a Test File**
-* 📄 **Generate Test Report**
-* 🔁 **Write Multiple Test Files**
-
-You can either select one from this list or describe your task directly — the agent will automatically understand what to do.
-
----
-
-## Task Reference Guide
-
-### 1. Setup Testing Environment
-
-Use this when:
-
-* You're testing a new project.
-* Your project lacks proper test scaffolding.
-
-**What the QA Lead Engineer will do:**
-
-* Detect the framework (Godspeed, Express etc.).
-* Create the necessary test files and configuration.
-* Fetch and parse your Swagger spec for routes.
-* Set up integration test stubs based on your PRD (Product Requirement Document). **(Note that integration tests cannot be written without PRD.)**
-* Ask you to update the `.env` file with testing DB values (this step is **critical** to avoid affecting production).
-* Generate or update the `qa-context.json` file with metadata.
-
-**Your input required:**
-
-* Replace `.env` with testing database URLs.
-* Provide the PRD (and optionally TRD) when asked.
-
-Once done, you'll be informed:
-
-> “Testing setup is complete.”
-
----
-
-### 2. Write a Test File
-
-Use this to generate a test for a **single function, route, or feature**.
-
-**Steps:**
-
-1. QA Lead will ask whether you want to write a:
-
-   * **unit**, **functional**, or **integration** test
-2. You’ll be asked for the **name of the function/route/feature**.
-3. The QA Lead will handle the rest:
-
-   * Create a detailed test strategy.
-   * Write the actual test file.
-   * Update `qa-context.json` to mark progress.
-
-Once finished, you’ll be informed:
-
-> “The test file for your function/route/feature has been created and the task is completed.”
-
----
-
-### 3. Generate Test Report
-
-Use this when you want a **test coverage and status report**.
-
-**Steps:**
-
-1. QA Lead will ask if you want:
-
-   * **unit**, **functional**, or **integration** test report
-2. It will run the appropriate test suite with coverage enabled.
-3. A comprehensive markdown report will be created containing:
-
-   * Timestamp
-   * Git branch and commit
-   * Test coverage
-   * PRD/TRD availability
-   * Test-by-test breakdown (✅ Passed, ❌ Failed)
-
-Reports will be saved in:
+🔄 Workflow Integration
+Stores test reports in:
 
 ```
 docs/test/<type>/reports/YYYY-MM-DD-HHMM.md
 ```
+Manages test progress and metadata in:
+
+```
+qa-context.json
+```
+
+### Leverages:
+
+- `qa-document-writer` for test strategy documents.
+- `qa-coder` for actual test file generation.
+- `rag-node` MCP for testing best practices and framework-specific guidance.
+- `command` group to execute test suites and manage files.
+
+## Safety Features
+- All commands run in a restricted, sandboxed shell.
+- Emphasizes mandatory `.env` file updates to prevent production data impact.
+- AI seeks explicit confirmation before making significant changes.
+- User code execution for testing is isolated and guarded.
+
+## Shortcut to Activate
+```
+Mac: ⌘ + .
+Windows/Linux: Ctrl + .
+```
+
+### Related Modes
+/debug: For troubleshooting and error diagnosis.
+/code: For writing and modifying application code.
+/orchestrator: For managing complex, multi-step projects.
+/pmlead: For product strategy and requirements definition.
+
+## Author Notes
+This mode transforms Saarthi into a powerful QA automation partner, simplifying the often complex and time-consuming process of setting up and maintaining a robust testing suite. By orchestrating specialized agents, it provides a seamless experience for developers to ensure code quality and reliability, especially within the Godspeed framework.
 
 ---
 
-### 4. Write Multiple Test Files
+# 📄 QA Document Writer
+The QA Document Writer AI agent is responsible for generating comprehensive and actionable test strategy documents for specific functions, as assigned by the QA Lead Engineer.
 
-Use this when you want to **generate tests in bulk**.
+## Overview
+This mode focuses on creating detailed test strategy documents, including unit and functional test strategies. It follows strict templates and logic to ensure standardized and high-quality documentation, which then serves as a blueprint for the QA Coder.
 
-**How it works:**
+## Primary Use Cases
+- Generating unit test strategy documents.
+- Generating functional test strategy documents.
+- Documenting test cases and expected outcomes.
 
-* QA Lead will look into your `qa-context.json` file.
-* It will find all routes/features in the `not_started` list for the test type you choose.
-* For each:
+## Example Prompts
+(This mode is typically invoked internally by QA Lead Engineer, not directly by user)
 
-  * It will write a test strategy.
-  * Write the actual test file.
-  * Mark it as `completed`.
+## Internal Capabilities / Agents
+- **Strategy Template Engine:** Applies predefined templates for different test types.
+- **Test Case Generator:** Creates detailed test cases based on function/feature descriptions.
 
-Once all tests are written, you’ll see:
+## Model Behavior & Tool Access
+| Capability | Status |
+|---|---|
+| Read files | ✅ |
+| Write files | ✅ (test strategy documents) |
+| Execute commands | ❌ |
+| Evaluate code | ❌ |
+| Use external documentation | ✅ (via RAG MCP) |
+| Manage documentation flow | ✅ |
 
-> “All test files from the `not_started` list for \<test\_type> tests have been written and the task is completed.”
+## Preferred Models:
+
+GPT-4.5 / Claude 3 Sonnet (Document generation)
+
+## Scope
+✅ In Scope
+- Creation of unit test strategy documents.
+- Creation of functional test strategy documents.
+- Adherence to internal documentation standards.
+
+❌ Out of Scope
+- Writing actual test code (refer to QA Coder).
+- Executing tests or generating reports.
+- Direct user interaction (primarily an internal agent).
+
+## Embedded Behaviors
+- Receives instructions from QA Lead Engineer.
+- Generates markdown files for test strategies.
+- Ensures consistency in documentation format.
+
+🔄 Workflow Integration
+Stores test strategy documents in:
+
+```
+docs/test/strategies/<function_name>.md
+```
+
+### Leverages:
+
+- `rag-node` MCP for best practices in test documentation.
+
+## Safety Features
+- Operates within a restricted scope, only generating documentation.
+- No direct access to modify application code or execute commands.
+
+## Shortcut to Activate
+(This mode is typically invoked internally by QA Lead Engineer, not directly by user)
+
+### Related Modes
+/qa-lead-engineer: Orchestrates this mode.
+/qa-coder: Consumes the output of this mode.
+
+## Author Notes
+The QA Document Writer ensures that every test written has a solid, well-documented strategy behind it, promoting clarity, consistency, and maintainability in the testing process.
 
 ---
 
-## Notes & Warnings
+# 🧪 QA Coder
+The QA Coder AI agent is responsible for generating high-quality, maintainable test files for specific functions, based on the test strategy provided by the QA Document Writer.
 
-* **Changing the `.env` file is mandatory** during setup. If you skip this, tests may affect production data.
-* **PRD is required** for integration tests. If you don’t have one, you can still do functional/unit testing.
-* You do not need to manually interact with `qa-document-writer` or `qa-coder`. Everything is automated.
+## Overview
+This mode focuses on translating test strategies into executable test code. It implements test cases, handles mocking, and ensures that the generated tests are robust and adhere to coding standards.
 
----
+## Primary Use Cases
+- Writing unit test files.
+- Writing functional test files.
+- Implementing test cases with appropriate assertions.
+- Setting up mocks and stubs for dependencies.
 
-## Best Practices
+## Example Prompts
+(This mode is typically invoked internally by QA Lead Engineer, not directly by user)
 
-* Always start with **“Setup Testing Environment”** before writing tests.
-* Keep your **PRD and TRD** ready in the `docs/` directory.
-* Use **“Write Multiple Test Files”** when setting up tests for large codebases.
-* Re-run **“Generate Test Report”** regularly to track QA coverage.
+## Internal Capabilities / Agents
+- **Test Code Generator:** Translates test strategies into code.
+- **Mocking Handler:** Integrates mocking libraries and patterns.
+- **Assertion Builder:** Creates appropriate assertions for test cases.
 
----
+## Model Behavior & Tool Access
+| Capability | Status |
+|---|---|
+| Read files | ✅ |
+| Write files | ✅ (test files) |
+| Execute commands | ✅ (for test execution) |
+| Evaluate code | ✅ |
+| Use external documentation | ✅ (via RAG MCP) |
+| Manage code generation flow | ✅ |
 
-## Example Commands
+## Preferred Models:
 
-You can interact casually, like:
+Claude 3 Opus / Gemini 1.5 Pro (Code generation & test execution)
 
-* “Set up the testing environment for my project.”
-* “Write a functional test for `/api/users`.”
-* “Generate integration test report.”
-* “Create tests for all functional routes.”
+## Scope
+✅ In Scope
+- Writing unit test files based on provided strategies.
+- Writing functional test files based on provided strategies.
+- Implementing test cases and assertions.
+- Handling mocking and dependency injection for tests.
 
+❌ Out of Scope
+- Defining test strategies (refer to QA Document Writer).
+- Generating test reports (refer to QA Lead Engineer).
+- Direct user interaction (primarily an internal agent).
 
----
+## Embedded Behaviors
+- Receives test strategy from QA Lead Engineer.
+- Generates test files in the appropriate project structure.
+- Ensures generated code is clean, readable, and maintainable.
 
-### QA Lead Engineer
+🔄 Workflow Integration
+Stores test files in:
 
-| Aspect          | Details                                   |
-| ----------------|------------------------------------------------------------------ |
-| **Name**        | `QA Lead Engineer`                                                |
-| **Description** | The QA Lead Engineer AI agent assists with QA-related tasks by following provided instructions for each task. This is the primary mode for all QA activities.      |
-| **Tool Access** | `read`, `edit`, `browser`, `command`, `mcp`, `modes`                                                                                                              |
-| **Ideal For**   | Initiating and managing all QA tasks, such as setting up testing environments and writing test files.                                                               |
-| **Special Features** | Orchestrates the QA workflow by delegating tasks to the QA Document Writer and QA Coder modes.                                                              |
+```
+tests/<type>/<function_name>.test.ts
+```
 
----
+### Leverages:
 
-### QA Document Writer
+- `rag-node` MCP for best practices in test coding and framework-specific testing.
+- `command` group for executing generated tests.
 
-| Aspect          | Details                                   |
-| ----------------|------------------------------------------------------------------ |
-| **Name**        | `QA Document Writer`                               |
-| **Description** | The QA Document Writer AI agent is responsible for generating comprehensive and actionable test strategy documents for specific functions, as assigned by the QA Lead Engineer. |
-| **Tool Access** | `read`, `edit`, `browser`, `command`, `mcp`, `modes`                                                                                                              |
-| **Ideal For**   | Creating detailed unit and functional test strategy documents.                                                                                                    |
-| **Special Features** | Follows strict templates and logic to create standardized test strategies. Activated by the QA Lead Engineer.                                                 |
+## Safety Features
+- Operates within a restricted scope, only generating test code.
+- No direct access to modify production application code.
+- Test execution is sandboxed and monitored.
 
----
+## Shortcut to Activate
+(This mode is typically invoked internally by QA Lead Engineer, not directly by user)
 
-### QA Coder
+### Related Modes
+/qa-lead-engineer: Orchestrates this mode.
+/qa-document-writer: Provides test strategies to this mode.
 
-| Aspect          | Details                                   |
-| ----------------|------------------------------------------------------------------ |
-| **Name**        | `QA Coder`                                     |
-| **Description** | The QA Coder AI agent is responsible for generating high-quality, maintainable test files for specific functions, based on the test strategy provided by the QA Document Writer. |
-| **Tool Access** | `read`, `edit`, `browser`, `command`, `mcp`, `modes`                                                                                                              |
-| **Ideal For**   | Writing unit and functional test files based on a provided strategy.                                                                                              |
-| **Special Features** | Implements test cases, handles mocking, and validates test execution. Activated by the QA Lead Engineer.                                                      |
+## Author Notes
+The QA Coder is the workhorse of the QA system, transforming strategic plans into concrete, executable tests. It ensures that the codebase is thoroughly tested, contributing significantly to the overall quality and stability of the project.

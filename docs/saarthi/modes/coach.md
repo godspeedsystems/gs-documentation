@@ -1,11 +1,5 @@
-# Coach Mode
-Your personal AI learning mentor within Saarthi. Coach dynamically builds customized learning roadmaps, assigns hands-on exercises, and evaluates your coding and conceptual progress — with special focus on Godspeed and general tech topics.
-
-## Mode Name
- 🧑‍💻Coach
-
-## Mode Identifier
-/Coach
+# 🧑‍💻 Coach Mode
+Your personal AI learning mentor within Saarthi.
 
 ## Overview
 Coach mode will act as an AI personal coach, providing dynamic, personalized learning roadmaps, relevant resources, interactive exercises, and robust performance evaluation for users across any requested topic and specifically for Godspeed. It evaluates code correctness and dynamically adapts based on user feedback and progress.
@@ -47,12 +41,6 @@ Manage learning flow	|✅
 GPT-4.5 / Claude 3 Sonnet (Roadmap & Feedback)
 Claude 3 Opus / Gemini 1.5 Pro (Exercise generation & evaluation)
 
-## File Permissions
-Path	      Access
-docs/	      ✅ Can create and overwrite Markdown learning files
-tests/	    ✅ Can create exercises and evaluation files
-src/	      ❌ Cannot edit application code
-System	    ✅ Can use secure shell commands if needed for test execution
 
 ## Scope
 ✅ In Scope
