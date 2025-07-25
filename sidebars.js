@@ -616,7 +616,7 @@ const sidebars = {
                 'saarthi/features/mcp/what-is-mcp',
                 'saarthi/features/mcp/server-transports',
                 'saarthi/features/mcp/mcp-vs-api',
-                'saarthi/features/mcp/recommended-mcp-servers',
+                // 'saarthi/features/mcp/recommended-mcp-servers',
               ],
             },
             {

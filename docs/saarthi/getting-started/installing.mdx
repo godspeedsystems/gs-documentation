@@ -8,32 +8,59 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 <SaarthiIcon /> [Saarthi](https://marketplace.visualstudio.com/items?itemName=godspeed-systems.saarthi) is a VS Code extension that brings AI-powered coding assistance directly to your editor. Install from
 **VS Code Marketplace** - fastest method for standard VS Code users
 
-## Prerequisite: 
 
-[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
+## 🧩 Prerequisite: [Install Python](https://www.python.org/downloads/) 
 
-To check if Python is already installed:
+Saarthi uses Python to enable its advanced AI and framework-level features (like RAG-based querying, local agents, and the MCP server).
 
-Open your terminal or command prompt and type
+### What You Need to Do:
 
-``` 
- python --version
-```
+1. **Check if Python is installed**
 
+   Run this in your terminal:
 
-## Install Saarthi From VS Code Marketplace
+   ```bash
+   python --version
+   ```
+
+2. **If not installed**, download and install Python from the official website:
+   👉 [Download Python](https://www.python.org/downloads/)
+
+3. **Important**:
+   During installation, **make sure to check the box**:
+
+   > ✅ **Add Python to PATH**
+
+---
+
+:::tip
+Without Python, the installation of Saarthi and its components like the **rag-node MCP server** will not work.
+:::
+
+## Steps To Install Saarthi
 
 1. Open VS Code
-2. Access Extensions: Click the Extensions icon in the Activity Bar or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
-3. Search for "Saarthi"
-4. Select <SaarthiIcon/> Saarthi by godspeed systems and click **Install**
-5. Reload VS Code if prompted
+2. Click the Extensions icon on the sidebar or press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS)
+3. In the search bar, type “Saarthi”. 
+    
+    Select <SaarthiIcon/> Saarthi by godspeed systems and click **Install**
 
-After installation, find the Saarthi icon in the Activity Bar to open the Saarthi panel.
+:::tip
+ Installation may take 5–7 minutes as it sets up the local environment.
+:::
 
-## Local Setup & Development
+    During installation, Saarthi automatically:
 
-For instructions on setting up Saarthi for local development, building from source, or contributing, please see the [Local Development Setup](../advanced-usage/local-development-setup) guide in the Advanced Usage section.
+    - Installs the RAG-Node MCP Server and
+    - Sets up a local Chromadb instance
+
+4. Once installation completes, a prompt will appear asking for Gemini API key. [Get it from Google AI Studio](https://aistudio.google.com/app/apikey)
+
+5. Once saved, you'll land on the Saarthi welcome screen.
+
+6. Here, you need to select LLM Provider and Model to be used by all agents.
+
+
 
 ## Troubleshooting
 
@@ -47,8 +74,8 @@ For instructions on setting up Saarthi for local development, building from sour
 
 **Installation Problems**
 * Ensure stable internet connection
-* Verify VS Code version 1.84.0 or later
+* Reload VS Code in case installation takes more than 10 times.
 
 **ChromaDB Setup Failed**
-* Ensure Python is installed
+* Ensure Python is installed and added to Path
 
