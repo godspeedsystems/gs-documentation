@@ -1,8 +1,8 @@
 # Orchestrator Mode
-A strategic workflow orchestrator (aka Boomerang Mode) that breaks down complex tasks and delegates them to specialized modes.
+A strategic workflow orchestrator that breaks down complex tasks and delegates them to specialized modes.
 
 ## Overview
-Orchestrator mode functions as a strategic workflow orchestrator, also known as "Boomerang Mode." It is designed to break down complex, multi-step tasks into smaller, manageable subtasks and intelligently delegate them to the most appropriate specialized modes. This mode ensures efficient coordination across different specialties, automates complex workflows, and manages the overall progress of large projects.
+Orchestrator mode functions as a strategic workflow orchestrator. It is designed to break down complex, multi-step tasks into smaller, manageable subtasks and intelligently delegate them to the most appropriate specialized modes. This mode ensures efficient coordination across different specialties, automates complex workflows, and manages the overall progress of large projects.
 
 ## Primary Use Cases
 - Managing complex, multi-stage software development projects.

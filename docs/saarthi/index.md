@@ -7,6 +7,10 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
 <SaarthiIcon /> Saarthi is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
 
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/YkvIXkW_RG8?si=L5SVUfybthi66LdC" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## What Can Saarthi Do?
 
 - **Generate full stack and framework-aligned code** using Code mode with RAG

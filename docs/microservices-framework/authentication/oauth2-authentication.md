@@ -93,5 +93,3 @@ keywords: [Godspeed, OAuth2, authentication, authorization, Google, GitHub, Link
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/ZOQ-wFkXtto?si=0PBfotFFDqAMPSAX" frameborder="0" allowfullscreen></iframe>
 </div>
 
-
-

@@ -4,6 +4,12 @@ A comprehensive AI-powered reviewer that performs multi-dimensional analysis of 
 ## Overview
 The Code Review mode performs an **in-depth, context-aware review** across six critical dimensions: **Compliance, Code Quality, Readability, Linting, Correctness, and Completeness**. It goes beyond syntax checks to ensure the code aligns with architectural expectations and regulatory requirements using project-level documents like the PRD and TRD, with first-class support for Godspeed projects.
 
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+<iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/sV-xk8nC9Cc?si=SiPEDSpoRiROhc9q" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
 ## Primary Use Cases
 - Performing a full audit of project code.
 - Ensuring feature completeness and alignment with specifications.
