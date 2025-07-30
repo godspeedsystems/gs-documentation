@@ -23,9 +23,9 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 - **Test** manages all QA tasks
 - **Manage Product** develop product strategy, competitive analysis, MVP planning and market positioning.
 
-## Prerequisite:
+<!-- ## Prerequisite:
 
-[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
+[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi. -->
 
 ## Quick Start
 

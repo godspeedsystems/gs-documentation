@@ -45,9 +45,9 @@ With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems
 
 ---
 
-## Prerequisite: 
+<!-- ## Prerequisite: 
 
-[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi.
+[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi. -->
 
 ## Step 1: [Install Saarthi in VS Code](/docs/saarthi/getting-started/installing.mdx)
 
