@@ -61,7 +61,7 @@ export default function convertEpoch(inputTimestamp: string){
     return format(newDateTime, 'yyyy-MM-dd HH:mm:ss');
 }
 ```
-
+<!-- 
 ## Sample workflow using plugins
 You can use these plugins in your workflows as given below:
 ```
@@ -75,4 +75,4 @@ You can use these plugins in your workflows as given below:
         date: <% time_epoch_convertEpochToDate(inputs.body.datetimestamp) %>
         default_date: <% epoch_convertEpoch(inputs.body.datetimestamp) %>
 
-```
+``` -->

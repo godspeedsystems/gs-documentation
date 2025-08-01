@@ -23,17 +23,7 @@ base_url: <% config.api.base_url %>
               type: string
               enum: <% mappings.gender %>
 ```
-
-**Runtime evaluation** There are some variables/code which should be evaluated at runtime. For example, using [GSContext properties](../workflows/native-language-functions.md/#gscontext) in workflows as given below:
-                     
-```yaml title=src/workflows/helloworld.yaml
-id: helloworld
-tasks:
-  - id: first_task
-    fn: com.gs.return
-    args: <% "Hello, The gender of " + inputs.body.name + " is " + inputs.body.gender %>
-```
-
+<!-- d
 ## Default language at global level
 The default language is `js`. You can change the default language globally in `defaults.lang` key in `config/default.yaml`. It will be applicable everywhere unless overridden explicitly.    
 ```yaml title=config/default.yaml

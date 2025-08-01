@@ -1,6 +1,23 @@
 # 🎯 Product Manager Lead
 A strategic product manager focused on helping conceptual thinkers validate ideas and develop product strategy.
 
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+  <iframe
+    src="https://www.youtube.com/embed/VNVnbBopwNo?si=2YRctH2acXuUIBZQ"
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '90%',
+      height: '90%',
+    }}
+    frameBorder="1"
+    allow="autoplay; encrypted-media" allowFullScreen></iframe>
+</div>
+
+
+
 ## Overview
 The Product Manager Lead mode is designed to assist startup founders in planning, validating, and developing their product using Lean Startup principles and the "Four Steps to Epiphany" framework by Steve Blank. It focuses on high-level strategy, idea validation, competitive analysis, MVP planning, and market positioning.
 

@@ -357,22 +357,6 @@ const sidebars = {
               id: "microservices-framework/datasources/datasource-plugins/ChatGPT datasource",
             },
             {
-              type: "category",
-              label: "9.17. Plugin- ElasticGraph",
-              items: [
-                {
-                  type: "doc",
-                  label: "9.17.1. Elasticgraph",
-                  id: "microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph",
-                },
-                {
-                  type: "doc",
-                  label: "9.17.2. Feature Set of Elasticgraph",
-                  id: "microservices-framework/datasources/datasource-plugins/elasticgraph/feature-set-of-elasticgraph",
-                },
-              ],
-            },
-            {
               type: "doc",
               label: "9.18. Plugin- Memcache",
               id: "microservices-framework/datasources/datasource-plugins/Memcached Datasource",

@@ -1,5 +1,12 @@
 ---
 sidebar_label: Your First Task
+description: Learn how to start your first task with Saarthi AI assistant. Step-by-step guide for beginners to understand the approval workflow and iterative process.
+keywords:
+  - Saarthi tutorial
+  - first task
+  - getting started
+  - AI coding assistant tutorial
+  - approval workflow
 ---
 import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
