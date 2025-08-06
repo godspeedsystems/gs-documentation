@@ -27,7 +27,7 @@ Godspeed's YAML-based DSL simplifies the expression of what is to be done. In ma
 
 ### Unified datastore model and API
 
-The unified model configuration and CRUD API, which includes popular SQL, NoSQL stores including [Elasticgraph](/docs/microservices-framework/datasources/datasource-plugins/elasticgraph/elasticgraph.md) (a unique ORM over Elasticsearch), offer standardized interfaces to various types of datastores, whether SQL or NoSQL. Each integration adapts to the nature of the data store. The Prisma and Elasticgraph plugins provided by Godspeed expose the native functions of the client used, giving developer the freedom to use the universal syntax or native queries.
+The unified model configuration and CRUD API, which offers standardized interfaces to various types of datastores, whether SQL or NoSQL. Each integration adapts to the nature of the data store. The Prisma plugin provided by Godspeed expose the native functions of the client used, giving developer the freedom to use the universal syntax or native queries.
 
 
 ### Schema driven data validation

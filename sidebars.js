@@ -19,7 +19,7 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
-    'welcome',
+    'welcome',  
     {
       type: "category",
       label: "Microservices Framework",
@@ -490,8 +490,8 @@ const sidebars = {
           items: [
             'saarthi/getting-started/installing',
             'saarthi/getting-started/connecting-api-provider',
-            'saarthi/getting-started/your-first-task'
-          ]
+            'saarthi/getting-started/your-first-task',
+          ],
         },
         {
           type: "category",
@@ -682,6 +682,7 @@ const sidebars = {
         'saarthi/faq'
       ]
     },
+    'tutorial-videos',
     {
       type: "category",
       label: "Release-Notes",

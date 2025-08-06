@@ -11,12 +11,42 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 80%;
     height: 100%;
-  }
+  } 
   
-  
-  
-  
-  
-  
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.video-item {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.video-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.video-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .video-item {
+  background-color: #333;
+}
+
+[data-theme='dark'] .video-title {
+  color: #eee;
+}
