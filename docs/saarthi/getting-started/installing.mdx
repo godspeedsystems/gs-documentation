@@ -60,6 +60,38 @@ Without Python, the installation of Saarthi and its components like the **rag-no
 5. Here, Select LLM Provider and enter API Key. For help on connecting your API provider [ssCheck this](/docs/saarthi/getting-started/connecting-api-provider)
 - To use Free Google API Key. Get it from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
+
+## Enable Godspeed Context Awareness
+
+To get Godspeed-specific suggestions, documentation-aware answers, and context-driven support, 
+you’ll need to install the Godspeed-powered RAG-MCP Server.
+
+**This is highly recommended for Godspeed framework users.**
+
+Run the following command based on your OS:
+
+#### Windows (PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -Command "iwr -useb 'https://github.com/godspeedsystems/RAG-MCP-Server/releases/download/0.0.1/setup-saarthi.ps1' | iex"
+```
+
+#### macOS/Linux (Bash):
+
+```bash
+bash <(curl -sSL "https://github.com/godspeedsystems/RAG-MCP-Server/releases/download/0.0.1/setup-saarthi.sh")
+```
+
+This will install:
+
+- The **MCP server**
+- A local vector store (Chromadb)
+- Saarthi’s context pipeline for deep Godspeed integration
+
+That’s it ! You’re now ready to transform your development workflow the 10x way using **Saarthi + Godspeed**.
+
+
+
 ## Troubleshooting
 
 *VS Code Output panel showing Saarthi logs for troubleshooting*
@@ -74,6 +106,4 @@ Without Python, the installation of Saarthi and its components like the **rag-no
 * Ensure stable internet connection
 * Reload VS Code in case installation takes more than 10 times.
 
-**ChromaDB Setup Failed**
-* Ensure Python is installed and added to Path
 
