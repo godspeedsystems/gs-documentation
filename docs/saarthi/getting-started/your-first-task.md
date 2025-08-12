@@ -14,6 +14,20 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
 Now that you've [configured your AI provider and model](connecting-api-provider.md), you're ready to start using Saarthi! This guide walks you through your first interaction.
 
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+  <iframe
+    src="https://www.youtube.com/embed/N6TO0TskXsU?si=G8PS_xGx7VDgx5Ds" 
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '90%',
+      height: '90%',
+    }}
+    frameBorder="1"
+    allow="autoplay; encrypted-media" allowFullScreen></iframe>
+</div>
+
 ## Step 1: Open the Saarthi Panel
 
 Click the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar (vertical bar on the side of the window) to open the chat interface. If you don't see the icon, verify the extension is installed and enabled.

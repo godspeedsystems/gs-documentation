@@ -26,29 +26,10 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 </div>
 
 
-
 <SaarthiIcon /> [Saarthi](https://marketplace.visualstudio.com/items?itemName=godspeed-systems.saarthi) is a VS Code extension that brings AI-powered coding assistance directly to your editor. Install from
 **VS Code Marketplace** - fastest method for standard VS Code users
 
-<!--
-Saarthi uses Python to enable its advanced AI and framework-level features (like RAG-based querying, local agents, and the MCP server).
-### What You Need to Do:
-1. **Check if Python is installed**
-   Run this in your terminal:
-   ```bash
-   python --version
-   ```
-2. **If not installed**, download and install Python from the official website:
-   👉 [Download Python](https://www.python.org/downloads/)
-3. **Important**:
-   During installation, **make sure to check the box**:
-   > ✅ **Add Python to PATH**
----
-:::tip
-Without Python, the installation of Saarthi and its components like the **rag-node MCP server** will not work.
-:::
-![Installing Saarthi](/img/installing/installing.png)
--->
+
 
 ## Steps To Install
 
@@ -59,37 +40,6 @@ Without Python, the installation of Saarthi and its components like the **rag-no
 5. Click on Saarthi icon, you'll then see Saarthi welcome screen.
 5. Here, Select LLM Provider and enter API Key. For help on connecting your API provider [ssCheck this](/docs/saarthi/getting-started/connecting-api-provider)
 - To use Free Google API Key. Get it from [Google AI Studio](https://aistudio.google.com/app/apikey)
-
-
-## Enable Godspeed Context Awareness
-
-To get Godspeed-specific suggestions, documentation-aware answers, and context-driven support, 
-you’ll need to install the Godspeed-powered RAG-MCP Server.
-
-**This is highly recommended for Godspeed framework users.**
-
-Run the following command based on your OS:
-
-#### Windows (PowerShell):
-
-```powershell
-powershell -ExecutionPolicy Bypass -Command "iwr -useb 'https://github.com/godspeedsystems/RAG-MCP-Server/releases/download/0.0.1/setup-saarthi.ps1' | iex"
-```
-
-#### macOS/Linux (Bash):
-
-```bash
-bash <(curl -sSL "https://github.com/godspeedsystems/RAG-MCP-Server/releases/download/0.0.1/setup-saarthi.sh")
-```
-
-This will install:
-
-- The **MCP server**
-- A local vector store (Chromadb)
-- Saarthi’s context pipeline for deep Godspeed integration
-
-That’s it ! You’re now ready to transform your development workflow the 10x way using **Saarthi + Godspeed**.
-
 
 
 ## Troubleshooting

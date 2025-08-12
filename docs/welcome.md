@@ -54,15 +54,15 @@ With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems
 ## Step 2: Open Saarthi & Select [Code Mode](/docs/saarthi/modes/code.md)
 
 1. From VS Code sidebar, Open **Saarthi**
-3. Choose `💻 Code` from the mode selector
+2. Choose `💻 Code` from the mode selector
 
-> Saarthi will now automatically connect to **RAG node MCP Server**, for context-aware coding with Godspeed framework.
+> Saarthi is by default connected to **Godspeed MCP Server**, to build framework aligned microservices.
 
 ---
 
 ## Step 3: Create Your First Microservice — Just One Prompt
 
-In the Saarthi chat box, type:
+In the Saarthi chat box, type a prompt. For Example:
 
 ```
 Create a godspeed microservice for product catalog with CRUD operations using Postgres database.
