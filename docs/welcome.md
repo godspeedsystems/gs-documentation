@@ -32,11 +32,9 @@ With **Saarthi**, your multi agent dev team in vs code, building enterprise-grad
 
 1. From VS Code sidebar, Open **Saarthi**
 2. Choose `💻 Code` from the mode selector
-
-> Saarthi will now automatically connect to **GS MCP Server**, for context-aware coding with Godspeed framework.
+> Saarthi is by default connected to **Godspeed MCP Server**, to build framework aligned microservices.
 
 ## Step 4: Enter Prompt
-
 In the Saarthi chat box, type what you want to build. For Example:
 ```
 Create a godspeed microservice for product catalog with CRUD operations using Postgres database.
