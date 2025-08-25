@@ -102,7 +102,6 @@ You can use coffee/js to write embedded code in:
 - args which are the arguments to the the function.
 - transformations in [`com.gs.transform`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgstransform) and [`com.gs.return`](/docs/microservices-framework/workflows/yaml-workflows/inbuilt-workflows.md#comgsreturn)
 - [authz instruction](../authorization/authz-usecases.md/#c-authorization-at-task-level) at task level.
-- [on_error](../workflows/yaml-workflows/workflow-dsl.md/#error-handling) in workflow tasks.
 
 **1. Scripting with coffee**
 ```

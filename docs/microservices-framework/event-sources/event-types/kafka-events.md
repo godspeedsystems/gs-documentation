@@ -1,7 +1,7 @@
 # Kafka event
 > A [Kafka](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/kafka-as-datasource-as-eventsource#godspeed-plugin-kafka-as-datasource-as-eventsource) event is specified as `{datasourceName}.{topic_name}.{group_id}` in [the Kafka event specification](#example-spec-for-kafka-event).
 
-Within the Kafka event structure, the content of the message is captured and made accessible as `inputs.body`, facilitating its integration into the handler workflow for processing.
+Within the Kafka event structure, the content of the message is captured and made accessible as `inputs.body`, facilitating its integration into the handler function for processing.
 
 #### Example spec for Kafka event
 
@@ -21,7 +21,7 @@ Kafka.publish-producer1.kafka_proj:   # event key
           required: ['message']
  ```
 
-#### Example workflow consuming a Kafka event
+#### Example function consuming a Kafka event
 
 ```ts
 import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";

@@ -47,11 +47,11 @@ Four ways to switch modes:
 
 - [Orchestrator](/docs/saarthi/modes/orchestrator.md)
 
-- [QA Lead Engineer](./modes/qa-modes.md)
+- [QA Lead Engineer](/docs/saarthi/modes/qa-modes.md)
 
-- [Product Manager](./modes/pm-lead.md)
+- [Product Manager](/docs/saarthi/modes/pm-lead.md)
 
-- [Coach](./modes/coach.md)
+- [Coach](/docs/saarthi/modes/coach.md)
 
 <!-- 
 ### Code (Default)

@@ -1,88 +1,79 @@
-# Godspeed - Meta Framework
-
-This document is meant for technology leaders, architects, and developers. Its purpose is to present the platform's overarching objectives, guiding principles, design elements, components, and functionalities to the target audience.
-
-## Introduction
-
-> Our mission at Godspeed is to bring greater standardization, best practices and ease of engineering to the tech teams of the world. We wish to achieve this as a collaboration by and for the community.  We wish to develop a meta-framework along with tools, integrations, learning content, licensing and marketplace, based on a value system which fosters develop-rights, equity, fairness and wellbeing for all.
-
-We want to democratize tech for teams to effortlessly create, maintain, and monitor complex applications with reduced effort, agility, scalability, quality, performance, cost effectiveness and minimization of technical debt and talent hurdle. Our goal is to liberate teams from the burdensome, repetitive tasks, boilerplate, wiring, so that instead of focusing on the how, they retain a razor sharp focus on the what.
-
-To achieve this, we're committed to providing teams with the meta-framework, tools, integrations and learning that they need to develop and maintain products, guided by first principles and best practices like
-
-* Standardized implementation across languages, frameworks & tools
-* Decoupled architecture with plug and play integrations
-* Zero boilerplate with pre-built abstractions
-* Schema and standards driven development
-* Shift left
-* Cloud agnostic setup
-* No vendor lock-in
-
+---
+id: overview
+title: Overview
+description:  "An introduction to godspeed framework and benefits, why should you use godspeed framework." keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why godspeed]
 ---
 
-## Aims
+# Introduction
 
-### Boosting tech team's efficiency
+Godspeed is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
 
-The meta-framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based [telemetry](/docs/microservices-framework/telemetry/overview.md) and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
+👉 Currently, it fully supports the Node.js ecosystem. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
-The framework includes the essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in significant reduction in workload.
+## 12 Reasons Why Use Godspeed Framework?
+
+By adopting Godspeed framework, teams experience:
+
+
+✅ Confident Delivery
+
+Schema-driven development and guardrails enforce clear API contracts, validate data automatically, and apply secure defaults. This minimizes bugs, reduces chaos, and ensures safer, predictable delivery.
+
+✅ Faster Delivery
+
+Godspeed enforces a declarative, schema-first, guardrailed approach, where developers describe the intent (what), and the framework handles the mechanics (how). Auto-generated CRUD APIs and pre-built integrations eliminate boilerplate. Teams spend more time on business logic instead of repetitive setup.
+
+✅ Fewer Bugs, Less Chaos
+
+Godspeed offers fewer bugs because schemas + validations act as guardrails, defaults handle security & infra automatically, and developers write less error-prone boilerplate. This not only prevents common errors but also brings order and predictability, resulting in less chaos across teams and integrations.
+
+✅ Auto-Generated Validations
+
+Request and response validations are automatically derived from schemas, removing the need for handwritten code. This enforces correctness at runtime effortlessly.
+
+✅ Can Get More from Young Devs
+
+Even less experienced developers can build confidently, as the framework prevents common mistakes with built-in validations, conventions, and guardrails—while still allowing flexibility.
+
+✅ Developer & LLM Friendly
+
+Godspeed lets developers focus only on the what (business logic) while the framework takes care of the how (wiring, validation, security). Its guardrailed, schema-driven, and YAML-based structure also makes the codebase highly LLM friendly, enabling AI to generate higher-quality code with fewer tokens.
+
 ![productivity](/img/productivity.png)
 
-### Lower learning curve.
+✅ Guardrailed Development
 
-Developers can deliver a simple microservice on their first day itself. The standardized guardrails enforce their adoption and learning of best practices and engineering concepts, upskilling on the way as the projects proceed. In most cases, only a few in the organization need in-depth expertise, while others can quickly adapt to the framework through training and collaborate effectively, with support from internal team or from Godspeed.
+Standardized defaults, schema-first validations, and best practice enforcement provide strong safety rails. Teams build with confidence, minimizing errors and inconsistencies.
 
-### Easy brownfield adoption
+✅ Higher Efficiency Across Teams
 
-Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](/docs/microservices-framework/CLI.md). Godspeed ships as a node module. Hence it can be imported in any nodejs , bunjs or springboot project easily or developers can even reuse the existing event sources and data sources without any hassle.
+A consistent API schema powers Swagger/OpenAPI specs, Postman collections, and UI slices, so UI, QA, and external integrations stay perfectly aligned without rework.
 
-### Security
+✅ Low on Maintenance
 
-The framework can read the environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization](/docs/microservices-framework/authorization/overview.md). For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
+A standardized, decoupled architecture with clear boundaries avoids technical debt. Projects remain modular, easy to update, and systematically maintainable over time.
 
-### Flexibility
+✅ Easy to Scale & Extend
 
-Developer should be able to implement anything they need, or replace existing [eventsources](/docs/microservices-framework/event-sources/overview.md) or [datasources](/docs/microservices-framework/datasources/overview.md) with ease. They should also be able to migrate a project from one language or framework to another with least effort.
+Pluggable event sources and data sources make it easy to add REST, Kafka, GraphQL, or new databases. Kubernetes-ready deployment ensures scalability out of the box.
 
-### Scale, performance and monitoring
+✅ Flexibility
 
-For scale, we encourage the adoption of horizontal scaling approach based on Kubernetes. Developers can deploy a service on a Kubernetes cluster on any cloud.
+A decoupled architecture ensures your business logic is portable across event sources, data sources, and clouds. Teams can evolve stacks without vendor lock-in.
 
-For performance, we believe the datasources (APIs and DBs) are the bottlenecks most of the time, and hence the framework allows an easy integration of a cache of choice, over the calls to the [datasources](/docs/microservices-framework/datasources/overview.md). An easier way to setup Graphql like subscriptions and dual writes is planned.
+✅ Cost Savings
 
-For monitoring, the framework microservices allows export of APM and BPM signals in OTEL format which is supported by all major observability backend solutions. We provide a pre-configured Grafana dashboard, with correlated logs and traces, and detailed APM out of the box. Using the devops plugin of Godspeed CLI, teams can install the full Grafana stack with Loki, Mimir, Tempo and Minio, on a Kubernetes cluster for scalable telemetry ingestion.
+Reduced bugs, faster delivery cycles, and lower maintenance translate directly into significant cost savings in both development and operations.
 
-### Maintainability
+![features ->](/img/features.png)
 
-The standardized guardrails with clearly defined developer's boundaries, ensure neat, simple & systematic implementations across projects and individual developers with diverse experiences. This avoids technical debt from creeping into the project over time. Further, the decoupled architecture and a neat and modular implementation allows agility in bringing rapid changes as per the ever evolving needs and scenarios.
+### Know More about the Framework
 
----
+### [Guardrails](guard-rails.md)
+At Godspeed, our development philosophy revolves around four core [guardrails](guard-rails.md), shaping a robust and innovative approach to software creation.
 
-## Design Principles
+### [Design Principles](design-principles.md)
 
-In order to serve the [Goals](#aims) and [Tenets](/docs/microservices-framework/introduction/tenets.md) of the framework, we have followed certain [design principles](/docs/microservices-framework/introduction/design-principles.md).
+In order to serve above goals, the framework follows certain [design principles](design-principles.md).
 
-## Framework architecture
-
-The three main pillars of Godspeed framework: [eventsources](/docs/microservices-framework/event-sources/overview.md), [datasources](/docs/microservices-framework/datasources/overview.md), and [functions or workflows](/docs/microservices-framework/workflows/overview.md).
-
-> Do read more about them in the [design principles](/docs/microservices-framework/introduction/design-principles.md) section.
-
-![framework-architecture](/img/framework-architecture.png)
-
----
-
-### Building blocks of framework:
-
-1. [**EventSources:**](/docs/microservices-framework/event-sources/overview.md) Pluggable event sources of different kinds like, **HTTP with Express or Fastify, gRpc or Graphql server, cron, web socket, Message bus with Kafka or RabbitMQ, an event from Salesforce**.
-
-   1.1. [**Events:**](/docs/microservices-framework/event-sources/overview.md) Events of async and sync kind are defined in standardized YAML DSL with endpoint, authorization rules and Swagger spec of input and output (as applicable).
-2. [**DataSources:**](/docs/microservices-framework/datasources/overview.md) Pluggable datastores or API clients, to send or retrieve data. For ex. **MongoDB, Redis, AWS API etc**
-3. [**Pure Workflows or Functions:**](/docs/microservices-framework/workflows/overview.md) The events invoke pure functions or workflows which contain the business logic. They take JSON as input and return JSON based output.
-4. [**Config:**](/docs/microservices-framework/config-and-mappings/config.md) The configuration variables as well as their values are defined in yaml files under `config/` directory. Some variables are specific to the framework and rest variables can be created as per the business use cases.
-5. [**ENV:**](/docs/microservices-framework/config-and-mappings/config.md#environment-variables) Sensitive data, like database URLs, that require concealment are specified in .env files and made available in the rest of the project via GSContext object.
-
-## Features
-
-![features](/img/features.png)
+### [Install Godspeed ->](/docs/get-started)

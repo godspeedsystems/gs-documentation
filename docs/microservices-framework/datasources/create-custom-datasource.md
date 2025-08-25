@@ -15,7 +15,7 @@ You can create and interact with custom data source in few steps by:
 
 **2. Implementing datasource logic and**
 
-**3. Creating event and workflow to manage interactions**
+**3. Creating event and function to manage interactions**
 
 Lets understand how to implement the above steps :
 
@@ -256,9 +256,9 @@ http.post./chatgpt:
             type: string
 ```
 
-## Step 4: Define the Workflow
+## Step 4: Define the function
 
-In the `src/functions` directory, create a typescript workflow file (e.g., `prompt.ts`)
+In the `src/functions` directory, create a typescript function file (e.g., `prompt.ts`)
 
 ```typescript
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";

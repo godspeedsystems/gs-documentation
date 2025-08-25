@@ -51,3 +51,14 @@ Watch the below video for more understanding.
 <iframe style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} src="https://www.youtube.com/embed/tVWDbVPsLFQ" frameborder="0" allowfullscreen></iframe>
 </div>
 
+
+
+We're committed to providing teams with the meta-framework, tools, integrations and learning that they need to develop and maintain products, guided by first principles and best practices like
+
+* Standardized implementation across languages, frameworks & tools
+* Decoupled architecture with plug and play integrations
+* Zero boilerplate with pre-built abstractions
+* Schema and standards driven development
+* Shift left
+* Cloud agnostic setup
+* No vendor lock-in

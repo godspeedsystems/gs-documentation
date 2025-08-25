@@ -45,7 +45,7 @@ The sample config can be modified as per the usecase of your application.
   # Common headers to be set in all API calls
   headers:
     Content-Type: application/json
-    Cookie: <% mappings.my_bank.auth_workflow_cookie %>
+    Cookie: <% mappings.my_bank.auth_function_cookie %>
     Authorization: <% `Bearer ${config.my_bank.apiToken}` %>    # to use Bearer token 
 
   # Retry logic for failed API calls for ex on Internal server errors or request timeouts
@@ -86,12 +86,12 @@ tasks:
 
 ### Set Up an Event
 
-1. **Create an Event to Trigger the Workflow**: Define an HTTP event to trigger the workflow and call the third-party API.
+1. **Create an Event to Trigger the function**: Define an HTTP event to trigger the function and call the third-party API.
  Example `fetchData.yaml`:
 
 ```yaml
 http.get./fetch-data:
-  fn: fetchDataWorkflow
+  fn: fetchDatafunction
   authn: false
   responses:
     200:
@@ -102,13 +102,13 @@ http.get./fetch-data:
 ```
   ### Explanation:
    - **http.get./fetch-data:**: The first line of any http event defines the (protocol.Method./end-point)
-   Here, /fetch-data is the end point which will send a get request to third party API by calling a workflow.
-   - **fn**: fn defines the workflow function to be called. here it is, fetchDataWorkflow.
+   Here, /fetch-data is the end point which will send a get request to third party API by calling a function.
+   - **fn**: fn defines the function function to be called. here it is, fetchDatafunction.
 
 
-### Set Up Workflow to Use the Axios Datasource
+### Set Up function to Use the Axios Datasource
 
- Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
+ Go to `src/functions/` and create a file (e.g., `fetchDatafunction.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
 
 ```ts
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
@@ -139,7 +139,7 @@ The Godspeed Axios Plugin offers the following advantages:
 
 **3. Error Handling:** The plugin includes robust error handling, allowing developers to gracefully handle various scenarios, such as server timeouts, request setup failures, and server-side errors.
 
-**4. Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven workflows.
+**4. Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven functions.
 
 
 ## Plugin Components
@@ -187,7 +187,7 @@ the above config works on two conditions if status from the api is 500,501 or 50
 <!-- **b.** Override retry logic at task level within args object of the axios method call.
 
 ```yaml
-id: some_workflow
+id: some_function
 tasks:
   - id: post-anything
     # Fetching loan offers from rule engine for the given bank and pan card
@@ -260,9 +260,9 @@ module.exports = async function (ctx: any) {
 
 In an axios datasource call, if `skipAuth` is set in `args` then auth flow will be ignored. This is useful when generating token from the same api.
 
-<!-- example workflow:
+<!-- example function:
 ```yaml
-id: some_workflow
+id: some_function
 tasks:
   - id: post-anything
     # Fetching loan offers from rule engine for the given bank and pan card

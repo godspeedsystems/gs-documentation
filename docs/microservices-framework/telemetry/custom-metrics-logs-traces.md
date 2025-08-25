@@ -16,7 +16,7 @@ metrics:
   dec: 10
   set: 100
   observe: 2000
-  timer: true|false(boolean) starts at the beginning of workflow/task and ends at the end of workflow/task
+  timer: true|false(boolean) starts at the beginning of function and ends at the end of function/task
 ```
 
 | metric type | function |
@@ -61,7 +61,7 @@ tasks:
 ```
 
 ### DSL spec for custom trace
-You can add custom trace in the workflow tasks. Then these custom traces will be traced along with the default [traces](./tracing.md). Check [OTel traces](https://opentelemetry.io/docs/concepts/signals/traces/) to understand more about trace, span, attributes, etc.,
+You can add custom trace in the function tasks. Then these custom traces will be traced along with the default [traces](./tracing.md). Check [OTel traces](https://opentelemetry.io/docs/concepts/signals/traces/) to understand more about trace, span, attributes, etc.,
 ```yaml
 trace:
   name: span_name
@@ -91,7 +91,7 @@ tasks:
 ```
 
 ### DSL spec for custom logs
-You can add custom log before and after a task in a workflow.
+You can add custom log before and after a task in a function.
 ```yaml
 logs:
   before:

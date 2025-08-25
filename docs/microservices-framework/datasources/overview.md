@@ -1,11 +1,11 @@
 # Data Sources
 ## Overview
 
-Data sources play a central role in the Godspeed Framework, serving as the origins or locations from which data can be collected and stored. This documentation provides an overview of data sources within the framework, their usage, and how to invoke them from within workflow tasks.
+Data sources play a central role in the Godspeed Framework, serving as the origins or locations from which data can be collected and stored. This documentation provides an overview of data sources within the framework, their usage, and how to invoke them from within function.
 
 In the Godspeed Framework, data sources are fundamental components that enable users to access and manipulate data from various origins. Examples of data sources include databases, message bus, cache, file systems, and third-party APIs.
 
-Data sources can be seamlessly integrated into your workflow tasks using a standardized syntax. The key element for invoking data sources is the fn attribute, which is namespaced under datasource. Here's an example of how data sources are used within a workflow task:
+Data sources can be seamlessly integrated into your function tasks using a standardized syntax. The key element for invoking data sources is the fn attribute, which is namespaced under datasource. Here's an example of how data sources are used within a function task:
 
 ### Demonstration
 
@@ -25,8 +25,8 @@ Datasources can be divided into two types, "Datastore as datasource" and "API as
 Example 1: Datastore as Datasource [prisma-as-datastore](/docs/microservices-framework/datasources/list-of-plugins#1-prisma-as-datasource)
 
 <!-- ```yaml
-id: workflow_1
-description: This workflow will fetch the user with userId from the mongo database
+id: function_1
+description: This function will fetch the user with userId from the mongo database
 tasks:
   - id: task_1
     fn: datasource.mongo.User.findOne
@@ -56,7 +56,7 @@ In this example:
   - `Post`: entity name
   - `findUnique`: method to be invoked in entity name
 
-the workflow is consuming the datasource `mongo` and finding one document from Post entity.
+the function is consuming the datasource `mongo` and finding one document from Post entity.
 
 :::tip **Godspeed has "Prisma as datastore plugin", which provides a uniform access to all databases**
 :::

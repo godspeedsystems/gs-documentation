@@ -308,7 +308,7 @@ Create a new file `src/events/query.yaml`:
           required: ['query']
 ```
 
-### Query Execution Workflow
+### Query Execution function
 Define your function `src/functions/execute-query.yaml`:
 
 <!-- ```yaml

@@ -2,7 +2,7 @@
 
 ## Step-by-Step Guide to create APIs in Godspeed framework
 
-Creating a REST API in Godspeed involves defining an **HTTP event** to handle incoming requests and configuring a workflow/function to process the data and return a response. 
+Creating a REST API in Godspeed involves defining an **HTTP event** to handle incoming requests and configuring a function to process the data and return a response. 
   
   Here’s a step-by-step guide to setting up a REST API in Godspeed.
 
@@ -59,13 +59,13 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
         
   ```
 
-### Step 3: Set Up the Workflow
-  Now, create a workflow/function to process the request in the src/functions/ directory. Workflow logic can be written either in typescript/javascript or in yaml.
+### Step 3: Set Up the function
+  Now, create a function to process the request in the src/functions/ directory. Function logic can be written either in typescript/javascript or in yaml.
 
  ### 3.1 Typescript function
-  Hereby sharing a typescript function which shows all that you get in your event handler workflow when an event is triggered. The generic input structure is constant whether for Express, Fastify, Kafka, Salesforce, Socket etc.
+  Hereby sharing a typescript function which shows all that you get in your event handler function when an event is triggered. The generic input structure is constant whether for Express, Fastify, Kafka, Salesforce, Socket etc.
 
-  **All that you get in your typescript workflow:**
+  **All that you get in your typescript function:**
 
   ```typescript
   import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
@@ -85,7 +85,7 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
           childLogger, // context specific logger. Read pino childLogger for more information
           logger, // Basic logger of the project, generally prefer childLogger for logging 
           outputs, // outputs of previously executed tasks (if any)
-          functions, // all loaded workflows/functions from the src/functions/ folder
+          functions, // all loaded functions from the src/functions/ folder
           datasources, //all configured datasources from src/datasources
           mappings  //mappings from src/mappings folder. this is useful for loading key value configurations for business logic of your project
       }: {
@@ -98,9 +98,9 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
           mappings: PlainObject
       } = ctx;
 
-      // Will print with workflow_name and task_id attributes. 
+      // Will print with function_name and task_id attributes. 
       childLogger.info('Server is running healthy');
-      // Will print without workflow_name and task_id attributes
+      // Will print without function_name and task_id attributes
       logger.info('Arguments passed %o', args);
       logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
       logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
@@ -128,10 +128,10 @@ Open src/eventsources/http.yaml to confirm the Express plugin (the HTTP eventsou
       }
   }
   ```
-### Example typescript workflow to return greetings with user's name
-This workflow will take the name from the request and return a personalized greeting. 
+### Example typescript function to return greetings with user's name
+This function will take the name from the request and return a personalized greeting. 
 
-`greet-user-workflow.ts`
+`greet-user-function.ts`
 ```typescript
   import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
   export default function (ctx: GSContext) {
@@ -147,11 +147,11 @@ This workflow will take the name from the request and return a personalized gree
 
 ```
 <!-- 
-#### Example workflow in yaml:
+#### Example function in yaml:
 
-    summary: Workflow to greet the user by name
+    summary: function to greet the user by name
     id: greet_user
-    description: Workflow to greet the user by name
+    description: function to greet the user by name
     tasks:
       - id: testing_inputs
         fn: com.gs.return

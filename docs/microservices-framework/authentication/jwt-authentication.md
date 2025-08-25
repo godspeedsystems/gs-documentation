@@ -75,7 +75,7 @@ In our Express eventsource plugin, JWT Authentication is implemented using passp
   </details>
 
   After exporting the environment variable, you can access these variable anywhere in your project by using inline
-  scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts workflows.
+  scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts functions.
 
 :::tip Note 
 If you do not set these environment variables mentioned above, it will result in an error while running your project. And if the token values set in header differ from those specified in the configuration, the response will be 'Unauthorized.'
@@ -120,7 +120,7 @@ Once you have enabled it here, authentication will be true for all endpoints, un
 ```yaml
 # Login with username and password
 http.post./login:   # defines the POST request that will be triggered when a client hits /login endpoint.
-  fn: verifyLogin   # the workflow to handle the request
+  fn: verifyLogin   # the function to handle the request
   authn: false
   body:
     content:
@@ -150,7 +150,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
             type: string
             example: 'Invalid username or password'
 ```
-**Workflow (verifyLogin.ts)**
+**function (verifyLogin.ts)**
 ```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
   import jwt from 'jsonwebtoken';
@@ -182,9 +182,9 @@ http.post./login:   # defines the POST request that will be triggered when a cli
 
 
 ### How to access JWT payload
-You can access the complete JWT payload using ctx.inputs.data.user when writing JS/TS workflows.
+You can access the complete JWT payload using ctx.inputs.data.user when writing JS/TS functions.
 
-Example access from a workflow
+Example access from a function
 ```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
 export default function (ctx: GSContext) {

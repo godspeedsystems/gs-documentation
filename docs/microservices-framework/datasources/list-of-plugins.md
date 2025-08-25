@@ -105,7 +105,7 @@ The Godspeed Axios Plugin offers the following advantages:
 
 3. **Error Handling:** The plugin includes robust error handling, allowing developers to gracefully handle various scenarios, such as server timeouts, request setup failures, and server-side errors.
 
-4. **Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven workflows.
+4. **Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven functions.
 
 
 ## Plugin Components
@@ -151,7 +151,7 @@ the above config works on two conditions if status from the api is 500,501 or 50
 - Override at task level within args object of the axios method call.
 
 ```yaml
-id: some_workflow
+id: some_function
 tasks:
   - id: post-anything
     # Fetching loan offers from rule engine for the given bank and pan card
@@ -192,7 +192,7 @@ authn:
 # Common headers to be set in all API calls
 headers:
   Content-Type: application/json
-  Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+  Cookie: <%mappings.my_bank.auth_function_cookie%>
 
 # Retry logic for failed API calls for ex on Internal server errors or request timeouts
 retry:
@@ -347,7 +347,7 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
 
 ```
 
-#### Example TS workflow
+#### Example TS function
 ```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
@@ -385,7 +385,7 @@ Event
          application/json:
 
 ```
-the above event calling `aws_upload.ts` workflow from `src/functions/` 
+the above event calling `aws_upload.ts` function from `src/functions/` 
  
 ```js 
 import { GSContext, GSStatus } from "@godspeedsystems/core";
@@ -502,7 +502,7 @@ http.post./email:
                 type: string
 ```
 
-### Typescript Workflow to send mail
+### Typescript function to send mail
 ```typescript title=src/functions/send_email.ts
 
 import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
@@ -645,7 +645,7 @@ module.exports = {
 };
 ```
 
-### Sample workflow for Mongoose API
+### Sample function for Mongoose API
 
 When calling any mongoose function it will be called as
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.

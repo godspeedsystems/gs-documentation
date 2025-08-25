@@ -53,7 +53,7 @@ brokers: ["kafka:9092"]
                 type: string
 ```
 
-**3.** In workflow we need to mension `datasource.kafka.producer` as function `fn` to produce data.
+**3.** In function we need to mension `datasource.kafka.producer` as function `fn` to produce data.
 
 ```yaml title=src/functions/kafka-publish.yaml
 id: kafka-publish
@@ -92,7 +92,7 @@ kafka.publish-producer1.kafka_proj: // event key
         schema:
           type: string
 ```
-**3. ** kafka workflow for consumer
+**3. ** kafka function for consumer
 ``` title=src/functions/kafka_consume.yaml
 # function for consume data
 id: kafka-consumer
@@ -120,8 +120,8 @@ After implementing Kafka plugin, your project structure will look like this:
 │   ├── eventsources
 │   │   └── kafka.yaml                       # Eventsource configuration
 │   └── functions
-│       ├── kafka-publish.yaml               # Workflow to publish message
-│       └── kafka-consume.yaml               # Workflow to consume message
+│       ├── kafka-publish.yaml               # function to publish message
+│       └── kafka-consume.yaml               # function to consume message
 ```
 
 ## Reference links

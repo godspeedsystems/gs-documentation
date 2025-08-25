@@ -97,7 +97,7 @@ on_response_validation_error:
 ```
 </details>
 
-## Get Started by writing an event and workflow for Express 
+## Get Started by writing an event and function for Express 
 
 You can store one or more events in each YAML file stored in the `src/events/` folder. The files can be organized and stored in any folder structure. The functions are created under `src/functions/`.
 
@@ -174,10 +174,10 @@ Specifying the event schema here, not only validates your input and response, ha
     # on_response_validation_error:
 ```
 
-### Event Handler or Workflow: (TS/JS)
+### Event Handler function: (TS/JS)
 
 The meta-framework supports pure functions. This means they take JSON as input and return JSON as output, irrespective of the eventsource from where the event is captured and response returned.
-Hereby sharing a typescript function which shows all that you get in your event handler workflow
+Hereby sharing a typescript function which shows all that you get in your event handler function
 when an event is captured by _any event source_. The generic input structure is constant whether for Express, Fastify, Kafka, Salesforce, Socket etc.
 
 ```typescript
@@ -218,9 +218,9 @@ export default function (ctx: GSContext) {
         mappings: PlainObject //Plain JSON loaded from the mappings folder
     } = ctx;
     
-    // Will print with workflow_name and task_id attributes
+    // Will print with function_name and task_id attributes
     childLogger.info('Server is running healthy');
-    // Will print without workflow_name and task_id attributes
+    // Will print without function_name and task_id attributes
     logger.info('Inputs object \n user %o query %o body %o headers %o params %o', user, query, body, headers, params);
     logger.info('Outputs object has outputs from previous tasks with given ids %o', Object.keys(outputs));
     logger.info('Datasources object has following datasource clients %o', Object.keys(datasources));
@@ -348,7 +348,7 @@ http.post./helloworld:
 ```
 
 
-### Example Workflow to handle the uploaded files 
+### Example function to handle the uploaded files 
 
 ```typescript
   export default function (ctx: GSContext) {

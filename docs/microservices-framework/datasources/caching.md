@@ -4,11 +4,11 @@ description: Learn about caching tasks using Redis/Mem-cache or any other custom
 keywords: [caching, Redis, Mem-cache, GSCacheAsDatasource, plugin]
 ---
 # Caching
-Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the workflows.   
+Godspeed provides caching of the tasks using redis/mem-cache or any other custom cache. You can cache the result of any task in the functions.   
 Godspeed provides two pre-defined types of cache i.e. [redis](./datasource-plugins/Redis%20Datasource.md) and in-memory. It allows using multiple caches in a single service with a default cache. Cache datasource should implement abstract class `GSCacheAsDatasource` [code is below](#how-to-write-your-own-cache-plugin). You can make multiple caches using this abstract class.
 
 > You can read and return from cache if data is present there, before executing any task where caching instruction is set.   
-> The data is stored in form of [GSStatus](../workflows/native-language-functions.md/#gsstatus) of the executed task. Both success and failure statuses can be stored and loaded.
+> The data is stored in form of [GSStatus](../functions/native-language-functions.md/#gsstatus) of the executed task. Both success and failure statuses can be stored and loaded.
 
 ## Configuration
 ### Add pre-defined cache in Godspeed
@@ -72,7 +72,7 @@ caching: <redis or mem-cache>
 
 #### Using caching in Typescript/Javascript tasks
 :::note
-Currently caching support is not provided when you call a datasource or function/workflow from typescript code. Check this [github issue](https://github.com/godspeedsystems/gs-node-service/issues/1008) for more information.
+Currently caching support is not provided when you call a datasource or function from typescript code. Check this [github issue](https://github.com/godspeedsystems/gs-node-service/issues/1008) for more information.
 :::
 For now if you want to use cache datasource within typescript code, you need to call it like any other datasource from within a typescript code. You need to manage caching and invalidations in your code. This requires some boilerplate till the above issue is implemented.
 
@@ -124,7 +124,7 @@ caching:
 :::
 
 ##### Sample
-Here is the caching spec to write in the workflow.
+Here is the caching spec to write in the function.
 ```yaml title=config/default.yaml
 caching: redis
 ```
@@ -138,10 +138,10 @@ caching: redis
 ```
 
 ```yaml title=src/functions/helloworld2.yaml
-# Functions (Helloworld2 workflow)
-id: helloworld2_workflow
+# Functions (Helloworld2 function)
+id: helloworld2_function
 tasks:
-  - id: helloworld2_workflow_first_task
+  - id: helloworld2_function_first_task
     fn: com.gs.transform
     args:
       name: helloworld2
@@ -151,10 +151,10 @@ tasks:
 ```
 
 ```yaml title=src/functions/helloworld3.yaml
-# Functions (Helloworld3 workflow)
-id: helloworld3_workflow
+# Functions (Helloworld3 function)
+id: helloworld3_function
 tasks:
-  - id: helloworld3_workflow_first_task
+  - id: helloworld3_function_first_task
     caching:
       before:
         key: abc

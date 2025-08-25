@@ -134,7 +134,7 @@ http.post./send-mail:
                 example: 'Failed to send email.'
 ```
 
-### Write Workflow/Function
+### Write Function
 
 1. Create a file `sendMail.ts` inside the src/functions folder.
 2. Copy this inside that file:
@@ -518,7 +518,7 @@ http.post./event-tracking:
                 example: 'Failed to process events.'
 ```
 
-#### C. Workflow Function
+#### C. Function
 
 1. Create a file `track.ts` inside the functions folder.
 2. Copy this inside that file:

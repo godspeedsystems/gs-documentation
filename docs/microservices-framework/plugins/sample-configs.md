@@ -315,8 +315,8 @@ authn:
 #     fn: com.gs.transform  # Godspeed function to evaluate authorization logic
 #     args: <%inputs.user.role === 'admin'%>  # Example: Allow only admin users
 
-# Authorization can also be handled via a predefined workflow:
-# authz: authz.check_user  # Reference a workflow inside the functions folder
+# Authorization can also be handled via a predefined function:
+# authz: authz.check_user  # Reference a function inside the functions folder
 
 # Handling Validation Errors
 on_request_validation_error: validations.request.standardResponse

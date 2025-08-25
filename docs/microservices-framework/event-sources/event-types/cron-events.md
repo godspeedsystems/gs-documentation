@@ -26,10 +26,10 @@ cron.* * * * *.Asia/Kolkata:   # event key
 - `Asia/Kolkata`: This is a timezone specification. It indicates that the event is scheduled to run in the Asia/Kolkata timezone. Kolkata is a city in India, and this timezone corresponds to the Indian Standard Time (IST).
 
 <!-- 
-### Cron workflow to schedule 
+### Cron function to schedule 
 ( src/functions/every_minute.yaml )
 
-summary: this workflow will be running every minute
+summary: this function will be running every minute
 tasks:
   - id: print
     description: print for every minute
@@ -38,7 +38,7 @@ tasks:
       data: HELLO from CRON
 -->
 
-### Cron workflow to schedule ( src/functions/every_minute.ts )
+### Cron function to schedule ( src/functions/every_minute.ts )
 
 ```ts
 import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";

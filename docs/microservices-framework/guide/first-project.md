@@ -107,7 +107,7 @@ In the Godspeed meta-framework, every API (REST or GraphQL) and message (websock
 This naming convention might be new to you. While the broader developer community typically refers to only `async events` (like Kafka or websocket messages) as `events`, Godspeed considers both synchronous APIs (REST, GraphQL) and asynchronous events (Message bus, websocket, cron) as `events`.
 :::
 
-#### Testing API Input and Output Validation
+### Testing API Input and Output Validation
 
 Godspeed provides built-in validation for data sent to and from your APIs, ensuring data integrity.
 

@@ -6,7 +6,7 @@ The Framework provides request and response schema validation
 
 We have the ability to define inputs and their types in our request schema, such as path parameters, query parameters, and request body. This allows the framework to validate whether the API has received the specified inputs in the expected types.
 
-Whenever an API is triggered, AJV (Another JSON Schema Validator) verifies the request schema against the provided inputs. If the defined schema matches the inputs, it allows the workflow to execute. Otherwise, it throws an error with a status code of 400 and a descriptive message indicating where the schema validation failed.
+Whenever an API is triggered, AJV (Another JSON Schema Validator) verifies the request schema against the provided inputs. If the defined schema matches the inputs, it allows the function to execute. Otherwise, it throws an error with a status code of 400 and a descriptive message indicating where the schema validation failed.
 
 ### Sample Request Schema
 
@@ -74,12 +74,12 @@ http.post./helloworld:
 
 Just like request schema validation, there's also response schema validation in place. In this process, the framework checks the response type, validates the properties of the response, and ensures they align with the specified types.
 
-The process of response schema validation involves storing the response schema, enabling the workflow to execute, and checking the response body along with its properties for validation.
+The process of response schema validation involves storing the response schema, enabling the function to execute, and checking the response body along with its properties for validation.
 
 Response schema validation includes two cases
 
-- Failure in Workflow Execution
-- Successful Workflow Execution but Fails in Response Schema Validation
+- Failure in function Execution
+- Successful function Execution but Fails in Response Schema Validation
 
 
 ### Sample Response Schema

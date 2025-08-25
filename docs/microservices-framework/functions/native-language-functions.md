@@ -1,6 +1,6 @@
 # Writing functions in Godspeed
 
-Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language workflow enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
+Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language function enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.
 
 :::tip
 In Godspeed, your function gets input in a standard JSON format and returns output in a standard JSON format, independent of the eventsource through which this function is triggered. Eventsource could be Express, Fastify, Apollo Graphql or event message bus like Kafka, RabbitMQ or socket message. This means Godspeed has a unified way to deal with all eventsources, providing a modular architecture and re-uasability of your functions.
@@ -24,8 +24,8 @@ export default function (ctx: GSContext) {
         }, 
         childLogger, // context specific logger. Read pino childLogger for more information
         logger, // Basic logger of the project, generally prefer childLogger for logging 
-        outputs, // outputs of previously executed tasks of yaml workflows (if any)
-        functions, // all loaded workflows/functions from the src/functions/ folder
+        outputs, // outputs of previously executed tasks
+        functions, // all loaded functions from the src/functions/ folder
         datasources, //all configured datasources from src/datasources
         mappings  //mappings from src/mappings folder. this is useful for loading key value configurations for business logic of your project
     }: {
@@ -74,15 +74,15 @@ For seeing how framework handles data returned from a function, including calcul
 
 ### GSContext
 
-GSContext carries the loaded components of this project and as well the inputs of the current event. Every information you need to know or store about the event and the workflow executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
+GSContext carries the loaded components of this project and as well the inputs of the current event. Every information you need to know or store about the event and the function executed so far, and as well the loaded `functions`, `datasources`, `logger`, `childLogger`, `config`, `mappings` etc, is available in the `GSContext` object.
 
 :::tip note
- Every function/workflow has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
+ Every function has access to the ctx object, which is passed as an argument, and furthermore, you can access its properties by destructuring it.
 :::
 
 ### More about GSContext
 
-Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current workflow and is available to the event handlers (`functions`). It is passed to any sub workflows subsequently called by the event handler. 
+Check the code of GSContext interface [here](https://github.com/godspeedsystems/gs-node-service/blob/v2/src/core/interfaces.ts). GSContext has the contextual information of your current function and is available to the event handlers (`functions`). It is passed to any sub functions subsequently called by the event handler. 
 It includes all the context specific information like tracing information, actor, environment, headers, payload etc.
 
 
