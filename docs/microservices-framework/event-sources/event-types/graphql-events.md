@@ -37,7 +37,7 @@ apollo.post./mongo/category:      // event key having prefix apollo
           type: object
 ```
 
-### Graphql Workflow
+### Graphql function
 
   ```ts
   export default function (ctx: GSContext) {

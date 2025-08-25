@@ -1,7 +1,7 @@
 ---
 title: About Authorization
 description: Overview of authorization, including RBAC, ABAC, key agents, and workflow DSL.
-keywords: [authorization, RBAC, ABAC, user, resource, action, context, workflow DSL]
+keywords: [authorization, RBAC, ABAC, user, resource, action, context]
 ---
 
 # About Authorization
@@ -33,7 +33,7 @@ Context refers to the circumstances or conditions under which a user's request f
 
 <!-- 
 ## Datasources authentication
-At the API datasource level, you can implement authentication measures. You can establish an authentication workflow specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this workflow can furnish headers, parameters, or status codes to the primary workflow as required.
+At the API datasource level, you can implement authentication measures. You can establish an authentication function specific to the datasource, allowing it to make requests to an authentication service in order to obtain tokens or perform authentication checks. Subsequently, this function can furnish headers, parameters, or status codes to the primary function as required.
 
 Here is the sample spec:
 **Datasource**
@@ -42,9 +42,9 @@ type: api
 base_url: <% config.api.base_url %>
 authn: com.jfs.api_auth
 ```
-Here, `com.jfs.api_auth` is the authentication workflow which gets called for the authentication of any request to this datasource.
+Here, `com.jfs.api_auth` is the authentication function which gets called for the authentication of any request to this datasource.
 
-#### Sample workflow using the above datasource
+#### Sample function using the above datasource
 ```yaml
 summary: Call an API and transform the 
 tasks:
@@ -54,9 +54,9 @@ tasks:
       args:
         data: <% inputs.body %>
 ```
-#### Sample authentication workflow com.jfs.api_auth
+#### Sample authentication function com.jfs.api_auth
 ```yaml
-summary: Auth workflow
+summary: Auth function
 tasks:
     - id: auth_step1
       description: Hit the authn request
@@ -74,7 +74,7 @@ tasks:
           queryid: <% outputs.auth_step1.params.queryid %>
         statusCodes: <% outputs.auth_step1.status_code %>          
 ```
-The authentication workflow should return response in this format:
+The authentication function should return response in this format:
 ```yaml
 headers: 
   header1: val1
@@ -83,7 +83,7 @@ params:
 statusCodes: [401, 403, ....]
 ```
 :::note
-The authentication workflow gets called when any request returns the specified `statusCodes`. 
+The authentication function gets called when any request returns the specified `statusCodes`. 
 :::
 
 
@@ -99,7 +99,7 @@ If authz workflow returns data as true/false, it means the task is allowed/denie
 If authz workflow returns JSON output then it is merged with args.data of the task for which authz is being executed.
 
 Here is the sample spec:  
-**Sample workflow calling the authz workflow**
+**Sample function calling the authz workflow**
 ```yaml
 summary: Call an API
 tasks:

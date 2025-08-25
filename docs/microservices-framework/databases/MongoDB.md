@@ -39,7 +39,7 @@ successResponseCodes: #default response codes for success responses
   findOneAndDelete: 202
 ```
 - You can keep the file by any name. This file is used to initialize a mongoose datasource instance. Whatever is the name of the file, you will need to invoke the mongoose datasource commands by the same name. Also your models will be needed to be kept in a folder with the same name as your yaml file (i.e. your datasource instance name). For example mongoose1.yaml would mean calling 
-<!-- `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml workflows and -->
+<!-- `fn:datasources.mongoose1.<Model_Name>.<Function_Name>` from yaml functions and -->
 `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files. Also you will need to create a folder `datasources/mongoose1/models` and keep your models there as detailed below.
 
 - You can override the default response codes for success cases for different methods by putting them in the datasource instance's yaml file
@@ -101,12 +101,12 @@ module.exports = {
 };
 
 ```
-### Sample Event and workflow
+### Sample Event and function
 
 <!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
-    id: mongoose_workflow
+    id: mongoose_function
     tasks:
       - id: first_task
         fn: datasource.mongoose.SomeModel.findOne
@@ -114,9 +114,9 @@ module.exports = {
   ```
 **2. ** Most Mongoose functions accept multiple args. To pass all args to an API call, send an array of the acceptable args. This array is spread and passed to the API call
   ```yaml
-    id: helloworld2_workflow
+    id: helloworld2_function
     tasks:
-      - id: helloworld2_workflow_first_task
+      - id: helloworld2_function_first_task
         fn: datasource.mongoose.SomeModel.findOne
         args: #as an array
           - name: mastersilv3r #search clause: First argument
@@ -155,7 +155,7 @@ http.post./participant:
                 type: object
                 description: The created Participant object
 ```
-### Workflow
+### function
 When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
 ```ts
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
@@ -303,10 +303,10 @@ godspeed gen-crud-api
 ```
 * This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/mongo.prisma
 
-* Now you can view the event and workflows according defined prisma schema
+* Now you can view the event and functions according defined prisma schema
 
 ### Sample API
-Here is a sample event and workflow for mongodb, which is fetching data from the database.
+Here is a sample event and function for mongodb, which is fetching data from the database.
 
 ```yaml title=src/events/getPost.yaml
 

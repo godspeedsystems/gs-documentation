@@ -4,7 +4,7 @@ In Godspeed, Axios is used as a datasource plugin for making HTTP requests to ex
 This allows your application to communicate with third-party services or other microservices by sending requests
 and receiving responses in a structured way. Axios simplifies the process of making requests, 
 handling authentication, managing headers, handling errors, 
-and retrying requests, which is especially useful for complex workflows or external integrations.
+and retrying requests, which is especially useful for complex functions or external integrations.
 
 ## Step-by-Step Guide:
 
@@ -36,7 +36,7 @@ In this file, you can set the base URL and any custom headers or authentication 
 
   headers:      # to set Common headers in all API calls
     Content-Type: application/json
-    Cookie: <%mappings.my_bank.auth_workflow_cookie%>
+    Cookie: <%mappings.my_bank.auth_function_cookie%>
 
   # Retry logic for failed API calls for ex on Internal server errors or request timeouts
   retry:
@@ -57,12 +57,12 @@ In this file, you can set the base URL and any custom headers or authentication 
 
 ### Step 2: Set Up an Event
 
-1. **Create an Event to Trigger the Workflow**: Define an HTTP event to trigger the workflow and call the third-party API.
+1. **Create an Event to Trigger the function**: Define an HTTP event to trigger the function and call the third-party API.
  Example `fetchData.yaml`:
 
 ```yaml
 http.get./fetch-data:
-  fn: fetchDataWorkflow
+  fn: fetchDatafunction
   authn: false
   responses:
     200:
@@ -73,13 +73,13 @@ http.get./fetch-data:
 ```
   ### Explanation:
    - **http.get./fetch-data:**: The first line of any http event defines the (protocol.Method./end-point)
-   Here, /fetch-data is the end point which will send a get request to third party API by calling a workflow.
-   - **fn**: fn defines the workflow function to be called. here it is, fetchDataWorkflow.
+   Here, /fetch-data is the end point which will send a get request to third party API by calling a function.
+   - **fn**: fn defines the function function to be called. here it is, fetchDatafunction.
 
 
-### Step 3: Set Up Workflow to Use the Axios Datasource
+### Step 3: Set Up function to Use the Axios Datasource
 
- Go to `src/functions/` and create a file (e.g., `fetchDataWorkflow.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
+ Go to `src/functions/` and create a file (e.g., `fetchDatafunction.ts`).Use the Axios configuration to make the API call. You can specify the endpoint, HTTP method, and any parameters needed for the request.
 
 ```ts
 import { GSContext, GSDataSource, logger, PlainObject } from "@godspeedsystems/core";
@@ -100,7 +100,7 @@ export default async function (ctx: GSContext) {
 <!-- 
   summary: Calls the third-party API using Axios
   tasks:
-  - id: fetchDataWorkflow
+  - id: fetchDatafunction
     fn: datasource.api.get./anything
     args:
       data:

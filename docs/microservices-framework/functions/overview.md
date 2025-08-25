@@ -1,8 +1,8 @@
 ---
-title: Functions (Event Handler Workflows)
+title: Functions (Event Handlers)
 ---
 
-The Meta Framework allows you to write business logic in [Typescript and Javascript functions](/docs/microservices-framework/workflows/native-language-functions.md)
+The Meta Framework allows you to write business logic in [Typescript and Javascript functions](/docs/microservices-framework/functions/native-language-functions.md)
 You may use any language depending on your choice. We suggest to prefer Typescript over Javascript for type check reasons. 
 
 

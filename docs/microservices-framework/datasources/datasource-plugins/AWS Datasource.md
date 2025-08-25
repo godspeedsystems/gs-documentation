@@ -79,9 +79,9 @@ In an event, we establish HTTP endpoint that accepts json objects in request bod
          application/json:
 ```
 
-In workflow we need to mention `datasource.aws.${serviceName}.${method}` as function `fn` to perform operations in this case `datasource.aws.s3.listObjects`.
+In function we need to mention `datasource.aws.${serviceName}.${method}` as function `fn` to perform operations in this case `datasource.aws.s3.listObjects`.
 
-```ts title=TS workflow
+```ts title=TS function
 import { GSContext, GSDataSource, GSStatus } from "@godspeedsystems/core";
 
 export default async function (ctx: GSContext, args: any) {
@@ -116,7 +116,7 @@ http.post./aws:
          application/json:
 
 ```
-the above event calling `aws_upload.ts` workflow from `src/functions/` 
+the above event calling `aws_upload.ts` function from `src/functions/` 
  
 ```js 
 import { GSContext, GSStatus } from "@godspeedsystems/core";

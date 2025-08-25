@@ -52,11 +52,11 @@ Example **`callback-event.yaml`**:
 
 ---
 
-### 2. Create the Workflow to Process the Callback
+### 2. Create the function to Process the Callback
 
-Define a workflow to process the callback data, handling any necessary business logic.
+Define a function to process the callback data, handling any necessary business logic.
 
-1. **Create a Workflow File** in the `src/functions` directory to define how the callback data is processed.
+1. **Create a function File** in the `src/functions` directory to define how the callback data is processed.
 
 Example **`handleCallback.yaml`**:
 
@@ -110,9 +110,9 @@ Example **`handleCallback.yaml`**:
 
 Let’s say you’re integrating with a payment gateway, and you want to handle a payment status update callback:
 
-1. **Set Up Event and Workflow**: Follow the same steps as above to create the event (`payment_callback.yaml`) and workflow (`handlePaymentCallback`) files.
+1. **Set Up Event and function**: Follow the same steps as above to create the event (`payment_callback.yaml`) and function (`handlePaymentCallback`) files.
 2. **Register the Callback URL**: Provide the payment gateway with your callback URL.
-3. **Process the Callback**: In the `handlePaymentCallback` workflow, define specific tasks to validate payment status, log transactions, or update your database based on the callback data.
+3. **Process the Callback**: In the `handlePaymentCallback` function, define specific tasks to validate payment status, log transactions, or update your database based on the callback data.
 
 ---
 

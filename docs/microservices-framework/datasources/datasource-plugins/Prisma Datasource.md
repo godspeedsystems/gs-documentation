@@ -140,7 +140,7 @@ You can generate the CRUD API'S by entering the below command:
   ```
 * This command will generate the crud apis based on the sample schema provided at ./src/datasources/schema.prisma
 
-* You can now view events and workflows generated under events and functions folder. They follow a structure similar to the APIs below.
+* You can now view events and functions generated under events and functions folder. They follow a structure similar to the APIs below.
 
 Here is an additional subsection you can insert under the **“How to use”** section of your Prisma Datasource Plugin documentation. This integrates the `execute` method explanation and encourages its usage in TypeScript functions:
 
@@ -197,7 +197,7 @@ module.exports = async (ctx: GSContext): Promise<GSStatus> => {
 ---
 
 ### Sample API
-If your schema name is mysql.prisma and model name is 'post', then your event and workflow to fetch data from the database, will look like :
+If your schema name is mysql.prisma and model name is 'post', then your event and function to fetch data from the database, will look like :
 
 ```yaml title = src/events/post.yaml
 
@@ -345,8 +345,8 @@ If no_access/can_access is set, then you will not be able to specify:
 :::
 
 <details>
-<summary>Sample workflow with inline authz instruction</summary>
-In the below workflow with inline authz instruction can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
+<summary>Sample function with inline authz instruction</summary>
+In the below function with inline authz instruction can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
 
 ```yaml title=fetch_author.yaml
 summary: Fetch author
@@ -370,7 +370,7 @@ tasks:
 </details>
 
 <details>
-<summary>Sample workflow calling a separate authz workflow</summary>
+<summary>Sample function calling a separate authz function</summary>
 
 ```yaml title=fetch_author.yaml
 summary: Fetch author
@@ -385,9 +385,9 @@ tasks:
         id: <% inputs.params.id %>
 ```
 
-In the below authz workflow can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
+In the below authz function can_access, no_access and where conditions are provided. These conditions will be applied while fetching author details.
 ```yaml title=authz_wf.yaml
-summary: authz workflow
+summary: authz function
   - id: authz_task_1
     summary: return access columns
     fn: com.gs.transform

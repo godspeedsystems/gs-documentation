@@ -54,7 +54,7 @@ cron.* * * * *.Asia/Kolkata:    #this eventkey prefix should be the `type` menti
 ```
 Know more about cron expressions   `https://crontab.cronhub.io/`
 
-#### 2. Cron workflow to schedule ( src/functions/every_minute.ts )
+#### 2. Cron function to schedule ( src/functions/every_minute.ts )
 
 ```ts
 import { GSCloudEvent, GSContext, PlainObject } from "@godspeedsystems/core";
@@ -75,7 +75,7 @@ export default function (ctx: GSContext) {
 
 ```
 <!-- ```yaml
-summary: this workflow will be running every minute
+summary: this function will be running every minute
 tasks:
   - id: print
     description: print for every minute

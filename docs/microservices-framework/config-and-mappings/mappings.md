@@ -7,7 +7,7 @@ sidebar_position: 3
 
 # Mappings
 
-Mappings is a global object which will be available in your microservice. You can define anything in the mappings i.e. key/value pair map, array, etc. You can access these mappings inside your workflows at any time.
+Mappings is a global object which will be available in your microservice. You can define anything in the mappings i.e. key/value pair map, array, etc. You can access these mappings inside your functions at any time.
 
 ## Project structure
 Mappings are present in `src/mappings` directory. The default format is yaml and you can store mappings in the nested directories also. The nested directories are also accessible in the same `mappings` object.
@@ -21,7 +21,7 @@ Mappings are present in `src/mappings` directory. The default format is yaml and
 ```
 
 ## Sample mappings
-This is a sample mapping which is accessible in the workflows inside mappings object using `mappings.Gender` and `mappings.generate.genId`   
+This is a sample mapping which is accessible in the functions inside mappings object using `mappings.Gender` and `mappings.generate.genId`   
 ```yaml title=index.yaml
 Gender:
   Male: M
@@ -71,10 +71,10 @@ However, for other file names you need to mention the file name while accessing 
          reportPath: <% mappings.report_path %>
   ```
    **Explanation**:
-   - The `report_path` mapping is used to dynamically define the report path for the workflow triggered by the event.
+   - The `report_path` mapping is used to dynamically define the report path for the function triggered by the event.
 
 ---
-### Sample typescript Workflow accessing mappings
+### Sample typescript function accessing mappings
 
 In this example, mappings is utilized to dynamically retrieve error messages based on an error code.
 
@@ -97,7 +97,7 @@ export default async function(ctx: GSContext, args: any) {
       }
 
 ```
-### Step-by-Step Explanation of above ts workflow
+### Step-by-Step Explanation of above ts function
 
 - The mappings object is destructured from the ctx (Godspeed context).
 - In this case, mappings.error_codes.codes contains a predefined set of error codes and their corresponding messages.

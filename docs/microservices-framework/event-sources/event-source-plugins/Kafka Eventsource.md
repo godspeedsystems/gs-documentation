@@ -44,9 +44,9 @@ http.post./kafka-pub:
           required: ['message']
 
 ```
-<!-- #### kafka workflow for Producer ( src/functions/kafka-publish.yaml )
+<!-- #### kafka function for Producer ( src/functions/kafka-publish.yaml )
 
-In workflow we need to mension `datasource.kafka.producer` as function (fn) to produce data.
+In function we need to mension `datasource.kafka.producer` as function (fn) to produce data.
 
 ```yaml
 id: kafka-publish
@@ -58,7 +58,7 @@ tasks:
         topic: "publish-producer1"
         message: <% inputs.body.message %>
 ``` -->
-### kafka workflow for Producer ( src/functions/kafka-publish.ts )
+### kafka function for Producer ( src/functions/kafka-publish.ts )
 
 ```ts
 import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
@@ -125,7 +125,7 @@ kafka.publish-producer1.kafka_proj:   # event key
         schema:
           type: string
 ```
-### kafka workflow for Consumer 
+### kafka function for Consumer 
 (src/functions/kafka_consume.ts)
 ```ts
 import { GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";

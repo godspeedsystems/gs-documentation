@@ -6,24 +6,7 @@ slug: /
 
 # Welcome to Godspeed
 
-> **From Idea to Scale — 10x Faster & Better**
-
-**Godspeed** is the first **agentic SDLC platform** that brings order, speed, and consistency to the software development lifecycle. Whether you're an individual developer or a scaling team, Godspeed gives you the tools to ship clean, compliant code faster — with fewer bugs and less chaos.
-
-
-## What is Godspeed?
-
-Godspeed combines two powerful innovations into one cohesive developer experience:
-
-- **[Saarthi: Agentic SDLC Team](/docs/saarthi/index.md)**  
-  AI teammates for product planning, development, testing, DevOps, and monitoring.
-  
-- **[4th-Generation Framework Stack](/docs/microservices-framework/guide/get-started.md)**  
-  Build full-stack, event-driven, distributed systems with fewer lines of code and [built-in best practices](/docs/microservices-framework/introduction/guard-rails.md)
-
-> Even entry-level engineers — or LLMs — can ship production-grade software using Godspeed.
-
----
+-Unlock Your True Potential
 
 ## What Can You Build?
 
@@ -37,33 +20,24 @@ Godspeed combines two powerful innovations into one cohesive developer experienc
 | **DevOps Workflows & Infra-as-Code** | GitOps, CI/CD, Terraform-powered automation                   |
 ---
 
-## Build Your First Microservice with AI-Powered Speed
+## Build Your First Microservice with Godspeed
 
-Godspeed is a 4th-gen microservices framework that brings the power of AI directly into your development workflow — with **zero boilerplate**, **multi-agent assistance**, and **context-aware code generation**.
+With **Saarthi**, your multi agent dev team in vs code, building enterprise-grade systems is now just **one prompt away**.
 
-With **Saarthi**, your in-editor AI assistant, building enterprise-grade systems is now just **one prompt away**.
+## Step 1: [Install Godspeed Framework](/docs/microservices-framework/guide/get-started.md)
 
----
+## Step 2: [Install Saarthi in VS Code](/docs/saarthi/getting-started/installing.mdx)
 
-<!-- ## Prerequisite: 
-
-[Python](https://www.python.org/downloads/) must be installed on your system before installing Saarthi. -->
-
-## Step 1: [Install Saarthi in VS Code](/docs/saarthi/getting-started/installing.mdx)
-
-## Step 2: Open Saarthi & Select [Code Mode](/docs/saarthi/modes/code.md)
+## Step 3: Open Saarthi & Select [Code Mode](/docs/saarthi/modes/code.md)
 
 1. From VS Code sidebar, Open **Saarthi**
-3. Choose `💻 Code` from the mode selector
+2. Choose `💻 Code` from the mode selector
 
-> Saarthi will now automatically connect to **RAG node MCP Server**, for context-aware coding with Godspeed framework.
+> Saarthi will now automatically connect to **GS MCP Server**, for context-aware coding with Godspeed framework.
 
----
+## Step 4: Enter Prompt
 
-## Step 3: Create Your First Microservice — Just One Prompt
-
-In the Saarthi chat box, type:
-
+In the Saarthi chat box, type what you want to build. For Example:
 ```
 Create a godspeed microservice for product catalog with CRUD operations using Postgres database.
 ```
@@ -79,18 +53,8 @@ All with framework-aligned best practices and zero boilerplate.
 
 ---
 
-##  Step 4: Run Your Service Locally
+**[Understand your first godspeed project →](/docs/microservices-framework/guide/first-project#understanding-your-first-godspeed-project)**
 
-```bash
-cd <project-name>
-godspeed serve
-```
 
-Test your endpoints instantly in Swagger UI.
-
----
-
-## Meet Your Multi-Agent Team
-
-[Explore Saarthi Agent Modes →](/docs/saarthi/basic-usage/using-modes.md)
+**[Explore Saarthi Agent Modes →](/docs/saarthi/basic-usage/using-modes.md)**
 

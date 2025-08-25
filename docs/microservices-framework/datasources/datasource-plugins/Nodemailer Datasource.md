@@ -84,7 +84,7 @@ http.post./email:
               error:
                 type: string
 ```
-### Typescript Workflow to send mail
+### Typescript function to send mail
 ```typescript title=src/functions/send_email.ts
 
 import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";

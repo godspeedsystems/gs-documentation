@@ -52,7 +52,7 @@ keywords: [Godspeed, OAuth2, authentication, authorization, Google, GitHub, Link
         failure_redirect: <% process.env.GITHUB_FAILURE_REDIRECT_URL %>
   ```
 
-  Let's See an example event and workflow of above provided success_redirect_url 
+  Let's See an example event and function of above provided success_redirect_url 
   
   Event src/events/helloUser.yaml
   ```yaml
@@ -67,7 +67,7 @@ keywords: [Godspeed, OAuth2, authentication, authorization, Google, GitHub, Link
             type: string
   ```
  
-  Workflow  (src/functions/helloUser.ts)
+  function  (src/functions/helloUser.ts)
   ```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
   export default function (ctx: GSContext) {

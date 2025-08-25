@@ -35,18 +35,13 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "1.2. Why Godspeed?",
-              id: "microservices-framework/introduction/benefits",
-            },
-            {
-              type: "doc",
-              label: "1.3. Design Principles",
-              id: "microservices-framework/introduction/design-principles",
-            },
-            {
-              type: "doc",
-              label: "1.4. Guard Rails",
+              label: "1.2. Guard Rails",
               id: "microservices-framework/introduction/guard-rails",
+            },
+            {
+              type: "doc",
+              label: "1.3. Features",
+              id: "microservices-framework/introduction/design-principles",
             },
           ],
         },
@@ -66,7 +61,7 @@ const sidebars = {
             },
             {
               type: "doc",
-              label: "2.3. Detailed Walthrough",
+              label: "2.3. Detailed Walkthrough",
               id: "microservices-framework/guide/walkthrough",
             },
             {
@@ -211,17 +206,17 @@ const sidebars = {
             {
               type: "doc",
               label: "8.1. Overview",
-              id: "microservices-framework/workflows/overview",
+              id: "microservices-framework/functions/overview",
             },
             {
               type: "doc",
               label: "8.2. Typescript and Javascript functions",
-              id: "microservices-framework/workflows/native-language-functions",
+              id: "microservices-framework/functions/native-language-functions",
             },
             {
               type: "doc",
               label: "8.3. Response Serialization",
-              id: "microservices-framework/workflows/response-serialization",
+              id: "microservices-framework/functions/response-serialization",
             }
           ],
         },
@@ -450,11 +445,11 @@ const sidebars = {
               label: "15.6. Logs",
               id: "microservices-framework/telemetry/logging",
             },
-            {
-              type: "doc",
-              label: "16.3. Custom traces, logs and metrics (BPM)",
-              id: "microservices-framework/telemetry/custom-metrics-logs-traces"
-            },
+            // {
+            //   type: "doc",
+            //   label: "16.3. Custom traces, logs and metrics (BPM)",
+            //   id: "microservices-framework/telemetry/custom-metrics-logs-traces"
+            // },
           ],
         },
         {

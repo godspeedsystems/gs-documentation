@@ -390,7 +390,7 @@ cron.* * * * *.Asia/Kolkata:
 ```
 For  cron expressions   `https://crontab.cronhub.io/`
 
-#### cron workflow to schedule ( src/functions/every_minute.yaml )
+#### cron function to schedule ( src/functions/every_minute.yaml )
 
 ```
 import { GSContext, GSStatus } from "@godspeedsystems/core";
@@ -539,7 +539,7 @@ kafka.publish-producer1.kafka_proj:
           type: string
 ```
 
-#### Example workflow for consumer ( src/functions/kafka-consume.yaml ) :
+#### Example function for consumer ( src/functions/kafka-consume.yaml ) :
 
 ```ts
 import { GSContext, GSStatus } from "@godspeedsystems/core";

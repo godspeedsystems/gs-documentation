@@ -122,7 +122,7 @@ Once environment variables are set up, they can be accessed in Godspeed Project 
 - **In TypeScript/JavaScript files**:
   Use `ctx.config` to access values within your TypeScript workflows.
 
-  **Example TypeScript Workflow**:
+  **Example TypeScript function**:
   ```typescript
   import { GSContext, GSStatus } from "@godspeedsystems/core";
 
@@ -176,6 +176,6 @@ httpbin: # sample api datasource url
   base_url: https://httpbin.org
 ```
 
-Here, `defaults` key has the variables which are used by the framework for default values in workflow DSL.    
+Here, `defaults` key has the variables which are used by the framework for default values.   
 **1. lang** - By default, the framework sets it to `js`. Check [default language](../inline-scripting/overview.md/#default-language-at-global-level) for more information.   
 **2. on_error.continue** - By default, the framework sets it to `false`.

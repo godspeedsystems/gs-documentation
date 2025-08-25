@@ -97,11 +97,11 @@ module.exports = {
 
 ```
 
-### Sample Event and workflow
+### Sample Event and function
 <!-- 
 **1. ** Only the first arg of the function as accepted by the API.
   ```yaml
-    id: mongoose_workflow
+    id: mongoose_function
     tasks:
       - id: first_task
         fn: datasource.mongoose.SomeModel.findOne
@@ -109,9 +109,9 @@ module.exports = {
   ```
 **2. ** Most Mongoose functions accept multiple args. To pass all args to an API call, send an array of the acceptable args. This array is spread and passed to the API call
   ```yaml
-    id: helloworld2_workflow
+    id: helloworld2_function
     tasks:
-      - id: helloworld2_workflow_first_task
+      - id: helloworld2_function_first_task
         fn: datasource.mongoose.SomeModel.findOne
         args: #as an array
           - name: mastersilv3r #search clause: First argument
@@ -150,7 +150,7 @@ http.post./participant:
                 type: object
                 description: The created Participant object
 ```
-### Workflow
+### function
 When calling any api function it will be called as `ctx.datasources.mongoose1.<Model_Name>.<Function_Name>` from TS/JS files.
 
 ### Create

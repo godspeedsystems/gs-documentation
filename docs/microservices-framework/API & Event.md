@@ -15,7 +15,7 @@ To write an api in Godspeed, first you need to write an Event Schema. This schem
 An event schema specifies:
 
 - The name/topic/URL of the event
-- The event handler Workflow (fn)
+- The event handler function (fn)
 - Input and Output schema
 - [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
 <!-- - [Authorization checks](/docs/microservices-framework/authorization/overview.md) -->
@@ -40,7 +40,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
 
   #Other non-swagger components (optional)
   authn: #custom authentication. Currently plugins support JWT. Can be customized
-  authz: #your custom authz workflow
+  authz: #your custom authz function
   on_request_validation_error: #when validation fails
   on_response_validation_error: #when validation fails
   log: #Open Telemetry compliant log attributes which help debug and search through logs better
@@ -163,7 +163,7 @@ issuer: JWT_ISSUER
 </details>
 
 After exporting the environment variable, you can access these variable anywhere in your project by using inline
-scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts workflows.
+scripting `<%config.issuer%>` in yaml or as `ctx.config.issuer` in js/ts functions.
 
 :::tip Note
 If you do not set these environment variables mentioned above, it will result in an error while running your project. And if the token values set in header differ from those specified in the configuration, the response will be 'Unauthorized.'
@@ -207,7 +207,7 @@ http.get./helloworld:
 ```yaml
 # Login with username and password
 http.post./login:   # defines the POST request that will be triggered when a client hits /login endpoint.
-  fn: verifyLogin   # the workflow to handle the request
+  fn: verifyLogin   # the function to handle the request
   authn: false
   body:
     content:
@@ -237,7 +237,7 @@ http.post./login:   # defines the POST request that will be triggered when a cli
             type: string
             example: 'Invalid username or password'
 ```
-**Workflow (verifyLogin.ts)**
+**Function (verifyLogin.ts)**
 ```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
 import jwt from 'jsonwebtoken';
@@ -268,9 +268,9 @@ export default function (ctx: GSContext) {
 ```
 
 ### How to access JWT payload
-You can access the complete JWT payload as ctx.inputs.data.user in JS/TS workflows.
+You can access the complete JWT payload as ctx.inputs.data.user in JS/TS functions.
 
-Example access from TS workflow
+Example access from TS function
 ```ts
 import { GSCloudEvent, GSContext, PlainObject, GSStatus, logger } from "@godspeedsystems/core";
 export default function (ctx: GSContext) {
@@ -340,7 +340,7 @@ For consistency across plugins, it's recommended to use a standardized configura
         failure_redirect: <% process.env.GITHUB_FAILURE_REDIRECT_URL %>
   ```
 
-  Let's See an example event and workflow of above provided success_redirect_url
+  Let's See an example event and function of above provided success_redirect_url
 
   Event src/events/helloUser.yaml
   ```yaml
@@ -355,7 +355,7 @@ For consistency across plugins, it's recommended to use a standardized configura
             type: string
   ```
 
-  Workflow  (src/functions/helloUser.ts)
+  function  (src/functions/helloUser.ts)
   ```ts
   import { GSCloudEvent, GSContext, PlainObject, GSStatus } from "@godspeedsystems/core";
   export default function (ctx: GSContext) {
@@ -402,7 +402,7 @@ Actions define the specific operations or activities that users may want to perf
 d. **Context**
 Context refers to the circumstances or conditions under which a user's request for access is evaluated. This includes factors such as time, location, or any other relevant contextual information.
 
-Authz workflow returns JSON output then it is merged with args.data of the task for which authz is being executed.
+Authz function returns JSON output then it is merged with args.data of the task for which authz is being executed.
 
 <!-- ## Reusing Definitions
 

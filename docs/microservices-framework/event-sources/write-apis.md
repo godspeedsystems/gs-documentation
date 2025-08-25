@@ -60,7 +60,7 @@ To define an api endpoint, first you need to write an Event Schema. This schema 
 **It involves specifying:**
 
 - The name/topic/URL of the event
-- The event handler Workflow (fn)
+- The event handler function (fn)
 - Input and Output schema
 - [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
 - [Authorization checks](/docs/microservices-framework/authorization/overview.md)
@@ -91,7 +91,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
   
   #Other non-swagger components (optional)
   authn: #custom authentication. Currently plugins support JWT. Can be customized
-  authz: #your custom authz workflow
+  authz: #your custom authz function
   on_request_validation_error: #when validation fails
   on_response_validation_error: #when validation fails
   log: #Open Telemetry compliant log attributes which help debug and search through logs better
@@ -105,7 +105,7 @@ Lets understand the first line from the above snippet `http.get./greet`.
 
 `/helloworld`: endpoint (In case of http and graphql sources. Can be groupId in case of Kafka for ex.)
 
-We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript and javascript workflows. In the above example the helloworld function exists in `src/functions` directory. 
+We are exposing an endpoint with a `get` method on `http` protocol. This endpoint is calling an eventhandler called `helloworld` in the second line. Event handlers can be functions written in typescript and javascript functions. In the above example the helloworld function exists in `src/functions` directory. 
 
 ### Key Differences between a Sync and Async Event Schema
 
@@ -192,7 +192,7 @@ In Godspeed, your function gets input in a standard JSON format and returns outp
 Click the link below to explore the complete anatomy of an event handler function written in TypeScript.
 It illustrates how to access inputs, use the GSContext, interact with datasources, and return responses correctly.
 
-👉 [Full Example: Understanding Godspeed Function Structure](/docs/microservices-framework/workflows/native-language-functions.md#example-typescript-function)
+👉 [Full Example: Understanding Godspeed Function Structure](/docs/microservices-framework/functions/native-language-functions.md#example-typescript-function)
 
 
 ### Test Your API

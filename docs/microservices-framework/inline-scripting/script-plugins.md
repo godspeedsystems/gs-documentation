@@ -32,7 +32,7 @@ Plugins are present in `src/plugins` directory. The default format is js/ts and 
 ## How they are loaded?
 :::tip Note
 1. If the file name is index.ts then its content is available directly at global level i.e. you don't need to write index explicitly while accessing the plugin e.g. `randomInt`.    
-2. For other file names you need to mention the file name using underscore notation while accessing the plugins function inside your workflow e.g. `time_epoch_convertEpochToDate`
+2. For other file names you need to mention the file name using underscore notation while accessing the plugins function inside your function e.g. `time_epoch_convertEpochToDate`
 3. If it's a default import then you don't need to mention the plugin function name e.g. `epoch_convertEpoch`
 :::
 
@@ -62,8 +62,8 @@ export default function convertEpoch(inputTimestamp: string){
 }
 ```
 <!-- 
-## Sample workflow using plugins
-You can use these plugins in your workflows as given below:
+## Sample function using plugins
+You can use these plugins in your functions as given below:
 ```
   - id: httpbinCof_step1
     description: Hit http bin with some dummy data. It will send back same as response

@@ -23,7 +23,7 @@ type: mem-cache
 ```
 
 ### Sample Usage
-Create two events and two event handler workflows for each event, by the name helloworld2 and helloworld3 respectively.
+Create two events and two event handler functions for each event, by the name helloworld2 and helloworld3 respectively.
 
 ### Events
 ```yaml
@@ -33,12 +33,12 @@ http.get./helloworld2:
 http.get./helloworld3:
  fn: helloworld3
 ```
-<!-- ### Functions (Helloworld2 workflow)
+<!-- ### Functions (Helloworld2 function)
 
 ```
-id: helloworld2_workflow
+id: helloworld2_function
 tasks:
-  - id: helloworld2_workflow_first_task
+  - id: helloworld2_function_first_task
     fn: com.gs.transform
     args:
       name: helloworld2
@@ -48,11 +48,11 @@ tasks:
       # noRead: true #if this is set get(key) method will not be called for this task
       # noWrite: true #the result of this task will not be written, even if cache_on_failure is set to true. i.e. set() method will not be called
 ```  
-### Functions (Helloworld3 workflow)
+### Functions (Helloworld3 function)
 ```
-id: helloworld3_workflow
+id: helloworld3_function
 tasks:
-  - id: helloworld3_workflow_first_task
+  - id: helloworld3_function_first_task
     caching:
       key: abc
       invalidate: xyz #helloworld2 key

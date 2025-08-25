@@ -1,15 +1,16 @@
 ---
 sidebar_position: 1
 title: Guides and FAQs
-description: A collection of guides and frequently asked questions about using the Godspeed Meta-Framework, covering topics such as setting up APIs, writing workflows and functions, and accessing datasources.
-keywords: [Godspeed, guides, FAQs, API setup, workflows, functions, datasources, REST API, CRUD API, Swagger UI, Postman, authentication, JWT, OAuth2, callbacks, webhooks, TypeScript, inline scripting, databases, datastores, plugins, environment variables, secrets]
+description: A collection of guides and frequently asked questions about using the Godspeed Meta-Framework, covering topics such as setting up APIs, writing functions, and accessing datasources.
+keywords: [Godspeed, guides, FAQs, API setup, functions, datasources, REST API, CRUD API, Swagger UI, Postman, authentication, JWT, OAuth2, callbacks, webhooks, TypeScript, inline scripting, databases, datastores, plugins, environment variables, secrets]
 ---
 
-This section provides answers to common questions and step-by-step guides for using the Godspeed Meta-Framework. It covers essential topics including setting up and securing APIs (REST, CRUD, Swagger, Postman, JWT, OAuth2), writing business logic using workflows and functions (TypeScript and Javascript), and accessing various datasources like databases, APIs, and caches.
+This section provides answers to common questions and step-by-step guides for using the Godspeed Meta-Framework. It covers essential topics including setting up and securing APIs (REST, CRUD, Swagger, Postman, JWT, OAuth2), writing business logic using functions (TypeScript and Javascript), and accessing various datasources like databases, APIs, and caches.
 
 ### What is Godspeed?
 
-Godspeed is a **4th generation declarative microservice framework** for Node.js that simplifies backend development. It emphasizes **configuration-over-code**, allowing developers to build event-driven and API-based applications quickly using YAML schemas and minimal boilerplate. It supports both synchronous and asynchronous event sources like HTTP, Kafka, and Cron, and integrates with external systems via plugins.
+Godspeed is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
+Currently, it fully supports the Node.js ecosystem. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
 ### [How to install godspeed ?](/docs/get-started#install-godspeed)
 
@@ -58,7 +59,7 @@ godspeed plugin add @godspeedsystems/plugins-websocket-as-eventsource
 ```
 Check the auto generated eventsource configuration file  `src/eventsources/<plugin-name>.yaml` to configure it as per your requirements.
 
-Then start writing events and workflows.
+Then start writing events and functions.
 
 
 ### How does the Godspeed CLI help developers?
@@ -140,7 +141,7 @@ They are loaded dynamically via YAML configurations where you specify the `type`
 
 It asks to you select your prisma schema file and eventsource you are using, then it scans your **Prisma schema** and automatically generates:
 * API event definitions
-* Workflows for Create, Read, Update, Delete operations
+* functions for Create, Read, Update, Delete operations
 * That can be tested via Swagger UI immediately
 
 This command eliminates boilerplate and accelerates backend setup.
@@ -177,10 +178,10 @@ Swagger JSON specs are auto-generated and stored under `src/docs/http-swagger.js
 
 ### What are the key classes and extensibility points in the Godspeed framework?
 
-Godspeed is built around a set of core classes and interfaces that provide consistency, extensibility, and observability across workflows, plugins, and event handling. Key components include:
+Godspeed is built around a set of core classes and interfaces that provide consistency, extensibility, and observability across functions, plugins, and event handling. Key components include:
 
 **GSContext**
-The execution context available in every function, workflow, and plugin.
+The execution context available in every function, and plugin.
 Contains inputs, outputs, config, datasources, functions, logger, and more.
 Enables full traceability, logging, and resource access during event execution.
 
@@ -189,7 +190,7 @@ Represents the incoming request or event in a standard format (CloudEvents spec)
 Contains data, actor, headers, and other metadata.
 
 **GSStatus**
-Standard response object used to represent the outcome of any function or workflow.
+Standard response object used to represent the outcome of any function.
 Contains success, code, message, data, etc.
 
 **Plugin Base Classes**
@@ -218,16 +219,16 @@ Eventsources are initialized — Plugins like Express or Kafka are set up from s
 
 Event definitions are loaded — Event handlers (HTTP routes, Kafka topics, etc.) are mapped to their respective functions via src/events/.
 
-Functions and workflows are loaded — All TypeScript and YAML-based logic from src/functions/ becomes available for invocation.
+Functions are loaded — All TypeScript and YAML-based logic from src/functions/ becomes available for invocation.
 
 Mappings and validations are loaded — Static key-value maps and request/response validation logic are pulled from src/mappings/ and src/functions/validations/.
 
-App is ready — The service is now ready to process events, serve API requests, and run workflows based on triggers.
+App is ready — The service is now ready to process events, serve API requests, and run functions based on triggers.
 
 
 ### How is authentication handled in Godspeed?
 
-Godspeed supports robust and flexible authentication mechanisms using JWT, OAuth2, and custom auth workflows. Here's how you can secure your services:
+Godspeed supports robust and flexible authentication mechanisms using JWT, OAuth2, and custom auth functions. Here's how you can secure your services:
 
 **Authentication Methods**
 **JWT/OAuth2:** Configure these directly in your eventsource (e.g., Express) or datasource YAML files.
@@ -248,20 +249,20 @@ authn:
       client_secret:
 ```
 **GSActor Support**
-Godspeed provides a GSActor object in every GSCloudEvent, which captures the identity and attributes of the user or system triggering the event. This makes it easy to propagate user context across workflows.
+Godspeed provides a GSActor object in every GSCloudEvent, which captures the identity and attributes of the user or system triggering the event. This makes it easy to propagate user context across functions.
 
 **Best Practices**
 Always validate JWT tokens and propagate the actor through the GSContext.
-Use role-based checks in your workflow logic or via authz tasks.
+Use role-based checks in your function logic or via authz tasks.
 Keep your secrets and auth config in the environment-safe config/ directory.
 
-### How do events trigger workflows in Godspeed?
-In Godspeed, events are declarative triggers that activate functions or workflows. These events are typically configured in YAML files under src/events/, and are mapped to logic defined in src/functions/.
+### How do events trigger functions in Godspeed?
+In Godspeed, events are declarative triggers that activate functions. These events are typically configured in YAML files under src/events/, and are mapped to logic defined in src/functions/.
 
-**Event-to-Function/Workflow Flow**
+**Event-to-Function Flow**
 An event occurs — For example, an HTTP request, Kafka message, or Cron schedule.
-Event is mapped to a function/workflow — The fn: field in the event YAML points to a corresponding handler.
-Function/Workflow executes — The handler processes the request using the provided GSContext.
+Event is mapped to a function — The fn: field in the event YAML points to a corresponding handler.
+Function executes — The handler processes the request using the provided GSContext.
 
 ### Setting up the APIs of your service
 
@@ -287,18 +288,13 @@ Function/Workflow executes — The handler processes the request using the provi
 
 
 
-### Writing your Workflows or Functions
-In Godspeed, the words Workflows and Functions mean one and the same thing, i.e. your business logic.
-
-- **[How to write typescript workflows in godspeed?](/docs/microservices-framework/workflows/native-language-functions)**
+### Writing your Functions
+- **[How to write typescript functions in godspeed?](/docs/microservices-framework/functions/native-language-functions)**
 
 - **[How to use inline scripting in Godspeed YAML configurations ?](/docs/microservices-framework/inline-scripting/overview)**
 
 
-
-<!-- - **[When to prefer writing typescript workflows over yaml? And vice versa?]() -->
-
-### Accessing other APIs, databases and datastores from workflows
+### Accessing other APIs, databases and datastores from functions
 In Godspeed, datasource can mean any place where you send or retrieve data from. It could mean:
 - External APIs
 - Datastores
@@ -317,9 +313,9 @@ In Godspeed, datasource can mean any place where you send or retrieve data from.
 
 - **[How to access any datastore by creating a custom datasource?](/docs/microservices-framework/datasources/create-custom-datasource)**
 
-- **[How to invoke datasource clients from typescript workflows?](/docs/microservices-framework/how-to/call-datasource)**
+- **[How to invoke datasource clients from typescript functions?](/docs/microservices-framework/how-to/call-datasource)**
 
-- **[How to access the environment variables from the typescript workflows?](/docs/microservices-framework/how-to/short-faqs)**
+- **[How to access the environment variables from the typescript functions?](/docs/microservices-framework/how-to/short-faqs)**
 
 - **[How to update and run the project after renaming any file?](/docs/microservices-framework/how-to/short-faqs#how-to-update-and-run-the-project-after-renaming-any-file)**
 

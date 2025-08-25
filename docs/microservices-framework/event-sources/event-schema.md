@@ -7,7 +7,7 @@ To define an event in Godspeed, you need to write an Event Schema. This schema i
 It involves specifying:
 
 - The name/topic/URL of the event
-- The event handler Workflow (fn)
+- The event handler function (fn)
 - Input and Output schema
 - [Validation error handling](/docs/microservices-framework/event-sources/validations/schema-validation)
 - [Authorization checks](/docs/microservices-framework/authorization/overview.md)
@@ -38,7 +38,7 @@ http.get./greet: #The initial line depicts a fusion of the event, the employed m
   
   #Other non-swagger components (optional)
   authn: #custom authentication. Currently plugins support JWT. Can be customized
-  authz: #your custom authz workflow
+  authz: #your custom authz function
   on_request_validation_error: #when validation fails
   on_response_validation_error: #when validation fails
   log: #Open Telemetry compliant log attributes which help debug and search through logs better

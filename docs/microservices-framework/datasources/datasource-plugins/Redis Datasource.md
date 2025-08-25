@@ -31,7 +31,7 @@ url: redis://alice:foobared@awesome.redis.server:6380
 Configure your Redis data source with connection string. 
 
 ### 2. Get a Value
-Workflow to get a value from redis.
+function to get a value from redis.
 
 ```
 import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
@@ -52,7 +52,7 @@ export default async function (ctx: GSContext, args: { key: string }) {
 ```
 
 ### 3. Set a Value
-Workflow to set a value in redis.
+function to set a value in redis.
 
 ```
 import { GSContext, GSStatus, GSDataSource } from "@godspeedsystems/core";
@@ -85,7 +85,7 @@ The Godspeed Redis Plugin offers the following benefits:
 
 **3. Error Handling:** The plugin includes robust error handling, allowing developers to gracefully handle scenarios such as connection issues, key not found, and other Redis-related errors.
 
-**4. Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven workflows.
+**4. Integration with Godspeed Core:** The plugin seamlessly integrates with the Godspeed Core library, aligning with the principles of the Godspeed framework and enabling streamlined event-driven functions.
 
 ## Plugin Components
 

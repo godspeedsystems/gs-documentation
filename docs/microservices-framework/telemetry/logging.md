@@ -19,8 +19,8 @@ Logs are the application/service logs that are displayed on console. Sample logs
 ```
 Godspeed adds some attributes (extra key/value pairs) to the logs to enhance logging and provide more information about the location. For example, in the above logs,    
 **`section`**: which represents section the service is in while getting loading.   
-**`parent`**: an object with information about the parent workflow and task.   
-**`workflow_name`**: which represents the current workflow.   
+**`parent`**: an object with information about the parent function and task.   
+**`function_name`**: which represents the current function.   
 **`task_id`**: which represents the current task.   
 
 ### Log formats
@@ -46,11 +46,11 @@ Sample Logs:
 [14:46:00.819] INFO: [END] Load mappings
 [14:46:00.819] INFO: [START] Load data sources from /home/gurjot/data/cli-test/v2_test2/dist/datasources
 . . . . . . . . .
-[14:46:00.881] DEBUG: JS/TS functions found in src/functions my_bank_api.auth_workflow,validations.request.standardResponse
+[14:46:00.881] DEBUG: JS/TS functions found in src/functions my_bank_api.auth_function,validations.request.standardResponse
     section: "loading_functions"
 . . . . . . . .
 [14:46:00.882] DEBUG: Starting to parse and load GSFunction id: helloworld name: helloworld
-    workflow_name: "helloworld"
+    function_name: "helloworld"
     task_id: "helloworld"
 ```
 
@@ -74,7 +74,7 @@ Logs are dumped in this format when all of the below conditions are satisfied:
 . . . . . . . . .
 {"Body":"JS/TS functions found in src/functions my_bank_api.auth_workflow,validations.request.standardResponse","Timestamp":"2024-04-10T09:40:45.210Z000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"sample_app","env":"production","host.hostname":"ThinkPadT480s"},"Attributes":{"section":"loading_functions"}}
 . . . . . . . . .
-{"Body":"Starting to parse and load GSFunction id: helloworld name: helloworld","Timestamp":"2024-04-10T09:40:45.210Z000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"sample_app","env":"production","host.hostname":"ThinkPadT480s"},"Attributes":{"workflow_name":"helloworld","task_id":"helloworld"}}
+{"Body":"Starting to parse and load GSFunction id: helloworld name: helloworld","Timestamp":"2024-04-10T09:40:45.210Z000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"sample_app","env":"production","host.hostname":"ThinkPadT480s"},"Attributes":{"function_name":"helloworld","task_id":"helloworld"}}
 ```   
 
 ### Log level
@@ -129,9 +129,9 @@ By specifying the above redaction path, `mobileNumber` field will be redacted in
    
 Sample masked logs:
 ```json
-{"Body":"args after evaluation: step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.124Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"step1"}}
-{"Body":"Executing handler step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.124Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"step1"}}
-{"Body":"Result of _executeFn step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.130Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"step1"}}
+{"Body":"args after evaluation: step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.124Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","function_name":"helloworld","task_id":"step1"}}
+{"Body":"Executing handler step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.124Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","function_name":"helloworld","task_id":"step1"}}
+{"Body":"Result of _executeFn step1 {\"name\":\"ABC\",\"gender\":\"M\",\"age\":25,\"mobileNumber\":\"*****\"}","Timestamp":"2024-04-10T09:40:45.130Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","function_name":"helloworld","task_id":"step1"}}
 {"Body":"Result of _executeFn add_mobileNumber_transformation_step2 {\"request_data\":{\"payload\":{\"data\":{\"body\":{\"mobileNumber\":\"*****\"}}}}}","Timestamp":"2024-04-10T09:40:45.190Z000000","SeverityNumber":9,"SeverityText":"INFO","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"add_mobileNumber_transformation_step2"}}
 {"Body":"this.id: hello_world, output: {\"request_data\":{\"payload\":{\"data\":{\"body\":{\"mobileNumber\":\"*****\"}}}}}","Timestamp":"2024-04-10T09:40:45.191Z000000","SeverityNumber":5,"SeverityText":"DEBUG","Resource":{"service.name":"sample_app","host.hostname":"4030f41a75cb","process.pid":3593},"Attributes":{"event":"/helloworld.http.get","workflow_name":"helloworld","task_id":"hello_world"}}
 ```
