@@ -3,7 +3,7 @@ title: ChatGPT Datasource Plugin
 ---
 **[Link to Plugin Source Code](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/chatgpt-as-datasource)**
 
-The ChatGPT plugin for Godspeed allows seamless integration with OpenAI’s language models, enabling dynamic AI-driven responses in your workflows and APIs.
+The ChatGPT plugin for Godspeed allows seamless integration with OpenAI’s language models, enabling dynamic AI-driven responses in your APIs.
 
 ### 1. Install the Plugin
 

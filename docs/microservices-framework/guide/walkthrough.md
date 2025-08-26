@@ -11,10 +11,10 @@ In the previous section we got an understanding on how to setup a meta-framework
 Do ckeck the [tenets](../introduction/tenets.md), [design principles](../introduction/design-principles.md) and [guardrails](../introduction/guard-rails.md) baked into the meta-framework as part of its design - helping teams develop microservices based applications with best practices. 
 
 #### The three pillars
-Have you seen the [three pillars of abstraction](../introduction/design-principles.md#three-fundamental-abstractions) in the Meta-Framework?
+Have you seen the [three pillars of abstraction](../introduction/design-principles.md#fundamental-abstractions) in the Meta-Framework?
 
 - [Eventsources and event schemas](../event-sources/overview.md)
-- [Event handler functions (Pure functions)](../workflows/overview.md) 
+- [Event handler functions (Pure functions)](../functions/overview.md) 
 - [Datasources](../datasources/overview.md)
 
 You may want to check why you should use the [4th generation](https://godspeed.systems/blog/godspeed-fourth-generation-programming-framework) Meta-Framework versus creating apps using pure 3rd generation frameworks like Nodejs or Django stack from scratch.
@@ -27,7 +27,7 @@ You may want to check why you should use the [4th generation](https://godspeed.s
 :::tip
 As mentioned in the [getting started](./get-started.md) section all APIs and async events are together referred to as `events`. And hence any source like Express, Fastify, Kafka, Apollo Graphql are called [EventSources](../event-sources/overview.md).
 :::
-In [getting started](./get-started.md) section we created a project that includes a simple 'hello world' example which uses an http Express [eventsource](../event-sources/overview.md), [events](/docs/microservices-framework/event-sources/event-schema.md) and [event handler functions](/docs/microservices-framework/workflows/overview.md). 
+In [getting started](./get-started.md) section we created a project that includes a simple 'hello world' example which uses an http Express [eventsource](../event-sources/overview.md), [events](/docs/microservices-framework/event-sources/event-schema.md) and [event handler functions](/docs/microservices-framework/functions/overview.md). 
 
 
 Now we can move into further details.
@@ -89,7 +89,7 @@ For http service like Express, Fastify and Graphql, all events are defined in th
 
 ### Event Handler Functions
 
-[Event handlers](../workflows/overview.md) are **pure functions** which take input as JSON and return output as JSON, independent of the eventsource from which the event originated. This is again another adoption of decoupled architecture approach in the meta framework.
+[Event handlers](../functions/overview.md) are **pure functions** which take input as JSON and return output as JSON, independent of the eventsource from which the event originated. This is again another adoption of decoupled architecture approach in the meta framework.
 
 **Sample typescript event handler function**
 Here is how a function handler looks like.
@@ -112,7 +112,7 @@ export default function (ctx: GSContext) {
 }
 ```
 
-We are importing [GSContext](/docs/microservices-framework/workflows/native-language-functions#gscontext) & [GSStatus](/docs/microservices-framework/workflows/native-language-functions#gsstatus) from core package of meta-framework. Go to their respective section to more about them.
+We are importing [GSContext](/docs/microservices-framework/functions/native-language-functions#gscontext) & [GSStatus](/docs/microservices-framework/functions/native-language-functions#gsstatus) from core package of meta-framework. Go to their respective section to more about them.
 
 <!-- 
 **Sample YAML function**

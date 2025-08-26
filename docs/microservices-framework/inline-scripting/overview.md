@@ -1,6 +1,6 @@
 # Scripting
 
-Inline scripting involves embedding and executing code directly within Godspeed YAML code (e.g. workflows, datasources, eventsource, events, etc.,) enhancing seamless integration of script-based logic or functionality.   
+Inline scripting involves embedding and executing code directly within Godspeed YAML code (e.g. functions, datasources, eventsource, events, etc.,) enhancing seamless integration of script-based logic or functionality.   
 It is used directly by embedding the code/variables in `<% %>` tags. This code is evaluated whenever the yaml is needed to be evaluated e.g. at loadtime or runtime. 
      
 **Loadtime evaluation** There are some variables/code which should be evaluated at loadtime. For example, using [configs and mappings](../config-and-mappings/config.md) in datasources, events, or eventsources as given below:
@@ -40,11 +40,11 @@ port: <coffee% config.port %>
 ```
 <!-- 
 ## Scripting in workflows
-We use scripting in workflows/functions for dynamic evaluation of variables in `<% %>` tags.
+We use scripting in functions for dynamic evaluation of variables in `<% %>` tags.
 
 ### Accessing ctx properties using scripting
 
-The values of all [`ctx`](/docs/microservices-framework/workflows/native-language-functions.md#gscontext) properties can be assessed using scripting tags.
+The values of all [`ctx`](/docs/microservices-framework/functions/native-language-functions.md#gscontext) properties can be assessed using scripting tags.
 
 **1. Evaluating the inputs using scripting**
 

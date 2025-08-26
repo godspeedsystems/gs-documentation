@@ -327,7 +327,7 @@ The framework sees that your returned data has one of `code` or `success` meta-k
 **i.** If both are present, it looks for the other GSStatus keys and set them.  
 **ii.** If only code is present and lies between 200-399, then success is assumed to be true else false. It looks for the other GSStatus keys and set them.   
 **iii.** If only success is present, then code is assumed to be 200. It looks for the other GSStatus keys and set them.   
-**iv.** If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks or workflows.   
+**iv.** If it doesn't find any of these keys, it assumes all that you have returned is intended to be GSStatus.data then it adds `code: 200` and `success: true` internally to your response and create a `GSStatus` out of it to pass on to next tasks.   
 
 <!-- **[Authz workflows](../authorization/authz-usecases.md/#authz-workflows)**
 

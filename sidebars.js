@@ -489,6 +489,11 @@ const sidebars = {
           ],
         },
         {
+            type: 'link',
+            label: 'Tutorial Videos',
+            href: 'https://www.youtube.com/watch?v=QFXn8Xv1gLY&list=PLRuRJ3PaaJ7stQ7cdwvjEwn6rJCaQ3VPs',
+        },
+        {
           type: "category",
           label: "Agents",
           items: [
@@ -677,7 +682,6 @@ const sidebars = {
         'saarthi/faq'
       ]
     },
-    'tutorial-videos',
     {
       type: "category",
       label: "Release-Notes",
@@ -694,7 +698,15 @@ const sidebars = {
         },
       ],
     },
-  ],  
+  ],
+  youtubeVideo: [
+    {
+      type: 'link',
+      label: 'YouTube Video',
+      href: 'YOUR_YOUTUBE_VIDEO_LINK_HERE',
+    },
+  ],
 };
 
 module.exports = sidebars;
+

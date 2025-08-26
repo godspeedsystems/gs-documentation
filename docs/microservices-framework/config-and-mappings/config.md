@@ -30,7 +30,7 @@ Environment variables in Godspeed are essential for securely managing configurat
 Environment variables can be set up using: 
 1. **Define variables** in `config/custom-environment-variables.yaml`.
 2. **Set values** in `.env` or use `export` in the terminal.
-3. **Access variables** using `<% config.variable_path %>` in yaml and `ctx.config` in typeScript workflows.
+3. **Access variables** using `<% config.variable_path %>` in yaml and `ctx.config` in typeScript functions.
 
 ### Step 1: Define Environment Variables in YAML Configuration
 
@@ -120,7 +120,7 @@ Once environment variables are set up, they can be accessed in Godspeed Project 
   ```
   
 - **In TypeScript/JavaScript files**:
-  Use `ctx.config` to access values within your TypeScript workflows.
+  Use `ctx.config` to access values within your TypeScript functions.
 
   **Example TypeScript function**:
   ```typescript

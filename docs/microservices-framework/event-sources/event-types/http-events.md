@@ -46,9 +46,9 @@ http.post./mongo/user/search/{id}: #This is the only thing that changes across a
 
 - The event's first line comprises three key elements: the type of eventsource (e.g., `http`), the method (e.g., `put`), and the URL (`/mongo/user/{id}`). This format is defined by the eventsource plugin, and it is the only line that changes across all events.
 
-#### Accessing Event Properties in Workflows
+#### Accessing Event Properties in functions
 
-For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the workflows](/docs/microservices-framework/workflows/overview.md).
+For an HTTP event, the headers, query, params and body data are captured in a standard format, and made available in the `inputs` object [for use in the functions](/docs/microservices-framework/functions/overview.md).
 
 The inputs (event) object has following properties:
 If you have jwt authentication like strategy implemented, then
@@ -97,7 +97,7 @@ Framework will give you below folder structure.
 
 2. `/` is the default endpoint,if you want to provide your custom swagger endpoint, you can modify the endpoint from **"./src/eventsources/http.yaml"**
 
-#### Update http.yaml( src/eventsources/http.yaml )
+#### Update http.yaml (src/eventsources/http.yaml)
 
 ```yaml
 type: express

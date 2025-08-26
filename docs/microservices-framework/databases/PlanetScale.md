@@ -76,4 +76,4 @@ godspeed gen-crud-api
 ```
 * This command will generate the crud apis based on the sample prisma schema provided at ./src/datasources/planetscale.prisma
 
-* Now you can view the event and workflows according to the defined prisma schema
+* Now you can view the event and functions according to the defined prisma schema

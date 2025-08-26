@@ -1,5 +1,5 @@
 
-# Invoking Datasource Clients from TypeScript Workflows
+# Invoking Datasource Clients from TypeScript functions
 
 In Godspeed, all configured datasources can be accessed through `ctx.datasources`. 
 

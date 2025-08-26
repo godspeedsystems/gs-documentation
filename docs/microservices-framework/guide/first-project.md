@@ -61,7 +61,7 @@ Godspeed generates a well-organized project structure:
       * [`datasources`](/docs/microservices-framework/datasources/overview.md)
       * [`events`](/docs/microservices-framework/event-sources/event-schema.md)
       * [`eventsources`](/docs/microservices-framework/event-sources/overview.md)
-      * [`functions`](/docs/microservices-framework/workflows/overview.md)
+      * [`functions`](/docs/microservices-framework/functions/overview.md)
       * [`mappings`](/docs/microservices-framework/config-and-mappings/mappings.md)
       * The `eslintrc.json` file contains a curated list of recommended ESLint plugins for your project.
       * Swagger specifications for your HTTP endpoints are configured in `src/eventsources/http.yaml`.
@@ -102,7 +102,7 @@ In this `helloworld.yaml` file:
   * **`schema: { type: string }`**: The `name` parameter must be a string, enforcing text input.
 
 :::tip
-In the Godspeed meta-framework, every API (REST or GraphQL) and message (websocket, cron, message bus) is referred to as an **`event`**. All events trigger workflows/functions, which act as event handlers (see the `fn:` instruction in the YAML above). Synchronous events return a response, while asynchronous events do not.
+In the Godspeed meta-framework, every API (REST or GraphQL) and message (websocket, cron, message bus) is referred to as an **`event`**. All events trigger functions, which act as event handlers (see the `fn:` instruction in the YAML above). Synchronous events return a response, while asynchronous events do not.
 
 This naming convention might be new to you. While the broader developer community typically refers to only `async events` (like Kafka or websocket messages) as `events`, Godspeed considers both synchronous APIs (REST, GraphQL) and asynchronous events (Message bus, websocket, cron) as `events`.
 :::

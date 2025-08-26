@@ -36,7 +36,7 @@ Commands:
   clean                           clean the previous build.
   preview                         run the build in a hosted environment like production or development.
   gen-crud-api                    scans your prisma datasources and generate
-                                  CRUD APIs events and workflows
+                                  CRUD APIs events and event-handler functions
   plugin add                      installs eventsource and datasource plugins for godspeed.           
   plugin remove                   uninstalls eventsource and datasource plugins for godspeed.  
   plugin update                   update  eventsource and datasource plugins  
@@ -342,4 +342,4 @@ godspeed gen-graphql-schema
 ```
 > 📌 Prerequisite: must have installed graphQL plugin.
 
-Generates a GraphQL schema automatically from your existing Godspeed events and workflows.
+Generates a GraphQL schema automatically from your existing Godspeed events and functions.

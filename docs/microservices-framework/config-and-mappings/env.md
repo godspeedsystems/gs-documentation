@@ -10,7 +10,7 @@ Using this file offers several advantages:
 
 - **Security:** Sensitive information (like API keys and secrets) is stored outside of the codebase, helping prevent accidental exposure.
 - **Environment-Based Configuration:** You can specify different values for variables based on your environment, allowing seamless transitions between development, testing, and production.
-- **Easy Access Across the Project:** The variables defined in .env can be accessed easily in Godspeed configurations, workflows, and scripts.
+- **Easy Access Across the Project:** The variables defined in .env can be accessed easily in Godspeed configurations, functions and scripts.
 
 .env file is placed in the root directory of your project.
 ```

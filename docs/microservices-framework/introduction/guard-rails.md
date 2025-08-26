@@ -7,7 +7,7 @@ At Godspeed, our development philosophy revolves around four core guardrails, sh
 
 ### 1.Schema driven development:
 
-Embracing the power of structured data, Godspeed follows a schema-driven development approach. This guardrail ensures that the events, workflows within the software are defined by clear and well-documented schemas. 
+Embracing the power of structured data, Godspeed follows a schema-driven development approach. This guardrail ensures that the events, functions within the software are defined by clear and well-documented schemas. 
 
 Dive deeper into the fascinating world of schema-driven development by watching the video below...
 

@@ -6,66 +6,59 @@ description:  "An introduction to godspeed framework and benefits, why should yo
 
 # Introduction
 
-Godspeed is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
+Godspeedjs is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
 
-👉 Currently, it fully supports the Node.js ecosystem. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
+👉 Currently, it fully supports Node.js, Deno and Bun.js ecosystems. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
-## 12 Reasons Why Use Godspeed Framework?
+## 12 Reasons Why Use Godspeedjs Framework?
 
 By adopting Godspeed framework, teams experience:
 
+### ✅ Confident & Faster Delivery
 
-✅ Confident Delivery
+The godspeedjs framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
-Schema-driven development and guardrails enforce clear API contracts, validate data automatically, and apply secure defaults. This minimizes bugs, reduces chaos, and ensures safer, predictable delivery.
+### ✅ Fewer Bugs, Less Chaos
 
-✅ Faster Delivery
+Less lines of code, less integration boilerplate (datasources, eventsources and observability), less chance of errors, less time to solve. 
 
-Godspeed enforces a declarative, schema-first, guardrailed approach, where developers describe the intent (what), and the framework handles the mechanics (how). Auto-generated CRUD APIs and pre-built integrations eliminate boilerplate. Teams spend more time on business logic instead of repetitive setup.
+### ✅ Auto-Generated Validations
 
-✅ Fewer Bugs, Less Chaos
+Request and response validations are automatically derived from event schemas (http, mcp, graphQL, message bus, cron, socket etc.). This enforces correctness at runtime effortlessly.
 
-Godspeed offers fewer bugs because schemas + validations act as guardrails, defaults handle security & infra automatically, and developers write less error-prone boilerplate. This not only prevents common errors but also brings order and predictability, resulting in less chaos across teams and integrations.
+### ✅ Suitable for All Experience Levels
 
-✅ Auto-Generated Validations
+Whether you are a vibe coder, entry-level developer, or an experienced engineer, you can build confidently with Godspeed. And the best part—it’s very easy to use, especially with Saarthi. Developers can deliver a simple microservice on their first day itself.
 
-Request and response validations are automatically derived from schemas, removing the need for handwritten code. This enforces correctness at runtime effortlessly.
+### ✅ LLM Friendly
 
-✅ Can Get More from Young Devs
+The framework includes the essential functionalities of a 'modern microservice' by default, allowing developers to concentrate solely on business logic, resulting in significant reduction in workload. This makes the codebase highly LLM friendly, enabling AI to generate higher-quality code with fewer tokens.
 
-Even less experienced developers can build confidently, as the framework prevents common mistakes with built-in validations, conventions, and guardrails—while still allowing flexibility.
+### ✅ Security
 
-✅ Developer & LLM Friendly
+The framework can read environmental variables from a secure source like K8s Vault. It supports JWT, RBAC and ABAC based fine grained [authorization]. For data at rest, developers can use encryption mechanisms over datastores. Log redaction allows to hide sensitive information from logs.
 
-Godspeed lets developers focus only on the what (business logic) while the framework takes care of the how (wiring, validation, security). Its guardrailed, schema-driven, and YAML-based structure also makes the codebase highly LLM friendly, enabling AI to generate higher-quality code with fewer tokens.
+### ✅ Efficient Team Collaboration
 
-![productivity](/img/productivity.png)
+Backend, Frontend and external integrations all use single source of truth based auto generation features to  stay aligned on latest developments. For example, using the generated swagger collection, to generate clients or test cases using saarthi.  
 
-✅ Guardrailed Development
+### ✅ Low on Maintenance
 
-Standardized defaults, schema-first validations, and best practice enforcement provide strong safety rails. Teams build with confidence, minimizing errors and inconsistencies.
+Decoupled architecture with clear boundaries avoids technical debt. Projects remain modular, easy to update, and systematically maintainable over time.
 
-✅ Higher Efficiency Across Teams
+### ✅ Easy to Scale & Extend
 
-A consistent API schema powers Swagger/OpenAPI specs, Postman collections, and UI slices, so UI, QA, and external integrations stay perfectly aligned without rework.
+Pluggable event sources and data sources make it easy to add express, Kafka, cron, or any new databases. 
 
-✅ Low on Maintenance
+### ✅ Full freedom and Flexibility
 
-A standardized, decoupled architecture with clear boundaries avoids technical debt. Projects remain modular, easy to update, and systematically maintainable over time.
+Godspeed gives developers the full power of the Node.js ecosystem, while adding guardrails on top. You can plug in any event source, datasource, middleware, or custom business logic without restrictions. The framework’s decoupled architecture ensures that your core workflows remain portable, so teams can evolve their stacks, swap technologies, or scale services without vendor lock-in.
 
-✅ Easy to Scale & Extend
-
-Pluggable event sources and data sources make it easy to add REST, Kafka, GraphQL, or new databases. Kubernetes-ready deployment ensures scalability out of the box.
-
-✅ Flexibility
-
-A decoupled architecture ensures your business logic is portable across event sources, data sources, and clouds. Teams can evolve stacks without vendor lock-in.
-
-✅ Cost Savings
+### ✅ Cost Savings
 
 Reduced bugs, faster delivery cycles, and lower maintenance translate directly into significant cost savings in both development and operations.
 
-![features ->](/img/features.png)
+<!-- ![features ->](/img/features.png) -->
 
 ### Know More about the Framework
 

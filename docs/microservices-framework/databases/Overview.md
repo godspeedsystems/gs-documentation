@@ -6,7 +6,7 @@ keywords: [database integration, prisma orm, schema driven development, postgres
 
 # Database Support Overview
 
-The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL databases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and workflows are automatically generated from the schema itself.
+The framework takes the approach of schema driven development. It supports multiple kinds of SQL and NoSQL databases. The developer only needs to specify or generate the schema for a database, with authorization policies. The CRUD events and functions are automatically generated from the schema itself.
 
 The framework provides functionality to access almost all popular databases through Prisma-as-datastore plugin [Plugin Repository](https://github.com/godspeedsystems/gs-plugins/tree/main/plugins/prisma-as-datastore) which is a powerful tool for efficient and secure database interactions in web applications. 
  

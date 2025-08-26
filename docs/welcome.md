@@ -1,12 +1,10 @@
 ---
-title: Welcome to Godspeed
-description: Introduction to Godspeed's 4th-gen SDLC platform and its capabilities.
+title: Welcome to Godspeed Ecosystem
+description: Introduction to Godspeed ecosystem.
 slug: /
 ---
 
-# Welcome to Godspeed
-
--Unlock Your True Potential
+Godspeed is the first agentic SDLC platform that helps you build production-grade software 10x faster. Powered by a 4th-gen framework, AI agents, and built-in guardrails, it brings consistency to modern development. Whether you're using your own stack or Godspeed’s, even entry-level engineers or LLMs can ship clean, scalable code with ease.
 
 ## What Can You Build?
 
@@ -20,7 +18,7 @@ slug: /
 | **DevOps Workflows & Infra-as-Code** | GitOps, CI/CD, Terraform-powered automation                   |
 ---
 
-## Build Your First Microservice with Godspeed
+## Build Modern Microservices in 3 simple steps
 
 With **Saarthi**, your multi agent dev team in vs code, building enterprise-grade systems is now just **one prompt away**.
 
@@ -54,5 +52,5 @@ All with framework-aligned best practices and zero boilerplate.
 **[Understand your first godspeed project →](/docs/microservices-framework/guide/first-project#understanding-your-first-godspeed-project)**
 
 
-**[Explore Saarthi Agent Modes →](/docs/saarthi/basic-usage/using-modes.md)**
+**[Explore Saarthi Agents →](/docs/saarthi/basic-usage/using-modes.md)**
 

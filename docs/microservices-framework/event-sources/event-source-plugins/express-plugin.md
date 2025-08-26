@@ -15,7 +15,7 @@ The Godspeed Express Plugin provides the following benefits:
 
 3. **Customizable Configuration:** The plugin allows for easy configuration of Express settings, such as port, request body limits, file size limits, JWT authentication, authorization, swagger generation etc.
 
-4. **Reusable pure function handlers:** The plugin works seamlessly with the Godspeed Core library, enabling the processing of cloud events in pure workflows, decoupled with Express API, making them reusable.
+4. **Reusable pure function handlers:** The plugin works seamlessly with the Godspeed Core library, enabling the processing of cloud events in pure functions, decoupled with Express API, making them reusable.
 
 5. **File upload feature:** The Express plugin allows you to upload files as well.
 
