@@ -1,22 +1,26 @@
 ---
 id: overview
-title: Overview
-description:  "An introduction to godspeed framework and benefits, why should you use godspeed framework." keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why godspeed]
+title: Godspeed JS Framework Introduction
+description:  "An introduction to godspeed js framework and benefits, why should you use godspeed js framework." keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why godspeed js]
 ---
 
 # Introduction
 
-Godspeedjs is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
+Godspeed JS is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
 
 👉 Currently, it fully supports Node.js, Deno and Bun.js ecosystems. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
-## 12 Reasons Why Use Godspeedjs Framework?
+### Install
 
-By adopting Godspeed framework, teams experience:
+Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Godspeed JS**.
+
+## 10 Reasons Why Use Godspeed JS Framework?
+
+By adopting Godspeed JS framework, teams experience:
 
 ### ✅ Confident & Faster Delivery
 
-The godspeedjs framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
+The Godspeed JS framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
 ### ✅ Fewer Bugs, Less Chaos
 
@@ -44,15 +48,11 @@ Backend, Frontend and external integrations all use single source of truth based
 
 ### ✅ Low on Maintenance
 
-Decoupled architecture with clear boundaries avoids technical debt. Projects remain modular, easy to update, and systematically maintainable over time.
-
-### ✅ Easy to Scale & Extend
-
-Pluggable event sources and data sources make it easy to add express, Kafka, cron, or any new databases. 
+[Decoupled architecture](guard-rails#4-decoupled-architecture) with clear boundaries avoids technical debt. Projects remain modular, easy to update, and systematically maintainable over time.
 
 ### ✅ Full freedom and Flexibility
 
-Godspeed gives developers the full power of the Node.js ecosystem, while adding guardrails on top. You can plug in any event source, datasource, middleware, or custom business logic without restrictions. The framework’s decoupled architecture ensures that your core workflows remain portable, so teams can evolve their stacks, swap technologies, or scale services without vendor lock-in.
+Godspeed gives developers the full power of the Node.js ecosystem, while adding guardrails on top. You can plug in any [event source](/docs/microservices-framework/event-sources/event-source-plugins/Overview), [data source](/docs/microservices-framework/datasources/datasource-plugins/Overview), middleware, or custom business logic without restrictions. The framework’s decoupled architecture ensures that your core workflows remain portable, so teams can evolve their stacks, swap technologies, or scale services without vendor lock-in.
 
 ### ✅ Cost Savings
 
@@ -63,10 +63,10 @@ Reduced bugs, faster delivery cycles, and lower maintenance translate directly i
 ### Know More about the Framework
 
 ### [Guardrails](guard-rails.md)
-At Godspeed, our development philosophy revolves around four core [guardrails](guard-rails.md), shaping a robust and innovative approach to software creation.
+At Godspeed, our development philosophy revolves around four core [guardrails](guard-rails.md) - Schema driven development, Configure over code, Security, Decoupled Architecture.
 
 ### [Design Principles](design-principles.md)
 
 In order to serve above goals, the framework follows certain [design principles](design-principles.md).
 
-### [Install Godspeed ->](/docs/get-started)
+### [Install Godspeed JS ->](/docs/get-started)

@@ -3,9 +3,6 @@ title: Create a custom Eventsource
 description: A comprehensive guide to Godspeed's pluggable event source system. Learn about creating your own custom event source, how to integrate a new event source into your Godspeed service or project.
 keywords: [custom event sources, new event source, custom plugin, event-driven, godspeed plugin, plugin management, event integration, event source plugins]
 ---
-# Create a custom Eventsource
-
-## About Eventsources
 
 An eventsource is any entity or technology responsible for capturing events or notifications when specific events or conditions occur. These events are consumed by event handlers or processors for real-time or near-real-time responses. Eventsources can include Sync and Async event sources like Message brokers, Webhooks etc.The settings for each datasource lies in src/eventsources directory.
 

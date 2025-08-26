@@ -4,7 +4,7 @@ description: A comprehensive guide to Godspeed's pluggable event source system. 
 keywords: [event sources, plugins, event-driven architecture, godspeed plugin, plugin management, event integration, plugin installation, framework plugins, event source plugins, plugin architecture]
 ---
 
-# Event Source Plugins Overview
+# Event Source Plugins
 
 Godspeed framework adopts a pluggable approach that empowers you to define eventsources effortlessly. Our framework provides an interface that caters to diverse eventsource needs. Here's a glimpse into the exceptional eventsource plugins crafted by our core framework team.
 

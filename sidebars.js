@@ -19,7 +19,7 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
-    'welcome',  
+    'welcome', 
     {
       type: "category",
       label: "Microservices Framework",
@@ -88,7 +88,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "6. Event sources",
+          label: "6. EventSources",
           items: [
             {
               type: "doc",
