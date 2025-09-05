@@ -1,26 +1,26 @@
 ---
 id: overview
-title: Godspeed JS Framework Introduction
-description:  "An introduction to godspeed js framework and benefits, why should you use godspeed js framework." keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why godspeed js]
+title: Param Framework Introduction
+description:  "An introduction to Param framework and benefits, why should you use Param framework." keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why Param]
 ---
 
 # Introduction
 
-Godspeed JS is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
+Param (Prev. Godspeed) is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
 
 👉 Currently, it fully supports Node.js, Deno and Bun.js ecosystems. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
 ### Install
 
-Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Godspeed JS**.
+Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Param (Prev. Godspeed)**.
 
-## 10 Reasons Why Use Godspeed JS Framework?
+## 10 Reasons Why Use Param(Prev. Godspeed) Framework?
 
-By adopting Godspeed JS framework, teams experience:
+By adopting Param framework, teams experience:
 
 ### ✅ Confident & Faster Delivery
 
-The Godspeed JS framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
+The Param framework with developer guardrails, generative features and pre-built integrations provides a ready-made feature set, a YAML DSL for important abstractions, simplified project setup, OTEL based telemetry and devops tooling, streamlining the lives of developers and reducing their work and hence the chance of mistakes. This enables them to concentrate on and achieve their primary tasks with minimal effort, time, and cost.
 
 ### ✅ Fewer Bugs, Less Chaos
 
@@ -69,4 +69,4 @@ At Godspeed, our development philosophy revolves around four core [guardrails](g
 
 In order to serve above goals, the framework follows certain [design principles](design-principles.md).
 
-### [Install Godspeed JS ->](/docs/get-started)
+### [Install Param (Godspeed) Framework ->](/docs/get-started)

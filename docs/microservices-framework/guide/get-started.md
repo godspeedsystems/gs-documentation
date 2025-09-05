@@ -15,7 +15,7 @@ This guide provides a step-by-step guide to install and get started with Godspee
     <iframe style={{ position: 'absolute', top: 10, left: 10, width: '100%', height: '80%' }} src="https://www.youtube.com/embed/xb0fgMmFywc?si=EhuxwGAXJSSmOUCX" frameborder="0" allow="fullscreen;" allowfullscreen ></iframe>
 </div> -->
 
-## Install Godspeed
+## Install Godspeed (Param)            
 
 The following setup script installs all required prerequisites and the Godspeed runtime components automatically. This simplifies the onboarding process for new users by avoiding manual setup of individual dependencies.
 
@@ -58,7 +58,7 @@ curl -fsSL https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon
   - pnpm (can be enabled via corepack: corepack enable pnpm)
   
 
-  **2. Install the Godspeed framework globally:**
+  **2. Install the Godspeed (Param framework) globally:**
 
   ```bash
   npm install -g @godspeedsystems/godspeed

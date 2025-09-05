@@ -23,7 +23,7 @@ Godspeed is the first agentic SDLC platform that helps you build production-grad
 
 With **Saarthi**, your multi agent dev team in vs code, building enterprise-grade systems is now just **one prompt away**.
 
-## Step 1: [Install Godspeed JS](/docs/microservices-framework/guide/get-started.md)
+## Step 1: [Install Framework](/docs/microservices-framework/guide/get-started.md)
 
 ## Step 2: [Install Saarthi in VS Code](/docs/saarthi/getting-started/installing.mdx)
 
