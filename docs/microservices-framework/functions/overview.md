@@ -1,5 +1,7 @@
 ---
-title: Functions (Event Handlers)
+title: Functions (EVent Handlers)
+description: Writing functions in Godspeed-Framework, covering topics such as setting up APIs, writing functions, and accessing datasources.
+keywords: [Godspeed, API setup, functions, datasources, REST API, typeScript syntax]
 ---
 
 The Meta Framework allows you to write business logic in [Typescript and Javascript functions](/docs/microservices-framework/functions/native-language-functions.md)

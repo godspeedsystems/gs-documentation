@@ -1,4 +1,4 @@
-# Features
+# Design Principles
 
 ### Fundamental abstractions
 Every microservice in the Param framework has four fundamental abstractions which encompass the functionality of any microservice in general.

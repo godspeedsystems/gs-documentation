@@ -1,7 +1,8 @@
 ---
 id: overview
-title: Param or Godspeed Framework Introduction
-description:  "An introduction to Param(previously godspeed) framework and benefits, why should you use Param framework or godspeed framework" keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why Param or godspeed framework]
+title: Introduction
+description:  "An introduction to Param or godspeed framework and benefits, why should you use Param framework or godspeed framework" 
+keywords: [Godspeed, Meta-Framework, 4th-gen framework, overview, benefits, why Param or godspeed framework]
 ---
 
 # Introduction
@@ -12,9 +13,9 @@ Param (Prev. Godspeed) is industry’s first opinionated 4th generation framewor
 
 ### Install
 
-Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Param (Prev. Godspeed)**.
+Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Param or Godspeed**.
 
-## 10 Reasons Why Use Param(Prev. Godspeed) Framework?
+## 10 Reasons Why Use Param Framework?
 
 By adopting Param framework, teams experience:
 
@@ -69,4 +70,4 @@ At Godspeed, our development philosophy revolves around four core [guardrails](g
 
 In order to serve above goals, the framework follows certain [design principles](design-principles.md).
 
-### [Install Param (Godspeed) Framework ->](/docs/get-started)
+### [Install Param (Godspeed) ->](/docs/get-started)

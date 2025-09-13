@@ -1,3 +1,9 @@
+---
+title: Writing functions in Godspeed
+description: Writing functions in Godspeed-Framework, covering topics such as setting up APIs, writing functions, and accessing datasources.
+keywords: [Godspeed, API setup, functions, datasources, REST API, typeScript syntax]
+---
+
 # Writing functions in Godspeed
 
 Since the framework currently supports Node.js, Deno and Bun.js ecosystems, the native languages currently supported are TypeScript and JavaScript. This allows users to create custom functions. A native language function enables us to incorporate additional features using JavaScript or TypeScript, where we have the capability to implement intricate business logic.

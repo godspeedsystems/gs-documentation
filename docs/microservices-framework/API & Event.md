@@ -404,13 +404,23 @@ Context refers to the circumstances or conditions under which a user's request f
 
 Authz function returns JSON output then it is merged with args.data of the task for which authz is being executed.
 
-<!-- ## Reusing Definitions
+## Reusing Definitions using $ref
 
+In Godspeed, when defining your HTTP events and their payload schemas, you often come across syntax like this:
+
+```
+  body:
+    content:
+      application/json:
+        schema:
+          $ref: "#/definitions/mongo/BusinessProfile"
+```
+This usage aligns with how OpenAPI refers to component schemas, but with Godspeed’s internal structure for reusability.
+<!-- 
 ## Validations
 
 ## File Upload
 
 ## Define Event Handler Functions (GSContext, GSCloudEvent, GSStatus, Returning from functions)
 
-## Using Datasources inside functions
- -->
+## Using Datasources inside functions -->

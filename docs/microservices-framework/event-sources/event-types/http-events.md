@@ -1,3 +1,9 @@
+---
+title: API or http Event
+description: In Godspeed, every API is defined as an event and handled by a corresponding function, with a unified event-driven structure for both REST and non-REST event sources.
+keywords: [Godspeed, API, http event, REST, event-driven, event schema]
+---
+
 # HTTP events or Sync APIs
 
 In Godspeed, sync APIs are created as HTTP events. Each API endpoint is essentially an event configured to listen for HTTP requests and respond accordingly. HTTP events accept inputs such as body, headers, path parameters, and query parameters. 

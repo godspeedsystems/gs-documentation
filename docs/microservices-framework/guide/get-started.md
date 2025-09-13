@@ -1,8 +1,8 @@
 ---
 id: get-started
 title: Getting Started with Godspeed
-description: A comprehensive guide to install the Godspeed Meta-Framework, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
-keywords: [Godspeed, Meta-Framework, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
+description: A comprehensive guide to install the Godspeed CLI, creating your first project(aka service), running the development server, accessing Swagger UI, and testing a basic API.
+keywords: [Godspeed, Param, installation, setup, project (service) creation, CLI, running project (service) locally, Swagger UI, API testing, helloworld, guide, tutorial]
 slug: /get-started
 ---
 
@@ -17,7 +17,9 @@ This guide provides a step-by-step guide to install and get started with Godspee
 
 ## Install Godspeed          
 
-The following setup script installs all required prerequisites and the Godspeed runtime components automatically. This simplifies the onboarding process for new users by avoiding manual setup of individual dependencies.
+The following setup script installs all required prerequisites and Godspeed CLI automatically. This simplifies the onboarding process for new users by avoiding manual setup of individual dependencies.
+
+### Installation Script
 
 ### Windows Users
 
@@ -32,7 +34,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zero8dotdev/install-go
 curl -fsSL https://raw.githubusercontent.com/zero8dotdev/install-godspeed-daemon/main/CompleteInstall.sh | bash
 ```
 
-### ✅ The Script Will Install:
+### ✅ The above script will install:
 
 | Component         | Purpose                                                      |
 | ----------------- | ------------------------------------------------------------ |
