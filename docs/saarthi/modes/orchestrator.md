@@ -1,4 +1,4 @@
-# Orchestrator Mode
+# 🪃 Orchestrator Mode
 A strategic workflow orchestrator that breaks down complex tasks and delegates them to specialized modes.
 
 ## Overview

@@ -84,10 +84,16 @@ Open the Saarthi panel and type your task in the chat box. Be clear and specific
 ### What are modes in Saarthi?
 [Modes](./basic-usage/using-modes) are different personas that Saarthi can adopt, each with a specific focus and set of capabilities. The built-in modes are:
 
-*   **Code:** For general-purpose coding tasks.
+*   **Product Team:** For product management leadership, product documentation and assistance.
 *   **Architect:** For planning and technical leadership.
-*   **Ask:** For answering questions and providing information.
+*   **Code:** For general-purpose coding tasks.
+*   **Code-Godspeed:** For Godspeed framework development.
+*   **Code Review:** For comprehensive code analysis and reviews.
 *   **Debug:** For systematic problem diagnosis.
+*   **DevOps:** For DevOps tasks and infrastructure management.
+*   **Orchestrator:** For strategic workflow orchestration and task delegation.
+*   **QA Team:** For writing QA code, QA documentation and QA leadership and strategy.
+
 You can also create [Custom Modes](./features/custom-modes).
 
 ### How do I switch between modes?

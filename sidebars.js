@@ -514,6 +514,11 @@ const sidebars = {
             },
             {
               type: 'doc',
+              label: 'Code Godspeed',
+              id: 'saarthi/modes/code-godspeed',
+            },
+            {
+              type: 'doc',
               label: 'Coach',
               id: 'saarthi/modes/coach',
             },
@@ -535,7 +540,7 @@ const sidebars = {
             },
             {
               type: 'doc',
-              label: 'QA',
+              label: 'QA Team',
               id: 'saarthi/modes/qa-modes',
             },
             {
@@ -555,6 +560,7 @@ const sidebars = {
             },
           ],
         },
+        'saarthi/workflows',
         {
           type: 'category',
           label: 'Basic Usage',
