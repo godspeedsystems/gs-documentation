@@ -1,4 +1,4 @@
-# Saarthi Release Notes
+# Saarthi Release Notes (2.0.12)
 
 ## New Features Added
 
@@ -16,10 +16,11 @@ Instead of typing commands or manually configuring tools, you can now simply:
 Automation First – From scaffolding a new Godspeed project to generating UI components or automating your release process- workflows handle everything. 
 
 20+ Predefined Workflows – Saarthi comes packed with ready-to-use workflows covering the entire development lifecycle. Some examples include: 
-🔹 Setup Project on Docker 
-🔹 Implement Authentication in Godspeed 
-🔹 Prompt-to-UI Generation 
-🔹 GitHub Issue to PR with Review 
+
+- Setup Project on Docker 
+- Implement Authentication in Godspeed 
+- Prompt-to-UI Generation 
+- GitHub Issue to PR with Review 
 
 Whether you’re starting a project, learning something, creating documentation, raising a PR or deploying  — Saarthi has a workflow for it. 
 
