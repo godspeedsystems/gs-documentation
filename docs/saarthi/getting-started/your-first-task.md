@@ -34,7 +34,7 @@ Click the Saarthi icon (<SaarthiIcon />) in the VS Code Activity Bar (vertical b
 
 *The Saarthi icon in the Activity Bar opens the chat interface.*
 
-## Step 2: Type Your Task
+## Step 2: Select a Mode and Type Your Task
 
 Type a clear, concise description of what you want Saarthi to do in the chat box at the bottom of the panel. Examples of effective tasks:
 
@@ -44,7 +44,8 @@ Type a clear, concise description of what you want Saarthi to do in the chat box
 
 No special commands or syntax needed—just use plain English.
 
-*Enter your task in natural language - no special syntax required.*
+* To build framework aligned microservices using [Param](/docs/microservices-framework/introduction/overview.md), you can choose `Code-Godspeed` mode. It is by default connected to **Godspeed MCP Server**.
+*
 
 ## Step 3: Send Your Task
 

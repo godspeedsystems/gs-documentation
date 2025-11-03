@@ -61,7 +61,7 @@ Sample Logs:
 :::
 
 Logs are dumped in this format when all of the below conditions are satisfied:   
-**(a)** observability is [enabled](/docs/microservices-framework/CLI.md/#otel) i.e. OTEL_ENABLED env variable is set to true.   
+**(a)** observability is [enabled](/docs/microservices-framework/cli/otel-cli.md) i.e. OTEL_ENABLED env variable is set to true.   
 **(b)** NODE_ENV is not set to 'dev'.
 
 ```json

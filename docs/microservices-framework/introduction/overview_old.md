@@ -35,7 +35,7 @@ Developers can deliver a simple microservice on their first day itself. The stan
 
 ### Easy brownfield adoption
 
-Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](/docs/microservices-framework/CLI.md). Godspeed ships as a node module. Hence it can be imported in any nodejs , bunjs or springboot project easily or developers can even reuse the existing event sources and data sources without any hassle.
+Teams can adopt Godspeed by simply including the NPM module or jar in their existing project and installing the [CLI](/docs/microservices-framework/cli/godspeed-cli.md). Godspeed ships as a node module. Hence it can be imported in any nodejs , bunjs or springboot project easily or developers can even reuse the existing event sources and data sources without any hassle.
 
 ### Security
 

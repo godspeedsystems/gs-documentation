@@ -45,7 +45,7 @@ Numerous open source and commercial softwares for Observability support OpenTele
 Collect, correlate and debug signals across logs (events), traces and metrics, based on the request id and the attributes defined for the organization. For example, app version, function, DB query, K8s pod, domain, microservice etc.
 
 ### Enable/disable observability
-You can [enable/disable OTEL](../CLI.md/#otel-enabling-and-disabling-open-telemetry) in Godspeed.
+You can [enable/disable OTEL](../cli/otel-cli.md) in Godspeed.
 
 <!-- ### Custom traces, logs and metrics in the workflows
 You can add [custom traces, logs and metrics](./custom-metrics-logs-traces.md) in Godspeed workflows. -->

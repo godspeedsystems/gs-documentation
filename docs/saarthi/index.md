@@ -1,9 +1,9 @@
 ---
-sidebar_label: Welcome
+sidebar_label: About Saarthi
 ---
 import SaarthiIcon from '@site/src/components/SaarthiIcon';
 
-# Saarthi 
+# Saarthi
 
 <SaarthiIcon /> Saarthi is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
 
@@ -36,7 +36,7 @@ import SaarthiIcon from '@site/src/components/SaarthiIcon';
 ## Key Features
 
 ### Multiple Agents
-Saarthi adapts to your needs with specialized [agents and modes](./basic-usage/using-modes):
+Saarthi adapts to your needs with specialized [modes](./basic-usage/using-modes) and [workflows](/docs/saarthi/workflows.md):
 
 
     **[💻 Code](./modes/code.md):** For general-purpose coding tasks, now with integrated support for Godspeed’s 4th-gen meta framework for backend development, enabling guard-railed 10x engineering practices—automatically.
@@ -66,7 +66,7 @@ Saarthi adapts to your needs with specialized [agents and modes](./basic-usage/u
  
 
 ### Smart Tools
-Saarthi comes with powerful [tools](./basic-usage/how-tools-work) that can:
+- Saarthi comes with powerful **[workflows](/docs/saarthi/workflows.md)** that can automate your multi-step dev tasks.
 - Read and write files in your project
 - Execute commands in your VS Code terminal
 - Control a web browser

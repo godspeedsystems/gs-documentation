@@ -1,9 +1,9 @@
-# Agents and Modes
+# Modes
 
-Agents in Saarthi are specialized personas that tailor the assistant's behavior to your current task. Each mode offers different capabilities, expertise, and access levels to help you accomplish specific goals.
+Modes or agents in Saarthi are specialized personas that tailor the assistant's behavior to your current task. Each mode offers different capabilities, expertise, and access levels to help you accomplish specific goals.
 
 :::info Sticky Models
-Each agent or remembers your last-used model. When switching modes, Saarthi automatically selects that model—no manual selection needed. Assign different models to different modes (e.g., Gemini 2.5 Preview for `🏗️ Architect` mode, Claude Sonnet 3.7 for `💻 Code` mode) and Saarthi will switch models automatically when you change modes.
+Each mode remembers your last-used model. When switching modes, Saarthi automatically selects that model—no manual selection needed. Assign different models to different modes (e.g., Gemini 2.5 Preview for `🏗️ Architect` mode, Claude Sonnet 3.7 for `💻 Code` mode) and Saarthi will switch models automatically when you change modes.
 :::
 
 ## Why Use Different Modes?
@@ -31,7 +31,7 @@ Four ways to switch modes:
 
 4. **Accept suggestions:** Click on mode switch suggestions that Saarthi offers when appropriate
 
-## Built-in Agents or Modes
+## Built-in Modes
 
 - [Ask](/docs/saarthi/modes/ask.md)
 
