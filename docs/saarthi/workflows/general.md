@@ -1,3 +1,8 @@
+---
+sidebar_label: General
+---
+
+
 # Workflows
 
 Workflows in Saarthi are **sequences of actions** defined to automate common development and deployment tasks. They are customizable and bring consistency, guardrails, and speed to your engineering process — from setting up a Godspeed project to deploying on cloud, generating UIs, creating test strategies, or even drafting technical documents.  
@@ -136,49 +141,7 @@ Sets up authentication in your Godspeed microservice using supported auth method
 
 ---
 
-### 7. Figma to UI Generation
-
-**Description:**
-Convert your Figma designs into responsive UI components and pages.
-
-**Pre-requirements:**
-
-* Figma file URL
-* Figma Personal Access Token
-
-**Process:**
-
-1. **Select Workflow** – Choose `Figma to UI Generation` from workflows dropdown.
-2. **Provide Figma Details** – Enter Figma URL + Access Token.
-3. **Extract Components** – Saarthi generates component hierarchy with `gs-nodegen-figma`.
-4. **Generate Scaffolding** – Creates project scaffolding + imports Godspeed UI components.
-5. **Integrate APIs (optional)** – Provide Swagger spec → generates API slices with Redux.
-6. **Run Strategy** – Orchestrator executes milestones → pages & components built step-by-step.
-
----
-
-### 8. Prompt to UI Generation
-
-**Description:**
-Generate UI pages and components directly from a text prompt, if you don't have PRD, TRD, or Figma designs.
-Saarthi automates **strategy creation, component scaffolding, API integration, and responsive UI development** — all inside your workspace.
-
-**Requirements:**
-
-* Prepare your PRD/TRD files simply give a text prompt.
-* Project brief (you’ll be prompted for this if PRD/TRD are missing)
-* If using API integration, have a **Swagger/OpenAPI spec JSON** ready.
-
-**Process:**
-
-1. **Provide Project Brief** – If no PRD/TRD found, Saarthi asks for a short description of the project.
-2. **Scan Components** – Reads `components/gs-ui` and `components-list.txt` to detect available components.
-3. **Finalize Components** – User helps confirm components and their variants.
-4. **Generate Strategy** – Pages and components are mapped into milestones & steps.
-5. **Run Strategy** – Orchestrator executes the plan, building responsive pages with integrated APIs (if provided).
-
-
-### 9. Download and Run Docker Container
+### 7. Download and Run Docker Container
 
 **Description**
 Pulls a Docker image and runs a container with custom configuration.
@@ -193,7 +156,7 @@ Pulls a Docker image and runs a container with custom configuration.
 6. Validates container is running.
 
 
-### 10. Godspeed Coaching
+### 8. Godspeed Coaching
 
 **Description**
 Provides an interactive learning experience for mastering the Godspeed framework.
@@ -207,7 +170,7 @@ Provides an interactive learning experience for mastering the Godspeed framework
 
 ---
 
-### 11. Implement Feature from PRD
+### 9. Implement Feature from PRD
 
 **Description:**
 Implements features step-by-step based on the Product Requirement Document (PRD).
@@ -221,7 +184,7 @@ Implements features step-by-step based on the Product Requirement Document (PRD)
 
 ---
 
-### 12. Create/Update Test Strategy
+### 10. Create/Update Test Strategy
 
 **Description:**
 Creates or updates a comprehensive test strategy including scope, metrics, and environments.
@@ -235,7 +198,7 @@ Creates or updates a comprehensive test strategy including scope, metrics, and e
 
 ---
 
-### 13. Generate Test Cases
+### 11. Generate Test Cases
 
 **Description:**
 Generates detailed test cases (steps, expected results, traceability) from requirements.
@@ -249,7 +212,7 @@ Generates detailed test cases (steps, expected results, traceability) from requi
 
 ---
 
-### 14. Update Test Cases in Strategy
+### 12. Update Test Cases in Strategy
 
 **Description:**
 Maintains test documentation with version control, impact analysis, and traceability.
@@ -263,7 +226,7 @@ Maintains test documentation with version control, impact analysis, and traceabi
 
 ---
 
-### 15. Deploy to Render
+### 13. Deploy to Render
 
 **Description:**
 Deploys applications directly to the Render cloud platform.
@@ -277,7 +240,7 @@ Deploys applications directly to the Render cloud platform.
 
 ---
 
-### 16. Progress Review
+### 14. Progress Review
 
 **Description:**
 Reviews code, tests, and documentation against defined quality metrics.
@@ -291,7 +254,7 @@ Reviews code, tests, and documentation against defined quality metrics.
 
 ---
 
-### 17. Create Docker Image
+### 15. Create Docker Image
 
 **Description:**
 Builds Docker images from Dockerfiles for containerized deployment.
@@ -305,7 +268,7 @@ Builds Docker images from Dockerfiles for containerized deployment.
 
 ---
 
-### 18. Sprint Plan to Git Issues
+### 16. Sprint Plan to Git Issues
 
 **Description:**
 Converts sprint planning items into actionable GitHub issues.
@@ -319,7 +282,7 @@ Converts sprint planning items into actionable GitHub issues.
 
 ---
 
-### 19. Generate High-Level TRD
+### 17. Generate High-Level TRD
 
 **Description:**
 Generates a Technical Requirements Document (TRD) with architecture diagrams.
@@ -333,7 +296,7 @@ Generates a Technical Requirements Document (TRD) with architecture diagrams.
 
 ---
 
-### 20. Generate Coding Guidelines
+### 18. Generate Coding Guidelines
 
 **Description:**
 Creates coding standards with best practices, security, and compliance guidelines.
@@ -347,7 +310,7 @@ Creates coding standards with best practices, security, and compliance guideline
 
 ---
 
-### 21. Learning Roadmap
+### 19. Learning Roadmap
 
 **Description:**
 Builds a personalized learning roadmap with exercises, resources, and progress tracking.
@@ -361,7 +324,7 @@ Builds a personalized learning roadmap with exercises, resources, and progress t
 
 ---
 
-### 22. Assign Exercises
+### 20. Assign Exercises
 
 **Description:**
 Assigns predefined or custom exercises with tracking.
@@ -375,7 +338,7 @@ Assigns predefined or custom exercises with tracking.
 
 ---
 
-### 23. Feedback-Driven Learning Path
+### 21. Feedback-Driven Learning Path
 
 **Description:**
 Refines the learning experience using feedback, adjusting pace and content.
