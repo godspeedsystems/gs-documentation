@@ -12,13 +12,13 @@ This section provides answers to common questions and step-by-step guides for us
 Godspeed is industry’s first opinionated 4th generation framework for building modern APIs and event-driven systems with less effort, high quality and easy maintenance. It’s designed to reduce lines of code, prevent chaos in development, build with confidence and reliability. It follows godspeed philosophy to focus on the what, and not the how.
 Currently, it fully supports the Node.js ecosystem. On the polyglot roadmap, Godspeed aims to support multiple languages (Java, Go, Python, etc.).
 
-### [How to install godspeed ?](/docs/get-started#install-godspeed)
+### [How to install godspeed ?](/docs/microservices-framework/guide/get-started#install-godspeed-cli)
 
 ### How to create a microservice ?
 
 Godspeed provides a CLI-based workflow to scaffold a new backend service in minutes. Follow these steps to spin up a project using the Godspeed CLI.
 
-Step 1: Verify Godspeed installation using `godspeed -V` command. If not found, then first install godspeed using [installation guide]((/docs/get-started#install-godspeed)).
+Step 1: Verify Godspeed installation using `godspeed -V` command. If not found, then first install godspeed using [installation guide](/docs/microservices-framework/guide/get-started#install-godspeed-cli).
 
 Step 2: Create a New Project using `godspeed create <project-name>`
 

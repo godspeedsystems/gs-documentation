@@ -13,7 +13,7 @@ Param (Prev. Godspeed) is industry’s first opinionated 4th generation framewor
 
 ### Install
 
-Head to the [installation guide](/docs/get-started#install-godspeed) and get started with **Param or Godspeed**.
+Head to the [installation guide](/docs/microservices-framework/guide/get-started#install-godspeed-cli) and get started with **Param or Godspeed**.
 
 ## 10 Reasons Why Use Param Framework?
 
@@ -70,4 +70,4 @@ At Godspeed, our development philosophy revolves around four core [guardrails](g
 
 In order to serve above goals, the framework follows certain [design principles](design-principles.md).
 
-### [Install Param (Godspeed) ->](/docs/get-started)
+### [Install Param (Godspeed) ->](/docs/microservices-framework/guide/get-started)
